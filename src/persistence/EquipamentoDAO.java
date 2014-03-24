@@ -32,8 +32,10 @@ public class EquipamentoDAO {
 
     public static EquipamentoDAO getInstance() {
     	
-        if (instance == null)
+        if ( instance == null ) {
             instance = new EquipamentoDAO();
+        }
+        
         return instance;
     }
     
@@ -42,13 +44,19 @@ public class EquipamentoDAO {
     public void incluir(Equipamento equipamento) throws SQLException, 
     		PatrimonioException {
     	
-        if (equipamento == null)
+        if ( equipamento == null ) {
             throw new PatrimonioException(EQUIPAMENTO_NULO);
-        else if (this.inDBCodigo(equipamento.getCodigo()))
-            throw new PatrimonioException(CODIGO_JA_EXISTENTE);
-        else if (!this.inDB(equipamento)) {
-            this.updateQuery("INSERT INTO " + "equipamento (codigo, descricao) VALUES (" + "\"" + equipamento.getCodigo() + "\", "
-                    + "\"" + equipamento.getDescricao() + "\");");
+        } else { 
+        	if ( this.inDBCodigo(equipamento.getCodigo()) ) {
+        		throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+        	} else { 
+        		if ( !this.inDB(equipamento) ) {
+        			this.updateQuery("INSERT INTO " + "equipamento " 
+        					+ "(codigo, descricao) VALUES (" 
+        					+ "\"" + equipamento.getCodigo() + "\", "
+        					+ "\"" + equipamento.getDescricao() + "\");");
+        		}
+        	}
         }
     }
 
@@ -56,34 +64,50 @@ public class EquipamentoDAO {
     public void alterar(Equipamento old_equipamento, Equipamento new_equipamento) 
     			throws SQLException, PatrimonioException {
     	
-        if (old_equipamento == null)
+        if ( old_equipamento == null ) {
             throw new PatrimonioException(EQUIPAMENTO_NULO);
-        if (new_equipamento == null)
+        }
+        if ( new_equipamento == null ) {
             throw new PatrimonioException(EQUIPAMENTO_NULO);
+        }
 
         Connection con = FactoryConnection.getInstance().getConnection();
         PreparedStatement pst;
 
-        if (!this.inDB(old_equipamento))
+        if (!this.inDB(old_equipamento) ) {
             throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
-        else if (this.inOtherDB(old_equipamento))
-            throw new PatrimonioException(EQUIPAMENTO_EM_USO);
-        else if (!new_equipamento.getCodigo().equals(old_equipamento.getCodigo()) && this.inDBCodigo(new_equipamento.getCodigo()))
-            throw new PatrimonioException(CODIGO_JA_EXISTENTE);
-        else if (!this.inDB(new_equipamento)) {
-            String msg = "UPDATE equipamento SET " + "codigo = \"" + new_equipamento.getCodigo() + "\", " + "descricao = \""
-                    + new_equipamento.getDescricao() + "\"" + " WHERE " + "equipamento.codigo = \"" + old_equipamento.getCodigo()
-                    + "\" and " + "equipamento.descricao = \"" + old_equipamento.getDescricao() + "\";";
+        } else { 
+        	if ( this.inOtherDB(old_equipamento) ) {
+        		throw new PatrimonioException(EQUIPAMENTO_EM_USO);
+        	} else { 
+        		if ( !new_equipamento.getCodigo().equals(old_equipamento.getCodigo() ) 
+        					&& this.inDBCodigo(new_equipamento.getCodigo()) ) {
+        			throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+        		} else { 
+        			if ( !this.inDB(new_equipamento) ) {
+        				String msg = "UPDATE equipamento SET " 
+        						+ "codigo = \"" + new_equipamento.getCodigo() 
+        						+ "\", " + "descricao = \"" 
+        						+ new_equipamento.getDescricao() 
+        						+ "\"" + " WHERE " + "equipamento.codigo = \"" 
+        						+ old_equipamento.getCodigo()
+        						+ "\" and " + "equipamento.descricao = \"" 
+        						+ old_equipamento.getDescricao() + "\";";
 
-            con.setAutoCommit(false);
-            pst = con.prepareStatement(msg);
-            pst.executeUpdate();
-            con.commit();
+        				con.setAutoCommit(false);
+        				pst = con.prepareStatement(msg);
+        				pst.executeUpdate();
+        				con.commit();
 
-            pst.close();
+        				pst.close();
 
-        } else
-            throw new PatrimonioException(EQUIPAMENTO_JA_EXISTENTE);
+        			} else {
+        				throw new PatrimonioException(EQUIPAMENTO_JA_EXISTENTE);
+        			}
+        		}
+        	}
+        }
+        
         con.close();
     }
     
@@ -91,15 +115,22 @@ public class EquipamentoDAO {
     public void excluir(Equipamento equipamento) throws SQLException, 
     		PatrimonioException {
     	
-        if (equipamento == null)
+        if ( equipamento == null ) {
             throw new PatrimonioException(EQUIPAMENTO_NULO);
-        else if (this.inOtherDB(equipamento))
-            throw new PatrimonioException(EQUIPAMENTO_EM_USO);
-        if (this.inDB(equipamento)) {
-            this.updateQuery("DELETE FROM equipamento WHERE " + "equipamento.codigo = \"" + equipamento.getCodigo() + "\" and "
-                    + "equipamento.descricao = \"" + equipamento.getDescricao() + "\";");
-        } else
+        } else {
+        	if ( this.inOtherDB(equipamento) ) {
+        		throw new PatrimonioException(EQUIPAMENTO_EM_USO);
+        	}
+        }
+        
+        if ( this.inDB(equipamento) ) {
+            this.updateQuery("DELETE FROM equipamento WHERE " 
+            		+ "equipamento.codigo = \"" + equipamento.getCodigo() 
+            		+ "\" and " + "equipamento.descricao = \"" 
+            		+ equipamento.getDescricao() + "\";");
+        } else {
             throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
+        }
     }
     
     // Retrive all Equipamento from the database.
@@ -138,8 +169,9 @@ public class EquipamentoDAO {
         PreparedStatement pst = con.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
 
-        while (rs.next())
+        while ( rs.next() ) {
             vet.add(this.fetchEquipamento(rs));
+        }
 
         pst.close();
         rs.close();
@@ -154,15 +186,17 @@ public class EquipamentoDAO {
         PreparedStatement pst = con.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
 
-        if (!rs.next()) {
+        if ( !rs.next() ) {
             rs.close();
             pst.close();
             con.close();
+            
             return false;
         } else {
             rs.close();
             pst.close();
             con.close();
+            
             return true;
         }
     }
@@ -171,22 +205,26 @@ public class EquipamentoDAO {
     private boolean inDB(Equipamento e) throws SQLException, 
     		PatrimonioException {
     	
-        return this.inDBGeneric("SELECT * FROM equipamento WHERE " + "equipamento.codigo = \"" + e.getCodigo() + "\" and "
+        return this.inDBGeneric("SELECT * FROM equipamento WHERE " 
+        		+ "equipamento.codigo = \"" + e.getCodigo() + "\" and "
                 + "equipamento.descricao = \"" + e.getDescricao() + "\";");
     }
 
     // Check if there is a database entry by code id. 
     private boolean inDBCodigo(String codigo) throws SQLException {
     	
-        return this.inDBGeneric("SELECT * FROM equipamento WHERE " + "codigo = \"" + codigo + "\";");
+        return this.inDBGeneric("SELECT * FROM equipamento WHERE " 
+        		+ "codigo = \"" + codigo + "\";");
     }
 
     // Check if there is a database entry. 
     private boolean inOtherDB(Equipamento e) throws SQLException {
     	
         return this.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
-                + "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE " + "equipamento.codigo = \"" + e.getCodigo()
-                + "\" and " + "equipamento.descricao = \"" + e.getDescricao() + "\");");
+                + "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE " 
+        		+ "equipamento.codigo = \"" + e.getCodigo()
+                + "\" and " + "equipamento.descricao = \"" 
+        		+ e.getDescricao() + "\");");
     }
 
     private Equipamento fetchEquipamento(ResultSet rs) throws 
@@ -200,6 +238,7 @@ public class EquipamentoDAO {
         Connection con = FactoryConnection.getInstance().getConnection();
         PreparedStatement pst = con.prepareStatement(msg);
         pst.executeUpdate();
+        
         pst.close();
         con.close();
     }
