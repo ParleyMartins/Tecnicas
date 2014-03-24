@@ -1,3 +1,8 @@
+/*
+Name: ResEquipamentoProfessorDAO
+Function: Manage the DAO of the relation between Equipamento and Professor
+ */
+
 package persistence;
 
 import java.sql.ResultSet;
@@ -14,7 +19,7 @@ import exception.ReservaException;
 
 public class ResEquipamentoProfessorDAO extends DAO {
 
-	// Mensagens e Alertas
+	// Messages and alerts.
 	private final String NULA = "Termo nulo.";
 	private final String EQUIPAMENTO_INDISPONIVEL = "O Equipamento esta reservada no mesmo dia e horario.";
 	private final String PROFESSOR_INEXISTENTE = "Professor inexistente.";
@@ -22,11 +27,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private final String RESERVA_INEXISTENTE = "Reserva inexistente";
 	private final String RESERVA_EXISTENTE = "A reserva ja existe.";
 
-	// Singleton
+	// Singleton implementation.
 	private static ResEquipamentoProfessorDAO instance;
 
 	private ResEquipamentoProfessorDAO() {
 
+		// Blank constructor.
 	}
 
 	public static ResEquipamentoProfessorDAO getInstance() {
@@ -36,9 +42,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return instance;
 	}
 
-	//
-
-	// Querys de Reuso
+	// Select Professor by id query.
 	private String select_id_professor(Professor p) {
 
 		return "SELECT id_professor FROM professor WHERE "
@@ -49,6 +53,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "professor.matricula = \"" + p.getMatricula() + "\"";
 	}
 
+	// Select Equipamento by id query.
 	private String select_id_equipamento(Equipamento equipamento) {
 
 		return "SELECT id_equipamento FROM equipamento WHERE "
@@ -57,6 +62,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ equipamento.getDescricao();
 	}
 
+	// Reuse query for WHERE clause
 	private String where_reserva_equipamento_professor(
 			ReservaEquipamentoProfessor r) {
 
@@ -68,6 +74,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ r.getData();
 	}
 
+	// Reuse query for VALUES clause.
 	private String values_reserva_equipamento_professor(
 			ReservaEquipamentoProfessor r) {
 
@@ -76,6 +83,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ r.getHora() + "\", " + "\"" + r.getData();
 	}
 
+	// Reuse query for ATRIBUTES query.
 	private String atributes_value_reserva_equipamento_professor(
 			ReservaEquipamentoProfessor r) {
 
@@ -86,6 +94,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ r.getData();
 	}
 
+	// Reuse query for INSERT clause.
 	private String insert_into(ReservaEquipamentoProfessor r) {
 
 		return "INSERT INTO "
@@ -93,6 +102,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "VALUES ( " + values_reserva_equipamento_professor(r) + " );";
 	}
 
+	// Reuse query for UPDATE clause.
 	private String update(ReservaEquipamentoProfessor r,
 			ReservaEquipamentoProfessor r2) {
 
@@ -101,18 +111,21 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ this.where_reserva_equipamento_professor(r) + " ;";
 	}
 
+	// Reuse query for DELETE Professor clause.
 	private String delete_from_professor(ReservaEquipamentoProfessor r) {
 
 		return "DELETE FROM reserva_equipamento_professor "
 				+ this.where_reserva_equipamento_professor(r) + " ;";
 	}
 
+	// Reuse query for DELETE Aluno clause.
 	private String delete_from_aluno(ReservaEquipamentoProfessor r) {
 
 		return "DELETE FROM reserva_equipamento_aluno WHERE " + "hora = \""
 				+ r.getHora() + "\" and " + "data = \"" + r.getData() + " ;";
 	}
 
+	// Include new Reserva in the database.
 	public void incluir(ReservaEquipamentoProfessor r) throws ReservaException,
 			SQLException {
 
@@ -139,6 +152,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 	}
 
+	// Update Reserva info in the database.
 	public void alterar(ReservaEquipamentoProfessor r,
 			ReservaEquipamentoProfessor r_new) throws ReservaException,
 			SQLException {
@@ -182,6 +196,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 									super.updateQuery(this.update(r, r_new));
 	}
 
+	// Remove Reserva from database.
 	public void excluir(ReservaEquipamentoProfessor r) throws ReservaException,
 			SQLException {
 
@@ -194,6 +209,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				super.executeQuery(this.delete_from_professor(r));
 	}
 
+	// Select all Reservas from the database.
 	@SuppressWarnings("unchecked")
 	public Vector<Object> buscarTodos() throws SQLException, ClienteException,
 			PatrimonioException, ReservaException {
@@ -204,6 +220,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
 	}
 
+	// Select Reserva by month.
 	@SuppressWarnings("unchecked")
 	public Vector<ReservaEquipamentoProfessor> buscarPorMes(int mes)
 			throws SQLException, ClienteException, PatrimonioException,
@@ -223,6 +240,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return reservas_prof_mes;
 	}
 
+	// Select Reserva by hour.
 	@SuppressWarnings("unchecked")
 	public Vector<ReservaEquipamentoProfessor> buscarPorHora(String hora)
 			throws SQLException, ClienteException, PatrimonioException,
@@ -241,6 +259,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ hora_a + "\" or hora = \"" + hora_b + "\";");
 	}
 
+	// Fetch Reserva using a result.
 	@Override
 	protected Object fetch(ResultSet rs) throws SQLException, ClienteException,
 			PatrimonioException, ReservaException {
@@ -258,6 +277,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return r;
 	}
 
+	// Check if there is a Professor in the database.
 	private boolean professorinDB(Professor professor) throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM professor WHERE "
@@ -269,6 +289,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ professor.getMatricula() + "\";");
 	}
 
+	// Check if there is an Equipamento in the database.
 	private boolean equipamentoinDB(Equipamento equipamento)
 			throws SQLException {
 
@@ -278,6 +299,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ equipamento.getDescricao() + "\" and " + ";");
 	}
 
+	// Check if there is a Professor entry in a Reserva.
 	private boolean professorinReservaDB(Professor professor, String data,
 			String hora) throws SQLException {
 
@@ -293,6 +315,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ professor.getMatricula() + "\");");
 	}
 
+	// Check if there is a Equipamento entry in a Reserva.
 	private boolean equipamentoinReservaDB(Equipamento equipamento,
 			String data, String hora) throws SQLException {
 
@@ -312,6 +335,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ equipamento.getDescricao() + "\" and " + ");");
 	}
 
+	// Check if there is a Reserva entry in the database.
 	private boolean reservainDB(ReservaEquipamentoProfessor r)
 			throws SQLException {
 
