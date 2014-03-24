@@ -41,7 +41,7 @@ public class EquipamentoDAO {
     
     
     // Include new Equipamento in the database. 
-    public void incluir(Equipamento equipamento) throws SQLException, 
+    public void include(Equipamento equipamento) throws SQLException, 
     		PatrimonioException {
     	
         if ( equipamento == null ) {
@@ -61,7 +61,7 @@ public class EquipamentoDAO {
     }
 
     // Update Equipamento info in the database.
-    public void alterar(Equipamento old_equipamento, Equipamento new_equipamento) 
+    public void change(Equipamento old_equipamento, Equipamento new_equipamento) 
     			throws SQLException, PatrimonioException {
     	
         if ( old_equipamento == null ) {
@@ -112,7 +112,7 @@ public class EquipamentoDAO {
     }
     
     // Remove Equipamento form the database. 
-    public void excluir(Equipamento equipamento) throws SQLException, 
+    public void exclude(Equipamento equipamento) throws SQLException, 
     		PatrimonioException {
     	
         if ( equipamento == null ) {
@@ -134,24 +134,26 @@ public class EquipamentoDAO {
     }
     
     // Retrive all Equipamento from the database.
-    public Vector<Equipamento> buscarTodos() throws SQLException, 
+    public Vector<Equipamento> searchAll() throws SQLException, 
     		PatrimonioException {
     	
-        return this.buscar("SELECT * FROM equipamento;");
+        return this.search("SELECT * FROM equipamento;");
     }
 
     // Search an Equipamento by id code.
-    public Vector<Equipamento> buscarPorCodigo(String valor) throws SQLException, 
+    public Vector<Equipamento> searchByCode(String valor) throws SQLException, 
     		PatrimonioException {
     	
-        return this.buscar("SELECT * FROM equipamento WHERE codigo = " + "\"" + valor + "\";");
+        return this.search("SELECT * FROM equipamento WHERE codigo = " 
+        		+ "\"" + valor + "\";");
     }
 
     // Search an Equipamento by description.
-    public Vector<Equipamento> buscarPorDescricao(String valor) throws 
+    public Vector<Equipamento> searchByDescription(String valor) throws 
     		SQLException, PatrimonioException {
     	
-        return this.buscar("SELECT * FROM equipamento WHERE descricao = " + "\"" + valor + "\";");
+        return this.search("SELECT * FROM equipamento WHERE descricao = " 
+        		+ "\"" + valor + "\";");
     }
 
     /*
@@ -159,7 +161,7 @@ public class EquipamentoDAO {
     */
 
     // Retrive Equipamento from the database.
-    private Vector<Equipamento> buscar(String query) throws SQLException, 
+    private Vector<Equipamento> search(String query) throws SQLException, 
     		PatrimonioException {
     	
         Vector<Equipamento> vet = new Vector<Equipamento>();
