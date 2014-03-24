@@ -337,17 +337,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 		return super
 				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
-						+ "data = \""
-						+ data
-						+ "\" and "
-						+ "hora = \""
-						+ hora
-						+ "\" and "
+						+ "data = \"" + data + "\" and " 
+						+ "hora = \"" + hora + "\" and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \""
-						+ equipamento.getCodigo()
-						+ "\" and "
-						+ "equipamento.descricao = \""
+						+ "equipamento.codigo = \"" + equipamento.getCodigo()
+						+ "\" and " + "equipamento.descricao = \""
 						+ equipamento.getDescricao() + "\" and " + ");");
 	}
 
@@ -358,33 +352,19 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return super
 				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 						+ "id_professor = (SELECT id_professor FROM professor WHERE "
-						+ "professor.nome = \""
-						+ r.getProfessor().getNome()
-						+ "\" and "
-						+ "professor.cpf = \""
-						+ r.getProfessor().getCpf()
-						+ "\" and "
-						+ "professor.telefone = \""
+						+ "professor.nome = \""	+ r.getProfessor().getNome()
+						+ "\" and " + "professor.cpf = \"" + r.getProfessor().getCpf()
+						+ "\" and " + "professor.telefone = \"" 
 						+ r.getProfessor().getTelefone()
-						+ "\" and "
-						+ "professor.email = \""
-						+ r.getProfessor().getEmail()
-						+ "\" and "
-						+ "professor.matricula = \""
-						+ r.getProfessor().getMatricula()
-						+ "\") and "
+						+ "\" and " + "professor.email = \"" + r.getProfessor().getEmail()
+						+ "\" and " + "professor.matricula = \"" 
+						+ r.getProfessor().getMatricula() + "\") and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \""
-						+ r.getEquipamento().getCodigo()
-						+ "\" and "
-						+ "equipamento.descricao = \""
-						+ r.getEquipamento().getDescricao()
-						+ "\" and "
-						+ "hora = \""
-						+ r.getHora()
-						+ "\" and "
-						+ "data = \""
-						+ r.getData() + ";");
+						+ "equipamento.codigo = \"" + r.getEquipamento().getCodigo()
+						+ "\" and " + "equipamento.descricao = \""
+						+ r.getEquipamento().getDescricao() + "\" and "
+						+ "hora = \"" + r.getHora() + "\" and "
+						+ "data = \"" + r.getData() + ";");
 	}
 
 }
