@@ -1,3 +1,8 @@
+/*
+Name: FactoryConnection
+Function: Makes the connection with the database server
+*/
+
 package persistence;
 
 import java.sql.Connection;
@@ -12,18 +17,20 @@ public class FactoryConnection {
 	private String user = "testuser";
 	private String password = "password";
 	
-	//Singleton
-		private static FactoryConnection instance;
-		private FactoryConnection(){
-		}
-		public static FactoryConnection getInstance(){
-			if(instance == null)
-				instance = new FactoryConnection();
-			return instance;
-		}
-	//
+	// Singleton implementation. 
+	private static FactoryConnection instance;
+	private FactoryConnection(){
+		// Blank constructor. 
+	}
+	
+	public static FactoryConnection getInstance(){
+		if(instance == null)
+			instance = new FactoryConnection();
+		return instance;
+	}
+	
 		
-		
+	// Create and return the connection with the database server. 
 	public Connection getConnection() throws SQLException{
 		Connection con = null;
 		con = DriverManager.getConnection(local, user, password);
