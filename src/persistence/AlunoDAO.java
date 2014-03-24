@@ -1,3 +1,8 @@
+/*
+Name: AlunoDAO
+Function: manage the DAO functions of the Aluno model
+*/
+
 package persistence;
 
 import model.Aluno;
@@ -9,7 +14,7 @@ import exception.ClienteException;
 
 public class AlunoDAO {
 
-	//Mensagens
+	// Messages. 
 		private static final String ALUNO_JA_EXISTENTE = "O Aluno ja esta cadastrado.";
 		private static final String ALUNO_NULO = "O Aluno esta nulo.";
 		private static final String ALUNO_NAO_EXISTENTE = "O Aluno nao esta cadastrado.";
@@ -17,7 +22,7 @@ public class AlunoDAO {
 		private static final String CPF_JA_EXISTENTE = "Ja existe um aluno cadastrado com esse CPF.";
 		private static final String MATRICULA_JA_EXISTENTE = "Ja existe um aluno cadastrado com essa matricula.";
 	
-	//Singleton
+	// Singleton implementation. 
 		private static AlunoDAO instance;
 		private AlunoDAO(){
 		}
@@ -26,9 +31,8 @@ public class AlunoDAO {
 				instance = new AlunoDAO();
 			return instance;
 		}
-	//
 	
-		
+	// Include new Aluno in the database. 
 	public void incluir(Aluno aluno) throws SQLException, ClienteException {
 		if(aluno == null)
 			throw new ClienteException(ALUNO_NULO);
@@ -51,6 +55,7 @@ public class AlunoDAO {
 			throw new ClienteException(ALUNO_JA_EXISTENTE);
 	}
 
+	// Update Aluno info in the database.
 	public void alterar(Aluno aluno_velho, Aluno aluno_novo) throws SQLException, ClienteException {
 		if(aluno_velho == null)
 			throw new ClienteException(ALUNO_NULO);
@@ -94,6 +99,7 @@ public class AlunoDAO {
 		con.close();
 	}
 
+	// Remove Aluno form the database. 
 	public void excluir(Aluno aluno) throws SQLException, ClienteException {
 		if(aluno == null)
 			throw new ClienteException(ALUNO_NULO);
@@ -113,31 +119,42 @@ public class AlunoDAO {
 	}
 
 	
-	
+	// Retrive all Alunos from the database. 
 	public Vector<Aluno> buscarTodos() throws SQLException, ClienteException {
 		return this.buscar("SELECT * FROM aluno;");
 	}
+	
+	// Search an Aluno by name. 
 	public Vector<Aluno> buscarNome(String valor) throws SQLException, ClienteException {
 		return this.buscar("SELECT * FROM aluno WHERE nome = " + "\"" + valor + "\";");
 	}
+	
+	// Search an Aluno by CPF. 
 	public Vector<Aluno> buscarCpf(String valor) throws SQLException, ClienteException {
 		return this.buscar("SELECT * FROM aluno WHERE cpf = " + "\"" + valor + "\";");
 	}
+	
+	// Search an Aluno by Matricula. 
 	public Vector<Aluno> buscarMatricula(String valor) throws SQLException, ClienteException {
 		return this.buscar("SELECT * FROM aluno WHERE matricula = " + "\"" + valor + "\";");
 	}
+	
+	// Search an Aluno by Email. 
 	public Vector<Aluno> buscarEmail(String valor) throws SQLException, ClienteException {
 		return this.buscar("SELECT * FROM aluno WHERE email = " + "\"" + valor + "\";");
 	}
+	
+	// Search an Aluno by phone number. 
 	public Vector<Aluno> buscarTelefone(String valor) throws SQLException, ClienteException {
 		return this.buscar("SELECT * FROM aluno WHERE telefone = " + "\"" + valor + "\";");
 	}
 	
 	
-	/**
-	 * Metodos Privados
-	 * */
+	/*
+	Private Methods
+	*/
 	
+	// Search a database entry. 
 	private Vector<Aluno> buscar(String query) throws SQLException, ClienteException {
 		Vector<Aluno> vet = new Vector<Aluno>();
 		
@@ -155,7 +172,7 @@ public class AlunoDAO {
 		return vet;
 	}
 	
-	
+	// Check if there is a database entry by query. 
 	private boolean inDBGeneric(String query) throws SQLException{
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
@@ -175,6 +192,8 @@ public class AlunoDAO {
 			return true;
 		}
 	}
+	
+	// Check if there is a database entry by Aluno. 
 	private boolean inDB(Aluno aluno) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.nome = \"" + aluno.getNome() + "\" and " +
@@ -183,14 +202,20 @@ public class AlunoDAO {
 				"aluno.email = \"" + aluno.getEmail() + "\" and " +
 				"aluno.matricula = \"" + aluno.getMatricula() + "\";");
 	}
+	
+	// Check if there is a database entry by CPF.
 	private boolean inDBCpf(String codigo) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.cpf = \"" + codigo + "\";");
 	}
+	
+	// Check if there is a database entry by Matricula.
 	private boolean inDBMatricula(String codigo) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.matricula = \"" + codigo + "\";");
 	}
+	
+	// Check if there is a database entry.
 	private boolean inOtherDB(Aluno aluno) throws SQLException, ClienteException{
 		return this.inDBGeneric(
 				"SELECT * FROM reserva_sala_aluno WHERE " +
