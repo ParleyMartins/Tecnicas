@@ -15,6 +15,14 @@ import view.mainViews.SalaView;
 
 public class Main2 extends javax.swing.JFrame {
 
+	private javax.swing.JButton alunoBtn;
+	private javax.swing.JButton equipamentoBtn;
+	private javax.swing.JLabel fundoLbl;
+	private javax.swing.JPanel panelReserva;
+	private javax.swing.JPanel panelReserva1;
+	private javax.swing.JButton professorBtn;
+	private javax.swing.JButton salaBtn;
+	
 	// Constructor generates form Main2
 	public Main2 ( ) {
 
@@ -24,28 +32,28 @@ public class Main2 extends javax.swing.JFrame {
 	// This method initializes the Components.
 	private void initComponents ( ) {
 
-		fundoLbl = new javax.swing.JLabel();
-		panelReserva1 = new javax.swing.JPanel();
-		salaBtn = new javax.swing.JButton();
-		equipamentoBtn = new javax.swing.JButton();
-		panelReserva = new javax.swing.JPanel();
-		professorBtn = new javax.swing.JButton();
-		alunoBtn = new javax.swing.JButton();
+		this.fundoLbl = new javax.swing.JLabel();
+		this.panelReserva1 = new javax.swing.JPanel();
+		this.salaBtn = new javax.swing.JButton();
+		this.equipamentoBtn = new javax.swing.JButton();
+		this.panelReserva = new javax.swing.JPanel();
+		this.professorBtn = new javax.swing.JButton();
+		this.alunoBtn = new javax.swing.JButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("SisRES");
 		setName("Main"); 
 		setResizable(false);
 
-		fundoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		fundoLbl.setText("SisRES");
+		this.fundoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.fundoLbl.setText("SisRES");
 
-		panelReserva1.setBorder(javax.swing.BorderFactory
+		this.panelReserva1.setBorder(javax.swing.BorderFactory
 				.createTitledBorder("Reserva"));
 
-		salaBtn.setText("Sala");
-		salaBtn.setName("Sala");
-		salaBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.salaBtn.setText("Sala");
+		this.salaBtn.setName("Sala");
+		this.salaBtn.addActionListener(new java.awt.event.ActionListener() {
 
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
 
@@ -53,9 +61,9 @@ public class Main2 extends javax.swing.JFrame {
 			}
 		});
 
-		equipamentoBtn.setText("Equipamento");
-		equipamentoBtn.setName("Equipamento");
-		equipamentoBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.equipamentoBtn.setText("Equipamento");
+		this.equipamentoBtn.setName("Equipamento");
+		this.equipamentoBtn.addActionListener(new java.awt.event.ActionListener() {
 
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
 
@@ -64,8 +72,8 @@ public class Main2 extends javax.swing.JFrame {
 		});
 
 		javax.swing.GroupLayout panelReserva1Layout = new javax.swing.GroupLayout(
-				panelReserva1);
-		panelReserva1.setLayout(panelReserva1Layout);
+				this.panelReserva1);
+		this.panelReserva1.setLayout(panelReserva1Layout);
 		panelReserva1Layout
 				.setHorizontalGroup(panelReserva1Layout
 						.createParallelGroup(
@@ -75,14 +83,14 @@ public class Main2 extends javax.swing.JFrame {
 										.createSequentialGroup()
 										.addGap(6, 6, 6)
 										.addComponent(
-												salaBtn,
+												this.salaBtn,
 												javax.swing.GroupLayout.PREFERRED_SIZE,
 												105,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
-												equipamentoBtn,
+												this.equipamentoBtn,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												106, Short.MAX_VALUE)
 										.addContainerGap()));
@@ -99,12 +107,12 @@ public class Main2 extends javax.swing.JFrame {
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(
-																salaBtn,
+																this.salaBtn,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																40,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																equipamentoBtn,
+																this.equipamentoBtn,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																40,
 																javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,12 +120,12 @@ public class Main2 extends javax.swing.JFrame {
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 
-		panelReserva.setBorder(javax.swing.BorderFactory
+		this.panelReserva.setBorder(javax.swing.BorderFactory
 				.createTitledBorder("Cadastro"));
 
-		professorBtn.setText("Professor");
-		professorBtn.setName("Professor");
-		professorBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.professorBtn.setText("Professor");
+		this.professorBtn.setName("Professor");
+		this.professorBtn.addActionListener(new java.awt.event.ActionListener() {
 
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
 
@@ -125,9 +133,9 @@ public class Main2 extends javax.swing.JFrame {
 			}
 		});
 
-		alunoBtn.setText("Aluno");
-		alunoBtn.setName("Aluno");
-		alunoBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.alunoBtn.setText("Aluno");
+		this.alunoBtn.setName("Aluno");
+		this.alunoBtn.addActionListener(new java.awt.event.ActionListener() {
 
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
 
@@ -136,8 +144,8 @@ public class Main2 extends javax.swing.JFrame {
 		});
 
 		javax.swing.GroupLayout panelReservaLayout = new javax.swing.GroupLayout(
-				panelReserva);
-		panelReserva.setLayout(panelReservaLayout);
+				this.panelReserva);
+		this.panelReserva.setLayout(panelReservaLayout);
 		panelReservaLayout
 				.setHorizontalGroup(panelReservaLayout
 						.createParallelGroup(
@@ -147,14 +155,14 @@ public class Main2 extends javax.swing.JFrame {
 										.createSequentialGroup()
 										.addContainerGap()
 										.addComponent(
-												professorBtn,
+												this.professorBtn,
 												javax.swing.GroupLayout.PREFERRED_SIZE,
 												105,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
-												alunoBtn,
+												this.alunoBtn,
 												javax.swing.GroupLayout.PREFERRED_SIZE,
 												105,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,12 +180,12 @@ public class Main2 extends javax.swing.JFrame {
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(
-																professorBtn,
+																this.professorBtn,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																40,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																alunoBtn,
+																this.alunoBtn,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																40,
 																javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -193,13 +201,13 @@ public class Main2 extends javax.swing.JFrame {
 				.addGroup(
 						layout.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(panelReserva1,
+								.addComponent(this.panelReserva1,
 										javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(panelReserva,
+								.addComponent(this.panelReserva,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE))
@@ -207,7 +215,7 @@ public class Main2 extends javax.swing.JFrame {
 						javax.swing.GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addGap(191, 191, 191)
-								.addComponent(fundoLbl,
+								.addComponent(this.fundoLbl,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE).addGap(185, 185, 185)));
@@ -222,17 +230,17 @@ public class Main2 extends javax.swing.JFrame {
 												javax.swing.GroupLayout.Alignment.LEADING,
 												false)
 												.addComponent(
-														panelReserva,
+														this.panelReserva,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														panelReserva1,
+														this.panelReserva1,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))
 								.addGap(111, 111, 111)
-								.addComponent(fundoLbl,
+								.addComponent(this.fundoLbl,
 										javax.swing.GroupLayout.PREFERRED_SIZE,
 										45,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,12 +318,4 @@ public class Main2 extends javax.swing.JFrame {
 			}
 		});
 	}
-
-	private javax.swing.JButton alunoBtn;
-	private javax.swing.JButton equipamentoBtn;
-	private javax.swing.JLabel fundoLbl;
-	private javax.swing.JPanel panelReserva;
-	private javax.swing.JPanel panelReserva1;
-	private javax.swing.JButton professorBtn;
-	private javax.swing.JButton salaBtn;
 }
