@@ -37,8 +37,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 	public static ResEquipamentoProfessorDAO getInstance() {
 
-		if (instance == null)
+		if (instance == null) {
 			instance = new ResEquipamentoProfessorDAO();
+		}
 		return instance;
 	}
 
@@ -129,27 +130,30 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	public void incluir(ReservaEquipamentoProfessor r) throws ReservaException,
 			SQLException {
 
-		if (r == null)
+		if (r == null) {
 			throw new ReservaException(NULA);
-		else
-			if (!this.professorinDB(r.getProfessor()))
+		} else {
+			if (!this.professorinDB(r.getProfessor())) {
 				throw new ReservaException(PROFESSOR_INEXISTENTE);
-			else
-				if (!this.equipamentoinDB(r.getEquipamento()))
+			} else {
+				if (!this.equipamentoinDB(r.getEquipamento())) {
 					throw new ReservaException(EQUIPAMENTO_INEXISTENTE);
-				else
+				} else {
 					if (this.equipamentoinReservaDB(r.getEquipamento(),
-							r.getData(), r.getHora()))
+							r.getData(), r.getHora())) {
 						throw new ReservaException(EQUIPAMENTO_INDISPONIVEL);
-					else
+					} else {
 						if (this.professorinReservaDB(r.getProfessor(),
-								r.getData(), r.getHora()))
+								r.getData(), r.getHora())) {
 							throw new ReservaException(RESERVA_EXISTENTE);
-						else {
+						} else {
 							super.executeQuery(this.delete_from_aluno(r));
 							super.executeQuery(this.insert_into(r));
 						}
-
+					}
+				}
+			}
+		}
 	}
 
 	// Update Reserva info in the database.
@@ -157,56 +161,64 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			ReservaEquipamentoProfessor r_new) throws ReservaException,
 			SQLException {
 
-		if (r == null)
+		if (r == null) {
 			throw new ReservaException(NULA);
-		else
-			if (r_new == null)
+		} else {
+			if (r_new == null) {
 				throw new ReservaException(NULA);
-
-			else
-				if (!this.reservainDB(r))
+			} else {
+				if (!this.reservainDB(r)) {
 					throw new ReservaException(RESERVA_INEXISTENTE);
-				else
-					if (this.reservainDB(r_new))
+				} else {
+					if (this.reservainDB(r_new)) {
 						throw new ReservaException(RESERVA_EXISTENTE);
-					else
+					} else {
 						if (!r.getData().equals(r_new.getData())
 								|| !r.getHora().equals(r_new.getHora())) {
 							if (this.professorinReservaDB(r_new.getProfessor(),
-									r_new.getData(), r_new.getHora()))
-								throw new ReservaException(RESERVA_EXISTENTE);// Perguntar
-																				// pro
-																				// Matheus
-							else
+									r_new.getData(), r_new.getHora())) {
+								throw new ReservaException(RESERVA_EXISTENTE);
+							} else {
 								if (this.equipamentoinReservaDB(
 										r_new.getEquipamento(),
-										r_new.getData(), r_new.getHora()))
+										r_new.getData(), r_new.getHora())) {
 									throw new ReservaException(
 											EQUIPAMENTO_INDISPONIVEL);
-						} else
-							if (!this.professorinDB(r_new.getProfessor()))
+								}
+							}
+						} else {
+							if (!this.professorinDB(r_new.getProfessor())) {
 								throw new ReservaException(
 										PROFESSOR_INEXISTENTE);
-							else
+							} else {
 								if (!this.equipamentoinDB(r_new
-										.getEquipamento()))
+										.getEquipamento())) {
 									throw new ReservaException(
 											EQUIPAMENTO_INEXISTENTE);
-								else
+								} else {
 									super.updateQuery(this.update(r, r_new));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	// Remove Reserva from database.
 	public void excluir(ReservaEquipamentoProfessor r) throws ReservaException,
 			SQLException {
 
-		if (r == null)
+		if (r == null) {
 			throw new ReservaException(NULA);
-		else
-			if (!this.reservainDB(r))
+	    } else {
+			if (!this.reservainDB(r)) {
 				throw new ReservaException(RESERVA_INEXISTENTE);
-			else
+			} else {
 				super.executeQuery(this.delete_from_professor(r));
+			}
+	    }
 	}
 
 	// Select all Reservas from the database.
@@ -231,6 +243,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
 						+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;");
 		Iterator<ReservaEquipamentoProfessor> it = reservas_prof_mes.iterator();
+		
 		while (it.hasNext()) {
 			ReservaEquipamentoProfessor obj = it.next();
 			if (Integer.parseInt(obj.getData().split("[./-]")[1]) != mes) {
@@ -247,10 +260,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			ReservaException {
 
 		String hora_a = "", hora_b = "";
-		if (hora.length() == 4)
+		if (hora.length() == 4) {
 			hora_a = "0" + hora;
-		if (hora.charAt(0) == '0')
+		}
+		if (hora.charAt(0) == '0') {
 			hora_b = hora.substring(1);
+		}
+		
 		return super
 				.search("SELECT * FROM reserva_equipamento_professor "
 						+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
