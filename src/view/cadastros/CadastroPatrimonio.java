@@ -1,166 +1,221 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ 	RegisterProperty
+ 	This mother-class is used to register a room or a equipment
+ 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
 package view.cadastros;
 
-/**
- * 
- * @author Parley
- */
 public abstract class CadastroPatrimonio extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CadastroCliente
-     */
-    public CadastroPatrimonio(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
+	protected javax.swing.JButton cadastroBtn;
+	protected javax.swing.JButton cancelBtn;
+	protected javax.swing.JLabel codigoLbl;
+	protected javax.swing.JTextField codigoTxtField;
+	protected javax.swing.JLabel descricaoLbl;
+	protected javax.swing.JScrollPane jScrollPane1;
+	protected javax.swing.JLabel capacidadeLbl;
+	protected javax.swing.JTextField capacidadeTxtField;
+	protected javax.swing.JTextArea descricaoTextArea;
+	
+	// Creates a new form RegisterProperty
+	public CadastroPatrimonio (java.awt.Frame parent, boolean modal) {
 
-    protected abstract void cadastroAction();
+		super(parent, modal);
+		initComponents();
+	}
 
-    public void initComponents() {
+	// This method is going to perform the register action in each child class.
+	protected abstract void cadastroAction ( );
 
-        codigoLbl = new javax.swing.JLabel();
-        capacidadeLbl = new javax.swing.JLabel();
-        descricaoLbl = new javax.swing.JLabel();
-        codigoTxtField = new javax.swing.JTextField();
-        capacidadeTxtField = new javax.swing.JTextField();
-        cadastroBtn = new javax.swing.JButton();
-        cancelBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        descricaoTextArea = new javax.swing.JTextArea();
+	// Method called from within the constructor to initialize components.
+	public void initComponents ( ) {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro");
-        setResizable(false);
+		this.codigoLbl = new javax.swing.JLabel();
+		this.capacidadeLbl = new javax.swing.JLabel();
+		this.descricaoLbl = new javax.swing.JLabel();
+		this.codigoTxtField = new javax.swing.JTextField();
+		this.capacidadeTxtField = new javax.swing.JTextField();
+		this.cadastroBtn = new javax.swing.JButton();
+		this.cancelBtn = new javax.swing.JButton();
+		this.jScrollPane1 = new javax.swing.JScrollPane();
+		this.descricaoTextArea = new javax.swing.JTextArea();
 
-        codigoLbl.setText("Codigo: ");
+		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setTitle("Cadastro");
+		setResizable(false);
 
-        capacidadeLbl.setText("Capacidade: ");
+		this.codigoLbl.setText("Codigo: ");
 
-        descricaoLbl.setText("Descricao:");
+		this.capacidadeLbl.setText("Capacidade: ");
 
-        capacidadeTxtField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+		this.descricaoLbl.setText("Descricao:");
 
-        codigoTxtField.setName("Codigo");
-        capacidadeTxtField.setName("Capacidade");
-        descricaoTextArea.setName("Descricao");
+		this.capacidadeTxtField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        cadastroBtn.setText("Cadastrar");
-        cadastroBtn.setName("Cadastrar");
-        cadastroBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroBtnActionPerformed(evt);
-            }
-        });
+		this.codigoTxtField.setName("Codigo");
+		this.capacidadeTxtField.setName("Capacidade");
+		this.descricaoTextArea.setName("Descricao");
 
-        cancelBtn.setText("Cancelar");
-        cancelBtn.setName("Cancelar");
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
+		this.cadastroBtn.setText("Cadastrar");
+		this.cadastroBtn.setName("Cadastrar");
+		this.cadastroBtn.addActionListener(new java.awt.event.ActionListener() {
 
-        descricaoTextArea.setColumns(20);
-        descricaoTextArea.setRows(5);
-        jScrollPane1.setViewportView(descricaoTextArea);
+			public void actionPerformed (java.awt.event.ActionEvent evt) {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup()
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(
-                                                layout.createSequentialGroup()
-                                                        .addContainerGap()
-                                                        .addGroup(
-                                                                layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                        .addComponent(descricaoLbl,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE)
-                                                                        .addComponent(capacidadeLbl,
-                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE)
-                                                                        .addComponent(codigoLbl,
-                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(
-                                                                layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                        .addComponent(jScrollPane1)
-                                                                        .addComponent(capacidadeTxtField)
-                                                                        .addComponent(codigoTxtField)))
-                                        .addGroup(
-                                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                                layout.createSequentialGroup()
-                                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(cadastroBtn)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE).addGap(8, 8, 8)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(codigoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(codigoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(capacidadeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 19,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(capacidadeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(descricaoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(cadastroBtn)
-                                        .addComponent(cancelBtn))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+				cadastroBtnActionPerformed(evt);
+			}
+		});
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+		this.cancelBtn.setText("Cancelar");
+		this.cancelBtn.setName("Cancelar");
+		this.cancelBtn.addActionListener(new java.awt.event.ActionListener() {
 
-    private void cadastroBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        cadastroAction();
+			public void actionPerformed (java.awt.event.ActionEvent evt) {
 
-    }
+				cancelBtnActionPerformed(evt);
+			}
+		});
 
-    protected void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        this.setVisible(false);
-    }
+		this.descricaoTextArea.setColumns(20);
+		this.descricaoTextArea.setRows(5);
+		this.jScrollPane1.setViewportView(this.descricaoTextArea);
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton cadastroBtn;
-    protected javax.swing.JButton cancelBtn;
-    protected javax.swing.JLabel codigoLbl;
-    protected javax.swing.JTextField codigoTxtField;
-    protected javax.swing.JLabel descricaoLbl;
-    protected javax.swing.JScrollPane jScrollPane1;
-    // protected javax.swing.JTextPane jTextPane1;
-    protected javax.swing.JLabel capacidadeLbl;
-    protected javax.swing.JTextField capacidadeTxtField;
-    protected javax.swing.JTextArea descricaoTextArea;
-    // End of variables declaration//GEN-END:variables
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
+				getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING,
+												false)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addContainerGap()
+																.addGroup(
+																		layout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.TRAILING,
+																				false)
+																				.addComponent(
+																						this.descricaoLbl,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						Short.MAX_VALUE)
+																				.addComponent(
+																						this.capacidadeLbl,
+																						javax.swing.GroupLayout.Alignment.LEADING,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						Short.MAX_VALUE)
+																				.addComponent(
+																						this.codigoLbl,
+																						javax.swing.GroupLayout.Alignment.LEADING,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						Short.MAX_VALUE))
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addGroup(
+																		layout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING,
+																				false)
+																				.addComponent(
+																						this.jScrollPane1)
+																				.addComponent(
+																						this.capacidadeTxtField)
+																				.addComponent(
+																						this.codigoTxtField)))
+												.addGroup(
+														javax.swing.GroupLayout.Alignment.TRAILING,
+														layout.createSequentialGroup()
+																.addContainerGap(
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		this.cadastroBtn)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																.addComponent(
+																		this.cancelBtn,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		81,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGap(8, 8, 8)))
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.BASELINE)
+												.addComponent(
+														this.codigoLbl,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														21,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(
+														this.codigoTxtField,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.BASELINE)
+												.addComponent(
+														this.capacidadeLbl,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														19,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(
+														this.capacidadeTxtField,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(
+														this.descricaoLbl,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														22,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(
+														this.jScrollPane1,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														109,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGap(18, 18, 18)
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.BASELINE)
+												.addComponent(this.cadastroBtn)
+												.addComponent(this.cancelBtn))
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
+
+		pack();
+	}
+
+	// Method used to call the abstract function in each child class.
+	private void cadastroBtnActionPerformed (java.awt.event.ActionEvent evt) {
+
+		cadastroAction();
+	}
+
+	// Method used to cancel a registration.
+	protected void cancelBtnActionPerformed (java.awt.event.ActionEvent evt) {
+
+		this.setVisible(false);
+	}
 }
