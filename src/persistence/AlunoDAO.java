@@ -34,6 +34,7 @@ public class AlunoDAO {
 	
 	// Include new Aluno in the database. 
 	public void incluir(Aluno aluno) throws SQLException, ClienteException {
+		
 		if(aluno == null)
 			throw new ClienteException(ALUNO_NULO);
 		else if(this.inDBCpf(aluno.getCpf()))
@@ -56,7 +57,9 @@ public class AlunoDAO {
 	}
 
 	// Update Aluno info in the database.
-	public void alterar(Aluno aluno_velho, Aluno aluno_novo) throws SQLException, ClienteException {
+	public void alterar(Aluno aluno_velho, Aluno aluno_novo) throws 
+			SQLException, ClienteException {
+		
 		if(aluno_velho == null)
 			throw new ClienteException(ALUNO_NULO);
 		if(aluno_novo == null)
@@ -101,6 +104,7 @@ public class AlunoDAO {
 
 	// Remove Aluno form the database. 
 	public void excluir(Aluno aluno) throws SQLException, ClienteException {
+		
 		if(aluno == null)
 			throw new ClienteException(ALUNO_NULO);
 		else if(this.inOtherDB(aluno))
@@ -121,31 +125,42 @@ public class AlunoDAO {
 	
 	// Retrive all Alunos from the database. 
 	public Vector<Aluno> buscarTodos() throws SQLException, ClienteException {
+		
 		return this.buscar("SELECT * FROM aluno;");
 	}
 	
 	// Search an Aluno by name. 
-	public Vector<Aluno> buscarNome(String valor) throws SQLException, ClienteException {
+	public Vector<Aluno> buscarNome(String valor) throws SQLException, 
+			ClienteException {
+		
 		return this.buscar("SELECT * FROM aluno WHERE nome = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by CPF. 
-	public Vector<Aluno> buscarCpf(String valor) throws SQLException, ClienteException {
+	public Vector<Aluno> buscarCpf(String valor) throws SQLException, 
+			ClienteException {
+		
 		return this.buscar("SELECT * FROM aluno WHERE cpf = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by Matricula. 
-	public Vector<Aluno> buscarMatricula(String valor) throws SQLException, ClienteException {
+	public Vector<Aluno> buscarMatricula(String valor) throws SQLException, 
+			ClienteException {
+		
 		return this.buscar("SELECT * FROM aluno WHERE matricula = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by Email. 
-	public Vector<Aluno> buscarEmail(String valor) throws SQLException, ClienteException {
+	public Vector<Aluno> buscarEmail(String valor) throws SQLException, 
+			ClienteException {
+		
 		return this.buscar("SELECT * FROM aluno WHERE email = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by phone number. 
-	public Vector<Aluno> buscarTelefone(String valor) throws SQLException, ClienteException {
+	public Vector<Aluno> buscarTelefone(String valor) throws SQLException, 
+			ClienteException {
+		
 		return this.buscar("SELECT * FROM aluno WHERE telefone = " + "\"" + valor + "\";");
 	}
 	
@@ -155,7 +170,9 @@ public class AlunoDAO {
 	*/
 	
 	// Search a database entry. 
-	private Vector<Aluno> buscar(String query) throws SQLException, ClienteException {
+	private Vector<Aluno> buscar(String query) throws SQLException, 
+			ClienteException {
+		
 		Vector<Aluno> vet = new Vector<Aluno>();
 		
 		Connection con =  FactoryConnection.getInstance().getConnection();
@@ -173,7 +190,8 @@ public class AlunoDAO {
 	}
 	
 	// Check if there is a database entry by query. 
-	private boolean inDBGeneric(String query) throws SQLException{
+	private boolean inDBGeneric(String query) throws SQLException {
+		
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
 		ResultSet rs = pst.executeQuery();
@@ -194,7 +212,8 @@ public class AlunoDAO {
 	}
 	
 	// Check if there is a database entry by Aluno. 
-	private boolean inDB(Aluno aluno) throws SQLException{
+	private boolean inDB(Aluno aluno) throws SQLException {
+		
 		return this.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.nome = \"" + aluno.getNome() + "\" and " +
 				"aluno.cpf = \"" + aluno.getCpf() + "\" and " +
@@ -204,19 +223,23 @@ public class AlunoDAO {
 	}
 	
 	// Check if there is a database entry by CPF.
-	private boolean inDBCpf(String codigo) throws SQLException{
+	private boolean inDBCpf(String codigo) throws SQLException {
+		
 		return this.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.cpf = \"" + codigo + "\";");
 	}
 	
 	// Check if there is a database entry by Matricula.
-	private boolean inDBMatricula(String codigo) throws SQLException{
+	private boolean inDBMatricula(String codigo) throws SQLException {
+		
 		return this.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.matricula = \"" + codigo + "\";");
 	}
 	
 	// Check if there is a database entry.
-	private boolean inOtherDB(Aluno aluno) throws SQLException, ClienteException{
+	private boolean inOtherDB(Aluno aluno) throws SQLException, 
+			ClienteException {
+		
 		return this.inDBGeneric(
 				"SELECT * FROM reserva_sala_aluno WHERE " +
 				"id_aluno = (SELECT id_aluno FROM aluno WHERE " +
@@ -228,12 +251,15 @@ public class AlunoDAO {
 	}
 	
 	
-	private Aluno fetchAluno(ResultSet rs) throws ClienteException, SQLException{
+	private Aluno fetchAluno(ResultSet rs) throws ClienteException, 
+			SQLException {
+		
 		return new Aluno(rs.getString("nome"), rs.getString("cpf"), rs.getString("matricula"),
 				rs.getString("telefone"), rs.getString("email"));
 	}
 	
-	private void updateQuery(String msg) throws SQLException{
+	private void updateQuery(String msg) throws SQLException {
+		
 		Connection con =  FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(msg);
 		pst.executeUpdate();		
