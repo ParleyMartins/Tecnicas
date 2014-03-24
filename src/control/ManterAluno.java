@@ -23,31 +23,31 @@ public class ManterAluno {
 	//
 	
 	public Vector<Aluno> buscarNome(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarNome(valor);
+		return AlunoDAO.getInstance().searchNome(valor);
 	}
 	public Vector<Aluno> buscarCpf(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarCpf(valor);
+		return AlunoDAO.getInstance().searchCpf(valor);
 	}
 	public Vector<Aluno> buscarMatricula(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarMatricula(valor);
+		return AlunoDAO.getInstance().searchMatricula(valor);
 	}
 	public Vector<Aluno> buscarEmail(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarEmail(valor);
+		return AlunoDAO.getInstance().searchEmail(valor);
 	}
 	public Vector<Aluno> buscarTelefone(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarTelefone(valor);
+		return AlunoDAO.getInstance().searchTelefone(valor);
 	}
 		
 		
 	public Vector<Aluno> getAluno_vet() throws SQLException, ClienteException{
-		this.alunos_vet = AlunoDAO.getInstance().buscarTodos();
+		this.alunos_vet = AlunoDAO.getInstance().searchAll();
 		return this.alunos_vet;
 	}
 	
 	public void inserir(String nome, String cpf, String matricula,
 			String telefone, String email) throws ClienteException, SQLException {
 		Aluno aluno = new Aluno(nome, cpf, matricula, telefone, email);
-		AlunoDAO.getInstance().incluir(aluno);
+		AlunoDAO.getInstance().include(aluno);
 		this.alunos_vet.add(aluno);
 	}
 
@@ -64,11 +64,11 @@ public class ManterAluno {
 		aluno.setMatricula(matricula);
 		aluno.setTelefone(telefone);
 		aluno.setEmail(email);
-		AlunoDAO.getInstance().alterar(aluno_velho, aluno);
+		AlunoDAO.getInstance().change(aluno_velho, aluno);
 	}
 
 	public void excluir(Aluno aluno) throws SQLException, ClienteException {
-		AlunoDAO.getInstance().excluir(aluno);
+		AlunoDAO.getInstance().exclude(aluno);
 		this.alunos_vet.remove(aluno);
 	}
 

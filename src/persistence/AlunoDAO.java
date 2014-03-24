@@ -38,7 +38,7 @@ public class AlunoDAO {
 	}
 	
 	// Include new Aluno in the database. 
-	public void incluir(Aluno aluno) throws SQLException, ClienteException {
+	public void include(Aluno aluno) throws SQLException, ClienteException {
 		
 		if ( aluno == null ) {
 			throw new ClienteException(ALUNO_NULO);
@@ -67,7 +67,7 @@ public class AlunoDAO {
 	}
 
 	// Update Aluno info in the database.
-	public void alterar(Aluno aluno_velho, Aluno aluno_novo) throws 
+	public void change(Aluno aluno_velho, Aluno aluno_novo) throws 
 			SQLException, ClienteException {
 		
 		if ( aluno_velho == null ) {
@@ -126,7 +126,7 @@ public class AlunoDAO {
 	}
 
 	// Remove Aluno form the database. 
-	public void excluir(Aluno aluno) throws SQLException, ClienteException {
+	public void exclude(Aluno aluno) throws SQLException, ClienteException {
 		
 		if( aluno == null ) {
 			throw new ClienteException(ALUNO_NULO);
@@ -151,44 +151,44 @@ public class AlunoDAO {
 
 	
 	// Retrive all Alunos from the database. 
-	public Vector<Aluno> buscarTodos() throws SQLException, ClienteException {
+	public Vector<Aluno> searchAll() throws SQLException, ClienteException {
 		
-		return this.buscar("SELECT * FROM aluno;");
+		return this.search("SELECT * FROM aluno;");
 	}
 	
 	// Search an Aluno by name. 
-	public Vector<Aluno> buscarNome(String valor) throws SQLException, 
+	public Vector<Aluno> searchNome(String valor) throws SQLException, 
 			ClienteException {
 		
-		return this.buscar("SELECT * FROM aluno WHERE nome = " + "\"" + valor + "\";");
+		return this.search("SELECT * FROM aluno WHERE nome = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by CPF. 
-	public Vector<Aluno> buscarCpf(String valor) throws SQLException, 
+	public Vector<Aluno> searchCpf(String valor) throws SQLException, 
 			ClienteException {
 		
-		return this.buscar("SELECT * FROM aluno WHERE cpf = " + "\"" + valor + "\";");
+		return this.search("SELECT * FROM aluno WHERE cpf = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by Matricula. 
-	public Vector<Aluno> buscarMatricula(String valor) throws SQLException, 
+	public Vector<Aluno> searchMatricula(String valor) throws SQLException, 
 			ClienteException {
 		
-		return this.buscar("SELECT * FROM aluno WHERE matricula = " + "\"" + valor + "\";");
+		return this.search("SELECT * FROM aluno WHERE matricula = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by Email. 
-	public Vector<Aluno> buscarEmail(String valor) throws SQLException, 
+	public Vector<Aluno> searchEmail(String valor) throws SQLException, 
 			ClienteException {
 		
-		return this.buscar("SELECT * FROM aluno WHERE email = " + "\"" + valor + "\";");
+		return this.search("SELECT * FROM aluno WHERE email = " + "\"" + valor + "\";");
 	}
 	
 	// Search an Aluno by phone number. 
-	public Vector<Aluno> buscarTelefone(String valor) throws SQLException, 
+	public Vector<Aluno> searchTelefone(String valor) throws SQLException, 
 			ClienteException {
 		
-		return this.buscar("SELECT * FROM aluno WHERE telefone = " + "\"" + valor + "\";");
+		return this.search("SELECT * FROM aluno WHERE telefone = " + "\"" + valor + "\";");
 	}
 	
 	
@@ -197,7 +197,7 @@ public class AlunoDAO {
 	*/
 	
 	// Search a database entry. 
-	private Vector<Aluno> buscar(String query) throws SQLException, 
+	private Vector<Aluno> search(String query) throws SQLException, 
 			ClienteException {
 		
 		Vector<Aluno> vet = new Vector<Aluno>();
