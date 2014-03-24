@@ -137,14 +137,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
     @SuppressWarnings("unchecked") public Vector<Object> buscarTodos() throws SQLException, ClienteException, PatrimonioException,
             ReservaException {
-        return super.buscar("SELECT * FROM reserva_sala_professor "
+        return super.search("SELECT * FROM reserva_sala_professor "
                 + "INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
                 + "INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
     }
 
     @SuppressWarnings("unchecked") public Vector<ReservaEquipamentoProfessor> buscarPorMes(int mes) throws SQLException,
             ClienteException, PatrimonioException, ReservaException {
-        Vector<ReservaEquipamentoProfessor> reservas_prof_mes = super.buscar("SELECT * FROM reserva_equipamento_professor "
+        Vector<ReservaEquipamentoProfessor> reservas_prof_mes = super.search("SELECT * FROM reserva_equipamento_professor "
                 + "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
                 + "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;");
         Iterator<ReservaEquipamentoProfessor> it = reservas_prof_mes.iterator();
@@ -164,7 +164,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
             hora_a = "0" + hora;
         if (hora.charAt(0) == '0')
             hora_b = hora.substring(1);
-        return super.buscar("SELECT * FROM reserva_equipamento_professor "
+        return super.search("SELECT * FROM reserva_equipamento_professor "
                 + "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
                 + "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor "
                 + " WHERE hora = \"" + hora + "\" or hora = \"" + hora_a + "\" or hora = \"" + hora_b + "\";");

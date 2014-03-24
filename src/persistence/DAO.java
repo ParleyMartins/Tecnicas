@@ -21,7 +21,7 @@ public abstract class DAO {
 	Search for a database entry according to the query
 	*/
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected Vector buscar(String query) throws SQLException, ClienteException, 
+	protected Vector search(String query) throws SQLException, ClienteException, 
 			PatrimonioException, ReservaException {
 		
 		Vector vet = new Vector();
