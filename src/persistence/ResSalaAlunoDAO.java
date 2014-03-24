@@ -168,13 +168,13 @@ public class ResSalaAlunoDAO extends DAO{
 	}
 	
 	public Vector<ReservaSalaAluno> buscarTodos() throws SQLException, ClienteException, PatrimonioException, ReservaException{
-		return super.buscar("SELECT * FROM reserva_sala_aluno " +
+		return super.search("SELECT * FROM reserva_sala_aluno " +
 				"INNER JOIN sala ON sala.id_sala = reserva_sala_aluno.id_sala " +
 				"INNER JOIN aluno ON aluno.id_aluno = reserva_sala_aluno.id_aluno;");
 	}
 	public Vector<ReservaSalaAluno> buscarPorDia(String data) throws SQLException, ClienteException, PatrimonioException, ReservaException{
 		data = this.padronizarData(data);
-		return super.buscar("SELECT * FROM reserva_sala_aluno " +
+		return super.search("SELECT * FROM reserva_sala_aluno " +
 				"INNER JOIN sala ON sala.id_sala = reserva_sala_aluno.id_sala " +
 				"INNER JOIN aluno ON aluno.id_aluno = reserva_sala_aluno.id_aluno " +
 				"WHERE data = \""+ data + "\";");
@@ -182,7 +182,7 @@ public class ResSalaAlunoDAO extends DAO{
 	public Vector<ReservaSalaAluno> buscarPorHora(String hora) 
 			throws SQLException, ClienteException, PatrimonioException, ReservaException{
 		hora = this.padronizarHora(hora);
-		return super.buscar("SELECT * FROM reserva_sala_aluno " +
+		return super.search("SELECT * FROM reserva_sala_aluno " +
 				"INNER JOIN sala ON sala.id_sala = reserva_sala_aluno.id_sala " +
 				"INNER JOIN aluno ON aluno.id_aluno = reserva_sala_aluno.id_aluno " +
 				" WHERE hora = \"" + hora +"\";");

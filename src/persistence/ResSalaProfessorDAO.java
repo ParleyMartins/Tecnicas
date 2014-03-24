@@ -159,7 +159,7 @@ public class ResSalaProfessorDAO extends DAO{
 
 	@SuppressWarnings("unchecked")
 	public Vector<ReservaSalaProfessor> buscarTodos() throws SQLException, ClienteException, PatrimonioException, ReservaException{
-		return super.buscar("SELECT * FROM reserva_sala_professor " +
+		return super.search("SELECT * FROM reserva_sala_professor " +
 				"INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala " +
 				"INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
 	}
@@ -167,7 +167,7 @@ public class ResSalaProfessorDAO extends DAO{
 	
 	@SuppressWarnings("unchecked")
 	public Vector<ReservaSalaProfessor> buscarPorData(String data) throws SQLException, ClienteException, PatrimonioException, ReservaException{
-		return super.buscar("SELECT * FROM reserva_sala_professor " +
+		return super.search("SELECT * FROM reserva_sala_professor " +
 				"INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala " +
 				"INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor" +
 				" WHERE data = \"" + this.padronizarData(data) + "\";");

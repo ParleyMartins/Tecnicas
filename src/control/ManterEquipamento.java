@@ -25,13 +25,13 @@ public class ManterEquipamento {
 //
 		
 	public Vector<Equipamento> getEquipamento_vet() throws SQLException, PatrimonioException {
-		this.Equipamento_vet = EquipamentoDAO.getInstance().buscarTodos();
+		this.Equipamento_vet = EquipamentoDAO.getInstance().searchAll();
 		return this.Equipamento_vet;
 	}
 
 	public void inserir(String codigo, String descricao) throws PatrimonioException, SQLException {
 		Equipamento equipamento = new Equipamento(codigo, descricao);
-		EquipamentoDAO.getInstance().incluir(equipamento);
+		EquipamentoDAO.getInstance().include(equipamento);
 		getEquipamento_vet();
 	}
 
@@ -42,7 +42,7 @@ public class ManterEquipamento {
 		Equipamento old_equipamento = new Equipamento(equipamento.getCodigo(), equipamento.getDescricao());
 		equipamento.setCodigo(codigo);
 		equipamento.setDescricao(descricao);
-		EquipamentoDAO.getInstance().alterar(old_equipamento, equipamento);
+		EquipamentoDAO.getInstance().change(old_equipamento, equipamento);
 		getEquipamento_vet();
 	}
 
@@ -50,7 +50,7 @@ public class ManterEquipamento {
 		if (equipamento == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		}
-		EquipamentoDAO.getInstance().excluir(equipamento);
+		EquipamentoDAO.getInstance().exclude(equipamento);
 		getEquipamento_vet();
 	}
 }
