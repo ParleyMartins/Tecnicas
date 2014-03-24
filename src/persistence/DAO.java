@@ -22,9 +22,10 @@ public abstract class DAO {
 	*/
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Vector buscar(String query) throws SQLException, ClienteException, 
-													PatrimonioException, ReservaException{
-		Vector vet = new Vector();
+			PatrimonioException, ReservaException {
 		
+		Vector vet = new Vector();
+
 		Connection con =  FactoryConnection.getInstance().getConnection();
 		
 		PreparedStatement pst = con.prepareStatement(query);
@@ -42,7 +43,8 @@ public abstract class DAO {
 	/*
 	Check if a database entry exists
 	*/
-	protected boolean inDBGeneric(String query) throws SQLException{
+	protected boolean inDBGeneric(String query) throws SQLException {
+		
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
 		ResultSet rs = pst.executeQuery();
@@ -66,14 +68,15 @@ public abstract class DAO {
 	Function signature, used on the search method.
 	Must be implemented on the following DAO classes.
 	*/
-	protected abstract Object fetch(ResultSet rs) throws SQLException, ClienteException,
-														PatrimonioException, ReservaException;
+	protected abstract Object fetch(ResultSet rs) throws SQLException, 
+			ClienteException, PatrimonioException, ReservaException;
 	
 	
 	/*
 	Add or remove a database entry. 
 	*/
-	protected void executeQuery(String msg) throws SQLException{
+	protected void executeQuery(String msg) throws SQLException {
+		
 		Connection con =  FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(msg);
 		pst.executeUpdate();		
@@ -84,7 +87,8 @@ public abstract class DAO {
 	/*
 	Update a database entry. 
 	*/
-	protected void updateQuery(String msg) throws SQLException{
+	protected void updateQuery(String msg) throws SQLException {
+		
 		Connection con =  FactoryConnection.getInstance().getConnection();
 		con.setAutoCommit(false);
 		PreparedStatement pst = con.prepareStatement(msg);
