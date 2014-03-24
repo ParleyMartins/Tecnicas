@@ -1,3 +1,8 @@
+/*
+Name: EquipamentoDAO
+Function: manage the DAO functions of the Equipamento model
+*/
+
 package persistence;
 
 import java.sql.Connection;
@@ -11,17 +16,18 @@ import exception.PatrimonioException;
 
 public class EquipamentoDAO {
 
-    // Mensagens
+    // Messages. 
     private static final String EQUIPAMENTO_JA_EXISTENTE = "Equipamento ja cadastrado.";
     private static final String EQUIPAMENTO_NAO_EXISTENTE = "Equipamento nao cadastrado.";
     private static final String EQUIPAMENTO_NULO = "Equipamento esta nulo.";
     private static final String EQUIPAMENTO_EM_USO = "Equipamento esta sendo utilizado em uma reserva.";
     private static final String CODIGO_JA_EXISTENTE = "Equipamento com o mesmo codigo ja cadastrado.";
 
-    // Singleton
+    // Singleton implementation. 
     private static EquipamentoDAO instance;
 
     private EquipamentoDAO() {
+    	// Blank constructor. 
     }
 
     public static EquipamentoDAO getInstance() {
@@ -29,9 +35,9 @@ public class EquipamentoDAO {
             instance = new EquipamentoDAO();
         return instance;
     }
-
-    //
-
+    
+    
+    // Include new Equipamento in the database. 
     public void incluir(Equipamento equipamento) throws SQLException, PatrimonioException {
         if (equipamento == null)
             throw new PatrimonioException(EQUIPAMENTO_NULO);
@@ -43,6 +49,7 @@ public class EquipamentoDAO {
         }
     }
 
+    // Update Equipamento info in the database.
     public void alterar(Equipamento old_equipamento, Equipamento new_equipamento) throws SQLException, PatrimonioException {
         if (old_equipamento == null)
             throw new PatrimonioException(EQUIPAMENTO_NULO);
@@ -74,7 +81,8 @@ public class EquipamentoDAO {
             throw new PatrimonioException(EQUIPAMENTO_JA_EXISTENTE);
         con.close();
     }
-
+    
+    // Remove Equipamento form the database. 
     public void excluir(Equipamento equipamento) throws SQLException, PatrimonioException {
         if (equipamento == null)
             throw new PatrimonioException(EQUIPAMENTO_NULO);
@@ -86,23 +94,27 @@ public class EquipamentoDAO {
         } else
             throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
     }
-
+    
+    // Retrive all Equipamento from the database.
     public Vector<Equipamento> buscarTodos() throws SQLException, PatrimonioException {
         return this.buscar("SELECT * FROM equipamento;");
     }
 
+    // Search an Equipamento by id code.
     public Vector<Equipamento> buscarPorCodigo(String valor) throws SQLException, PatrimonioException {
         return this.buscar("SELECT * FROM equipamento WHERE codigo = " + "\"" + valor + "\";");
     }
 
+    // Search an Equipamento by description.
     public Vector<Equipamento> buscarPorDescricao(String valor) throws SQLException, PatrimonioException {
         return this.buscar("SELECT * FROM equipamento WHERE descricao = " + "\"" + valor + "\";");
     }
 
-    /**
-     * Metodos Privados
-     * */
+    /*
+    Private Methods
+    */
 
+    // Retrive Equipamento from the database.
     private Vector<Equipamento> buscar(String query) throws SQLException, PatrimonioException {
         Vector<Equipamento> vet = new Vector<Equipamento>();
 
@@ -120,6 +132,7 @@ public class EquipamentoDAO {
         return vet;
     }
 
+    // Check if there is a database entry by query. 
     private boolean inDBGeneric(String query) throws SQLException {
         Connection con = FactoryConnection.getInstance().getConnection();
         PreparedStatement pst = con.prepareStatement(query);
@@ -138,15 +151,18 @@ public class EquipamentoDAO {
         }
     }
 
+    // Check if there is a database entry by Equipamento. 
     private boolean inDB(Equipamento e) throws SQLException, PatrimonioException {
         return this.inDBGeneric("SELECT * FROM equipamento WHERE " + "equipamento.codigo = \"" + e.getCodigo() + "\" and "
                 + "equipamento.descricao = \"" + e.getDescricao() + "\";");
     }
 
+    // Check if there is a database entry by code id. 
     private boolean inDBCodigo(String codigo) throws SQLException {
         return this.inDBGeneric("SELECT * FROM equipamento WHERE " + "codigo = \"" + codigo + "\";");
     }
 
+    // Check if there is a database entry. 
     private boolean inOtherDB(Equipamento e) throws SQLException {
         return this.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
                 + "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE " + "equipamento.codigo = \"" + e.getCodigo()
