@@ -23,17 +23,22 @@ public class FactoryConnection {
 		// Blank constructor. 
 	}
 	
-	public static FactoryConnection getInstance(){
-		if(instance == null)
+	public static FactoryConnection getInstance() {
+		
+		if ( instance == null ) {
 			instance = new FactoryConnection();
+		}
+		
 		return instance;
 	}
 	
 		
 	// Create and return the connection with the database server. 
-	public Connection getConnection() throws SQLException{
+	public Connection getConnection() throws SQLException {
+		
 		Connection con = null;
 		con = DriverManager.getConnection(local, user, password);
+		
 		return con;
 	}
 
