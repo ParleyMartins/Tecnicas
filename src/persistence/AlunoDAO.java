@@ -280,7 +280,7 @@ public class AlunoDAO {
 				"aluno.matricula = \"" + aluno.getMatricula() + "\");");
 	}
 	
-	
+	// Fetch Alunoo using a result. 
 	private Aluno fetchAluno(ResultSet rs) throws ClienteException, 
 			SQLException {
 		
@@ -288,6 +288,7 @@ public class AlunoDAO {
 				rs.getString("telefone"), rs.getString("email"));
 	}
 	
+	// Update a query.
 	private void updateQuery(String msg) throws SQLException {
 		
 		Connection con =  FactoryConnection.getInstance().getConnection();

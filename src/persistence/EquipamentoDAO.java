@@ -229,12 +229,14 @@ public class EquipamentoDAO {
         		+ e.getDescricao() + "\");");
     }
 
+    // Fetch Equipamento usign a result.
     private Equipamento fetchEquipamento(ResultSet rs) throws 
     		PatrimonioException, SQLException {
     	
         return new Equipamento(rs.getString("codigo"), rs.getString("descricao"));
     }
 
+    // Update a query. 
     private void updateQuery(String msg) throws SQLException {
     	
         Connection con = FactoryConnection.getInstance().getConnection();

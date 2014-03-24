@@ -17,9 +17,7 @@ import exception.ReservaException;
 
 public abstract class DAO {
 	
-	/*
-	Search for a database entry according to the query
-	*/
+	// Search for a database entry according to the query.
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Vector search(String query) throws SQLException, ClienteException, 
 			PatrimonioException, ReservaException {
@@ -41,9 +39,7 @@ public abstract class DAO {
 		return vet;
 	}
 	
-	/*
-	Check if a database entry exists
-	*/
+	// Check if a database entry exists.
 	protected boolean inDBGeneric(String query) throws SQLException {
 		
 		Connection con = FactoryConnection.getInstance().getConnection();
@@ -71,9 +67,7 @@ public abstract class DAO {
 			ClienteException, PatrimonioException, ReservaException;
 	
 	
-	/*
-	Add or remove a database entry. 
-	*/
+	// Add or remove a database entry. 
 	protected void executeQuery(String msg) throws SQLException {
 		
 		Connection con =  FactoryConnection.getInstance().getConnection();
@@ -83,9 +77,7 @@ public abstract class DAO {
 		con.close();
 	}
 	
-	/*
-	Update a database entry. 
-	*/
+	// Update a database entry. 
 	protected void updateQuery(String msg) throws SQLException {
 		
 		Connection con =  FactoryConnection.getInstance().getConnection();
