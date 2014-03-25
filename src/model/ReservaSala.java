@@ -1,3 +1,9 @@
+/**
+ReservaSala
+Class sets exceptions of ReservaSala.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSala.java.
+*/
+
 package model;
 
 import exception.ReservaException;
