@@ -1,3 +1,9 @@
+/**
+Professor
+Class sets exceptions of Professor.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Professor.java.
+*/
+
 package model;
 
 import exception.ClienteException;
