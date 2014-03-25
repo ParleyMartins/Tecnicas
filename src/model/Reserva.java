@@ -1,3 +1,9 @@
+/**
+Reserva
+Class sets exceptions of Reserva.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Reserva.java.
+*/
+
 package model;
 
 import java.text.SimpleDateFormat;
