@@ -1,7 +1,7 @@
 /**
-ReservaEquipamentoProfessor
-Class sets exceptions of ReservaEquipamentoProfessor.	
-https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamentoProfessor.java.
+		ReservaEquipamentoProfessor.
+		Class sets exceptions of ReservaEquipamentoProfessor.	
+		https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamentoProfessor.java.
 */
 
 package model;
