@@ -13,7 +13,7 @@ public class Sala extends Patrimonio {
 	private String capacidade;
 	
 
-	//Mensagens de Erro e Alertas
+	//Alerts and error mensages
 		private final String CAPACIDADE_INVALIDO = "Capacidade Invalida.";
 		private final String CAPACIDADE_BRANCO = "Capacidade em Branco.";
 		private final String CAPACIDADE_NULA = "Capacidade esta nula.";

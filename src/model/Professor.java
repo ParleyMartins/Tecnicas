@@ -10,7 +10,7 @@ import exception.ClienteException;
 
 public class Professor extends Cliente {
 	
-	//Mensagens de Erro e Alertas
+	//Alerts and error mensages
 		//private final String MATRICULA_INVALIDO = "Matricula Invalida.";
 		private final String MATRICULA_BRANCO = "Matricula em Branco.";
 		private final String MATRICULA_NULO = "Matricula esta Nula.";

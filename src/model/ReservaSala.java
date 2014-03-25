@@ -13,7 +13,7 @@ public class ReservaSala extends Reserva{
 	private Sala sala;
 	private String finalidade;
 	
-	//Mensagens
+	//Mensages
 		private final String SALA_NULO = "A sala esta nula.";
 		private final String FINALIDADE_NULA = "A finalidade esta nula.";
 		private final String FINALIDADE_BRANCO = "A finalidade esta em branco.";

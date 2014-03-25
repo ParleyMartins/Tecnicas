@@ -12,7 +12,7 @@ public class ReservaEquipamento extends Reserva {
 
     private Equipamento equipamento;
 
-    // Mensagens
+    // Mensages
     private final String EQUIPAMENTO_NULO = "O equipamneto esta nulo.";
 
     public ReservaEquipamento(String data, String hora, Equipamento equipamento) throws ReservaException {

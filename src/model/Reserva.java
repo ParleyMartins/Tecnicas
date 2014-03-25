@@ -16,7 +16,7 @@ public class Reserva {
 	private String hora;
 	private String data;
 	
-	//Mesagens, Alertas e Padroes
+	//Mensages, Alerts, Defaults
 		private final String HORA_NULA = "A hora esta nula.";
 		private final String HORA_INVALIDA = "A hora eh invalida.";
 		private final String HORA_BRANCA = "A hora esta em branco.";

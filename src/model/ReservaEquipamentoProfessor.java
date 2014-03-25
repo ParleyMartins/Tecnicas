@@ -12,7 +12,7 @@ public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 
     private Professor professor;
 
-    // Mensagens
+    // Mensages
     private final String PROFESSOR_NULO = "O professor esta nulo.";
 
     public ReservaEquipamentoProfessor(String data, String hora, Equipamento equipamento, Professor professor)

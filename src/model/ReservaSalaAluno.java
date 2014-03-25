@@ -13,7 +13,7 @@ public class ReservaSalaAluno extends ReservaSala{
 	private Aluno aluno;
 	private String cadeiras_reservadas;
 	
-	//Mensagens
+	//Mensages
 		private final String ALUNO_NULO = "O aluno esta nulo.";
 		private final String CADEIRAS_NULA = "O numero de cadeiras esta nulo.";
 		private final String CADEIRAS_BRANCO = "O numero de cadeiras esta em branco.";

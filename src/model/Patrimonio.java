@@ -12,7 +12,7 @@ public class Patrimonio {
 
 	private String codigo;
 	private String descricao;
-	//Mensagens de Erro e Alertas
+	//Alerts and error mensages
 	//private final String CODIGO_INVALIDO = "Codigo Invalido.";
 	private final String CODIGO_BRANCO = "Codigo em Branco.";
 	private final String CODIGO_NULO = "Codigo esta Nulo.";
