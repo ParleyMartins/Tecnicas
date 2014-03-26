@@ -4,24 +4,37 @@
  */
 package view.mainViews;
 
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Vector;
-
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-
 import model.Cliente;
 
 /**
  * 
  * @author Parley
  */
-public abstract class ClienteView extends javax.swing.JDialog {
+public abstract class ClienteView extends JDialog {
 
     /**
      * Creates new form ClienteView
      */
-    public ClienteView(java.awt.Frame parent, boolean modal) {
+    public ClienteView(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -82,141 +95,141 @@ public abstract class ClienteView extends javax.swing.JDialog {
     // desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBotoes = new javax.swing.JPanel();
-        cadastrarBtn = new javax.swing.JButton();
-        alterarBtn = new javax.swing.JButton();
-        excluirBtn = new javax.swing.JButton();
-        panelLista = new javax.swing.JPanel();
-        pesquisarLbl = new javax.swing.JLabel();
-        pesquisarTextField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaCliente = new javax.swing.JTable();
+        panelBotoes = new JPanel();
+        cadastrarBtn = new JButton();
+        alterarBtn = new JButton();
+        excluirBtn = new JButton();
+        panelLista = new JPanel();
+        pesquisarLbl = new JLabel();
+        pesquisarTextField = new JTextField();
+        jScrollPane1 = new JScrollPane();
+        tabelaCliente = new JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cliente");
 
-        panelBotoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotoes.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
         cadastrarBtn.setText("Cadastrar");
         cadastrarBtn.setName("Cadastrar");
-        cadastrarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cadastrarBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 cadastrarBtnActionPerformed(evt);
             }
         });
 
         alterarBtn.setText("Alterar");
         alterarBtn.setName("Alterar");
-        alterarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        alterarBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 alterarBtnActionPerformed(evt);
             }
         });
 
         excluirBtn.setText("Excluir");
         excluirBtn.setName("Excluir");
-        excluirBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        excluirBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 excluirBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout panelBotoesLayout = new javax.swing.GroupLayout(panelBotoes);
+        GroupLayout panelBotoesLayout = new GroupLayout(panelBotoes);
         panelBotoes.setLayout(panelBotoesLayout);
-        panelBotoesLayout.setHorizontalGroup(panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelBotoesLayout.setHorizontalGroup(panelBotoesLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(
                         panelBotoesLayout
                                 .createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(
                                         panelBotoesLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(excluirBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(alterarBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cadastrarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 135,
+                                                .createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(excluirBtn, GroupLayout.DEFAULT_SIZE,
+                                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(alterarBtn, GroupLayout.DEFAULT_SIZE,
+                                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cadastrarBtn, GroupLayout.DEFAULT_SIZE, 135,
                                                         Short.MAX_VALUE)).addContainerGap()));
-        panelBotoesLayout.setVerticalGroup(panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelBotoesLayout.setVerticalGroup(panelBotoesLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(
                         panelBotoesLayout
                                 .createSequentialGroup()
                                 .addGap(65, 65, 65)
-                                .addComponent(cadastrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(alterarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 82,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(excluirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(78, Short.MAX_VALUE)));
+                                .addComponent(cadastrarBtn, GroupLayout.PREFERRED_SIZE, 80,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(alterarBtn, GroupLayout.PREFERRED_SIZE, 82,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(excluirBtn, GroupLayout.PREFERRED_SIZE, 80,
+                                        GroupLayout.PREFERRED_SIZE).addContainerGap(78, Short.MAX_VALUE)));
 
         pesquisarLbl.setText("Digite a matricula desejada: ");
 
-        pesquisarTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        pesquisarTextField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 pesquisarTextFieldActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout panelListaLayout = new javax.swing.GroupLayout(panelLista);
+        GroupLayout panelListaLayout = new GroupLayout(panelLista);
         panelLista.setLayout(panelListaLayout);
-        panelListaLayout.setHorizontalGroup(panelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelListaLayout.setHorizontalGroup(panelListaLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(
                         panelListaLayout.createSequentialGroup().addContainerGap().addComponent(pesquisarLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(pesquisarTextField)));
-        panelListaLayout.setVerticalGroup(panelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+        panelListaLayout.setVerticalGroup(panelListaLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
                 panelListaLayout
                         .createSequentialGroup()
                         .addContainerGap()
                         .addGroup(
                                 panelListaLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(pesquisarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(pesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                                        .createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(pesquisarLbl, GroupLayout.PREFERRED_SIZE, 28,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pesquisarTextField, GroupLayout.PREFERRED_SIZE,
+                                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         tabelaCliente.setModel(fillTable());
         tabelaCliente.setName("tabelaCliente");
         jScrollPane1.setViewportView(tabelaCliente);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+                GroupLayout.Alignment.TRAILING,
                 layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(panelLista, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(panelLista, GroupLayout.DEFAULT_SIZE,
+                                                GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                GroupLayout.PREFERRED_SIZE).addContainerGap()));
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(
                                                 layout.createSequentialGroup()
-                                                        .addComponent(panelLista, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                                                        .addComponent(panelLista, GroupLayout.DEFAULT_SIZE,
+                                                                GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 353,
+                                                                GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE,
+                                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pesquisarTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_pesquisarTextFieldActionPerformed
+    private void pesquisarTextFieldActionPerformed(ActionEvent evt) {// GEN-FIRST:event_pesquisarTextFieldActionPerformed
         String nome = this.pesquisarTextField.getText();
         if (nome.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nenhum texto digitado", "Erro", JOptionPane.ERROR_MESSAGE, null);
@@ -225,13 +238,13 @@ public abstract class ClienteView extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_pesquisarTextFieldActionPerformed
 
-    private void cadastrarBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cadastrarBtnActionPerformed
+    private void cadastrarBtnActionPerformed(ActionEvent evt) {// GEN-FIRST:event_cadastrarBtnActionPerformed
         // TODO add your handling code here:
         cadastrarAction();
 
     }// GEN-LAST:event_cadastrarBtnActionPerformed
 
-    private void alterarBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_alterarBtnActionPerformed
+    private void alterarBtnActionPerformed(ActionEvent evt) {// GEN-FIRST:event_alterarBtnActionPerformed
         // TODO add your handling code here:
 
         int index = this.tabelaCliente.getSelectedRow();
@@ -244,20 +257,20 @@ public abstract class ClienteView extends javax.swing.JDialog {
 
     }// GEN-LAST:event_alterarBtnActionPerformed
 
-    private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_excluirBtnActionPerformed
+    private void excluirBtnActionPerformed(ActionEvent evt) {// GEN-FIRST:event_excluirBtnActionPerformed
         excluirAction();
 
     }// GEN-LAST:event_excluirBtnActionPerformed
      // Variables declaration - do not modify//GEN-BEGIN:variables
 
-    private javax.swing.JButton alterarBtn;
-    private javax.swing.JButton cadastrarBtn;
-    private javax.swing.JButton excluirBtn;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel panelBotoes;
-    private javax.swing.JPanel panelLista;
-    private javax.swing.JLabel pesquisarLbl;
-    private javax.swing.JTextField pesquisarTextField;
-    protected javax.swing.JTable tabelaCliente;
+    private JButton alterarBtn;
+    private JButton cadastrarBtn;
+    private JButton excluirBtn;
+    private JScrollPane jScrollPane1;
+    private JPanel panelBotoes;
+    private JPanel panelLista;
+    private JLabel pesquisarLbl;
+    private JTextField pesquisarTextField;
+    protected JTable tabelaCliente;
     // End of variables declaration//GEN-END:variables
 }

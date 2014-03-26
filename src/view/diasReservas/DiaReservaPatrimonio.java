@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JDialog;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
 
 public abstract class DiaReservaPatrimonio extends JDialog{
 
@@ -36,14 +38,14 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 	// Method to visualize room or equipment.
 	protected abstract void visualizarAction (String data);
 	
-	// Method callem from constructor to initialize the components
+	// Method called from constructor to initialize the components
 	private void initComponents ( ) {
 
 		visualizarButton = new JButton();
 		jPanel1 = new JPanel();
 		jCalendar1 = new JCalendar();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		visualizarButton.setText("Visualizar Reservas do Dia");
 		visualizarButton.setName("VisualizarButton"); 
@@ -115,7 +117,7 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(visualizarButton)
 								.addContainerGap()));
 

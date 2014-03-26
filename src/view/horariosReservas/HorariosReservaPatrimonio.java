@@ -8,14 +8,22 @@ package view.horariosReservas;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+
 import model.Patrimonio;
+
 import javax.swing.JTable;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JDialog;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+
+import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.GroupLayout;
 
 public abstract class HorariosReservaPatrimonio extends JDialog {
@@ -65,7 +73,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		jScrollPane1 = new JScrollPane();
 		reservasTable = new JTable();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		reservarButton.setText("Reservar");
 		reservarButton.setName("ReservarButton");
@@ -134,19 +142,19 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 												GroupLayout.PREFERRED_SIZE, 51,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(alterarButton,
 												GroupLayout.PREFERRED_SIZE, 65,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(cancelarReservaButton,
 												GroupLayout.PREFERRED_SIZE, 59,
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap(175, Short.MAX_VALUE)));
 
-		jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL,
-				new java.awt.Component[] { alterarButton,
+		jPanel2Layout.linkSize(SwingConstants.VERTICAL,
+				new Component[] { alterarButton,
 						cancelarReservaButton, reservarButton });
 
 		reservasTable.setModel(fillTable(this.p));
@@ -166,7 +174,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 												GroupLayout.DEFAULT_SIZE, 727,
 												Short.MAX_VALUE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(jPanel2,
 												GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE,
@@ -192,8 +200,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 						.addContainerGap(GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)));
 
-		jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL,
-				new java.awt.Component[] { jPanel2, jScrollPane1 });
+		jPanel3Layout.linkSize(SwingConstants.VERTICAL,
+				new Component[] { jPanel2, jScrollPane1 });
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);

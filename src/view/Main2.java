@@ -6,6 +6,24 @@
 
 package view;
 
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
+
 import view.mainViews.AlunoView;
 import view.mainViews.ClienteView;
 import view.mainViews.EquipamentoView;
@@ -13,15 +31,15 @@ import view.mainViews.PatrimonioView;
 import view.mainViews.ProfessorView;
 import view.mainViews.SalaView;
 
-public class Main2 extends javax.swing.JFrame {
+public class Main2 extends JFrame {
 
-	private javax.swing.JButton alunoBtn;
-	private javax.swing.JButton equipamentoBtn;
-	private javax.swing.JLabel fundoLbl;
-	private javax.swing.JPanel panelReserva;
-	private javax.swing.JPanel panelReserva1;
-	private javax.swing.JButton professorBtn;
-	private javax.swing.JButton salaBtn;
+	private JButton alunoBtn;
+	private JButton equipamentoBtn;
+	private JLabel fundoLbl;
+	private JPanel panelReserva;
+	private JPanel panelReserva1;
+	private JButton professorBtn;
+	private JButton salaBtn;
 	
 	// Constructor generates form Main2
 	public Main2 ( ) {
@@ -32,30 +50,30 @@ public class Main2 extends javax.swing.JFrame {
 	// This method initializes the Components.
 	private void initComponents ( ) {
 
-		this.fundoLbl = new javax.swing.JLabel();
-		this.panelReserva1 = new javax.swing.JPanel();
-		this.salaBtn = new javax.swing.JButton();
-		this.equipamentoBtn = new javax.swing.JButton();
-		this.panelReserva = new javax.swing.JPanel();
-		this.professorBtn = new javax.swing.JButton();
-		this.alunoBtn = new javax.swing.JButton();
+		this.fundoLbl = new JLabel();
+		this.panelReserva1 = new JPanel();
+		this.salaBtn = new JButton();
+		this.equipamentoBtn = new JButton();
+		this.panelReserva = new JPanel();
+		this.professorBtn = new JButton();
+		this.alunoBtn = new JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("SisRES");
 		setName("Main"); 
 		setResizable(false);
 
-		this.fundoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.fundoLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		this.fundoLbl.setText("SisRES");
 
-		this.panelReserva1.setBorder(javax.swing.BorderFactory
+		this.panelReserva1.setBorder(BorderFactory
 				.createTitledBorder("Reserva"));
 
 		this.salaBtn.setText("Sala");
 		this.salaBtn.setName("Sala");
-		this.salaBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.salaBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (java.awt.event.ActionEvent evt) {
+			public void actionPerformed (ActionEvent evt) {
 
 				salaBtnActionPerformed(evt);
 			}
@@ -63,41 +81,41 @@ public class Main2 extends javax.swing.JFrame {
 
 		this.equipamentoBtn.setText("Equipamento");
 		this.equipamentoBtn.setName("Equipamento");
-		this.equipamentoBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.equipamentoBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (java.awt.event.ActionEvent evt) {
+			public void actionPerformed (ActionEvent evt) {
 
 				equipamentoBtnActionPerformed(evt);
 			}
 		});
 
-		javax.swing.GroupLayout panelReserva1Layout = new javax.swing.GroupLayout(
+		GroupLayout panelReserva1Layout = new GroupLayout(
 				this.panelReserva1);
 		this.panelReserva1.setLayout(panelReserva1Layout);
 		panelReserva1Layout
 				.setHorizontalGroup(panelReserva1Layout
 						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReserva1Layout
 										.createSequentialGroup()
 										.addGap(6, 6, 6)
 										.addComponent(
 												this.salaBtn,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
+												GroupLayout.PREFERRED_SIZE,
 												105,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
 												this.equipamentoBtn,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												106, Short.MAX_VALUE)
 										.addContainerGap()));
 		panelReserva1Layout
 				.setVerticalGroup(panelReserva1Layout
 						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReserva1Layout
 										.createSequentialGroup()
@@ -105,29 +123,29 @@ public class Main2 extends javax.swing.JFrame {
 										.addGroup(
 												panelReserva1Layout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+																GroupLayout.Alignment.BASELINE)
 														.addComponent(
 																this.salaBtn,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
+																GroupLayout.PREFERRED_SIZE,
 																40,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
+																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
 																this.equipamentoBtn,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
+																GroupLayout.PREFERRED_SIZE,
 																40,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
+																GroupLayout.PREFERRED_SIZE))
 										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 
-		this.panelReserva.setBorder(javax.swing.BorderFactory
+		this.panelReserva.setBorder(BorderFactory
 				.createTitledBorder("Cadastro"));
 
 		this.professorBtn.setText("Professor");
 		this.professorBtn.setName("Professor");
-		this.professorBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.professorBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (java.awt.event.ActionEvent evt) {
+			public void actionPerformed (ActionEvent evt) {
 
 				professorBtnActionPerformed(evt);
 			}
@@ -135,42 +153,42 @@ public class Main2 extends javax.swing.JFrame {
 
 		this.alunoBtn.setText("Aluno");
 		this.alunoBtn.setName("Aluno");
-		this.alunoBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.alunoBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (java.awt.event.ActionEvent evt) {
+			public void actionPerformed (ActionEvent evt) {
 
 				alunoBtnActionPerformed(evt);
 			}
 		});
 
-		javax.swing.GroupLayout panelReservaLayout = new javax.swing.GroupLayout(
+		GroupLayout panelReservaLayout = new GroupLayout(
 				this.panelReserva);
 		this.panelReserva.setLayout(panelReservaLayout);
 		panelReservaLayout
 				.setHorizontalGroup(panelReservaLayout
 						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReservaLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addComponent(
 												this.professorBtn,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
+												GroupLayout.PREFERRED_SIZE,
 												105,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
 												this.alunoBtn,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
+												GroupLayout.PREFERRED_SIZE,
 												105,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+												GroupLayout.PREFERRED_SIZE)
 										.addGap(14, 14, 14)));
 		panelReservaLayout
 				.setVerticalGroup(panelReservaLayout
 						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReservaLayout
 										.createSequentialGroup()
@@ -178,79 +196,79 @@ public class Main2 extends javax.swing.JFrame {
 										.addGroup(
 												panelReservaLayout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+																GroupLayout.Alignment.BASELINE)
 														.addComponent(
 																this.professorBtn,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
+																GroupLayout.PREFERRED_SIZE,
 																40,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
+																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
 																this.alunoBtn,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
+																GroupLayout.PREFERRED_SIZE,
 																40,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
+																GroupLayout.PREFERRED_SIZE))
 										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
+		GroupLayout layout = new GroupLayout(
 				getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
 								.addContainerGap()
 								.addComponent(this.panelReserva1,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(this.panelReserva,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE))
 				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
+						GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addGap(191, 191, 191)
 								.addComponent(this.fundoLbl,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE).addGap(185, 185, 185)));
 		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
+						GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING,
+												GroupLayout.Alignment.LEADING,
 												false)
 												.addComponent(
 														this.panelReserva,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
 														this.panelReserva1,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))
 								.addGap(111, 111, 111)
 								.addComponent(this.fundoLbl,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
+										GroupLayout.PREFERRED_SIZE,
 										45,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+										GroupLayout.PREFERRED_SIZE)
 								.addContainerGap(168, Short.MAX_VALUE)));
 
 		pack();
 	}
 
 	// This method performs an action once the room button is pressed.
-	private void salaBtnActionPerformed (java.awt.event.ActionEvent evt) {
+	private void salaBtnActionPerformed (ActionEvent evt) {
 
 		PatrimonioView room = new SalaView(this, true);
 		room.setResizable(false);
@@ -258,7 +276,7 @@ public class Main2 extends javax.swing.JFrame {
 	}
 
 	// This method performs an action once the equipment button is pressed.
-	private void equipamentoBtnActionPerformed (java.awt.event.ActionEvent evt) {
+	private void equipamentoBtnActionPerformed (ActionEvent evt) {
 		
 		PatrimonioView equipamento = new EquipamentoView(this, true);
 		equipamento.setResizable(false);
@@ -266,7 +284,7 @@ public class Main2 extends javax.swing.JFrame {
 	}
 
 	// This method performs an action once the teacher button is pressed.
-	private void professorBtnActionPerformed (java.awt.event.ActionEvent evt) {
+	private void professorBtnActionPerformed (ActionEvent evt) {
 
 		ClienteView client = new ProfessorView(this, true);
 		client.setResizable(false);
@@ -274,7 +292,7 @@ public class Main2 extends javax.swing.JFrame {
 	}
 
 	// This performs an action once the student button is pressed.
-	private void alunoBtnActionPerformed (java.awt.event.ActionEvent evt) {
+	private void alunoBtnActionPerformed (ActionEvent evt) {
 
 		ClienteView client = new AlunoView(this, true);
 		client.setResizable(false);
@@ -289,28 +307,28 @@ public class Main2 extends javax.swing.JFrame {
 			default look and feel. For details see
 		 */
 		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+			for (UIManager.LookAndFeelInfo info : UIManager
 					.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Main2.class.getName()).log(
-					java.util.logging.Level.SEVERE, null, ex);
+			Logger.getLogger(Main2.class.getName()).log(
+					Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Main2.class.getName()).log(
-					java.util.logging.Level.SEVERE, null, ex);
+			Logger.getLogger(Main2.class.getName()).log(
+					Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Main2.class.getName()).log(
-					java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Main2.class.getName()).log(
-					java.util.logging.Level.SEVERE, null, ex);
+			Logger.getLogger(Main2.class.getName()).log(
+					Level.SEVERE, null, ex);
+		} catch (UnsupportedLookAndFeelException ex) {
+			Logger.getLogger(Main2.class.getName()).log(
+					Level.SEVERE, null, ex);
 		}
 		
-		java.awt.EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 
 			public void run ( ) {
 
