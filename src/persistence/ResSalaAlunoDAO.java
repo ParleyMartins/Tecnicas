@@ -1,3 +1,8 @@
+/*
+Name: ResSalaAlunoDAO
+Function: Manage the DAO of the relation between ReservaSala and Aluno 
+*/
+
 package persistence;
 
 import java.sql.ResultSet;
@@ -18,32 +23,33 @@ import model.Sala;
 @SuppressWarnings("unchecked")
 public class ResSalaAlunoDAO extends DAO{
 	
-	//Mensagens e Alertas
-		private final String NULA = "Termo nulo.";
-		private final String ALUNO_INDISPONIVEL = "O aluno possui uma reserva no mesmo dia e horario.";
-		private final String SALA_INDISPONIVEL = "A Sala esta reservada no mesmo dia e horario.";
-		private final String ALUNO_INEXISTENTE = "Aluno inexistente.";
-		private final String SALA_INEXISTENTE = "Sala inexistente";
-		private final String RESERVA_INEXISTENTE = "Reserva inexistente";
-		private final String RESERVA_EXISTENTE = "A reserva ja existe.";
-		private final String CADEIRAS_INDISPONIVEIS = "O numero de cadeiras reservadas esta indisponivel para esta sala.";
-		private final String DATA_JA_PASSOU = "A data escolhida ja passou.";
-		private final String HORA_JA_PASSOU = "A hora escolhida ja passou.";
+	// Messages and alerts.
+	private final String NULA = "Termo nulo.";
+	private final String ALUNO_INDISPONIVEL = "O aluno possui uma reserva no mesmo dia e horario.";
+	private final String SALA_INDISPONIVEL = "A Sala esta reservada no mesmo dia e horario.";
+	private final String ALUNO_INEXISTENTE = "Aluno inexistente.";
+	private final String SALA_INEXISTENTE = "Sala inexistente";
+	private final String RESERVA_INEXISTENTE = "Reserva inexistente";
+	private final String RESERVA_EXISTENTE = "A reserva ja existe.";
+	private final String CADEIRAS_INDISPONIVEIS = "O numero de cadeiras reservadas esta indisponivel para esta sala.";
+	private final String DATA_JA_PASSOU = "A data escolhida ja passou.";
+	private final String HORA_JA_PASSOU = "A hora escolhida ja passou.";
 
 	
-	//Singleton
-		private static ResSalaAlunoDAO instance;
-		private ResSalaAlunoDAO(){
-		}
-		public static ResSalaAlunoDAO getInstance(){
-			if(instance == null)
-				instance = new ResSalaAlunoDAO();
-			return instance;
-		}
-	//
+	// Singleton implementation. 
+	private static ResSalaAlunoDAO instance;
+	private ResSalaAlunoDAO(){
 		
+		// Blank constructor. 
+	}
+	public static ResSalaAlunoDAO getInstance(){
+		if(instance == null)
+			instance = new ResSalaAlunoDAO();
+		return instance;
+	}
+			
 		
-	//Querys de Reuso
+		// Select id by Aluno query. 
 		private String select_id_aluno(Aluno a){
 			return "SELECT id_aluno FROM aluno WHERE " +
 					"aluno.nome = \"" + a.getNome() + "\" and " +
@@ -52,12 +58,16 @@ public class ResSalaAlunoDAO extends DAO{
 					"aluno.email = \"" + a.getEmail() + "\" and " +
 					"aluno.matricula = \"" + a.getMatricula() + "\"";
 		}
+		
+		// Select id by Sala query.
 		private String select_id_sala(Sala sala){
 			return "SELECT id_sala FROM sala WHERE " +
 					"sala.codigo = \"" + sala.getCodigo() + "\" and " +
 					"sala.descricao = \"" + sala.getDescricao() +  "\" and " +
 					"sala.capacidade = " + sala.getCapacidade();
 		}
+		
+		// Reuse query for WHERE clause.
 		private String where_reserva_sala_aluno(ReservaSalaAluno r){
 			return " WHERE " +
 			"id_aluno = ( " + select_id_aluno(r.getAluno()) + " ) and " +
@@ -67,6 +77,8 @@ public class ResSalaAlunoDAO extends DAO{
 			"data = \"" + r.getData() + "\" and " +
 			"cadeiras_reservadas = " + r.getCadeiras_reservadas();
 		}
+		
+		// Reuse query for VALUES clause.
 		private String values_reserva_sala_aluno(ReservaSalaAluno r){
 			return "( " + select_id_aluno(r.getAluno()) + " ), " +
 			"( " + select_id_sala(r.getSala()) + " ), " +
@@ -75,6 +87,8 @@ public class ResSalaAlunoDAO extends DAO{
 			"\"" + r.getData() + "\", " +
 			r.getCadeiras_reservadas();
 		}
+		
+		// Reuse query for ATRIBUTES clause.
 		private String atibutes_value_reserva_sala_aluno(ReservaSalaAluno r){
 			return "id_aluno = ( " + select_id_aluno(r.getAluno()) + " ), " +
 			"id_sala = ( " + select_id_sala(r.getSala()) + " ), " +
@@ -83,22 +97,28 @@ public class ResSalaAlunoDAO extends DAO{
 			"data = \"" + r.getData() + "\", " +
 			"cadeiras_reservadas = " + r.getCadeiras_reservadas();
 		}
+		
+		// Reuse query for INSERT clause. 
 		private String insert_into(ReservaSalaAluno r){
 			return "INSERT INTO " +
 					"reserva_sala_aluno (id_aluno, id_sala, finalidade, hora, data, cadeiras_reservadas) " +
 					"VALUES ( " + values_reserva_sala_aluno(r) + " );";
 		}
+		
+		// Reuse query for UPDATE clause. 
 		private String update(ReservaSalaAluno r, ReservaSalaAluno r2){
 			return "UPDATE reserva_sala_aluno SET " + 
 					this.atibutes_value_reserva_sala_aluno(r2) +
 					this.where_reserva_sala_aluno(r) + " ;";
 		}
+		
+		// Reuse query for DELETE clause.
 		private String delete_from(ReservaSalaAluno r){
 			return "DELETE FROM reserva_sala_aluno " + this.where_reserva_sala_aluno(r) + " ;";
 		}
 
 		
-		
+	// Include new Reserva in the database. 	
 	public void incluir(ReservaSalaAluno r) throws ReservaException, SQLException, ClienteException, PatrimonioException {
 		if(r == null)
 			throw new ReservaException(NULA);
@@ -125,6 +145,7 @@ public class ResSalaAlunoDAO extends DAO{
 			super.executeQuery(this.insert_into(r));
 	}
 	
+	// Update Reserva info from the database. 
 	public void alterar(ReservaSalaAluno r, ReservaSalaAluno r_new) throws ReservaException, SQLException, ClienteException, PatrimonioException{
 		if(r == null)
 			throw new ReservaException(NULA);
@@ -158,6 +179,7 @@ public class ResSalaAlunoDAO extends DAO{
 			
 	}
 	
+	// Remove Reserva info from the database. 
 	public void excluir(ReservaSalaAluno r) throws ReservaException, SQLException {
 		if(r == null)
 			throw new ReservaException(NULA);
@@ -167,11 +189,14 @@ public class ResSalaAlunoDAO extends DAO{
 			super.executeQuery(this.delete_from(r));
 	}
 	
+	// Select all Reservas from the database. 
 	public Vector<ReservaSalaAluno> buscarTodos() throws SQLException, ClienteException, PatrimonioException, ReservaException{
 		return super.search("SELECT * FROM reserva_sala_aluno " +
 				"INNER JOIN sala ON sala.id_sala = reserva_sala_aluno.id_sala " +
 				"INNER JOIN aluno ON aluno.id_aluno = reserva_sala_aluno.id_aluno;");
 	}
+	
+	// Select Reservas from the database by day. 
 	public Vector<ReservaSalaAluno> buscarPorDia(String data) throws SQLException, ClienteException, PatrimonioException, ReservaException{
 		data = this.padronizarData(data);
 		return super.search("SELECT * FROM reserva_sala_aluno " +
@@ -179,6 +204,8 @@ public class ResSalaAlunoDAO extends DAO{
 				"INNER JOIN aluno ON aluno.id_aluno = reserva_sala_aluno.id_aluno " +
 				"WHERE data = \""+ data + "\";");
 	}
+	
+	// Select Reservas from the database by hour. 
 	public Vector<ReservaSalaAluno> buscarPorHora(String hora) 
 			throws SQLException, ClienteException, PatrimonioException, ReservaException{
 		hora = this.padronizarHora(hora);
@@ -188,7 +215,7 @@ public class ResSalaAlunoDAO extends DAO{
 				" WHERE hora = \"" + hora +"\";");
 	}
 
-	
+	// Check for the amount of available chairs in one room. 
 	public int cadeirasDisponiveis(Sala sala, String data, String hora) 
 			throws SQLException, PatrimonioException, ClienteException, ReservaException{
 		data = this.padronizarData(data);
@@ -204,7 +231,7 @@ public class ResSalaAlunoDAO extends DAO{
 		return total;
 	}
 	
-	
+	// Check if there is available chairs in one room.
 	private boolean haCadeiras(String cadeiras_reservadas, Sala sala, String data, String hora) 
 			throws SQLException, ClienteException, PatrimonioException, ReservaException {
 		if(this.cadeirasDisponiveis(sala, data, hora) >= Integer.parseInt(cadeiras_reservadas))
@@ -212,6 +239,7 @@ public class ResSalaAlunoDAO extends DAO{
 		return false;
 	}
 	
+	// Fetch reserva using a result; 
 	@Override
 	protected Object fetch(ResultSet rs) throws SQLException, ClienteException, PatrimonioException, ReservaException {
 		Aluno a = new Aluno(rs.getString("nome"), rs.getString("cpf"), rs.getString("matricula"),
@@ -225,6 +253,7 @@ public class ResSalaAlunoDAO extends DAO{
 		return r;
 	}
 	
+	// Check if there is a Aluno in the database. 
 	private boolean alunoinDB(Aluno aluno) throws SQLException{
 		return super.inDBGeneric("SELECT * FROM aluno WHERE " +
 				"aluno.nome = \"" + aluno.getNome() + "\" and " +
@@ -234,6 +263,7 @@ public class ResSalaAlunoDAO extends DAO{
 				"aluno.matricula = \"" + aluno.getMatricula() + "\";");
 	}
 	
+	// Check if there is a Sala in the database.
 	private boolean salainDB(Sala sala) throws SQLException{
 		return super.inDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + sala.getCodigo() + "\" and " +
@@ -242,6 +272,7 @@ public class ResSalaAlunoDAO extends DAO{
 				";");
 	}
 	
+	// Check if there is a Aluno entry in Reserva.
 	private boolean alunoinReservaDB(Aluno aluno, String data, String hora) throws SQLException {
 		return super.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 				"data = \"" + data + "\" and " +
@@ -253,6 +284,8 @@ public class ResSalaAlunoDAO extends DAO{
 				"aluno.email = \"" + aluno.getEmail() + "\" and " +
 				"aluno.matricula = \"" + aluno.getMatricula() + "\");");
 	}
+	
+	// Check if there is a Sala entry in Reserva.
 	private boolean salainReservaProfessorDB(Sala sala, String data, String hora) throws SQLException {
 		return super.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"data = \"" + this.padronizarData(data) + "\" and " +
@@ -263,6 +296,7 @@ public class ResSalaAlunoDAO extends DAO{
 				"sala.capacidade = " + sala.getCapacidade() +" );");
 	}
 	
+	// Check if there is a Reserva in the database. 
 	private boolean reservainDB(ReservaSalaAluno r) throws SQLException {
 		return super.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 					"id_aluno = (SELECT id_aluno FROM aluno WHERE " +
@@ -280,18 +314,21 @@ public class ResSalaAlunoDAO extends DAO{
 					"data = \"" + r.getData() + "\" and " +
 					"cadeiras_reservadas = " + r.getCadeiras_reservadas() + ";");
 	}
-
+	
+	// Gets the current date. 
 	private String dataAtual(){
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
 		return formatador.format(date);
 	}
 	
+	// Gets the current time. 
 	private String horaAtual(){
 		Date date = new Date(System.currentTimeMillis());
 		return date.toString().substring(11, 16);
 	}
 	
+	// Check if the date is passed. 
 	private boolean dataPassou(String d){
 		String agora[] = this.dataAtual().split("[./-]");
 		String data[] = d.split("[./-]");
@@ -317,6 +354,7 @@ public class ResSalaAlunoDAO extends DAO{
 		return false;
 	}
 	
+	// Check if Date is equals
 	public boolean dataIgual(String d){
 		d = this.padronizarData(d);
 		String agora[] = this.dataAtual().split("[./-]");
@@ -327,6 +365,7 @@ public class ResSalaAlunoDAO extends DAO{
 		return false;
 	}
 	
+	// Check if the time is passed. 
 	private boolean horaPassou(String hora){
 		String agora = this.horaAtual();
 		if(hora.length() == 4)
@@ -343,6 +382,7 @@ public class ResSalaAlunoDAO extends DAO{
 			return false;
 	}
 	
+	// Standardize the date. 
 	private String padronizarData(String data){
 		String agora[] = dataAtual().split("[./-]");
 		String partes[] = data.split("[./-]");
@@ -361,6 +401,7 @@ public class ResSalaAlunoDAO extends DAO{
 		return dataNoPadrao;
 	}
 	
+	// Standardize the time. 
 	private String padronizarHora(String hora){
 		if(hora.length() == 4)
 			return "0" + hora;
