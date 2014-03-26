@@ -6,20 +6,24 @@
 
 package view.cadastros;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+
 public abstract class CadastroCliente extends javax.swing.JDialog {
 
-	protected javax.swing.JButton cadastroBtn;
-	protected javax.swing.JTextField telefoneTxtField;
-	protected javax.swing.JTextField nomeTxtField;
-	protected javax.swing.JTextField matriculaTxtField;
-	protected javax.swing.JTextField emailTxtField;
-	protected javax.swing.JTextField cpfTxtField;
-	private javax.swing.JLabel emailLbl;
-	private javax.swing.JLabel matriculaLbl;
-	private javax.swing.JLabel nomeLbl;
-	private javax.swing.JLabel telefoneLbl;
-	private javax.swing.JButton cancelBtn;
-	private javax.swing.JLabel cpfLbl;
+	protected cadastroBtn;
+	protected telefoneTxtField;
+	protected nomeTxtField;
+	protected matriculaTxtField;
+	protected emailTxtField;
+	protected cpfTxtField;
+	private emailLbl;
+	private matriculaLbl;
+	private nomeLbl;
+	private telefoneLbl;
+	private cancelBtn;
+	private cpfLbl;
 
 	// Constructor generates a RegisterClient form.
 	public CadastroCliente (java.awt.Frame parent, boolean modal) {

@@ -5,17 +5,23 @@
  */
 package view.cadastros;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 public abstract class CadastroPatrimonio extends javax.swing.JDialog {
 
-	protected javax.swing.JButton cadastroBtn;
-	protected javax.swing.JButton cancelBtn;
-	protected javax.swing.JLabel codigoLbl;
-	protected javax.swing.JTextField codigoTxtField;
-	protected javax.swing.JLabel descricaoLbl;
-	protected javax.swing.JScrollPane jScrollPane1;
-	protected javax.swing.JLabel capacidadeLbl;
-	protected javax.swing.JTextField capacidadeTxtField;
-	protected javax.swing.JTextArea descricaoTextArea;
+	protected cadastroBtn;
+	protected cancelBtn;
+	protected codigoLbl;
+	protected codigoTxtField;
+	protected descricaoLbl;
+	protected jScrollPane1;
+	protected capacidadeLbl;
+	protected capacidadeTxtField;
+	protected descricaoTextArea;
 	
 	// Creates a new form RegisterProperty
 	public CadastroPatrimonio (java.awt.Frame parent, boolean modal) {
