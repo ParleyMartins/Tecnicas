@@ -13,15 +13,15 @@ import javax.swing.JTextArea;
 
 public abstract class CadastroPatrimonio extends javax.swing.JDialog {
 
-	protected cadastroBtn;
-	protected cancelBtn;
-	protected codigoLbl;
-	protected codigoTxtField;
-	protected descricaoLbl;
-	protected jScrollPane1;
-	protected capacidadeLbl;
-	protected capacidadeTxtField;
-	protected descricaoTextArea;
+	protected JButton cadastroBtn;
+	protected JButton cancelBtn;
+	protected JLabel codigoLbl;
+	protected JTextField codigoTxtField;
+	protected JLabel descricaoLbl;
+	protected JScrollPane jScrollPane1;
+	protected JLabel capacidadeLbl;
+	protected JTextField capacidadeTxtField;
+	protected JTextArea descricaoTextArea;
 	
 	// Creates a new form RegisterProperty
 	public CadastroPatrimonio (java.awt.Frame parent, boolean modal) {

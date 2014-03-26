@@ -247,7 +247,7 @@ public class Main2 extends javax.swing.JFrame {
 								.addContainerGap(168, Short.MAX_VALUE)));
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
 	// This method performs an action once the room button is pressed.
 	private void salaBtnActionPerformed (java.awt.event.ActionEvent evt) {

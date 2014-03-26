@@ -12,18 +12,18 @@ import javax.swing.JLabel;
 
 public abstract class CadastroCliente extends javax.swing.JDialog {
 
-	protected cadastroBtn;
-	protected telefoneTxtField;
-	protected nomeTxtField;
-	protected matriculaTxtField;
-	protected emailTxtField;
-	protected cpfTxtField;
-	private emailLbl;
-	private matriculaLbl;
-	private nomeLbl;
-	private telefoneLbl;
-	private cancelBtn;
-	private cpfLbl;
+	protected JButton cadastroBtn;
+	protected JTextField telefoneTxtField;
+	protected JTextField nomeTxtField;
+	protected JTextField matriculaTxtField;
+	protected JTextField emailTxtField;
+	protected JTextField cpfTxtField;
+	private JLabel emailLbl;
+	private JLabel matriculaLbl;
+	private JLabel nomeLbl;
+	private JLabel telefoneLbl;
+	private JButton cancelBtn;
+	private JLabel cpfLbl;
 
 	// Constructor generates a RegisterClient form.
 	public CadastroCliente (java.awt.Frame parent, boolean modal) {

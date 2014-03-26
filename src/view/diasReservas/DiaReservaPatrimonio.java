@@ -7,19 +7,24 @@
 package view.diasReservas;
 
 import javax.swing.JButton;
+
 import com.toedter.calendar.JCalendar;
+
 import javax.swing.JPanel;
+
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 
 public abstract class DiaReservaPatrimonio extends JDialog{
 
 
-	protected visualizarButton;
-	private jCalendar1;
-	private jPanel1;
+	protected JButton visualizarButton;
+	private JCalendar jCalendar1;
+	private JPanel jPanel1;
 	
 	// Constructor generates a PropertyReservationDay form.
 	public DiaReservaPatrimonio (Frame parent, boolean modal) {
