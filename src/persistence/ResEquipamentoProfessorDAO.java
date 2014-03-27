@@ -1,7 +1,8 @@
-/*
-Name: ResEquipamentoProfessorDAO
-Function: Manage the DAO of the relation between Equipamento and Professor
- */
+/**
+ResEquipamentoProfessorDAO
+Manage the DAO of the relation between Equipamento and Professor
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/ResEquipamentoProfessorDAO.java
+*/
 
 package persistence;
 
@@ -30,12 +31,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	// Singleton implementation.
 	private static ResEquipamentoProfessorDAO instance;
 
-	private ResEquipamentoProfessorDAO() {
+	private ResEquipamentoProfessorDAO ( ) {
 
 		// Blank constructor.
 	}
 
-	public static ResEquipamentoProfessorDAO getInstance() {
+	public static ResEquipamentoProfessorDAO getInstance ( ) {
 
 		if (instance == null) {
 			instance = new ResEquipamentoProfessorDAO();
@@ -44,7 +45,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Select Professor by id query.
-	private String select_id_professor(Professor p) {
+	private String select_id_professor (Professor p) {
 
 		return "SELECT id_professor FROM professor WHERE "
 				+ "professor.nome = \"" + p.getNome() + "\" and "
@@ -55,7 +56,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Select Equipamento by id query.
-	private String select_id_equipamento(Equipamento equipamento) {
+	private String select_id_equipamento (Equipamento equipamento) {
 
 		return "SELECT id_equipamento FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipamento.getCodigo()
@@ -64,7 +65,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Reuse query for WHERE clause
-	private String where_reserva_equipamento_professor(
+	private String where_reserva_equipamento_professor (
 			ReservaEquipamentoProfessor r) {
 
 		return " WHERE " + "id_professor = ( "
@@ -76,7 +77,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Reuse query for VALUES clause.
-	private String values_reserva_equipamento_professor(
+	private String values_reserva_equipamento_professor (
 			ReservaEquipamentoProfessor r) {
 
 		return "( " + select_id_professor(r.getProfessor()) + " ), " + "( "
@@ -85,7 +86,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Reuse query for ATRIBUTES query.
-	private String atributes_value_reserva_equipamento_professor(
+	private String atributes_value_reserva_equipamento_professor (
 			ReservaEquipamentoProfessor r) {
 
 		return "id_professor = ( " + select_id_professor(r.getProfessor())
@@ -96,7 +97,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Reuse query for INSERT clause.
-	private String insert_into(ReservaEquipamentoProfessor r) {
+	private String insert_into (ReservaEquipamentoProfessor r) {
 
 		return "INSERT INTO "
 				+ "reserva_equipamento_professor (id_professor, id_equipamento, hora, data) "
@@ -104,7 +105,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Reuse query for UPDATE clause.
-	private String update(ReservaEquipamentoProfessor r,
+	private String update (ReservaEquipamentoProfessor r,
 			ReservaEquipamentoProfessor r2) {
 
 		return "UPDATE reserva_equipamento_professor SET "
@@ -113,21 +114,22 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Reuse query for DELETE Professor clause.
-	private String delete_from_professor(ReservaEquipamentoProfessor r) {
+	private String delete_from_professor (ReservaEquipamentoProfessor r) {
 
 		return "DELETE FROM reserva_equipamento_professor "
 				+ this.where_reserva_equipamento_professor(r) + " ;";
 	}
 
 	// Reuse query for DELETE Aluno clause.
-	private String delete_from_aluno(ReservaEquipamentoProfessor r) {
+	private String delete_from_aluno (ReservaEquipamentoProfessor r) {
 
 		return "DELETE FROM reserva_equipamento_aluno WHERE " + "hora = \""
 				+ r.getHora() + "\" and " + "data = \"" + r.getData() + " ;";
 	}
 
 	// Include new Reserva in the database.
-	public void incluir(ReservaEquipamentoProfessor r) throws ReservaException,
+	public void incluir (ReservaEquipamentoProfessor r)
+			throws ReservaException,
 			SQLException {
 
 		if (r == null) {
@@ -157,7 +159,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Update Reserva info in the database.
-	public void alterar(ReservaEquipamentoProfessor r,
+	public void alterar (ReservaEquipamentoProfessor r,
 			ReservaEquipamentoProfessor r_new) throws ReservaException,
 			SQLException {
 
@@ -207,23 +209,25 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Remove Reserva from database.
-	public void excluir(ReservaEquipamentoProfessor r) throws ReservaException,
+	public void excluir (ReservaEquipamentoProfessor r)
+			throws ReservaException,
 			SQLException {
 
 		if (r == null) {
 			throw new ReservaException(NULA);
-	    } else {
+		} else {
 			if (!this.reservainDB(r)) {
 				throw new ReservaException(RESERVA_INEXISTENTE);
 			} else {
 				super.executeQuery(this.delete_from_professor(r));
 			}
-	    }
+		}
 	}
 
 	// Select all Reservas from the database.
-	@SuppressWarnings("unchecked")
-	public Vector<Object> buscarTodos() throws SQLException, ClienteException,
+	@SuppressWarnings ("unchecked")
+	public Vector <Object> buscarTodos ( ) throws SQLException,
+			ClienteException,
 			PatrimonioException, ReservaException {
 
 		return super
@@ -233,17 +237,18 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Select Reserva by month.
-	@SuppressWarnings("unchecked")
-	public Vector<ReservaEquipamentoProfessor> buscarPorMes(int mes)
+	@SuppressWarnings ("unchecked")
+	public Vector <ReservaEquipamentoProfessor> buscarPorMes (int mes)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		Vector<ReservaEquipamentoProfessor> reservas_prof_mes = super
+		Vector <ReservaEquipamentoProfessor> reservas_prof_mes = super
 				.search("SELECT * FROM reserva_equipamento_professor "
 						+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
 						+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;");
-		Iterator<ReservaEquipamentoProfessor> it = reservas_prof_mes.iterator();
-		
+		Iterator <ReservaEquipamentoProfessor> it = reservas_prof_mes
+				.iterator();
+
 		while (it.hasNext()) {
 			ReservaEquipamentoProfessor obj = it.next();
 			if (Integer.parseInt(obj.getData().split("[./-]")[1]) != mes) {
@@ -254,8 +259,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Select Reserva by hour.
-	@SuppressWarnings("unchecked")
-	public Vector<ReservaEquipamentoProfessor> buscarPorHora(String hora)
+	@SuppressWarnings ("unchecked")
+	public Vector <ReservaEquipamentoProfessor> buscarPorHora (String hora)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -266,7 +271,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		if (hora.charAt(0) == '0') {
 			hora_b = hora.substring(1);
 		}
-		
+
 		return super
 				.search("SELECT * FROM reserva_equipamento_professor "
 						+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
@@ -277,7 +282,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 	// Fetch Reserva using a result.
 	@Override
-	protected Object fetch(ResultSet rs) throws SQLException, ClienteException,
+	protected Object fetch (ResultSet rs) throws SQLException,
+			ClienteException,
 			PatrimonioException, ReservaException {
 
 		Professor p = new Professor(rs.getString("nome"), rs.getString("cpf"),
@@ -294,7 +300,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Check if there is a Professor in the database.
-	private boolean professorinDB(Professor professor) throws SQLException {
+	private boolean professorinDB (Professor professor) throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM professor WHERE "
 				+ "professor.nome = \"" + professor.getNome() + "\" and "
@@ -306,7 +312,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Check if there is an Equipamento in the database.
-	private boolean equipamentoinDB(Equipamento equipamento)
+	private boolean equipamentoinDB (Equipamento equipamento)
 			throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM equipamento WHERE "
@@ -316,7 +322,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Check if there is a Professor entry in a Reserva.
-	private boolean professorinReservaDB(Professor professor, String data,
+	private boolean professorinReservaDB (Professor professor, String data,
 			String hora) throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
@@ -332,13 +338,17 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Check if there is a Equipamento entry in a Reserva.
-	private boolean equipamentoinReservaDB(Equipamento equipamento,
+	private boolean equipamentoinReservaDB (Equipamento equipamento,
 			String data, String hora) throws SQLException {
 
 		return super
 				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
-						+ "data = \"" + data + "\" and " 
-						+ "hora = \"" + hora + "\" and "
+						+ "data = \""
+						+ data
+						+ "\" and "
+						+ "hora = \""
+						+ hora
+						+ "\" and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
 						+ "equipamento.codigo = \"" + equipamento.getCodigo()
 						+ "\" and " + "equipamento.descricao = \""
@@ -346,21 +356,29 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	// Check if there is a Reserva entry in the database.
-	private boolean reservainDB(ReservaEquipamentoProfessor r)
+	private boolean reservainDB (ReservaEquipamentoProfessor r)
 			throws SQLException {
 
 		return super
 				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 						+ "id_professor = (SELECT id_professor FROM professor WHERE "
-						+ "professor.nome = \""	+ r.getProfessor().getNome()
-						+ "\" and " + "professor.cpf = \"" + r.getProfessor().getCpf()
-						+ "\" and " + "professor.telefone = \"" 
+						+ "professor.nome = \"" + r.getProfessor().getNome()
+						+ "\" and "
+						+ "professor.cpf = \""
+						+ r.getProfessor().getCpf()
+						+ "\" and "
+						+ "professor.telefone = \""
 						+ r.getProfessor().getTelefone()
-						+ "\" and " + "professor.email = \"" + r.getProfessor().getEmail()
-						+ "\" and " + "professor.matricula = \"" 
-						+ r.getProfessor().getMatricula() + "\") and "
+						+ "\" and "
+						+ "professor.email = \""
+						+ r.getProfessor().getEmail()
+						+ "\" and "
+						+ "professor.matricula = \""
+						+ r.getProfessor().getMatricula()
+						+ "\") and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \"" + r.getEquipamento().getCodigo()
+						+ "equipamento.codigo = \""
+						+ r.getEquipamento().getCodigo()
 						+ "\" and " + "equipamento.descricao = \""
 						+ r.getEquipamento().getDescricao() + "\" and "
 						+ "hora = \"" + r.getHora() + "\" and "
