@@ -1,7 +1,8 @@
 /**
-  ManterProfessor 
-  Search, insert, update, delete the registration of the teacher.
-  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterProfessorAluno.java
+  ManterProfessor Search, insert, update, delete the registration of the
+  teacher.
+  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control
+  ManterProfessorAluno.java
  */
 package control;
 
@@ -16,7 +17,7 @@ public class ManterProfessor {
 
 	private Vector <Professor> professores_vet = new Vector <Professor>();
 
-	// Singleton
+	// Singleton implementation.
 	private static ManterProfessor instance;
 
 	private ManterProfessor ( ) {
@@ -30,38 +31,42 @@ public class ManterProfessor {
 		return instance;
 	}
 
-	//
-
+	// Search teacher's name in the database.
 	public Vector <Professor> buscarNome (String valor) throws SQLException,
 			ClienteException {
 
 		return ProfessorDAO.getInstance().buscarNome(valor);
 	}
 
+	// Search the cpf of the student in the database.
 	public Vector <Professor> buscarCpf (String valor) throws SQLException,
 			ClienteException {
 
 		return ProfessorDAO.getInstance().buscarCpf(valor);
 	}
 
+	// Search the enrollment of the teacher in the database.
 	public Vector <Professor> buscarMatricula (String valor)
 			throws SQLException, ClienteException {
 
 		return ProfessorDAO.getInstance().buscarMatricula(valor);
 	}
 
+	// Find the teacher in email database.
 	public Vector <Professor> buscarEmail (String valor) throws SQLException,
 			ClienteException {
 
 		return ProfessorDAO.getInstance().buscarEmail(valor);
 	}
 
+	// Search the phone of the student in the database.
 	public Vector <Professor> buscarTelefone (String valor)
 			throws SQLException, ClienteException {
 
 		return ProfessorDAO.getInstance().buscarTelefone(valor);
 	}
 
+	// Returns Vector<Professor>.
 	public Vector <Professor> getProfessores_vet ( ) throws SQLException,
 			ClienteException {
 
@@ -69,6 +74,7 @@ public class ManterProfessor {
 		return this.professores_vet;
 	}
 
+	// Insert name, cpf, registration, phone and email of the teacher.
 	public void inserir (String nome, String cpf, String matricula,
 			String telefone, String email) throws ClienteException,
 			SQLException {
@@ -78,6 +84,7 @@ public class ManterProfessor {
 		this.professores_vet.add(prof);
 	}
 
+	// Changes name, cpf, registration, phone and email of the teacher.
 	public void alterar (String nome, String cpf, String matricula,
 			String telefone, String email, Professor prof)
 			throws ClienteException, SQLException {
@@ -96,6 +103,7 @@ public class ManterProfessor {
 		ProfessorDAO.getInstance().alterar(prof_velho, prof);
 	}
 
+	// Remove the teacher record.
 	public void excluir (Professor professor) throws SQLException,
 			ClienteException {
 
