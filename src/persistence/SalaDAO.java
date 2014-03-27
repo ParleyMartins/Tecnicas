@@ -1,3 +1,9 @@
+/**
+SalaDAO
+Manages the DAO from Sala
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/SalaDAO.java
+*/
+
 package persistence;
 
 import model.Sala;
@@ -12,25 +18,26 @@ import exception.PatrimonioException;
 
 public class SalaDAO {
 
-	//Mensagens
+	// Messages and alerts.
 		private static final String SALA_JA_EXISTENTE = "Sala ja cadastrada.";
 		private static final String SALA_NAO_EXISTENTE = "Sala nao cadastrada.";
 		private static final String SALA_EM_USO = "Sala esta sendo utilizada em uma reserva.";
 		private static final String SALA_NULA = "Sala esta nula.";
 		private static final String CODIGO_JA_EXISTENTE = "Sala com o mesmo codigo ja cadastrada.";
 	
-	//Singleton
+	// Singleton implementation.
 		private static SalaDAO instance;
 		private SalaDAO(){
+			// Blank constructor. 
 		}
 		public static SalaDAO getInstance(){
 			if(instance == null)
 				instance = new SalaDAO();
 			return instance;
 		}
-	//
 
 		
+	// Include new Sala in the database. 
 	public void incluir(Sala sala) throws SQLException, PatrimonioException {	
 		if(sala == null)
 			throw new PatrimonioException(SALA_NULA);
@@ -43,6 +50,7 @@ public class SalaDAO {
 					sala.getCapacidade() + ");");
 	}
 
+	// Change a Sala info in the database. 
 	public void alterar(Sala old_sala, Sala new_sala) throws SQLException, PatrimonioException {
 		if(new_sala == null)
 			throw new PatrimonioException(SALA_NULA);
@@ -79,6 +87,7 @@ public class SalaDAO {
 		con.close();
 	}
 
+	// Exclude a Sala from the database. 
 	public void excluir(Sala sala) throws SQLException, PatrimonioException {
 		if(sala == null)
 			throw new PatrimonioException(SALA_NULA);
@@ -97,24 +106,32 @@ public class SalaDAO {
 
 	
 	
+	// Select all Salas from the database. 
 	public Vector<Sala> buscarTodos() throws SQLException, PatrimonioException {
 		return this.buscar("SELECT * FROM sala;");
 	}
+	
+	// Select a Sala in the database by code. 
 	public Vector<Sala> buscarPorCodigo(String valor) throws SQLException, PatrimonioException {
 		return this.buscar("SELECT * FROM sala WHERE codigo = " + "\"" + valor + "\";");
 	}
+	
+	// Select a Sala in the database by description.
 	public Vector<Sala> buscarPorDescricao(String valor) throws SQLException, PatrimonioException {
 		return this.buscar("SELECT * FROM sala WHERE descricao = " + "\"" + valor + "\";");
 	}
+	
+	// Select a Sala in the database by capacity. 
 	public Vector<Sala> buscarPorCapacidade(String valor) throws SQLException, PatrimonioException {
 		return this.buscar("SELECT * FROM sala WHERE capacidade = " + valor + ";");
 	}
 	
 	
-	/**
-	 * Metodos Privados
-	 * */
+	/*
+	Private methods. 
+	*/
 	
+	// Search a Sala in the database by query. 
 	private Vector<Sala> buscar(String query) throws SQLException, PatrimonioException {
 		Vector<Sala> vet = new Vector<Sala>();
 		
@@ -132,7 +149,7 @@ public class SalaDAO {
 		return vet;
 	}
 	
-	
+	// Check if there is an entry in the database. 
 	private boolean inDBGeneric(String query) throws SQLException{
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
@@ -152,6 +169,8 @@ public class SalaDAO {
 			return true;
 		}
 	}
+	
+	// Check if there is a Sala in the database. 
 	private boolean inDB(Sala sala) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + sala.getCodigo() + "\" and " +
@@ -159,10 +178,14 @@ public class SalaDAO {
 				"sala.capacidade = " + sala.getCapacidade() +
 				";");
 	}
+	
+	// Check if there is a Sala in the database by code. 
 	private boolean inDBCodigo(String codigo) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + codigo + "\";");
 	}
+	
+	// Check if there is a Sala entry in other databases. 
 	private boolean inOtherDB(Sala sala) throws SQLException{
 		if( this.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
@@ -183,11 +206,12 @@ public class SalaDAO {
 		return true;
 	}
 	
-	
+	// Fetch a Sala using a String result. 
 	private Sala fetchSala(ResultSet rs) throws PatrimonioException, SQLException{
 		return new Sala(rs.getString("codigo"), rs.getString("descricao"), rs.getString("capacidade"));
 	}
 	
+	// Update a query. 
 	private void updateQuery(String msg) throws SQLException{
 		Connection con =  FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(msg);
