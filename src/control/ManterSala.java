@@ -1,3 +1,8 @@
+/**
+ManterSala
+Include the code and description of the room, change, and delete devices.
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterSala.java
+*/
 package control;
 
 import java.sql.SQLException;
@@ -11,11 +16,12 @@ public class ManterSala {
 
 	private Vector <Sala> salas_vet = new Vector <Sala>();
 
-	// Singleton
+	// Singleton implementation.
 	private static ManterSala instance;
 
 	private ManterSala ( ) {
-
+		
+		// Blank constructor.
 	}
 
 	public static ManterSala getInstance ( ) {
@@ -25,7 +31,6 @@ public class ManterSala {
 		return instance;
 	}
 
-	//
 
 	public Vector <Sala> getSalas_vet ( ) throws SQLException,
 			PatrimonioException {
@@ -33,7 +38,8 @@ public class ManterSala {
 		this.salas_vet = SalaDAO.getInstance().buscarTodos();
 		return this.salas_vet;
 	}
-
+	
+	// include code and description of the room in the database.
 	public void inserir (String codigo, String descricao, String capacidade)
 			throws PatrimonioException, SQLException {
 
@@ -42,6 +48,7 @@ public class ManterSala {
 		this.salas_vet.add(sala);
 	}
 
+	// Update code and description info in the database.
 	public void alterar (String codigo, String descricao, String capacidade,
 			Sala sala) throws PatrimonioException, SQLException {
 
@@ -53,6 +60,7 @@ public class ManterSala {
 		SalaDAO.getInstance().alterar(old_sala, sala);
 	}
 
+	//Remove room form the database.
 	public void excluir (Sala sala) throws SQLException, PatrimonioException {
 
 		SalaDAO.getInstance().excluir(sala);
