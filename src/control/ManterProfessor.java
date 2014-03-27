@@ -1,5 +1,6 @@
 /**
-  ManterProfessor Search, insert, update, delete the registration of the
+  ManterProfessor 
+  Search, insert, update, delete the registration of the
   teacher.
   https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control
   ManterProfessorAluno.java
@@ -38,7 +39,7 @@ public class ManterProfessor {
 		return ProfessorDAO.getInstance().buscarNome(valor);
 	}
 
-	// Search the cpf of the student in the database.
+	// Search the cpf of the teacher in the database.
 	public Vector <Professor> buscarCpf (String valor) throws SQLException,
 			ClienteException {
 
@@ -59,7 +60,7 @@ public class ManterProfessor {
 		return ProfessorDAO.getInstance().buscarEmail(valor);
 	}
 
-	// Search the phone of the student in the database.
+	// Search the phone of the teacher in the database.
 	public Vector <Professor> buscarTelefone (String valor)
 			throws SQLException, ClienteException {
 
