@@ -1,12 +1,18 @@
+/**
+	EquipmentView
+	This class shows the equipments from database
+	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+ */
+
 package view.mainViews;
 
+import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
-
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import model.Equipamento;
 import view.alteracoes.AlterarEquipamento;
 import view.cadastros.CadastroEquipamento;
@@ -14,108 +20,139 @@ import view.diasReservas.DiaReservaEquipamento;
 import control.ManterEquipamento;
 import exception.PatrimonioException;
 
-/**
- * 
- * @author Parley
- */
 public class EquipamentoView extends PatrimonioView {
 
-    public EquipamentoView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        pesquisarLbl.setText("Digite o eqpto. desejado: ");
-        this.setTitle("Equipamentos");
-        this.setName("EquipamentoView");
-    }
+	// Constructor generates a EquipmentView form.
+	public EquipamentoView (Frame parent, boolean modal) {
 
-    private Vector<String> fillDataVector(Equipamento equipamento) {
+		super(parent, modal);
+		pesquisarLbl.setText("Digite o eqpto. desejado: ");
+		this.setTitle("Equipamentos");
+		this.setName("EquipamentoView");
+	}
 
-        if (equipamento == null) {
-            return null;
-        }
+	// This method fills a vector with the equipments on database.
+	private Vector <String> fillDataVector (Equipamento equipamento) {
 
-        Vector<String> nomesTabela = new Vector<String>();
+		if (equipamento == null) {
+			return null;
+		}
 
-        nomesTabela.add(equipamento.getCodigo());
-        nomesTabela.add(equipamento.getDescricao());
+		Vector <String> nomesTabela = new Vector <String>();
 
-        return nomesTabela;
+		nomesTabela.add(equipamento.getCodigo());
+		nomesTabela.add(equipamento.getDescricao());
 
-    }
+		return nomesTabela;
 
-    @Override protected DefaultTableModel fillTable() {
-        try {
-            DefaultTableModel table = new DefaultTableModel();
+	}
 
-            Iterator<Equipamento> i = control.ManterEquipamento.getInstance().getEquipamento_vet().iterator();
+	@Override
+	// This method fills a table with the equipments on database.
+	protected DefaultTableModel fillTable ( ) {
 
-            table.addColumn("Codigo");
-            table.addColumn("Descricao");
+		try {
+			DefaultTableModel table = new DefaultTableModel();
 
-            while (i.hasNext()) {
-                Equipamento equipamento = i.next();
-                table.addRow(fillDataVector(equipamento));
-            }
-            return table;
+			Iterator <Equipamento> i = control.ManterEquipamento.getInstance()
+					.getEquipamento_vet().iterator();
 
-        } catch (PatrimonioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        }
-        return null;
-    }
+			table.addColumn("Codigo");
+			table.addColumn("Descricao");
 
-    @Override protected void cadastrarAction() {
-        CadastroEquipamento cadastro = new CadastroEquipamento(new javax.swing.JFrame(), true);
-        cadastro.setResizable(false);
-        cadastro.setVisible(true);
-        this.tabelaPatrimonio.setModel(fillTable());
-    }
+			while (i.hasNext()) {
+				Equipamento equipamento = i.next();
+				table.addRow(fillDataVector(equipamento));
+			}
+			return table;
 
-    @Override protected void alterarAction(int index) {
+		} catch (PatrimonioException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (NullPointerException ex) {
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
+					"Erro", JOptionPane.ERROR_MESSAGE, null);
+		}
+		return null;
+	}
 
-        AlterarEquipamento alteracao = new AlterarEquipamento(new javax.swing.JFrame(), true, index);
-        alteracao.setResizable(false);
-        alteracao.setVisible(true);
-        this.tabelaPatrimonio.setModel(fillTable());
+	@Override
+	// Method generates a equipment register form.
+	protected void cadastrarAction ( ) {
 
-    }
+		CadastroEquipamento cadastro = new CadastroEquipamento(new JFrame(),
+				true);
+		cadastro.setResizable(false);
+		cadastro.setVisible(true);
+		this.tabelaPatrimonio.setModel(fillTable());
+	}
 
-    @Override protected void excluirAction(int index) {
+	@Override
+	// Method generates a equipment modify form.
+	protected void alterarAction (int index) {
 
-        try {
-            int confirm = JOptionPane.showConfirmDialog(this, "Deseja mesmo excluir Equipamento: "
-                    + ManterEquipamento.getInstance().getEquipamento_vet().get(index).getDescricao() + "?", "Excluir",
-                    JOptionPane.YES_NO_OPTION);
+		AlterarEquipamento alteracao = new AlterarEquipamento(new JFrame(),
+				true, index);
+		alteracao.setResizable(false);
+		alteracao.setVisible(true);
+		this.tabelaPatrimonio.setModel(fillTable());
 
-            if (confirm == JOptionPane.YES_OPTION) {
-                ManterEquipamento.getInstance().excluir(ManterEquipamento.getInstance().getEquipamento_vet().get(index));
-                JOptionPane.showMessageDialog(this, "Equipamento excluido com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE,
-                        null);
-            }
-            this.tabelaPatrimonio.setModel(fillTable());
+	}
 
-        } catch (PatrimonioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        }
+	@Override
+	// Method deletes a equipment.
+	protected void excluirAction (int index) {
 
-    }
+		try {
+			int confirm = JOptionPane.showConfirmDialog(this,
+					"Deseja mesmo excluir Equipamento: "
+							+ ManterEquipamento.getInstance()
+									.getEquipamento_vet().get(index)
+									.getDescricao() + "?", "Excluir",
+					JOptionPane.YES_NO_OPTION);
 
-    @Override protected void visualizarAction(int index) {
-        try {
-            DiaReservaEquipamento reserva = new DiaReservaEquipamento(new javax.swing.JFrame(), true, index);
-            reserva.setResizable(false);
-            reserva.setVisible(true);
-        } catch (PatrimonioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        }
-    }
+			if (confirm == JOptionPane.YES_OPTION) {
+				ManterEquipamento.getInstance().excluir(
+						ManterEquipamento.getInstance().getEquipamento_vet()
+								.get(index));
+				JOptionPane.showMessageDialog(this,
+						"Equipamento excluido com sucesso", "Sucesso",
+						JOptionPane.INFORMATION_MESSAGE,
+						null);
+			}
+			this.tabelaPatrimonio.setModel(fillTable());
+
+		} catch (PatrimonioException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (NullPointerException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		}
+
+	}
+
+	@Override
+	// Method generates a visualize form.
+	protected void visualizarAction (int index) {
+
+		try {
+			DiaReservaEquipamento reserva = new DiaReservaEquipamento(
+					new JFrame(), true, index);
+			reserva.setResizable(false);
+			reserva.setVisible(true);
+		} catch (PatrimonioException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		}
+	}
 }
