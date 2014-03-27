@@ -35,19 +35,22 @@ public class SalaDAO {
 
 	public static SalaDAO getInstance ( ) {
 
-		if (instance == null)
+		if (instance == null) {
 			instance = new SalaDAO();
+		}
 		return instance;
 	}
 
 	// Include new Sala in the database.
 	public void incluir (Sala sala) throws SQLException, PatrimonioException {
 
-		if (sala == null)
+		if (sala == null) {
 			throw new PatrimonioException(SALA_NULA);
-		else
-			if (this.inDBCodigo(sala.getCodigo()))
+		} else {
+			if (this.inDBCodigo(sala.getCodigo())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+			}
+		}
 		this.updateQuery("INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
 				"\"" + sala.getCodigo() + "\", " +
@@ -59,23 +62,28 @@ public class SalaDAO {
 	public void alterar (Sala old_sala, Sala new_sala) throws SQLException,
 			PatrimonioException {
 
-		if (new_sala == null)
+		if (new_sala == null) {
 			throw new PatrimonioException(SALA_NULA);
-		if (old_sala == null)
+		}
+		if (old_sala == null) {
 			throw new PatrimonioException(SALA_NULA);
+		}
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst;
 
-		if (!this.inDB(old_sala))
+		if (!this.inDB(old_sala)) {
 			throw new PatrimonioException(SALA_NAO_EXISTENTE);
-		else
-			if (this.inOtherDB(old_sala))
+		} else {
+			if (this.inOtherDB(old_sala)) {
 				throw new PatrimonioException(SALA_EM_USO);
-			else
+			} else {
 				if (!old_sala.getCodigo().equals(new_sala.getCodigo())
-						&& this.inDBCodigo(new_sala.getCodigo()))
+						&& this.inDBCodigo(new_sala.getCodigo())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+				}
+			}
+		}
 		if (!this.inDB(new_sala)) {
 			String msg = "UPDATE sala SET " +
 					"codigo = \"" + new_sala.getCodigo() + "\", " +
@@ -90,9 +98,9 @@ public class SalaDAO {
 			pst = con.prepareStatement(msg);
 			pst.executeUpdate();
 			con.commit();
-		}
-		else
+		} else {
 			throw new PatrimonioException(SALA_JA_EXISTENTE);
+		}
 
 		pst.close();
 		con.close();
@@ -101,12 +109,12 @@ public class SalaDAO {
 	// Exclude a Sala from the database.
 	public void excluir (Sala sala) throws SQLException, PatrimonioException {
 
-		if (sala == null)
+		if (sala == null) {
 			throw new PatrimonioException(SALA_NULA);
-		else
-			if (this.inOtherDB(sala))
+		} else {
+			if (this.inOtherDB(sala)) {
 				throw new PatrimonioException(SALA_EM_USO);
-			else
+			} else {
 				if (this.inDB(sala)) {
 					this.updateQuery("DELETE FROM sala WHERE " +
 							"sala.codigo = \"" + sala.getCodigo() + "\" and " +
@@ -114,9 +122,11 @@ public class SalaDAO {
 							+ "\" and " +
 							"sala.capacidade = " + sala.getCapacidade() + ";"
 							);
-				}
-				else
+				} else {
 					throw new PatrimonioException(SALA_NAO_EXISTENTE);
+				}
+			}
+		}
 	}
 
 	// Select all Salas from the database.
@@ -165,8 +175,9 @@ public class SalaDAO {
 		PreparedStatement pst = con.prepareStatement(query);
 		ResultSet rs = pst.executeQuery();
 
-		while (rs.next())
+		while (rs.next()) {
 			vet.add(this.fetchSala(rs));
+		}
 
 		pst.close();
 		rs.close();
@@ -181,14 +192,12 @@ public class SalaDAO {
 		PreparedStatement pst = con.prepareStatement(query);
 		ResultSet rs = pst.executeQuery();
 
-		if (!rs.next())
-		{
+		if (!rs.next()) {
 			rs.close();
 			pst.close();
 			con.close();
 			return false;
-		}
-		else {
+		} else {
 			rs.close();
 			pst.close();
 			con.close();
@@ -220,14 +229,12 @@ public class SalaDAO {
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + sala.getCodigo() + "\" and " +
 				"sala.descricao = \"" + sala.getDescricao() + "\" and " +
-				"sala.capacidade = " + sala.getCapacidade() + " );") == false)
-		{
+				"sala.capacidade = " + sala.getCapacidade() + " );") == false) {
 			if (this.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 					"id_sala = (SELECT id_sala FROM sala WHERE " +
 					"sala.codigo = \"" + sala.getCodigo() + "\" and " +
 					"sala.descricao = \"" + sala.getDescricao() + "\" and " +
-					"sala.capacidade = " + sala.getCapacidade() + " );") == false)
-			{
+					"sala.capacidade = " + sala.getCapacidade() + " );") == false) {
 				return false;
 			}
 		}
