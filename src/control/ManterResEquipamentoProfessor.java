@@ -1,7 +1,8 @@
 /**
   ManterResEquipamentoProfessor
   Check reservations for equipment made by teacher
-  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/controlManterResEquipamentoProfessor.java
+  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src
+  /controlManterResEquipamentoProfessor.java
  */
 package control;
 
@@ -20,7 +21,6 @@ public class ManterResEquipamentoProfessor {
 
 	private Vector <Object> rev_equipamento_professor_vet = new Vector <Object>();
 
-	// Singleton implementation.
 	private static ManterResEquipamentoProfessor instance;
 
 	private ManterResEquipamentoProfessor ( ) {
@@ -28,6 +28,7 @@ public class ManterResEquipamentoProfessor {
 		// Blank constructor.
 	}
 
+	// Singleton implementation.
 	public static ManterResEquipamentoProfessor getInstance ( ) {
 
 		if (instance == null)
@@ -35,7 +36,7 @@ public class ManterResEquipamentoProfessor {
 		return instance;
 	}
 
-	// Returns the booking of equipment held by the teacher, per hour.
+	// Returns the equipment reservation made ​​by a teacher in a period of time.
 	public Vector <ReservaEquipamentoProfessor> getReservasHora (String hora)
 			throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
@@ -44,7 +45,7 @@ public class ManterResEquipamentoProfessor {
 
 	}
 
-	// Returns the booking of equipment held by the teacher, per month.
+	// Returns the equipment reservation made ​​​​by a teacher in a month period.
 	public Vector <ReservaEquipamentoProfessor> getReservasMes (int mes)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
@@ -62,7 +63,7 @@ public class ManterResEquipamentoProfessor {
 		return this.rev_equipamento_professor_vet;
 	}
 
-	// Inserts equipment, teacher, date and time of booking in the database
+	// Inserts equipment, teacher, date and time of a reservation in the database
 	public void inserir (Equipamento equipamento, Professor prof, String data,
 			String hora) throws SQLException, ReservaException {
 
@@ -83,7 +84,7 @@ public class ManterResEquipamentoProfessor {
 
 	}
 
-	// Remove equipment booked by the teacher database
+	// Remove the reservation made by a teacher.
 	public void excluir (ReservaEquipamentoProfessor reserva)
 			throws SQLException, ReservaException {
 
