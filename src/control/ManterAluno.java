@@ -1,6 +1,7 @@
 /**
-  Name: ManterAluno Function: Search, insert, update, delete the registration
-  of the student.
+  ManterAluno 
+  Search, insert, update, delete the registration of the student.
+  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterAluno.java
  */
 
 package control;

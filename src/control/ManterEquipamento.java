@@ -8,45 +8,58 @@ import model.Equipamento;
 
 public class ManterEquipamento {
 
-	private Vector<Equipamento> Equipamento_vet = new Vector<Equipamento>();
-	
-//Singleton
+	private Vector <Equipamento> Equipamento_vet = new Vector <Equipamento>();
+
+	// Singleton
 
 	private static ManterEquipamento instance;
-	private ManterEquipamento() {
-		
+
+	private ManterEquipamento ( ) {
+
 	}
-	public static ManterEquipamento getInstance() {
+
+	public static ManterEquipamento getInstance ( ) {
+
 		if (instance == null) {
 			instance = new ManterEquipamento();
 		}
 		return instance;
 	}
-//
-		
-	public Vector<Equipamento> getEquipamento_vet() throws SQLException, PatrimonioException {
+
+	//
+
+	public Vector <Equipamento> getEquipamento_vet ( ) throws SQLException,
+			PatrimonioException {
+
 		this.Equipamento_vet = EquipamentoDAO.getInstance().searchAll();
 		return this.Equipamento_vet;
 	}
 
-	public void inserir(String codigo, String descricao) throws PatrimonioException, SQLException {
+	public void inserir (String codigo, String descricao)
+			throws PatrimonioException, SQLException {
+
 		Equipamento equipamento = new Equipamento(codigo, descricao);
 		EquipamentoDAO.getInstance().include(equipamento);
 		getEquipamento_vet();
 	}
 
-	public void alterar(String codigo, String descricao, Equipamento equipamento) throws PatrimonioException, SQLException {
+	public void alterar (String codigo, String descricao,
+			Equipamento equipamento) throws PatrimonioException, SQLException {
+
 		if (equipamento == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		}
-		Equipamento old_equipamento = new Equipamento(equipamento.getCodigo(), equipamento.getDescricao());
+		Equipamento old_equipamento = new Equipamento(equipamento.getCodigo(),
+				equipamento.getDescricao());
 		equipamento.setCodigo(codigo);
 		equipamento.setDescricao(descricao);
 		EquipamentoDAO.getInstance().change(old_equipamento, equipamento);
 		getEquipamento_vet();
 	}
 
-	public void excluir(Equipamento equipamento) throws SQLException, PatrimonioException {
+	public void excluir (Equipamento equipamento) throws SQLException,
+			PatrimonioException {
+
 		if (equipamento == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		}
