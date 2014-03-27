@@ -1,7 +1,8 @@
-/*
-Name: EquipamentoDAO
-Function: manage the DAO functions of the Equipamento model
- */
+/**
+EquipamentoDAO
+Manage the DAO functions of the Equipamento model
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/EquipamentoDAO.java
+*/
 
 package persistence;
 
@@ -26,12 +27,12 @@ public class EquipamentoDAO {
 	// Singleton implementation.
 	private static EquipamentoDAO instance;
 
-	private EquipamentoDAO() {
+	private EquipamentoDAO ( ) {
 
 		// Blank constructor.
 	}
 
-	public static EquipamentoDAO getInstance() {
+	public static EquipamentoDAO getInstance ( ) {
 
 		if (instance == null) {
 			instance = new EquipamentoDAO();
@@ -41,7 +42,7 @@ public class EquipamentoDAO {
 	}
 
 	// Include new Equipamento in the database.
-	public void include(Equipamento equipamento) throws SQLException,
+	public void include (Equipamento equipamento) throws SQLException,
 			PatrimonioException {
 
 		if (equipamento == null) {
@@ -61,7 +62,7 @@ public class EquipamentoDAO {
 	}
 
 	// Update Equipamento info in the database.
-	public void change(Equipamento old_equipamento, Equipamento new_equipamento)
+	public void change (Equipamento old_equipamento, Equipamento new_equipamento)
 			throws SQLException, PatrimonioException {
 
 		if (old_equipamento == null) {
@@ -113,7 +114,7 @@ public class EquipamentoDAO {
 	}
 
 	// Remove Equipamento form the database.
-	public void exclude(Equipamento equipamento) throws SQLException,
+	public void exclude (Equipamento equipamento) throws SQLException,
 			PatrimonioException {
 
 		if (equipamento == null) {
@@ -135,14 +136,15 @@ public class EquipamentoDAO {
 	}
 
 	// Retrive all Equipamento from the database.
-	public Vector<Equipamento> searchAll() throws SQLException,
+	public Vector <Equipamento> searchAll ( ) throws SQLException,
 			PatrimonioException {
 
 		return this.search("SELECT * FROM equipamento;");
 	}
 
 	// Search an Equipamento by id code.
-	public Vector<Equipamento> searchByCode(String valor) throws SQLException,
+	public Vector <Equipamento> searchByCode (String valor)
+			throws SQLException,
 			PatrimonioException {
 
 		return this.search("SELECT * FROM equipamento WHERE codigo = " + "\""
@@ -150,7 +152,7 @@ public class EquipamentoDAO {
 	}
 
 	// Search an Equipamento by description.
-	public Vector<Equipamento> searchByDescription(String valor)
+	public Vector <Equipamento> searchByDescription (String valor)
 			throws SQLException, PatrimonioException {
 
 		return this.search("SELECT * FROM equipamento WHERE descricao = "
@@ -162,10 +164,10 @@ public class EquipamentoDAO {
 	 */
 
 	// Retrive Equipamento from the database.
-	private Vector<Equipamento> search(String query) throws SQLException,
+	private Vector <Equipamento> search (String query) throws SQLException,
 			PatrimonioException {
 
-		Vector<Equipamento> vet = new Vector<Equipamento>();
+		Vector <Equipamento> vet = new Vector <Equipamento>();
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 
@@ -183,7 +185,7 @@ public class EquipamentoDAO {
 	}
 
 	// Check if there is a database entry by query.
-	private boolean inDBGeneric(String query) throws SQLException {
+	private boolean inDBGeneric (String query) throws SQLException {
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
@@ -205,7 +207,7 @@ public class EquipamentoDAO {
 	}
 
 	// Check if there is a database entry by Equipamento.
-	private boolean inDB(Equipamento e) throws SQLException,
+	private boolean inDB (Equipamento e) throws SQLException,
 			PatrimonioException {
 
 		return this.inDBGeneric("SELECT * FROM equipamento WHERE "
@@ -214,14 +216,14 @@ public class EquipamentoDAO {
 	}
 
 	// Check if there is a database entry by code id.
-	private boolean inDBCodigo(String codigo) throws SQLException {
+	private boolean inDBCodigo (String codigo) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM equipamento WHERE "
 				+ "codigo = \"" + codigo + "\";");
 	}
 
 	// Check if there is a database entry.
-	private boolean inOtherDB(Equipamento e) throws SQLException {
+	private boolean inOtherDB (Equipamento e) throws SQLException {
 
 		return this
 				.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
@@ -232,7 +234,7 @@ public class EquipamentoDAO {
 	}
 
 	// Fetch Equipamento usign a result.
-	private Equipamento fetchEquipamento(ResultSet rs)
+	private Equipamento fetchEquipamento (ResultSet rs)
 			throws PatrimonioException, SQLException {
 
 		return new Equipamento(rs.getString("codigo"),
@@ -240,7 +242,7 @@ public class EquipamentoDAO {
 	}
 
 	// Update a query.
-	private void updateQuery(String msg) throws SQLException {
+	private void updateQuery (String msg) throws SQLException {
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(msg);

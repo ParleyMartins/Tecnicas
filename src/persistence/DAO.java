@@ -1,7 +1,8 @@
-/*
-Name: DAO
-Function: Manages the access to the database
- */
+/**
+DAO
+Manages the access to the database
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/DAO.java
+*/
 
 package persistence;
 
@@ -18,8 +19,8 @@ import exception.ReservaException;
 public abstract class DAO {
 
 	// Search for a database entry according to the query.
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected Vector search(String query) throws SQLException,
+	@SuppressWarnings ({ "rawtypes", "unchecked" })
+	protected Vector search (String query) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
 
 		Vector vet = new Vector();
@@ -40,7 +41,7 @@ public abstract class DAO {
 	}
 
 	// Check if a database entry exists.
-	protected boolean inDBGeneric(String query) throws SQLException {
+	protected boolean inDBGeneric (String query) throws SQLException {
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
@@ -60,14 +61,14 @@ public abstract class DAO {
 	}
 
 	/*
-	 * Function signature, used on the search method. Must be implemented on the
-	 * following DAO classes.
-	 */
-	protected abstract Object fetch(ResultSet rs) throws SQLException,
+	Function signature, used on the search method. Must be implemented on the
+	following DAO classes.
+	*/
+	protected abstract Object fetch (ResultSet rs) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException;
 
 	// Add or remove a database entry.
-	protected void executeQuery(String msg) throws SQLException {
+	protected void executeQuery (String msg) throws SQLException {
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(msg);
@@ -77,7 +78,7 @@ public abstract class DAO {
 	}
 
 	// Update a database entry.
-	protected void updateQuery(String msg) throws SQLException {
+	protected void updateQuery (String msg) throws SQLException {
 
 		Connection con = FactoryConnection.getInstance().getConnection();
 		con.setAutoCommit(false);
