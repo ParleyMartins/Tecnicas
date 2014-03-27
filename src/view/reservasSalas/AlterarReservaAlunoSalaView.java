@@ -26,12 +26,12 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
     ReservaSalaAluno reservaAluno;
     ReservaSalaProfessor reservaProfessor;
 
-    private void resetComponents() {
+    private void resetComponents( ) {
         this.reservarButton.setText("Alterar");
         this.reservarButton.setName("AlterarButton");
         this.alunoRadioButton.setSelected(true);
         this.cpfLabel.setEnabled(false);
-        alunoRadioButtonAction();
+        alunoRadioButtonAction( );
     }
 
     public AlterarReservaAlunoSalaView(Frame parent, boolean modal, int index, String data) throws SQLException,
@@ -39,38 +39,38 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
         super(parent, modal);
         this.setName("AlterarReservaSalaView");
         this.reservaAluno = instanceAluno.getReservasMes(data).get(index);
-        resetComponents();
+        resetComponents( );
 
     }
 
-    @Override protected void reservarAluno() {
+    @Override protected void reservarAluno( ) {
         try {
-            instanceAluno.alterar(this.finalidadeTextField.getText(), this.qntCadeirasReservadasTextField.getText(), reservaAluno);
+            instanceAluno.alterar(this.finalidadeTextField.getText( ), this.qntCadeirasReservadasTextField.getText( ), reservaAluno);
 
             JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 
             this.setVisible(false);
         } catch (ReservaException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (PatrimonioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (ClienteException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         }
     }
 
-    @Override protected void reservarProfessor() {
+    @Override protected void reservarProfessor( ) {
 
     }
 
-    @Override protected void professorRadioButtonAction() {
+    @Override protected void professorRadioButtonAction( ) {
     }
 
-    @Override protected void alunoRadioButtonAction() {
+    @Override protected void alunoRadioButtonAction( ) {
         this.instanceProf = null;
         this.professorRadioButton.setEnabled(false);
         this.cpfTextField.setBackground(new Color(200, 208, 254));
@@ -79,32 +79,32 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
         this.qntCadeirasReservadasTextField.setBackground(Color.white);
         this.horaTextField.setBackground(new Color(200, 208, 254));
         this.horaTextField.setEditable(false);
-        this.horaTextField.setText(reservaAluno.getHora());
-        this.alunoTextArea.setText(reservaAluno.getAluno().toString());
-        this.salaTextArea.setText(reservaAluno.getSala().toString());
-        this.dataTextField.setText(reservaAluno.getData());
-        this.qntCadeirasTxtField.setText(reservaAluno.getSala().getCapacidade());
-        this.qntCadeirasReservadasTextField.setText(reservaAluno.getCadeiras_reservadas());
-        this.finalidadeTextField.setText(reservaAluno.getFinalidade());
+        this.horaTextField.setText(reservaAluno.getHora( ));
+        this.alunoTextArea.setText(reservaAluno.getAluno( ).toString( ));
+        this.salaTextArea.setText(reservaAluno.getSala( ).toString( ));
+        this.dataTextField.setText(reservaAluno.getData( ));
+        this.qntCadeirasTxtField.setText(reservaAluno.getSala( ).getCapacidade( ));
+        this.qntCadeirasReservadasTextField.setText(reservaAluno.getCadeiras_reservadas( ));
+        this.finalidadeTextField.setText(reservaAluno.getFinalidade( ));
     }
 
-    @Override protected void verificarAction() {
+    @Override protected void verificarAction( ) {
         try {
-            this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno.cadeirasDisponveis(sala, this.dataTextField.getText(),
-                    this.horaTextField.getText())));
+            this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno.cadeirasDisponveis(sala, this.dataTextField.getText( ),
+                    this.horaTextField.getText( ))));
         } catch (ReservaException ex) {
             
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (PatrimonioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (ClienteException ex) {
             
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         } catch (NullPointerException ex) {
             
-            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ), "Erro", JOptionPane.ERROR_MESSAGE, null);
         }
         
     }

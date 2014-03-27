@@ -27,7 +27,7 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 		super(parent, modal);
 		this.equipamento = e;
 		this.dataTextField.setText(data);
-		this.equipamentoTextArea.setText(e.toString());
+		this.equipamentoTextArea.setText(e.toString( ));
 	}
 
 	@Override
@@ -36,17 +36,17 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 		try {
 
 			this.instanceProf.inserir(this.equipamento, this.prof,
-					this.dataTextField.getText(), this.horaTextField.getText());
+					this.dataTextField.getText( ), this.horaTextField.getText( ));
 
 			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

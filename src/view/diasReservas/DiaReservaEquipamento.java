@@ -24,7 +24,7 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 			int indexEquipamento) throws SQLException, PatrimonioException {
 
 		super(parent, modal);
-		this.eq = ManterEquipamento.getInstance().getEquipamento_vet()
+		this.eq = ManterEquipamento.getInstance( ).getEquipamento_vet( )
 				.get(indexEquipamento);
 	}
 
@@ -33,7 +33,7 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 	protected void visualizarAction (String data) {
 
 		HorariosReservaPatrimonio reserva = new HorariosReservaEquipamento(
-				new JFrame(), true, data, this.eq);
+				new JFrame( ), true, data, this.eq);
 		reserva.setVisible(true);
 		reserva.setResizable(false);
 	}

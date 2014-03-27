@@ -34,7 +34,7 @@ public abstract class CadastroPatrimonio extends JDialog {
 	public CadastroPatrimonio (Frame parent, boolean modal) {
 
 		super(parent, modal);
-		initComponents();
+		initComponents( );
 	}
 
 	// This method is going to perform the register action in each child class.
@@ -43,15 +43,15 @@ public abstract class CadastroPatrimonio extends JDialog {
 	// Method called from within the constructor to initialize components.
 	public void initComponents ( ) {
 
-		this.codigoLbl = new JLabel();
-		this.capacidadeLbl = new JLabel();
-		this.descricaoLbl = new JLabel();
-		this.codigoTxtField = new JTextField();
-		this.capacidadeTxtField = new JTextField();
-		this.cadastroBtn = new JButton();
-		this.cancelBtn = new JButton();
-		this.jScrollPane1 = new JScrollPane();
-		this.descricaoTextArea = new JTextArea();
+		this.codigoLbl = new JLabel( );
+		this.capacidadeLbl = new JLabel( );
+		this.descricaoLbl = new JLabel( );
+		this.codigoTxtField = new JTextField( );
+		this.capacidadeTxtField = new JTextField( );
+		this.cadastroBtn = new JButton( );
+		this.cancelBtn = new JButton( );
+		this.jScrollPane1 = new JScrollPane( );
+		this.descricaoTextArea = new JTextArea( );
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Cadastro");
@@ -71,7 +71,7 @@ public abstract class CadastroPatrimonio extends JDialog {
 
 		this.cadastroBtn.setText("Cadastrar");
 		this.cadastroBtn.setName("Cadastrar");
-		this.cadastroBtn.addActionListener(new ActionListener() {
+		this.cadastroBtn.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -81,7 +81,7 @@ public abstract class CadastroPatrimonio extends JDialog {
 
 		this.cancelBtn.setText("Cancelar");
 		this.cancelBtn.setName("Cancelar");
-		this.cancelBtn.addActionListener(new ActionListener() {
+		this.cancelBtn.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -94,19 +94,19 @@ public abstract class CadastroPatrimonio extends JDialog {
 		this.jScrollPane1.setViewportView(this.descricaoTextArea);
 
 		GroupLayout layout = new GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
+				getContentPane( ));
+		getContentPane( ).setLayout(layout);
 		layout.setHorizontalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
+						layout.createSequentialGroup( )
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING,
 												false)
 												.addGroup(
-														layout.createSequentialGroup()
-																.addContainerGap()
+														layout.createSequentialGroup( )
+																.addContainerGap( )
 																.addGroup(
 																		layout.createParallelGroup(
 																				GroupLayout.Alignment.TRAILING,
@@ -142,7 +142,7 @@ public abstract class CadastroPatrimonio extends JDialog {
 																						this.codigoTxtField)))
 												.addGroup(
 														GroupLayout.Alignment.TRAILING,
-														layout.createSequentialGroup()
+														layout.createSequentialGroup( )
 																.addContainerGap(
 																		GroupLayout.DEFAULT_SIZE,
 																		Short.MAX_VALUE)
@@ -162,8 +162,8 @@ public abstract class CadastroPatrimonio extends JDialog {
 		layout.setVerticalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
@@ -217,13 +217,13 @@ public abstract class CadastroPatrimonio extends JDialog {
 										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)));
 
-		pack();
+		pack( );
 	}
 
 	// Method used to call the abstract function in each child class.
 	private void cadastroBtnActionPerformed (ActionEvent evt) {
 
-		cadastroAction();
+		cadastroAction( );
 	}
 
 	// Method used to cancel a registration.

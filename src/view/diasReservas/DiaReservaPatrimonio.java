@@ -32,7 +32,7 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 	public DiaReservaPatrimonio (Frame parent, boolean modal) {
 
 		super(parent, modal);
-		initComponents();
+		initComponents( );
 	}
 
 	// Method to visualize room or equipment.
@@ -41,15 +41,15 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 	// Method called from constructor to initialize the components
 	private void initComponents ( ) {
 
-		visualizarButton = new JButton();
-		jPanel1 = new JPanel();
-		jCalendar1 = new JCalendar();
+		visualizarButton = new JButton( );
+		jPanel1 = new JPanel( );
+		jCalendar1 = new JCalendar( );
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		visualizarButton.setText("Visualizar Reservas do Dia");
 		visualizarButton.setName("VisualizarButton"); 
-		visualizarButton.addActionListener(new ActionListener() {
+		visualizarButton.addActionListener(new ActionListener( ) {
 			private JCalendar jCalendar1;
 			private JPanel jPanel1;
 			protected JButton visualizarButton;
@@ -65,34 +65,34 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				jPanel1Layout
-						.createSequentialGroup()
-						.addContainerGap()
+						.createSequentialGroup( )
+						.addContainerGap( )
 						.addComponent(jCalendar1,
 								GroupLayout.DEFAULT_SIZE, 608,
-								Short.MAX_VALUE).addContainerGap()));
+								Short.MAX_VALUE).addContainerGap( )));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				jPanel1Layout
-						.createSequentialGroup()
-						.addContainerGap()
+						.createSequentialGroup( )
+						.addContainerGap( )
 						.addComponent(jCalendar1,
 								GroupLayout.DEFAULT_SIZE, 434,
-								Short.MAX_VALUE).addContainerGap()));
+								Short.MAX_VALUE).addContainerGap( )));
 
 		GroupLayout layout = new GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
+				getContentPane( ));
+		getContentPane( ).setLayout(layout);
 		layout.setHorizontalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
 												.addGroup(
 														GroupLayout.Alignment.TRAILING,
-														layout.createSequentialGroup()
+														layout.createSequentialGroup( )
 																.addGap(0,
 																		0,
 																		Short.MAX_VALUE)
@@ -106,12 +106,12 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))
-								.addContainerGap()));
+								.addContainerGap( )));
 		layout.setVerticalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addComponent(jPanel1,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.DEFAULT_SIZE,
@@ -119,21 +119,21 @@ public abstract class DiaReservaPatrimonio extends JDialog{
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(visualizarButton)
-								.addContainerGap()));
+								.addContainerGap( )));
 
-		pack();
+		pack( );
 	}
 
 	// Method to generate the action of visualize the selected day
 	private void visualizarButtonActionPerformed (ActionEvent evt) {
 		String data;
-		int mes = 1 + this.jCalendar1.getMonthChooser().getMonth();
+		int mes = 1 + this.jCalendar1.getMonthChooser( ).getMonth( );
 		if (mes < 10) {
-			data = this.jCalendar1.getDayChooser().getDay() + "/0" + mes + "/"
-					+ this.jCalendar1.getYearChooser().getYear();
+			data = this.jCalendar1.getDayChooser( ).getDay( ) + "/0" + mes + "/"
+					+ this.jCalendar1.getYearChooser( ).getYear( );
 		} else {
-			data = this.jCalendar1.getDayChooser().getDay() + "/" + mes + "/"
-					+ this.jCalendar1.getYearChooser().getYear();
+			data = this.jCalendar1.getDayChooser( ).getDay( ) + "/" + mes + "/"
+					+ this.jCalendar1.getYearChooser( ).getYear( );
 		}
 		visualizarAction(data);
 	}
