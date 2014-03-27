@@ -1,3 +1,8 @@
+/**
+ManterResSalaProfessor
+Check room booking for  made by teacher
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterResSalaProfessor.java
+*/
 package control;
 
 import java.sql.SQLException;
@@ -16,11 +21,12 @@ public class ManterResSalaProfessor {
 
 	private Vector <ReservaSalaProfessor> rev_sala_professor_vet = new Vector <ReservaSalaProfessor>();
 
-	// Singleton
+	// Singleton implementation.
 	private static ManterResSalaProfessor instance;
 
 	private ManterResSalaProfessor ( ) {
-
+		
+		// Blank constructor.
 	}
 
 	public static ManterResSalaProfessor getInstance ( ) {
@@ -30,8 +36,7 @@ public class ManterResSalaProfessor {
 		return instance;
 	}
 
-	//
-
+	// Returns the room reservation made ​​by the teacher, per date.
 	public Vector <ReservaSalaProfessor> buscarPorData (String data)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
@@ -39,6 +44,7 @@ public class ManterResSalaProfessor {
 		return ResSalaProfessorDAO.getInstance().buscarPorData(data);
 	}
 
+	// Returns the room reservation made ​​by the teacher
 	public Vector <ReservaSalaProfessor> getResProfessorSala_vet ( )
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
@@ -48,6 +54,7 @@ public class ManterResSalaProfessor {
 		return this.rev_sala_professor_vet;
 	}
 
+	// Include new reservation in the database.
 	public void inserir (Sala sala, Professor prof,
 			String data, String hora, String finalidade)
 			throws SQLException, ReservaException {
@@ -58,6 +65,7 @@ public class ManterResSalaProfessor {
 		this.rev_sala_professor_vet.add(reserva);
 	}
 
+	// Update reservation info from the database.
 	public void alterar (String finalidade, ReservaSalaProfessor reserva)
 			throws SQLException, ReservaException {
 
@@ -70,6 +78,7 @@ public class ManterResSalaProfessor {
 
 	}
 
+	// Remove the room that was reserved for teacher
 	public void excluir (ReservaSalaProfessor reserva) throws SQLException,
 			ReservaException {
 
