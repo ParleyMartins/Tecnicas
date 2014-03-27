@@ -1,6 +1,6 @@
 /**
   ManterResEquipamentoProfessor
-  Check reservations for equipment made ​​by teacher
+  Check reservations for equipment made by teacher
   https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/controlManterResEquipamentoProfessor.java
  */
 package control;

@@ -1,3 +1,8 @@
+/**
+ManterResSalaAluno
+Check room booking for  made by student
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterResSalaAluno.java
+*/
 package control;
 
 import java.sql.SQLException;
@@ -14,11 +19,13 @@ import exception.ReservaException;
 public class ManterResSalaAluno {
 
 	private Vector <ReservaSalaAluno> rev_sala_aluno_vet = new Vector <ReservaSalaAluno>();
-	// Singleton
+	
+	// Singleton implementation.
 	private static ManterResSalaAluno instance;
 
 	private ManterResSalaAluno ( ) {
 
+		// Blank constructor.
 	}
 
 	public static ManterResSalaAluno getInstance ( ) {
@@ -29,8 +36,7 @@ public class ManterResSalaAluno {
 		return instance;
 	}
 
-	//
-
+	// Returns the room reservation made ​​by the student, per hour.
 	public Vector <ReservaSalaAluno> getReservasHora (String hora)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
@@ -39,13 +45,17 @@ public class ManterResSalaAluno {
 
 	}
 
+	// Returns the room reservation made ​​by the student, per month.
 	public Vector <ReservaSalaAluno> getReservasMes (String data)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
 		return ResSalaAlunoDAO.getInstance().buscarPorDia(data);
+		
+	
 	}
 
+	// Returns the room reservation made ​​by the student
 	public Vector <ReservaSalaAluno> getResAlunoSala_vet ( )
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
@@ -54,6 +64,7 @@ public class ManterResSalaAluno {
 		return this.rev_sala_aluno_vet;
 	}
 
+	// Returns the number of seats available
 	public int cadeirasDisponveis (Sala sala, String data, String hora)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
@@ -62,6 +73,7 @@ public class ManterResSalaAluno {
 				hora);
 	}
 
+	// Include new reservation in the database.
 	public void inserir (Sala sala, Aluno aluno,
 			String data, String hora, String finalidade,
 			String cadeiras_reservadas)
@@ -74,6 +86,7 @@ public class ManterResSalaAluno {
 		this.rev_sala_aluno_vet.add(r);
 	}
 
+	// Update reservation info from the database.
 	public void alterar (String finalidade, String cadeiras_reservadas,
 			ReservaSalaAluno r)
 			throws SQLException, ReservaException, ClienteException,
@@ -87,6 +100,7 @@ public class ManterResSalaAluno {
 		ResSalaAlunoDAO.getInstance().alterar(res_old, r);
 	}
 
+	// Remove the room that was reserved for student
 	public void excluir (ReservaSalaAluno r) throws SQLException,
 			ReservaException {
 
