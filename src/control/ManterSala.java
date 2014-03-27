@@ -14,56 +14,57 @@ import model.Sala;
 
 public class ManterSala {
 
-	private Vector <Sala> salas_vet = new Vector <Sala>();
-
-	// Singleton implementation.
 	private static ManterSala instance;
+	
+	private Vector <Sala> salas_vet = new Vector <Sala>( );
+
 
 	private ManterSala ( ) {
 		
 		// Blank constructor.
 	}
 
+	// This constructor provides the singleton implementation.
 	public static ManterSala getInstance ( ) {
 
 		if (instance == null)
-			instance = new ManterSala();
+			instance = new ManterSala( );
 		return instance;
 	}
 
-
+	// Gets a vector of room.
 	public Vector <Sala> getSalas_vet ( ) throws SQLException,
 			PatrimonioException {
 
-		this.salas_vet = SalaDAO.getInstance().buscarTodos();
+		this.salas_vet = SalaDAO.getInstance( ).buscarTodos( );
 		return this.salas_vet;
 	}
 	
-	// include code and description of the room in the database.
+	// This method include code and description of the room in the database.
 	public void inserir (String codigo, String descricao, String capacidade)
 			throws PatrimonioException, SQLException {
 
 		Sala sala = new Sala(codigo, descricao, capacidade);
-		SalaDAO.getInstance().incluir(sala);
+		SalaDAO.getInstance( ).incluir(sala);
 		this.salas_vet.add(sala);
 	}
 
-	// Update code and description info in the database.
+	//  This method Update code and description info in the database.
 	public void alterar (String codigo, String descricao, String capacidade,
 			Sala sala) throws PatrimonioException, SQLException {
 
-		Sala old_sala = new Sala(sala.getCodigo(), sala.getDescricao(),
-				sala.getCapacidade());
+		Sala old_sala = new Sala(sala.getCodigo( ), sala.getDescricao( ),
+				sala.getCapacidade( ));
 		sala.setCodigo(codigo);
 		sala.setDescricao(descricao);
 		sala.setCapacidade(capacidade);
-		SalaDAO.getInstance().alterar(old_sala, sala);
+		SalaDAO.getInstance( ).alterar(old_sala, sala);
 	}
 
-	//Remove room form the database.
+	//This method deletes room form the database.
 	public void excluir (Sala sala) throws SQLException, PatrimonioException {
 
-		SalaDAO.getInstance().excluir(sala);
+		SalaDAO.getInstance( ).excluir(sala);
 		this.salas_vet.remove(sala);
 	}
 
