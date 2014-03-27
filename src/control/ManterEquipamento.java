@@ -1,3 +1,8 @@
+/**
+ManterEquipamento
+Include code and description of equipment, change and delete equipment.
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterEquipamento.java
+*/
 package control;
 
 import java.sql.SQLException;
@@ -10,12 +15,13 @@ public class ManterEquipamento {
 
 	private Vector <Equipamento> Equipamento_vet = new Vector <Equipamento>();
 
-	// Singleton
+	// Singleton implementation.
 
 	private static ManterEquipamento instance;
 
 	private ManterEquipamento ( ) {
-
+		
+		// Blank constructor.
 	}
 
 	public static ManterEquipamento getInstance ( ) {
@@ -26,7 +32,6 @@ public class ManterEquipamento {
 		return instance;
 	}
 
-	//
 
 	public Vector <Equipamento> getEquipamento_vet ( ) throws SQLException,
 			PatrimonioException {
@@ -35,6 +40,7 @@ public class ManterEquipamento {
 		return this.Equipamento_vet;
 	}
 
+	// include code and description of the equipment in the database.
 	public void inserir (String codigo, String descricao)
 			throws PatrimonioException, SQLException {
 
@@ -43,6 +49,7 @@ public class ManterEquipamento {
 		getEquipamento_vet();
 	}
 
+	// Update code and description info in the database.
 	public void alterar (String codigo, String descricao,
 			Equipamento equipamento) throws PatrimonioException, SQLException {
 
@@ -57,6 +64,7 @@ public class ManterEquipamento {
 		getEquipamento_vet();
 	}
 
+	//Remove equipment form the database.
 	public void excluir (Equipamento equipamento) throws SQLException,
 			PatrimonioException {
 
