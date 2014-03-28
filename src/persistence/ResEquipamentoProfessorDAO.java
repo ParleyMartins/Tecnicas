@@ -61,7 +61,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return "SELECT id_equipamento FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipamento.getCodigo()
 				+ "\" and " + "equipamento.descricao = \""
-				+ equipamento.getDescricao();
+				+ equipamento.getDescricao() + "\"";
 	}
 
 	// Reuse query for WHERE clause
@@ -73,7 +73,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "id_equipamento = ( "
 				+ select_id_equipamento(r.getEquipamento()) + " ) and "
 				+ "hora = \"" + r.getHora() + "\" and " + "data = \""
-				+ r.getData();
+				+ r.getData() + "\"";
 	}
 
 	// Reuse query for VALUES clause.
@@ -82,7 +82,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 		return "( " + select_id_professor(r.getProfessor()) + " ), " + "( "
 				+ select_id_equipamento(r.getEquipamento()) + " ), " + "\""
-				+ r.getHora() + "\", " + "\"" + r.getData();
+				+ r.getHora() + "\", " + "\"" + r.getData() + "\"";
 	}
 
 	// Reuse query for ATRIBUTES query.
@@ -93,7 +93,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ " ), " + "id_equipamento = ( "
 				+ select_id_equipamento(r.getEquipamento()) + " ), "
 				+ "hora = \"" + r.getHora() + "\", " + "data = \""
-				+ r.getData();
+				+ r.getData() + "\"";
 	}
 
 	// Reuse query for INSERT clause.
@@ -149,7 +149,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 								r.getData(), r.getHora())) {
 							throw new ReservaException(RESERVA_EXISTENTE);
 						} else {
-							super.executeQuery(this.delete_from_aluno(r));
+							//super.executeQuery(this.delete_from_aluno(r));
 							super.executeQuery(this.insert_into(r));
 						}
 					}
@@ -318,7 +318,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return super.inDBGeneric("SELECT * FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipamento.getCodigo()
 				+ "\" and " + "equipamento.descricao = \""
-				+ equipamento.getDescricao() + "\" and " + ";");
+				+ equipamento.getDescricao() + "\";");
 	}
 
 	// Check if there is a Professor entry in a Reserva.
@@ -352,7 +352,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
 						+ "equipamento.codigo = \"" + equipamento.getCodigo()
 						+ "\" and " + "equipamento.descricao = \""
-						+ equipamento.getDescricao() + "\" and " + ");");
+						+ equipamento.getDescricao() + "\");");
 	}
 
 	// Check if there is a Reserva entry in the database.
@@ -382,7 +382,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "\" and " + "equipamento.descricao = \""
 						+ r.getEquipamento().getDescricao() + "\" and "
 						+ "hora = \"" + r.getHora() + "\" and "
-						+ "data = \"" + r.getData() + ";");
+						+ "data = \"" + r.getData() + "\");");
 	}
 
 }

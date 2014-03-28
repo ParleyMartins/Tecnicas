@@ -74,13 +74,14 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Change reservation of equipment in the database
-	public void alterar (String finalidade, ReservaEquipamentoProfessor reserva)
+	public void alterar (ReservaEquipamentoProfessor reserva_old, String data,
+			String hora, Equipamento equipamento, Professor professor)
 			throws SQLException, ReservaException {
 
-		ReservaEquipamentoProfessor reserva_old = new ReservaEquipamentoProfessor(
-				reserva.getData(), reserva.getHora(),
-				reserva.getEquipamento(), reserva.getProfessor());
-		ResEquipamentoProfessorDAO.getInstance().alterar(reserva_old, reserva);
+		ReservaEquipamentoProfessor reserva_new  = new ReservaEquipamentoProfessor(
+				data, hora, equipamento, professor); 
+		
+		ResEquipamentoProfessorDAO.getInstance().alterar(reserva_old, reserva_new);
 
 	}
 
@@ -90,5 +91,11 @@ public class ManterResEquipamentoProfessor {
 
 		ResEquipamentoProfessorDAO.getInstance().excluir(reserva);
 		this.rev_equipamento_professor_vet.remove(reserva);
+	}
+
+	public void alterar () {
+
+		// TODO Auto-generated method stub
+		
 	}
 }

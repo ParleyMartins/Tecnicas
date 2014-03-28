@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import model.Equipamento;
 import model.ReservaEquipamentoProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -19,15 +20,17 @@ import exception.ReservaException;
 
 public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
-	int index;
+	//int index;
 	ReservaEquipamentoProfessor reserva;
+	Equipamento equipamento;
 
 	public AlterarReservaEquipamentoView (Frame parent, boolean modal,
-			int index, int mes) throws SQLException, PatrimonioException,
+			int index, int mes, Equipamento eq) throws SQLException,
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.index = index;
+		this.equipamento = eq;
+		//this.index = index;
 		this.reserva = this.instanceProf.getReservasMes(mes).get(index);
 		resetComponents( );
 	}
@@ -36,8 +39,8 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	protected void reservarProfessor ( ) {
 
 		try {
-
-			this.instanceProf.alterar(null, this.reserva);
+			this.instanceProf.alterar(this.reserva, this.dataTextField.getText( ), this.horaTextField.getText( ),
+					this.equipamento, this.reserva.getProfessor());
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
@@ -57,9 +60,11 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 		this.cpfLabel.setEnabled(false);
 		this.cpfTextField.setBackground(new Color(200, 208, 254));
 		this.cpfTextField.setEditable(false);
+		this.cpfTextField.setText(this.reserva.getProfessor().getCpf());;
 		this.horaTextField.setText(this.reserva.getHora( ));
 		this.dataTextField.setText(this.reserva.getData( ));
 		this.professorTextArea.setText(this.reserva.getProfessor( ).toString( ));
+		this.equipamentoTextArea.setText(this.reserva.getEquipamento().toString());
 	}
 
 }

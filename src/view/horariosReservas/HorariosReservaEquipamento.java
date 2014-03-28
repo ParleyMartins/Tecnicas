@@ -10,12 +10,15 @@ import java.awt.Frame;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import model.Equipamento;
 import model.Patrimonio;
 import model.ReservaEquipamentoProfessor;
+import view.reservasEquipamentos.AlterarReservaEquipamentoView;
 import view.reservasEquipamentos.FazerReservaEquipamentoView;
 import view.reservasEquipamentos.ReservaEquipamentoView;
 import control.ManterResEquipamentoProfessor;
@@ -34,6 +37,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 		super(parent, modal, data, eq);
 		this.eq = eq;
+		this.alterarButton.setVisible(false);
 	}
 
 	// This method fills the vector with data to be used on the table.
@@ -161,20 +165,27 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	// This method modifies a reservation
 	protected void alterarAction (int index) {
 
-		/**
-		 * try { index = Integer.parseInt((String)
-		 * this.reservasTable.getModel( ).getValueAt(index, 0));
-		 * ReservaEquipamentoView reserva = new
-		 * AlterarReservaEquipamentoView(new JFrame( ), true, index, this.mes);
-		 * reserva.setVisible(true); } catch (SQLException ex) {
-		 * JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
-		 * JOptionPane.ERROR_MESSAGE, null); } catch (PatrimonioException ex) {
-		 * JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
-		 * JOptionPane.ERROR_MESSAGE, null); } catch (ClienteException ex) {
-		 * JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
-		 * JOptionPane.ERROR_MESSAGE, null); } catch (ReservaException ex) {
-		 * JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
-		 * JOptionPane.ERROR_MESSAGE, null); }
-		 */
+		
+		try {
+			index = Integer.parseInt((String)
+					this.reservasTable.getModel().getValueAt(index, 0));
+			ReservaEquipamentoView reserva = new
+					AlterarReservaEquipamentoView(new JFrame(), true, index,
+							this.mes, this.eq);
+			reserva.setVisible(true);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (PatrimonioException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (ClienteException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (ReservaException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		}
+		 
 	}
 }
