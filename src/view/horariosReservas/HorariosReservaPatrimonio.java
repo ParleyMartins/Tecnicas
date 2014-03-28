@@ -46,7 +46,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		this.data = data;
 		this.setTitle(data);
 		this.p = p;
-		initComponents();
+		initComponents( );
 
 	}
 
@@ -65,19 +65,19 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	// This method initialize the components.
 	private void initComponents ( ) {
 
-		jPanel3 = new JPanel();
-		jPanel2 = new JPanel();
-		reservarButton = new JButton();
-		alterarButton = new JButton();
-		cancelarReservaButton = new JButton();
-		jScrollPane1 = new JScrollPane();
-		reservasTable = new JTable();
+		jPanel3 = new JPanel( );
+		jPanel2 = new JPanel( );
+		reservarButton = new JButton( );
+		alterarButton = new JButton( );
+		cancelarReservaButton = new JButton( );
+		jScrollPane1 = new JScrollPane( );
+		reservasTable = new JTable( );
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		reservarButton.setText("Reservar");
 		reservarButton.setName("ReservarButton");
-		reservarButton.addActionListener(new ActionListener() {
+		reservarButton.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -87,7 +87,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 		alterarButton.setText("Alterar Reserva");
 		alterarButton.setName("AlterarButton");
-		alterarButton.addActionListener(new ActionListener() {
+		alterarButton.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -97,7 +97,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 		cancelarReservaButton.setText("Cancelar Reserva");
 		cancelarReservaButton.setName("CancelarReservaButton");
-		cancelarReservaButton.addActionListener(new ActionListener() {
+		cancelarReservaButton.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -110,8 +110,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				jPanel2Layout
-						.createSequentialGroup()
-						.addContainerGap()
+						.createSequentialGroup( )
+						.addContainerGap( )
 						.addGroup(
 								jPanel2Layout
 										.createParallelGroup(
@@ -136,7 +136,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanel2Layout
-										.createSequentialGroup()
+										.createSequentialGroup( )
 										.addGap(25, 25, 25)
 										.addComponent(reservarButton,
 												GroupLayout.PREFERRED_SIZE, 51,
@@ -168,8 +168,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanel3Layout
-										.createSequentialGroup()
-										.addContainerGap()
+										.createSequentialGroup( )
+										.addContainerGap( )
 										.addComponent(jScrollPane1,
 												GroupLayout.DEFAULT_SIZE, 727,
 												Short.MAX_VALUE)
@@ -179,12 +179,12 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 												GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap()));
+										.addContainerGap( )));
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				jPanel3Layout
-						.createSequentialGroup()
-						.addContainerGap()
+						.createSequentialGroup( )
+						.addContainerGap( )
 						.addGroup(
 								jPanel3Layout
 										.createParallelGroup(
@@ -203,31 +203,31 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		jPanel3Layout.linkSize(SwingConstants.VERTICAL,
 				new Component[] { jPanel2, jScrollPane1 });
 
-		GroupLayout layout = new GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
+		GroupLayout layout = new GroupLayout(getContentPane( ));
+		getContentPane( ).setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
+				layout.createSequentialGroup( )
+						.addContainerGap( )
 						.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE).addContainerGap()));
+								Short.MAX_VALUE).addContainerGap( )));
 		layout.setVerticalGroup(layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
+				layout.createSequentialGroup( )
+						.addContainerGap( )
 						.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE).addGap(20, 20, 20)));
 
-		pack();
+		pack( );
 	}
 
 	// This methods generates the cancel action.
 	private void cancelarReservaButtonActionPerformed (ActionEvent evt) {
 
 		int indexLinha;
-		indexLinha = this.reservasTable.getSelectedRow();
+		indexLinha = this.reservasTable.getSelectedRow( );
 		if (indexLinha < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -240,7 +240,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	// This methods generates the reservation action.
 	private void reservarButtonActionPerformed (ActionEvent evt) {
 
-		reservarAction();
+		reservarAction( );
 		this.reservasTable.setModel(fillTable(this.p));
 	}
 
@@ -248,7 +248,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	private void alterarButtonActionPerformed (ActionEvent evt) {
 
 		int indexLinha;
-		indexLinha = this.reservasTable.getSelectedRow();
+		indexLinha = this.reservasTable.getSelectedRow( );
 		if (indexLinha < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);

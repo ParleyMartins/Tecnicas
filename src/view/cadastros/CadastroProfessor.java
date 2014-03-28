@@ -26,13 +26,13 @@ public class CadastroProfessor extends CadastroCliente {
 	public void cadastroAction ( ) {
 
 		try {
-			if (this.cadastroBtn.getText().equals("Cadastrar")) {
-				ManterProfessor.getInstance().inserir(
-						this.nomeTxtField.getText(),
-						this.cpfTxtField.getText(),
-						this.matriculaTxtField.getText(),
-						this.telefoneTxtField.getText(),
-						this.emailTxtField.getText());
+			if (this.cadastroBtn.getText( ).equals("Cadastrar")) {
+				ManterProfessor.getInstance( ).inserir(
+						this.nomeTxtField.getText( ),
+						this.cpfTxtField.getText( ),
+						this.matriculaTxtField.getText( ),
+						this.telefoneTxtField.getText( ),
+						this.emailTxtField.getText( ));
 
 				JOptionPane.showMessageDialog(this,
 						"Professor Cadastrado com sucesso", "Sucesso",
@@ -42,13 +42,13 @@ public class CadastroProfessor extends CadastroCliente {
 				this.setVisible(false);
 			}
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

@@ -44,19 +44,19 @@ public class Main2 extends JFrame {
 	// Constructor generates form Main2
 	public Main2 ( ) {
 
-		initComponents();
+		initComponents( );
 	}
 
 	// This method initializes the Components.
 	private void initComponents ( ) {
 
-		this.fundoLbl = new JLabel();
-		this.panelReserva1 = new JPanel();
-		this.salaBtn = new JButton();
-		this.equipamentoBtn = new JButton();
-		this.panelReserva = new JPanel();
-		this.professorBtn = new JButton();
-		this.alunoBtn = new JButton();
+		this.fundoLbl = new JLabel( );
+		this.panelReserva1 = new JPanel( );
+		this.salaBtn = new JButton( );
+		this.equipamentoBtn = new JButton( );
+		this.panelReserva = new JPanel( );
+		this.professorBtn = new JButton( );
+		this.alunoBtn = new JButton( );
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("SisRES");
@@ -71,7 +71,7 @@ public class Main2 extends JFrame {
 
 		this.salaBtn.setText("Sala");
 		this.salaBtn.setName("Sala");
-		this.salaBtn.addActionListener(new ActionListener() {
+		this.salaBtn.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -81,7 +81,7 @@ public class Main2 extends JFrame {
 
 		this.equipamentoBtn.setText("Equipamento");
 		this.equipamentoBtn.setName("Equipamento");
-		this.equipamentoBtn.addActionListener(new ActionListener() {
+		this.equipamentoBtn.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -98,7 +98,7 @@ public class Main2 extends JFrame {
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReserva1Layout
-										.createSequentialGroup()
+										.createSequentialGroup( )
 										.addGap(6, 6, 6)
 										.addComponent(
 												this.salaBtn,
@@ -111,15 +111,15 @@ public class Main2 extends JFrame {
 												this.equipamentoBtn,
 												GroupLayout.DEFAULT_SIZE,
 												106, Short.MAX_VALUE)
-										.addContainerGap()));
+										.addContainerGap( )));
 		panelReserva1Layout
 				.setVerticalGroup(panelReserva1Layout
 						.createParallelGroup(
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReserva1Layout
-										.createSequentialGroup()
-										.addContainerGap()
+										.createSequentialGroup( )
+										.addContainerGap( )
 										.addGroup(
 												panelReserva1Layout
 														.createParallelGroup(
@@ -143,7 +143,7 @@ public class Main2 extends JFrame {
 
 		this.professorBtn.setText("Professor");
 		this.professorBtn.setName("Professor");
-		this.professorBtn.addActionListener(new ActionListener() {
+		this.professorBtn.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -153,7 +153,7 @@ public class Main2 extends JFrame {
 
 		this.alunoBtn.setText("Aluno");
 		this.alunoBtn.setName("Aluno");
-		this.alunoBtn.addActionListener(new ActionListener() {
+		this.alunoBtn.addActionListener(new ActionListener( ) {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -170,8 +170,8 @@ public class Main2 extends JFrame {
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReservaLayout
-										.createSequentialGroup()
-										.addContainerGap()
+										.createSequentialGroup( )
+										.addContainerGap( )
 										.addComponent(
 												this.professorBtn,
 												GroupLayout.PREFERRED_SIZE,
@@ -191,8 +191,8 @@ public class Main2 extends JFrame {
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								panelReservaLayout
-										.createSequentialGroup()
-										.addContainerGap()
+										.createSequentialGroup( )
+										.addContainerGap( )
 										.addGroup(
 												panelReservaLayout
 														.createParallelGroup(
@@ -212,13 +212,13 @@ public class Main2 extends JFrame {
 												Short.MAX_VALUE)));
 
 		GroupLayout layout = new GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
+				getContentPane( ));
+		getContentPane( ).setLayout(layout);
 		layout.setHorizontalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addComponent(this.panelReserva1,
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
@@ -231,7 +231,7 @@ public class Main2 extends JFrame {
 										Short.MAX_VALUE))
 				.addGroup(
 						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
+						layout.createSequentialGroup( )
 								.addGap(191, 191, 191)
 								.addComponent(this.fundoLbl,
 										GroupLayout.DEFAULT_SIZE,
@@ -241,8 +241,8 @@ public class Main2 extends JFrame {
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
 						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING,
@@ -264,7 +264,7 @@ public class Main2 extends JFrame {
 										GroupLayout.PREFERRED_SIZE)
 								.addContainerGap(168, Short.MAX_VALUE)));
 
-		pack();
+		pack( );
 	}
 
 	// This method performs an action once the room button is pressed.
@@ -308,31 +308,31 @@ public class Main2 extends JFrame {
 		 */
 		try {
 			for (UIManager.LookAndFeelInfo info : UIManager
-					.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
+					.getInstalledLookAndFeels( )) {
+				if ("Nimbus".equals(info.getName( ))) {
+					UIManager.setLookAndFeel(info.getClassName( ));
 					break;
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Main2.class.getName()).log(
+			Logger.getLogger(Main2.class.getName( )).log(
 					Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			Logger.getLogger(Main2.class.getName()).log(
+			Logger.getLogger(Main2.class.getName( )).log(
 					Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			Logger.getLogger(Main2.class.getName()).log(
+			Logger.getLogger(Main2.class.getName( )).log(
 					Level.SEVERE, null, ex);
 		} catch (UnsupportedLookAndFeelException ex) {
-			Logger.getLogger(Main2.class.getName()).log(
+			Logger.getLogger(Main2.class.getName( )).log(
 					Level.SEVERE, null, ex);
 		}
 		
-		EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable( ) {
 
 			public void run ( ) {
 
-				new Main2().setVisible(true);
+				new Main2( ).setVisible(true);
 			}
 		});
 	}

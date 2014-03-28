@@ -29,7 +29,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 		super(parent, modal);
 		this.index = index;
 		this.reserva = this.instanceProf.getReservasMes(mes).get(index);
-		resetComponents();
+		resetComponents( );
 	}
 
 	@Override
@@ -42,10 +42,10 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
