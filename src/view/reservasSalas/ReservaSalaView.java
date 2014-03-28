@@ -1,3 +1,9 @@
+/**
+ 	RoomReservationView
+ 	This mother-class provides the room reservation form.
+ 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
+ */
+
 package view.reservasSalas;
 
 import java.awt.Color;
@@ -67,7 +73,7 @@ public abstract class ReservaSalaView extends JDialog {
 	private JScrollPane jScrollPane2;
 	private ButtonGroup alunoProfbuttonGroup;
 
-	// Constructor generates a EquipmentReservationView form.
+	// Constructor generates a RoomReservationView form.
 	public ReservaSalaView (Frame parent, boolean modal) throws SQLException,
 			PatrimonioException, PatrimonioException,
 			ClienteException, ReservaException {
