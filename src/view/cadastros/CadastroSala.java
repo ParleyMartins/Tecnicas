@@ -1,7 +1,7 @@
 /**
- 	RegisterRoom
- 	This class allows the user to register a room.
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
+RegisterRoom
+This class allows the user to register a room.
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
 
 package view.cadastros;

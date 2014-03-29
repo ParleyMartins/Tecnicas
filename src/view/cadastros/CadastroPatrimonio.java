@@ -1,7 +1,7 @@
 /**
- 	RegisterProperty
- 	This mother-class is used to register a room or a equipment
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
+RegisterProperty
+This mother-class is used to register a room or a equipment
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
 package view.cadastros;
 
