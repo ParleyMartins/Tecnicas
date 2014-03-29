@@ -79,14 +79,13 @@ public abstract class ReservaSalaView extends JDialog {
 			ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.instanceProf = ManterResSalaProfessor.getInstance( );
-		this.instanceAluno = ManterResSalaAluno.getInstance( );
-		initComponents( );
+		this.instanceProf = ManterResSalaProfessor.getInstance();
+		this.instanceAluno = ManterResSalaAluno.getInstance();
+		initComponents();
 		this.buscarCpfButton.setName("BuscarCpfButton");
 
 	}
 
-	
 	abstract protected void verificarAction ( );
 
 	abstract protected void reservarAluno ( );
@@ -101,9 +100,9 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 
-			Vector <Aluno> alunos = ManterAluno.getInstance( ).buscarCpf(
-					this.cpfTextField.getText( ));
-			if (alunos.isEmpty( )) {
+			Vector <Aluno> alunos = ManterAluno.getInstance().buscarCpf(
+					this.cpfTextField.getText());
+			if (alunos.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Aluno nao Cadastrado."
 						+ " Digite o CPF correto ou cadastre o aluno desejado",
 						"Erro", JOptionPane.ERROR_MESSAGE, null);
@@ -111,16 +110,16 @@ public abstract class ReservaSalaView extends JDialog {
 				this.aluno = null;
 				return;
 			}
-			this.aluno = alunos.firstElement( );
-			this.alunoTextArea.setText(this.aluno.toString( ));
+			this.aluno = alunos.firstElement();
+			this.alunoTextArea.setText(this.aluno.toString());
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -128,9 +127,9 @@ public abstract class ReservaSalaView extends JDialog {
 	protected void getProfessor ( ) {
 
 		try {
-			Vector <Professor> professor = ManterProfessor.getInstance( )
-					.buscarCpf(this.cpfTextField.getText( ));
-			if (professor.isEmpty( )) {
+			Vector <Professor> professor = ManterProfessor.getInstance()
+					.buscarCpf(this.cpfTextField.getText());
+			if (professor.isEmpty()) {
 				JOptionPane
 						.showMessageDialog(
 								this,
@@ -141,16 +140,16 @@ public abstract class ReservaSalaView extends JDialog {
 				this.prof = null;
 				return;
 			}
-			this.prof = professor.firstElement( );
-			this.alunoTextArea.setText(professor.firstElement( ).toString( ));
+			this.prof = professor.firstElement();
+			this.alunoTextArea.setText(professor.firstElement().toString());
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -166,35 +165,35 @@ public abstract class ReservaSalaView extends JDialog {
 		return ERRO;
 	}
 
-	// This method  initialize the components
+	// This method initialize the components
 	private void initComponents ( ) {
 
-		this.alunoProfbuttonGroup = new ButtonGroup( );
-		this.salaLabel = new JLabel( );
-		this.alunoLabel = new JLabel( );
-		this.jPanel1 = new JPanel( );
-		this.professorRadioButton = new JRadioButton( );
-		this.alunoRadioButton = new JRadioButton( );
-		this.cpfLabel = new JLabel( );
-		this.cpfTextField = new JTextField( );
-		this.finalidadeTextLabel = new JLabel( );
-		this.finalidadeTextField = new JTextField( );
-		this.qntCadeirasLabel = new JLabel( );
-		this.qntCadeirasTxtField = new JTextField( );
-		this.qntCadeirasReservadasLbl = new JLabel( );
-		this.qntCadeirasReservadasTextField = new JTextField( );
-		this.dataLabel = new JLabel( );
-		this.horaLabel = new JLabel( );
-		this.horaTextField = new JTextField( );
-		this.reservarButton = new JButton( );
-		this.cancelarButton = new JButton( );
-		this.jScrollPane1 = new JScrollPane( );
-		alunoTextArea = new JTextArea( );
-		this.jScrollPane2 = new JScrollPane( );
-		this.salaTextArea = new JTextArea( );
-		this.dataTextField = new JTextField( );
-		this.buscarCpfButton = new JButton( );
-		this.verificarCadeiraButton = new JButton( );
+		this.alunoProfbuttonGroup = new ButtonGroup();
+		this.salaLabel = new JLabel();
+		this.alunoLabel = new JLabel();
+		this.jPanel1 = new JPanel();
+		this.professorRadioButton = new JRadioButton();
+		this.alunoRadioButton = new JRadioButton();
+		this.cpfLabel = new JLabel();
+		this.cpfTextField = new JTextField();
+		this.finalidadeTextLabel = new JLabel();
+		this.finalidadeTextField = new JTextField();
+		this.qntCadeirasLabel = new JLabel();
+		this.qntCadeirasTxtField = new JTextField();
+		this.qntCadeirasReservadasLbl = new JLabel();
+		this.qntCadeirasReservadasTextField = new JTextField();
+		this.dataLabel = new JLabel();
+		this.horaLabel = new JLabel();
+		this.horaTextField = new JTextField();
+		this.reservarButton = new JButton();
+		this.cancelarButton = new JButton();
+		this.jScrollPane1 = new JScrollPane();
+		alunoTextArea = new JTextArea();
+		this.jScrollPane2 = new JScrollPane();
+		this.salaTextArea = new JTextArea();
+		this.dataTextField = new JTextField();
+		this.buscarCpfButton = new JButton();
+		this.verificarCadeiraButton = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("ReservaPatrimonio");
@@ -210,7 +209,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.alunoProfbuttonGroup.add(this.professorRadioButton);
 		this.professorRadioButton.setText("Professor");
 		this.professorRadioButton.setName("this.professorRadioButton");
-		this.professorRadioButton.addActionListener(new ActionListener( ) {
+		this.professorRadioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -221,7 +220,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.alunoProfbuttonGroup.add(this.alunoRadioButton);
 		this.alunoRadioButton.setText("Aluno");
 		this.alunoRadioButton.setName("this.alunoRadioButton");
-		this.alunoRadioButton.addActionListener(new ActionListener( ) {
+		this.alunoRadioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -238,13 +237,14 @@ public abstract class ReservaSalaView extends JDialog {
 						.addGroup(
 								GroupLayout.Alignment.TRAILING,
 								jPanel1Layout
-										.createSequentialGroup( )
+										.createSequentialGroup()
 										.addGap(27, 27, 27)
 										.addComponent(this.alunoRadioButton)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED,
 												31, Short.MAX_VALUE)
-										.addComponent(this.professorRadioButton,
+										.addComponent(
+												this.professorRadioButton,
 												GroupLayout.PREFERRED_SIZE, 80,
 												GroupLayout.PREFERRED_SIZE)
 										.addGap(19, 19, 19))
@@ -255,8 +255,8 @@ public abstract class ReservaSalaView extends JDialog {
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanel1Layout
-										.createSequentialGroup( )
-										.addContainerGap( )
+										.createSequentialGroup()
+										.addContainerGap()
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
@@ -274,7 +274,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.cpfLabel.setName("CpfLabel");
 
 		this.cpfTextField.setName("CPF");
-		this.cpfTextField.addActionListener(new ActionListener( ) {
+		this.cpfTextField.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -294,10 +294,13 @@ public abstract class ReservaSalaView extends JDialog {
 		this.qntCadeirasTxtField.setBackground(new Color(200, 208, 254));
 		this.qntCadeirasTxtField.setName("Quantidade de Cadeiras Disponiveis");
 
-		this.qntCadeirasReservadasLbl.setText("Quantidade de Cadeiras Reservadas: ");
-		this.qntCadeirasReservadasLbl.setName("QuantidadeCadeirasReservadasLabel");
+		this.qntCadeirasReservadasLbl
+				.setText("Quantidade de Cadeiras Reservadas: ");
+		this.qntCadeirasReservadasLbl
+				.setName("QuantidadeCadeirasReservadasLabel");
 
-		this.qntCadeirasReservadasTextField.setBackground(new Color(200, 208, 254));
+		this.qntCadeirasReservadasTextField.setBackground(new Color(200, 208,
+				254));
 		this.qntCadeirasReservadasTextField
 				.setName("Quantidade de Cadeiras Reservadas");
 
@@ -310,7 +313,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		this.reservarButton.setText("Reservar");
 		this.reservarButton.setName("Reservar");
-		this.reservarButton.addActionListener(new ActionListener( ) {
+		this.reservarButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -320,7 +323,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		this.cancelarButton.setText("Cancelar");
 		this.cancelarButton.setName("Cancelar");
-		this.cancelarButton.addActionListener(new ActionListener( ) {
+		this.cancelarButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -347,7 +350,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.dataTextField.setName("DiaTextField");
 
 		this.buscarCpfButton.setText("Buscar CPF");
-		this.buscarCpfButton.addActionListener(new ActionListener( ) {
+		this.buscarCpfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -357,7 +360,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		this.verificarCadeiraButton.setText("Verificar Cadeiras Disponiveis");
 		this.verificarCadeiraButton.setName("VerificarCadeirasButton");
-		this.verificarCadeiraButton.addActionListener(new ActionListener( ) {
+		this.verificarCadeiraButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -365,18 +368,18 @@ public abstract class ReservaSalaView extends JDialog {
 			}
 		});
 
-		GroupLayout layout = new GroupLayout(getContentPane( ));
-		getContentPane( ).setLayout(layout);
+		GroupLayout layout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								layout.createSequentialGroup( )
-										.addContainerGap( )
+								layout.createSequentialGroup()
+										.addContainerGap()
 										.addGroup(
 												layout.createParallelGroup(
 														GroupLayout.Alignment.LEADING)
 														.addGroup(
-																layout.createSequentialGroup( )
+																layout.createSequentialGroup()
 																		.addGap(199,
 																				199,
 																				199)
@@ -397,12 +400,12 @@ public abstract class ReservaSalaView extends JDialog {
 																				GroupLayout.DEFAULT_SIZE,
 																				Short.MAX_VALUE))
 														.addGroup(
-																layout.createSequentialGroup( )
+																layout.createSequentialGroup()
 																		.addGroup(
 																				layout.createParallelGroup(
 																						GroupLayout.Alignment.LEADING)
 																						.addGroup(
-																								layout.createSequentialGroup( )
+																								layout.createSequentialGroup()
 																										.addComponent(
 																												this.qntCadeirasReservadasLbl)
 																										.addGap(41,
@@ -411,7 +414,7 @@ public abstract class ReservaSalaView extends JDialog {
 																										.addComponent(
 																												this.qntCadeirasReservadasTextField))
 																						.addGroup(
-																								layout.createSequentialGroup( )
+																								layout.createSequentialGroup()
 																										.addGroup(
 																												layout.createParallelGroup(
 																														GroupLayout.Alignment.LEADING)
@@ -439,7 +442,7 @@ public abstract class ReservaSalaView extends JDialog {
 																																GroupLayout.Alignment.TRAILING)))
 																						.addGroup(
 																								GroupLayout.Alignment.TRAILING,
-																								layout.createSequentialGroup( )
+																								layout.createSequentialGroup()
 																										.addComponent(
 																												this.qntCadeirasLabel,
 																												GroupLayout.PREFERRED_SIZE,
@@ -450,7 +453,7 @@ public abstract class ReservaSalaView extends JDialog {
 																										.addComponent(
 																												this.qntCadeirasTxtField))
 																						.addGroup(
-																								layout.createSequentialGroup( )
+																								layout.createSequentialGroup()
 																										.addGroup(
 																												layout.createParallelGroup(
 																														GroupLayout.Alignment.LEADING)
@@ -460,7 +463,7 @@ public abstract class ReservaSalaView extends JDialog {
 																																GroupLayout.DEFAULT_SIZE,
 																																GroupLayout.PREFERRED_SIZE)
 																														.addGroup(
-																																layout.createSequentialGroup( )
+																																layout.createSequentialGroup()
 																																		.addComponent(
 																																				this.cpfLabel)
 																																		.addPreferredGap(
@@ -478,7 +481,7 @@ public abstract class ReservaSalaView extends JDialog {
 																												0,
 																												Short.MAX_VALUE))
 																						.addGroup(
-																								layout.createSequentialGroup( )
+																								layout.createSequentialGroup()
 																										.addComponent(
 																												this.dataLabel)
 																										.addPreferredGap(
@@ -506,12 +509,12 @@ public abstract class ReservaSalaView extends JDialog {
 																												GroupLayout.DEFAULT_SIZE,
 																												185,
 																												Short.MAX_VALUE)))
-																		.addContainerGap( ))))
+																		.addContainerGap())))
 				);
 		layout.setVerticalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								layout.createSequentialGroup( )
+								layout.createSequentialGroup()
 										.addComponent(this.jPanel1,
 												GroupLayout.PREFERRED_SIZE, 34,
 												GroupLayout.PREFERRED_SIZE)
@@ -534,7 +537,7 @@ public abstract class ReservaSalaView extends JDialog {
 												layout.createParallelGroup(
 														GroupLayout.Alignment.LEADING)
 														.addGroup(
-																layout.createSequentialGroup( )
+																layout.createSequentialGroup()
 																		.addPreferredGap(
 																				LayoutStyle.ComponentPlacement.UNRELATED)
 																		.addComponent(
@@ -545,7 +548,7 @@ public abstract class ReservaSalaView extends JDialog {
 																		.addPreferredGap(
 																				LayoutStyle.ComponentPlacement.RELATED))
 														.addGroup(
-																layout.createSequentialGroup( )
+																layout.createSequentialGroup()
 																		.addGap(51,
 																				51,
 																				51)
@@ -573,7 +576,7 @@ public abstract class ReservaSalaView extends JDialog {
 														GroupLayout.Alignment.LEADING,
 														false)
 														.addGroup(
-																layout.createSequentialGroup( )
+																layout.createSequentialGroup()
 																		.addGap(21,
 																				21,
 																				21)
@@ -583,7 +586,7 @@ public abstract class ReservaSalaView extends JDialog {
 																				23,
 																				GroupLayout.PREFERRED_SIZE))
 														.addGroup(
-																layout.createSequentialGroup( )
+																layout.createSequentialGroup()
 																		.addGap(18,
 																				18,
 																				18)
@@ -601,7 +604,8 @@ public abstract class ReservaSalaView extends JDialog {
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
 																this.dataTextField)
-														.addComponent(this.horaLabel)
+														.addComponent(
+																this.horaLabel)
 														.addComponent(
 																this.horaTextField,
 																GroupLayout.PREFERRED_SIZE,
@@ -649,33 +653,33 @@ public abstract class ReservaSalaView extends JDialog {
 																GroupLayout.PREFERRED_SIZE,
 																37,
 																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap( ))
+										.addContainerGap())
 				);
 
-		pack( );
+		pack();
 	}
 
 	// This method generates an action to verify number of chairs available.
 	private void verificarCadeiraButtonActionPerformed (ActionEvent evt) {
 
-		verificarAction( );
+		verificarAction();
 	}
-	
+
 	// This method generates an action to cpfTextField.
 	private void cpfTextFieldActionPerformed (ActionEvent evt) {
 
-		String nome = this.cpfTextField.getText( );
-		if (nome.isEmpty( )) {
+		String nome = this.cpfTextField.getText();
+		if (nome.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			this.alunoTextArea.setText("");
 		} else {
-			switch (getManterInstance( )) {
+			switch (getManterInstance()) {
 				case ALUNO:
-					getAluno( );
+					getAluno();
 					break;
 				case PROF:
-					getProfessor( );
+					getProfessor();
 					break;
 				default:
 					JOptionPane.showMessageDialog(this,
@@ -688,25 +692,25 @@ public abstract class ReservaSalaView extends JDialog {
 	// This method generates an action to the student radio button.
 	private void alunoRadioButtonActionPerformed (ActionEvent evt) {
 
-		alunoRadioButtonAction( );
+		alunoRadioButtonAction();
 
 	}
 
 	// This method generates an action to the teacher radio button.
 	private void professorRadioButtonActionPerformed (ActionEvent evt) {
 
-		professorRadioButtonAction( );
+		professorRadioButtonAction();
 	}
 
 	// This method generates an action to reserve button.
 	private void reservarButtonActionPerformed (ActionEvent evt) {
 
-		switch (getManterInstance( )) {
+		switch (getManterInstance()) {
 			case ALUNO:
-				reservarAluno( );
+				reservarAluno();
 				break;
 			case PROF:
-				reservarProfessor( );
+				reservarProfessor();
 				break;
 			default:
 				JOptionPane.showMessageDialog(this,

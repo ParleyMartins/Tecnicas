@@ -32,7 +32,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
 		this.reservaAluno = instanceAluno.getReservasMes(data).get(index);
-		resetComponents( );
+		resetComponents();
 
 	}
 
@@ -42,8 +42,8 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 		try {
 			instanceAluno
-					.alterar(this.finalidadeTextField.getText( ),
-							this.qntCadeirasReservadasTextField.getText( ),
+					.alterar(this.finalidadeTextField.getText(),
+							this.qntCadeirasReservadasTextField.getText(),
 							reservaAluno);
 
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
@@ -51,19 +51,19 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 			this.setVisible(false);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -91,15 +91,15 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 		this.qntCadeirasReservadasTextField.setBackground(Color.white);
 		this.horaTextField.setBackground(new Color(200, 208, 254));
 		this.horaTextField.setEditable(false);
-		this.horaTextField.setText(reservaAluno.getHora( ));
-		this.alunoTextArea.setText(reservaAluno.getAluno( ).toString( ));
-		this.salaTextArea.setText(reservaAluno.getSala( ).toString( ));
-		this.dataTextField.setText(reservaAluno.getData( ));
+		this.horaTextField.setText(reservaAluno.getHora());
+		this.alunoTextArea.setText(reservaAluno.getAluno().toString());
+		this.salaTextArea.setText(reservaAluno.getSala().toString());
+		this.dataTextField.setText(reservaAluno.getData());
 		this.qntCadeirasTxtField
-				.setText(reservaAluno.getSala( ).getCapacidade( ));
+				.setText(reservaAluno.getSala().getCapacidade());
 		this.qntCadeirasReservadasTextField.setText(reservaAluno
-				.getCadeiras_reservadas( ));
-		this.finalidadeTextField.setText(reservaAluno.getFinalidade( ));
+				.getCadeiras_reservadas());
+		this.finalidadeTextField.setText(reservaAluno.getFinalidade());
 	}
 
 	@Override
@@ -107,25 +107,25 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 		try {
 			this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno
-					.cadeirasDisponveis(sala, this.dataTextField.getText( ),
-							this.horaTextField.getText( ))));
+					.cadeirasDisponveis(sala, this.dataTextField.getText(),
+							this.horaTextField.getText())));
 		} catch (ReservaException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 
@@ -138,7 +138,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 		this.reservarButton.setName("AlterarButton");
 		this.alunoRadioButton.setSelected(true);
 		this.cpfLabel.setEnabled(false);
-		alunoRadioButtonAction( );
+		alunoRadioButtonAction();
 	}
 
 }
