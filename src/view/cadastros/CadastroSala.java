@@ -1,42 +1,46 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+RegisterRoom
+This class allows the user to register a room.
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
+
 package view.cadastros;
 
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
-
 import control.ManterSala;
 import exception.PatrimonioException;
 
-/**
- * 
- * @author Parley
- */
 public class CadastroSala extends CadastroPatrimonio {
 
-    public CadastroSala(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        this.setName("CadastroSala");
-    }
+	// Constructor creates a RegisterRoom form.
+	public CadastroSala (java.awt.Frame parent, boolean modal) {
 
-    @Override protected void cadastroAction() {
-        try {
-            // JOptionPane.showMessageDialog(this, codigoTxtField.getText() +
-            // descricaoTextArea.getText() + capacidadeTxtField.getText(),
-            // "teste", JOptionPane.INFORMATION_MESSAGE, null);
-            ManterSala.getInstance().inserir(codigoTxtField.getText(), descricaoTextArea.getText(), capacidadeTxtField.getText());
+		super(parent, modal);
+		this.setName("CadastroSala");
+	}
 
-            JOptionPane.showMessageDialog(this, "Sala Cadastrada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
-            this.setVisible(false);
+	@Override
+	// This method registers a student.
+	protected void cadastroAction ( ) {
 
-        } catch (PatrimonioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getSQLState() + "\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE, null);
-        }
+		try {
+			ManterSala.getInstance().inserir(this.codigoTxtField.getText(),
+					this.descricaoTextArea.getText(),
+					this.capacidadeTxtField.getText());
 
-    }
+			JOptionPane.showMessageDialog(this, "Sala Cadastrada com sucesso",
+					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
+			this.setVisible(false);
+
+		} catch (PatrimonioException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this,
+					ex.getSQLState() + "\n" + ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+		}
+
+	}
 }

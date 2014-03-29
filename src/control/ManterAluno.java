@@ -1,3 +1,9 @@
+/**
+	ManterAluno
+	This class receives students' data and give them to persistence classes.
+	https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterAluno.java
+ */
+
 package control;
 
 import java.sql.SQLException;
@@ -8,67 +14,96 @@ import exception.ClienteException;
 import model.Aluno;
 
 public class ManterAluno {
-	
-	private Vector<Aluno> alunos_vet = new Vector<Aluno>();
-	
-	//Singlenton
-		private static ManterAluno instance;
-		private ManterAluno() {
+
+	private static ManterAluno instance;
+
+	private Vector <Aluno> alunos_vet = new Vector <Aluno>( );
+
+	private ManterAluno ( ) {
+
+		// Empty constructor.
 	}
-		public static ManterAluno getInstance() {
-		if(instance == null)
-			instance = new ManterAluno();
+
+	// This constructor provides the singleton implementation.
+	public static ManterAluno getInstance ( ) {
+
+		if (instance == null)
+			instance = new ManterAluno( );
 		return instance;
 	}
-	//
-	
-	public Vector<Aluno> buscarNome(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarNome(valor);
+
+	// This method looks for a student by name.
+	public Vector <Aluno> buscarNome (String valor) throws SQLException,
+			ClienteException {
+
+		return AlunoDAO.getInstance( ).searchNome(valor);
 	}
-	public Vector<Aluno> buscarCpf(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarCpf(valor);
+
+	// This method looks for a student by the cpf.
+	public Vector <Aluno> buscarCpf (String valor) throws SQLException,
+			ClienteException {
+
+		return AlunoDAO.getInstance( ).searchCpf(valor);
 	}
-	public Vector<Aluno> buscarMatricula(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarMatricula(valor);
+
+	// This method looks for a student by the enrollment number.
+	public Vector <Aluno> buscarMatricula (String valor) throws SQLException,
+			ClienteException {
+
+		return AlunoDAO.getInstance( ).searchMatricula(valor);
 	}
-	public Vector<Aluno> buscarEmail(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarEmail(valor);
+
+	// This method looks for a student by e-mail.
+	public Vector <Aluno> buscarEmail (String valor) throws SQLException,
+			ClienteException {
+
+		return AlunoDAO.getInstance( ).searchEmail(valor);
 	}
-	public Vector<Aluno> buscarTelefone(String valor) throws SQLException, ClienteException {
-		return AlunoDAO.getInstance().buscarTelefone(valor);
+
+	// This method looks for a student by phone number.
+	public Vector <Aluno> buscarTelefone (String valor) throws SQLException,
+			ClienteException {
+
+		return AlunoDAO.getInstance( ).searchTelefone(valor);
 	}
-		
-		
-	public Vector<Aluno> getAluno_vet() throws SQLException, ClienteException{
-		this.alunos_vet = AlunoDAO.getInstance().buscarTodos();
+
+	// This method gets a student vector.
+	public Vector <Aluno> getAluno_vet ( ) throws SQLException,
+			ClienteException {
+
+		this.alunos_vet = AlunoDAO.getInstance( ).searchAll( );
 		return this.alunos_vet;
 	}
-	
-	public void inserir(String nome, String cpf, String matricula,
-			String telefone, String email) throws ClienteException, SQLException {
+
+	// This method records a student on database.
+	public void inserir (String nome, String cpf, String matricula,
+			String telefone, String email) throws ClienteException,
+			SQLException {
+
 		Aluno aluno = new Aluno(nome, cpf, matricula, telefone, email);
-		AlunoDAO.getInstance().incluir(aluno);
+		AlunoDAO.getInstance( ).include(aluno);
 		this.alunos_vet.add(aluno);
 	}
 
-	public void alterar(String nome, String cpf, String matricula,
-			String telefone, String email, Aluno aluno) throws ClienteException, SQLException {
-		Aluno aluno_velho = new Aluno(
-								aluno.getNome(),
-								aluno.getCpf(),
-								aluno.getMatricula(),
-								aluno.getTelefone(),
-								aluno.getEmail());
+	// This method modifies a student field.
+	public void alterar (String nome, String cpf, String matricula,
+			String telefone, String email, Aluno aluno)
+			throws ClienteException, SQLException {
+
+		Aluno aluno_velho = new Aluno(aluno.getNome( ), aluno.getCpf( ),
+				aluno.getMatricula( ), aluno.getTelefone( ), aluno.getEmail( ));
 		aluno.setNome(nome);
 		aluno.setCpf(cpf);
 		aluno.setMatricula(matricula);
 		aluno.setTelefone(telefone);
 		aluno.setEmail(email);
-		AlunoDAO.getInstance().alterar(aluno_velho, aluno);
+		AlunoDAO.getInstance( ).change(aluno_velho, aluno);
 	}
 
-	public void excluir(Aluno aluno) throws SQLException, ClienteException {
-		AlunoDAO.getInstance().excluir(aluno);
+	// This method deletes the selected student.
+	public void excluir (Aluno aluno) throws SQLException, ClienteException {
+
+		AlunoDAO.getInstance( ).exclude(aluno);
 		this.alunos_vet.remove(aluno);
 	}
 

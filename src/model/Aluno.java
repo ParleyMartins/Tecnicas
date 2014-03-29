@@ -1,3 +1,9 @@
+/**
+Aluno
+Class sets exceptions of Aluno.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Aluno.java.
+*/
+
 package model;
 
 import exception.ClienteException;
