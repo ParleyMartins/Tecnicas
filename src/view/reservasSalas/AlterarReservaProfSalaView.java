@@ -1,7 +1,7 @@
 /**
-	RoomModifyTeacherReservationView
-	This class allows a teacher to modify a room reservation
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
+RoomModifyTeacherReservationView
+This class allows a teacher to modify a room reservation
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
  */
 package view.reservasSalas;
 

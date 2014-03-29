@@ -1,7 +1,7 @@
 /**
-	RoomReservationView
-	This class allows a user to make a room reservation
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
+RoomReservationView
+This class allows a user to make a room reservation
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
  */
 
 package view.reservasSalas;

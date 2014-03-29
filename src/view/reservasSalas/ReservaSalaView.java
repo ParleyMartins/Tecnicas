@@ -1,7 +1,7 @@
 /**
- 	RoomReservationView
- 	This mother-class provides the room reservation form.
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
+RoomReservationView
+This mother-class provides the room reservation form.
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasSalas
  */
 
 package view.reservasSalas;
