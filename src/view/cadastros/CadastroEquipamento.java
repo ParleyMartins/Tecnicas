@@ -24,10 +24,10 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 	protected void cadastroAction ( ) {
 
 		try {
-			ManterEquipamento.getInstance( ).inserir(
-					this.codigoTxtField.getText( ),
-					this.descricaoTextArea.getText( ));
-			
+			ManterEquipamento.getInstance().inserir(
+					this.codigoTxtField.getText(),
+					this.descricaoTextArea.getText());
+
 			JOptionPane.showMessageDialog(this,
 					"Equipamento Cadastrado com sucesso", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE,
@@ -35,13 +35,13 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 			this.setVisible(false);
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 

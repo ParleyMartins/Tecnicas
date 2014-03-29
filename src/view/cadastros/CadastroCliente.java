@@ -9,7 +9,6 @@ package view.cadastros;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
-
-
 
 public abstract class CadastroCliente extends JDialog {
 
@@ -39,7 +36,7 @@ public abstract class CadastroCliente extends JDialog {
 	public CadastroCliente (Frame parent, boolean modal) {
 
 		super(parent, modal);
-		initComponents( );
+		initComponents();
 	}
 
 	// This method is going to perform the register action in each child class.
@@ -48,18 +45,18 @@ public abstract class CadastroCliente extends JDialog {
 	// Method called from within the constructor to initialize components.
 	private void initComponents ( ) {
 
-		this.nomeLbl = new JLabel( );
-		this.matriculaLbl = new JLabel( );
-		this.cpfLbl = new JLabel( );
-		this.emailLbl = new JLabel( );
-		this.telefoneLbl = new JLabel( );
-		this.nomeTxtField = new JTextField( );
-		this.matriculaTxtField = new JTextField( );
-		this.cpfTxtField = new JTextField( );
-		this.emailTxtField = new JTextField( );
-		this.telefoneTxtField = new JTextField( );
-		this.cadastroBtn = new JButton( );
-		this.cancelBtn = new JButton( );
+		this.nomeLbl = new JLabel();
+		this.matriculaLbl = new JLabel();
+		this.cpfLbl = new JLabel();
+		this.emailLbl = new JLabel();
+		this.telefoneLbl = new JLabel();
+		this.nomeTxtField = new JTextField();
+		this.matriculaTxtField = new JTextField();
+		this.cpfTxtField = new JTextField();
+		this.emailTxtField = new JTextField();
+		this.telefoneTxtField = new JTextField();
+		this.cadastroBtn = new JButton();
+		this.cancelBtn = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Cadastro");
@@ -78,7 +75,7 @@ public abstract class CadastroCliente extends JDialog {
 		this.telefoneTxtField.setName("Telefone");
 		this.cadastroBtn.setText("Cadastrar");
 		this.cadastroBtn.setName("Cadastrar");
-		this.cadastroBtn.addActionListener(new ActionListener( ) {
+		this.cadastroBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -88,7 +85,7 @@ public abstract class CadastroCliente extends JDialog {
 
 		this.cancelBtn.setText("Cancelar");
 		this.cancelBtn.setName("Cancelar");
-		this.cancelBtn.addActionListener(new ActionListener( ) {
+		this.cancelBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -97,18 +94,18 @@ public abstract class CadastroCliente extends JDialog {
 		});
 
 		GroupLayout layout = new GroupLayout(
-				getContentPane( ));
-		getContentPane( ).setLayout(layout);
+				getContentPane());
+		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup( )
-								.addContainerGap( )
+						layout.createSequentialGroup()
+								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
 												.addGroup(
-														layout.createSequentialGroup( )
+														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
 																				GroupLayout.Alignment.TRAILING,
@@ -171,7 +168,7 @@ public abstract class CadastroCliente extends JDialog {
 																						Short.MAX_VALUE)))
 												.addGroup(
 														GroupLayout.Alignment.TRAILING,
-														layout.createSequentialGroup( )
+														layout.createSequentialGroup()
 																.addGap(0,
 																		0,
 																		Short.MAX_VALUE)
@@ -181,12 +178,12 @@ public abstract class CadastroCliente extends JDialog {
 																		LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		this.cancelBtn)))
-								.addContainerGap( )));
+								.addContainerGap()));
 		layout.setVerticalGroup(layout
 				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup( )
-								.addContainerGap( )
+						layout.createSequentialGroup()
+								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
@@ -271,13 +268,13 @@ public abstract class CadastroCliente extends JDialog {
 										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)));
 
-		pack( );
+		pack();
 	}
 
 	// Method used to call the abstract function in each child class.
 	private void cadastroBtnActionPerformed (ActionEvent evt) {
 
-		cadastroAction( );
+		cadastroAction();
 	}
 
 	// Method used to cancel a register.

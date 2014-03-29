@@ -25,20 +25,20 @@ public class CadastroSala extends CadastroPatrimonio {
 	protected void cadastroAction ( ) {
 
 		try {
-			ManterSala.getInstance( ).inserir(this.codigoTxtField.getText( ),
-					this.descricaoTextArea.getText( ),
-					this.capacidadeTxtField.getText( ));
+			ManterSala.getInstance().inserir(this.codigoTxtField.getText(),
+					this.descricaoTextArea.getText(),
+					this.capacidadeTxtField.getText());
 
 			JOptionPane.showMessageDialog(this, "Sala Cadastrada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this,
-					ex.getSQLState( ) + "\n" + ex.getMessage( ), "Erro",
+					ex.getSQLState() + "\n" + ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 
