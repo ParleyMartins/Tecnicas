@@ -25,22 +25,22 @@ public class AlterarProfessor extends CadastroCliente {
 		this.index2 = index;
 
 		try {
-			this.nomeTxtField.setText(ManterProfessor.getInstance( )
-					.getProfessores_vet( ).get(index).getNome( ));
-			this.emailTxtField.setText(ManterProfessor.getInstance( )
-					.getProfessores_vet( ).get(index).getEmail( ));
-			this.telefoneTxtField.setText(ManterProfessor.getInstance( )
-					.getProfessores_vet( ).get(index).getTelefone( ));
-			this.matriculaTxtField.setText(ManterProfessor.getInstance( )
-					.getProfessores_vet( ).get(index).getMatricula( ));
-			this.cpfTxtField.setText(ManterProfessor.getInstance( )
-					.getProfessores_vet( ).get(index).getCpf( ));
+			this.nomeTxtField.setText(ManterProfessor.getInstance()
+					.getProfessores_vet().get(index).getNome());
+			this.emailTxtField.setText(ManterProfessor.getInstance()
+					.getProfessores_vet().get(index).getEmail());
+			this.telefoneTxtField.setText(ManterProfessor.getInstance()
+					.getProfessores_vet().get(index).getTelefone());
+			this.matriculaTxtField.setText(ManterProfessor.getInstance()
+					.getProfessores_vet().get(index).getMatricula());
+			this.cpfTxtField.setText(ManterProfessor.getInstance()
+					.getProfessores_vet().get(index).getCpf());
 
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -50,13 +50,13 @@ public class AlterarProfessor extends CadastroCliente {
 	public void cadastroAction ( ) {
 
 		try {
-			ManterProfessor.getInstance( ).alterar(
-					this.nomeTxtField.getText( ),
-					this.cpfTxtField.getText( ),
-					this.matriculaTxtField.getText( ),
-					this.telefoneTxtField.getText( ),
-					this.emailTxtField.getText( ),
-					ManterProfessor.getInstance( ).getProfessores_vet( )
+			ManterProfessor.getInstance().alterar(
+					this.nomeTxtField.getText(),
+					this.cpfTxtField.getText(),
+					this.matriculaTxtField.getText(),
+					this.telefoneTxtField.getText(),
+					this.emailTxtField.getText(),
+					ManterProfessor.getInstance().getProfessores_vet()
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this,
@@ -64,10 +64,10 @@ public class AlterarProfessor extends CadastroCliente {
 					JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

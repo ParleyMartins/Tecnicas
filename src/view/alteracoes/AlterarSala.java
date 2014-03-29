@@ -27,22 +27,22 @@ public class AlterarSala extends CadastroPatrimonio {
 
 		try {
 
-			this.codigoTxtField.setText(ManterSala.getInstance( ).getSalas_vet( )
-					.get(index).getCodigo( ));
-			this.capacidadeTxtField.setText(ManterSala.getInstance( )
-					.getSalas_vet( ).get(index).getCapacidade( ));
-			this.descricaoTextArea.setText(ManterSala.getInstance( )
-					.getSalas_vet( ).get(index).getDescricao( ));
+			this.codigoTxtField.setText(ManterSala.getInstance().getSalas_vet()
+					.get(index).getCodigo());
+			this.capacidadeTxtField.setText(ManterSala.getInstance()
+					.getSalas_vet().get(index).getCapacidade());
+			this.descricaoTextArea.setText(ManterSala.getInstance()
+					.getSalas_vet().get(index).getDescricao());
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 
@@ -53,20 +53,20 @@ public class AlterarSala extends CadastroPatrimonio {
 
 		try {
 
-			ManterSala.getInstance( ).alterar(this.codigoTxtField.getText( ),
-					this.descricaoTextArea.getText( ),
-					this.capacidadeTxtField.getText( ),
-					ManterSala.getInstance( ).getSalas_vet( ).get(this.index2));
+			ManterSala.getInstance().alterar(this.codigoTxtField.getText(),
+					this.descricaoTextArea.getText(),
+					this.capacidadeTxtField.getText(),
+					ManterSala.getInstance().getSalas_vet().get(this.index2));
 
 			JOptionPane.showMessageDialog(this, "Sala Alterada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
