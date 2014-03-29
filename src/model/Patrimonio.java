@@ -1,7 +1,7 @@
 /**
- * Patrimonio. Class sets exceptions of Patrimonio.
- * https://github.com/ParleyMartins
- * /Tecnicas/tree/master/src/model/Patrimonio.java.
+Patrimonio. 
+Class sets exceptions of Patrimonio.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
  */
 
 package model;

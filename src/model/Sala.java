@@ -1,6 +1,7 @@
 /**
- * Sala. Class sets exceptions of Sala.
- * https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Sala.java.
+Sala. 
+Class sets exceptions of Sala.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Sala.java.
  */
 
 package model;

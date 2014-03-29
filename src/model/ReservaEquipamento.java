@@ -1,7 +1,7 @@
 /**
- * ReservaEquipamento. Class sets exceptions of ReservaEquipamento.
- * https://github
- * .com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamento.java.
+ReservaEquipamento. 
+Class sets exceptions of ReservaEquipamento.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamento.java.
  */
 
 package model;
