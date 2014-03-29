@@ -1,7 +1,7 @@
 /**
- 	Main2
- 	This class is the main user interface
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/Main2.java
+Main2
+This class is the main user interface
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/Main2.java
  */
 
 package view;
@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -23,7 +22,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-
 import view.mainViews.AlunoView;
 import view.mainViews.ClienteView;
 import view.mainViews.EquipamentoView;
@@ -47,6 +45,45 @@ public class Main2 extends JFrame {
 		initComponents( );
 	}
 
+
+	// Function main.
+	public static void main (String args[]) {
+
+		/*
+		Set the Nimbus look and feel. If it's not available, stay with the
+		default look and feel. For details see
+		*/
+		try {
+			for (UIManager.LookAndFeelInfo info : UIManager
+					.getInstalledLookAndFeels( )) {
+				if ("Nimbus".equals(info.getName( ))) {
+					UIManager.setLookAndFeel(info.getClassName( ));
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Main2.class.getName( )).log(
+					Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			Logger.getLogger(Main2.class.getName( )).log(
+					Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			Logger.getLogger(Main2.class.getName( )).log(
+					Level.SEVERE, null, ex);
+		} catch (UnsupportedLookAndFeelException ex) {
+			Logger.getLogger(Main2.class.getName( )).log(
+					Level.SEVERE, null, ex);
+		}
+		
+		EventQueue.invokeLater(new Runnable( ) {
+
+			public void run ( ) {
+
+				new Main2( ).setVisible(true);
+			}
+		});
+	}
+	
 	// This method initializes the Components.
 	private void initComponents ( ) {
 
@@ -299,41 +336,4 @@ public class Main2 extends JFrame {
 		client.setVisible(true);
 	}
 
-	// Function main.
-	public static void main (String args[]) {
-
-		 /**
-			Set the Nimbus look and feel. If it's not available, stay with the
-			default look and feel. For details see
-		 */
-		try {
-			for (UIManager.LookAndFeelInfo info : UIManager
-					.getInstalledLookAndFeels( )) {
-				if ("Nimbus".equals(info.getName( ))) {
-					UIManager.setLookAndFeel(info.getClassName( ));
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Main2.class.getName( )).log(
-					Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			Logger.getLogger(Main2.class.getName( )).log(
-					Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			Logger.getLogger(Main2.class.getName( )).log(
-					Level.SEVERE, null, ex);
-		} catch (UnsupportedLookAndFeelException ex) {
-			Logger.getLogger(Main2.class.getName( )).log(
-					Level.SEVERE, null, ex);
-		}
-		
-		EventQueue.invokeLater(new Runnable( ) {
-
-			public void run ( ) {
-
-				new Main2( ).setVisible(true);
-			}
-		});
-	}
 }
