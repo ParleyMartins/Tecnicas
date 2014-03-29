@@ -1,7 +1,7 @@
 /**
- 	RegisterStudent 
- 	This class allows the user to register a student
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
+RegisterStudent 
+This class allows the user to register a student
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
 package view.cadastros;
 

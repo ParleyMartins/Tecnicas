@@ -1,7 +1,7 @@
 /**
-	RegisterEquipment
-	This class allows the user to register a equipment
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
+RegisterEquipment
+This class allows the user to register a equipment
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
 package view.cadastros;
 

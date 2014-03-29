@@ -1,7 +1,7 @@
 /**
- 	RegisterClient
- 	This mother-class is used to register a teacher or student
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
+RegisterClient
+This mother-class is used to register a teacher or student
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
 
 package view.cadastros;
