@@ -9,9 +9,7 @@ package view.reservasEquipamentos;
 import java.awt.Color;
 import java.awt.Frame;
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
-
 import model.Equipamento;
 import model.ReservaEquipamentoProfessor;
 import exception.ClienteException;
@@ -20,7 +18,7 @@ import exception.ReservaException;
 
 public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
-	//int index;
+	// int index;
 	ReservaEquipamentoProfessor reserva;
 	Equipamento equipamento;
 
@@ -30,25 +28,26 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 		super(parent, modal);
 		this.equipamento = eq;
-		//this.index = index;
+		// this.index = index;
 		this.reserva = this.instanceProf.getReservasMes(mes).get(index);
-		resetComponents( );
+		resetComponents();
 	}
 
 	@Override
 	protected void reservarProfessor ( ) {
 
 		try {
-			this.instanceProf.alterar(this.reserva, this.dataTextField.getText( ), this.horaTextField.getText( ),
+			this.instanceProf.alterar(this.reserva,
+					this.dataTextField.getText(), this.horaTextField.getText(),
 					this.equipamento, this.reserva.getProfessor());
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -60,11 +59,12 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 		this.cpfLabel.setEnabled(false);
 		this.cpfTextField.setBackground(new Color(200, 208, 254));
 		this.cpfTextField.setEditable(false);
-		this.cpfTextField.setText(this.reserva.getProfessor().getCpf());;
-		this.horaTextField.setText(this.reserva.getHora( ));
-		this.dataTextField.setText(this.reserva.getData( ));
-		this.professorTextArea.setText(this.reserva.getProfessor( ).toString( ));
-		this.equipamentoTextArea.setText(this.reserva.getEquipamento().toString());
+		this.cpfTextField.setText(this.reserva.getProfessor().getCpf());
+		this.horaTextField.setText(this.reserva.getHora());
+		this.dataTextField.setText(this.reserva.getData());
+		this.professorTextArea.setText(this.reserva.getProfessor().toString());
+		this.equipamentoTextArea.setText(this.reserva.getEquipamento()
+				.toString());
 	}
 
 }
