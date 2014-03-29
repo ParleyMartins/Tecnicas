@@ -1,8 +1,9 @@
 /**
-  ClienteException
-  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src
-  /exception/ClienteException.java
- */
+ClienteException
+Exception type to Cliente's errors
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/exception/ClienteException.java
+*/
+
 package exception;
 
 @SuppressWarnings ("serial")
