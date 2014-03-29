@@ -23,7 +23,7 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 			throws SQLException, PatrimonioException {
 
 		super(parent, modal);
-		this.sala = ManterSala.getInstance( ).getSalas_vet( ).get(indexSala);
+		this.sala = ManterSala.getInstance().getSalas_vet().get(indexSala);
 		this.setName("DiaReservaSala");
 	}
 
@@ -31,7 +31,7 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 	// Generates the visualize action to the selected day.
 	protected void visualizarAction (String data) {
 
-		HorariosReservaSala reserva = new HorariosReservaSala(new JFrame( ),
+		HorariosReservaSala reserva = new HorariosReservaSala(new JFrame(),
 				true, data, this.sala);
 		reserva.setVisible(true);
 		reserva.setResizable(false);
