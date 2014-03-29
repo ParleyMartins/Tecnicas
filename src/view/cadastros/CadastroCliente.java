@@ -6,26 +6,40 @@
 
 package view.cadastros;
 
-public abstract class CadastroCliente extends javax.swing.JDialog {
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-	protected javax.swing.JButton cadastroBtn;
-	protected javax.swing.JTextField telefoneTxtField;
-	protected javax.swing.JTextField nomeTxtField;
-	protected javax.swing.JTextField matriculaTxtField;
-	protected javax.swing.JTextField emailTxtField;
-	protected javax.swing.JTextField cpfTxtField;
-	private javax.swing.JLabel emailLbl;
-	private javax.swing.JLabel matriculaLbl;
-	private javax.swing.JLabel nomeLbl;
-	private javax.swing.JLabel telefoneLbl;
-	private javax.swing.JButton cancelBtn;
-	private javax.swing.JLabel cpfLbl;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
+
+
+
+public abstract class CadastroCliente extends JDialog {
+
+	protected JButton cadastroBtn;
+	protected JTextField telefoneTxtField;
+	protected JTextField nomeTxtField;
+	protected JTextField matriculaTxtField;
+	protected JTextField emailTxtField;
+	protected JTextField cpfTxtField;
+	private JLabel emailLbl;
+	private JLabel matriculaLbl;
+	private JLabel nomeLbl;
+	private JLabel telefoneLbl;
+	private JButton cancelBtn;
+	private JLabel cpfLbl;
 
 	// Constructor generates a RegisterClient form.
-	public CadastroCliente (java.awt.Frame parent, boolean modal) {
+	public CadastroCliente (Frame parent, boolean modal) {
 
 		super(parent, modal);
-		initComponents();
+		initComponents( );
 	}
 
 	// This method is going to perform the register action in each child class.
@@ -34,20 +48,20 @@ public abstract class CadastroCliente extends javax.swing.JDialog {
 	// Method called from within the constructor to initialize components.
 	private void initComponents ( ) {
 
-		this.nomeLbl = new javax.swing.JLabel();
-		this.matriculaLbl = new javax.swing.JLabel();
-		this.cpfLbl = new javax.swing.JLabel();
-		this.emailLbl = new javax.swing.JLabel();
-		this.telefoneLbl = new javax.swing.JLabel();
-		this.nomeTxtField = new javax.swing.JTextField();
-		this.matriculaTxtField = new javax.swing.JTextField();
-		this.cpfTxtField = new javax.swing.JTextField();
-		this.emailTxtField = new javax.swing.JTextField();
-		this.telefoneTxtField = new javax.swing.JTextField();
-		this.cadastroBtn = new javax.swing.JButton();
-		this.cancelBtn = new javax.swing.JButton();
+		this.nomeLbl = new JLabel( );
+		this.matriculaLbl = new JLabel( );
+		this.cpfLbl = new JLabel( );
+		this.emailLbl = new JLabel( );
+		this.telefoneLbl = new JLabel( );
+		this.nomeTxtField = new JTextField( );
+		this.matriculaTxtField = new JTextField( );
+		this.cpfTxtField = new JTextField( );
+		this.emailTxtField = new JTextField( );
+		this.telefoneTxtField = new JTextField( );
+		this.cadastroBtn = new JButton( );
+		this.cancelBtn = new JButton( );
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Cadastro");
 		setResizable(false);
 
@@ -58,15 +72,15 @@ public abstract class CadastroCliente extends javax.swing.JDialog {
 		this.telefoneLbl.setText("Telefone: ");
 		this.nomeTxtField.setName("Nome");
 		this.matriculaTxtField.setName("Matricula");
-		this.matriculaTxtField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+		this.matriculaTxtField.setHorizontalAlignment(JTextField.LEFT);
 		this.cpfTxtField.setName("CPF");
 		this.emailTxtField.setName("E-mail");
 		this.telefoneTxtField.setName("Telefone");
 		this.cadastroBtn.setText("Cadastrar");
 		this.cadastroBtn.setName("Cadastrar");
-		this.cadastroBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.cadastroBtn.addActionListener(new ActionListener( ) {
 
-			public void actionPerformed (java.awt.event.ActionEvent evt) {
+			public void actionPerformed (ActionEvent evt) {
 
 				cadastroBtnActionPerformed(evt);
 			}
@@ -74,200 +88,200 @@ public abstract class CadastroCliente extends javax.swing.JDialog {
 
 		this.cancelBtn.setText("Cancelar");
 		this.cancelBtn.setName("Cancelar");
-		this.cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+		this.cancelBtn.addActionListener(new ActionListener( ) {
 
-			public void actionPerformed (java.awt.event.ActionEvent evt) {
+			public void actionPerformed (ActionEvent evt) {
 
 				cancelBtnActionPerformed(evt);
 			}
 		});
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
+		GroupLayout layout = new GroupLayout(
+				getContentPane( ));
+		getContentPane( ).setLayout(layout);
 		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												GroupLayout.Alignment.LEADING)
 												.addGroup(
-														layout.createSequentialGroup()
+														layout.createSequentialGroup( )
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING,
+																				GroupLayout.Alignment.TRAILING,
 																				false)
 																				.addComponent(
 																						this.telefoneLbl,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.emailLbl,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.cpfLbl,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.matriculaLbl,
-																						javax.swing.GroupLayout.Alignment.LEADING,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.Alignment.LEADING,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.nomeLbl,
-																						javax.swing.GroupLayout.Alignment.LEADING,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.Alignment.LEADING,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE))
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		LayoutStyle.ComponentPlacement.RELATED)
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				GroupLayout.Alignment.LEADING)
 																				.addComponent(
 																						this.nomeTxtField)
 																				.addComponent(
 																						this.matriculaTxtField,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						453,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.cpfTxtField,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.Alignment.TRAILING,
+																						GroupLayout.DEFAULT_SIZE,
 																						453,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.emailTxtField,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						453,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						this.telefoneTxtField,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.Alignment.TRAILING,
+																						GroupLayout.DEFAULT_SIZE,
 																						453,
 																						Short.MAX_VALUE)))
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														layout.createSequentialGroup()
+														GroupLayout.Alignment.TRAILING,
+														layout.createSequentialGroup( )
 																.addGap(0,
 																		0,
 																		Short.MAX_VALUE)
 																.addComponent(
 																		this.cadastroBtn)
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		this.cancelBtn)))
-								.addContainerGap()));
+								.addContainerGap( )));
 		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
+						layout.createSequentialGroup( )
+								.addContainerGap( )
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(
 														this.nomeLbl,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														21,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														this.nomeTxtField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(
 														this.matriculaLbl,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														19,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														this.matriculaTxtField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(
 														this.cpfLbl,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														22,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														this.cpfTxtField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(
 														this.emailLbl,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														23,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														this.emailTxtField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(
 														this.telefoneLbl,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														23,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														this.telefoneTxtField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(this.cadastroBtn)
 												.addComponent(this.cancelBtn))
 								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)));
 
-		pack();
+		pack( );
 	}
 
 	// Method used to call the abstract function in each child class.
-	private void cadastroBtnActionPerformed (java.awt.event.ActionEvent evt) {
+	private void cadastroBtnActionPerformed (ActionEvent evt) {
 
-		cadastroAction();
+		cadastroAction( );
 	}
 
 	// Method used to cancel a register.
-	private void cancelBtnActionPerformed (java.awt.event.ActionEvent evt) {
+	private void cancelBtnActionPerformed (ActionEvent evt) {
 
 		this.setVisible(false);
 	}

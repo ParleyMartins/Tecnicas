@@ -1,251 +1,359 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+	ClientView
+	This mother-class is used to show rooms and equipments from database
+	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
  */
+
 package view.mainViews;
 
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * 
- * @author Parley
- */
 public abstract class PatrimonioView extends JDialog {
 
-    /**
-     * Creates new form ClienteView
-     */
-    public PatrimonioView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
+	protected JButton alterar;
+	protected JButton cadastrar;
+	protected JButton excluir;
+	protected JScrollPane jScrollPane1;
+	protected JPanel panelBotoes;
+	protected JPanel panelLista;
+	protected JLabel pesquisarLbl;
+	protected JTextField pesquisarTextField;
+	protected JTable tabelaPatrimonio;
+	protected JButton visualizarBtn;
+	
+	// Constructor creates a PropertyView form.
+	public PatrimonioView (Frame parent, boolean modal) {
 
-    protected abstract DefaultTableModel fillTable();
+		super(parent, modal);
+		initComponents( );
+	}
 
-    protected abstract void visualizarAction(int index);
+	// This method fills a table with the properties on database.
+	protected abstract DefaultTableModel fillTable ( );
 
-    protected abstract void cadastrarAction();
+	// This method generates the action to search a property.
+	protected void pesquisarTextFieldActionPerformed (ActionEvent evt) {
 
-    protected abstract void alterarAction(int index);
+		String nome = this.pesquisarTextField.getText( );
+		if (nome.isEmpty( )) {
+			JOptionPane.showMessageDialog(this, "Nenhum texto digitado",
+					"Erro", JOptionPane.ERROR_MESSAGE, null);
+		} else {
+			JOptionPane.showMessageDialog(this, "Funciona", "Teste",
+					JOptionPane.WARNING_MESSAGE, null);
+		}
+	}
 
-    protected abstract void excluirAction(int index);
+	// Method generates a property visualize form.
+	protected abstract void visualizarAction (int index);
 
-    private void initComponents() {
+	// Method generates a property register form.
+	protected abstract void cadastrarAction ( );
 
-        panelBotoes = new javax.swing.JPanel();
-        cadastrar = new javax.swing.JButton();
-        alterar = new javax.swing.JButton();
-        excluir = new javax.swing.JButton();
-        visualizarBtn = new javax.swing.JButton();
-        panelLista = new javax.swing.JPanel();
-        pesquisarLbl = new javax.swing.JLabel();
-        pesquisarTextField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPatrimonio = new javax.swing.JTable();
+	// Method generates a property modify form.
+	protected abstract void alterarAction (int index);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Salas");
+	// Method deletes a property.
+	protected abstract void excluirAction (int index);
 
-        panelBotoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+	// This method initializes the components.
+	private void initComponents ( ) {
 
-        cadastrar.setText("Cadastrar");
-        cadastrar.setName("Cadastrar");
-        cadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarActionPerformed(evt);
-            }
-        });
+		panelBotoes = new JPanel( );
+		cadastrar = new JButton( );
+		alterar = new JButton( );
+		excluir = new JButton( );
+		visualizarBtn = new JButton( );
+		panelLista = new JPanel( );
+		pesquisarLbl = new JLabel( );
+		pesquisarTextField = new JTextField( );
+		jScrollPane1 = new JScrollPane( );
+		tabelaPatrimonio = new JTable( );
 
-        alterar.setText("Alterar");
-        alterar.setName("Alterar");
-        alterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alterarActionPerformed(evt);
-            }
-        });
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setTitle("Salas");
 
-        excluir.setText("Excluir");
-        excluir.setName("Excluir");
-        excluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excluirActionPerformed(evt);
-            }
-        });
+		panelBotoes.setBorder(BorderFactory
+				.createLineBorder(new Color(0, 0, 0)));
 
-        visualizarBtn.setText("Visualizar Horarios");
-        visualizarBtn.setName("Visualizar Horarios");
-        visualizarBtn.setEnabled(true);
-        visualizarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                visualizarActionPerformed(evt);
-            }
-        });
+		cadastrar.setText("Cadastrar");
+		cadastrar.setName("Cadastrar");
+		cadastrar.addActionListener(new ActionListener( ) {
 
-        javax.swing.GroupLayout panelBotoesLayout = new javax.swing.GroupLayout(panelBotoes);
-        panelBotoes.setLayout(panelBotoesLayout);
-        panelBotoesLayout.setHorizontalGroup(panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(
-                        javax.swing.GroupLayout.Alignment.TRAILING,
-                        panelBotoesLayout
-                                .createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(
-                                        panelBotoesLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(visualizarBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(excluir, javax.swing.GroupLayout.Alignment.LEADING,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        Short.MAX_VALUE)
-                                                .addComponent(alterar, javax.swing.GroupLayout.Alignment.LEADING,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        Short.MAX_VALUE)
-                                                .addComponent(cadastrar, javax.swing.GroupLayout.Alignment.LEADING,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-                                .addContainerGap()));
-        panelBotoesLayout.setVerticalGroup(panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(
-                        panelBotoesLayout
-                                .createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 82,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(visualizarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(31, Short.MAX_VALUE)));
+			public void actionPerformed (ActionEvent evt) {
 
-        pesquisarTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisarTextFieldActionPerformed(evt);
-            }
-        });
+				cadastrarActionPerformed(evt);
+			}
+		});
 
-        javax.swing.GroupLayout panelListaLayout = new javax.swing.GroupLayout(panelLista);
-        panelLista.setLayout(panelListaLayout);
-        panelListaLayout.setHorizontalGroup(panelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(
-                        panelListaLayout
-                                .createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(pesquisarLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 304,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addContainerGap()));
-        panelListaLayout.setVerticalGroup(panelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                panelListaLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(
-                                panelListaLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(pesquisarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(pesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		alterar.setText("Alterar");
+		alterar.setName("Alterar");
+		alterar.addActionListener(new ActionListener( ) {
 
-        tabelaPatrimonio.setModel(fillTable());
-        tabelaPatrimonio.setName("tabelaPatrimonio");
-        tabelaPatrimonio.setRowSelectionAllowed(true);
-        // tabelaPatrimonio.setSelectionMode();
+			public void actionPerformed (ActionEvent evt) {
 
-        jScrollPane1.setViewportView(tabelaPatrimonio);
+				alterarActionPerformed(evt);
+			}
+		});
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(panelLista, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(
-                                                layout.createSequentialGroup()
-                                                        .addComponent(panelLista, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		excluir.setText("Excluir");
+		excluir.setName("Excluir");
+		excluir.addActionListener(new ActionListener( ) {
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+			public void actionPerformed (ActionEvent evt) {
 
-    private void visualizarActionPerformed(java.awt.event.ActionEvent evt) {
-        int index = this.tabelaPatrimonio.getSelectedRow();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro", JOptionPane.ERROR_MESSAGE, null);
-            return;
-        }
-        visualizarAction(index);
-    }
+				excluirActionPerformed(evt);
+			}
+		});
 
-    protected void pesquisarTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_pesquisarTextFieldActionPerformed
-        String nome = this.pesquisarTextField.getText();
-        if (nome.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhum texto digitado", "Erro", JOptionPane.ERROR_MESSAGE, null);
-        } else {
-            JOptionPane.showMessageDialog(this, "Funciona", "Teste", JOptionPane.WARNING_MESSAGE, null);
-        }
-    }
+		visualizarBtn.setText("Visualizar Horarios");
+		visualizarBtn.setName("Visualizar Horarios");
+		visualizarBtn.setEnabled(true);
+		visualizarBtn.addActionListener(new ActionListener( ) {
 
-    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cadastrarActionPerformed
+			public void actionPerformed (ActionEvent evt) {
 
-        cadastrarAction();
-    }
+				visualizarActionPerformed(evt);
+			}
+		});
 
-    private void alterarActionPerformed(java.awt.event.ActionEvent evt) {
-        int index = this.tabelaPatrimonio.getSelectedRow();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro", JOptionPane.ERROR_MESSAGE, null);
-            return;
-        }
+		GroupLayout panelBotoesLayout = new GroupLayout(panelBotoes);
+		panelBotoes.setLayout(panelBotoesLayout);
+		panelBotoesLayout
+				.setHorizontalGroup(panelBotoesLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								GroupLayout.Alignment.TRAILING,
+								panelBotoesLayout
+										.createSequentialGroup( )
+										.addContainerGap( )
+										.addGroup(
+												panelBotoesLayout
+														.createParallelGroup(
+																GroupLayout.Alignment.TRAILING)
+														.addComponent(
+																visualizarBtn,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																excluir,
+																GroupLayout.Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																alterar,
+																GroupLayout.Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																cadastrar,
+																GroupLayout.Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																135,
+																Short.MAX_VALUE))
+										.addContainerGap( )));
+		panelBotoesLayout
+				.setVerticalGroup(panelBotoesLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								panelBotoesLayout
+										.createSequentialGroup( )
+										.addGap(30, 30, 30)
+										.addComponent(cadastrar,
+												GroupLayout.PREFERRED_SIZE, 80,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.UNRELATED)
+										.addComponent(alterar,
+												GroupLayout.PREFERRED_SIZE, 82,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(excluir,
+												GroupLayout.PREFERRED_SIZE, 80,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(visualizarBtn,
+												GroupLayout.PREFERRED_SIZE, 81,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(31, Short.MAX_VALUE)));
 
-        alterarAction(index);
-    }
+		pesquisarTextField.addActionListener(new ActionListener( ) {
 
-    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_excluirActionPerformed
+			public void actionPerformed (ActionEvent evt) {
 
-        int index = this.tabelaPatrimonio.getSelectedRow();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro", JOptionPane.ERROR_MESSAGE, null);
-            return;
-        }
+				pesquisarTextFieldActionPerformed(evt);
+			}
+		});
 
-        excluirAction(index);
+		GroupLayout panelListaLayout = new GroupLayout(panelLista);
+		panelLista.setLayout(panelListaLayout);
+		panelListaLayout
+				.setHorizontalGroup(panelListaLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								panelListaLayout
+										.createSequentialGroup( )
+										.addContainerGap( )
+										.addComponent(pesquisarLbl)
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.UNRELATED)
+										.addComponent(pesquisarTextField,
+												GroupLayout.PREFERRED_SIZE,
+												304,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addContainerGap( )));
+		panelListaLayout.setVerticalGroup(panelListaLayout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGroup(
+				panelListaLayout
+						.createSequentialGroup( )
+						.addContainerGap( )
+						.addGroup(
+								panelListaLayout
+										.createParallelGroup(
+												GroupLayout.Alignment.BASELINE)
+										.addComponent(pesquisarLbl,
+												GroupLayout.PREFERRED_SIZE, 28,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(pesquisarTextField,
+												GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)));
 
-    }// GEN-LAST:event_excluirActionPerformed
+		tabelaPatrimonio.setModel(fillTable( ));
+		tabelaPatrimonio.setName("tabelaPatrimonio");
+		tabelaPatrimonio.setRowSelectionAllowed(true);
 
-    protected javax.swing.JButton alterar;
-    protected javax.swing.JButton cadastrar;
-    protected javax.swing.JButton excluir;
-    protected javax.swing.JScrollPane jScrollPane1;
-    protected javax.swing.JPanel panelBotoes;
-    protected javax.swing.JPanel panelLista;
-    protected javax.swing.JLabel pesquisarLbl;
-    protected javax.swing.JTextField pesquisarTextField;
-    protected javax.swing.JTable tabelaPatrimonio;
-    protected javax.swing.JButton visualizarBtn;
+		jScrollPane1.setViewportView(tabelaPatrimonio);
+
+		GroupLayout layout = new GroupLayout(getContentPane( ));
+		getContentPane( ).setLayout(layout);
+		layout.setHorizontalGroup(layout
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(
+						GroupLayout.Alignment.TRAILING,
+						layout.createSequentialGroup( )
+								.addContainerGap( )
+								.addGroup(
+										layout.createParallelGroup(
+												GroupLayout.Alignment.LEADING)
+												.addComponent(
+														panelLista,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
+												.addComponent(
+														jScrollPane1,
+														GroupLayout.DEFAULT_SIZE,
+														460, Short.MAX_VALUE))
+								.addPreferredGap(
+										LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(panelBotoes,
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap( )));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup( )
+								.addContainerGap( )
+								.addGroup(
+										layout.createParallelGroup(
+												GroupLayout.Alignment.LEADING)
+												.addGroup(
+														layout.createSequentialGroup( )
+																.addComponent(
+																		panelLista,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addPreferredGap(
+																		LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		jScrollPane1,
+																		GroupLayout.PREFERRED_SIZE,
+																		353,
+																		GroupLayout.PREFERRED_SIZE))
+												.addComponent(
+														panelBotoes,
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
+
+		pack( );
+	}
+
+	// This method generates the action to visualize the reservations to a property.
+	private void visualizarActionPerformed (ActionEvent evt) {
+
+		int index = this.tabelaPatrimonio.getSelectedRow( );
+		if (index < 0) {
+			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+			return;
+		}
+		visualizarAction(index);
+	}
+
+	// This method generates the action to register a property.
+	private void cadastrarActionPerformed (ActionEvent evt) {
+
+		cadastrarAction( );
+	}
+
+	// This method generates the action to modify a property.
+	private void alterarActionPerformed (ActionEvent evt) {
+
+		int index = this.tabelaPatrimonio.getSelectedRow( );
+		if (index < 0) {
+			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+			return;
+		}
+
+		alterarAction(index);
+	}
+
+	// This method generates the action to delete a property.
+	private void excluirActionPerformed (ActionEvent evt) {
+
+		int index = this.tabelaPatrimonio.getSelectedRow( );
+		if (index < 0) {
+			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+			return;
+		}
+
+		excluirAction(index);
+
+	}
+
 }

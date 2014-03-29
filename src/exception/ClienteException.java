@@ -1,13 +1,23 @@
+/**
+ClienteException
+Exception type to Cliente's errors
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/exception/ClienteException.java
+*/
+
 package exception;
 
-@SuppressWarnings("serial")
+@SuppressWarnings ("serial")
 public class ClienteException extends Exception {
 
-	public ClienteException() {
-		super();
+	// Constructor creates a ClientExcpetion without any argument.
+	public ClienteException ( ) {
+
+		super( );
 	}
 
-	public ClienteException(String message) {
+	// Constructor creates a ClientExcpetion with a message.
+	public ClienteException (String message) {
+
 		super(message);
 	}
 

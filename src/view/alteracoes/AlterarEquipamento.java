@@ -30,20 +30,20 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 		try {
 
-			this.codigoTxtField.setText(ManterEquipamento.getInstance()
-					.getEquipamento_vet().get(index).getCodigo());
-			this.descricaoTextArea.setText(ManterEquipamento.getInstance()
-					.getEquipamento_vet().get(index).getDescricao());
+			this.codigoTxtField.setText(ManterEquipamento.getInstance( )
+					.getEquipamento_vet( ).get(index).getCodigo( ));
+			this.descricaoTextArea.setText(ManterEquipamento.getInstance( )
+					.getEquipamento_vet( ).get(index).getDescricao( ));
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 
@@ -55,10 +55,10 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 		try {
 
-			ManterEquipamento.getInstance().alterar(
-					this.codigoTxtField.getText(),
-					this.descricaoTextArea.getText(),
-					ManterEquipamento.getInstance().getEquipamento_vet()
+			ManterEquipamento.getInstance( ).alterar(
+					this.codigoTxtField.getText( ),
+					this.descricaoTextArea.getText( ),
+					ManterEquipamento.getInstance( ).getEquipamento_vet( )
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this,
@@ -68,10 +68,10 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 			this.setVisible(false);
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
