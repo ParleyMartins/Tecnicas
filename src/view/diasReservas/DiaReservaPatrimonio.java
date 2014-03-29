@@ -1,7 +1,7 @@
 /**
- 	PropertyReservationDay
- 	This mother-class is used as base to select a day to reserve a property
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/diasReservas
+PropertyReservationDay
+This mother-class is used as base to select a day to reserve a property
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/diasReservas
  */
 
 package view.diasReservas;

@@ -1,7 +1,7 @@
 /**
- 	EquipmentReservationDay
- 	This class allows the user to select a day to reserve a equipment
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/diasReservas
+EquipmentReservationDay
+This class allows the user to select a day to reserve a equipment
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/diasReservas
  */
 
 package view.diasReservas;
