@@ -1,7 +1,7 @@
 /**
- 	ModifyStudent
- 	This class allows user to modify one or more fields of student
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
+ModifyStudent
+This class allows user to modify one or more fields of student
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
  */
 package view.alteracoes;
 
