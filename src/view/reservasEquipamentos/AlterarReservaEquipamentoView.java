@@ -1,7 +1,7 @@
 /**
-	EquipmentModifyReservationView
-	This class allows a user to modify a equipment reservation
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
+EquipmentModifyReservationView
+This class allows a user to modify a equipment reservation
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
  */
 
 package view.reservasEquipamentos;

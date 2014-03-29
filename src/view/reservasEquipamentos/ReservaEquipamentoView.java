@@ -1,7 +1,7 @@
 /**
- 	EquipmentReservationView
- 	This mother-class provides the equipment reservation form.
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
+EquipmentReservationView
+This mother-class provides the equipment reservation form.
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
  */
 
 package view.reservasEquipamentos;

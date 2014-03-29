@@ -1,7 +1,7 @@
 /**
- 	EquipmentMakeReservationView
- 	This class allows a teacher to reserve a equipment
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
+EquipmentMakeReservationView
+This class allows a teacher to reserve a equipment
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
  */
 package view.reservasEquipamentos;
 
