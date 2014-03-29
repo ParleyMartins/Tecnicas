@@ -1,7 +1,7 @@
 /**
- 	ModifyTeacher
- 	This class allows user to modify one or more fields of teacher.
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
+ModifyTeacher
+This class allows user to modify one or more fields of teacher.
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
  */
 package view.alteracoes;
 

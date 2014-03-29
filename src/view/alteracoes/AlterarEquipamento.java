@@ -1,7 +1,7 @@
 /**
- 	ModifyEquipment
- 	This class allows user to modify one or more fields of equipment
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
+ModifyEquipment
+This class allows user to modify one or more fields of equipment
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
  */
 
 package view.alteracoes;

@@ -1,7 +1,7 @@
 /**
-	ModifyRoom
-	This class allows user to modify one or more fields of a room
- 	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
+ModifyRoom
+This class allows user to modify one or more fields of a room
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
  */
 package view.alteracoes;
 
