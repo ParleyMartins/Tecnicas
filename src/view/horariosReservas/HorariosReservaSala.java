@@ -1,7 +1,7 @@
 /**
-	RoomReservertionTime
-	This class allows the user to select a time to reserve a room
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
+RoomReservertionTime
+This class allows the user to select a time to reserve a room
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
  */
 package view.horariosReservas;
 
@@ -43,36 +43,36 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 	protected Vector <String> fillDataVector (Object o, int index) {
 
-		Vector <String> nomesTabela = new Vector <String>( );
+		Vector <String> nomesTabela = new Vector <String>();
 		if (o instanceof ReservaSalaAluno) {
 			ReservaSalaAluno r = (ReservaSalaAluno) o;
-			if (this.sala != null && (r.getSala( ).equals(this.sala))) {
+			if (this.sala != null && (r.getSala().equals(this.sala))) {
 				nomesTabela.add(String.valueOf(index));
 				nomesTabela.add("Aluno");
-				nomesTabela.add(r.getHora( ));
-				nomesTabela.add(r.getAluno( ).getNome( ));
-				nomesTabela.add(r.getAluno( ).getMatricula( ));
-				nomesTabela.add(r.getFinalidade( ));
-				nomesTabela.add(r.getSala( ).getCodigo( ));
-				nomesTabela.add(r.getSala( ).getDescricao( ));
-				nomesTabela.add(r.getCadeiras_reservadas( ));
-				nomesTabela.add(r.getSala( ).getCapacidade( ));
+				nomesTabela.add(r.getHora());
+				nomesTabela.add(r.getAluno().getNome());
+				nomesTabela.add(r.getAluno().getMatricula());
+				nomesTabela.add(r.getFinalidade());
+				nomesTabela.add(r.getSala().getCodigo());
+				nomesTabela.add(r.getSala().getDescricao());
+				nomesTabela.add(r.getCadeiras_reservadas());
+				nomesTabela.add(r.getSala().getCapacidade());
 			}
 		} else
 			if (o instanceof ReservaSalaProfessor) {
 				ReservaSalaProfessor r = (ReservaSalaProfessor) o;
-				if (this.sala != null && (r.getSala( ).equals(this.sala))) {
+				if (this.sala != null && (r.getSala().equals(this.sala))) {
 
 					nomesTabela.add(String.valueOf(index));
 					nomesTabela.add("Professor");
-					nomesTabela.add(r.getHora( ));
-					nomesTabela.add(r.getProfessor( ).getNome( ));
-					nomesTabela.add(r.getProfessor( ).getMatricula( ));
-					nomesTabela.add(r.getFinalidade( ));
-					nomesTabela.add(r.getSala( ).getCodigo( ));
-					nomesTabela.add(r.getSala( ).getDescricao( ));
-					nomesTabela.add(r.getSala( ).getCapacidade( ));
-					nomesTabela.add(r.getSala( ).getCapacidade( ));
+					nomesTabela.add(r.getHora());
+					nomesTabela.add(r.getProfessor().getNome());
+					nomesTabela.add(r.getProfessor().getMatricula());
+					nomesTabela.add(r.getFinalidade());
+					nomesTabela.add(r.getSala().getCodigo());
+					nomesTabela.add(r.getSala().getDescricao());
+					nomesTabela.add(r.getSala().getCapacidade());
+					nomesTabela.add(r.getSala().getCapacidade());
 				}
 			}
 
@@ -84,9 +84,9 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	protected DefaultTableModel fillTable (Patrimonio sala) {
 
 		this.sala = (Sala) sala;
-		DefaultTableModel table = new DefaultTableModel( );
-		this.instanceAluno = ManterResSalaAluno.getInstance( );
-		this.instanceProf = ManterResSalaProfessor.getInstance( );
+		DefaultTableModel table = new DefaultTableModel();
+		this.instanceAluno = ManterResSalaAluno.getInstance();
+		this.instanceProf = ManterResSalaProfessor.getInstance();
 		table.addColumn("");
 		table.addColumn("Tipo:");
 		table.addColumn("Hora:");
@@ -104,37 +104,37 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 			Vector v = this.instanceProf.buscarPorData(this.data);
 
 			if (v != null)
-				for (int i = 0 ; i < v.size( ) ; i++) {
+				for (int i = 0 ; i < v.size() ; i++) {
 					Vector <String> linha = fillDataVector(v.get(i), i);
-					if (!linha.isEmpty( ))
+					if (!linha.isEmpty())
 						table.addRow(linha);
 
 				}
-			v.clear( );
+			v.clear();
 
 			v = this.instanceAluno.getReservasMes(this.data);
 			if (v != null)
-				for (int i = 0 ; i < v.size( ) ; i++) {
+				for (int i = 0 ; i < v.size() ; i++) {
 					Vector <String> linha = fillDataVector(v.get(i), i);
-					if (!linha.isEmpty( ))
+					if (!linha.isEmpty())
 						table.addRow(linha);
 
 				}
 
 		} catch (SQLException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName( )).log(
+			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
 		} catch (PatrimonioException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName( )).log(
+			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
 		} catch (ClienteException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName( )).log(
+			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
 		} catch (ReservaException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName( )).log(
+			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
 		} catch (NullPointerException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName( )).log(
+			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
 		}
 
@@ -146,20 +146,23 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	protected void cancelarReservaAction (int index) {
 
 		try {
-			String tipoCliente = (String) this.reservasTable.getModel( )
+			String tipoCliente = (String) this.reservasTable.getModel()
 					.getValueAt(index, 1);
-			index = Integer.parseInt((String) this.reservasTable.getModel( )
+			index = Integer.parseInt((String) this.reservasTable.getModel()
 					.getValueAt(index, 0));
 			if (tipoCliente.equals("Aluno")) {
-				int confirm = JOptionPane.showConfirmDialog(this,
+				int confirm = JOptionPane.showConfirmDialog(
+						this,
 						"Deseja mesmo excluir Reserva?\n"
-								+ this.instanceAluno.getReservasMes(data).get(index)
-										.toString( ), "Excluir",
+								+ this.instanceAluno.getReservasMes(data)
+										.get(index)
+										.toString(), "Excluir",
 						JOptionPane.YES_NO_OPTION);
 
 				if (confirm == JOptionPane.YES_OPTION) {
-					this.instanceAluno.excluir(this.instanceAluno.getReservasMes(
-							data).get(index));
+					this.instanceAluno.excluir(this.instanceAluno
+							.getReservasMes(
+									data).get(index));
 					JOptionPane.showMessageDialog(this,
 							"Reserva excluida com sucesso", "Sucesso",
 							JOptionPane.INFORMATION_MESSAGE,
@@ -171,12 +174,13 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 							this,
 							"Deseja mesmo excluir Reserva?\n"
 									+ this.instanceProf.buscarPorData(data)
-											.get(index).toString( ), "Excluir",
+											.get(index).toString(), "Excluir",
 							JOptionPane.YES_NO_OPTION);
 
 					if (confirm == JOptionPane.YES_OPTION) {
-						this.instanceProf.excluir(this.instanceProf.buscarPorData(
-								data).get(index));
+						this.instanceProf.excluir(this.instanceProf
+								.buscarPorData(
+										data).get(index));
 						JOptionPane.showMessageDialog(this,
 								"Reserva excluida com sucesso", "Sucesso",
 								JOptionPane.INFORMATION_MESSAGE,
@@ -185,16 +189,16 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				}
 
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -203,20 +207,20 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	protected void reservarAction ( ) {
 
 		try {
-			ReservaSalaView reserva = new FazerReservaSalaView(new JFrame( ),
+			ReservaSalaView reserva = new FazerReservaSalaView(new JFrame(),
 					true, sala, this.data);
 			reserva.setVisible(true);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
@@ -225,31 +229,31 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	protected void alterarAction (int index) {
 
 		try {
-			String tipoCliente = (String) this.reservasTable.getModel( )
+			String tipoCliente = (String) this.reservasTable.getModel()
 					.getValueAt(index, 1);
-			index = Integer.parseInt((String) this.reservasTable.getModel( )
+			index = Integer.parseInt((String) this.reservasTable.getModel()
 					.getValueAt(index, 0));
 			if (tipoCliente.equals("Aluno")) {
 				ReservaSalaView reserva = new AlterarReservaAlunoSalaView(
-						new JFrame( ), true, index, this.data);
+						new JFrame(), true, index, this.data);
 				reserva.setVisible(true);
 			} else
 				if (tipoCliente.equals("Professor")) {
 					ReservaSalaView reserva = new AlterarReservaProfSalaView(
-							new JFrame( ), true, index, this.data);
+							new JFrame(), true, index, this.data);
 					reserva.setVisible(true);
 				}
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
