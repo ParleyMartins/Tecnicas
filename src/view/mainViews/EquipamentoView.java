@@ -1,7 +1,7 @@
 /**
-	EquipmentView
-	This class shows the equipments from database
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+EquipmentView
+This class shows the equipments from database
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
  */
 
 package view.mainViews;
@@ -38,10 +38,10 @@ public class EquipamentoView extends PatrimonioView {
 			return null;
 		}
 
-		Vector <String> nomesTabela = new Vector <String>( );
+		Vector <String> nomesTabela = new Vector <String>();
 
-		nomesTabela.add(equipamento.getCodigo( ));
-		nomesTabela.add(equipamento.getDescricao( ));
+		nomesTabela.add(equipamento.getCodigo());
+		nomesTabela.add(equipamento.getDescricao());
 
 		return nomesTabela;
 
@@ -52,28 +52,28 @@ public class EquipamentoView extends PatrimonioView {
 	protected DefaultTableModel fillTable ( ) {
 
 		try {
-			DefaultTableModel table = new DefaultTableModel( );
+			DefaultTableModel table = new DefaultTableModel();
 
-			Iterator <Equipamento> i = control.ManterEquipamento.getInstance( )
-					.getEquipamento_vet( ).iterator( );
+			Iterator <Equipamento> i = control.ManterEquipamento.getInstance()
+					.getEquipamento_vet().iterator();
 
 			table.addColumn("Codigo");
 			table.addColumn("Descricao");
 
-			while (i.hasNext( )) {
-				Equipamento equipamento = i.next( );
+			while (i.hasNext()) {
+				Equipamento equipamento = i.next();
 				table.addRow(fillDataVector(equipamento));
 			}
 			return table;
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 		return null;
@@ -83,22 +83,22 @@ public class EquipamentoView extends PatrimonioView {
 	// Method generates a equipment register form.
 	protected void cadastrarAction ( ) {
 
-		CadastroEquipamento cadastro = new CadastroEquipamento(new JFrame( ),
+		CadastroEquipamento cadastro = new CadastroEquipamento(new JFrame(),
 				true);
 		cadastro.setResizable(false);
 		cadastro.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable( ));
+		this.tabelaPatrimonio.setModel(fillTable());
 	}
 
 	@Override
 	// Method generates a equipment modify form.
 	protected void alterarAction (int index) {
 
-		AlterarEquipamento alteracao = new AlterarEquipamento(new JFrame( ),
+		AlterarEquipamento alteracao = new AlterarEquipamento(new JFrame(),
 				true, index);
 		alteracao.setResizable(false);
 		alteracao.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable( ));
+		this.tabelaPatrimonio.setModel(fillTable());
 
 	}
 
@@ -109,30 +109,30 @@ public class EquipamentoView extends PatrimonioView {
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					"Deseja mesmo excluir Equipamento: "
-							+ ManterEquipamento.getInstance( )
-									.getEquipamento_vet( ).get(index)
-									.getDescricao( ) + "?", "Excluir",
+							+ ManterEquipamento.getInstance()
+									.getEquipamento_vet().get(index)
+									.getDescricao() + "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterEquipamento.getInstance( ).excluir(
-						ManterEquipamento.getInstance( ).getEquipamento_vet( )
+				ManterEquipamento.getInstance().excluir(
+						ManterEquipamento.getInstance().getEquipamento_vet()
 								.get(index));
 				JOptionPane.showMessageDialog(this,
 						"Equipamento excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
 			}
-			this.tabelaPatrimonio.setModel(fillTable( ));
+			this.tabelaPatrimonio.setModel(fillTable());
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 
@@ -144,14 +144,14 @@ public class EquipamentoView extends PatrimonioView {
 
 		try {
 			DiaReservaEquipamento reserva = new DiaReservaEquipamento(
-					new JFrame( ), true, index);
+					new JFrame(), true, index);
 			reserva.setResizable(false);
 			reserva.setVisible(true);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

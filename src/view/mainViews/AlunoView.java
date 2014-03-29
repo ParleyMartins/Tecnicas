@@ -1,7 +1,7 @@
 /**
-	StudendView
-	This class shows the students from database
-	https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+StudendView
+This class shows the students from database
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
  */
 
 package view.mainViews;
@@ -30,13 +30,13 @@ public class AlunoView extends ClienteView {
 	public Iterator getIterator ( ) {
 
 		try {
-			return ManterAluno.getInstance( ).getAluno_vet( ).iterator( );
+			return ManterAluno.getInstance().getAluno_vet().iterator();
 
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		return null;
@@ -46,11 +46,11 @@ public class AlunoView extends ClienteView {
 	// Method generates a student register form.
 	public void cadastrarAction ( ) {
 
-		CadastroCliente cadastrar = new CadastroAluno(new JFrame( ),
+		CadastroCliente cadastrar = new CadastroAluno(new JFrame(),
 				true);
 		cadastrar.setResizable(false);
 		cadastrar.setVisible(true);
-		tabelaCliente.setModel(fillTable( ));
+		tabelaCliente.setModel(fillTable());
 
 	}
 
@@ -58,11 +58,11 @@ public class AlunoView extends ClienteView {
 	// Method generates a student modify form.
 	public void alterarAction (int index) {
 
-		AlterarAluno alterar = new AlterarAluno(new JFrame( ), true,
+		AlterarAluno alterar = new AlterarAluno(new JFrame(), true,
 				index);
 		alterar.setResizable(false);
 		alterar.setVisible(true);
-		this.tabelaCliente.setModel(fillTable( ));
+		this.tabelaCliente.setModel(fillTable());
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class AlunoView extends ClienteView {
 	public void excluirAction ( ) {
 
 		try {
-			int index = this.tabelaCliente.getSelectedRow( );
+			int index = this.tabelaCliente.getSelectedRow();
 			if (index < 0) {
 				JOptionPane.showMessageDialog(this, "Selecione uma linha!",
 						"Erro", JOptionPane.ERROR_MESSAGE, null);
@@ -80,23 +80,23 @@ public class AlunoView extends ClienteView {
 			int confirm = JOptionPane.showConfirmDialog(
 					this,
 					"Deseja mesmo excluir Aluno: "
-							+ ManterAluno.getInstance( ).getAluno_vet( )
-									.get(index).getNome( ) + "?", "Excluir",
+							+ ManterAluno.getInstance().getAluno_vet()
+									.get(index).getNome() + "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterAluno.getInstance( ).excluir(
-						ManterAluno.getInstance( ).getAluno_vet( ).get(index));
+				ManterAluno.getInstance().excluir(
+						ManterAluno.getInstance().getAluno_vet().get(index));
 				JOptionPane.showMessageDialog(this,
 						"Aluno excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);
 			}
-			this.tabelaCliente.setModel(fillTable( ));
+			this.tabelaCliente.setModel(fillTable());
 
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
