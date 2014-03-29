@@ -46,7 +46,7 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 			JOptionPane.showMessageDialog(this, ex.getMessage( ), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage( ),
+			JOptionPane.showMessageDialog(this, ex.getMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
