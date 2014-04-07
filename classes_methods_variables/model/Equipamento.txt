@@ -4,14 +4,9 @@ Class sets exceptions of Equipamento.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Equipamento.java.
 */
 
-package model;
+class Equipamento extends Patrimonio{
 
-import exception.PatrimonioException;
+	// The parameters are only used to call the super Constructor.
+	public Equipamento(String codigo, String descricao) throws PatrimonioException 
 
-public class Equipamento extends Patrimonio{
 
-	public Equipamento(String codigo, String descricao) throws PatrimonioException {
-		super(codigo, descricao);
-	}
-
-}
