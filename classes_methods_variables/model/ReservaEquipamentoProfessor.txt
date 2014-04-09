@@ -4,50 +4,31 @@ Class sets exceptions of ReservaEquipamentoProfessor.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamentoProfessor.java.
  */
 
-package model;
-
-import exception.ReservaException;
-
 public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 
+	// Attribute to keep the teacher of the equipment reservation.
 	private Professor professor;
 
-	// Mensages
+	// Excpetion message.
 	private final String PROFESSOR_NULO = "O professor esta nulo.";
 
+	/*
+	The constructor calls the super Constructor and calls the setter method 
+	to validate the teacher.
+	*/
 	public ReservaEquipamentoProfessor (String data, String hora,
 			Equipamento equipamento, Professor professor)
-			throws ReservaException {
+			throws ReservaException 
+	
+	// Getter.
+	public Professor getProfessor ( ) 
 
-		super(data, hora, equipamento);
-		this.setProfessor(professor);
-	}
-
-	public Professor getProfessor ( ) {
-
-		return professor;
-	}
-
-	public void setProfessor (Professor professor) throws ReservaException {
-
-		if (professor == null)
-			throw new ReservaException(PROFESSOR_NULO);
-		this.professor = professor;
-	}
-
-	public boolean equals (ReservaEquipamentoProfessor obj) {
-
-		return (super.equals(obj) && this.getEquipamento().equals(
-				obj.getEquipamento()));
-	}
-
-	@Override
-	public String toString ( ) {
-
-		return "ReservaEquipamentoProfessor [professor="
-				+ this.getEquipamento().toString() + ", toString()="
-				+ super.toString()
-				+ "]";
-	}
-
+	// This validates the teacher to the reservation.
+	public void setProfessor (Professor professor) throws ReservaException 
+	
+	// This compares two reservations
+	public boolean equals (ReservaEquipamentoProfessor obj)
+	
+	// This generates a string with the attribute values.
+	public String toString ( )
 }
