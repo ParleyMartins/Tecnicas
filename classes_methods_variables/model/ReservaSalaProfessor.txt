@@ -14,7 +14,7 @@ public class ReservaSalaProfessor extends ReservaSala {
 	
 	/*
 	The constructor calls the super Constructor and calls the setter method 
-	to validate the equipment.
+	to validate the teacher.
 	*/
 	public ReservaSalaProfessor (String data, String hora, Sala sala,
 			String finalidade, Professor professor) throws ReservaException 
