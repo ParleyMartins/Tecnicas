@@ -22,7 +22,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Professor.java.
 	}
 
 /*
-This method validadates the enrollment number. If the number is null or empty, 
+This method validates the enrollment number. If the number is null or empty, 
 it throws an exception with the respective message.
 */
 void setMatricula (String matricula) throws ClienteException 

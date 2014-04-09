@@ -36,8 +36,7 @@ public String getCapacidade ( )
 
 
 /*
-This resets the capacity, validating it with a number regex. If the parameter
-does not fit the regex, is empty or null, the method throws an exception.
+This resets the capacity, validating it with a number regex.
 */
 public void setCapacidade (String capacidade) throws PatrimonioException
 
