@@ -3,10 +3,17 @@ abstract class DAO
 	// Search for a database entry according to the query.
 	protected Vector search
 		String query // The query that will be used to do the search.
+		Vector vet // Array of objects, will get the search result.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		ResultSet rs // Results from some database search, and will be used to create a object. 
 
 	// Check if a database entry exists.
 	protected boolean inDBGeneric
 		String query // The query that will be used to check the existence.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		ResultSet rs // Results from some database search. 
 
 	/*
 	Function signature, used on the search method. Must be implemented on the
@@ -18,7 +25,11 @@ abstract class DAO
 	// Add or remove a database entry.
 	protected void executeQuery
 		String msg // The query that will be executed.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
 
 	// Update a database entry.
 	protected void updateQuery
 		String msg // The query that will be updated. 
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
