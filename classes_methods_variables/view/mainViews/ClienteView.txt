@@ -56,28 +56,26 @@ public abstract class ClienteView extends JDialog {
 
             // Client receives the current iterator Client, while i hasNext.
 			Cliente cliente
-			table.addRow(fillDataVector(cliente))
 	}
 
 	// This method initializes the components.
 	private void initComponents ( ) {
 
-        // Variable to receive the buttons panel layout.
+       	// Variable to receive the buttons panel layout.
 		GroupLayout panelBotoesLayout
 
         // Variable to receive the general panel layout.
-		GroupLayout panelListaLayout = new GroupLayout(panelLista)
+		GroupLayout panelListaLayout 
 
 		// Variable to receive the general pane layout.
-		GroupLayout layout = new GroupLayout(getContentPane())
+		GroupLayout layout 
 
-		pack()
 	}
 
 	// This method generates the action to search a client.
 	private void pesquisarTextFieldActionPerformed (ActionEvent evt) {
         // Parameter evt is not used.
-		String nome // This receives the action field typed text.
+		String nome // This receives the text typed in the textField. 
 	}
 
 	// This method generates the action to register a client. The parameter is not used.

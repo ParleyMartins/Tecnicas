@@ -3,6 +3,7 @@ StudendView
 This class shows the students from database
 https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
  */
+ 
 //Class extends the standard form of Client, implementing the abstract methods
 public class AlunoView extends ClienteView {
 
