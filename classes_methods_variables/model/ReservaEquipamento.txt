@@ -10,42 +10,29 @@ import exception.ReservaException;
 
 public class ReservaEquipamento extends Reserva {
 
+	// Attribute to keep the equipment of the reservation.
 	private Equipamento equipamento;
 
-	// Mensages
+	// Excpetion messages.
 	private final String EQUIPAMENTO_NULO = "O equipamneto esta nulo.";
 
+	/*
+	The constructor calls the super Constructor and calls the setter method 
+	to validate the equipment.
+	*/
 	public ReservaEquipamento (String data, String hora, Equipamento equipamento)
-			throws ReservaException {
+			throws ReservaException 
 
-		super(data, hora);
-		this.setEquipamento(equipamento);
-	}
+	// Getter.
+	public Equipamento getEquipamento ( ) 
 
-	public Equipamento getEquipamento ( ) {
-
-		return this.equipamento;
-	}
-
+	// This validates a equipment to make the reservation possible.
 	public void setEquipamento (Equipamento equipamento)
-			throws ReservaException {
-
-		if (equipamento == null)
-			throw new ReservaException(EQUIPAMENTO_NULO);
-		this.equipamento = equipamento;
-	}
-
-	public boolean equals (ReservaEquipamento obj) {
-
-		return (super.equals(obj) && this.getEquipamento().equals(
-				obj.getEquipamento()));
-	}
-
-	@Override
-	public String toString ( ) {
-
-		return "ReservaEquipamento [equipamento=" + this.getEquipamento()
-				+ ", toString()=" + super.toString() + "]";
-	}
-
+			throws ReservaException 
+	
+	// This is used to compare two reservations.
+	public boolean equals (ReservaEquipamento obj) 
+	
+	// This generates a string with the attributes values.
+	public String toString ( ) 
 }

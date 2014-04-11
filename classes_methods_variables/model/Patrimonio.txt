@@ -4,15 +4,13 @@ Class sets exceptions of Patrimonio.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
  */
 
-package model;
-
-import exception.PatrimonioException;
-
 public class Patrimonio {
 
+	// Attributes needed to create a Property.
 	private String codigo;
 	private String descricao;
-	// Alerts and error mensages
+	
+	// Final strings with exception messages.
 	// private final String CODIGO_INVALIDO = "Codigo Invalido.";
 	private final String CODIGO_BRANCO = "Codigo em Branco.";
 	private final String CODIGO_NULO = "Codigo esta Nulo.";
@@ -20,60 +18,22 @@ public class Patrimonio {
 	private final String DESCRICAO_BRANCO = "Descricao em Branco.";
 	private final String DESCRICAO_NULO = "Descricao esta Nula.";
 
+	// Constuctor calls the setters methods to validate the parameters.
 	public Patrimonio (String codigo, String descricao)
-			throws PatrimonioException {
+			throws PatrimonioException
+	// Getters
+	public String getCodigo ( ) 
+	public String getDescricao ( ) 
 
-		this.setCodigo(codigo);
-		this.setDescricao(descricao);
-	}
+	// This is used to validate the property code.
+	public void setCodigo (String codigo) throws PatrimonioException 
 
-	public String getCodigo ( ) {
+	// This method is here to validate a new description.
+	public void setDescricao (String descricao) throws PatrimonioException 
 
-		return codigo;
-	}
+	// This is used to compare two properties
+	public boolean equals (Patrimonio e)
 
-	public String getDescricao ( ) {
-
-		return descricao;
-	}
-
-	public void setCodigo (String codigo) throws PatrimonioException {
-
-		if (codigo == null)
-			throw new PatrimonioException(CODIGO_NULO);
-		else
-			if ("".equals(codigo.trim()))
-				throw new PatrimonioException(CODIGO_BRANCO);
-		// else if(codigo.matches("PATTERN"))
-		// this.codigo = codigo;
-		// else
-		// throw new PatrimonioException(CODIGO_INVALIDO);
-		this.codigo = codigo;//
-	}
-
-	public void setDescricao (String descricao) throws PatrimonioException {
-
-		if (descricao == null)
-			throw new PatrimonioException(DESCRICAO_NULO);
-		else
-			if ("".equals(descricao.trim()))
-				throw new PatrimonioException(DESCRICAO_BRANCO);
-		this.descricao = descricao;
-	}
-
-	public boolean equals (Patrimonio e) {
-
-		if (this.getCodigo().equals(e.getCodigo()) &&
-				this.getDescricao().equals(e.getDescricao()))
-			return true;
-
-		return false;
-	}
-
-	@Override
-	public String toString ( ) {
-
-		return "Codigo=" + codigo +
-				"\nDescricao=" + descricao;
-	}
+	// This method is used to print a String with the class attributes.
+	public String toString ( ) 
 }

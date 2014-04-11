@@ -4,57 +4,45 @@ Class sets exceptions of Sala.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Sala.java.
  */
 
-package model;
+class Sala extends Patrimonio {
 
-import exception.PatrimonioException;
+/*
+This attribute represents the full capacity of the room (in number of chairs).
+It's validated on setCapacidade.
+*/
+private String capacidade;
 
-public class Sala extends Patrimonio {
 
-	private String capacidade;
+// Final strings with exception messages.
+private final String CAPACIDADE_INVALIDO = "Capacidade Invalida.";
+private final String CAPACIDADE_BRANCO = "Capacidade em Branco.";
+private final String CAPACIDADE_NULA = "Capacidade esta nula.";
 
-	// Alerts and error mensages
-	private final String CAPACIDADE_INVALIDO = "Capacidade Invalida.";
-	private final String CAPACIDADE_BRANCO = "Capacidade em Branco.";
-	private final String CAPACIDADE_NULA = "Capacidade esta nula.";
 
-	// private final String CAPACIDADE_NEGATIVA = "Capacidade negativa.";
+//
+public Sala (String codigo, String descricao, String capacidade)
+		throws PatrimonioException {
+	// These parameters are used to call the constructor.
+	codigo
+	descricao
 
-	public Sala (String codigo, String descricao, String capacidade)
-			throws PatrimonioException {
-
-		super(codigo, descricao);
-		this.setCapacidade(capacidade);
-	}
-
-	public String getCapacidade ( ) {
-
-		return capacidade;
-	}
-
-	public void setCapacidade (String capacidade) throws PatrimonioException {
-
-		if (capacidade == null)
-			throw new PatrimonioException(CAPACIDADE_NULA);
-		else
-			if ("".equals(capacidade.trim()))
-				throw new PatrimonioException(CAPACIDADE_BRANCO);
-			else
-				if (capacidade.matches("[\\d]+")) {
-					this.capacidade = capacidade;
-				}
-				else
-				{
-					throw new PatrimonioException(CAPACIDADE_INVALIDO);
-				}
-	}
-
-	public boolean equals (Sala b) {
-
-		if (super.equals(b) &&
-				this.getCapacidade().equals(b.getCapacidade())) {
-			return true;
-		}
-
-		return false;
-	}
+	// This one is used to set the capacity attribute.
+	capacidade
 }
+
+
+// Getter.
+public String getCapacidade ( )
+
+
+/*
+This resets the capacity, validating it with a number regex.
+*/
+public void setCapacidade (String capacidade) throws PatrimonioException
+
+
+
+// This compares two rooms. The parameter is only used to the comparasion.
+public boolean equals (Sala b) 
+
+
