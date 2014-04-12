@@ -1,18 +1,17 @@
 public class ManterResSalaAluno {
 
-	private static ManterResSalaAluno instance;
+	private static ManterResSalaAluno instance; //Array to store ManterResSalaAluno.
 	
-	private Vector <ReservaSalaAluno> rev_sala_aluno_vet 
+	private Vector <ReservaSalaAluno> rev_sala_aluno_vet //Variable instance the class.
 	
-	private ManterResSalaAluno ( ) {
+	private ManterResSalaAluno ( ) //Method constructor of the class.
 
 	}
 
 	// Singleton implementation.
 	public static ManterResSalaAluno getInstance ( ) {
 
-			instance
-
+	
 	// Returns the room reservation made ​​by students in a period of time.
 	public Vector <ReservaSalaAluno> getReservasHora (String hora)
 			throws SQLException, PatrimonioException, ClienteException,
@@ -44,7 +43,7 @@ public class ManterResSalaAluno {
 			throws SQLException, ReservaException, ClienteException,
 			PatrimonioException {
 
-		ReservaSalaAluno r
+		ReservaSalaAluno r //Varible to store ReservaSalaAluno on database;
 				
 	// Update reservation info from the database.
 	public void alterar (String finalidade, String cadeiras_reservadas,
@@ -52,7 +51,7 @@ public class ManterResSalaAluno {
 			throws SQLException, ReservaException, ClienteException,
 			PatrimonioException {
 
-		ReservaSalaAluno res_old
+		ReservaSalaAluno res_old //Auxiliar variable to modifie ReservaEquipamentoProfessor field.
 				
 				
 	// Remove the reservation made by a student.

@@ -1,18 +1,17 @@
 
 public class ManterProfessor
 
-	private static ManterProfessor instance;
+	private static ManterProfessor instance; //Variable to instance class ManterProfessor
 	
-	private Vector <Professor> professores_vet
+	private Vector <Professor> professores_vet //Array to store Professors.
 	
-	private ManterProfessor ( ) {		
+	private ManterProfessor ( ) {		 //Method constructor of the class.
 	}
 
 	// This constructor provides the singleton implementation.
 	public static ManterProfessor getInstance ( ) {
 
-			instance 
-
+	
 	// This method looks for a teacher by name.
 	public Vector <Professor> buscarNome (String valor) throws SQLException,
 			ClienteException {
@@ -50,7 +49,7 @@ public class ManterProfessor
 			String telefone, String email) throws ClienteException,
 			SQLException {
 
-		Professor prof 
+		Professor prof  //Varible to store a student for database;
 		
 		
 	// This method modifies a teacher field.
@@ -58,7 +57,7 @@ public class ManterProfessor
 			String telefone, String email, Professor prof)
 			throws ClienteException, SQLException {
 
-		Professor prof_velho 
+		Professor prof_velho  //Auxiliar variable to modifie student field
 				
 				
 	// This method deletes the selected teacher.

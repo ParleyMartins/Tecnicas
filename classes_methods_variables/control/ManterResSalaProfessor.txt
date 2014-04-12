@@ -1,16 +1,16 @@
 public class ManterResSalaProfessor {
 
-	private static ManterResSalaProfessor instance;
+	private static ManterResSalaProfessor instance; //Array to store ManterResSalaProfessor.
 	
-	private Vector <ReservaSalaProfessor> rev_sala_professor_vet
-	private ManterResSalaProfessor ( ) {
+	private Vector <ReservaSalaProfessor> rev_sala_professor_vet //Variable instance the class.
+	
+	//Method constructor of the class.
+	private ManterResSalaProfessor ( ) //Method constructor of the class.
 
-		// Blank constructor.
-		
 
 	// Singleton implementation.
 	public static ManterResSalaProfessor getInstance ( ) {
-			instance
+			
 
 	// Returns the room reservation made ​​​​by students in a month period.
 	public Vector <ReservaSalaProfessor> buscarPorData (String data)
@@ -29,13 +29,13 @@ public class ManterResSalaProfessor {
 			String data, String hora, String finalidade)
 			throws SQLException, ReservaException {
 
-		ReservaSalaProfessor reserva
+		ReservaSalaProfessor reserva //Varible to store ReservaSalaAluno on database.
 
 	// Update reservation info from the database.
 	public void alterar (String finalidade, ReservaSalaProfessor reserva)
 			throws SQLException, ReservaException {
 
-		ReservaSalaProfessor reserva_old
+		ReservaSalaProfessor reserva_old //Auxiliar variable to modifie ReservaSalaProfessor field.
 
 	// Remove the reservation made by a teacher.
 	public void excluir (ReservaSalaProfessor reserva) throws SQLException,

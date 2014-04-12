@@ -1,19 +1,17 @@
 
 
-public class ManterResEquipamentoProfessor {
+public class ManterResEquipamentoProfessor 
 
-	private Vector <Object> rev_equipamento_professor_vet
+	private Vector <Object> rev_equipamento_professor_vet //Array to store ReservaEquipamentoProfessor.
 
-	private static ManterResEquipamentoProfessor instance;
+	private static ManterResEquipamentoProfessor instance; //Variable instance the class.
 
-	private ManterResEquipamentoProfessor ( ) {
+	private ManterResEquipamentoProfessor ( )  //Method constructor of the class.
 
 
 
 	// Singleton implementation.
 	public static ManterResEquipamentoProfessor getInstance ( ) {
-	
-			instance 
 		
 		
 	// Returns the equipment reservation made ​​by a teacher in a period of time.
@@ -37,21 +35,18 @@ public class ManterResEquipamentoProfessor {
 	public void inserir (Equipamento equipamento, Professor prof, String data,
 			String hora) throws SQLException, ReservaException {
 
-		ReservaEquipamentoProfessor reserva
+		ReservaEquipamentoProfessor reserva //Varible to store ReservaEquipamentoProfessor on database.
 
 	// Change reservation of equipment in the database
 	public void alterar (ReservaEquipamentoProfessor reserva_old, String data,
 			String hora, Equipamento equipamento, Professor professor)
 			throws SQLException, ReservaException {
 
-		ReservaEquipamentoProfessor reserva_new  
+		ReservaEquipamentoProfessor reserva_new  //Auxiliar variable to modifie ReservaEquipamentoProfessor field.
 
 	// Remove the reservation made by a teacher.
 	public void excluir (ReservaEquipamentoProfessor reserva)
 			throws SQLException, ReservaException {
 
-
-	public void alterar () {
-
-		// TODO Auto-generated method stub
-}
+	//Empty method.
+	public void alterar () 

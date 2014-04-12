@@ -1,19 +1,17 @@
 
 public class ManterSala {
 
-	private static ManterSala instance;
+	private static ManterSala instance;  //Array to store ManterResSala.
 	
-	private Vector <Sala> salas_vet 
+	private Vector <Sala> salas_vet  //Variable instance the class.
+ 
 
-
-	private ManterSala ( ) {
+	private ManterSala ( )  //Method constructor of the class.
 		
-		// Blank constructor.
-
 
 	// This constructor provides the singleton implementation.
 	public static ManterSala getInstance ( ) {
-			instance
+	
 
 	// Gets a vector of room.
 	public Vector <Sala> getSalas_vet ( ) throws SQLException,
@@ -25,14 +23,14 @@ public class ManterSala {
 	public void inserir (String codigo, String descricao, String capacidade)
 			throws PatrimonioException, SQLException {
 
-		Sala sala 
+		Sala sala  //Varible to store sala on database.
 
 
 	//  This method Update code and description info in the database.
 	public void alterar (String codigo, String descricao, String capacidade,
 			Sala sala) throws PatrimonioException, SQLException {
 
-		Sala old_sala 
+		Sala old_sala //Auxiliar variable to modifie Sala field.
 
 	//This method deletes room form the database.
 	public void excluir (Sala sala) throws SQLException, PatrimonioException {

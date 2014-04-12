@@ -1,23 +1,25 @@
      public class ManterAluno 
 
-	private static ManterAluno instance;
-
-	private Vector <Aluno> alunos_vet
-	private ManterAluno ( ) {
+	
+	private Vector <Aluno> alunos_vet //Array to store Alunos.
+	
+		private static ManterAluno instance; //Variable instance the class.
+	
+	private ManterAluno ( )   //Method constructor of the class.
 
  
-	
+	// This constructor provides the singleton implementation.
 public static ManterAluno getInstance ( ) {
-			instance = new ManterAluno( );
 
 
 
+// This method looks for a student by name.
 	public Vector <Aluno> buscarNome (String valor) throws SQLException,mClienteException {
 	
-
+// This method looks for a student by the cpf.
 	public Vector <Aluno> buscarCpf (String valor) throws SQLException ClienteException {
 	
-
+// This method looks for a student by the enrollment number.
 	public Vector <Aluno> buscarMatricula (String valor) throws SQLException,
 	
 			
@@ -39,12 +41,12 @@ public static ManterAluno getInstance ( ) {
 	public void inserir (String nome, String cpf, String matricula,String telefone, String email) throws ClienteException,
 SQLException {
 
-Aluno aluno
+Aluno aluno //Varible to store a student on database;
 		
 	// This method modifies a student field.
 	public void alterar (String nome, String cpf, String matricula,String telefone, String email, Aluno aluno) throws ClienteException, SQLException {
 
-		Aluno aluno_velho 
+		Aluno aluno_velho //Auxiliar variable to modifie student field
 
 	// This method deletes the selected student.
 	public void excluir (Aluno aluno) throws SQLException, ClienteException {
