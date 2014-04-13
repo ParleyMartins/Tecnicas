@@ -1,6 +1,6 @@
 public class DiaReservaSala 
 
-	private Sala sala
+	private Sala sala //Attribute to keep the room that was reserved.
 
 	// Constructor creates a RoomReservationDay form.
 	public DiaReservaSala 

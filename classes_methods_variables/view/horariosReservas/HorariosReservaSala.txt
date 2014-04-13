@@ -1,260 +1,37 @@
-/**
-RoomReservertionTime
-This class allows the user to select a time to reserve a room
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
- */
-package view.horariosReservas;
+public class HorariosReservaSala 
 
-import java.sql.SQLException;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import model.Patrimonio;
-import model.ReservaSalaAluno;
-import model.ReservaSalaProfessor;
-import model.Sala;
-import view.reservasSalas.AlterarReservaAlunoSalaView;
-import view.reservasSalas.AlterarReservaProfSalaView;
-import view.reservasSalas.FazerReservaSalaView;
-import view.reservasSalas.ReservaSalaView;
-import control.ManterResSalaAluno;
-import control.ManterResSalaProfessor;
-import exception.ClienteException;
-import exception.PatrimonioException;
-import exception.ReservaException;
-import java.awt.Frame;
+	ManterResSalaAluno instanceAluno
+	ManterResSalaProfessor instanceProf
+	Sala sala
 
-public class HorariosReservaSala extends HorariosReservaPatrimonio {
+	public HorariosReservaSala 
+		Frame parent // Frame representing the parent window.
+		boolean modal // Parameter to JDialog's constructor. 
+		String data // This gets the date of booking the room.
 
-	ManterResSalaAluno instanceAluno;
-	ManterResSalaProfessor instanceProf;
-	Sala sala;
+	// This method fills a vector 
+	protected Vector <String> fillDataVector 
+		Object o 
+		int index // Room's position in the Controller's ArrayList.
+		Vector <String> nomesTabela // Vector with the fields of a Room.
+		ReservaSalaProfessor r // Variable of the room reservation made ??by the teacher.
 
-	public HorariosReservaSala (Frame parent, boolean modal, String data,
-			Sala sala) {
+	protected DefaultTableModel fillTable // Table to receive all the rooms data.
+		Patrimonio sala 
+		Vector v 
 
-		super(parent, modal, data, sala);
-		this.sala = sala;
-		this.setName("HorarioReservaSala");
-	}
-
-	protected Vector <String> fillDataVector (Object o, int index) {
-
-		Vector <String> nomesTabela = new Vector <String>();
-		if (o instanceof ReservaSalaAluno) {
-			ReservaSalaAluno r = (ReservaSalaAluno) o;
-			if (this.sala != null && (r.getSala().equals(this.sala))) {
-				nomesTabela.add(String.valueOf(index));
-				nomesTabela.add("Aluno");
-				nomesTabela.add(r.getHora());
-				nomesTabela.add(r.getAluno().getNome());
-				nomesTabela.add(r.getAluno().getMatricula());
-				nomesTabela.add(r.getFinalidade());
-				nomesTabela.add(r.getSala().getCodigo());
-				nomesTabela.add(r.getSala().getDescricao());
-				nomesTabela.add(r.getCadeiras_reservadas());
-				nomesTabela.add(r.getSala().getCapacidade());
-			}
-		} else
-			if (o instanceof ReservaSalaProfessor) {
-				ReservaSalaProfessor r = (ReservaSalaProfessor) o;
-				if (this.sala != null && (r.getSala().equals(this.sala))) {
-
-					nomesTabela.add(String.valueOf(index));
-					nomesTabela.add("Professor");
-					nomesTabela.add(r.getHora());
-					nomesTabela.add(r.getProfessor().getNome());
-					nomesTabela.add(r.getProfessor().getMatricula());
-					nomesTabela.add(r.getFinalidade());
-					nomesTabela.add(r.getSala().getCodigo());
-					nomesTabela.add(r.getSala().getDescricao());
-					nomesTabela.add(r.getSala().getCapacidade());
-					nomesTabela.add(r.getSala().getCapacidade());
-				}
-			}
-
-		return nomesTabela;
-
-	}
-
-	@Override
-	protected DefaultTableModel fillTable (Patrimonio sala) {
-
-		this.sala = (Sala) sala;
-		DefaultTableModel table = new DefaultTableModel();
-		this.instanceAluno = ManterResSalaAluno.getInstance();
-		this.instanceProf = ManterResSalaProfessor.getInstance();
-		table.addColumn("");
-		table.addColumn("Tipo:");
-		table.addColumn("Hora:");
-		table.addColumn("Nome");
-		table.addColumn("Matricula");
-		table.addColumn("Finalidade");
-		table.addColumn("Codigo da Sala");
-		table.addColumn("Descricao da Sala");
-		table.addColumn("Reservadas");
-		table.addColumn("Capacidade");
-
-		this.mes = Integer.parseInt(this.data.substring(3, 5));
-
-		try {
-			Vector v = this.instanceProf.buscarPorData(this.data);
-
-			if (v != null)
-				for (int i = 0 ; i < v.size() ; i++) {
-					Vector <String> linha = fillDataVector(v.get(i), i);
-					if (!linha.isEmpty())
-						table.addRow(linha);
-
-				}
-			v.clear();
-
-			v = this.instanceAluno.getReservasMes(this.data);
-			if (v != null)
-				for (int i = 0 ; i < v.size() ; i++) {
-					Vector <String> linha = fillDataVector(v.get(i), i);
-					if (!linha.isEmpty())
-						table.addRow(linha);
-
-				}
-
-		} catch (SQLException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
-					Level.SEVERE, null, ex);
-		} catch (PatrimonioException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
-					Level.SEVERE, null, ex);
-		} catch (ClienteException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
-					Level.SEVERE, null, ex);
-		} catch (ReservaException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
-					Level.SEVERE, null, ex);
-		} catch (NullPointerException ex) {
-			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
-					Level.SEVERE, null, ex);
-		}
-
-		return table;
-
-	}
-
-	@Override
-	protected void cancelarReservaAction (int index) {
-
-		try {
-			String tipoCliente = (String) this.reservasTable.getModel()
-					.getValueAt(index, 1);
-			index = Integer.parseInt((String) this.reservasTable.getModel()
-					.getValueAt(index, 0));
-			if (tipoCliente.equals("Aluno")) {
-				int confirm = JOptionPane.showConfirmDialog(
-						this,
-						"Deseja mesmo excluir Reserva?\n"
-								+ this.instanceAluno.getReservasMes(data)
-										.get(index)
-										.toString(), "Excluir",
-						JOptionPane.YES_NO_OPTION);
-
-				if (confirm == JOptionPane.YES_OPTION) {
-					this.instanceAluno.excluir(this.instanceAluno
-							.getReservasMes(
-									data).get(index));
-					JOptionPane.showMessageDialog(this,
-							"Reserva excluida com sucesso", "Sucesso",
-							JOptionPane.INFORMATION_MESSAGE,
-							null);
-				}
-			} else
-				if (tipoCliente.equals("Professor")) {
-					int confirm = JOptionPane.showConfirmDialog(
-							this,
-							"Deseja mesmo excluir Reserva?\n"
-									+ this.instanceProf.buscarPorData(data)
-											.get(index).toString(), "Excluir",
-							JOptionPane.YES_NO_OPTION);
-
-					if (confirm == JOptionPane.YES_OPTION) {
-						this.instanceProf.excluir(this.instanceProf
-								.buscarPorData(
-										data).get(index));
-						JOptionPane.showMessageDialog(this,
-								"Reserva excluida com sucesso", "Sucesso",
-								JOptionPane.INFORMATION_MESSAGE,
-								null);
-					}
-				}
-
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		}
-	}
-
-	@Override
-	protected void reservarAction ( ) {
-
-		try {
-			ReservaSalaView reserva = new FazerReservaSalaView(new JFrame(),
-					true, sala, this.data);
-			reserva.setVisible(true);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		}
-	}
-
-	@Override
-	protected void alterarAction (int index) {
-
-		try {
-			String tipoCliente = (String) this.reservasTable.getModel()
-					.getValueAt(index, 1);
-			index = Integer.parseInt((String) this.reservasTable.getModel()
-					.getValueAt(index, 0));
-			if (tipoCliente.equals("Aluno")) {
-				ReservaSalaView reserva = new AlterarReservaAlunoSalaView(
-						new JFrame(), true, index, this.data);
-				reserva.setVisible(true);
-			} else
-				if (tipoCliente.equals("Professor")) {
-					ReservaSalaView reserva = new AlterarReservaProfSalaView(
-							new JFrame(), true, index, this.data);
-					reserva.setVisible(true);
-				}
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		}
-	}
-}
+	// Method that generates the action cancel booking.
+	protected void cancelarReservaAction 
+		//Variable that receives the type of clients making the reservation.
+		String tipoCliente 
+		/*This variable is used to store the response (yes or no) of a simple 
+			JOptionPane to confirm deleting the reserved room.*/
+		int confirm 
+	
+	// Method generates an action to book the room.
+	protected void reservarAction 
+			ReservaSalaView reserva 
+	
+	// Method generates an action to modify the booking room.
+	protected void alterarAction 
+	

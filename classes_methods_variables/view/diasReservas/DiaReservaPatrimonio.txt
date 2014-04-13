@@ -15,8 +15,10 @@ public abstract class DiaReservaPatrimonio
 
 	// Method called from constructor to initialize the components
 	private void initComponents 
+	
+	// Method used to call the abstract function in each child class.
 		public void actionPerformed 
-			ActionEvent evt // A semantic event which indicates that a component-defined action occurred.
+			ActionEvent evt // Event to indicate that a action was performed.
 
 		GroupLayout jPanel1Layout 
 
