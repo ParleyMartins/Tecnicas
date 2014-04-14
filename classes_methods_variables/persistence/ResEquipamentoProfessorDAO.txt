@@ -44,8 +44,8 @@ public class ResEquipamentoProfessorDAO
 
 	// Reuse query for UPDATE clause.
 	private String update 
-		ReservaEquipamentoProfessor r // The  ReservaEquipamento object that represents the entry to be updated.
-		ReservaEquipamentoProfessor r2
+		ReservaEquipamentoProfessor r // The  ReservaEquipamentoProfessor object that represents the entry to be updated.
+		ReservaEquipamentoProfessor r2 // The ReservaEquipamentoProfessor object that represents the new entry, to replace the old one.
 
 	// Reuse query for DELETE Professor clause.
 	private String delete_from_professor 
@@ -75,26 +75,26 @@ public class ResEquipamentoProfessorDAO
 
 	// Select Reserva by month.
 	public Vector <ReservaEquipamentoProfessor> buscarPorMes 
-		int mes
-		Vector <ReservaEquipamentoProfessor> reservas_prof_mes 
-		Iterator <ReservaEquipamentoProfessor> it
-		ReservaEquipamentoProfessor obj 
+		int mes // Variable for the month of booking.
+		Vector <ReservaEquipamentoProfessor> reservas_prof_mes // Vector that takes reservations made by the teacher in the month.
+		Iterator <ReservaEquipamentoProfessor> it // Traverses the vector.
+		ReservaEquipamentoProfessor obj // Variable referring localized reservation.
 
 	// Select Reserva by hour.
 	public Vector <ReservaEquipamentoProfessor> buscarPorHora 
-		String hora
-		String hora_a 
-		hora_b 
+		String hora // Time of booking made.
+		String hora_a // Variable gets time in the format0H:HH
+		hora_b // Variable gets time in the format H:HH
 
 	// Fetch Reserva using a result.
 	protected Object fetch (ResultSet rs) 
-		Professor p // identification of the outcome of booking Professor
-		Equipamento s //identification of the outcome of booking Equipamento
-		ReservaEquipamentoProfessor r identification of the outcome of booking ReservaQuipamento
+		Professor p // Identification of the outcome of booking Professor
+		Equipamento s // Identification of the outcome of booking Equipamento
+		ReservaEquipamentoProfessor r // Identification of the outcome of booking ReservaQuipamento
 
 	// Check if there is a Professor in the database.
 	private boolean professorinDB 
-		Professor professor // variable referring to the Professor to be searched in the database.
+		Professor professor // Variable referring to the Professor to be searched in the database.
 
 	// Check if there is an Equipamento in the database.
 	private boolean equipamentoinDB 
@@ -103,15 +103,15 @@ public class ResEquipamentoProfessorDAO
 
 	// Check if there is a Professor entry in a Reserva.
 	private boolean professorinReservaDB 
-		Professor professor
-		String data
-		String hora
+		Professor professor // Represents a teacher 
+		String data // Represents a date.
+		String hora // Represents a time.
 		
 	// Check if there is a Equipamento entry in a Reserva.
 	private boolean equipamentoinReservaDB 
 		Equipamento equipamento // The object that represents the ReservaEquipamento, so we can check if it is on the database.
-		String data
-		String hora
+		String data // Represents a date.
+		String hora // Represents a time.
 
 	// Check if there is a Reserva entry in the database.
 	private boolean reservainDB 
