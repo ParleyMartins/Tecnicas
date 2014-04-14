@@ -1,40 +1,40 @@
 
 public abstract class ReservaSalaView extends JDialog {
 
-	protected final int ALUNO
-	protected final int PROF 
-	protected final int ERRO 
-	protected ManterResSalaAluno instanceAluno;
-	protected ManterResSalaProfessor instanceProf;
-	protected Sala sala;
-	protected Aluno aluno;
-	protected Professor prof;
-	protected JLabel alunoLabel;
-	protected JRadioButton professorRadioButton;
-	protected JLabel qntCadeirasLabel;
-	protected JLabel qntCadeirasReservadasLbl;
-	protected JTextField qntCadeirasReservadasTextField;
-	protected JTextField qntCadeirasTxtField;
-	protected JButton reservarButton;
-	protected JLabel salaLabel;
-	protected JTextArea salaTextArea;
-	protected JButton verificarCadeiraButton;
-	protected JRadioButton alunoRadioButton;
-	protected JTextArea alunoTextArea;
-	protected JButton buscarCpfButton;
-	protected JButton cancelarButton;
-	protected JLabel cpfLabel;
-	protected JTextField cpfTextField;
-	protected JLabel dataLabel;
-	protected JTextField dataTextField;
-	protected JTextField finalidadeTextField;
-	protected JLabel finalidadeTextLabel;
-	protected JLabel horaLabel;
-	protected JTextField horaTextField;
-	private JPanel jPanel1;
-	private JScrollPane jScrollPane1;
-	private JScrollPane jScrollPane2;
-	private ButtonGroup alunoProfbuttonGroup;
+	protected final int ALUNO //Integer used in compare condition in the method manterInstancia.
+	protected final int PROF //Integer used in compare condition in the method manterInstancia.
+	protected final int ERRO //Integer used in method manterInstancia.
+	protected ManterResSalaAluno instanceAluno; //Object of class ManterResSalaAluno.
+	protected ManterResSalaProfessor instanceProf; // Object of class ManterResSalaProfessor.
+	protected Sala sala; // Object of class Sala.
+	protected Aluno aluno;//Object of class Aluno.
+	protected Professor prof;//Object of class Professor.
+	protected JLabel alunoLabel;  //Component to create a label for aluno.
+	protected JRadioButton professorRadioButton;  //Component to create a radio button for professor.
+	protected JLabel qntCadeirasLabel; //Component to create a label for qntCadeiras.
+	protected JLabel qntCadeirasReservadasLbl; //Component to create a label for qntCadeirasReservadas.
+	protected JTextField qntCadeirasReservadasTextField; //Component to create a text field for qntCadeirasReservadas.
+	protected JTextField qntCadeirasTxtField; //Component to create a text field for qntCadeiras.
+	protected JButton reservarButton; //Component to create a button from reservar.
+	protected JLabel salaLabel; //Component to create a label for sala.
+	protected JTextArea salaTextArea; //Component to create a text area for sala.
+	protected JButton verificarCadeiraButton; //Component to create a button for verify chairs.
+	protected JRadioButton alunoRadioButton; //Component to create a radio button for aluno.
+	protected JTextArea alunoTextArea; //Component to create a text area for aluno.
+	protected JButton buscarCpfButton; //Component to create a button for serach cpfs.
+	protected JButton cancelarButton; //Component to create a button for cancel action.
+	protected JLabel cpfLabel;  //Component to create a label for cpf.
+	protected JTextField cpfTextField;  //Component to create a text field for cpf.
+	protected JLabel dataLabel; //Component to create a label for date.
+	protected JTextField dataTextField;  //Component to create a text field for date.
+	protected JTextField finalidadeTextField;   //Component to create a text field for finalidade.
+	protected JLabel finalidadeTextLabel; //Component to create a label for Finalidade.
+	protected JLabel horaLabel; //Component to create a label for hour.
+	protected JTextField horaTextField;  //Component to create a text field for hour.
+	private JPanel jPanel1;  // Create container for java window.
+	private JScrollPane jScrollPane1;  // Create scroll on java window.
+	private JScrollPane jScrollPane2; // Create scroll on java window.
+	private ButtonGroup alunoProfbuttonGroup;  //Group radio buttons from aluno and professor.
 
 	// Constructor generates a RoomReservationView form.
 	public ReservaSalaView (Frame parent, boolean modal) throws SQLException,
@@ -42,15 +42,15 @@ public abstract class ReservaSalaView extends JDialog {
 			ClienteException, ReservaException {
 
 		
-	abstract protected void verificarAction ( );
+	abstract protected void verificarAction ( ); //Abstract method of verificarAction.
 
-	abstract protected void reservarAluno ( );
+	abstract protected void reservarAluno ( ); //Abstract method of reservarAluno.
 
-	abstract protected void reservarProfessor ( );
+	abstract protected void reservarProfessor ( ); //Abstract method of reservarProfessor.
 
-	abstract protected void professorRadioButtonAction ( );
+	abstract protected void professorRadioButtonAction ( ); //Abstract method of professorRadioButtonAction.
 	
-	abstract protected void alunoRadioButtonAction ( ); //Abstract method of alunoRadioButtonAction
+	abstract protected void alunoRadioButtonAction ( ); //Abstract method of alunoRadioButtonAction.
 
 	//Get the student who is using the system
 	protected void getAluno ( ) {
