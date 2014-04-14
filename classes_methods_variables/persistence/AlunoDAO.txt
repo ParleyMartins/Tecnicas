@@ -82,15 +82,15 @@ class AlunoDAO
 	private boolean inDBMatricula 
 		String codigo // The student id code that identifies the Aluno, so we can check if it is on the database.  
 
-	// Check if there is a database entry.
+	// Check if there is a database entry in other tables.
 	private boolean inOtherDB 
 		Aluno aluno // The object that represents the Aluno, so we can check if it is on the database.  
 
-	// Fetch Alunoo using a result.
+	// Fetch Aluno using a result.
 	private Aluno fetchAluno 
 		ResultSet rs // Results from some database search, and will be used to create a Aluno object. 
 
-	// Update a query.
+	// Executes a statement. It is used in many other functions to modify the database. 
 	private void updateQuery 
 		String msg // The statemant that should be sended to the database. 
 		Connection con // Will represent the current connection with the database.
