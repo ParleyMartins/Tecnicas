@@ -1,50 +1,37 @@
 
 public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
-	int index;
-	ReservaSalaAluno reservaAluno;
-	ReservaSalaProfessor reservaProfessor;
+	int index;//Store index of ReservaSalaProfessor
+	ReservaSalaAluno reservaAluno; //Object of ReservaSalaAluno
+	ReservaSalaProfessor reservaProfessor; //Object of ReservaSalaProfessor
 
-	
+	//method sets the name of the visualization and the new student of reserving the room.
 	public AlterarReservaAlunoSalaView (Frame parent, boolean modal, int index,
 			String data) throws SQLException,
 			PatrimonioException, PatrimonioException, ClienteException,
 			ReservaException {
 
 
-	// Implementation of the abstract methods of the mother-class.
-	@Override
-	protected void reservarAluno ( ) {
+	// Try reserve the room for the student.
+	protected void reservarAluno ( ) 
 
 
-
-	@Override
+	// Empty method.
 	protected void reservarProfessor ( ) {
 
-		// Empty method.
-	}
 
-	@Override
+	// Empty method.
 	protected void professorRadioButtonAction ( ) {
 
-		// Empty method.
-	}
 
-	@Override
+	//Sets style of the buttons in visualization of user.
 	protected void alunoRadioButtonAction ( ) {
 
-		
-	}
 
-	@Override
+	//Verify if its possible reserve the room for the student.
 	protected void verificarAction ( ) {
 
-	
-	}
 
 	// This method resets some components
 	private void resetComponents ( ) {
 
-	}
-
-}

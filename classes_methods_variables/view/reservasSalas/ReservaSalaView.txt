@@ -49,51 +49,50 @@ public abstract class ReservaSalaView extends JDialog {
 	abstract protected void reservarProfessor ( );
 
 	abstract protected void professorRadioButtonAction ( );
+	
+	abstract protected void alunoRadioButtonAction ( ); //Abstract method of alunoRadioButtonAction
 
-	abstract protected void alunoRadioButtonAction ( );
-
+	//Get the student who is using the system
 	protected void getAluno ( ) {
 
-			Vector <Aluno> alunos 
+			Vector <Aluno> alunos  //Use to get the instance of students.
 			
-
+	//Get the teacher who is using the system
 	protected void getProfessor ( ) {
 
-			Vector <Professor> professor 
+			Vector <Professor> professor //Use to get the instance of teachers
 
+	//Verify what is the type of the user (teacher or student).
 	protected int getManterInstance ( ) {
 
 	}
 
-	// This method initialize the components
+	// This method initialize the components of the layout window.
 	private void initComponents ( ) {
 
-		
+			// Verify and return reply from the professor action button events.
+			public void actionPerformed (ActionEvent evt) 
+
+			// Verify and return reply from the aluno action button events.
+			public void actionPerformed (ActionEvent evt) 
+
+
+		GroupLayout jPanel1Layout //Store the layout of the java window.
+			
+			// Verify and return reply from the action button events.
 			public void actionPerformed (ActionEvent evt) {
 
+			// Verify and return reply from the action button events.
 			public void actionPerformed (ActionEvent evt) {
 
-				alunoRadioButtonActionPerformed(evt);
-			}
-		});
-
-		GroupLayout jPanel1Layout 
-		this.reservarButton.addActionListener(new ActionListener() {
-
+			// Verify and return reply from the action button events.
 			public void actionPerformed (ActionEvent evt) {
 
-				
-
-			public void actionPerformed (ActionEvent evt) {
-
-
-			public void actionPerformed (ActionEvent evt) {
-
-		
+			// Verify and return reply from the action button events.
 			public void actionPerformed (ActionEvent evt) {
 
 		
-		GroupLayout layout 
+		GroupLayout layout //Store the layout of the java window.
 
 	// This method generates an action to verify number of chairs available.
 	private void verificarCadeiraButtonActionPerformed (ActionEvent evt) {
@@ -102,20 +101,15 @@ public abstract class ReservaSalaView extends JDialog {
 	// This method generates an action to cpfTextField.
 	private void cpfTextFieldActionPerformed (ActionEvent evt) {
 
-		String nome 
+		String nome //String store the cpf used in search
 
 	// This method generates an action to the student radio button.
 	private void alunoRadioButtonActionPerformed (ActionEvent evt) {
 
-		alunoRadioButtonAction();
-
-	}
 
 	// This method generates an action to the teacher radio button.
 	private void professorRadioButtonActionPerformed (ActionEvent evt) {
 
-		professorRadioButtonAction();
-	}
 
 	// This method generates an action to reserve button.
 	private void reservarButtonActionPerformed (ActionEvent evt) {
