@@ -16,3 +16,4 @@ class FactoryConnection
 
 	// Create and return the connection with the database server.
 	public Connection getConnection
+		Connection con // Will represent the current connection with the database.

@@ -22,9 +22,12 @@ class EquipamentoDAO
 		Equipamento equipamento // The Euipamento object that will be included in the database.
 
 	// Update Equipamento info in the database.
-	public void change 
+	public void change
 		Equipamento old_equipamento // The Equipamento object that represents the entry to be updated.
 		Equipamento new_equipamento // The Equipamento object that represents the new entry, to replace the old one.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		String msg // The query that will be executed within the statement.
 
 	// Remove Equipamento form the database.
 	public void exclude 
@@ -45,10 +48,17 @@ class EquipamentoDAO
 	// Retrive Equipamento from the database.
 	private Vector <Equipamento> search
 		String query // The query that will be used in the seach.
+		Vector <Equipamento> vet // Array of equipments, will get the search result.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		ResultSet rs // Results from some database search, and will be used to create a Equipamento object. 
 
 	// Check if there is a database entry by query.
 	private boolean inDBGeneric
 		String query // Query that will be used to check if there is an entry in the database. 
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		ResultSet rs // Results from some database search. 
 
 	// Check if there is a database entry by Equipamento.
 	private boolean inDB
@@ -69,3 +79,5 @@ class EquipamentoDAO
 	// Executes a statement. It is used in many other functions to modify the database. 
 	private void updateQuery 
 		String msg // The statemant that should be sended to the database. 
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.

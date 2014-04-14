@@ -1,40 +1,14 @@
-/**
-RoomReservationDay
-This class allows the user to select a day to reserve a room.
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/diasReservas
- */
+public class DiaReservaSala 
 
-package view.diasReservas;
-
-import java.awt.Frame;
-import java.sql.SQLException;
-import javax.swing.JFrame;
-import model.Sala;
-import view.horariosReservas.HorariosReservaSala;
-import control.ManterSala;
-import exception.PatrimonioException;
-
-public class DiaReservaSala extends DiaReservaPatrimonio {
-
-	private Sala sala;
+	private Sala sala //Attribute to keep the room that was reserved.
 
 	// Constructor creates a RoomReservationDay form.
-	public DiaReservaSala (Frame parent, boolean modal, int indexSala)
-			throws SQLException, PatrimonioException {
-
-		super(parent, modal);
-		this.sala = ManterSala.getInstance().getSalas_vet().get(indexSala);
-		this.setName("DiaReservaSala");
-	}
-
-	@Override
+	public DiaReservaSala 
+		Frame parent // Frame representing the parent window.
+		boolean modal // Parameter to JDialog's constructor.
+		int indexSala // Room's position in the Controller's ArrayList.
+			
 	// Generates the visualize action to the selected day.
-	protected void visualizarAction (String data) {
-
-		HorariosReservaSala reserva = new HorariosReservaSala(new JFrame(),
-				true, data, this.sala);
-		reserva.setVisible(true);
-		reserva.setResizable(false);
-	}
-
-}
+	protected void visualizarAction 
+		String data // Variable regarding the date of the day of booking the room.
+		HorariosReservaSala reserva  // Variable referring to the time that the room is reserved.

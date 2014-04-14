@@ -4,148 +4,65 @@ This class shows the rooms from database
 https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
  */
 
-package view.mainViews;
-
-import java.awt.Frame;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.Vector;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import model.Sala;
-import view.alteracoes.AlterarSala;
-import view.cadastros.CadastroPatrimonio;
-import view.cadastros.CadastroSala;
-import view.diasReservas.DiaReservaSala;
-import control.ManterSala;
-import exception.PatrimonioException;
-
 public class SalaView extends PatrimonioView {
 
-	// Constructor generates a RoomView form.
-	public SalaView (Frame parent, boolean modal) {
-
-		super(parent, modal);
-		pesquisarLbl.setText("Digite a sala desejada: ");
-		this.setName("SalaView");
-	}
+	/*
+	Constructor generates a RoomView form, using the parameters to call 
+	the super constructor.
+	*/
+	public SalaView (Frame parent, boolean modal) 
 
 	// This method fills a vector with the rooms on database.
 	protected Vector <String> fillDataVector (Sala sala) {
-
-		if (sala == null) {
-			return null;
-		}
-
-		Vector <String> nomesTabela = new Vector <String>();
-
-		nomesTabela.add(sala.getCodigo());
-		nomesTabela.add(sala.getDescricao());
-		nomesTabela.add(sala.getCapacidade());
-
-		return nomesTabela;
-
+	
+		// Parameter room used to fill the vector with data.
+		Vector <String> nomesTabela  // Vector with the fields of a Room.
 	}
 
 	@Override
 	// This method fills a table with the rooms on database.
 	protected DefaultTableModel fillTable ( ) {
 
-		try {
-			DefaultTableModel table = new DefaultTableModel();
+		DefaultTableModel table // Table to receive all the rooms data.
 
-			Iterator <Sala> i = ManterSala.getInstance().getSalas_vet()
-					.iterator();
+		Iterator <Sala> i  // Iterator to "sweep" across the room database.
 
-			table.addColumn("Codigo");
-			table.addColumn("Nome");
-			table.addColumn("Capacidade");
-			while (i.hasNext()) {
-				Sala sala = i.next();
-				table.addRow(fillDataVector(sala));
-			}
-
-			return table;
-
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		}
-
-		return null;
+            // room receives the current iterator room, while i hasNext.
+			Sala sala = i.next();
 	}
 
 	@Override
 	// Method generates a room register form.
 	protected void cadastrarAction ( ) {
 
-		CadastroPatrimonio cadastro = new CadastroSala(
-				new JFrame(), true);
-		cadastro.setResizable(false);
-		cadastro.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable());
+		CadastroPatrimonio cadastro //Form responsible for new registrations.
 	}
 
 	@Override
 	// Method generates a room modify form.
 	protected void alterarAction (int index) {
-
-		AlterarSala alteracao = new AlterarSala(new JFrame(), true,
-				index);
-		alteracao.setResizable(false);
-		alteracao.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable());
+		/*
+		The parameter index is used to select a Student from the database,
+		which is done in the modify form, generated below
+		*/
+		AlterarSala alteracao
 	}
 
 	@Override
 	// Method deletes a room.
 	protected void excluirAction (int index) {
-
-		try {
-			int confirm = JOptionPane
-					.showConfirmDialog(this, "Deseja mesmo excluir Sala: "
-							+ ManterSala.getInstance().getSalas_vet()
-									.get(index).getDescricao() + "?",
-							"Excluir",
-							JOptionPane.YES_NO_OPTION);
-
-			if (confirm == JOptionPane.YES_OPTION) {
-				ManterSala.getInstance().excluir(
-						ManterSala.getInstance().getSalas_vet().get(index));
-				JOptionPane.showMessageDialog(this,
-						"Sala excluida com sucesso", "Sucesso",
-						JOptionPane.INFORMATION_MESSAGE, null);
-			}
-			this.tabelaPatrimonio.setModel(fillTable());
-
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		}
+		// The parameter contains the index of the selected row.		
+		/* 
+		This variable is used to store the answer (yes or no) of a simple
+		JOptionPane that confirms the exclusion of the selected client.
+		*/
+			int confirm
 	}
 
 	@Override
 	// Method generates a visualize form.
 	protected void visualizarAction (int index) {
-
-		try {
-			DiaReservaSala reserva = new DiaReservaSala(
-					new JFrame(), true, index);
-			reserva.setResizable(false);
-			reserva.setVisible(true);
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE, null);
-		}
+		// The parameter contains the index of the selected row.
+			DiaReservaSala reserva // Form to choose the day to make reservations.
 	}
 }

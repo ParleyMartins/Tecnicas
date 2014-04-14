@@ -24,6 +24,8 @@ class AlunoDAO
 	public void change
 		Aluno aluno_velho // The Aluno object that represents the entry to be updated.
 		Aluno aluno_novo // The Aluno object that represents the new entry, to replace the old one.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
 
 	// Remove Aluno form the database.
 	public void exclude
@@ -55,11 +57,18 @@ class AlunoDAO
 
 	// Search a database entry.
 	private Vector <Aluno> search 
-		String query // The query that will be used in the seach. 
+		String query // The query that will be used in the seach.
+		Vector <Aluno> vet // Array of students, will get the search result.
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		ResultSet rs // Results from some database search, and will be used to create a Aluno object. 
 
 	// Check if there is a database entry by query.
 	private boolean inDBGeneric 
 		String query // Query that will be used to check if there is an entry in the database. 
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
+		ResultSet rs // Results from some database search, and will be used to create a Aluno object. 
 
 	// Check if there is a database entry by Aluno.
 	private boolean inDB 
@@ -83,4 +92,6 @@ class AlunoDAO
 
 	// Executes a statement. It is used in many other functions to modify the database. 
 	private void updateQuery 
-		String msg // The statement that should be sended to the database. 
+		String msg // The statemant that should be sended to the database. 
+		Connection con // Will represent the current connection with the database.
+		PreparedStatement pst // The statement to be executed at current connection.
