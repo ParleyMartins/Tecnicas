@@ -19,6 +19,6 @@ abstract class DAO
 	protected void executeQuery
 		String msg // The query that will be executed.
 
-	// Update a database entry.
+	// Executes a statement. It is used in many other functions to modify the database. 
 	protected void updateQuery
 		String msg // The query that will be updated. 
