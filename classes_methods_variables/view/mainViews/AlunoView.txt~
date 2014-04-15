@@ -1,0 +1,44 @@
+/**
+StudendView
+This class shows the students from database
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+ */
+//Class extends the standard form of Client, implementing the abstract methods
+public class AlunoView extends ClienteView {
+
+	// Constructor creates a StudentView form, calling the super constructor.
+	public AlunoView (Frame parent, boolean modal)
+
+	// Method gets the iterator from 'KeepStudent'.
+	public Iterator getIterator ( ) 
+
+	@Override
+	// Method generates a student register form.
+	public void cadastrarAction ( ) {
+		CadastroCliente cadastrar //Form responsable for new registrations.
+	}
+
+	@Override
+	// Method generates a student modify form.
+	public void alterarAction (int index) {
+		/*
+		The parameter index is used to select a Student from the database,
+		which is done in the modify form, generated below
+		*/
+		AlterarAluno alterar
+	}
+
+	@Override
+	// Method deletes a student.
+	public void excluirAction ( ) {
+
+			int index // This receives the selected row from the table.
+			
+			/* 
+			This variable is used to store the answer (yes or no) of a simple
+			JOptionPane that confirms the exclusion of the selected client.
+			*/
+			int confirm
+	}
+
+}

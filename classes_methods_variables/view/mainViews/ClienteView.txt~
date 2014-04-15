@@ -1,0 +1,94 @@
+/**
+ClientView
+This mother-class is used to show teachers and students from database
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+*/
+
+public abstract class ClienteView extends JDialog {
+
+	protected JTable tabelaCliente // Table with the clients from the database.
+	private JButton alterarBtn // Button to change attributes of a recorded client.
+	private JButton cadastrarBtn // Button to register a new client.
+	private JButton excluirBtn // Button to delete a selected client.
+
+	// Variable to scroll the screen if there are too many clients.
+	private JScrollPane jScrollPane1
+
+	private JPanel panelBotoes // Panel to hold the buttons.
+	private JPanel panelLista // Panel to hold all the elements.
+	private JLabel pesquisarLbl // Label to search.
+
+	//Field used to get the cpf that will be searched.
+	private JTextField pesquisarTextField
+
+    /*
+	Constructor creates a ClientView form, calling the super Constructor
+	with both parameters.
+	*/
+	public ClienteView (Frame parent, boolean modal)
+
+	// Method gets the iterator from a Client.
+	public abstract Iterator getIterator ( )
+
+	// Method generates a client register form.
+	public abstract void cadastrarAction ( )
+
+	// Method generates a client modify form.
+	public abstract void alterarAction (int index)
+
+	// Method deletes a client.
+	public abstract void excluirAction ( )
+
+	// This method fills a vector with the clients on database.
+	protected Vector <String> fillDataVector (Cliente cliente) {
+
+        // Parameter cliente used to fill the vector with data.
+		Vector <String> nomesTabela  // Vector with the fields of a Client.
+
+	}
+
+	// This method fills a table with the clients on database.
+	protected DefaultTableModel fillTable ( ) {
+
+		DefaultTableModel table // Table to receive all the clients data.
+
+		Iterator <Cliente> i  // Iterator to "sweep" across the Client database.
+
+            // Client receives the current iterator Client, while i hasNext.
+			Cliente cliente
+			table.addRow(fillDataVector(cliente))
+	}
+
+	// This method initializes the components.
+	private void initComponents ( ) {
+
+       	// Variable to receive the buttons panel layout.
+		GroupLayout panelBotoesLayout
+
+        // Variable to receive the general panel layout.
+		GroupLayout panelListaLayout 
+
+		// Variable to receive the general pane layout.
+		GroupLayout layout 
+
+	}
+
+	// This method generates the action to search a client.
+	private void pesquisarTextFieldActionPerformed (ActionEvent evt) {
+        // Parameter evt is not used.
+		String nome // This receives the text typed in the textField. 
+	}
+
+	// This method generates the action to register a client. The parameter is not used.
+	private void cadastrarBtnActionPerformed (ActionEvent evt)
+
+	// This method generates the action to modify a client. The parameter is not used.
+	private void alterarBtnActionPerformed (ActionEvent evt) {
+        //This receives the index of the current selected line.
+		//It starts on zero.
+		int index
+	}
+
+	// This method generates the action to delete a client. The parameter is not used.
+	private void excluirBtnActionPerformed (ActionEvent evt)
+}

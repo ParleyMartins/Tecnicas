@@ -1,0 +1,93 @@
+/**
+PropertyView
+This mother-class is used to show rooms and equipments from database
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+ */
+
+public abstract class PatrimonioView extends JDialog {
+
+	protected JButton alterar; // Button to change attributes of a recorded property.
+	protected JButton cadastrar; // Button to register a new property.
+	protected JButton excluir; // Button to delete a selected property.
+	protected JPanel panelBotoes; // Panel to hold the buttons.
+	protected JPanel panelLista; // Panel to hold all the elements.
+	protected JLabel pesquisarLbl; // Label to search.
+	protected JTable tabelaPatrimonio; // Table with the propertys from the database.
+	// Button to visualize the reservations of the selected equipment.
+	protected JButton visualizarBtn; 
+	// Variable to scroll the screen if there are too many propertys.
+	protected JScrollPane jScrollPane1; 
+	// Field used to get the cpf that will be searched.
+	protected JTextField pesquisarTextField; 
+
+	// Constructor creates a PropertyView form.
+	// The parameters are used to call the super Constructor only.
+	public PatrimonioView (Frame parent, boolean modal) {
+	}
+
+	// This method fills a table with the properties on database.
+	protected abstract DefaultTableModel fillTable ( );
+
+	// This method generates the action to search a property.
+	protected void pesquisarTextFieldActionPerformed (ActionEvent evt) {
+
+		String nome // This receives the text typed in the textField. 
+	}
+
+	// Method generates a property visualize form.
+	protected abstract void visualizarAction (int index);
+
+	// Method generates a property register form.
+	protected abstract void cadastrarAction ( );
+
+	// Method generates a property modify form.
+	protected abstract void alterarAction (int index);
+
+	// Method deletes a property.
+	protected abstract void excluirAction (int index);
+
+	// This method initializes the components.
+	private void initComponents ( ) {
+
+		// Variable to receive the buttons panel layout.
+		GroupLayout panelBotoesLayout
+
+        // Variable to receive the general panel layout.
+		GroupLayout panelListaLayout 
+
+		// Variable to receive the general pane layout.
+		GroupLayout layout 		
+	}
+
+	// This method generates the action to visualize the reservations to a
+	// property.
+	private void visualizarActionPerformed (ActionEvent evt) {
+		// The parameter is never used.
+		int index // This receives the selected row index.
+	}
+
+	// This method generates the action to register a property.
+	//The parameter is never used.
+	private void cadastrarActionPerformed (ActionEvent evt)
+
+	// This method generates the action to modify a property.
+	private void alterarActionPerformed (ActionEvent evt) {
+		// The parameter is never used.
+		int index // This receives the selected row index.
+	}
+
+	// This method generates the action to delete a property.
+	private void excluirActionPerformed (ActionEvent evt) {
+
+		int index = this.tabelaPatrimonio.getSelectedRow();
+		if (index < 0) {
+			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+			return;
+		}
+
+		excluirAction(index);
+
+	}
+
+}
