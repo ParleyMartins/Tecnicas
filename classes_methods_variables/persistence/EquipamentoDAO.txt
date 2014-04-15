@@ -76,7 +76,7 @@ class EquipamentoDAO
 	private Equipamento fetchEquipamento 
 		ResultSet rs // Results from some database search, and will be used to create a Equipamento object. 
 
-	// Update a query.
+	// Executes a statement. It is used in many other functions to modify the database. 
 	private void updateQuery 
 		String msg // The statemant that should be sended to the database. 
 		Connection con // Will represent the current connection with the database.

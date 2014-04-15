@@ -28,7 +28,7 @@ abstract class DAO
 		Connection con // Will represent the current connection with the database.
 		PreparedStatement pst // The statement to be executed at current connection.
 
-	// Update a database entry.
+	// Executes a statement. It is used in many other functions to modify the database. 
 	protected void updateQuery
 		String msg // The query that will be updated. 
 		Connection con // Will represent the current connection with the database.
