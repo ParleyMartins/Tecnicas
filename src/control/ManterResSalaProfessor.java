@@ -1,8 +1,9 @@
 /**
-  ManterResSalaProfessor Manages the reservations made by teacher.
-  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/
-  /ManterResSalaProfessor.java
- */
+ManageTeacherRoomReservation
+Manages the reservations made by teacher.
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/
+/ManterResSalaProfessor.java
+*/
 package control;
 
 import java.sql.SQLException;
@@ -20,8 +21,8 @@ import exception.ReservaException;
 public class ManterResSalaProfessor {
 
 	private static ManterResSalaProfessor instance;
-	
-	private Vector <ReservaSalaProfessor> rev_sala_professor_vet = new Vector <ReservaSalaProfessor>( );
+
+	private Vector <ReservaSalaProfessor> teacherRoomReservationVec = new Vector <ReservaSalaProfessor>();
 
 	private ManterResSalaProfessor ( ) {
 
@@ -32,16 +33,16 @@ public class ManterResSalaProfessor {
 	public static ManterResSalaProfessor getInstance ( ) {
 
 		if (instance == null)
-			instance = new ManterResSalaProfessor( );
+			instance = new ManterResSalaProfessor();
 		return instance;
 	}
 
 	// Returns the room reservation made ​​​​by students in a month period.
-	public Vector <ReservaSalaProfessor> buscarPorData (String data)
+	public Vector <ReservaSalaProfessor> buscarPorData (String date)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		return ResSalaProfessorDAO.getInstance( ).buscarPorData(data);
+		return ResSalaProfessorDAO.getInstance().buscarPorData(date);
 	}
 
 	// Returns all the reservations made ​​by teacher
@@ -49,40 +50,42 @@ public class ManterResSalaProfessor {
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		this.rev_sala_professor_vet = ResSalaProfessorDAO.getInstance( )
-				.buscarTodos( );
-		return this.rev_sala_professor_vet;
+		this.teacherRoomReservationVec = ResSalaProfessorDAO.getInstance()
+				.buscarTodos();
+		return this.teacherRoomReservationVec;
 	}
 
 	// Include new reservation in the database.
-	public void inserir (Sala sala, Professor prof,
-			String data, String hora, String finalidade)
+	public void inserir (Sala room, Professor teacher,
+			String date, String time, String purpose)
 			throws SQLException, ReservaException {
 
-		ReservaSalaProfessor reserva = new ReservaSalaProfessor(data, hora,
-				sala, finalidade, prof);
-		ResSalaProfessorDAO.getInstance( ).incluir(reserva);
-		this.rev_sala_professor_vet.add(reserva);
+		ReservaSalaProfessor reservation = new ReservaSalaProfessor(date, time,
+				room, purpose, teacher);
+		ResSalaProfessorDAO.getInstance().incluir(reservation);
+		this.teacherRoomReservationVec.add(reservation);
 	}
 
 	// Update reservation info from the database.
-	public void alterar (String finalidade, ReservaSalaProfessor reserva)
+	public void alterar (String purpose, ReservaSalaProfessor newReservation)
 			throws SQLException, ReservaException {
 
-		ReservaSalaProfessor reserva_old = new ReservaSalaProfessor(
-				reserva.getData( ), reserva.getHora( ), reserva.getSala( ),
-				reserva.getFinalidade( ), reserva.getProfessor( ));
+		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
+				newReservation.getData(), newReservation.getHora(),
+				newReservation.getSala(),
+				newReservation.getFinalidade(), newReservation.getProfessor());
 
-		reserva.setFinalidade(finalidade);
-		ResSalaProfessorDAO.getInstance( ).alterar(reserva_old, reserva);
+		newReservation.setFinalidade(purpose);
+		ResSalaProfessorDAO.getInstance().alterar(oldReservation,
+				newReservation);
 
 	}
 
 	// Remove the reservation made by a teacher.
-	public void excluir (ReservaSalaProfessor reserva) throws SQLException,
+	public void excluir (ReservaSalaProfessor reservation) throws SQLException,
 			ReservaException {
 
-		ResSalaProfessorDAO.getInstance( ).excluir(reserva);
-		this.rev_sala_professor_vet.remove(reserva);
+		ResSalaProfessorDAO.getInstance().excluir(reservation);
+		this.teacherRoomReservationVec.remove(reservation);
 	}
 }
