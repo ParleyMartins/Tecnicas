@@ -19,7 +19,7 @@ import exception.ReservaException;
 
 public class ManterResEquipamentoProfessor {
 
-	private Vector <Object> rev_equipamento_professor_vet = new Vector <Object>();
+	private Vector <Object> teacherEquipReservationVector = new Vector <Object>();
 
 	private static ManterResEquipamentoProfessor instance;
 
@@ -37,20 +37,20 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Returns the equipment reservation made ​​by a teacher in a period of time.
-	public Vector <ReservaEquipamentoProfessor> getReservasHora (String hora)
+	public Vector <ReservaEquipamentoProfessor> getReservasHora (String time)
 			throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
-		return ResEquipamentoProfessorDAO.getInstance().buscarPorHora(hora);
+		return ResEquipamentoProfessorDAO.getInstance().buscarPorHora(time);
 
 	}
 
 	// Returns the equipment reservation made ​​​​by a teacher in a month period.
-	public Vector <ReservaEquipamentoProfessor> getReservasMes (int mes)
+	public Vector <ReservaEquipamentoProfessor> getReservasMes (int month)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResEquipamentoProfessorDAO.getInstance().buscarPorMes(mes);
+		return ResEquipamentoProfessorDAO.getInstance().buscarPorMes(month);
 	}
 
 	// Returns the object that the teacher reserved.
@@ -58,39 +58,39 @@ public class ManterResEquipamentoProfessor {
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		this.rev_equipamento_professor_vet = ResEquipamentoProfessorDAO
+		this.teacherEquipReservationVector = ResEquipamentoProfessorDAO
 				.getInstance().buscarTodos();
-		return this.rev_equipamento_professor_vet;
+		return this.teacherEquipReservationVector;
 	}
 
 	// Inserts equipment, teacher, date and time of a reservation in the database
-	public void inserir (Equipamento equipamento, Professor prof, String data,
-			String hora) throws SQLException, ReservaException {
+	public void inserir (Equipamento equipment, Professor teacher, String date,
+			String time) throws SQLException, ReservaException {
 
 		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(
-				data, hora, equipamento, prof);
+				date, time, equipment, teacher);
 		ResEquipamentoProfessorDAO.getInstance().incluir(reserva);
-		this.rev_equipamento_professor_vet.add(reserva);
+		this.teacherEquipReservationVector.add(reserva);
 	}
 
 	// Change reservation of equipment in the database
-	public void alterar (ReservaEquipamentoProfessor reserva_old, String data,
-			String hora, Equipamento equipamento, Professor professor)
+	public void alterar (ReservaEquipamentoProfessor oldReservation, String date,
+			String time, Equipamento equipment, Professor teacher)
 			throws SQLException, ReservaException {
 
 		ReservaEquipamentoProfessor reserva_new  = new ReservaEquipamentoProfessor(
-				data, hora, equipamento, professor); 
+				date, time, equipment, teacher); 
 		
-		ResEquipamentoProfessorDAO.getInstance().alterar(reserva_old, reserva_new);
+		ResEquipamentoProfessorDAO.getInstance().alterar(oldReservation, reserva_new);
 
 	}
 
 	// Remove the reservation made by a teacher.
-	public void excluir (ReservaEquipamentoProfessor reserva)
+	public void excluir (ReservaEquipamentoProfessor reservation)
 			throws SQLException, ReservaException {
 
-		ResEquipamentoProfessorDAO.getInstance().excluir(reserva);
-		this.rev_equipamento_professor_vet.remove(reserva);
+		ResEquipamentoProfessorDAO.getInstance().excluir(reservation);
+		this.teacherEquipReservationVector.remove(reservation);
 	}
 
 	public void alterar () {
