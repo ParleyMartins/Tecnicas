@@ -32,19 +32,19 @@ public class SalaView extends PatrimonioView {
 	}
 
 	// This method fills a vector with the rooms on database.
-	protected Vector <String> fillDataVector (Sala sala) {
+	protected Vector <String> fillDataVector (Sala room) {
 
-		if (sala == null) {
+		if (room == null) {
 			return null;
 		}
 
-		Vector <String> nomesTabela = new Vector <String>();
+		Vector <String> roomData = new Vector <String>();
 
-		nomesTabela.add(sala.getCodigo());
-		nomesTabela.add(sala.getDescricao());
-		nomesTabela.add(sala.getCapacidade());
+		roomData.add(room.getCodigo());
+		roomData.add(room.getDescricao());
+		roomData.add(room.getCapacidade());
 
-		return nomesTabela;
+		return roomData;
 
 	}
 
@@ -53,20 +53,20 @@ public class SalaView extends PatrimonioView {
 	protected DefaultTableModel fillTable ( ) {
 
 		try {
-			DefaultTableModel table = new DefaultTableModel();
+			DefaultTableModel roomTable = new DefaultTableModel();
 
 			Iterator <Sala> i = ManterSala.getInstance().getSalas_vet()
 					.iterator();
 
-			table.addColumn("Codigo");
-			table.addColumn("Nome");
-			table.addColumn("Capacidade");
+			roomTable.addColumn("Codigo");
+			roomTable.addColumn("Nome");
+			roomTable.addColumn("Capacidade");
 			while (i.hasNext()) {
 				Sala sala = i.next();
-				table.addRow(fillDataVector(sala));
+				roomTable.addRow(fillDataVector(sala));
 			}
 
-			return table;
+			return roomTable;
 
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
@@ -83,10 +83,10 @@ public class SalaView extends PatrimonioView {
 	// Method generates a room register form.
 	protected void cadastrarAction ( ) {
 
-		CadastroPatrimonio cadastro = new CadastroSala(
+		CadastroPatrimonio registerRoom = new CadastroSala(
 				new JFrame(), true);
-		cadastro.setResizable(false);
-		cadastro.setVisible(true);
+		registerRoom.setResizable(false);
+		registerRoom.setVisible(true);
 		this.tabelaPatrimonio.setModel(fillTable());
 	}
 
@@ -94,10 +94,10 @@ public class SalaView extends PatrimonioView {
 	// Method generates a room modify form.
 	protected void alterarAction (int index) {
 
-		AlterarSala alteracao = new AlterarSala(new JFrame(), true,
+		AlterarSala modifyRoom = new AlterarSala(new JFrame(), true,
 				index);
-		alteracao.setResizable(false);
-		alteracao.setVisible(true);
+		modifyRoom.setResizable(false);
+		modifyRoom.setVisible(true);
 		this.tabelaPatrimonio.setModel(fillTable());
 	}
 
@@ -136,10 +136,10 @@ public class SalaView extends PatrimonioView {
 	protected void visualizarAction (int index) {
 
 		try {
-			DiaReservaSala reserva = new DiaReservaSala(
+			DiaReservaSala dayReservation = new DiaReservaSala(
 					new JFrame(), true, index);
-			reserva.setResizable(false);
-			reserva.setVisible(true);
+			dayReservation.setResizable(false);
+			dayReservation.setVisible(true);
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
