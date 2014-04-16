@@ -1,7 +1,7 @@
 /**
 RoomView
 This class shows the rooms from database
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/mainViews
  */
 
 package view.mainViews;
@@ -27,7 +27,7 @@ public class SalaView extends PatrimonioView {
 	public SalaView (Frame parent, boolean modal) {
 
 		super(parent, modal);
-		pesquisarLbl.setText("Digite a sala desejada: ");
+		searchLbl.setText("Digite a sala desejada: ");
 		this.setName("SalaView");
 	}
 
@@ -87,7 +87,7 @@ public class SalaView extends PatrimonioView {
 				new JFrame(), true);
 		registerRoom.setResizable(false);
 		registerRoom.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable());
+		this.propertyTable.setModel(fillTable());
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class SalaView extends PatrimonioView {
 				index);
 		modifyRoom.setResizable(false);
 		modifyRoom.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable());
+		this.propertyTable.setModel(fillTable());
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class SalaView extends PatrimonioView {
 						"Sala excluida com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);
 			}
-			this.tabelaPatrimonio.setModel(fillTable());
+			this.propertyTable.setModel(fillTable());
 
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
