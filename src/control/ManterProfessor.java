@@ -1,9 +1,8 @@
 /**
-  ManterProfessor 
-  This class receives teachers' data and give them to persistence classes.
-  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control
-  /ManterProfessorAluno.java
- */
+ManageTeacher 
+This class receives teachers' data and give them to persistence classes.
+https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterProfessorAluno.java
+*/
 package control;
 
 import java.sql.SQLException;
@@ -16,11 +15,11 @@ import model.Professor;
 public class ManterProfessor {
 
 	private static ManterProfessor instance;
-	
-	private Vector <Professor> professores_vet = new Vector <Professor>( );
+
+	private Vector <Professor> teachersVec = new Vector <Professor>();
 
 	private ManterProfessor ( ) {
-		
+
 		// Empty constructor.
 	}
 
@@ -28,88 +27,88 @@ public class ManterProfessor {
 	public static ManterProfessor getInstance ( ) {
 
 		if (instance == null)
-			instance = new ManterProfessor( );
+			instance = new ManterProfessor();
 		return instance;
 	}
 
 	// This method looks for a teacher by name.
-	public Vector <Professor> buscarNome (String valor) throws SQLException,
+	public Vector <Professor> buscarNome (String name) throws SQLException,
 			ClienteException {
 
-		return ProfessorDAO.getInstance( ).buscarNome(valor);
+		return ProfessorDAO.getInstance().buscarNome(name);
 	}
 
 	// This method looks for a teacher by the cpf.
-	public Vector <Professor> buscarCpf (String valor) throws SQLException,
+	public Vector <Professor> buscarCpf (String cpf) throws SQLException,
 			ClienteException {
 
-		return ProfessorDAO.getInstance( ).buscarCpf(valor);
+		return ProfessorDAO.getInstance().buscarCpf(cpf);
 	}
 
 	// This method looks for a teacher by the enrollment number.
-	public Vector <Professor> buscarMatricula (String valor)
+	public Vector <Professor> buscarMatricula (String enrollmentNumber)
 			throws SQLException, ClienteException {
 
-		return ProfessorDAO.getInstance( ).buscarMatricula(valor);
+		return ProfessorDAO.getInstance().buscarMatricula(enrollmentNumber);
 	}
 
 	// This method looks for a teacher by e-mail.
-	public Vector <Professor> buscarEmail (String valor) throws SQLException,
+	public Vector <Professor> buscarEmail (String email) throws SQLException,
 			ClienteException {
 
-		return ProfessorDAO.getInstance( ).buscarEmail(valor);
+		return ProfessorDAO.getInstance().buscarEmail(email);
 	}
 
 	// This method looks for a student by phone number.
-	public Vector <Professor> buscarTelefone (String valor)
+	public Vector <Professor> buscarTelefone (String phoneNumber)
 			throws SQLException, ClienteException {
 
-		return ProfessorDAO.getInstance( ).buscarTelefone(valor);
+		return ProfessorDAO.getInstance().buscarTelefone(phoneNumber);
 	}
 
 	// This method gets a teacher vector.
 	public Vector <Professor> getProfessores_vet ( ) throws SQLException,
 			ClienteException {
 
-		this.professores_vet = ProfessorDAO.getInstance( ).buscarTodos( );
-		return this.professores_vet;
+		this.teachersVec = ProfessorDAO.getInstance().buscarTodos();
+		return this.teachersVec;
 	}
 
 	// This method records a teacher on database..
-	public void inserir (String nome, String cpf, String matricula,
-			String telefone, String email) throws ClienteException,
+	public void inserir (String name, String cpf, String enrollmentNumber,
+			String phoneNumber, String email) throws ClienteException,
 			SQLException {
 
-		Professor prof = new Professor(nome, cpf, matricula, telefone, email);
-		ProfessorDAO.getInstance( ).incluir(prof);
-		this.professores_vet.add(prof);
+		Professor teacher = new Professor(name, cpf, enrollmentNumber, phoneNumber, email);
+		ProfessorDAO.getInstance().incluir(teacher);
+		this.teachersVec.add(teacher);
 	}
 
 	// This method modifies a teacher field.
-	public void alterar (String nome, String cpf, String matricula,
-			String telefone, String email, Professor prof)
+	public void alterar (String name, String cpf, String enrollmentNumber,
+			String phoneNumber, String email, Professor newTeacher)
 			throws ClienteException, SQLException {
 
-		Professor prof_velho = new Professor(
-				prof.getNome( ),
-				prof.getCpf( ),
-				prof.getMatricula( ),
-				prof.getTelefone( ),
-				prof.getEmail( ));
-		prof.setNome(nome);
-		prof.setCpf(cpf);
-		prof.setMatricula(matricula);
-		prof.setTelefone(telefone);
-		prof.setEmail(email);
-		ProfessorDAO.getInstance( ).alterar(prof_velho, prof);
+		Professor oldTeacher = new Professor(
+				newTeacher.getNome(),
+				newTeacher.getCpf(),
+				newTeacher.getMatricula(),
+				newTeacher.getTelefone(),
+				newTeacher.getEmail());
+		newTeacher.setNome(name);
+		newTeacher.setCpf(cpf);
+		newTeacher.setMatricula(enrollmentNumber);
+		newTeacher.setTelefone(phoneNumber);
+		newTeacher.setEmail(email);
+		ProfessorDAO.getInstance().alterar(oldTeacher, newTeacher);
 	}
 
 	// This method deletes the selected teacher.
-	public void excluir (Professor professor) throws SQLException,
+	public void excluir (Professor teacher) throws SQLException,
 			ClienteException {
 
-		ProfessorDAO.getInstance( ).excluir(professor);
-		this.professores_vet.remove(professor);
+		ProfessorDAO.getInstance().excluir(teacher);
+		this.teachersVec.remove(teacher);
 	}
 
 }
