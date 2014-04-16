@@ -1,7 +1,7 @@
 /**
 TeacherView
 This class shows the teachers from database
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/mainViews
  */
 package view.mainViews;
 
@@ -25,7 +25,7 @@ public class ProfessorView extends ClienteView {
 		this.setName("ProfessorView");
 	}
 
-	// Method gets the iterator from 'KeepTeacher'.
+	// Method gets the iterator from 'ModifyTeacher'.
 	public Iterator getIterator ( ) {
 
 		try {
@@ -46,9 +46,9 @@ public class ProfessorView extends ClienteView {
 	// Method generates a teacher register form.
 	public void cadastrarAction ( ) {
 
-		CadastroCliente cadastrar = new CadastroProfessor(new JFrame(), true);
-		cadastrar.setResizable(false);
-		cadastrar.setVisible(true);
+		CadastroCliente registerTeacher = new CadastroProfessor(new JFrame(), true);
+		registerTeacher.setResizable(false);
+		registerTeacher.setVisible(true);
 		tabelaCliente.setModel(fillTable());
 
 	}
@@ -57,10 +57,10 @@ public class ProfessorView extends ClienteView {
 	// Method generates a teacher modify form.
 	public void alterarAction (int index) {
 
-		AlterarProfessor alterar = new AlterarProfessor(new JFrame(), true,
+		AlterarProfessor modifyTeacher = new AlterarProfessor(new JFrame(), true,
 				index);
-		alterar.setResizable(false);
-		alterar.setVisible(true);
+		modifyTeacher.setResizable(false);
+		modifyTeacher.setVisible(true);
 		this.tabelaCliente.setModel(fillTable());
 	}
 
