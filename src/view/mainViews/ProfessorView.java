@@ -49,7 +49,7 @@ public class ProfessorView extends ClienteView {
 		CadastroCliente registerTeacher = new CadastroProfessor(new JFrame(), true);
 		registerTeacher.setResizable(false);
 		registerTeacher.setVisible(true);
-		tabelaCliente.setModel(fillTable());
+		clientTable.setModel(fillTable());
 
 	}
 
@@ -61,7 +61,7 @@ public class ProfessorView extends ClienteView {
 				index);
 		modifyTeacher.setResizable(false);
 		modifyTeacher.setVisible(true);
-		this.tabelaCliente.setModel(fillTable());
+		this.clientTable.setModel(fillTable());
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ProfessorView extends ClienteView {
 	public void excluirAction ( ) {
 
 		try {
-			int index = this.tabelaCliente.getSelectedRow();
+			int index = this.clientTable.getSelectedRow();
 			if (index < 0) {
 				JOptionPane.showMessageDialog(this, "Selecione uma linha!",
 						"Erro", JOptionPane.ERROR_MESSAGE, null);
@@ -91,7 +91,7 @@ public class ProfessorView extends ClienteView {
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
 			}
-			this.tabelaCliente.setModel(fillTable());
+			this.clientTable.setModel(fillTable());
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
