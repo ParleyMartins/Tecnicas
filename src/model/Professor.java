@@ -2,7 +2,7 @@
 Professor. 
 Class sets exceptions of Professor.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Professor.java.
- */
+*/
 
 package model;
 
@@ -10,29 +10,28 @@ import exception.ClienteException;
 
 public class Professor extends Cliente {
 
-	// Alerts and error mensages
-	// private final String MATRICULA_INVALIDO = "Matricula Invalida.";
-	private final String MATRICULA_BRANCO = "Matricula em Branco.";
-	private final String MATRICULA_NULO = "Matricula esta Nula.";
+	// Alerts and error messages.
+	private final String BLANK_ENROLLMENT_NUMBER = "Matricula em Branco.";
+	private final String NULL_ENROLLMENT_NUMBER = "Matricula esta Nula.";
 
-	public Professor (String nome, String cpf, String matricula,
-			String telefone, String email) throws ClienteException {
+	public Professor (String name, String cpf, String enrollment_number,
+			String phone_number, String email) throws ClienteException {
 
-		super(nome, cpf, matricula, telefone, email);
+		super(name, cpf, enrollment_number, phone_number, email);
 	}
 
-	public void setEnrollmentNumber (String matricula) throws ClienteException {
+	public void setEnrollmentNumber(String enrollment_number) throws ClienteException {
 
-		if (matricula == null)
-			throw new ClienteException(MATRICULA_NULO);
-		else
-			if ("".equals(matricula.trim()))
-				throw new ClienteException(MATRICULA_BRANCO);
-		// else if(matricula.matches("PATTERN"))
-		// super.matricula = matricula;
-		// else
-		// throw new ClienteException(MATRICULA_INVALIDO);
-		super.enrollmentNumber = matricula;//
+		if (enrollment_number == null) {
+			throw new ClienteException(NULL_ENROLLMENT_NUMBER);
+		} else {
+			if ("".equals(enrollment_number.trim())) {
+				throw new ClienteException(BLANK_ENROLLMENT_NUMBER);
+			} else {
+				// Do nothing; 
+			}
+		}
+		super.enrollmentNumber = enrollment_number;
 	}
 
 }

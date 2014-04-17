@@ -2,7 +2,7 @@
 Patrimonio. 
 Class sets exceptions of Patrimonio.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
- */
+*/
 
 package model;
 
@@ -13,7 +13,7 @@ public class Patrimonio {
 	private String id_code;
 	private String description;
 	
-	// Alerts and error mensages.
+	// Alerts and error messages.
 	private final String CODIGO_BRANCO = "Codigo em Branco.";
 	private final String CODIGO_NULO = "Codigo esta Nulo.";
 	private final String DESCRICAO_BRANCO = "Descricao em Branco.";
