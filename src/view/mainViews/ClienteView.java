@@ -1,7 +1,7 @@
 /**
 ClientView
 This mother-class is used to show teachers and students from database
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/mainViews
  */
 
 package view.mainViews;
@@ -29,15 +29,15 @@ import model.Cliente;
 
 public abstract class ClienteView extends JDialog {
 
-	protected JTable tabelaCliente;
-	private JButton alterarBtn;
-	private JButton cadastrarBtn;
-	private JButton excluirBtn;
-	private JScrollPane jScrollPane1;
-	private JPanel panelBotoes;
-	private JPanel panelLista;
-	private JLabel pesquisarLbl;
-	private JTextField pesquisarTextField;
+	protected JTable clientTable;
+	private JButton modifyBtn;
+	private JButton registerBtn;
+	private JButton deleteBtn;
+	private JScrollPane scrollPane;
+	private JPanel buttonsPanel;
+	private JPanel mainPanel;
+	private JLabel searchLbl;
+	private JTextField searchTextField;
 
 	// Constructor creates a ClientView form.
 	public ClienteView (Frame parent, boolean modal) {
@@ -59,67 +59,67 @@ public abstract class ClienteView extends JDialog {
 	public abstract void excluirAction ( );
 
 	// This method fills a vector with the clients on database.
-	protected Vector <String> fillDataVector (Cliente cliente) {
+	protected Vector <String> fillDataVector (Cliente client) {
 
-		Vector <String> nomesTabela = new Vector <String>();
+		Vector <String> dataTable = new Vector <String>();
 
-		if (cliente == null) {
+		if (client == null) {
 			return null;
 		}
 
-		nomesTabela.add(cliente.getEnrollmentNumber());
-		nomesTabela.add(cliente.getName());
-		nomesTabela.add(cliente.getPhoneNumber());
-		nomesTabela.add(cliente.getCpf());
-		nomesTabela.add(cliente.getEmail());
+		dataTable.add(client.getEnrollmentNumber());
+		dataTable.add(client.getName());
+		dataTable.add(client.getPhoneNumber());
+		dataTable.add(client.getCpf());
+		dataTable.add(client.getEmail());
 
-		return nomesTabela;
+		return dataTable;
 
 	}
 
 	// This method fills a table with the clients on database.
 	protected DefaultTableModel fillTable ( ) {
 
-		DefaultTableModel table = new DefaultTableModel();
+		DefaultTableModel clientTable = new DefaultTableModel();
 
 		Iterator <Cliente> i = getIterator();
 
-		table.addColumn("Matricula");
-		table.addColumn("Nome");
-		table.addColumn("Telefone");
-		table.addColumn("CPF");
-		table.addColumn("E-mail");
+		clientTable.addColumn("Matricula");
+		clientTable.addColumn("Nome");
+		clientTable.addColumn("Telefone");
+		clientTable.addColumn("CPF");
+		clientTable.addColumn("E-mail");
 
 		while (i.hasNext()) {
 			Cliente cliente = i.next();
-			table.addRow(fillDataVector(cliente));
+			clientTable.addRow(fillDataVector(cliente));
 		}
 
-		return table;
+		return clientTable;
 	}
 
 	// This method initializes the components.
 	private void initComponents ( ) {
 
-		panelBotoes = new JPanel();
-		cadastrarBtn = new JButton();
-		alterarBtn = new JButton();
-		excluirBtn = new JButton();
-		panelLista = new JPanel();
-		pesquisarLbl = new JLabel();
-		pesquisarTextField = new JTextField();
-		jScrollPane1 = new JScrollPane();
-		tabelaCliente = new JTable();
+		buttonsPanel = new JPanel();
+		registerBtn = new JButton();
+		modifyBtn = new JButton();
+		deleteBtn = new JButton();
+		mainPanel = new JPanel();
+		searchLbl = new JLabel();
+		searchTextField = new JTextField();
+		scrollPane = new JScrollPane();
+		clientTable = new JTable();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Cliente");
 
-		panelBotoes.setBorder(BorderFactory
+		buttonsPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		cadastrarBtn.setText("Cadastrar");
-		cadastrarBtn.setName("Cadastrar");
-		cadastrarBtn.addActionListener(new ActionListener() {
+		registerBtn.setText("Cadastrar");
+		registerBtn.setName("Cadastrar");
+		registerBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -127,9 +127,9 @@ public abstract class ClienteView extends JDialog {
 			}
 		});
 
-		alterarBtn.setText("Alterar");
-		alterarBtn.setName("Alterar");
-		alterarBtn.addActionListener(new ActionListener() {
+		modifyBtn.setText("Alterar");
+		modifyBtn.setName("Alterar");
+		modifyBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -137,9 +137,9 @@ public abstract class ClienteView extends JDialog {
 			}
 		});
 
-		excluirBtn.setText("Excluir");
-		excluirBtn.setName("Excluir");
-		excluirBtn.addActionListener(new ActionListener() {
+		deleteBtn.setText("Excluir");
+		deleteBtn.setName("Excluir");
+		deleteBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -147,60 +147,60 @@ public abstract class ClienteView extends JDialog {
 			}
 		});
 
-		GroupLayout panelBotoesLayout = new GroupLayout(panelBotoes);
-		panelBotoes.setLayout(panelBotoesLayout);
-		panelBotoesLayout
-				.setHorizontalGroup(panelBotoesLayout
+		GroupLayout buttonsPanelLayout = new GroupLayout(buttonsPanel);
+		buttonsPanel.setLayout(buttonsPanelLayout);
+		buttonsPanelLayout
+				.setHorizontalGroup(buttonsPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelBotoesLayout
+								buttonsPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
-												panelBotoesLayout
+												buttonsPanelLayout
 														.createParallelGroup(
 																GroupLayout.Alignment.LEADING)
 														.addComponent(
-																excluirBtn,
+																deleteBtn,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(
-																alterarBtn,
+																modifyBtn,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(
-																cadastrarBtn,
+																registerBtn,
 																GroupLayout.DEFAULT_SIZE,
 																135,
 																Short.MAX_VALUE))
 										.addContainerGap()));
-		panelBotoesLayout
-				.setVerticalGroup(panelBotoesLayout
+		buttonsPanelLayout
+				.setVerticalGroup(buttonsPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelBotoesLayout
+								buttonsPanelLayout
 										.createSequentialGroup()
 										.addGap(65, 65, 65)
-										.addComponent(cadastrarBtn,
+										.addComponent(registerBtn,
 												GroupLayout.PREFERRED_SIZE, 80,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(alterarBtn,
+										.addComponent(modifyBtn,
 												GroupLayout.PREFERRED_SIZE, 82,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(excluirBtn,
+										.addComponent(deleteBtn,
 												GroupLayout.PREFERRED_SIZE, 80,
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap(78, Short.MAX_VALUE)));
 
-		pesquisarLbl.setText("Digite a matricula desejada: ");
+		searchLbl.setText("Digite a matricula desejada: ");
 
-		pesquisarTextField.addActionListener(new ActionListener() {
+		searchTextField.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -208,98 +208,107 @@ public abstract class ClienteView extends JDialog {
 			}
 		});
 
-		GroupLayout panelListaLayout = new GroupLayout(panelLista);
-		panelLista.setLayout(panelListaLayout);
-		panelListaLayout
-				.setHorizontalGroup(panelListaLayout
+		GroupLayout mainPanelLayout = new GroupLayout(mainPanel);
+		mainPanel.setLayout(mainPanelLayout);
+		mainPanelLayout
+				.setHorizontalGroup(mainPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelListaLayout
+								mainPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(pesquisarLbl)
+										.addComponent(searchLbl)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(pesquisarTextField)));
-		panelListaLayout.setVerticalGroup(panelListaLayout.createParallelGroup(
+										.addComponent(searchTextField)));
+		mainPanelLayout.setVerticalGroup(mainPanelLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				panelListaLayout
+				mainPanelLayout
 						.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(
-								panelListaLayout
+								mainPanelLayout
 										.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
-										.addComponent(pesquisarLbl,
+										.addComponent(searchLbl,
 												GroupLayout.PREFERRED_SIZE, 28,
 												GroupLayout.PREFERRED_SIZE)
-										.addComponent(pesquisarTextField,
+										.addComponent(searchTextField,
 												GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)));
 
-		tabelaCliente.setModel(fillTable());
-		tabelaCliente.setName("tabelaCliente");
-		jScrollPane1.setViewportView(tabelaCliente);
+		clientTable.setModel(fillTable());
+		clientTable.setName("tabelaCliente");
+		scrollPane.setViewportView(clientTable);
 
-		GroupLayout layout = new GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(
-						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										layout.createParallelGroup(
-												GroupLayout.Alignment.LEADING)
-												.addComponent(
-														panelLista,
-														GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE)
-												.addComponent(
-														jScrollPane1,
-														GroupLayout.DEFAULT_SIZE,
-														460, Short.MAX_VALUE))
-								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(panelBotoes,
-										GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										layout.createParallelGroup(
-												GroupLayout.Alignment.LEADING)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addComponent(
-																		panelLista,
-																		GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.DEFAULT_SIZE,
-																		Short.MAX_VALUE)
-																.addPreferredGap(
-																		LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		jScrollPane1,
-																		GroupLayout.PREFERRED_SIZE,
-																		353,
-																		GroupLayout.PREFERRED_SIZE))
-												.addComponent(
-														panelBotoes,
-														GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE,
-														GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+		GroupLayout mainLayout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(mainLayout);
+		mainLayout
+				.setHorizontalGroup(mainLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								GroupLayout.Alignment.TRAILING,
+								mainLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												mainLayout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																mainPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																scrollPane,
+																GroupLayout.DEFAULT_SIZE,
+																460,
+																Short.MAX_VALUE))
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(buttonsPanel,
+												GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap()));
+		mainLayout
+				.setVerticalGroup(mainLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								mainLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												mainLayout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addGroup(
+																mainLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				mainPanel,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				scrollPane,
+																				GroupLayout.PREFERRED_SIZE,
+																				353,
+																				GroupLayout.PREFERRED_SIZE))
+														.addComponent(
+																buttonsPanel,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 
 		pack();
 	}
@@ -307,8 +316,8 @@ public abstract class ClienteView extends JDialog {
 	// This method generates the action to search a client.
 	private void pesquisarTextFieldActionPerformed (ActionEvent evt) {
 
-		String nome = this.pesquisarTextField.getText();
-		if (nome.isEmpty()) {
+		String clientName = this.searchTextField.getText();
+		if (clientName.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nenhum texto digitado",
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		} else {
@@ -327,7 +336,7 @@ public abstract class ClienteView extends JDialog {
 	// This method generates the action to modify a client.
 	private void alterarBtnActionPerformed (ActionEvent evt) {
 
-		int index = this.tabelaCliente.getSelectedRow();
+		int index = this.clientTable.getSelectedRow();
 		if (index < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);

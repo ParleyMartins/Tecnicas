@@ -1,7 +1,7 @@
 /**
 TeacherView
 This class shows the teachers from database
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/mainViews
  */
 package view.mainViews;
 
@@ -25,7 +25,7 @@ public class ProfessorView extends ClienteView {
 		this.setName("ProfessorView");
 	}
 
-	// Method gets the iterator from 'KeepTeacher'.
+	// Method gets the iterator from 'ModifyTeacher'.
 	public Iterator getIterator ( ) {
 
 		try {
@@ -46,10 +46,10 @@ public class ProfessorView extends ClienteView {
 	// Method generates a teacher register form.
 	public void cadastrarAction ( ) {
 
-		CadastroCliente cadastrar = new CadastroProfessor(new JFrame(), true);
-		cadastrar.setResizable(false);
-		cadastrar.setVisible(true);
-		tabelaCliente.setModel(fillTable());
+		CadastroCliente registerTeacher = new CadastroProfessor(new JFrame(), true);
+		registerTeacher.setResizable(false);
+		registerTeacher.setVisible(true);
+		clientTable.setModel(fillTable());
 
 	}
 
@@ -57,11 +57,11 @@ public class ProfessorView extends ClienteView {
 	// Method generates a teacher modify form.
 	public void alterarAction (int index) {
 
-		AlterarProfessor alterar = new AlterarProfessor(new JFrame(), true,
+		AlterarProfessor modifyTeacher = new AlterarProfessor(new JFrame(), true,
 				index);
-		alterar.setResizable(false);
-		alterar.setVisible(true);
-		this.tabelaCliente.setModel(fillTable());
+		modifyTeacher.setResizable(false);
+		modifyTeacher.setVisible(true);
+		this.clientTable.setModel(fillTable());
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ProfessorView extends ClienteView {
 	public void excluirAction ( ) {
 
 		try {
-			int index = this.tabelaCliente.getSelectedRow();
+			int index = this.clientTable.getSelectedRow();
 			if (index < 0) {
 				JOptionPane.showMessageDialog(this, "Selecione uma linha!",
 						"Erro", JOptionPane.ERROR_MESSAGE, null);
@@ -91,7 +91,7 @@ public class ProfessorView extends ClienteView {
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
 			}
-			this.tabelaCliente.setModel(fillTable());
+			this.clientTable.setModel(fillTable());
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",

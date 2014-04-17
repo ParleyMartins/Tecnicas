@@ -1,7 +1,7 @@
 /**
 ClientView
 This mother-class is used to show rooms and equipments from database
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/mainViews
  */
 
 package view.mainViews;
@@ -26,16 +26,16 @@ import javax.swing.table.DefaultTableModel;
 
 public abstract class PatrimonioView extends JDialog {
 
-	protected JButton alterar;
-	protected JButton cadastrar;
-	protected JButton excluir;
-	protected JScrollPane jScrollPane1;
-	protected JPanel panelBotoes;
-	protected JPanel panelLista;
-	protected JLabel pesquisarLbl;
-	protected JTextField pesquisarTextField;
-	protected JTable tabelaPatrimonio;
-	protected JButton visualizarBtn;
+	protected JButton modiftyBtn;
+	protected JButton registerBtn;
+	protected JButton deleteBtn;
+	protected JScrollPane scrollPane;
+	protected JPanel buttonsPanel;
+	protected JPanel mainPanel;
+	protected JLabel searchLbl;
+	protected JTextField searchTextField;
+	protected JTable propertyTable;
+	protected JButton visualizeBtn;
 
 	// Constructor creates a PropertyView form.
 	public PatrimonioView (Frame parent, boolean modal) {
@@ -50,8 +50,8 @@ public abstract class PatrimonioView extends JDialog {
 	// This method generates the action to search a property.
 	protected void pesquisarTextFieldActionPerformed (ActionEvent evt) {
 
-		String nome = this.pesquisarTextField.getText();
-		if (nome.isEmpty()) {
+		String propertyName = this.searchTextField.getText();
+		if (propertyName.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nenhum texto digitado",
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		} else {
@@ -75,26 +75,26 @@ public abstract class PatrimonioView extends JDialog {
 	// This method initializes the components.
 	private void initComponents ( ) {
 
-		panelBotoes = new JPanel();
-		cadastrar = new JButton();
-		alterar = new JButton();
-		excluir = new JButton();
-		visualizarBtn = new JButton();
-		panelLista = new JPanel();
-		pesquisarLbl = new JLabel();
-		pesquisarTextField = new JTextField();
-		jScrollPane1 = new JScrollPane();
-		tabelaPatrimonio = new JTable();
+		buttonsPanel = new JPanel();
+		registerBtn = new JButton();
+		modiftyBtn = new JButton();
+		deleteBtn = new JButton();
+		visualizeBtn = new JButton();
+		mainPanel = new JPanel();
+		searchLbl = new JLabel();
+		searchTextField = new JTextField();
+		scrollPane = new JScrollPane();
+		propertyTable = new JTable();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Salas");
 
-		panelBotoes.setBorder(BorderFactory
+		buttonsPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		cadastrar.setText("Cadastrar");
-		cadastrar.setName("Cadastrar");
-		cadastrar.addActionListener(new ActionListener() {
+		registerBtn.setText("Cadastrar");
+		registerBtn.setName("Cadastrar");
+		registerBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -102,9 +102,9 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		alterar.setText("Alterar");
-		alterar.setName("Alterar");
-		alterar.addActionListener(new ActionListener() {
+		modiftyBtn.setText("Alterar");
+		modiftyBtn.setName("Alterar");
+		modiftyBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -112,9 +112,9 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		excluir.setText("Excluir");
-		excluir.setName("Excluir");
-		excluir.addActionListener(new ActionListener() {
+		deleteBtn.setText("Excluir");
+		deleteBtn.setName("Excluir");
+		deleteBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -122,10 +122,10 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		visualizarBtn.setText("Visualizar Horarios");
-		visualizarBtn.setName("Visualizar Horarios");
-		visualizarBtn.setEnabled(true);
-		visualizarBtn.addActionListener(new ActionListener() {
+		visualizeBtn.setText("Visualizar Horarios");
+		visualizeBtn.setName("Visualizar Horarios");
+		visualizeBtn.setEnabled(true);
+		visualizeBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -133,72 +133,72 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		GroupLayout panelBotoesLayout = new GroupLayout(panelBotoes);
-		panelBotoes.setLayout(panelBotoesLayout);
-		panelBotoesLayout
-				.setHorizontalGroup(panelBotoesLayout
+		GroupLayout buttonsPanelLayout = new GroupLayout(buttonsPanel);
+		buttonsPanel.setLayout(buttonsPanelLayout);
+		buttonsPanelLayout
+				.setHorizontalGroup(buttonsPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
 								GroupLayout.Alignment.TRAILING,
-								panelBotoesLayout
+								buttonsPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
-												panelBotoesLayout
+												buttonsPanelLayout
 														.createParallelGroup(
 																GroupLayout.Alignment.TRAILING)
 														.addComponent(
-																visualizarBtn,
+																visualizeBtn,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(
-																excluir,
+																deleteBtn,
 																GroupLayout.Alignment.LEADING,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(
-																alterar,
+																modiftyBtn,
 																GroupLayout.Alignment.LEADING,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(
-																cadastrar,
+																registerBtn,
 																GroupLayout.Alignment.LEADING,
 																GroupLayout.DEFAULT_SIZE,
 																135,
 																Short.MAX_VALUE))
 										.addContainerGap()));
-		panelBotoesLayout
-				.setVerticalGroup(panelBotoesLayout
+		buttonsPanelLayout
+				.setVerticalGroup(buttonsPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelBotoesLayout
+								buttonsPanelLayout
 										.createSequentialGroup()
 										.addGap(30, 30, 30)
-										.addComponent(cadastrar,
+										.addComponent(registerBtn,
 												GroupLayout.PREFERRED_SIZE, 80,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(alterar,
+										.addComponent(modiftyBtn,
 												GroupLayout.PREFERRED_SIZE, 82,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(excluir,
+										.addComponent(deleteBtn,
 												GroupLayout.PREFERRED_SIZE, 80,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(visualizarBtn,
+										.addComponent(visualizeBtn,
 												GroupLayout.PREFERRED_SIZE, 81,
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap(31, Short.MAX_VALUE)));
 
-		pesquisarTextField.addActionListener(new ActionListener() {
+		searchTextField.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -206,49 +206,49 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		GroupLayout panelListaLayout = new GroupLayout(panelLista);
-		panelLista.setLayout(panelListaLayout);
-		panelListaLayout
-				.setHorizontalGroup(panelListaLayout
+		GroupLayout mainPanelLayout = new GroupLayout(mainPanel);
+		mainPanel.setLayout(mainPanelLayout);
+		mainPanelLayout
+				.setHorizontalGroup(mainPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelListaLayout
+								mainPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(pesquisarLbl)
+										.addComponent(searchLbl)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(pesquisarTextField,
+										.addComponent(searchTextField,
 												GroupLayout.PREFERRED_SIZE,
 												304,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addContainerGap()));
-		panelListaLayout.setVerticalGroup(panelListaLayout.createParallelGroup(
+		mainPanelLayout.setVerticalGroup(mainPanelLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				panelListaLayout
+				mainPanelLayout
 						.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(
-								panelListaLayout
+								mainPanelLayout
 										.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
-										.addComponent(pesquisarLbl,
+										.addComponent(searchLbl,
 												GroupLayout.PREFERRED_SIZE, 28,
 												GroupLayout.PREFERRED_SIZE)
-										.addComponent(pesquisarTextField,
+										.addComponent(searchTextField,
 												GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)));
 
-		tabelaPatrimonio.setModel(fillTable());
-		tabelaPatrimonio.setName("tabelaPatrimonio");
-		tabelaPatrimonio.setRowSelectionAllowed(true);
+		propertyTable.setModel(fillTable());
+		propertyTable.setName("tabelaPatrimonio");
+		propertyTable.setRowSelectionAllowed(true);
 
-		jScrollPane1.setViewportView(tabelaPatrimonio);
+		scrollPane.setViewportView(propertyTable);
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -262,17 +262,17 @@ public abstract class PatrimonioView extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
 												.addComponent(
-														panelLista,
+														mainPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														jScrollPane1,
+														scrollPane,
 														GroupLayout.DEFAULT_SIZE,
 														460, Short.MAX_VALUE))
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(panelBotoes,
+								.addComponent(buttonsPanel,
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
@@ -288,19 +288,19 @@ public abstract class PatrimonioView extends JDialog {
 												.addGroup(
 														layout.createSequentialGroup()
 																.addComponent(
-																		panelLista,
+																		mainPanel,
 																		GroupLayout.DEFAULT_SIZE,
 																		GroupLayout.DEFAULT_SIZE,
 																		Short.MAX_VALUE)
 																.addPreferredGap(
 																		LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
-																		jScrollPane1,
+																		scrollPane,
 																		GroupLayout.PREFERRED_SIZE,
 																		353,
 																		GroupLayout.PREFERRED_SIZE))
 												.addComponent(
-														panelBotoes,
+														buttonsPanel,
 														GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE))
@@ -314,7 +314,7 @@ public abstract class PatrimonioView extends JDialog {
 	// property.
 	private void visualizarActionPerformed (ActionEvent evt) {
 
-		int index = this.tabelaPatrimonio.getSelectedRow();
+		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -332,7 +332,7 @@ public abstract class PatrimonioView extends JDialog {
 	// This method generates the action to modify a property.
 	private void alterarActionPerformed (ActionEvent evt) {
 
-		int index = this.tabelaPatrimonio.getSelectedRow();
+		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -345,7 +345,7 @@ public abstract class PatrimonioView extends JDialog {
 	// This method generates the action to delete a property.
 	private void excluirActionPerformed (ActionEvent evt) {
 
-		int index = this.tabelaPatrimonio.getSelectedRow();
+		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);

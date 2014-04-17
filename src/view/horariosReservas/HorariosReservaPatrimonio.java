@@ -1,7 +1,7 @@
 /**
 PropertyReservertionTime
 This mother-class is used as base to select a time to reserve a property
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/horariosReservas
  */
 package view.horariosReservas;
 
