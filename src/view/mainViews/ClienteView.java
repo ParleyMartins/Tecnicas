@@ -59,19 +59,19 @@ public abstract class ClienteView extends JDialog {
 	public abstract void excluirAction ( );
 
 	// This method fills a vector with the clients on database.
-	protected Vector <String> fillDataVector (Cliente cliente) {
+	protected Vector <String> fillDataVector (Cliente client) {
 
 		Vector <String> dataTable = new Vector <String>();
 
-		if (cliente == null) {
+		if (client == null) {
 			return null;
 		}
 
-		dataTable.add(cliente.getMatricula());
-		dataTable.add(cliente.getNome());
-		dataTable.add(cliente.getTelefone());
-		dataTable.add(cliente.getCpf());
-		dataTable.add(cliente.getEmail());
+		dataTable.add(client.getEnrollmentNumber());
+		dataTable.add(client.getName());
+		dataTable.add(client.getPhoneNumber());
+		dataTable.add(client.getCpf());
+		dataTable.add(client.getEmail());
 
 		return dataTable;
 

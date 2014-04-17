@@ -79,7 +79,7 @@ public class ProfessorView extends ClienteView {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					"Deseja mesmo excluir Professor: "
 							+ ManterProfessor.getInstance()
-									.getProfessores_vet().get(index).getNome()
+									.getProfessores_vet().get(index).getName()
 							+ "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {

@@ -81,7 +81,7 @@ public class AlunoView extends ClienteView {
 					this,
 					"Deseja mesmo excluir Aluno: "
 							+ ManterAluno.getInstance().getAluno_vet()
-									.get(index).getNome() + "?", "Excluir",
+									.get(index).getName() + "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
 				ManterAluno.getInstance().excluir(

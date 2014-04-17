@@ -56,10 +56,10 @@ public class ResSalaAlunoDAO extends DAO {
 	private String select_id_aluno (Aluno a) {
 
 		return "SELECT id_aluno FROM aluno WHERE " + "aluno.nome = \""
-				+ a.getNome() + "\" and " + "aluno.cpf = \"" + a.getCpf()
-				+ "\" and " + "aluno.telefone = \"" + a.getTelefone()
+				+ a.getName() + "\" and " + "aluno.cpf = \"" + a.getCpf()
+				+ "\" and " + "aluno.telefone = \"" + a.getPhoneNumber()
 				+ "\" and " + "aluno.email = \"" + a.getEmail() + "\" and "
-				+ "aluno.matricula = \"" + a.getMatricula() + "\"";
+				+ "aluno.matricula = \"" + a.getEnrollmentNumber() + "\"";
 	}
 
 	// Select id by Sala query.
@@ -342,11 +342,11 @@ public class ResSalaAlunoDAO extends DAO {
 	private boolean alunoinDB (Aluno aluno) throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM aluno WHERE "
-				+ "aluno.nome = \"" + aluno.getNome() + "\" and "
+				+ "aluno.nome = \"" + aluno.getName() + "\" and "
 				+ "aluno.cpf = \"" + aluno.getCpf() + "\" and "
-				+ "aluno.telefone = \"" + aluno.getTelefone() + "\" and "
+				+ "aluno.telefone = \"" + aluno.getPhoneNumber() + "\" and "
 				+ "aluno.email = \"" + aluno.getEmail() + "\" and "
-				+ "aluno.matricula = \"" + aluno.getMatricula() + "\";");
+				+ "aluno.matricula = \"" + aluno.getEnrollmentNumber() + "\";");
 	}
 
 	// Check if there is a Sala in the database.
@@ -365,11 +365,11 @@ public class ResSalaAlunoDAO extends DAO {
 		return super.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE "
 				+ "data = \"" + data + "\" and " + "hora = \"" + hora
 				+ "\" and " + "id_aluno = (SELECT id_aluno FROM aluno WHERE "
-				+ "aluno.nome = \"" + aluno.getNome() + "\" and "
+				+ "aluno.nome = \"" + aluno.getName() + "\" and "
 				+ "aluno.cpf = \"" + aluno.getCpf() + "\" and "
-				+ "aluno.telefone = \"" + aluno.getTelefone() + "\" and "
+				+ "aluno.telefone = \"" + aluno.getPhoneNumber() + "\" and "
 				+ "aluno.email = \"" + aluno.getEmail() + "\" and "
-				+ "aluno.matricula = \"" + aluno.getMatricula() + "\");");
+				+ "aluno.matricula = \"" + aluno.getEnrollmentNumber() + "\");");
 	}
 
 	// Check if there is a Sala entry in Reserva.
@@ -391,12 +391,12 @@ public class ResSalaAlunoDAO extends DAO {
 
 		return super.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE "
 				+ "id_aluno = (SELECT id_aluno FROM aluno WHERE "
-				+ "aluno.nome = \"" + r.getAluno().getNome() + "\" and "
+				+ "aluno.nome = \"" + r.getAluno().getName() + "\" and "
 				+ "aluno.cpf = \"" + r.getAluno().getCpf() + "\" and "
-				+ "aluno.telefone = \"" + r.getAluno().getTelefone()
+				+ "aluno.telefone = \"" + r.getAluno().getPhoneNumber()
 				+ "\" and "
 				+ "aluno.email = \"" + r.getAluno().getEmail() + "\" and "
-				+ "aluno.matricula = \"" + r.getAluno().getMatricula()
+				+ "aluno.matricula = \"" + r.getAluno().getEnrollmentNumber()
 				+ "\") and " + "id_sala = (SELECT id_sala FROM sala WHERE "
 				+ "sala.codigo = \"" + r.getSala().getCodigo() + "\" and "
 				+ "sala.descricao = \"" + r.getSala().getDescricao()

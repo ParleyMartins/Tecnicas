@@ -52,11 +52,11 @@ public class ResSalaProfessorDAO extends DAO {
 	private String select_id_professor (Professor p) {
 
 		return "SELECT id_professor FROM professor WHERE " +
-				"professor.nome = \"" + p.getNome() + "\" and " +
+				"professor.nome = \"" + p.getName() + "\" and " +
 				"professor.cpf = \"" + p.getCpf() + "\" and " +
-				"professor.telefone = \"" + p.getTelefone() + "\" and " +
+				"professor.telefone = \"" + p.getPhoneNumber() + "\" and " +
 				"professor.email = \"" + p.getEmail() + "\" and " +
-				"professor.matricula = \"" + p.getMatricula() + "\"";
+				"professor.matricula = \"" + p.getEnrollmentNumber() + "\"";
 	}
 
 	// Reuse query for SELECT SALA BY ID clause.
@@ -291,12 +291,12 @@ public class ResSalaProfessorDAO extends DAO {
 	private boolean professorinDB (Professor professor) throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM professor WHERE " +
-				"professor.nome = \"" + professor.getNome() + "\" and " +
+				"professor.nome = \"" + professor.getName() + "\" and " +
 				"professor.cpf = \"" + professor.getCpf() + "\" and " +
-				"professor.telefone = \"" + professor.getTelefone() + "\" and "
+				"professor.telefone = \"" + professor.getPhoneNumber() + "\" and "
 				+
 				"professor.email = \"" + professor.getEmail() + "\" and " +
-				"professor.matricula = \"" + professor.getMatricula() + "\";");
+				"professor.matricula = \"" + professor.getEnrollmentNumber() + "\";");
 	}
 
 	// Check if there is a Sala in the database.
@@ -327,13 +327,13 @@ public class ResSalaProfessorDAO extends DAO {
 
 		return super.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_professor = (SELECT id_professor FROM professor WHERE " +
-				"professor.nome = \"" + r.getProfessor().getNome() + "\" and " +
+				"professor.nome = \"" + r.getProfessor().getName() + "\" and " +
 				"professor.cpf = \"" + r.getProfessor().getCpf() + "\" and " +
-				"professor.telefone = \"" + r.getProfessor().getTelefone()
+				"professor.telefone = \"" + r.getProfessor().getPhoneNumber()
 				+ "\" and " +
 				"professor.email = \"" + r.getProfessor().getEmail()
 				+ "\" and " +
-				"professor.matricula = \"" + r.getProfessor().getMatricula()
+				"professor.matricula = \"" + r.getProfessor().getEnrollmentNumber()
 				+ "\") and " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + r.getSala().getCodigo() + "\" and " +
