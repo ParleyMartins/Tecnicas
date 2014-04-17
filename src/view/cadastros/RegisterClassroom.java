@@ -11,23 +11,23 @@ import javax.swing.JOptionPane;
 import control.ManterSala;
 import exception.PatrimonioException;
 
-public class CadastroSala extends CadastroPatrimonio {
+public class RegisterClassroom extends RegisterProperty{
 
 	// Constructor creates a RegisterRoom form.
-	public CadastroSala (java.awt.Frame parent, boolean modal) {
-
+	public RegisterClassroom (java.awt.Frame parent, boolean modal) {
+ 
 		super(parent, modal);
 		this.setName("CadastroSala");
 	}
 
 	@Override
 	// This method registers a student.
-	protected void cadastroAction ( ) {
+	protected void registerAction ( ) {
 
 		try {
-			ManterSala.getInstance().inserir(this.codigoTxtField.getText(),
-					this.descricaoTextArea.getText(),
-					this.capacidadeTxtField.getText());
+			ManterSala.getInstance().inserir(this.codeTxtField.getText(),
+					this.descriptionTxtArea.getText(),
+					this.capacityTxtField.getText());
 
 			JOptionPane.showMessageDialog(this, "Sala Cadastrada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
