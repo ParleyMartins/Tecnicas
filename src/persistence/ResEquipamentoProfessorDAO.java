@@ -48,11 +48,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private String select_id_professor (Professor p) {
 
 		return "SELECT id_professor FROM professor WHERE "
-				+ "professor.nome = \"" + p.getNome() + "\" and "
+				+ "professor.nome = \"" + p.getName() + "\" and "
 				+ "professor.cpf = \"" + p.getCpf() + "\" and "
-				+ "professor.telefone = \"" + p.getTelefone() + "\" and "
+				+ "professor.telefone = \"" + p.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + p.getEmail() + "\" and "
-				+ "professor.matricula = \"" + p.getMatricula() + "\"";
+				+ "professor.matricula = \"" + p.getEnrollmentNumber() + "\"";
 	}
 
 	// Select Equipamento by id query.
@@ -303,12 +303,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean professorinDB (Professor professor) throws SQLException {
 
 		return super.inDBGeneric("SELECT * FROM professor WHERE "
-				+ "professor.nome = \"" + professor.getNome() + "\" and "
+				+ "professor.nome = \"" + professor.getName() + "\" and "
 				+ "professor.cpf = \"" + professor.getCpf() + "\" and "
-				+ "professor.telefone = \"" + professor.getTelefone()
+				+ "professor.telefone = \"" + professor.getPhoneNumber()
 				+ "\" and " + "professor.email = \"" + professor.getEmail()
 				+ "\" and " + "professor.matricula = \""
-				+ professor.getMatricula() + "\";");
+				+ professor.getEnrollmentNumber() + "\";");
 	}
 
 	// Check if there is an Equipamento in the database.
@@ -329,12 +329,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "data = \"" + data + "\" and " + "hora = \"" + hora
 				+ "\" and "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
-				+ "professor.nome = \"" + professor.getNome() + "\" and "
+				+ "professor.nome = \"" + professor.getName() + "\" and "
 				+ "professor.cpf = \"" + professor.getCpf() + "\" and "
-				+ "professor.telefone = \"" + professor.getTelefone()
+				+ "professor.telefone = \"" + professor.getPhoneNumber()
 				+ "\" and " + "professor.email = \"" + professor.getEmail()
 				+ "\" and " + "professor.matricula = \""
-				+ professor.getMatricula() + "\");");
+				+ professor.getEnrollmentNumber() + "\");");
 	}
 
 	// Check if there is a Equipamento entry in a Reserva.
@@ -362,19 +362,19 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return super
 				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 						+ "id_professor = (SELECT id_professor FROM professor WHERE "
-						+ "professor.nome = \"" + r.getProfessor().getNome()
+						+ "professor.nome = \"" + r.getProfessor().getName()
 						+ "\" and "
 						+ "professor.cpf = \""
 						+ r.getProfessor().getCpf()
 						+ "\" and "
 						+ "professor.telefone = \""
-						+ r.getProfessor().getTelefone()
+						+ r.getProfessor().getPhoneNumber()
 						+ "\" and "
 						+ "professor.email = \""
 						+ r.getProfessor().getEmail()
 						+ "\" and "
 						+ "professor.matricula = \""
-						+ r.getProfessor().getMatricula()
+						+ r.getProfessor().getEnrollmentNumber()
 						+ "\") and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
 						+ "equipamento.codigo = \""

@@ -27,13 +27,13 @@ public class AlterarAluno extends CadastroCliente {
 
 		try {
 			this.nomeTxtField.setText(ManterAluno.getInstance().getAluno_vet()
-					.get(index).getNome());
+					.get(index).getName());
 			this.emailTxtField.setText(ManterAluno.getInstance().getAluno_vet()
 					.get(index).getEmail());
 			this.telefoneTxtField.setText(ManterAluno.getInstance()
-					.getAluno_vet().get(index).getTelefone());
+					.getAluno_vet().get(index).getPhoneNumber());
 			this.matriculaTxtField.setText(ManterAluno.getInstance()
-					.getAluno_vet().get(index).getMatricula());
+					.getAluno_vet().get(index).getEnrollmentNumber());
 			this.cpfTxtField.setText(ManterAluno.getInstance().getAluno_vet()
 					.get(index).getCpf());
 

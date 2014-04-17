@@ -67,9 +67,9 @@ public abstract class ClienteView extends JDialog {
 			return null;
 		}
 
-		nomesTabela.add(cliente.getMatricula());
-		nomesTabela.add(cliente.getNome());
-		nomesTabela.add(cliente.getTelefone());
+		nomesTabela.add(cliente.getEnrollmentNumber());
+		nomesTabela.add(cliente.getName());
+		nomesTabela.add(cliente.getPhoneNumber());
 		nomesTabela.add(cliente.getCpf());
 		nomesTabela.add(cliente.getEmail());
 

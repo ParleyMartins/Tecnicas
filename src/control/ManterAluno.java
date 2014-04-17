@@ -90,12 +90,12 @@ public class ManterAluno {
 			String phoneNumber, String email, Aluno newStudent)
 			throws ClienteException, SQLException {
 
-		Aluno oldStudent = new Aluno(newStudent.getNome( ), newStudent.getCpf( ),
-				newStudent.getMatricula( ), newStudent.getTelefone( ), newStudent.getEmail( ));
-		newStudent.setNome(name);
+		Aluno oldStudent = new Aluno(newStudent.getName( ), newStudent.getCpf( ),
+				newStudent.getEnrollmentNumber( ), newStudent.getPhoneNumber( ), newStudent.getEmail( ));
+		newStudent.setName(name);
 		newStudent.setCpf(cpf);
-		newStudent.setMatricula(enrollmentNumber);
-		newStudent.setTelefone(phoneNumber);
+		newStudent.setEnrollmentNumber(enrollmentNumber);
+		newStudent.setPhoneNumber(phoneNumber);
 		newStudent.setEmail(email);
 		AlunoDAO.getInstance( ).change(oldStudent, newStudent);
 	}

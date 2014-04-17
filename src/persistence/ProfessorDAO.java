@@ -48,7 +48,7 @@ public class ProfessorDAO {
 			if (this.inDBCpf(prof.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
-				if (this.inDBMatricula(prof.getMatricula())) {
+				if (this.inDBMatricula(prof.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				}
 			}
@@ -56,9 +56,9 @@ public class ProfessorDAO {
 
 		this.updateQuery("INSERT INTO "
 				+ "professor (nome, cpf, telefone, email, matricula) VALUES ("
-				+ "\"" + prof.getNome() + "\", " + "\"" + prof.getCpf()
-				+ "\", " + "\"" + prof.getTelefone() + "\", " + "\""
-				+ prof.getEmail() + "\", " + "\"" + prof.getMatricula()
+				+ "\"" + prof.getName() + "\", " + "\"" + prof.getCpf()
+				+ "\", " + "\"" + prof.getPhoneNumber() + "\", " + "\""
+				+ prof.getEmail() + "\", " + "\"" + prof.getEnrollmentNumber()
 				+ "\"); ");
 	}
 
@@ -86,26 +86,26 @@ public class ProfessorDAO {
 					&& this.inDBCpf(prof_novo.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
-				if (!prof_velho.getMatricula().equals(prof_novo.getMatricula())
-						&& this.inDBMatricula(prof_novo.getMatricula())) {
+				if (!prof_velho.getEnrollmentNumber().equals(prof_novo.getEnrollmentNumber())
+						&& this.inDBMatricula(prof_novo.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				} else {
 					if (!this.inDB(prof_novo)) {
 						String msg = "UPDATE professor SET " + "nome = \""
-								+ prof_novo.getNome() + "\", " + "cpf = \""
+								+ prof_novo.getName() + "\", " + "cpf = \""
 								+ prof_novo.getCpf() + "\", " + "telefone = \""
-								+ prof_novo.getTelefone() + "\", "
+								+ prof_novo.getPhoneNumber() + "\", "
 								+ "email = \"" + prof_novo.getEmail() + "\", "
-								+ "matricula = \"" + prof_novo.getMatricula()
+								+ "matricula = \"" + prof_novo.getEnrollmentNumber()
 								+ "\"" + " WHERE " + "professor.nome = \""
-								+ prof_velho.getNome() + "\" and "
+								+ prof_velho.getName() + "\" and "
 								+ "professor.cpf = \"" + prof_velho.getCpf()
 								+ "\" and " + "professor.telefone = \""
-								+ prof_velho.getTelefone() + "\" and "
+								+ prof_velho.getPhoneNumber() + "\" and "
 								+ "professor.email = \""
 								+ prof_velho.getEmail() + "\" and "
 								+ "professor.matricula = \""
-								+ prof_velho.getMatricula() + "\";";
+								+ prof_velho.getEnrollmentNumber() + "\";";
 						con.setAutoCommit(false);
 						pst = con.prepareStatement(msg);
 						pst.executeUpdate();
@@ -132,12 +132,12 @@ public class ProfessorDAO {
 		} else {
 			if (this.inDB(prof)) {
 				this.updateQuery("DELETE FROM professor WHERE "
-						+ "professor.nome = \"" + prof.getNome() + "\" and "
+						+ "professor.nome = \"" + prof.getName() + "\" and "
 						+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-						+ "professor.telefone = \"" + prof.getTelefone()
+						+ "professor.telefone = \"" + prof.getPhoneNumber()
 						+ "\" and " + "professor.email = \"" + prof.getEmail()
 						+ "\" and " + "professor.matricula = \""
-						+ prof.getMatricula() + "\";");
+						+ prof.getEnrollmentNumber() + "\";");
 			} else {
 				throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
 			}
@@ -242,11 +242,11 @@ public class ProfessorDAO {
 	private boolean inDB (Professor prof) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM professor WHERE "
-				+ "professor.nome = \"" + prof.getNome() + "\" and "
+				+ "professor.nome = \"" + prof.getName() + "\" and "
 				+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-				+ "professor.telefone = \"" + prof.getTelefone() + "\" and "
+				+ "professor.telefone = \"" + prof.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + prof.getEmail() + "\" and "
-				+ "professor.matricula = \"" + prof.getMatricula() + "\";");
+				+ "professor.matricula = \"" + prof.getEnrollmentNumber() + "\";");
 	}
 
 	// Check if Professor exists in the database by CPF.
@@ -268,19 +268,19 @@ public class ProfessorDAO {
 
 		if (this.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
-				+ "professor.nome = \"" + prof.getNome() + "\" and "
+				+ "professor.nome = \"" + prof.getName() + "\" and "
 				+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-				+ "professor.telefone = \"" + prof.getTelefone() + "\" and "
+				+ "professor.telefone = \"" + prof.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + prof.getEmail() + "\" and "
-				+ "professor.matricula = \"" + prof.getMatricula() + "\");") == false) {
+				+ "professor.matricula = \"" + prof.getEnrollmentNumber() + "\");") == false) {
 			if (this.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
 					+ "id_professor = (SELECT id_professor FROM professor WHERE "
-					+ "professor.nome = \"" + prof.getNome() + "\" and "
+					+ "professor.nome = \"" + prof.getName() + "\" and "
 					+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-					+ "professor.telefone = \"" + prof.getTelefone()
+					+ "professor.telefone = \"" + prof.getPhoneNumber()
 					+ "\" and " + "professor.email = \"" + prof.getEmail()
 					+ "\" and " + "professor.matricula = \""
-					+ prof.getMatricula() + "\");") == false) {
+					+ prof.getEnrollmentNumber() + "\");") == false) {
 				return false;
 			}
 		}

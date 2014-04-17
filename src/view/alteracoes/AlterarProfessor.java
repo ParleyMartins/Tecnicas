@@ -26,13 +26,13 @@ public class AlterarProfessor extends CadastroCliente {
 
 		try {
 			this.nomeTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getNome());
+					.getProfessores_vet().get(index).getName());
 			this.emailTxtField.setText(ManterProfessor.getInstance()
 					.getProfessores_vet().get(index).getEmail());
 			this.telefoneTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getTelefone());
+					.getProfessores_vet().get(index).getPhoneNumber());
 			this.matriculaTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getMatricula());
+					.getProfessores_vet().get(index).getEnrollmentNumber());
 			this.cpfTxtField.setText(ManterProfessor.getInstance()
 					.getProfessores_vet().get(index).getCpf());
 

@@ -21,7 +21,7 @@ public class Professor extends Cliente {
 		super(nome, cpf, matricula, telefone, email);
 	}
 
-	public void setMatricula (String matricula) throws ClienteException {
+	public void setEnrollmentNumber (String matricula) throws ClienteException {
 
 		if (matricula == null)
 			throw new ClienteException(MATRICULA_NULO);
@@ -32,7 +32,7 @@ public class Professor extends Cliente {
 		// super.matricula = matricula;
 		// else
 		// throw new ClienteException(MATRICULA_INVALIDO);
-		super.matricula = matricula;//
+		super.enrollmentNumber = matricula;//
 	}
 
 }

@@ -2,192 +2,212 @@
 Cliente
 Class sets exceptions of Cliente.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Cliente.java.
-*/
+ */
 
 package model;
 
 import exception.ClienteException;
 
-
-/*Para fazer uma melhor validacoa e captura do dados
- * se pega todos os dados como string.
- * 
- * 
- */
 public abstract class Cliente {
-	private String nome;
+
+	// All attributes are String to make the validation process easier.
+
+	// The CPF is a id number that every brazilian citizen have.
 	private String cpf;
-	private String telefone;
+	private String name;
+	private String phoneNumber;
 	private String email;
-	protected String matricula;
-	
-	//Mensagens de Erro e Alertas
-		private final String NOME_INVALIDO = "Nome Invalido.";
-		private final String NOME_BRANCO = "Nome em Branco.";
-		private final String NOME_NULO = "Nome esta Nulo.";
-		private final String CPF_INVALIDO = "CPF Invalido.";
-		private final String CPF_BRANCO = "CPF em Branco.";
-		private final String CPF_NULO = "CPF esta Nulo.";
-		private final String TELEFONE_INVALIDO = "Telefone Invalido.";
-		//private final String TELEFONE_BRANCO = "Telefone em Branco.";
-		private final String TELEFONE_NULO = "Telefone esta Nulo.";
-		//private final String EMAIL_INVALIDO = "E-mail Invalido.";
-		//private final String EMAIL_BRANCO = "E-mail em Branco.";
-		private final String EMAIL_NULO = "E-mail esta Nulo.";
-	
-	
-	public Cliente(String nome, String cpf, String matricula,
-			String telefone, String email) throws ClienteException{
-		this.setNome(nome);
+	protected String enrollmentNumber;
+
+	// Error messagens and alerts
+	private final String INVALID_NAME = "Nome Invalido.";
+	private final String BLANK_NAME = "Nome em Branco.";
+	private final String NULL_NAME = "Nome esta Nulo.";
+	private final String INVALID_CPF = "CPF Invalido.";
+	private final String BLANK_CPF = "CPF em Branco.";
+	private final String NULL_CPF = "CPF esta Nulo.";
+	private final String INVALID_PHONE_NUMBER = "Telefone Invalido.";
+	private final String NULL_PHONE_NUMBER = "Telefone esta Nulo.";
+	private final String NULL_EMAIL = "E-mail esta Nulo.";
+
+	public Cliente(String name, String cpf, String enrollmentNumber,
+			String phoneNumber, String email) throws ClienteException {
+
+		this.setName(name);
 		this.setCpf(cpf);
-        this.setMatricula(matricula);
-		this.setTelefone(telefone);
+		this.setEnrollmentNumber(enrollmentNumber);
+		this.setPhoneNumber(phoneNumber);
 		this.setEmail(email);
 	}
 
-	public String getNome() {
-		return nome;
-	}
-	
-	public String getCpf() {
-		return cpf;
-	}
-	
-	public String getTelefone() {
-		return telefone;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public String getMatricula() {
-		return matricula;
-	}
-	
-	public void setNome(String nome) throws ClienteException{
-		if(nome == null)
-			throw new ClienteException(NOME_NULO);
-		else if("".equals(nome.trim()))
-			throw new ClienteException(NOME_BRANCO);
-		else if(nome.trim().matches("[a-zA-Z][a-zA-Z\\s]+"))
-			this.nome = nome.trim();
-		else
-			throw new ClienteException(NOME_INVALIDO);
-	}
-	
-	public void setCpf(String cpf) throws ClienteException {
-		if(cpf == null)
-			throw new ClienteException(CPF_NULO);
-		else if("".equals(cpf))
-			throw new ClienteException(CPF_BRANCO);
-		else if(cpf.matches("[\\d]{3,3}.[\\d]{3,3}.[\\d]{3,3}-[\\d]{2,2}$"))
-		{
-			if(this.validarCpf(
-					cpf.split("[\\. | -]")[0] + 
-					cpf.split("[\\. | -]")[1] + 
-					cpf.split("[\\. | -]")[2] + 
-					cpf.split("[\\. | -]")[3]))
-				this.cpf = cpf;
-			else
-				throw new ClienteException(CPF_INVALIDO);
-		}
-		else
-			throw new ClienteException(CPF_INVALIDO);
-	}
-	
-	public void setTelefone(String telefone) throws ClienteException {
-		if(telefone == null)
-			throw new ClienteException(TELEFONE_NULO);
-		else if("".equals(telefone))
-			this.telefone = telefone;
-		//Telefone ser� guardado sem espa�os.
-		else if(telefone.matches("(\\([ ]*[\\d]{2,3}[ ]*\\))?[ ]*[\\d]{4,4}[ ]*-?[ ]*[\\d]{4,4}[ ]*$"))
-			this.telefone = telefone.replaceAll(" ", "");
-		else
-			throw new ClienteException(TELEFONE_INVALIDO);
-	}
-	
-	public void setEmail(String email) throws ClienteException {
-		if(email == null)
-			throw new ClienteException(EMAIL_NULO);
-		else
-			this.email = email;
-	}
-	
-	public abstract void setMatricula(String matricula) throws ClienteException;
-	
-	@Override
-	public String toString() {
-		return "Nome: " + nome + 
-			"\nCpf: " + cpf + 
-			"\nTelefone: " + telefone + 
-			"\nEmail: " + email + 
-			"\nMatricula: " + matricula;
+	public String getName() {
+
+		return name;
 	}
 
-	public boolean equals(Cliente b){
-		if(	this.getNome().equals(b.getNome()) &&
-			this.getCpf().equals(b.getCpf()) &&
-			this.getMatricula().equals(b.getMatricula()) &&
-			this.getTelefone().equals(b.getTelefone()) &&
-			this.getEmail().equals(b.getEmail())){
-			
+	public String getCpf() {
+
+		return cpf;
+	}
+
+	public String getPhoneNumber() {
+
+		return phoneNumber;
+	}
+
+	public String getEmail() {
+
+		return email;
+	}
+
+	public String getEnrollmentNumber() {
+
+		return enrollmentNumber;
+	}
+
+	public void setName(String name) throws ClienteException {
+
+		if (name == null) {
+			throw new ClienteException(NULL_NAME);
+		} else {
+			if ("".equals(name.trim())) {
+				throw new ClienteException(BLANK_NAME);
+			} else {
+				if (name.trim().matches("[a-zA-Z][a-zA-Z\\s]+")) {
+					this.name = name.trim();
+				} else {
+					throw new ClienteException(INVALID_NAME);
+				}
+			}
+		}
+	}
+
+	public void setCpf(String cpf) throws ClienteException {
+
+		if (cpf == null) {
+			throw new ClienteException(NULL_CPF);
+		} else {
+			if ("".equals(cpf)) {
+				throw new ClienteException(BLANK_CPF);
+			} else {
+				if (cpf.matches("[\\d]{3,3}.[\\d]{3,3}.[\\d]{3,3}-[\\d]{2,2}$")) {
+					if (this.validateCpf(cpf.split("[\\. | -]")[0]
+							+ cpf.split("[\\. | -]")[1]
+							+ cpf.split("[\\. | -]")[2]
+							+ cpf.split("[\\. | -]")[3])) {
+						this.cpf = cpf;
+					} else {
+						throw new ClienteException(INVALID_CPF);
+					}
+				} else {
+					throw new ClienteException(INVALID_CPF);
+				}
+			}
+		}
+	}
+
+	public void setPhoneNumber(String phoneNumber) throws ClienteException {
+
+		if (phoneNumber == null) {
+			throw new ClienteException(NULL_PHONE_NUMBER);
+		} else {
+			if ("".equals(phoneNumber)) {
+				this.phoneNumber = phoneNumber;
+			// The phone number must be stored without spaces
+			} else {
+				if (phoneNumber
+						.matches("(\\([ ]*[\\d]{2,3}[ ]*\\))?[ ]*[\\d]{4,4}[ ]*-?[ ]*[\\d]{4,4}[ ]*$")) {
+					this.phoneNumber = phoneNumber.replaceAll(" ", "");
+				} else {
+					throw new ClienteException(INVALID_PHONE_NUMBER);
+				}
+			}
+		}
+	}
+
+	public void setEmail(String email) throws ClienteException {
+
+		if (email == null) {
+			throw new ClienteException(NULL_EMAIL);
+		} else {
+			this.email = email;
+		}
+	}
+
+	public abstract void setEnrollmentNumber(String enrollmentNumber)
+			throws ClienteException;
+
+	@Override
+	public String toString() {
+
+		return "Nome: " + name + "\nCpf: " + cpf + "\nTelefone: " + phoneNumber
+				+ "\nEmail: " + email + "\nMatricula: " + enrollmentNumber;
+	}
+
+	public boolean equals(Cliente b) {
+
+		if (this.getName().equals(b.getName())
+				&& this.getCpf().equals(b.getCpf())
+				&& this.getEnrollmentNumber().equals(b.getEnrollmentNumber())
+				&& this.getPhoneNumber().equals(b.getPhoneNumber())
+				&& this.getEmail().equals(b.getEmail())) {
+
 			return true;
+		} else {
+			// Do nothing. 
 		}
 		return false;
 	}
-	
-	private boolean validarCpf(String cpf) {
 
-		int d1, d2;
-		int digito1, digito2, resto;
-		int digitoCPF;
-		String	nDigResult;
+	private boolean validateCpf(String cpf) {
 
-		d1 = d2 = 0;
-		digito1 = digito2 = resto = 0;
+		int firstVerifierDigit, secondVerifierDigit;
+		int firstDigit, secondDigit, leftover;
+		int currentCpfDigit;
+		String verifierDigitResult;
 
-		for (int nCount = 1; nCount < cpf.length() -1; nCount++)
-		{
-			 digitoCPF = Integer.valueOf (cpf.substring(nCount -1, nCount)).intValue();
+		firstVerifierDigit = secondVerifierDigit = 0;
+		firstDigit = secondDigit = leftover = 0;
 
-			 //multiplique a ultima casa por 2 a seguinte por 3 a seguinte por 4 e assim por diante.
-			 d1 = d1 + ( 11 - nCount ) * digitoCPF;
+		for (int position = 1; position < cpf.length() - 1; position++) {
+			currentCpfDigit = Integer.valueOf(
+					cpf.substring(position - 1, position)).intValue();
 
-			 //para o segundo digito repita o procedimento incluindo o primeiro digito calculado no passo anterior.
-			 d2 = d2 + ( 12 - nCount ) * digitoCPF;
-		};
+			// Multiply the last number by 2, the following by 3, after by 4...
+			firstVerifierDigit = firstVerifierDigit + (11 - position)
+					* currentCpfDigit;
 
-		//Primeiro resto da divisão por 11.
-		resto = (d1 % 11);
+			// To the second verifier, the same thing, including the first one.
+			secondVerifierDigit = secondVerifierDigit + (12 - position)
+					* currentCpfDigit;
+		}
 
-		//Se o resultado for 0 ou 1 o digito é 0 caso contrário o digito é 11 menos o resultado anterior.
-		if (resto < 2)
-			 digito1 = 0;
-		else
-			 digito1 = 11 - resto;
+		// We take the leftover to decide about the first digit value.
+		leftover = (firstVerifierDigit % 11);
 
-		d2 += 2 * digito1;
+		if (leftover < 2) {
+			firstDigit = 0;
+		} else {
+			firstDigit = 11 - leftover;
+		}
 
-		//Segundo resto da divisão por 11.
-		resto = (d2 % 11);
+		secondVerifierDigit += 2 * firstDigit;
 
-		//Se o resultado for 0 ou 1 o digito é 0 caso contrário o digito é 11 menos o resultado anterior.
-		if (resto < 2)
-			 digito2 = 0;
-		else
-			 digito2 = 11 - resto;
+		// The same thing, but to the second digit.
+		leftover = (secondVerifierDigit % 11);
 
-		//Digito verificador do CPF que está sendo validado.
-		String nDigVerific = cpf.substring (cpf.length()-2, cpf.length());
+		if (leftover < 2) {
+			secondDigit = 0;
+		} else {
+			secondDigit = 11 - leftover;
+		}
 
-		//Concatenando o primeiro resto com o segundo.
-		nDigResult = String.valueOf(digito1) + String.valueOf(digito2);
+		String finalVerifierDigit = cpf.substring(cpf.length() - 2, cpf.length());
+		verifierDigitResult = String.valueOf(firstDigit) + String.valueOf(secondDigit);
 
-		//comparar o digito verificador do cpf com o primeiro resto + o segundo resto.
-		return nDigVerific.equals(nDigResult);
+		// If the expected is equals the calculated, the CPF is valid. 
+		return finalVerifierDigit.equals(verifierDigitResult);
 
-	} // fim do método validarCpf
+	}
 
 }

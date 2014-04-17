@@ -90,15 +90,15 @@ public class ManterProfessor {
 			throws ClienteException, SQLException {
 
 		Professor oldTeacher = new Professor(
-				newTeacher.getNome(),
+				newTeacher.getName(),
 				newTeacher.getCpf(),
-				newTeacher.getMatricula(),
-				newTeacher.getTelefone(),
+				newTeacher.getEnrollmentNumber(),
+				newTeacher.getPhoneNumber(),
 				newTeacher.getEmail());
-		newTeacher.setNome(name);
+		newTeacher.setName(name);
 		newTeacher.setCpf(cpf);
-		newTeacher.setMatricula(enrollmentNumber);
-		newTeacher.setTelefone(phoneNumber);
+		newTeacher.setEnrollmentNumber(enrollmentNumber);
+		newTeacher.setPhoneNumber(phoneNumber);
 		newTeacher.setEmail(email);
 		ProfessorDAO.getInstance().alterar(oldTeacher, newTeacher);
 	}
