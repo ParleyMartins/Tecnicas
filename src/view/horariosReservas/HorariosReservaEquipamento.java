@@ -1,7 +1,7 @@
 /**
 EquipmentReservertionTime
 This class allows the user to select a time to reserve a equipment
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/horariosReservas
  */
 
 package view.horariosReservas;
@@ -51,8 +51,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 				nomesTabela.add(String.valueOf(index));
 				nomesTabela.add(r.getHora());
-				nomesTabela.add(r.getProfessor().getNome());
-				nomesTabela.add(r.getProfessor().getMatricula());
+				nomesTabela.add(r.getProfessor().getName());
+				nomesTabela.add(r.getProfessor().getEnrollmentNumber());
 				nomesTabela.add(r.getEquipamento().getCodigo());
 				nomesTabela.add(r.getEquipamento().getDescricao());
 			}

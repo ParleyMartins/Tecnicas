@@ -1,7 +1,7 @@
 /**
 ManterSala
 Include the code and description of the room, change, and delete devices.
-https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/control/ManterSala.java
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterSala.java
 */
 package control;
 
@@ -15,12 +15,11 @@ import model.Sala;
 public class ManterSala {
 
 	private static ManterSala instance;
-	
-	private Vector <Sala> salas_vet = new Vector <Sala>( );
 
+	private Vector <Sala> roomsVec = new Vector <Sala>();
 
 	private ManterSala ( ) {
-		
+
 		// Blank constructor.
 	}
 
@@ -28,7 +27,7 @@ public class ManterSala {
 	public static ManterSala getInstance ( ) {
 
 		if (instance == null)
-			instance = new ManterSala( );
+			instance = new ManterSala();
 		return instance;
 	}
 
@@ -36,36 +35,38 @@ public class ManterSala {
 	public Vector <Sala> getSalas_vet ( ) throws SQLException,
 			PatrimonioException {
 
-		this.salas_vet = SalaDAO.getInstance( ).buscarTodos( );
-		return this.salas_vet;
+		this.roomsVec = SalaDAO.getInstance().buscarTodos();
+		return this.roomsVec;
 	}
-	
+
 	// This method include code and description of the room in the database.
-	public void inserir (String codigo, String descricao, String capacidade)
+	public void inserir (String roomCode, String roomDescription,
+			String capacity)
 			throws PatrimonioException, SQLException {
 
-		Sala sala = new Sala(codigo, descricao, capacidade);
-		SalaDAO.getInstance( ).incluir(sala);
-		this.salas_vet.add(sala);
+		Sala sala = new Sala(roomCode, roomDescription, capacity);
+		SalaDAO.getInstance().incluir(sala);
+		this.roomsVec.add(sala);
 	}
 
-	//  This method Update code and description info in the database.
-	public void alterar (String codigo, String descricao, String capacidade,
-			Sala sala) throws PatrimonioException, SQLException {
+	// This method Update code and description info in the database.
+	public void alterar (String roomCode, String roomDescription,
+			String capacity,
+			Sala newRoom) throws PatrimonioException, SQLException {
 
-		Sala old_sala = new Sala(sala.getCodigo( ), sala.getDescricao( ),
-				sala.getCapacidade( ));
-		sala.setCodigo(codigo);
-		sala.setDescricao(descricao);
-		sala.setCapacidade(capacidade);
-		SalaDAO.getInstance( ).alterar(old_sala, sala);
+		Sala oldRoom = new Sala(newRoom.getCodigo(), newRoom.getDescricao(),
+				newRoom.getCapacidade());
+		newRoom.setCodigo(roomCode);
+		newRoom.setDescricao(roomDescription);
+		newRoom.setCapacidade(capacity);
+		SalaDAO.getInstance().alterar(oldRoom, newRoom);
 	}
 
-	//This method deletes room form the database.
-	public void excluir (Sala sala) throws SQLException, PatrimonioException {
+	// This method deletes room form the database.
+	public void excluir (Sala room) throws SQLException, PatrimonioException {
 
-		SalaDAO.getInstance( ).excluir(sala);
-		this.salas_vet.remove(sala);
+		SalaDAO.getInstance().excluir(room);
+		this.roomsVec.remove(room);
 	}
 
 }

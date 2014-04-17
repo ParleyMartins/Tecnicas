@@ -48,17 +48,17 @@ public class AlunoDAO {
 			if (this.inDBCpf(aluno.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
-				if (this.inDBMatricula(aluno.getMatricula())) {
+				if (this.inDBMatricula(aluno.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				} else {
 					if (!this.inDB(aluno)) {
 						this.updateQuery("INSERT INTO "
 								+ "aluno (nome, cpf, telefone, email, matricula) VALUES ("
-								+ "\"" + aluno.getNome() + "\", " + "\""
+								+ "\"" + aluno.getName() + "\", " + "\""
 								+ aluno.getCpf() + "\", " + "\""
-								+ aluno.getTelefone() + "\", " + "\""
+								+ aluno.getPhoneNumber() + "\", " + "\""
 								+ aluno.getEmail() + "\", " + "\""
-								+ aluno.getMatricula() + "\"); ");
+								+ aluno.getEnrollmentNumber() + "\"); ");
 					} else {
 						throw new ClienteException(ALUNO_JA_EXISTENTE);
 					}
@@ -92,29 +92,29 @@ public class AlunoDAO {
 						&& this.inDBCpf(aluno_novo.getCpf())) {
 					throw new ClienteException(CPF_JA_EXISTENTE);
 				} else {
-					if (!aluno_velho.getMatricula().equals(
-							aluno_novo.getMatricula())
-							&& this.inDBMatricula(aluno_novo.getMatricula())) {
+					if (!aluno_velho.getEnrollmentNumber().equals(
+							aluno_novo.getEnrollmentNumber())
+							&& this.inDBMatricula(aluno_novo.getEnrollmentNumber())) {
 						throw new ClienteException(MATRICULA_JA_EXISTENTE);
 					} else {
 						if (!this.inDB(aluno_novo)) {
 							String msg = "UPDATE aluno SET " + "nome = \""
-									+ aluno_novo.getNome() + "\", "
+									+ aluno_novo.getName() + "\", "
 									+ "cpf = \"" + aluno_novo.getCpf() + "\", "
 									+ "telefone = \""
-									+ aluno_novo.getTelefone() + "\", "
+									+ aluno_novo.getPhoneNumber() + "\", "
 									+ "email = \"" + aluno_novo.getEmail()
 									+ "\", " + "matricula = \""
-									+ aluno_novo.getMatricula() + "\""
+									+ aluno_novo.getEnrollmentNumber() + "\""
 									+ " WHERE " + "aluno.nome = \""
-									+ aluno_velho.getNome() + "\" and "
+									+ aluno_velho.getName() + "\" and "
 									+ "aluno.cpf = \"" + aluno_velho.getCpf()
 									+ "\" and " + "aluno.telefone = \""
-									+ aluno_velho.getTelefone() + "\" and "
+									+ aluno_velho.getPhoneNumber() + "\" and "
 									+ "aluno.email = \""
 									+ aluno_velho.getEmail() + "\" and "
 									+ "aluno.matricula = \""
-									+ aluno_velho.getMatricula() + "\";";
+									+ aluno_velho.getEnrollmentNumber() + "\";";
 
 							con.setAutoCommit(false);
 							pst = con.prepareStatement(msg);
@@ -143,12 +143,12 @@ public class AlunoDAO {
 			} else {
 				if (this.inDB(aluno)) {
 					this.updateQuery("DELETE FROM aluno WHERE "
-							+ "aluno.nome = \"" + aluno.getNome() + "\" and "
+							+ "aluno.nome = \"" + aluno.getName() + "\" and "
 							+ "aluno.cpf = \"" + aluno.getCpf() + "\" and "
-							+ "aluno.telefone = \"" + aluno.getTelefone()
+							+ "aluno.telefone = \"" + aluno.getPhoneNumber()
 							+ "\" and " + "aluno.email = \"" + aluno.getEmail()
 							+ "\" and " + "aluno.matricula = \""
-							+ aluno.getMatricula() + "\";");
+							+ aluno.getEnrollmentNumber() + "\";");
 				} else {
 					throw new ClienteException(ALUNO_NAO_EXISTENTE);
 				}
@@ -254,11 +254,11 @@ public class AlunoDAO {
 	private boolean inDB (Aluno aluno) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM aluno WHERE "
-				+ "aluno.nome = \"" + aluno.getNome() + "\" and "
+				+ "aluno.nome = \"" + aluno.getName() + "\" and "
 				+ "aluno.cpf = \"" + aluno.getCpf() + "\" and "
-				+ "aluno.telefone = \"" + aluno.getTelefone() + "\" and "
+				+ "aluno.telefone = \"" + aluno.getPhoneNumber() + "\" and "
 				+ "aluno.email = \"" + aluno.getEmail() + "\" and "
-				+ "aluno.matricula = \"" + aluno.getMatricula() + "\";");
+				+ "aluno.matricula = \"" + aluno.getEnrollmentNumber() + "\";");
 	}
 
 	// Check if there is a database entry by CPF.
@@ -281,11 +281,11 @@ public class AlunoDAO {
 
 		return this.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE "
 				+ "id_aluno = (SELECT id_aluno FROM aluno WHERE "
-				+ "aluno.nome = \"" + aluno.getNome() + "\" and "
+				+ "aluno.nome = \"" + aluno.getName() + "\" and "
 				+ "aluno.cpf = \"" + aluno.getCpf() + "\" and "
-				+ "aluno.telefone = \"" + aluno.getTelefone() + "\" and "
+				+ "aluno.telefone = \"" + aluno.getPhoneNumber() + "\" and "
 				+ "aluno.email = \"" + aluno.getEmail() + "\" and "
-				+ "aluno.matricula = \"" + aluno.getMatricula() + "\");");
+				+ "aluno.matricula = \"" + aluno.getEnrollmentNumber() + "\");");
 	}
 
 	// Fetch Alunoo using a result.

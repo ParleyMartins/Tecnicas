@@ -1,7 +1,7 @@
 /**
 Main2
 This class is the main user interface
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/Main2.java
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/Main2.java
  */
 
 package view;
@@ -31,13 +31,13 @@ import view.mainViews.SalaView;
 
 public class Main2 extends JFrame {
 
-	private JButton alunoBtn;
-	private JButton equipamentoBtn;
-	private JLabel fundoLbl;
-	private JPanel panelReserva;
-	private JPanel panelReserva1;
-	private JButton professorBtn;
-	private JButton salaBtn;
+	private JButton studentBtn;
+	private JButton equipmentBtn;
+	private JLabel backgroundLbl;
+	private JPanel clientPanel;
+	private JPanel propertyPanel;
+	private JButton teacherBtn;
+	private JButton roomBtn;
 
 	// Constructor generates form Main2
 	public Main2 ( ) {
@@ -86,28 +86,28 @@ public class Main2 extends JFrame {
 	// This method initializes the Components.
 	private void initComponents ( ) {
 
-		this.fundoLbl = new JLabel();
-		this.panelReserva1 = new JPanel();
-		this.salaBtn = new JButton();
-		this.equipamentoBtn = new JButton();
-		this.panelReserva = new JPanel();
-		this.professorBtn = new JButton();
-		this.alunoBtn = new JButton();
+		this.backgroundLbl = new JLabel();
+		this.propertyPanel = new JPanel();
+		this.roomBtn = new JButton();
+		this.equipmentBtn = new JButton();
+		this.clientPanel = new JPanel();
+		this.teacherBtn = new JButton();
+		this.studentBtn = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("SisRES");
 		setName("Main");
 		setResizable(false);
 
-		this.fundoLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		this.fundoLbl.setText("SisRES");
+		this.backgroundLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		this.backgroundLbl.setText("SisRES");
 
-		this.panelReserva1.setBorder(BorderFactory
+		this.propertyPanel.setBorder(BorderFactory
 				.createTitledBorder("Reserva"));
 
-		this.salaBtn.setText("Sala");
-		this.salaBtn.setName("Sala");
-		this.salaBtn.addActionListener(new ActionListener() {
+		this.roomBtn.setText("Sala");
+		this.roomBtn.setName("Sala");
+		this.roomBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -115,9 +115,9 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.equipamentoBtn.setText("Equipamento");
-		this.equipamentoBtn.setName("Equipamento");
-		this.equipamentoBtn.addActionListener(new ActionListener() {
+		this.equipmentBtn.setText("Equipamento");
+		this.equipmentBtn.setName("Equipamento");
+		this.equipmentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -125,48 +125,48 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		GroupLayout panelReserva1Layout = new GroupLayout(
-				this.panelReserva1);
-		this.panelReserva1.setLayout(panelReserva1Layout);
-		panelReserva1Layout
-				.setHorizontalGroup(panelReserva1Layout
+		GroupLayout propertyPanelLayout = new GroupLayout(
+				this.propertyPanel);
+		this.propertyPanel.setLayout(propertyPanelLayout);
+		propertyPanelLayout
+				.setHorizontalGroup(propertyPanelLayout
 						.createParallelGroup(
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelReserva1Layout
+								propertyPanelLayout
 										.createSequentialGroup()
 										.addGap(6, 6, 6)
 										.addComponent(
-												this.salaBtn,
+												this.roomBtn,
 												GroupLayout.PREFERRED_SIZE,
 												105,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
-												this.equipamentoBtn,
+												this.equipmentBtn,
 												GroupLayout.DEFAULT_SIZE,
 												106, Short.MAX_VALUE)
 										.addContainerGap()));
-		panelReserva1Layout
-				.setVerticalGroup(panelReserva1Layout
+		propertyPanelLayout
+				.setVerticalGroup(propertyPanelLayout
 						.createParallelGroup(
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelReserva1Layout
+								propertyPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
-												panelReserva1Layout
+												propertyPanelLayout
 														.createParallelGroup(
 																GroupLayout.Alignment.BASELINE)
 														.addComponent(
-																this.salaBtn,
+																this.roomBtn,
 																GroupLayout.PREFERRED_SIZE,
 																40,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																this.equipamentoBtn,
+																this.equipmentBtn,
 																GroupLayout.PREFERRED_SIZE,
 																40,
 																GroupLayout.PREFERRED_SIZE))
@@ -174,12 +174,12 @@ public class Main2 extends JFrame {
 												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 
-		this.panelReserva.setBorder(BorderFactory
+		this.clientPanel.setBorder(BorderFactory
 				.createTitledBorder("Cadastro"));
 
-		this.professorBtn.setText("Professor");
-		this.professorBtn.setName("Professor");
-		this.professorBtn.addActionListener(new ActionListener() {
+		this.teacherBtn.setText("Professor");
+		this.teacherBtn.setName("Professor");
+		this.teacherBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -187,9 +187,9 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.alunoBtn.setText("Aluno");
-		this.alunoBtn.setName("Aluno");
-		this.alunoBtn.addActionListener(new ActionListener() {
+		this.studentBtn.setText("Aluno");
+		this.studentBtn.setName("Aluno");
+		this.studentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -197,49 +197,49 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		GroupLayout panelReservaLayout = new GroupLayout(
-				this.panelReserva);
-		this.panelReserva.setLayout(panelReservaLayout);
-		panelReservaLayout
-				.setHorizontalGroup(panelReservaLayout
+		GroupLayout clientPanelLayout = new GroupLayout(
+				this.clientPanel);
+		this.clientPanel.setLayout(clientPanelLayout);
+		clientPanelLayout
+				.setHorizontalGroup(clientPanelLayout
 						.createParallelGroup(
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelReservaLayout
+								clientPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addComponent(
-												this.professorBtn,
+												this.teacherBtn,
 												GroupLayout.PREFERRED_SIZE,
 												105,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
-												this.alunoBtn,
+												this.studentBtn,
 												GroupLayout.PREFERRED_SIZE,
 												105,
 												GroupLayout.PREFERRED_SIZE)
 										.addGap(14, 14, 14)));
-		panelReservaLayout
-				.setVerticalGroup(panelReservaLayout
+		clientPanelLayout
+				.setVerticalGroup(clientPanelLayout
 						.createParallelGroup(
 								GroupLayout.Alignment.LEADING)
 						.addGroup(
-								panelReservaLayout
+								clientPanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
-												panelReservaLayout
+												clientPanelLayout
 														.createParallelGroup(
 																GroupLayout.Alignment.BASELINE)
 														.addComponent(
-																this.professorBtn,
+																this.teacherBtn,
 																GroupLayout.PREFERRED_SIZE,
 																40,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																this.alunoBtn,
+																this.studentBtn,
 																GroupLayout.PREFERRED_SIZE,
 																40,
 																GroupLayout.PREFERRED_SIZE))
@@ -255,13 +255,13 @@ public class Main2 extends JFrame {
 				.addGroup(
 						layout.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(this.panelReserva1,
+								.addComponent(this.propertyPanel,
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(this.panelReserva,
+								.addComponent(this.clientPanel,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE))
@@ -269,7 +269,7 @@ public class Main2 extends JFrame {
 						GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addGap(191, 191, 191)
-								.addComponent(this.fundoLbl,
+								.addComponent(this.backgroundLbl,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE).addGap(185, 185, 185)));
@@ -284,17 +284,17 @@ public class Main2 extends JFrame {
 												GroupLayout.Alignment.LEADING,
 												false)
 												.addComponent(
-														this.panelReserva,
+														this.clientPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														this.panelReserva1,
+														this.propertyPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))
 								.addGap(111, 111, 111)
-								.addComponent(this.fundoLbl,
+								.addComponent(this.backgroundLbl,
 										GroupLayout.PREFERRED_SIZE,
 										45,
 										GroupLayout.PREFERRED_SIZE)
@@ -314,25 +314,25 @@ public class Main2 extends JFrame {
 	// This method performs an action once the equipment button is pressed.
 	private void equipamentoBtnActionPerformed (ActionEvent evt) {
 
-		PatrimonioView equipamento = new EquipamentoView(this, true);
-		equipamento.setResizable(false);
-		equipamento.setVisible(true);
+		PatrimonioView equipment = new EquipamentoView(this, true);
+		equipment.setResizable(false);
+		equipment.setVisible(true);
 	}
 
 	// This method performs an action once the teacher button is pressed.
 	private void professorBtnActionPerformed (ActionEvent evt) {
 
-		ClienteView client = new ProfessorView(this, true);
-		client.setResizable(false);
-		client.setVisible(true);
+		ClienteView teacher = new ProfessorView(this, true);
+		teacher.setResizable(false);
+		teacher.setVisible(true);
 	}
 
 	// This performs an action once the student button is pressed.
 	private void alunoBtnActionPerformed (ActionEvent evt) {
 
-		ClienteView client = new AlunoView(this, true);
-		client.setResizable(false);
-		client.setVisible(true);
+		ClienteView student = new AlunoView(this, true);
+		student.setResizable(false);
+		student.setVisible(true);
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
 RoomReservertionTime
 This class allows the user to select a time to reserve a room
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/horariosReservas
  */
 package view.horariosReservas;
 
@@ -50,8 +50,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				nomesTabela.add(String.valueOf(index));
 				nomesTabela.add("Aluno");
 				nomesTabela.add(r.getHora());
-				nomesTabela.add(r.getAluno().getNome());
-				nomesTabela.add(r.getAluno().getMatricula());
+				nomesTabela.add(r.getAluno().getName());
+				nomesTabela.add(r.getAluno().getEnrollmentNumber());
 				nomesTabela.add(r.getFinalidade());
 				nomesTabela.add(r.getSala().getCodigo());
 				nomesTabela.add(r.getSala().getDescricao());
@@ -66,8 +66,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					nomesTabela.add(String.valueOf(index));
 					nomesTabela.add("Professor");
 					nomesTabela.add(r.getHora());
-					nomesTabela.add(r.getProfessor().getNome());
-					nomesTabela.add(r.getProfessor().getMatricula());
+					nomesTabela.add(r.getProfessor().getName());
+					nomesTabela.add(r.getProfessor().getEnrollmentNumber());
 					nomesTabela.add(r.getFinalidade());
 					nomesTabela.add(r.getSala().getCodigo());
 					nomesTabela.add(r.getSala().getDescricao());
