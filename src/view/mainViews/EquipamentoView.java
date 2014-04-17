@@ -1,7 +1,7 @@
 /**
 EquipmentView
 This class shows the equipments from database
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/mainViews
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/mainViews
  */
 
 package view.mainViews;
@@ -26,24 +26,24 @@ public class EquipamentoView extends PatrimonioView {
 	public EquipamentoView (Frame parent, boolean modal) {
 
 		super(parent, modal);
-		pesquisarLbl.setText("Digite o eqpto. desejado: ");
+		searchLbl.setText("Digite o eqpto. desejado: ");
 		this.setTitle("Equipamentos");
 		this.setName("EquipamentoView");
 	}
 
 	// This method fills a vector with the equipments on database.
-	private Vector <String> fillDataVector (Equipamento equipamento) {
+	private Vector <String> fillDataVector (Equipamento equipment) {
 
-		if (equipamento == null) {
+		if (equipment == null) {
 			return null;
 		}
 
-		Vector <String> nomesTabela = new Vector <String>();
+		Vector <String> dataTable = new Vector <String>();
 
-		nomesTabela.add(equipamento.getCodigo());
-		nomesTabela.add(equipamento.getDescricao());
+		dataTable.add(equipment.getCodigo());
+		dataTable.add(equipment.getDescricao());
 
-		return nomesTabela;
+		return dataTable;
 
 	}
 
@@ -52,19 +52,19 @@ public class EquipamentoView extends PatrimonioView {
 	protected DefaultTableModel fillTable ( ) {
 
 		try {
-			DefaultTableModel table = new DefaultTableModel();
+			DefaultTableModel equipmentTable = new DefaultTableModel();
 
 			Iterator <Equipamento> i = control.ManterEquipamento.getInstance()
 					.getEquipamento_vet().iterator();
 
-			table.addColumn("Codigo");
-			table.addColumn("Descricao");
+			equipmentTable.addColumn("Codigo");
+			equipmentTable.addColumn("Descricao");
 
 			while (i.hasNext()) {
 				Equipamento equipamento = i.next();
-				table.addRow(fillDataVector(equipamento));
+				equipmentTable.addRow(fillDataVector(equipamento));
 			}
-			return table;
+			return equipmentTable;
 
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
@@ -83,22 +83,22 @@ public class EquipamentoView extends PatrimonioView {
 	// Method generates a equipment register form.
 	protected void cadastrarAction ( ) {
 
-		CadastroEquipamento cadastro = new CadastroEquipamento(new JFrame(),
+		CadastroEquipamento registerEquipment = new CadastroEquipamento(new JFrame(),
 				true);
-		cadastro.setResizable(false);
-		cadastro.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable());
+		registerEquipment.setResizable(false);
+		registerEquipment.setVisible(true);
+		this.propertyTable.setModel(fillTable());
 	}
 
 	@Override
 	// Method generates a equipment modify form.
 	protected void alterarAction (int index) {
 
-		AlterarEquipamento alteracao = new AlterarEquipamento(new JFrame(),
+		AlterarEquipamento modifyEquipment = new AlterarEquipamento(new JFrame(),
 				true, index);
-		alteracao.setResizable(false);
-		alteracao.setVisible(true);
-		this.tabelaPatrimonio.setModel(fillTable());
+		modifyEquipment.setResizable(false);
+		modifyEquipment.setVisible(true);
+		this.propertyTable.setModel(fillTable());
 
 	}
 
@@ -123,7 +123,7 @@ public class EquipamentoView extends PatrimonioView {
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
 			}
-			this.tabelaPatrimonio.setModel(fillTable());
+			this.propertyTable.setModel(fillTable());
 
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
@@ -143,10 +143,10 @@ public class EquipamentoView extends PatrimonioView {
 	protected void visualizarAction (int index) {
 
 		try {
-			DiaReservaEquipamento reserva = new DiaReservaEquipamento(
+			DiaReservaEquipamento daysTable = new DiaReservaEquipamento(
 					new JFrame(), true, index);
-			reserva.setResizable(false);
-			reserva.setVisible(true);
+			daysTable.setResizable(false);
+			daysTable.setVisible(true);
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);

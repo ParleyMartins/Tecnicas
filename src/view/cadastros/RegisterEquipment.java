@@ -10,23 +10,23 @@ import javax.swing.JOptionPane;
 import control.ManterEquipamento;
 import exception.PatrimonioException;
 
-public class CadastroEquipamento extends CadastroPatrimonio {
+public class RegisterEquipment extends RegisterProperty {
 
-	public CadastroEquipamento (java.awt.Frame parent, boolean modal) {
+	public RegisterEquipment (java.awt.Frame parentWindow, boolean modal) {
 
-		super(parent, modal);
+		super(parentWindow, modal);
 		this.setName("CadastroEquipamento");
-		this.capacidadeLbl.setVisible(false);
-		this.capacidadeTxtField.setVisible(false);
+		this.capacityLabel.setVisible(false);
+		this.capacityTxtField.setVisible(false);
 	}
 
-	@Override
-	protected void cadastroAction ( ) {
+	
+	protected void registerAction ( ) {
 
 		try {
 			ManterEquipamento.getInstance().inserir(
-					this.codigoTxtField.getText(),
-					this.descricaoTextArea.getText());
+					this.codeTxtField.getText(),
+					this.descriptionTxtArea.getText());
 
 			JOptionPane.showMessageDialog(this,
 					"Equipamento Cadastrado com sucesso", "Sucesso",

@@ -2,7 +2,7 @@
 Patrimonio. 
 Class sets exceptions of Patrimonio.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
- */
+*/
 
 package model;
 
@@ -10,62 +10,68 @@ import exception.PatrimonioException;
 
 public class Patrimonio {
 
-	private String codigo;
-	private String descricao;
-	// Alerts and error mensages
-	// private final String CODIGO_INVALIDO = "Codigo Invalido.";
+	private String id_code;
+	private String description;
+	
+	// Alerts and error messages.
 	private final String CODIGO_BRANCO = "Codigo em Branco.";
 	private final String CODIGO_NULO = "Codigo esta Nulo.";
-	// private final String DESCRICAO_INVALIDO = "Descricao Invalido.";
 	private final String DESCRICAO_BRANCO = "Descricao em Branco.";
 	private final String DESCRICAO_NULO = "Descricao esta Nula.";
 
-	public Patrimonio (String codigo, String descricao)
+	public Patrimonio (String code, String description)
 			throws PatrimonioException {
 
-		this.setCodigo(codigo);
-		this.setDescricao(descricao);
+		this.setCodigo(code);
+		this.setDescricao(description);
 	}
 
 	public String getCodigo ( ) {
 
-		return codigo;
+		return id_code;
 	}
 
 	public String getDescricao ( ) {
 
-		return descricao;
+		return description;
 	}
 
-	public void setCodigo (String codigo) throws PatrimonioException {
+	public void setCodigo (String id_code) throws PatrimonioException {
 
-		if (codigo == null)
+		if (id_code == null) {
 			throw new PatrimonioException(CODIGO_NULO);
-		else
-			if ("".equals(codigo.trim()))
+		} else {
+			if ("".equals(id_code.trim())) {
 				throw new PatrimonioException(CODIGO_BRANCO);
-		// else if(codigo.matches("PATTERN"))
-		// this.codigo = codigo;
-		// else
-		// throw new PatrimonioException(CODIGO_INVALIDO);
-		this.codigo = codigo;//
+			} else {
+				// Do nothing. 
+			}
+		}
+		this.id_code = id_code;
 	}
 
-	public void setDescricao (String descricao) throws PatrimonioException {
+	public void setDescricao (String description) throws PatrimonioException {
 
-		if (descricao == null)
+		if (description == null) {
 			throw new PatrimonioException(DESCRICAO_NULO);
-		else
-			if ("".equals(descricao.trim()))
+		} else {
+			if ("".equals(description.trim())) {
 				throw new PatrimonioException(DESCRICAO_BRANCO);
-		this.descricao = descricao;
+			} else {
+				// Do nothing.
+			}
+		}
+		this.description = description;
 	}
 
-	public boolean equals (Patrimonio e) {
+	public boolean equals (Patrimonio property) {
 
-		if (this.getCodigo().equals(e.getCodigo()) &&
-				this.getDescricao().equals(e.getDescricao()))
+		if (this.getCodigo().equals(property.getCodigo()) &&
+				this.getDescricao().equals(property.getDescricao())) {
 			return true;
+		} else {
+			// do nothing. 
+		}
 
 		return false;
 	}
@@ -73,7 +79,7 @@ public class Patrimonio {
 	@Override
 	public String toString ( ) {
 
-		return "Codigo=" + codigo +
-				"\nDescricao=" + descricao;
+		return "Codigo=" + id_code +
+				"\nDescricao=" + description;
 	}
 }

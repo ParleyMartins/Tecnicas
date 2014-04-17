@@ -1,41 +1,38 @@
 /**
-RegisterTeacher
-This class allows the user to register a teacher
+RegisterStudent 
+This class allows the user to register a student
 https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
  */
-
 package view.cadastros;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import control.ManterProfessor;
+import control.ManterAluno;
 import exception.ClienteException;
 
-public class CadastroProfessor extends CadastroCliente {
+public class RegisterStudent extends RegisterClient {
 
-	// Constructor creates a RegisterTeacher form.
-	public CadastroProfessor (java.awt.Frame parent, boolean modal) {
+	// Constructor creates a RegisterStudent form.
+	public RegisterStudent(java.awt.Frame parentWindow, boolean modal) {
 
-		super(parent, modal);
-		this.setName("CadastroProfessor");
-
+		super(parentWindow, modal);
+		this.setName("CadastroAluno");
 	}
 
 	@Override
 	// This method registers a student
-	public void cadastroAction ( ) {
+	public void registerAction ( ) {
 
 		try {
-			if (this.cadastroBtn.getText().equals("Cadastrar")) {
-				ManterProfessor.getInstance().inserir(
-						this.nomeTxtField.getText(),
+			if (this.registerButton.getText().equals("Cadastrar")) {
+				ManterAluno.getInstance().inserir(this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
-						this.matriculaTxtField.getText(),
-						this.telefoneTxtField.getText(),
+						this.enrollmentNumberTxtField.getText(),
+						this.phoneNumberTxtField.getText(),
 						this.emailTxtField.getText());
 
 				JOptionPane.showMessageDialog(this,
-						"Professor Cadastrado com sucesso", "Sucesso",
+						"Aluno Cadastrado com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
 
@@ -52,5 +49,4 @@ public class CadastroProfessor extends CadastroCliente {
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
-
 }

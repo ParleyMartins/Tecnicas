@@ -1,7 +1,7 @@
 /**
 PropertyReservertionTime
 This mother-class is used as base to select a time to reserve a property
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/horariosReservas
  */
 package view.horariosReservas;
 
@@ -28,24 +28,24 @@ import javax.swing.GroupLayout;
 
 public abstract class HorariosReservaPatrimonio extends JDialog {
 
-	protected JButton alterarButton;
-	protected JButton cancelarReservaButton;
-	protected JButton reservarButton;
-	protected JTable reservasTable;
-	protected String data;
-	protected int mes;
-	protected Patrimonio p;
-	private JPanel jPanel2;
-	private JPanel jPanel3;
-	private JScrollPane jScrollPane1;
+	protected JButton modifyButton;
+	protected JButton cancelReservationButton;
+	protected JButton reserveButton;
+	protected JTable reservationTable;
+	protected String date;
+	protected int month;
+	protected Patrimonio property;
+	private JPanel buttonsPanel;
+	private JPanel tablePanel;
+	private JScrollPane scrollPane;
 
-	public HorariosReservaPatrimonio (Frame parent, boolean modal, String data,
-			Patrimonio p) {
+	public HorariosReservaPatrimonio (Frame parent, boolean modal, String date,
+			Patrimonio property) {
 
 		super(parent, modal);
-		this.data = data;
-		this.setTitle(this.data);
-		this.p = p;
+		this.date = date;
+		this.setTitle(this.date);
+		this.property = property;
 		initComponents();
 
 	}
@@ -65,19 +65,19 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	// This method initialize the components.
 	private void initComponents ( ) {
 
-		jPanel3 = new JPanel();
-		this.jPanel2 = new JPanel();
-		this.reservarButton = new JButton();
-		this.alterarButton = new JButton();
-		this.cancelarReservaButton = new JButton();
-		this.jScrollPane1 = new JScrollPane();
-		this.reservasTable = new JTable();
+		this.tablePanel = new JPanel();
+		this.buttonsPanel = new JPanel();
+		this.reserveButton = new JButton();
+		this.modifyButton = new JButton();
+		this.cancelReservationButton = new JButton();
+		this.scrollPane = new JScrollPane();
+		this.reservationTable = new JTable();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-		this.reservarButton.setText("Reservar");
-		this.reservarButton.setName("ReservarButton");
-		this.reservarButton.addActionListener(new ActionListener() {
+		this.reserveButton.setText("Reservar");
+		this.reserveButton.setName("ReservarButton");
+		this.reserveButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -85,9 +85,9 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			}
 		});
 
-		this.alterarButton.setText("Alterar Reserva");
-		this.alterarButton.setName("AlterarButton");
-		this.alterarButton.addActionListener(new ActionListener() {
+		this.modifyButton.setText("Alterar Reserva");
+		this.modifyButton.setName("AlterarButton");
+		this.modifyButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -95,9 +95,9 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			}
 		});
 
-		this.cancelarReservaButton.setText("Cancelar Reserva");
-		this.cancelarReservaButton.setName("CancelarReservaButton");
-		this.cancelarReservaButton.addActionListener(new ActionListener() {
+		this.cancelReservationButton.setText("Cancelar Reserva");
+		this.cancelReservationButton.setName("CancelarReservaButton");
+		this.cancelReservationButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
@@ -105,105 +105,113 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			}
 		});
 
-		GroupLayout jPanel2Layout = new GroupLayout(this.jPanel2);
-		this.jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel2Layout
-						.createSequentialGroup()
-						.addContainerGap()
+		GroupLayout buttonsPanelLayout = new GroupLayout(this.buttonsPanel);
+		this.buttonsPanel.setLayout(buttonsPanelLayout);
+		buttonsPanelLayout
+				.setHorizontalGroup(buttonsPanelLayout
+						.createParallelGroup(
+								GroupLayout.Alignment.LEADING)
 						.addGroup(
-								jPanel2Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.TRAILING,
-												false)
-										.addComponent(this.reservarButton,
-												GroupLayout.DEFAULT_SIZE, 127,
-												Short.MAX_VALUE)
-										.addComponent(
-												this.cancelarReservaButton,
-												GroupLayout.Alignment.LEADING,
-												GroupLayout.DEFAULT_SIZE, 127,
-												Short.MAX_VALUE)
-										.addComponent(this.alterarButton,
-												GroupLayout.Alignment.LEADING,
+								buttonsPanelLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												buttonsPanelLayout
+														.createParallelGroup(
+																GroupLayout.Alignment.TRAILING,
+																false)
+														.addComponent(
+																this.reserveButton,
+																GroupLayout.DEFAULT_SIZE,
+																127,
+																Short.MAX_VALUE)
+														.addComponent(
+																this.cancelReservationButton,
+																GroupLayout.Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																127,
+																Short.MAX_VALUE)
+														.addComponent(
+																this.modifyButton,
+																GroupLayout.Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE))
+										.addContainerGap(
 												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
-		jPanel2Layout
-				.setVerticalGroup(jPanel2Layout
+												Short.MAX_VALUE)));
+		buttonsPanelLayout
+				.setVerticalGroup(buttonsPanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								jPanel2Layout
+								buttonsPanelLayout
 										.createSequentialGroup()
 										.addGap(25, 25, 25)
-										.addComponent(this.reservarButton,
+										.addComponent(this.reserveButton,
 												GroupLayout.PREFERRED_SIZE, 51,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.alterarButton,
+										.addComponent(this.modifyButton,
 												GroupLayout.PREFERRED_SIZE, 65,
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
-												this.cancelarReservaButton,
+												this.cancelReservationButton,
 												GroupLayout.PREFERRED_SIZE, 59,
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap(175, Short.MAX_VALUE)));
 
-		jPanel2Layout.linkSize(SwingConstants.VERTICAL,
-				new Component[] { this.alterarButton,
-						this.cancelarReservaButton, this.reservarButton });
+		buttonsPanelLayout.linkSize(SwingConstants.VERTICAL,
+				new Component[] { this.modifyButton,
+						this.cancelReservationButton, this.reserveButton });
 
-		this.reservasTable.setModel(fillTable(this.p));
-		this.reservasTable.setName("ReservasTable"); // NOI18N
-		this.jScrollPane1.setViewportView(this.reservasTable);
+		this.reservationTable.setModel(fillTable(this.property));
+		this.reservationTable.setName("ReservasTable");
+		this.scrollPane.setViewportView(this.reservationTable);
 
-		GroupLayout jPanel3Layout = new GroupLayout(this.jPanel3);
-		this.jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout
-				.setHorizontalGroup(jPanel3Layout
+		GroupLayout tablePanelLayout = new GroupLayout(this.tablePanel);
+		this.tablePanel.setLayout(tablePanelLayout);
+		tablePanelLayout
+				.setHorizontalGroup(tablePanelLayout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
-								jPanel3Layout
+								tablePanelLayout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(this.jScrollPane1,
+										.addComponent(this.scrollPane,
 												GroupLayout.DEFAULT_SIZE, 727,
 												Short.MAX_VALUE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.jPanel2,
+										.addComponent(this.buttonsPanel,
 												GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap()));
-		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(
+		tablePanelLayout.setVerticalGroup(tablePanelLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel3Layout
+				tablePanelLayout
 						.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(
-								jPanel3Layout
+								tablePanelLayout
 										.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
-										.addComponent(this.jScrollPane1,
+										.addComponent(this.scrollPane,
 												GroupLayout.PREFERRED_SIZE,
 												407,
 												GroupLayout.PREFERRED_SIZE)
-										.addComponent(this.jPanel2,
+										.addComponent(this.buttonsPanel,
 												GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)));
 
-		jPanel3Layout.linkSize(SwingConstants.VERTICAL,
-				new Component[] { this.jPanel2, this.jScrollPane1 });
+		tablePanelLayout.linkSize(SwingConstants.VERTICAL,
+				new Component[] { this.buttonsPanel, this.scrollPane });
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -211,14 +219,16 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 				GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(this.jPanel3, GroupLayout.DEFAULT_SIZE,
+						.addComponent(this.tablePanel,
+								GroupLayout.DEFAULT_SIZE,
 								GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE).addContainerGap()));
 		layout.setVerticalGroup(layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(this.jPanel3, GroupLayout.DEFAULT_SIZE,
+						.addComponent(this.tablePanel,
+								GroupLayout.DEFAULT_SIZE,
 								GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE).addGap(20, 20, 20)));
 
@@ -228,35 +238,35 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	// This methods generates the cancel action.
 	private void cancelarReservaButtonActionPerformed (ActionEvent evt) {
 
-		int indexLinha;
-		indexLinha = this.reservasTable.getSelectedRow();
-		if (indexLinha < 0) {
+		int indexRow;
+		indexRow = this.reservationTable.getSelectedRow();
+		if (indexRow < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		}
-		cancelarReservaAction(indexLinha);
-		this.reservasTable.setModel(fillTable(this.p));
+		cancelarReservaAction(indexRow);
+		this.reservationTable.setModel(fillTable(this.property));
 	}
 
 	// This methods generates the reservation action.
 	private void reservarButtonActionPerformed (ActionEvent evt) {
 
 		reservarAction();
-		this.reservasTable.setModel(fillTable(this.p));
+		this.reservationTable.setModel(fillTable(this.property));
 	}
 
 	// This methods generates the modify reservation action.
 	private void alterarButtonActionPerformed (ActionEvent evt) {
 
-		int indexLinha;
-		indexLinha = this.reservasTable.getSelectedRow();
-		if (indexLinha < 0) {
+		int indexRow;
+		indexRow = this.reservationTable.getSelectedRow();
+		if (indexRow < 0) {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		}
-		alterarAction(indexLinha);
-		this.reservasTable.setModel(fillTable(this.p));
+		alterarAction(indexRow);
+		this.reservationTable.setModel(fillTable(this.property));
 	}
 }

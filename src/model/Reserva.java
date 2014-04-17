@@ -2,7 +2,7 @@
 Reserva. 
 Class sets exceptions of Reserva.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Reserva.java.
- */
+*/
 
 package model;
 
@@ -13,107 +13,117 @@ import exception.ReservaException;
 
 public class Reserva {
 
-	private String hora;
-	private String data;
+	private String time;
+	private String date;
 
-	// Mensages, Alerts, Defaults
-	private final String HORA_NULA = "A hora esta nula.";
-	private final String HORA_INVALIDA = "A hora eh invalida.";
-	private final String HORA_BRANCA = "A hora esta em branco.";
-	private final String HORA_PATTERN = "^[012]?[\\d]:[0-5][\\d]$";
-	private final String DATA_NULA = "A data esta nula.";
-	private final String DATA_INVALIDA = "A data eh invalida.";
-	private final String DATA_BRANCA = "A data esta em branco.";
-	private final String DATA_PATTERN = "^[0123]?[\\d]([./-])[01]?[\\d]\\1[\\d]{2,4}$";
+	// Error Messages and alerts
+	private final String NULL_TIME = "A hora esta nula.";
+	private final String INVALID_TIME = "A hora eh invalida.";
+	private final String BLANK_TIME = "A hora esta em branco.";
+	private final String NULL_DATE = "A data esta nula.";
+	private final String INVALID_DATE = "A data eh invalida.";
+	private final String BLANK_DATE = "A data esta em branco.";
 
-	public Reserva (String data, String hora) throws ReservaException {
+	private final String TIME_PATTERN = "^[012]?[\\d]:[0-5][\\d]$";
+	private final String DATE_PATTERN = "^[0123]?[\\d]([./-])[01]?[\\d]\\1[\\d]{2,4}$";
 
-		this.setData(data);
-		this.setHora(hora);
+	public Reserva(String date, String time) throws ReservaException {
+
+		this.setData(date);
+		this.setHora(time);
 	}
 
-	public String getHora ( ) {
+	public String getHora() {
 
-		return this.hora;
+		return this.time;
 	}
 
-	public String getData ( ) {
+	public String getData() {
 
-		return this.data;
+		return this.date;
 	}
 
-	public void setHora (String hora) throws ReservaException {
+	public void setHora(String time) throws ReservaException {
 
-		if (hora == null)
-			throw new ReservaException(HORA_NULA);
+		if (time == null) {
+			throw new ReservaException(NULL_TIME);
+		} else {
+			// Do nothing.
+		}
 
-		hora = hora.trim();
-		if (hora.equals(""))
-			throw new ReservaException(HORA_BRANCA);
-		else
-			if (hora.matches(HORA_PATTERN)) {
-				if (hora.length() == 4)
-					this.hora = "0" + hora;
-				else
-					this.hora = hora;
+		time = time.trim();
+		if (time.equals("")) {
+			throw new ReservaException(BLANK_TIME);
+		} else {
+			if (time.matches(TIME_PATTERN)) {
+				if (time.length() == 4) {
+					this.time = "0" + time;
+				} else {
+					this.time = time;
+				}
+			} else {
+				throw new ReservaException(INVALID_TIME);
 			}
-			else
-				throw new ReservaException(HORA_INVALIDA);
+		}
 	}
 
-	public void setData (String data) throws ReservaException {
+	public void setData(String date) throws ReservaException {
 
-		if (data == null)
-			throw new ReservaException(DATA_NULA);
+		if (date == null) {
+			throw new ReservaException(NULL_DATE);
+		}
 
-		data = data.trim();
-		if (data.equals(""))
-			throw new ReservaException(DATA_BRANCA);
-		else
-			if (data.matches(DATA_PATTERN)) {
-				this.data = padronizarData(data);
+		date = date.trim();
+		if (date.equals("")) {
+			throw new ReservaException(BLANK_DATE);
+		} else {
+			if (date.matches(DATE_PATTERN)) {
+				this.date = padronizarData(date);
+			} else {
+				throw new ReservaException(INVALID_DATE);
 			}
-			else
-				throw new ReservaException(DATA_INVALIDA);
-
+		}
 	}
 
-	public boolean equals (Reserva obj) {
+	public boolean equals(Reserva reservation) {
 
-		return (this.hora.equals(obj.getHora()) && this.data.equals(obj
-				.getData()));
+		return (this.time.equals(reservation.getHora()) && this.date
+				.equals(reservation.getData()));
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
-		return "\nHora=" + this.hora
-				+ "\nData=" + this.data;
+		return "\nHora=" + this.time + "\nData=" + this.date;
 	}
 
-	private static String padronizarData (String data) {
+	private static String padronizarData(String date) {
 
-		String agora[] = dataAtual().split("[./-]");
-		String partes[] = data.split("[./-]");
-		String dataNoPadrao = "";
+		String currentDate[] = dataAtual().split("[./-]");
+		String dateParts[] = date.split("[./-]");
+		String formatedDate = "";
 
-		for (int i = 0 ; i < 3 ; i++) {
-			if (i == 0)
-				dataNoPadrao += agora[i].substring(0,
-						agora[i].length() - partes[i].length()) + partes[i];
-			else
-				dataNoPadrao += "/" + agora[i].substring(0,
-						agora[i].length() - partes[i].length()) + partes[i];
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				formatedDate += currentDate[i].substring(0,
+						currentDate[i].length() - dateParts[i].length())
+						+ dateParts[i];
+			} else {
+				formatedDate += "/"
+						+ currentDate[i].substring(0, currentDate[i].length()
+								- dateParts[i].length()) + dateParts[i];
+			}
 
 		}
 
-		return dataNoPadrao;
+		return formatedDate;
 	}
 
-	private static String dataAtual ( ) {
+	private static String dataAtual() {
 
 		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-		return formatador.format(date);
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return formater.format(date);
 	}
 }

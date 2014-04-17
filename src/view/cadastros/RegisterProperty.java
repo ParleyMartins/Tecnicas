@@ -18,80 +18,80 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
-public abstract class CadastroPatrimonio extends JDialog {
+public abstract class RegisterProperty extends JDialog {
 
-	protected JButton cadastroBtn;
-	protected JButton cancelBtn;
-	protected JLabel codigoLbl;
-	protected JTextField codigoTxtField;
-	protected JLabel descricaoLbl;
+	protected JButton registerButton;
+	protected JButton cancelButton;
+	protected JLabel codeLabel;
+	protected JTextField codeTxtField;
+	protected JLabel descriptionLabel;
 	protected JScrollPane jScrollPane1;
-	protected JLabel capacidadeLbl;
-	protected JTextField capacidadeTxtField;
-	protected JTextArea descricaoTextArea;
+	protected JLabel capacityLabel;
+	protected JTextField capacityTxtField;
+	protected JTextArea descriptionTxtArea;
 
 	// Creates a new form RegisterProperty
-	public CadastroPatrimonio (Frame parent, boolean modal) {
+	public RegisterProperty (Frame parent, boolean modal) {
 
 		super(parent, modal);
 		initComponents();
 	}
 
 	// This method is going to perform the register action in each child class.
-	protected abstract void cadastroAction ( );
+	protected abstract void registerAction ( );
 
 	// Method called from within the constructor to initialize components.
 	public void initComponents ( ) {
 
-		this.codigoLbl = new JLabel();
-		this.capacidadeLbl = new JLabel();
-		this.descricaoLbl = new JLabel();
-		this.codigoTxtField = new JTextField();
-		this.capacidadeTxtField = new JTextField();
-		this.cadastroBtn = new JButton();
-		this.cancelBtn = new JButton();
+		this.codeLabel = new JLabel();
+		this.capacityLabel = new JLabel();
+		this.descriptionLabel = new JLabel();
+		this.codeTxtField = new JTextField();
+		this.capacityTxtField = new JTextField();
+		this.registerButton = new JButton();
+		this.cancelButton = new JButton();
 		this.jScrollPane1 = new JScrollPane();
-		this.descricaoTextArea = new JTextArea();
+		this.descriptionTxtArea = new JTextArea();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Cadastro");
 		setResizable(false);
 
-		this.codigoLbl.setText("Codigo: ");
+		this.codeLabel.setText("Codigo: ");
 
-		this.capacidadeLbl.setText("Capacidade: ");
+		this.capacityLabel.setText("Capacidade: ");
 
-		this.descricaoLbl.setText("Descricao:");
+		this.descriptionLabel.setText("Descricao:");
 
-		this.capacidadeTxtField.setHorizontalAlignment(JTextField.LEFT);
+		this.capacityTxtField.setHorizontalAlignment(JTextField.LEFT);
 
-		this.codigoTxtField.setName("Codigo");
-		this.capacidadeTxtField.setName("Capacidade");
-		this.descricaoTextArea.setName("Descricao");
+		this.codeTxtField.setName("Codigo");
+		this.capacityTxtField.setName("Capacidade");
+		this.descriptionTxtArea.setName("Descricao");
 
-		this.cadastroBtn.setText("Cadastrar");
-		this.cadastroBtn.setName("Cadastrar");
-		this.cadastroBtn.addActionListener(new ActionListener() {
-
-			public void actionPerformed (ActionEvent evt) {
-
-				cadastroBtnActionPerformed(evt);
-			}
-		});
-
-		this.cancelBtn.setText("Cancelar");
-		this.cancelBtn.setName("Cancelar");
-		this.cancelBtn.addActionListener(new ActionListener() {
+		this.registerButton.setText("Cadastrar");
+		this.registerButton.setName("Cadastrar");
+		this.registerButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
 
-				cancelBtnActionPerformed(evt);
+				registerButtonActionPerformed(evt);
 			}
 		});
 
-		this.descricaoTextArea.setColumns(20);
-		this.descricaoTextArea.setRows(5);
-		this.jScrollPane1.setViewportView(this.descricaoTextArea);
+		this.cancelButton.setText("Cancelar");
+		this.cancelButton.setName("Cancelar");
+		this.cancelButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed (ActionEvent evt) {
+
+				cancelButtonActionPerformed(evt);
+			}
+		});
+
+		this.descriptionTxtArea.setColumns(20);
+		this.descriptionTxtArea.setRows(5);
+		this.jScrollPane1.setViewportView(this.descriptionTxtArea);
 
 		GroupLayout layout = new GroupLayout(
 				getContentPane());
@@ -112,18 +112,18 @@ public abstract class CadastroPatrimonio extends JDialog {
 																				GroupLayout.Alignment.TRAILING,
 																				false)
 																				.addComponent(
-																						this.descricaoLbl,
+																						this.descriptionLabel,
 																						GroupLayout.DEFAULT_SIZE,
 																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
-																						this.capacidadeLbl,
+																						this.capacityLabel,
 																						GroupLayout.Alignment.LEADING,
 																						GroupLayout.DEFAULT_SIZE,
 																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
-																						this.codigoLbl,
+																						this.codeLabel,
 																						GroupLayout.Alignment.LEADING,
 																						GroupLayout.DEFAULT_SIZE,
 																						GroupLayout.DEFAULT_SIZE,
@@ -137,9 +137,9 @@ public abstract class CadastroPatrimonio extends JDialog {
 																				.addComponent(
 																						this.jScrollPane1)
 																				.addComponent(
-																						this.capacidadeTxtField)
+																						this.capacityTxtField)
 																				.addComponent(
-																						this.codigoTxtField)))
+																						this.codeTxtField)))
 												.addGroup(
 														GroupLayout.Alignment.TRAILING,
 														layout.createSequentialGroup()
@@ -147,11 +147,11 @@ public abstract class CadastroPatrimonio extends JDialog {
 																		GroupLayout.DEFAULT_SIZE,
 																		Short.MAX_VALUE)
 																.addComponent(
-																		this.cadastroBtn)
+																		this.registerButton)
 																.addPreferredGap(
 																		LayoutStyle.ComponentPlacement.UNRELATED)
 																.addComponent(
-																		this.cancelBtn,
+																		this.cancelButton,
 																		GroupLayout.PREFERRED_SIZE,
 																		81,
 																		GroupLayout.PREFERRED_SIZE)
@@ -168,12 +168,12 @@ public abstract class CadastroPatrimonio extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
 												.addComponent(
-														this.codigoLbl,
+														this.codeLabel,
 														GroupLayout.PREFERRED_SIZE,
 														21,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														this.codigoTxtField,
+														this.codeTxtField,
 														GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE))
@@ -183,12 +183,12 @@ public abstract class CadastroPatrimonio extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
 												.addComponent(
-														this.capacidadeLbl,
+														this.capacityLabel,
 														GroupLayout.PREFERRED_SIZE,
 														19,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														this.capacidadeTxtField,
+														this.capacityTxtField,
 														GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE))
@@ -198,7 +198,7 @@ public abstract class CadastroPatrimonio extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
 												.addComponent(
-														this.descricaoLbl,
+														this.descriptionLabel,
 														GroupLayout.PREFERRED_SIZE,
 														22,
 														GroupLayout.PREFERRED_SIZE)
@@ -211,8 +211,8 @@ public abstract class CadastroPatrimonio extends JDialog {
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
-												.addComponent(this.cadastroBtn)
-												.addComponent(this.cancelBtn))
+												.addComponent(this.registerButton)
+												.addComponent(this.cancelButton))
 								.addContainerGap(
 										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)));
@@ -221,13 +221,13 @@ public abstract class CadastroPatrimonio extends JDialog {
 	}
 
 	// Method used to call the abstract function in each child class.
-	private void cadastroBtnActionPerformed (ActionEvent evt) {
+	private void registerButtonActionPerformed (ActionEvent evt) {
 
-		cadastroAction();
+		registerAction();
 	}
 
 	// Method used to cancel a registration.
-	protected void cancelBtnActionPerformed (ActionEvent evt) {
+	protected void cancelButtonActionPerformed (ActionEvent evt) {
 
 		this.setVisible(false);
 	}
