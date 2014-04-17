@@ -1,7 +1,7 @@
 /**
 RoomReservertionTime
 This class allows the user to select a time to reserve a room
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/horariosReservas
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/view/horariosReservas
  */
 package view.horariosReservas;
 
