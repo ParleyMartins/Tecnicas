@@ -45,7 +45,7 @@ public class ManterEquipamento {
 			throws PatrimonioException, SQLException {
 
 		Equipamento equipment = new Equipamento(equipmentCode, equipmentDescription);
-		EquipamentoDAO.getInstance().include(equipment);
+		EquipamentoDAO.getInstance().insert(equipment);
 		getEquipmentVec();
 	}
 
@@ -60,7 +60,7 @@ public class ManterEquipamento {
 				newEquipment.getDescricao());
 		newEquipment.setCodigo(equipmentCode);
 		newEquipment.setDescricao(equipmentDescription);
-		EquipamentoDAO.getInstance().change(oldEquipment, newEquipment);
+		EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
 		getEquipmentVec();
 	}
 
@@ -71,7 +71,7 @@ public class ManterEquipamento {
 		if (equipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		}
-		EquipamentoDAO.getInstance().exclude(equipment);
+		EquipamentoDAO.getInstance().delete(equipment);
 		getEquipmentVec();
 	}
 }

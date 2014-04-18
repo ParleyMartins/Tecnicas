@@ -18,7 +18,7 @@ import exception.PatrimonioException;
 
 public class SalaDAO {
 
-	// Messages and alerts.
+	// Exception messages and alerts.
 	private static final String SALA_JA_EXISTENTE = "Sala ja cadastrada.";
 	private static final String SALA_NAO_EXISTENTE = "Sala nao cadastrada.";
 	private static final String SALA_EM_USO = "Sala esta sendo utilizada em uma reserva.";
@@ -42,85 +42,85 @@ public class SalaDAO {
 	}
 
 	// Include new Sala in the database.
-	public void incluir (Sala sala) throws SQLException, PatrimonioException {
+	public void insert (Sala room) throws SQLException, PatrimonioException {
 
-		if (sala == null) {
+		if (room == null) {
 			throw new PatrimonioException(SALA_NULA);
 		} else {
-			if (this.inDBCodigo(sala.getCodigo())) {
+			if (this.inDBCodigo(room.getCodigo())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 			}
 		}
 		this.updateQuery("INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
-				"\"" + sala.getCodigo() + "\", " +
-				"\"" + sala.getDescricao() + "\", " +
-				sala.getCapacidade() + ");");
+				"\"" + room.getCodigo() + "\", " +
+				"\"" + room.getDescricao() + "\", " +
+				room.getCapacidade() + ");");
 	}
 
 	// Change a Sala info in the database.
-	public void alterar (Sala old_sala, Sala new_sala) throws SQLException,
+	public void modify (Sala oldRoom, Sala newRoom) throws SQLException,
 			PatrimonioException {
 
-		if (new_sala == null) {
+		if (newRoom == null) {
 			throw new PatrimonioException(SALA_NULA);
 		}
-		if (old_sala == null) {
+		if (oldRoom == null) {
 			throw new PatrimonioException(SALA_NULA);
 		}
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst;
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement;
 
-		if (!this.inDB(old_sala)) {
+		if (!this.inDB(oldRoom)) {
 			throw new PatrimonioException(SALA_NAO_EXISTENTE);
 		} else {
-			if (this.inOtherDB(old_sala)) {
+			if (this.inOtherDB(oldRoom)) {
 				throw new PatrimonioException(SALA_EM_USO);
 			} else {
-				if (!old_sala.getCodigo().equals(new_sala.getCodigo())
-						&& this.inDBCodigo(new_sala.getCodigo())) {
+				if (!oldRoom.getCodigo().equals(newRoom.getCodigo())
+						&& this.inDBCodigo(newRoom.getCodigo())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 				}
 			}
 		}
-		if (!this.inDB(new_sala)) {
-			String msg = "UPDATE sala SET " +
-					"codigo = \"" + new_sala.getCodigo() + "\", " +
-					"descricao = \"" + new_sala.getDescricao() + "\", " +
-					"capacidade = " + new_sala.getCapacidade() +
+		if (!this.inDB(newRoom)) {
+			String message = "UPDATE sala SET " +
+					"codigo = \"" + newRoom.getCodigo() + "\", " +
+					"descricao = \"" + newRoom.getDescricao() + "\", " +
+					"capacidade = " + newRoom.getCapacidade() +
 					" WHERE " +
-					"sala.codigo = \"" + old_sala.getCodigo() + "\" and " +
-					"sala.descricao = \"" + old_sala.getDescricao() + "\" and "
+					"sala.codigo = \"" + oldRoom.getCodigo() + "\" and " +
+					"sala.descricao = \"" + oldRoom.getDescricao() + "\" and "
 					+
-					"sala.capacidade = " + old_sala.getCapacidade() + ";";
-			con.setAutoCommit(false);
-			pst = con.prepareStatement(msg);
-			pst.executeUpdate();
-			con.commit();
+					"sala.capacidade = " + oldRoom.getCapacidade() + ";";
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(message);
+			statement.executeUpdate();
+			connection.commit();
 		} else {
 			throw new PatrimonioException(SALA_JA_EXISTENTE);
 		}
 
-		pst.close();
-		con.close();
+		statement.close();
+		connection.close();
 	}
 
 	// Exclude a Sala from the database.
-	public void excluir (Sala sala) throws SQLException, PatrimonioException {
+	public void delete (Sala room) throws SQLException, PatrimonioException {
 
-		if (sala == null) {
+		if (room == null) {
 			throw new PatrimonioException(SALA_NULA);
 		} else {
-			if (this.inOtherDB(sala)) {
+			if (this.inOtherDB(room)) {
 				throw new PatrimonioException(SALA_EM_USO);
 			} else {
-				if (this.inDB(sala)) {
+				if (this.inDB(room)) {
 					this.updateQuery("DELETE FROM sala WHERE " +
-							"sala.codigo = \"" + sala.getCodigo() + "\" and " +
-							"sala.descricao = \"" + sala.getDescricao()
+							"sala.codigo = \"" + room.getCodigo() + "\" and " +
+							"sala.descricao = \"" + room.getDescricao()
 							+ "\" and " +
-							"sala.capacidade = " + sala.getCapacidade() + ";"
+							"sala.capacidade = " + room.getCapacidade() + ";"
 							);
 				} else {
 					throw new PatrimonioException(SALA_NAO_EXISTENTE);
