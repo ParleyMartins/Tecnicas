@@ -2,7 +2,7 @@
 ReservaSalaProfessor. 
 Class sets exceptions of ReservaSalaProfessor.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSalaProfessor.java.
- */
+*/
 
 package model;
 
@@ -10,38 +10,41 @@ import exception.ReservaException;
 
 public class ReservaSalaProfessor extends ReservaSala {
 
-	private Professor professor;
+	private Professor teacher;
 
-	// Mensages
-	private final String PROFESSOR_NULO = "O professor esta nulo.";
+	// Error message.
+	private final String NULL_PROFESSOR = "O professor esta nulo.";
 
-	public ReservaSalaProfessor (String data, String hora, Sala sala,
-			String finalidade, Professor professor) throws ReservaException {
+	public ReservaSalaProfessor(String date, String time, Sala classroom,
+			String purpose, Professor teacher) throws ReservaException {
 
-		super(data, hora, sala, finalidade);
-		this.setProfessor(professor);
+		super(date, time, classroom, purpose);
+		this.setProfessor(teacher);
 	}
 
-	public Professor getProfessor ( ) {
+	public Professor getProfessor() {
 
-		return this.professor;
+		return this.teacher;
 	}
 
-	public void setProfessor (Professor professor) throws ReservaException {
+	public void setProfessor(Professor teacher) throws ReservaException {
 
-		if (professor == null)
-			throw new ReservaException(PROFESSOR_NULO);
-		this.professor = professor;
+		if (teacher == null) {
+			throw new ReservaException(NULL_PROFESSOR);
+		} else {
+			// Do nothing.
+		}
+		this.teacher = teacher;
 	}
 
-	public boolean equals (ReservaSalaProfessor obj) {
+	public boolean equals(ReservaSalaProfessor reservation) {
 
-		return (super.equals(obj) && this.getProfessor().equals(
-				obj.getProfessor()));
+		return (super.equals(reservation) && this.getProfessor().equals(
+				reservation.getProfessor()));
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
 		return "ReservaSalaProfessor [professor="
 				+ this.getProfessor().toString() + ", toString()="
