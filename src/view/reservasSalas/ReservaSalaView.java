@@ -128,7 +128,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 			Vector <Professor> professor = ManterProfessor.getInstance()
-					.buscarCpf(this.cpfTextField.getText());
+					.searchCpf(this.cpfTextField.getText());
 			if (professor.isEmpty()) {
 				JOptionPane
 						.showMessageDialog(

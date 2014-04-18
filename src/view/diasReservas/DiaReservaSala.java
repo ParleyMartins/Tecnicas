@@ -23,7 +23,7 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 			throws SQLException, PatrimonioException {
 
 		super(parent, modal);
-		this.sala = ManterSala.getInstance().getSalas_vet().get(indexSala);
+		this.sala = ManterSala.getInstance().getRoomsVec().get(indexSala);
 		this.setName("DiaReservaSala");
 	}
 

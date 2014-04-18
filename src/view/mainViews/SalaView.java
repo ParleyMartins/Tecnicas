@@ -55,7 +55,7 @@ public class SalaView extends PatrimonioView {
 		try {
 			DefaultTableModel roomTable = new DefaultTableModel();
 
-			Iterator <Sala> i = ManterSala.getInstance().getSalas_vet()
+			Iterator <Sala> i = ManterSala.getInstance().getRoomsVec()
 					.iterator();
 
 			roomTable.addColumn("Codigo");
@@ -108,14 +108,14 @@ public class SalaView extends PatrimonioView {
 		try {
 			int confirm = JOptionPane
 					.showConfirmDialog(this, "Deseja mesmo excluir Sala: "
-							+ ManterSala.getInstance().getSalas_vet()
+							+ ManterSala.getInstance().getRoomsVec()
 									.get(index).getDescricao() + "?",
 							"Excluir",
 							JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterSala.getInstance().excluir(
-						ManterSala.getInstance().getSalas_vet().get(index));
+				ManterSala.getInstance().delete(
+						ManterSala.getInstance().getRoomsVec().get(index));
 				JOptionPane.showMessageDialog(this,
 						"Sala excluida com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);

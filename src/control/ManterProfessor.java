@@ -32,42 +32,42 @@ public class ManterProfessor {
 	}
 
 	// This method looks for a teacher by name.
-	public Vector <Professor> buscarNome (String name) throws SQLException,
+	public Vector <Professor> searchName (String name) throws SQLException,
 			ClienteException {
 
 		return ProfessorDAO.getInstance().buscarNome(name);
 	}
 
 	// This method looks for a teacher by the cpf.
-	public Vector <Professor> buscarCpf (String cpf) throws SQLException,
+	public Vector <Professor> searchCpf (String cpf) throws SQLException,
 			ClienteException {
 
 		return ProfessorDAO.getInstance().buscarCpf(cpf);
 	}
 
 	// This method looks for a teacher by the enrollment number.
-	public Vector <Professor> buscarMatricula (String enrollmentNumber)
+	public Vector <Professor> searchEnrollNumber (String enrollmentNumber)
 			throws SQLException, ClienteException {
 
 		return ProfessorDAO.getInstance().buscarMatricula(enrollmentNumber);
 	}
 
 	// This method looks for a teacher by e-mail.
-	public Vector <Professor> buscarEmail (String email) throws SQLException,
+	public Vector <Professor> searchEmail (String email) throws SQLException,
 			ClienteException {
 
 		return ProfessorDAO.getInstance().buscarEmail(email);
 	}
 
 	// This method looks for a student by phone number.
-	public Vector <Professor> buscarTelefone (String phoneNumber)
+	public Vector <Professor> searchPhoneNumber (String phoneNumber)
 			throws SQLException, ClienteException {
 
 		return ProfessorDAO.getInstance().buscarTelefone(phoneNumber);
 	}
 
 	// This method gets a teacher vector.
-	public Vector <Professor> getProfessores_vet ( ) throws SQLException,
+	public Vector <Professor> getTeachersVec ( ) throws SQLException,
 			ClienteException {
 
 		this.teachersVec = ProfessorDAO.getInstance().buscarTodos();
@@ -75,7 +75,7 @@ public class ManterProfessor {
 	}
 
 	// This method records a teacher on database..
-	public void inserir (String name, String cpf, String enrollmentNumber,
+	public void insert (String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email) throws ClienteException,
 			SQLException {
 
@@ -85,7 +85,7 @@ public class ManterProfessor {
 	}
 
 	// This method modifies a teacher field.
-	public void alterar (String name, String cpf, String enrollmentNumber,
+	public void modify (String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email, Professor newTeacher)
 			throws ClienteException, SQLException {
 
@@ -104,7 +104,7 @@ public class ManterProfessor {
 	}
 
 	// This method deletes the selected teacher.
-	public void excluir (Professor teacher) throws SQLException,
+	public void delete (Professor teacher) throws SQLException,
 			ClienteException {
 
 		ProfessorDAO.getInstance().excluir(teacher);

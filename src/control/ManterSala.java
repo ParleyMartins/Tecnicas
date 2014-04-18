@@ -32,7 +32,7 @@ public class ManterSala {
 	}
 
 	// Gets a vector of room.
-	public Vector <Sala> getSalas_vet ( ) throws SQLException,
+	public Vector <Sala> getRoomsVec ( ) throws SQLException,
 			PatrimonioException {
 
 		this.roomsVec = SalaDAO.getInstance().buscarTodos();
@@ -40,7 +40,7 @@ public class ManterSala {
 	}
 
 	// This method include code and description of the room in the database.
-	public void inserir (String roomCode, String roomDescription,
+	public void insert (String roomCode, String roomDescription,
 			String capacity)
 			throws PatrimonioException, SQLException {
 
@@ -50,7 +50,7 @@ public class ManterSala {
 	}
 
 	// This method Update code and description info in the database.
-	public void alterar (String roomCode, String roomDescription,
+	public void modify (String roomCode, String roomDescription,
 			String capacity,
 			Sala newRoom) throws PatrimonioException, SQLException {
 
@@ -63,7 +63,7 @@ public class ManterSala {
 	}
 
 	// This method deletes room form the database.
-	public void excluir (Sala room) throws SQLException, PatrimonioException {
+	public void delete (Sala room) throws SQLException, PatrimonioException {
 
 		SalaDAO.getInstance().excluir(room);
 		this.roomsVec.remove(room);
