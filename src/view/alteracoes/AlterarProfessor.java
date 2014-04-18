@@ -26,15 +26,15 @@ public class AlterarProfessor extends CadastroCliente {
 
 		try {
 			this.nomeTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getName());
+					.getTeachersVec().get(index).getName());
 			this.emailTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getEmail());
+					.getTeachersVec().get(index).getEmail());
 			this.telefoneTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getPhoneNumber());
+					.getTeachersVec().get(index).getPhoneNumber());
 			this.matriculaTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getEnrollmentNumber());
+					.getTeachersVec().get(index).getEnrollmentNumber());
 			this.cpfTxtField.setText(ManterProfessor.getInstance()
-					.getProfessores_vet().get(index).getCpf());
+					.getTeachersVec().get(index).getCpf());
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
@@ -56,7 +56,7 @@ public class AlterarProfessor extends CadastroCliente {
 					this.matriculaTxtField.getText(),
 					this.telefoneTxtField.getText(),
 					this.emailTxtField.getText(),
-					ManterProfessor.getInstance().getProfessores_vet()
+					ManterProfessor.getInstance().getTeachersVec()
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this,
