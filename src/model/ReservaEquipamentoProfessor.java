@@ -2,7 +2,7 @@
 ReservaEquipamentoProfessor. 
 Class sets exceptions of ReservaEquipamentoProfessor.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamentoProfessor.java.
- */
+*/
 
 package model;
 
@@ -10,44 +10,45 @@ import exception.ReservaException;
 
 public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 
-	private Professor professor;
+	private Professor teacher;
 
 	// Mensages
-	private final String PROFESSOR_NULO = "O professor esta nulo.";
+	private final String NULL_TEACHER = "O professor esta nulo.";
 
-	public ReservaEquipamentoProfessor (String data, String hora,
-			Equipamento equipamento, Professor professor)
-			throws ReservaException {
+	public ReservaEquipamentoProfessor(String date, String time,
+			Equipamento equipment, Professor teacher) throws ReservaException {
 
-		super(data, hora, equipamento);
-		this.setProfessor(professor);
+		super(date, time, equipment);
+		this.setProfessor(teacher);
 	}
 
-	public Professor getProfessor ( ) {
+	public Professor getProfessor() {
 
-		return professor;
+		return teacher;
 	}
 
-	public void setProfessor (Professor professor) throws ReservaException {
+	public void setProfessor(Professor teacher) throws ReservaException {
 
-		if (professor == null)
-			throw new ReservaException(PROFESSOR_NULO);
-		this.professor = professor;
+		if (teacher == null) {
+			throw new ReservaException(NULL_TEACHER);
+		} else {
+			// Do nothing.
+		}
+		this.teacher = teacher;
 	}
 
-	public boolean equals (ReservaEquipamentoProfessor obj) {
+	public boolean equals(ReservaEquipamentoProfessor reservation) {
 
-		return (super.equals(obj) && this.getEquipamento().equals(
-				obj.getEquipamento()));
+		return (super.equals(reservation) && this.getEquipamento().equals(
+				reservation.getEquipamento()));
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
 		return "ReservaEquipamentoProfessor [professor="
 				+ this.getEquipamento().toString() + ", toString()="
-				+ super.toString()
-				+ "]";
+				+ super.toString() + "]";
 	}
 
 }

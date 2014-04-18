@@ -37,10 +37,10 @@ public class ReservaEquipamento extends Reserva {
 		this.equipment = equipment;
 	}
 
-	public boolean equals(ReservaEquipamento equipmentReservation) {
+	public boolean equals(ReservaEquipamento reservation) {
 
-		return (super.equals(equipmentReservation) && this.getEquipamento()
-				.equals(equipmentReservation.getEquipamento()));
+		return (super.equals(reservation) && this.getEquipamento()
+				.equals(reservation.getEquipamento()));
 	}
 
 	@Override
