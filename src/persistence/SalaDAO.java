@@ -47,7 +47,7 @@ public class SalaDAO {
 		if (room == null) {
 			throw new PatrimonioException(SALA_NULA);
 		} else {
-			if (this.inDBCodigo(room.getCodigo())) {
+			if (this.inDbCode(room.getCodigo())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 			}
 		}
@@ -79,7 +79,7 @@ public class SalaDAO {
 				throw new PatrimonioException(SALA_EM_USO);
 			} else {
 				if (!oldRoom.getCodigo().equals(newRoom.getCodigo())
-						&& this.inDBCodigo(newRoom.getCodigo())) {
+						&& this.inDbCode(newRoom.getCodigo())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 				}
 			}
@@ -130,33 +130,34 @@ public class SalaDAO {
 	}
 
 	// Select all Salas from the database.
-	public Vector <Sala> buscarTodos ( ) throws SQLException,
+	public Vector <Sala> searchAll ( ) throws SQLException,
 			PatrimonioException {
 
-		return this.buscar("SELECT * FROM sala;");
+		return this.search("SELECT * FROM sala;");
 	}
 
 	// Select a Sala in the database by code.
-	public Vector <Sala> buscarPorCodigo (String valor) throws SQLException,
+	public Vector <Sala> searchByCode (String code) throws SQLException,
 			PatrimonioException {
 
-		return this.buscar("SELECT * FROM sala WHERE codigo = " + "\"" + valor
+		return this.search("SELECT * FROM sala WHERE codigo = " + "\"" + code
 				+ "\";");
 	}
 
 	// Select a Sala in the database by description.
-	public Vector <Sala> buscarPorDescricao (String valor) throws SQLException,
+	public Vector <Sala> searchByDescription (String description)
+			throws SQLException,
 			PatrimonioException {
 
-		return this.buscar("SELECT * FROM sala WHERE descricao = " + "\""
-				+ valor + "\";");
+		return this.search("SELECT * FROM sala WHERE descricao = " + "\""
+				+ description + "\";");
 	}
 
 	// Select a Sala in the database by capacity.
-	public Vector <Sala> buscarPorCapacidade (String valor)
+	public Vector <Sala> searchByCapacity (String capacity)
 			throws SQLException, PatrimonioException {
 
-		return this.buscar("SELECT * FROM sala WHERE capacidade = " + valor
+		return this.search("SELECT * FROM sala WHERE capacidade = " + capacity
 				+ ";");
 	}
 
@@ -165,76 +166,76 @@ public class SalaDAO {
 	*/
 
 	// Search a Sala in the database by query.
-	private Vector <Sala> buscar (String query) throws SQLException,
+	private Vector <Sala> search (String query) throws SQLException,
 			PatrimonioException {
 
-		Vector <Sala> vet = new Vector <Sala>();
+		Vector <Sala> roomVec = new Vector <Sala>();
 
-		Connection con = FactoryConnection.getInstance().getConnection();
+		Connection connection = FactoryConnection.getInstance().getConnection();
 
-		PreparedStatement pst = con.prepareStatement(query);
-		ResultSet rs = pst.executeQuery();
+		PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
 
-		while (rs.next()) {
-			vet.add(this.fetchSala(rs));
+		while (result.next()) {
+			roomVec.add(this.fetchSala(result));
 		}
 
-		pst.close();
-		rs.close();
-		con.close();
-		return vet;
+		statement.close();
+		result.close();
+		connection.close();
+		return roomVec;
 	}
 
 	// Check if there is an entry in the database.
 	private boolean inDBGeneric (String query) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(query);
-		ResultSet rs = pst.executeQuery();
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
 
-		if (!rs.next()) {
-			rs.close();
-			pst.close();
-			con.close();
+		if (!result.next()) {
+			result.close();
+			statement.close();
+			connection.close();
 			return false;
 		} else {
-			rs.close();
-			pst.close();
-			con.close();
+			result.close();
+			statement.close();
+			connection.close();
 			return true;
 		}
 	}
 
 	// Check if there is a Sala in the database.
-	private boolean inDB (Sala sala) throws SQLException {
+	private boolean inDB (Sala room) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM sala WHERE " +
-				"sala.codigo = \"" + sala.getCodigo() + "\" and " +
-				"sala.descricao = \"" + sala.getDescricao() + "\" and " +
-				"sala.capacidade = " + sala.getCapacidade() +
+				"sala.codigo = \"" + room.getCodigo() + "\" and " +
+				"sala.descricao = \"" + room.getDescricao() + "\" and " +
+				"sala.capacidade = " + room.getCapacidade() +
 				";");
 	}
 
 	// Check if there is a Sala in the database by code.
-	private boolean inDBCodigo (String codigo) throws SQLException {
+	private boolean inDbCode (String code) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM sala WHERE " +
-				"sala.codigo = \"" + codigo + "\";");
+				"sala.codigo = \"" + code + "\";");
 	}
 
 	// Check if there is a Sala entry in other databases.
-	private boolean inOtherDB (Sala sala) throws SQLException {
+	private boolean inOtherDB (Sala room) throws SQLException {
 
 		if (this.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
-				"sala.codigo = \"" + sala.getCodigo() + "\" and " +
-				"sala.descricao = \"" + sala.getDescricao() + "\" and " +
-				"sala.capacidade = " + sala.getCapacidade() + " );") == false) {
+				"sala.codigo = \"" + room.getCodigo() + "\" and " +
+				"sala.descricao = \"" + room.getDescricao() + "\" and " +
+				"sala.capacidade = " + room.getCapacidade() + " );") == false) {
 			if (this.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 					"id_sala = (SELECT id_sala FROM sala WHERE " +
-					"sala.codigo = \"" + sala.getCodigo() + "\" and " +
-					"sala.descricao = \"" + sala.getDescricao() + "\" and " +
-					"sala.capacidade = " + sala.getCapacidade() + " );") == false) {
+					"sala.codigo = \"" + room.getCodigo() + "\" and " +
+					"sala.descricao = \"" + room.getDescricao() + "\" and " +
+					"sala.capacidade = " + room.getCapacidade() + " );") == false) {
 				return false;
 			}
 		}
@@ -243,21 +244,22 @@ public class SalaDAO {
 	}
 
 	// Fetch a Sala using a String result.
-	private Sala fetchSala (ResultSet rs) throws PatrimonioException,
+	private Sala fetchSala (ResultSet result) throws PatrimonioException,
 			SQLException {
 
-		return new Sala(rs.getString("codigo"), rs.getString("descricao"),
-				rs.getString("capacidade"));
+		return new Sala(result.getString("codigo"),
+				result.getString("descricao"),
+				result.getString("capacidade"));
 	}
 
 	// Update a query.
-	private void updateQuery (String msg) throws SQLException {
+	private void updateQuery (String message) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(msg);
-		pst.executeUpdate();
-		pst.close();
-		con.close();
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement = connection.prepareStatement(message);
+		statement.executeUpdate();
+		statement.close();
+		connection.close();
 	}
 
 }

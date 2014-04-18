@@ -35,7 +35,7 @@ public class ManterSala {
 	public Vector <Sala> getRoomsVec ( ) throws SQLException,
 			PatrimonioException {
 
-		this.roomsVec = SalaDAO.getInstance().buscarTodos();
+		this.roomsVec = SalaDAO.getInstance().searchAll();
 		return this.roomsVec;
 	}
 
