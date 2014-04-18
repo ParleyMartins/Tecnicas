@@ -36,35 +36,35 @@ public class ManterAluno {
 	public Vector <Aluno> searchName (String studentName) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchNome(studentName);
+		return AlunoDAO.getInstance( ).searchByName(studentName);
 	}
 
 	// This method looks for a student by the cpf.
 	public Vector <Aluno> searchCpf (String cpf) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchCpf(cpf);
+		return AlunoDAO.getInstance( ).searchByCpf(cpf);
 	}
 
 	// This method looks for a student by the enrollment number.
 	public Vector <Aluno> searchEnrollNumber (String enrollmentNumber) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchMatricula(enrollmentNumber);
+		return AlunoDAO.getInstance( ).searchByEnrollmentNumber(enrollmentNumber);
 	}
 
 	// This method looks for a student by e-mail.
 	public Vector <Aluno> searchEmail (String email) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchEmail(email);
+		return AlunoDAO.getInstance( ).searchByEmail(email);
 	}
 
 	// This method looks for a student by phone number.
 	public Vector <Aluno> searchPhoneNumber (String phoneNumber) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchTelefone(phoneNumber);
+		return AlunoDAO.getInstance( ).searchByPhoneNumber(phoneNumber);
 	}
 
 	// This method gets a student vector.
@@ -81,7 +81,7 @@ public class ManterAluno {
 			SQLException {
 
 		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber, email);
-		AlunoDAO.getInstance( ).include(student);
+		AlunoDAO.getInstance( ).insert(student);
 		this.studentsVec.add(student);
 	}
 
@@ -97,13 +97,13 @@ public class ManterAluno {
 		newStudent.setEnrollmentNumber(enrollmentNumber);
 		newStudent.setPhoneNumber(phoneNumber);
 		newStudent.setEmail(email);
-		AlunoDAO.getInstance( ).change(oldStudent, newStudent);
+		AlunoDAO.getInstance( ).modify(oldStudent, newStudent);
 	}
 
 	// This method deletes the selected student.
 	public void delete (Aluno student) throws SQLException, ClienteException {
 
-		AlunoDAO.getInstance( ).exclude(student);
+		AlunoDAO.getInstance( ).delete(student);
 		this.studentsVec.remove(student);
 	}
 

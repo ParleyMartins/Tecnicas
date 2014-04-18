@@ -15,7 +15,7 @@ import exception.ClienteException;
 
 public class ProfessorDAO {
 
-	// Menssages.
+	// Exception messages.
 	private static final String PROFESSOR_JA_EXISTENTE = "O Professor ja esta cadastrado.";
 	private static final String PROFESSOR_NAO_EXISTENTE = "O Professor nao esta cadastrado.";
 	private static final String PROFESSOR_NULO = "O Professor esta nulo.";
@@ -40,15 +40,15 @@ public class ProfessorDAO {
 	}
 
 	// Include new Professor in the database.
-	public void incluir (Professor prof) throws SQLException, ClienteException {
+	public void insert (Professor teacher) throws SQLException, ClienteException {
 
-		if (prof == null) {
+		if (teacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
 		} else {
-			if (this.inDBCpf(prof.getCpf())) {
+			if (this.inDBCpf(teacher.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
-				if (this.inDBMatricula(prof.getEnrollmentNumber())) {
+				if (this.inDbEnrollmentNumber(teacher.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				}
 			}
@@ -56,60 +56,60 @@ public class ProfessorDAO {
 
 		this.updateQuery("INSERT INTO "
 				+ "professor (nome, cpf, telefone, email, matricula) VALUES ("
-				+ "\"" + prof.getName() + "\", " + "\"" + prof.getCpf()
-				+ "\", " + "\"" + prof.getPhoneNumber() + "\", " + "\""
-				+ prof.getEmail() + "\", " + "\"" + prof.getEnrollmentNumber()
+				+ "\"" + teacher.getName() + "\", " + "\"" + teacher.getCpf()
+				+ "\", " + "\"" + teacher.getPhoneNumber() + "\", " + "\""
+				+ teacher.getEmail() + "\", " + "\"" + teacher.getEnrollmentNumber()
 				+ "\"); ");
 	}
 
 	// Update Professor info in the database.
-	public void alterar (Professor prof_velho, Professor prof_novo)
+	public void update (Professor oldTeacher, Professor newTeacher)
 			throws SQLException, ClienteException {
 
-		if (prof_velho == null) {
+		if (oldTeacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
 		}
-		if (prof_novo == null) {
+		if (newTeacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
 		}
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst;
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement;
 
-		if (!this.inDB(prof_velho)) {
+		if (!this.inDB(oldTeacher)) {
 			throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
 		}
-		if (this.inOtherDB(prof_velho)) {
+		if (this.inOtherDB(oldTeacher)) {
 			throw new ClienteException(PROFESSOR_EM_USO);
 		} else {
-			if (!prof_velho.getCpf().equals(prof_novo.getCpf())
-					&& this.inDBCpf(prof_novo.getCpf())) {
+			if (!oldTeacher.getCpf().equals(newTeacher.getCpf())
+					&& this.inDBCpf(newTeacher.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
-				if (!prof_velho.getEnrollmentNumber().equals(prof_novo.getEnrollmentNumber())
-						&& this.inDBMatricula(prof_novo.getEnrollmentNumber())) {
+				if (!oldTeacher.getEnrollmentNumber().equals(newTeacher.getEnrollmentNumber())
+						&& this.inDbEnrollmentNumber(newTeacher.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				} else {
-					if (!this.inDB(prof_novo)) {
+					if (!this.inDB(newTeacher)) {
 						String msg = "UPDATE professor SET " + "nome = \""
-								+ prof_novo.getName() + "\", " + "cpf = \""
-								+ prof_novo.getCpf() + "\", " + "telefone = \""
-								+ prof_novo.getPhoneNumber() + "\", "
-								+ "email = \"" + prof_novo.getEmail() + "\", "
-								+ "matricula = \"" + prof_novo.getEnrollmentNumber()
+								+ newTeacher.getName() + "\", " + "cpf = \""
+								+ newTeacher.getCpf() + "\", " + "telefone = \""
+								+ newTeacher.getPhoneNumber() + "\", "
+								+ "email = \"" + newTeacher.getEmail() + "\", "
+								+ "matricula = \"" + newTeacher.getEnrollmentNumber()
 								+ "\"" + " WHERE " + "professor.nome = \""
-								+ prof_velho.getName() + "\" and "
-								+ "professor.cpf = \"" + prof_velho.getCpf()
+								+ oldTeacher.getName() + "\" and "
+								+ "professor.cpf = \"" + oldTeacher.getCpf()
 								+ "\" and " + "professor.telefone = \""
-								+ prof_velho.getPhoneNumber() + "\" and "
+								+ oldTeacher.getPhoneNumber() + "\" and "
 								+ "professor.email = \""
-								+ prof_velho.getEmail() + "\" and "
+								+ oldTeacher.getEmail() + "\" and "
 								+ "professor.matricula = \""
-								+ prof_velho.getEnrollmentNumber() + "\";";
-						con.setAutoCommit(false);
-						pst = con.prepareStatement(msg);
-						pst.executeUpdate();
-						con.commit();
+								+ oldTeacher.getEnrollmentNumber() + "\";";
+						connection.setAutoCommit(false);
+						statement = connection.prepareStatement(msg);
+						statement.executeUpdate();
+						connection.commit();
 					} else {
 						throw new ClienteException(PROFESSOR_JA_EXISTENTE);
 					}
@@ -117,27 +117,27 @@ public class ProfessorDAO {
 			}
 		}
 
-		pst.close();
-		con.close();
+		statement.close();
+		connection.close();
 	}
 
 	// Remove Professor from the database.
-	public void excluir (Professor prof) throws SQLException, ClienteException {
+	public void delete (Professor teacher) throws SQLException, ClienteException {
 
-		if (prof == null) {
+		if (teacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
 		}
-		if (this.inOtherDB(prof)) {
+		if (this.inOtherDB(teacher)) {
 			throw new ClienteException(PROFESSOR_EM_USO);
 		} else {
-			if (this.inDB(prof)) {
+			if (this.inDB(teacher)) {
 				this.updateQuery("DELETE FROM professor WHERE "
-						+ "professor.nome = \"" + prof.getName() + "\" and "
-						+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-						+ "professor.telefone = \"" + prof.getPhoneNumber()
-						+ "\" and " + "professor.email = \"" + prof.getEmail()
+						+ "professor.nome = \"" + teacher.getName() + "\" and "
+						+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
+						+ "professor.telefone = \"" + teacher.getPhoneNumber()
+						+ "\" and " + "professor.email = \"" + teacher.getEmail()
 						+ "\" and " + "professor.matricula = \""
-						+ prof.getEnrollmentNumber() + "\";");
+						+ teacher.getEnrollmentNumber() + "\";");
 			} else {
 				throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
 			}
@@ -145,52 +145,52 @@ public class ProfessorDAO {
 	}
 
 	// Search all Professor entries from the database
-	public Vector <Professor> buscarTodos ( ) throws SQLException,
+	public Vector <Professor> searchAll ( ) throws SQLException,
 			ClienteException {
 
-		return this.buscar("SELECT * FROM professor;");
+		return this.search("SELECT * FROM professor;");
 	}
 
 	// Search Professor by name.
-	public Vector <Professor> buscarNome (String valor) throws SQLException,
+	public Vector <Professor> searchByName (String name) throws SQLException,
 			ClienteException {
 
-		return this.buscar("SELECT * FROM professor WHERE nome = " + "\""
-				+ valor + "\";");
+		return this.search("SELECT * FROM professor WHERE nome = " + "\""
+				+ name + "\";");
 	}
 
 	// Search Professor by CPF
-	public Vector <Professor> buscarCpf (String valor) throws SQLException,
+	public Vector <Professor> searchByCpf (String cpf) throws SQLException,
 			ClienteException {
 
-		return this.buscar("SELECT * FROM professor WHERE cpf = " + "\""
-				+ valor + "\";");
+		return this.search("SELECT * FROM professor WHERE cpf = " + "\""
+				+ cpf + "\";");
 	}
 
 	// Search Professor by Matricula
-	public Vector <Professor> buscarMatricula (String valor)
+	public Vector <Professor> searchByEnrollmentNumber (String enrollmentNumber)
 			throws SQLException,
 			ClienteException {
 
-		return this.buscar("SELECT * FROM professor WHERE matricula = " + "\""
-				+ valor + "\";");
+		return this.search("SELECT * FROM professor WHERE matricula = " + "\""
+				+ enrollmentNumber + "\";");
 	}
 
 	// Search Professor by email
-	public Vector <Professor> buscarEmail (String valor) throws SQLException,
+	public Vector <Professor> searchByEmail (String email) throws SQLException,
 			ClienteException {
 
-		return this.buscar("SELECT * FROM professor WHERE email = " + "\""
-				+ valor + "\";");
+		return this.search("SELECT * FROM professor WHERE email = " + "\""
+				+ email + "\";");
 	}
 
 	// Search Professor by phone number.
-	public Vector <Professor> buscarTelefone (String valor)
+	public Vector <Professor> searchByPhoneNumber (String phoneNumber)
 			throws SQLException,
 			ClienteException {
 
-		return this.buscar("SELECT * FROM professor WHERE telefone = " + "\""
-				+ valor + "\";");
+		return this.search("SELECT * FROM professor WHERE telefone = " + "\""
+				+ phoneNumber + "\";");
 	}
 
 	/*
@@ -198,89 +198,89 @@ public class ProfessorDAO {
 	 */
 
 	// Search Professor in the database according to the query
-	private Vector <Professor> buscar (String query) throws SQLException,
+	private Vector <Professor> search (String query) throws SQLException,
 			ClienteException {
 
-		Vector <Professor> vet = new Vector <Professor>();
+		Vector <Professor> teacherVec = new Vector <Professor>();
 
-		Connection con = FactoryConnection.getInstance().getConnection();
+		Connection connection = FactoryConnection.getInstance().getConnection();
 
-		PreparedStatement pst = con.prepareStatement(query);
-		ResultSet rs = pst.executeQuery();
+		PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
 
-		while (rs.next()) {
-			vet.add(this.fetchProfessor(rs));
+		while (result.next()) {
+			teacherVec.add(this.fetchProfessor(result));
 		}
 
-		pst.close();
-		rs.close();
-		con.close();
-		return vet;
+		statement.close();
+		result.close();
+		connection.close();
+		return teacherVec;
 	}
 
 	// Check if Professor exists in the database.
 	private boolean inDBGeneric (String query) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(query);
-		ResultSet rs = pst.executeQuery();
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
 
-		if (!rs.next()) {
-			rs.close();
-			pst.close();
-			con.close();
+		if (!result.next()) {
+			result.close();
+			statement.close();
+			connection.close();
 			return false;
 		} else {
-			rs.close();
-			pst.close();
-			con.close();
+			result.close();
+			statement.close();
+			connection.close();
 			return true;
 		}
 	}
 
 	// Check if Professor exists in the database by Professor.
-	private boolean inDB (Professor prof) throws SQLException {
+	private boolean inDB (Professor teacher) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM professor WHERE "
-				+ "professor.nome = \"" + prof.getName() + "\" and "
-				+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-				+ "professor.telefone = \"" + prof.getPhoneNumber() + "\" and "
-				+ "professor.email = \"" + prof.getEmail() + "\" and "
-				+ "professor.matricula = \"" + prof.getEnrollmentNumber() + "\";");
+				+ "professor.nome = \"" + teacher.getName() + "\" and "
+				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
+				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
+				+ "professor.email = \"" + teacher.getEmail() + "\" and "
+				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\";");
 	}
 
 	// Check if Professor exists in the database by CPF.
-	private boolean inDBCpf (String codigo) throws SQLException {
+	private boolean inDBCpf (String cpf) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM professor WHERE " + "cpf = \""
-				+ codigo + "\";");
+				+ cpf + "\";");
 	}
 
 	// Check if Professor exists in the database by Matricula.
-	private boolean inDBMatricula (String codigo) throws SQLException {
+	private boolean inDbEnrollmentNumber (String enrollmentNumber) throws SQLException {
 
 		return this.inDBGeneric("SELECT * FROM professor WHERE "
-				+ "matricula = \"" + codigo + "\";");
+				+ "matricula = \"" + enrollmentNumber + "\";");
 	}
 
 	// Check if Professor exists in the database by CPF.
-	private boolean inOtherDB (Professor prof) throws SQLException {
+	private boolean inOtherDB (Professor teacher) throws SQLException {
 
 		if (this.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
-				+ "professor.nome = \"" + prof.getName() + "\" and "
-				+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-				+ "professor.telefone = \"" + prof.getPhoneNumber() + "\" and "
-				+ "professor.email = \"" + prof.getEmail() + "\" and "
-				+ "professor.matricula = \"" + prof.getEnrollmentNumber() + "\");") == false) {
+				+ "professor.nome = \"" + teacher.getName() + "\" and "
+				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
+				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
+				+ "professor.email = \"" + teacher.getEmail() + "\" and "
+				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\");") == false) {
 			if (this.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
 					+ "id_professor = (SELECT id_professor FROM professor WHERE "
-					+ "professor.nome = \"" + prof.getName() + "\" and "
-					+ "professor.cpf = \"" + prof.getCpf() + "\" and "
-					+ "professor.telefone = \"" + prof.getPhoneNumber()
-					+ "\" and " + "professor.email = \"" + prof.getEmail()
+					+ "professor.nome = \"" + teacher.getName() + "\" and "
+					+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
+					+ "professor.telefone = \"" + teacher.getPhoneNumber()
+					+ "\" and " + "professor.email = \"" + teacher.getEmail()
 					+ "\" and " + "professor.matricula = \""
-					+ prof.getEnrollmentNumber() + "\");") == false) {
+					+ teacher.getEnrollmentNumber() + "\");") == false) {
 				return false;
 			}
 		}
@@ -289,22 +289,22 @@ public class ProfessorDAO {
 	}
 
 	// Fetch Professor using a result.
-	private Professor fetchProfessor (ResultSet rs) throws ClienteException,
+	private Professor fetchProfessor (ResultSet result) throws ClienteException,
 			SQLException {
 
-		return new Professor(rs.getString("nome"), rs.getString("cpf"),
-				rs.getString("matricula"), rs.getString("telefone"),
-				rs.getString("email"));
+		return new Professor(result.getString("nome"), result.getString("cpf"),
+				result.getString("matricula"), result.getString("telefone"),
+				result.getString("email"));
 	}
 
 	// Update a query.
-	private void updateQuery (String msg) throws SQLException {
+	private void updateQuery (String message) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(msg);
-		pst.executeUpdate();
-		pst.close();
-		con.close();
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement = connection.prepareStatement(message);
+		statement.executeUpdate();
+		statement.close();
+		connection.close();
 	}
 
 }
