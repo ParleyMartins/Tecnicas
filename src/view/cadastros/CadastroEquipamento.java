@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 import control.ManterEquipamento;
 import exception.PatrimonioException;
 
-public class RegisterEquipment extends RegisterProperty {
+public class CadastroEquipamento extends CadastroPatrimonio {
 
-	public RegisterEquipment (java.awt.Frame parentWindow, boolean modal) {
+	public CadastroEquipamento (java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
 		this.setName("CadastroEquipamento");

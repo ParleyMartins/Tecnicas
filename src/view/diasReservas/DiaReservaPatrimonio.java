@@ -31,7 +31,7 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 	}
 
 	// Method to visualize room or equipment.
-	protected abstract void visualizarAction (String data);
+	protected abstract void viewSelectedDayAction (String data);
 
 	// Method called from constructor to initialize the components
 	private void initComponents ( ) {
@@ -133,6 +133,6 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 			data = this.jCalendar1.getDayChooser().getDay() + "/" + mes + "/"
 					+ this.jCalendar1.getYearChooser().getYear();
 		}
-		visualizarAction(data);
+		viewSelectedDayAction(data);
 	}
 }

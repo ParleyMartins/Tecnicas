@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
-public abstract class RegisterProperty extends JDialog {
+public abstract class CadastroPatrimonio extends JDialog {
 
 	protected JButton registerButton;
 	protected JButton cancelButton;
@@ -31,7 +31,7 @@ public abstract class RegisterProperty extends JDialog {
 	protected JTextArea descriptionTxtArea;
 
 	// Creates a new form RegisterProperty
-	public RegisterProperty (Frame parent, boolean modal) {
+	public CadastroPatrimonio (Frame parent, boolean modal) {
 
 		super(parent, modal);
 		initComponents();
