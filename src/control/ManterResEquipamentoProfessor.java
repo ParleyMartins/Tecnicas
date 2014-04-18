@@ -37,7 +37,7 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Returns the equipment reservation made ​​by a teacher in a period of time.
-	public Vector <ReservaEquipamentoProfessor> getReservasHora (String time)
+	public Vector <ReservaEquipamentoProfessor> getReservationsPerTime (String time)
 			throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
@@ -46,7 +46,7 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Returns the equipment reservation made ​​​​by a teacher in a month period.
-	public Vector <ReservaEquipamentoProfessor> getReservasMes (int month)
+	public Vector <ReservaEquipamentoProfessor> getReservationsPerMonth (int month)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -54,7 +54,7 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Returns the object that the teacher reserved.
-	public Vector <Object> getResEquipamentoProfessor_vet ( )
+	public Vector <Object> getTeacherEquipReservationVector ( )
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -64,7 +64,7 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Inserts equipment, teacher, date and time of a reservation in the database
-	public void inserir (Equipamento equipment, Professor teacher, String date,
+	public void insert (Equipamento equipment, Professor teacher, String date,
 			String time) throws SQLException, ReservaException {
 
 		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(
@@ -74,7 +74,7 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Change reservation of equipment in the database
-	public void alterar (ReservaEquipamentoProfessor oldReservation, String date,
+	public void modify (ReservaEquipamentoProfessor oldReservation, String date,
 			String time, Equipamento equipment, Professor teacher)
 			throws SQLException, ReservaException {
 
@@ -86,14 +86,14 @@ public class ManterResEquipamentoProfessor {
 	}
 
 	// Remove the reservation made by a teacher.
-	public void excluir (ReservaEquipamentoProfessor reservation)
+	public void delete (ReservaEquipamentoProfessor reservation)
 			throws SQLException, ReservaException {
 
 		ResEquipamentoProfessorDAO.getInstance().excluir(reservation);
 		this.teacherEquipReservationVector.remove(reservation);
 	}
 
-	public void alterar () {
+	public void modify () {
 
 		// TODO Auto-generated method stub
 		
