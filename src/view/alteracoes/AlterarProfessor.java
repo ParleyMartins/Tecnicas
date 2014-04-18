@@ -20,18 +20,18 @@ public class AlterarProfessor extends CadastroCliente {
 
 		super(parent, modal);
 		this.setName("AlterarProfessor");
-		this.cadastroBtn.setText("Alterar");
-		this.cadastroBtn.setName("Alterar");
+		this.registerButton.setText("Alterar");
+		this.registerButton.setName("Alterar");
 		this.index2 = index;
 
 		try {
-			this.nomeTxtField.setText(ManterProfessor.getInstance()
+			this.nameTxtField.setText(ManterProfessor.getInstance()
 					.getTeachersVec().get(index).getName());
 			this.emailTxtField.setText(ManterProfessor.getInstance()
 					.getTeachersVec().get(index).getEmail());
-			this.telefoneTxtField.setText(ManterProfessor.getInstance()
+			this.phoneNumberTxtField.setText(ManterProfessor.getInstance()
 					.getTeachersVec().get(index).getPhoneNumber());
-			this.matriculaTxtField.setText(ManterProfessor.getInstance()
+			this.enrollmentNumberTxtField.setText(ManterProfessor.getInstance()
 					.getTeachersVec().get(index).getEnrollmentNumber());
 			this.cpfTxtField.setText(ManterProfessor.getInstance()
 					.getTeachersVec().get(index).getCpf());
@@ -47,14 +47,14 @@ public class AlterarProfessor extends CadastroCliente {
 
 	@Override
 	// Creates an action to modify a teacher.
-	public void cadastroAction ( ) {
+	public void registerAction ( ) {
 
 		try {
 			ManterProfessor.getInstance().modify(
-					this.nomeTxtField.getText(),
+					this.nameTxtField.getText(),
 					this.cpfTxtField.getText(),
-					this.matriculaTxtField.getText(),
-					this.telefoneTxtField.getText(),
+					this.enrollmentNumberTxtField.getText(),
+					this.phoneNumberTxtField.getText(),
 					this.emailTxtField.getText(),
 					ManterProfessor.getInstance().getTeachersVec()
 							.get(this.index2));
