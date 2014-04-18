@@ -41,7 +41,7 @@ public class ManterResEquipamentoProfessor {
 			throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
-		return ResEquipamentoProfessorDAO.getInstance().buscarPorHora(time);
+		return ResEquipamentoProfessorDAO.getInstance().searchByTime(time);
 
 	}
 
@@ -50,7 +50,7 @@ public class ManterResEquipamentoProfessor {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResEquipamentoProfessorDAO.getInstance().buscarPorMes(month);
+		return ResEquipamentoProfessorDAO.getInstance().buscarByMonth(month);
 	}
 
 	// Returns the object that the teacher reserved.
@@ -59,7 +59,7 @@ public class ManterResEquipamentoProfessor {
 			ReservaException {
 
 		this.teacherEquipReservationVector = ResEquipamentoProfessorDAO
-				.getInstance().buscarTodos();
+				.getInstance().searchAll();
 		return this.teacherEquipReservationVector;
 	}
 
@@ -69,7 +69,7 @@ public class ManterResEquipamentoProfessor {
 
 		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(
 				date, time, equipment, teacher);
-		ResEquipamentoProfessorDAO.getInstance().incluir(reserva);
+		ResEquipamentoProfessorDAO.getInstance().insert(reserva);
 		this.teacherEquipReservationVector.add(reserva);
 	}
 
@@ -81,7 +81,7 @@ public class ManterResEquipamentoProfessor {
 		ReservaEquipamentoProfessor reserva_new  = new ReservaEquipamentoProfessor(
 				date, time, equipment, teacher); 
 		
-		ResEquipamentoProfessorDAO.getInstance().alterar(oldReservation, reserva_new);
+		ResEquipamentoProfessorDAO.getInstance().modify(oldReservation, reserva_new);
 
 	}
 
@@ -89,7 +89,7 @@ public class ManterResEquipamentoProfessor {
 	public void delete (ReservaEquipamentoProfessor reservation)
 			throws SQLException, ReservaException {
 
-		ResEquipamentoProfessorDAO.getInstance().excluir(reservation);
+		ResEquipamentoProfessorDAO.getInstance().delete(reservation);
 		this.teacherEquipReservationVector.remove(reservation);
 	}
 
