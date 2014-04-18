@@ -50,7 +50,7 @@ public class ManterResEquipamentoProfessor {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResEquipamentoProfessorDAO.getInstance().buscarByMonth(month);
+		return ResEquipamentoProfessorDAO.getInstance().searchByMonth(month);
 	}
 
 	// Returns the object that the teacher reserved.
