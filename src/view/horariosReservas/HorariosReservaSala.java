@@ -104,7 +104,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 		try {
 			Vector clientPerDate = this.teacherInstance
-					.buscarPorData(this.date);
+					.searchPerDate(this.date);
 
 			if (clientPerDate != null)
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
@@ -178,13 +178,13 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					int confirm = JOptionPane.showConfirmDialog(
 							this,
 							"Deseja mesmo excluir Reserva?\n"
-									+ this.teacherInstance.buscarPorData(date)
+									+ this.teacherInstance.searchPerDate(date)
 											.get(index).toString(), "Excluir",
 							JOptionPane.YES_NO_OPTION);
 
 					if (confirm == JOptionPane.YES_OPTION) {
-						this.teacherInstance.excluir(this.teacherInstance
-								.buscarPorData(
+						this.teacherInstance.delete(this.teacherInstance
+								.searchPerDate(
 										date).get(index));
 						JOptionPane.showMessageDialog(this,
 								"Reserva excluida com sucesso", "Sucesso",

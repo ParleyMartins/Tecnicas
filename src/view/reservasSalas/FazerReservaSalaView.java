@@ -78,7 +78,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 
 		try {
 
-			instanceProf.inserir(sala, prof, this.dataTextField.getText(),
+			instanceProf.insert(sala, prof, this.dataTextField.getText(),
 					this.horaTextField.getText(),
 					this.finalidadeTextField.getText());
 

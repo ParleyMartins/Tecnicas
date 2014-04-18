@@ -28,7 +28,7 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
-		this.reservaProfessor = instanceProf.buscarPorData(data).get(index);
+		this.reservaProfessor = instanceProf.searchPerDate(data).get(index);
 		resetComponents();
 
 	}
@@ -38,7 +38,7 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 	protected void reservarProfessor ( ) {
 
 		try {
-			instanceProf.alterar(this.finalidadeTextField.getText(),
+			instanceProf.modify(this.finalidadeTextField.getText(),
 					reservaProfessor);
 
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
