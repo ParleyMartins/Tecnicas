@@ -2,7 +2,7 @@
 Sala. 
 Class sets exceptions of Sala.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Sala.java.
- */
+*/
 
 package model;
 
@@ -10,49 +10,49 @@ import exception.PatrimonioException;
 
 public class Sala extends Patrimonio {
 
-	private String capacidade;
+	private String capacity;
 
-	// Alerts and error mensages
-	private final String CAPACIDADE_INVALIDO = "Capacidade Invalida.";
-	private final String CAPACIDADE_BRANCO = "Capacidade em Branco.";
-	private final String CAPACIDADE_NULA = "Capacidade esta nula.";
+	// Alerts and error messages.
+	private final String INVALID_CAPACITY = "Capacidade Invalida.";
+	private final String BLANK_CAPACITY = "Capacidade em Branco.";
+	private final String NULL_CAPACITY = "Capacidade esta nula.";
 
-	// private final String CAPACIDADE_NEGATIVA = "Capacidade negativa.";
-
-	public Sala (String codigo, String descricao, String capacidade)
+	public Sala(String id_code, String desciption, String capacity)
 			throws PatrimonioException {
 
-		super(codigo, descricao);
-		this.setCapacidade(capacidade);
+		super(id_code, desciption);
+		this.setCapacidade(capacity);
 	}
 
-	public String getCapacidade ( ) {
+	public String getCapacidade() {
 
-		return capacidade;
+		return capacity;
 	}
 
-	public void setCapacidade (String capacidade) throws PatrimonioException {
+	public void setCapacidade(String capacity) throws PatrimonioException {
 
-		if (capacidade == null)
-			throw new PatrimonioException(CAPACIDADE_NULA);
-		else
-			if ("".equals(capacidade.trim()))
-				throw new PatrimonioException(CAPACIDADE_BRANCO);
-			else
-				if (capacidade.matches("[\\d]+")) {
-					this.capacidade = capacidade;
+		if (capacity == null) {
+			throw new PatrimonioException(NULL_CAPACITY);
+		} else {
+			if ("".equals(capacity.trim())) {
+				throw new PatrimonioException(BLANK_CAPACITY);
+			} else {
+				if (capacity.matches("[\\d]+")) {
+					this.capacity = capacity;
+				} else {
+					throw new PatrimonioException(INVALID_CAPACITY);
 				}
-				else
-				{
-					throw new PatrimonioException(CAPACIDADE_INVALIDO);
-				}
+			}
+		}
 	}
 
-	public boolean equals (Sala b) {
+	public boolean equals(Sala classroom) {
 
-		if (super.equals(b) &&
-				this.getCapacidade().equals(b.getCapacidade())) {
+		if (super.equals(classroom)
+				&& this.getCapacidade().equals(classroom.getCapacidade())) {
 			return true;
+		} else {
+			// Do nothing.
 		}
 
 		return false;
