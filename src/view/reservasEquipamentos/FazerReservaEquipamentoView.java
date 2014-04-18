@@ -29,7 +29,7 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 	}
 
 	@Override
-	protected void reservarProfessor ( ) {
+	protected void reserveEquipmentToTeacher ( ) {
 
 		try {
 

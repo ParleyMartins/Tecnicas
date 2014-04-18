@@ -63,25 +63,25 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	}
 
 	// This method reserves a equipment.
-	abstract protected void reservarProfessor ( );
+	abstract protected void reserveEquipmentToTeacher ( );
 
 	// Method gets a teacher from database.
-	protected void getProfessor ( ) {
+	protected void getTeacherFromDB ( ) {
 
 		try {
-			Vector <Professor> instanceTeacheressor = ManterProfessor.getInstance()
+			Vector <Professor> instanceTeacher = ManterProfessor.getInstance()
 					.searchCpf(this.cpfTextField.getText());
-			if (instanceTeacheressor.isEmpty()) {
+			if (instanceTeacher.isEmpty()) {
 				JOptionPane
 						.showMessageDialog(
 								this,
 								"Professor nao Cadastrado."
-										+ " Digite o CPF correto ou cadastre o instanceTeacheressor desejado",
+										+ " Digite o CPF correto ou cadastre o instanceTeacher desejado",
 								"Erro", JOptionPane.ERROR_MESSAGE, null);
 				return;
 			}
-			this.instanceTeacher = instanceTeacheressor.firstElement();
-			this.instanceTeacherTextArea.setText(instanceTeacheressor.firstElement().toString());
+			this.instanceTeacher = instanceTeacher.firstElement();
+			this.instanceTeacherTextArea.setText(instanceTeacher.firstElement().toString());
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -131,9 +131,9 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.cpfTextField.setName("CPF");
 		this.cpfTextField.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				cpfTextFieldActionPerformed(evt);
+				cpfTextFieldActionPerformed(event);
 			}
 		});
 
@@ -148,9 +148,9 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.reserveButton.setName("Reservar");
 		this.reserveButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				reserveButtonActionPerformed(evt);
+				reserveButtonActionPerformed(event);
 			}
 		});
 
@@ -158,9 +158,9 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.cancelButton.setName("Cancelar");
 		this.cancelButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				cancelButtonActionPerformed(evt);
+				cancelButtonActionPerformed(event);
 			}
 		});
 
@@ -186,9 +186,9 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.searchCpfButton.setName("BuscarCpfButton");
 		this.searchCpfButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				searchCpfButtonActionPerformed(evt);
+				searchCpfButtonActionPerformed(event);
 			}
 		});
 
@@ -386,33 +386,33 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	}
 
 	// This method generates an action to cpfTextField.
-	private void cpfTextFieldActionPerformed (ActionEvent evt) {
+	private void cpfTextFieldActionPerformed (ActionEvent event) {
 
 		String nome = this.cpfTextField.getText();
 		if (nome.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			getProfessor();
+			getTeacherFromDB();
 		}
 	}
 
 	// This method generates an action to reserve button.
-	private void reserveButtonActionPerformed (ActionEvent evt) {
+	private void reserveButtonActionPerformed (ActionEvent event) {
 
-		reservarProfessor();
+		reserveEquipmentToTeacher();
 	}
 
 	// This method cancels the reservation.
-	private void cancelButtonActionPerformed (ActionEvent evt) {
+	private void cancelButtonActionPerformed (ActionEvent event) {
 
 		this.setVisible(false);
 	}
 
 	// This method performs the search for a teacher.
-	private void searchCpfButtonActionPerformed (ActionEvent evt) {
+	private void searchCpfButtonActionPerformed (ActionEvent event) {
 
-		cpfTextFieldActionPerformed(evt);
+		cpfTextFieldActionPerformed(event);
 	}
 
 }

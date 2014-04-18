@@ -34,7 +34,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	}
 
 	@Override
-	protected void reservarProfessor ( ) {
+	protected void reserveEquipmentToTeacher ( ) {
 
 		try {
 			this.instanceProf.modify(this.reserva,
