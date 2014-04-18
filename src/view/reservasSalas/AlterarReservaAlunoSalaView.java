@@ -31,7 +31,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
-		this.reservaAluno = instanceAluno.getReservasMes(data).get(index);
+		this.reservaAluno = instanceAluno.getReservationsPerMonth(data).get(index);
 		resetComponents();
 
 	}
@@ -42,7 +42,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 		try {
 			instanceAluno
-					.alterar(this.finalidadeTextField.getText(),
+					.modify(this.finalidadeTextField.getText(),
 							this.qntCadeirasReservadasTextField.getText(),
 							reservaAluno);
 
@@ -107,7 +107,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 		try {
 			this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno
-					.cadeirasDisponveis(sala, this.dataTextField.getText(),
+					.checkAvailableChairs(sala, this.dataTextField.getText(),
 							this.horaTextField.getText())));
 		} catch (ReservaException ex) {
 

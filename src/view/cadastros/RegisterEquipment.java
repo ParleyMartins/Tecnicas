@@ -24,7 +24,7 @@ public class RegisterEquipment extends RegisterProperty {
 	protected void registerAction ( ) {
 
 		try {
-			ManterEquipamento.getInstance().inserir(
+			ManterEquipamento.getInstance().insert(
 					this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText());
 

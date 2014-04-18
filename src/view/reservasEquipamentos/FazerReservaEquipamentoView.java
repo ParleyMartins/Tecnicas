@@ -33,7 +33,7 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 
 		try {
 
-			this.instanceProf.inserir(this.equipamento, this.prof,
+			this.instanceProf.insert(this.equipamento, this.prof,
 					this.dataTextField.getText(), this.horaTextField.getText());
 
 			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",

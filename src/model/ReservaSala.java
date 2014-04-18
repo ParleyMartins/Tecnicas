@@ -2,7 +2,7 @@
 ReservaSala. 
 Class sets exceptions of ReservaSala.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSala.java.
- */
+*/
 
 package model;
 
@@ -10,64 +10,70 @@ import exception.ReservaException;
 
 public class ReservaSala extends Reserva {
 
-	private Sala sala;
-	private String finalidade;
+	private Sala classroom;
+	private String purpose;
 
-	// Mensages
-	private final String SALA_NULO = "A sala esta nula.";
-	private final String FINALIDADE_NULA = "A finalidade esta nula.";
-	private final String FINALIDADE_BRANCO = "A finalidade esta em branco.";
+	// Messages.
+	private final String NULL_CLASSROOM = "A sala esta nula.";
+	private final String NULL_PURPOSE = "A finalidade esta nula.";
+	private final String BLANK_PURPOSE = "A finalidade esta em branco.";
 
-	public ReservaSala (String data, String hora, Sala sala, String finalidade)
+	public ReservaSala(String date, String time, Sala classroom, String purpose)
 			throws ReservaException {
 
-		super(data, hora);
-		this.setSala(sala);
-		this.setFinalidade(finalidade);
+		super(date, time);
+		this.setSala(classroom);
+		this.setFinalidade(purpose);
 	}
 
-	public Sala getSala ( ) {
+	public Sala getSala() {
 
-		return this.sala;
+		return this.classroom;
 	}
 
-	public String getFinalidade ( ) {
+	public String getFinalidade() {
 
-		return this.finalidade;
+		return this.purpose;
 	}
 
-	public void setSala (Sala sala) throws ReservaException {
+	public void setSala(Sala classroom) throws ReservaException {
 
-		if (sala == null)
-			throw new ReservaException(SALA_NULO);
-		this.sala = sala;
+		if (classroom == null) {
+			throw new ReservaException(NULL_CLASSROOM);
+		} else {
+			// Do nothing.
+		}
+		this.classroom = classroom;
 	}
 
-	public void setFinalidade (String finalidade) throws ReservaException {
+	public void setFinalidade(String purpose) throws ReservaException {
 
-		if (finalidade == null)
-			throw new ReservaException(FINALIDADE_NULA);
+		if (purpose == null) {
+			throw new ReservaException(NULL_PURPOSE);
+		} else {
+			// Do nothing.
+		}
 
-		finalidade = finalidade.trim();
-		if (finalidade.equals(""))
-			throw new ReservaException(FINALIDADE_BRANCO);
-		else
-			this.finalidade = finalidade;
+		purpose = purpose.trim();
+		if (purpose.equals("")) {
+			throw new ReservaException(BLANK_PURPOSE);
+		} else {
+			this.purpose = purpose;
+		}
 	}
 
-	public boolean equals (ReservaSala obj) {
+	public boolean equals(ReservaSala reservation) {
 
-		return (super.equals(obj) &&
-				this.getSala().equals(obj.getSala()) && this.getFinalidade()
-				.equals(obj.getFinalidade()));
+		return (super.equals(reservation)
+				&& this.getSala().equals(reservation.getSala()) && this
+				.getFinalidade().equals(reservation.getFinalidade()));
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
-		return "\n" + this.getSala().toString()
-				+ "\nFinalidade=" + this.getFinalidade()
-				+ super.toString();
+		return "\n" + this.getSala().toString() + "\nFinalidade="
+				+ this.getFinalidade() + super.toString();
 	}
 
 }

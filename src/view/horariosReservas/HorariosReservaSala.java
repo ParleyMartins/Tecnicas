@@ -29,9 +29,9 @@ import java.awt.Frame;
 
 public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
-	ManterResSalaAluno studentInstance;
-	ManterResSalaProfessor teacherInstance;
-	Sala room;
+	private ManterResSalaAluno studentInstance;
+	private ManterResSalaProfessor teacherInstance;
+	private Sala room;
 
 	public HorariosReservaSala (Frame parent, boolean modal, String date,
 			Sala room) {
@@ -41,7 +41,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 		this.setName("HorarioReservaSala");
 	}
 
-	protected Vector <String> fillDataVector (Object obj, int index) {
+	protected Vector <String> fillDataVector (Object obj, final int index) {
 
 		Vector <String> clientData = new Vector <String>();
 		if (obj instanceof ReservaSalaAluno) {
@@ -104,7 +104,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 		try {
 			Vector clientPerDate = this.teacherInstance
-					.buscarPorData(this.date);
+					.searchPerDate(this.date);
 
 			if (clientPerDate != null)
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
@@ -116,7 +116,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				}
 			clientPerDate.clear();
 
-			clientPerDate = this.studentInstance.getReservasMes(this.date);
+			clientPerDate = this.studentInstance.getReservationsPerMonth(this.date);
 			if (clientPerDate != null)
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
 					Vector <String> row = fillDataVector(clientPerDate.get(i),
@@ -148,7 +148,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void cancelarReservaAction (int index) {
+	protected void cancelReservationAction (int index) {
 
 		try {
 			String clientType = (String) this.reservationTable.getModel()
@@ -159,14 +159,14 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				int confirm = JOptionPane.showConfirmDialog(
 						this,
 						"Deseja mesmo excluir Reserva?\n"
-								+ this.studentInstance.getReservasMes(date)
+								+ this.studentInstance.getReservationsPerMonth(date)
 										.get(index)
 										.toString(), "Excluir",
 						JOptionPane.YES_NO_OPTION);
 
 				if (confirm == JOptionPane.YES_OPTION) {
-					this.studentInstance.excluir(this.studentInstance
-							.getReservasMes(
+					this.studentInstance.delete(this.studentInstance
+							.getReservationsPerMonth(
 									date).get(index));
 					JOptionPane.showMessageDialog(this,
 							"Reserva excluida com sucesso", "Sucesso",
@@ -178,13 +178,13 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					int confirm = JOptionPane.showConfirmDialog(
 							this,
 							"Deseja mesmo excluir Reserva?\n"
-									+ this.teacherInstance.buscarPorData(date)
+									+ this.teacherInstance.searchPerDate(date)
 											.get(index).toString(), "Excluir",
 							JOptionPane.YES_NO_OPTION);
 
 					if (confirm == JOptionPane.YES_OPTION) {
-						this.teacherInstance.excluir(this.teacherInstance
-								.buscarPorData(
+						this.teacherInstance.delete(this.teacherInstance
+								.searchPerDate(
 										date).get(index));
 						JOptionPane.showMessageDialog(this,
 								"Reserva excluida com sucesso", "Sucesso",
@@ -209,7 +209,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void reservarAction ( ) {
+	protected void reserveAction ( ) {
 
 		try {
 			ReservaSalaView roomReservation = new FazerReservaSalaView(
@@ -232,7 +232,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void alterarAction (int index) {
+	protected void modifyAction (int index) {
 
 		try {
 			String clientType = (String) this.reservationTable.getModel()

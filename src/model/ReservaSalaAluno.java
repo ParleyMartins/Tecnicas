@@ -2,7 +2,7 @@
 ReservaSalaAluno. 
 Class sets exceptions of ReservaSalaAluno.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSalaAluno.java.
- */
+*/
 
 package model;
 
@@ -10,73 +10,83 @@ import exception.ReservaException;
 
 public class ReservaSalaAluno extends ReservaSala {
 
-	private Aluno aluno;
-	private String cadeiras_reservadas;
+	private Aluno student;
+	private String reservedChairs;
 
-	// Mensages
-	private final String ALUNO_NULO = "O aluno esta nulo.";
-	private final String CADEIRAS_NULA = "O numero de cadeiras esta nulo.";
-	private final String CADEIRAS_BRANCO = "O numero de cadeiras esta em branco.";
-	private final String CADEIRAS_INVALIDA = "O numero de cadeira eh invalido.";
-	private final String CADEIRAS_ACIMA_DO_LIMITE = "A sala nao possui este numero de cadeiras para reservar.";
-	private final String CADEIRAS_PATTERN = "^[\\d]+$";
+	// Error messages.
+	private final String NULL_STUDENT = "O aluno esta nulo.";
+	private final String NULL_CHAIRS = "O numero de cadeiras esta nulo.";
+	private final String BLANK_CHAIRS = "O numero de cadeiras esta em branco.";
+	private final String INVALID_CHAIRS = "O numero de cadeira eh invalido.";
+	private final String OVER_LIMIT_CHAIRS = "A sala nao possui este numero de cadeiras para reservar.";
+	private final String CHAIRS_PATTERN = "^[\\d]+$";
 
-	public ReservaSalaAluno (String data, String hora, Sala sala,
-			String finalidade, String cadeiras_reservadas, Aluno aluno)
+	public ReservaSalaAluno(String date, String time, Sala classroom,
+			String purpose, String reserved_chairs, Aluno student)
 			throws ReservaException {
 
-		super(data, hora, sala, finalidade);
-		this.setAluno(aluno);
-		this.setCadeiras_reservadas(cadeiras_reservadas);
+		super(date, time, classroom, purpose);
+		this.setAluno(student);
+		this.setCadeiras_reservadas(reserved_chairs);
 	}
 
-	public Aluno getAluno ( ) {
+	public Aluno getAluno() {
 
-		return this.aluno;
+		return this.student;
 	}
 
-	public String getCadeiras_reservadas ( ) {
+	public String getCadeiras_reservadas() {
 
-		return this.cadeiras_reservadas;
+		return this.reservedChairs;
 	}
 
-	public void setAluno (Aluno aluno) throws ReservaException {
+	public void setAluno(Aluno student) throws ReservaException {
 
-		if (aluno == null)
-			throw new ReservaException(ALUNO_NULO);
-		this.aluno = aluno;
+		if (student == null) {
+			throw new ReservaException(NULL_STUDENT);
+		} else {
+			// Do nothing.
+		}
+		this.student = student;
 	}
 
-	public void setCadeiras_reservadas (String cadeiras_reservadas)
+	public void setCadeiras_reservadas(String reservedChairs)
 			throws ReservaException {
 
-		String c = cadeiras_reservadas;
-		if (c == null)
-			throw new ReservaException(CADEIRAS_NULA);
-		c = c.trim();
-		if (c.equals(""))
-			throw new ReservaException(CADEIRAS_BRANCO);
-		else
-			if (c.matches(CADEIRAS_PATTERN)) {
+		// So we can modify this value after, without losing the information.
+		String chairs = reservedChairs;
+		if (chairs == null) {
+			throw new ReservaException(NULL_CHAIRS);
+		} else {
+			// Do nothing.
+		}
+		chairs = chairs.trim();
+		if (chairs.equals("")) {
+			throw new ReservaException(BLANK_CHAIRS);
+		} else {
+			if (chairs.matches(CHAIRS_PATTERN)) {
 				if (Integer.parseInt(super.getSala().getCapacidade()) < Integer
-						.parseInt(cadeiras_reservadas))
-					throw new ReservaException(CADEIRAS_ACIMA_DO_LIMITE);
-				else
-					this.cadeiras_reservadas = cadeiras_reservadas;
+						.parseInt(reservedChairs)) {
+					throw new ReservaException(OVER_LIMIT_CHAIRS);
+				} else {
+					this.reservedChairs = reservedChairs;
+				}
+			} else {
+				throw new ReservaException(INVALID_CHAIRS);
 			}
-			else
-				throw new ReservaException(CADEIRAS_INVALIDA);
+		}
 	}
 
-	public boolean equals (ReservaSalaAluno obj) {
+	public boolean equals(ReservaSalaAluno reservation) {
 
-		return (super.equals(obj) &&
-				this.getAluno().equals(obj.getAluno()) && this
-				.getCadeiras_reservadas().equals(obj.getCadeiras_reservadas()));
+		return (super.equals(reservation)
+				&& this.getAluno().equals(reservation.getAluno()) && this
+				.getCadeiras_reservadas().equals(
+						reservation.getCadeiras_reservadas()));
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
 		return "Aluno: " + this.getAluno().toString()
 				+ "\nCadeiras Reservadas: " + this.getCadeiras_reservadas()

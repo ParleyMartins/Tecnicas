@@ -100,7 +100,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 
-			Vector <Aluno> alunos = ManterAluno.getInstance().buscarCpf(
+			Vector <Aluno> alunos = ManterAluno.getInstance().searchCpf(
 					this.cpfTextField.getText());
 			if (alunos.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Aluno nao Cadastrado."
@@ -128,7 +128,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 			Vector <Professor> professor = ManterProfessor.getInstance()
-					.buscarCpf(this.cpfTextField.getText());
+					.searchCpf(this.cpfTextField.getText());
 			if (professor.isEmpty()) {
 				JOptionPane
 						.showMessageDialog(

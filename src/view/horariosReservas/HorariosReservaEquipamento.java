@@ -42,7 +42,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	}
 
 	// This method fills the vector with data to be used on the table.
-	protected Vector <String> fillDataVector (Object obj, int index) {
+	protected Vector <String> fillDataVector (Object obj, final int index) {
 
 		Vector <String> dataVector = new Vector <String>();
 		if (obj instanceof ReservaEquipamentoProfessor) {
@@ -80,7 +80,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 			this.month = Integer.parseInt(this.date.substring(3, 5));
 
 			Vector <ReservaEquipamentoProfessor> monthReservations = this.instance
-					.getReservasMes(month);
+					.getReservationsPerMonth(month);
 			if (monthReservations != null)
 				for (int i = 0 ; i < monthReservations.size() ; i++) {
 					dataTable.addRow(fillDataVector(monthReservations.get(i), i));
@@ -106,17 +106,17 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	@Override
 	// This method cancels a reservation.
-	protected void cancelarReservaAction (int index) {
+	protected void cancelReservationAction (final int index) {
 
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					"Deseja mesmo excluir Reserva?\n"
-							+ this.instance.getReservasMes(month).get(index)
+							+ this.instance.getReservationsPerMonth(month).get(index)
 									.toString(), "Excluir",
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				this.instance.excluir(this.instance.getReservasMes(month).get(
+				this.instance.delete(this.instance.getReservationsPerMonth(month).get(
 						index));
 				JOptionPane.showMessageDialog(this,
 						"Reserva excluida com sucesso", "Sucesso",
@@ -140,8 +140,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	// This method reserves a propety.
-	protected void reservarAction ( ) {
+	// This method reserves a property.
+	protected void reserveAction ( ) {
 
 		try {
 			ReservaEquipamentoView reservation = new FazerReservaEquipamentoView(
@@ -164,7 +164,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	@Override
 	// This method modifies a reservation
-	protected void alterarAction (int index) {
+	protected void modifyAction (int index) {
 
 		try {
 			index = Integer.parseInt((String)

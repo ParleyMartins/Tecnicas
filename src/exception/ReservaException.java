@@ -7,17 +7,17 @@ https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/exception/Reserv
 package exception;
 
 @SuppressWarnings("serial")
-public class ReservaException extends Exception{
-	
+public class ReservaException extends Exception {
+
 	// Constructor creates a ReservaExcpetion without any argument
-	public ReservaException () {
-		
-		super( );
+	public ReservaException() {
+
+		super();
 	}
-	
+
 	// Constructor creates a ReservaExcpetion with a message.
-	public ReservaException (String msg) {
-		
-		super(msg);
+	public ReservaException(String message) {
+
+		super(message);
 	}
 }

@@ -38,7 +38,7 @@ public class ManterResSalaProfessor {
 	}
 
 	// Returns the room reservation made ​​​​by students in a month period.
-	public Vector <ReservaSalaProfessor> buscarPorData (String date)
+	public Vector <ReservaSalaProfessor> searchPerDate (String date)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -46,7 +46,7 @@ public class ManterResSalaProfessor {
 	}
 
 	// Returns all the reservations made ​​by teacher
-	public Vector <ReservaSalaProfessor> getResProfessorSala_vet ( )
+	public Vector <ReservaSalaProfessor> getTeacherRoomReservationVec ( )
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -56,7 +56,7 @@ public class ManterResSalaProfessor {
 	}
 
 	// Include new reservation in the database.
-	public void inserir (Sala room, Professor teacher,
+	public void insert (Sala room, Professor teacher,
 			String date, String time, String purpose)
 			throws SQLException, ReservaException {
 
@@ -67,7 +67,7 @@ public class ManterResSalaProfessor {
 	}
 
 	// Update reservation info from the database.
-	public void alterar (String purpose, ReservaSalaProfessor newReservation)
+	public void modify (String purpose, ReservaSalaProfessor newReservation)
 			throws SQLException, ReservaException {
 
 		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
@@ -82,7 +82,7 @@ public class ManterResSalaProfessor {
 	}
 
 	// Remove the reservation made by a teacher.
-	public void excluir (ReservaSalaProfessor reservation) throws SQLException,
+	public void delete (ReservaSalaProfessor reservation) throws SQLException,
 			ReservaException {
 
 		ResSalaProfessorDAO.getInstance().excluir(reservation);

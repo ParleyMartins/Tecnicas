@@ -6,17 +6,17 @@ https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/exception/Client
 
 package exception;
 
-@SuppressWarnings ("serial")
+@SuppressWarnings("serial")
 public class ClienteException extends Exception {
 
 	// Constructor creates a ClientExcpetion without any argument.
-	public ClienteException ( ) {
+	public ClienteException() {
 
-		super( );
+		super();
 	}
 
 	// Constructor creates a ClientExcpetion with a message.
-	public ClienteException (String message) {
+	public ClienteException(String message) {
 
 		super(message);
 	}

@@ -54,13 +54,13 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	protected abstract DefaultTableModel fillTable (Patrimonio p);
 
 	// This method cancels a reservation.
-	protected abstract void cancelarReservaAction (int indexLinha);
+	protected abstract void cancelReservationAction (final int indexRow);
 
-	// This method reserves a propety.
-	protected abstract void reservarAction ( );
+	// This method reserves a property.
+	protected abstract void reserveAction ( );
 
 	// This method modifies a reservation
-	protected abstract void alterarAction (int indexLinha);
+	protected abstract void modifyAction (final int indexLinha);
 
 	// This method initialize the components.
 	private void initComponents ( ) {
@@ -81,7 +81,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 			public void actionPerformed (ActionEvent evt) {
 
-				reservarButtonActionPerformed(evt);
+				reserveActionPerformed(evt);
 			}
 		});
 
@@ -91,7 +91,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 			public void actionPerformed (ActionEvent evt) {
 
-				alterarButtonActionPerformed(evt);
+				modifyActionPerformed(evt);
 			}
 		});
 
@@ -101,7 +101,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 			public void actionPerformed (ActionEvent evt) {
 
-				cancelarReservaButtonActionPerformed(evt);
+				cancelActionPerformed(evt);
 			}
 		});
 
@@ -236,7 +236,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	}
 
 	// This methods generates the cancel action.
-	private void cancelarReservaButtonActionPerformed (ActionEvent evt) {
+	private void cancelActionPerformed (ActionEvent evt) {
 
 		int indexRow;
 		indexRow = this.reservationTable.getSelectedRow();
@@ -245,19 +245,19 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		}
-		cancelarReservaAction(indexRow);
+		cancelReservationAction(indexRow);
 		this.reservationTable.setModel(fillTable(this.property));
 	}
 
 	// This methods generates the reservation action.
-	private void reservarButtonActionPerformed (ActionEvent evt) {
+	private void reserveActionPerformed (ActionEvent evt) {
 
-		reservarAction();
+		reserveAction();
 		this.reservationTable.setModel(fillTable(this.property));
 	}
 
 	// This methods generates the modify reservation action.
-	private void alterarButtonActionPerformed (ActionEvent evt) {
+	private void modifyActionPerformed (ActionEvent evt) {
 
 		int indexRow;
 		indexRow = this.reservationTable.getSelectedRow();
@@ -266,7 +266,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		}
-		alterarAction(indexRow);
+		modifyAction(indexRow);
 		this.reservationTable.setModel(fillTable(this.property));
 	}
 }

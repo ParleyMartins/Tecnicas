@@ -37,7 +37,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Returns the room reservation made ​​by students in a period of time.
-	public Vector <ReservaSalaAluno> getReservasHora (String time)
+	public Vector <ReservaSalaAluno> getReservationPerTime (String time)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -46,7 +46,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Returns the room reservation made ​​​​by students in a month period.
-	public Vector <ReservaSalaAluno> getReservasMes (String date)
+	public Vector <ReservaSalaAluno> getReservationsPerMonth (String date)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -55,7 +55,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Returns all the reservations made ​​by students
-	public Vector <ReservaSalaAluno> getResAlunoSala_vet ( )
+	public Vector <ReservaSalaAluno> getstudentRoomReservationVector ( )
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -65,7 +65,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Returns the number of seats available to reserve in a room.
-	public int cadeirasDisponveis (Sala room, String date, String time)
+	public int checkAvailableChairs (Sala room, String date, String time)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -74,7 +74,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Include new reservation in the database.
-	public void inserir (Sala room, Aluno student,
+	public void insert (Sala room, Aluno student,
 			String date, String time, String purpose,
 			String numberDesiredChairs)
 			throws SQLException, ReservaException, ClienteException,
@@ -88,7 +88,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Update reservation info from the database.
-	public void alterar (String purpose, String numberDesiredChairs,
+	public void modify (String purpose, String numberDesiredChairs,
 			ReservaSalaAluno reservation)
 			throws SQLException, ReservaException, ClienteException,
 			PatrimonioException {
@@ -104,7 +104,7 @@ public class ManterResSalaAluno {
 	}
 
 	// Remove the reservation made by a student.
-	public void excluir (ReservaSalaAluno reservation) throws SQLException,
+	public void delete (ReservaSalaAluno reservation) throws SQLException,
 			ReservaException {
 
 		ResSalaAlunoDAO.getInstance().excluir(reservation);

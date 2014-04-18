@@ -31,9 +31,9 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 		try {
 
 			this.codigoTxtField.setText(ManterEquipamento.getInstance()
-					.getEquipamento_vet().get(index).getCodigo());
+					.getEquipmentVec().get(index).getCodigo());
 			this.descricaoTextArea.setText(ManterEquipamento.getInstance()
-					.getEquipamento_vet().get(index).getDescricao());
+					.getEquipmentVec().get(index).getDescricao());
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {
@@ -55,10 +55,10 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 		try {
 
-			ManterEquipamento.getInstance().alterar(
+			ManterEquipamento.getInstance().modify(
 					this.codigoTxtField.getText(),
 					this.descricaoTextArea.getText(),
-					ManterEquipamento.getInstance().getEquipamento_vet()
+					ManterEquipamento.getInstance().getEquipmentVec()
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this,

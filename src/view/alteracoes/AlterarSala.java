@@ -27,12 +27,12 @@ public class AlterarSala extends CadastroPatrimonio {
 
 		try {
 
-			this.codigoTxtField.setText(ManterSala.getInstance().getSalas_vet()
+			this.codigoTxtField.setText(ManterSala.getInstance().getRoomsVec()
 					.get(index).getCodigo());
 			this.capacidadeTxtField.setText(ManterSala.getInstance()
-					.getSalas_vet().get(index).getCapacidade());
+					.getRoomsVec().get(index).getCapacidade());
 			this.descricaoTextArea.setText(ManterSala.getInstance()
-					.getSalas_vet().get(index).getDescricao());
+					.getRoomsVec().get(index).getDescricao());
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {
@@ -53,10 +53,10 @@ public class AlterarSala extends CadastroPatrimonio {
 
 		try {
 
-			ManterSala.getInstance().alterar(this.codigoTxtField.getText(),
+			ManterSala.getInstance().modify(this.codigoTxtField.getText(),
 					this.descricaoTextArea.getText(),
 					this.capacidadeTxtField.getText(),
-					ManterSala.getInstance().getSalas_vet().get(this.index2));
+					ManterSala.getInstance().getRoomsVec().get(this.index2));
 
 			JOptionPane.showMessageDialog(this, "Sala Alterada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);

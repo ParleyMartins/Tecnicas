@@ -25,7 +25,7 @@ public class RegisterClassroom extends RegisterProperty{
 	protected void registerAction ( ) {
 
 		try {
-			ManterSala.getInstance().inserir(this.codeTxtField.getText(),
+			ManterSala.getInstance().insert(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText(),
 					this.capacityTxtField.getText());
 

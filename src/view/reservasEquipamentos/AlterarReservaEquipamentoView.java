@@ -29,7 +29,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 		super(parent, modal);
 		this.equipamento = eq;
 		// this.index = index;
-		this.reserva = this.instanceProf.getReservasMes(mes).get(index);
+		this.reserva = this.instanceProf.getReservationsPerMonth(mes).get(index);
 		resetComponents();
 	}
 
@@ -37,7 +37,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	protected void reservarProfessor ( ) {
 
 		try {
-			this.instanceProf.alterar(this.reserva,
+			this.instanceProf.modify(this.reserva,
 					this.dataTextField.getText(), this.horaTextField.getText(),
 					this.equipamento, this.reserva.getProfessor());
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
