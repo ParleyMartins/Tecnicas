@@ -29,9 +29,9 @@ import java.awt.Frame;
 
 public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
-	ManterResSalaAluno studentInstance;
-	ManterResSalaProfessor teacherInstance;
-	Sala room;
+	private ManterResSalaAluno studentInstance;
+	private ManterResSalaProfessor teacherInstance;
+	private Sala room;
 
 	public HorariosReservaSala (Frame parent, boolean modal, String date,
 			Sala room) {
@@ -41,7 +41,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 		this.setName("HorarioReservaSala");
 	}
 
-	protected Vector <String> fillDataVector (Object obj, int index) {
+	protected Vector <String> fillDataVector (Object obj, final int index) {
 
 		Vector <String> clientData = new Vector <String>();
 		if (obj instanceof ReservaSalaAluno) {
@@ -148,7 +148,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void cancelarReservaAction (int index) {
+	protected void cancelReservationAction (int index) {
 
 		try {
 			String clientType = (String) this.reservationTable.getModel()
@@ -209,7 +209,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void reservarAction ( ) {
+	protected void reserveAction ( ) {
 
 		try {
 			ReservaSalaView roomReservation = new FazerReservaSalaView(
@@ -232,7 +232,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void alterarAction (int index) {
+	protected void modifyAction (int index) {
 
 		try {
 			String clientType = (String) this.reservationTable.getModel()

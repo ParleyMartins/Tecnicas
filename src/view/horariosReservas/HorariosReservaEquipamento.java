@@ -42,7 +42,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	}
 
 	// This method fills the vector with data to be used on the table.
-	protected Vector <String> fillDataVector (Object obj, int index) {
+	protected Vector <String> fillDataVector (Object obj, final int index) {
 
 		Vector <String> dataVector = new Vector <String>();
 		if (obj instanceof ReservaEquipamentoProfessor) {
@@ -106,7 +106,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	@Override
 	// This method cancels a reservation.
-	protected void cancelarReservaAction (int index) {
+	protected void cancelReservationAction (final int index) {
 
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this,
@@ -140,8 +140,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	// This method reserves a propety.
-	protected void reservarAction ( ) {
+	// This method reserves a property.
+	protected void reserveAction ( ) {
 
 		try {
 			ReservaEquipamentoView reservation = new FazerReservaEquipamentoView(
@@ -164,7 +164,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	@Override
 	// This method modifies a reservation
-	protected void alterarAction (int index) {
+	protected void modifyAction (int index) {
 
 		try {
 			index = Integer.parseInt((String)
