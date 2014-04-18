@@ -50,7 +50,7 @@ public class ManterEquipamento {
 	}
 
 	// This method update code and description info in the database.
-	public void alterar (String equipmentCode, String equipmentDescription,
+	public void modify (String equipmentCode, String equipmentDescription,
 			Equipamento newEquipment) throws PatrimonioException, SQLException {
 
 		if (newEquipment == null) {

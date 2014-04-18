@@ -55,7 +55,7 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 		try {
 
-			ManterEquipamento.getInstance().alterar(
+			ManterEquipamento.getInstance().modify(
 					this.codigoTxtField.getText(),
 					this.descricaoTextArea.getText(),
 					ManterEquipamento.getInstance().getEquipmentVec()
