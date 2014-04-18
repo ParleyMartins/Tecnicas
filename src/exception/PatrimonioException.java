@@ -10,15 +10,15 @@ package exception;
 public class PatrimonioException extends Exception {
 
 	// Constructor creates a PatrimonioExcpetion without any argument.
-	public PatrimonioException () {
-		
-		super( );
+	public PatrimonioException() {
+
+		super();
 	}
-	
+
 	// Constructor creates a PatrimonioExcpetion with a message.
-	public PatrimonioException (String msg) {
-		
-		super(msg);
+	public PatrimonioException(String message) {
+
+		super(message);
 	}
 
 }
