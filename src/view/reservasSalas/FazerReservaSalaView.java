@@ -40,12 +40,12 @@ public class FazerReservaSalaView extends ReservaSalaView {
 	protected void reservarAluno ( ) {
 
 		try {
-			instanceAluno.inserir(sala, aluno, this.dataTextField.getText(),
+			instanceAluno.insert(sala, aluno, this.dataTextField.getText(),
 					this.horaTextField.getText(),
 					this.finalidadeTextField.getText(),
 					this.qntCadeirasReservadasTextField.getText());
 
-			instanceAluno.getResAlunoSala_vet();
+			instanceAluno.getstudentRoomReservationVector();
 			// System.out.println(v.toString( ));
 
 			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
@@ -131,7 +131,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 
 		try {
 			this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno
-					.cadeirasDisponveis(sala, this.dataTextField.getText(),
+					.checkAvailableChairs(sala, this.dataTextField.getText(),
 							this.horaTextField.getText())));
 		} catch (ReservaException ex) {
 

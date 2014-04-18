@@ -116,7 +116,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				}
 			clientPerDate.clear();
 
-			clientPerDate = this.studentInstance.getReservasMes(this.date);
+			clientPerDate = this.studentInstance.getReservationsPerMonth(this.date);
 			if (clientPerDate != null)
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
 					Vector <String> row = fillDataVector(clientPerDate.get(i),
@@ -159,14 +159,14 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				int confirm = JOptionPane.showConfirmDialog(
 						this,
 						"Deseja mesmo excluir Reserva?\n"
-								+ this.studentInstance.getReservasMes(date)
+								+ this.studentInstance.getReservationsPerMonth(date)
 										.get(index)
 										.toString(), "Excluir",
 						JOptionPane.YES_NO_OPTION);
 
 				if (confirm == JOptionPane.YES_OPTION) {
-					this.studentInstance.excluir(this.studentInstance
-							.getReservasMes(
+					this.studentInstance.delete(this.studentInstance
+							.getReservationsPerMonth(
 									date).get(index));
 					JOptionPane.showMessageDialog(this,
 							"Reserva excluida com sucesso", "Sucesso",
