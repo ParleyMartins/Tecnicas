@@ -338,15 +338,15 @@ public class ResSalaAlunoDAO extends DAO {
 	}
 
 	// Gets the current date.
-	private String dataAtual ( ) {
+	private String currentDate ( ) {
 
 		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-		return formatador.format(date);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return formatter.format(date);
 	}
 
 	// Gets the current time.
-	private String currentDate ( ) {
+	private String currentTime ( ) {
 
 		Date date = new Date(System.currentTimeMillis());
 		return date.toString().substring(11, 16);
@@ -355,7 +355,7 @@ public class ResSalaAlunoDAO extends DAO {
 	// Check if the date is passed.
 	private boolean dateIsGone (String date) {
 
-		String now[] = this.dataAtual().split("[./-]");
+		String now[] = this.currentDate().split("[./-]");
 		String dateParts[] = date.split("[./-]");
 
 		int differenceDates = now[2].length() - dateParts[2].length();
@@ -387,7 +387,7 @@ public class ResSalaAlunoDAO extends DAO {
 	public boolean dateIsNow (String date) {
 
 		date = this.standardizeDate(date);
-		String now[] = this.dataAtual().split("[./-]");
+		String now[] = this.currentDate().split("[./-]");
 		String dateParts[] = date.split("[./-]");
 
 		if (now[0].equals(dateParts[0]) && now[1].equals(dateParts[1])
@@ -400,7 +400,7 @@ public class ResSalaAlunoDAO extends DAO {
 	// Check if the time is passed.
 	private boolean timeIsGone (String time) {
 
-		String now = this.currentDate();
+		String now = this.currentTime();
 		if (time.length() == 4) {
 			time = "0" + time;
 		}
@@ -425,7 +425,7 @@ public class ResSalaAlunoDAO extends DAO {
 	// Standardize the date.
 	private String standardizeDate (String date) {
 
-		String now[] = dataAtual().split("[./-]");
+		String now[] = currentDate().split("[./-]");
 		String dateParts[] = date.split("[./-]");
 		String standardDate = "";
 
@@ -452,7 +452,7 @@ public class ResSalaAlunoDAO extends DAO {
 	}
 	
 	// Select id by Aluno query.
-	private String selectStudentID (Aluno student) {
+	private String selectStudentIDQuery (Aluno student) {
 
 		return "SELECT id_aluno FROM aluno WHERE " + "aluno.nome = \""
 				+ student.getName() + "\" and " + "aluno.cpf = \"" + student.getCpf()
@@ -462,7 +462,7 @@ public class ResSalaAlunoDAO extends DAO {
 	}
 
 	// Select id by Sala query.
-	private String selectRoomID (Sala room) {
+	private String selectRoomIDQuery (Sala room) {
 
 		return "SELECT id_sala FROM sala WHERE " + "sala.codigo = \""
 				+ room.getCodigo() + "\" and " + "sala.descricao = \""
@@ -473,8 +473,8 @@ public class ResSalaAlunoDAO extends DAO {
 	// Reuse query for WHERE clause.
 	private String whereQuery (ReservaSalaAluno reservation) {
 
-		return " WHERE " + "id_aluno = ( " + selectStudentID(reservation.getAluno())
-				+ " ) and " + "id_sala = ( " + selectRoomID(reservation.getSala())
+		return " WHERE " + "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno())
+				+ " ) and " + "id_sala = ( " + selectRoomIDQuery(reservation.getSala())
 				+ " ) and " + "finalidade = \"" + reservation.getFinalidade() + "\" and "
 				+ "hora = \"" + reservation.getHora() + "\" and " + "data = \""
 				+ reservation.getData() + "\" and " + "cadeiras_reservadas = "
@@ -484,8 +484,8 @@ public class ResSalaAlunoDAO extends DAO {
 	// Reuse query for VALUES clause.
 	private String valuesReservationQuery (ReservaSalaAluno reservation) {
 
-		return "( " + selectStudentID(reservation.getAluno()) + " ), " + "( "
-				+ selectRoomID(reservation.getSala()) + " ), " + "\""
+		return "( " + selectStudentIDQuery(reservation.getAluno()) + " ), " + "( "
+				+ selectRoomIDQuery(reservation.getSala()) + " ), " + "\""
 				+ reservation.getFinalidade() + "\", " + "\"" + reservation.getHora() + "\", "
 				+ "\"" + reservation.getData() + "\", " + reservation.getCadeiras_reservadas();
 	}
@@ -493,8 +493,8 @@ public class ResSalaAlunoDAO extends DAO {
 	// Reuse query for ATRIBUTES clause.
 	private String attributesQuery (ReservaSalaAluno reservation) {
 
-		return "id_aluno = ( " + selectStudentID(reservation.getAluno()) + " ), "
-				+ "id_sala = ( " + selectRoomID(reservation.getSala()) + " ), "
+		return "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno()) + " ), "
+				+ "id_sala = ( " + selectRoomIDQuery(reservation.getSala()) + " ), "
 				+ "finalidade = \"" + reservation.getFinalidade() + "\", " + "hora = \""
 				+ reservation.getHora() + "\", " + "data = \"" + reservation.getData() + "\", "
 				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas();

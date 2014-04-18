@@ -42,7 +42,7 @@ public class ManterResSalaProfessor {
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		return ResSalaProfessorDAO.getInstance().buscarPorData(date);
+		return ResSalaProfessorDAO.getInstance().searchByDate(date);
 	}
 
 	// Returns all the reservations made ​​by teacher
@@ -51,7 +51,7 @@ public class ManterResSalaProfessor {
 			ReservaException {
 
 		this.teacherRoomReservationVec = ResSalaProfessorDAO.getInstance()
-				.buscarTodos();
+				.searchAll();
 		return this.teacherRoomReservationVec;
 	}
 
@@ -62,7 +62,7 @@ public class ManterResSalaProfessor {
 
 		ReservaSalaProfessor reservation = new ReservaSalaProfessor(date, time,
 				room, purpose, teacher);
-		ResSalaProfessorDAO.getInstance().incluir(reservation);
+		ResSalaProfessorDAO.getInstance().insert(reservation);
 		this.teacherRoomReservationVec.add(reservation);
 	}
 
@@ -76,7 +76,7 @@ public class ManterResSalaProfessor {
 				newReservation.getFinalidade(), newReservation.getProfessor());
 
 		newReservation.setFinalidade(purpose);
-		ResSalaProfessorDAO.getInstance().alterar(oldReservation,
+		ResSalaProfessorDAO.getInstance().modify(oldReservation,
 				newReservation);
 
 	}
@@ -85,7 +85,7 @@ public class ManterResSalaProfessor {
 	public void delete (ReservaSalaProfessor reservation) throws SQLException,
 			ReservaException {
 
-		ResSalaProfessorDAO.getInstance().excluir(reservation);
+		ResSalaProfessorDAO.getInstance().delete(reservation);
 		this.teacherRoomReservationVec.remove(reservation);
 	}
 }
