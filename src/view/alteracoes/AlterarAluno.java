@@ -26,15 +26,15 @@ public class AlterarAluno extends CadastroCliente {
 		this.index2 = index;
 
 		try {
-			this.nomeTxtField.setText(ManterAluno.getInstance().getAluno_vet()
+			this.nomeTxtField.setText(ManterAluno.getInstance().getStudentsVec()
 					.get(index).getName());
-			this.emailTxtField.setText(ManterAluno.getInstance().getAluno_vet()
+			this.emailTxtField.setText(ManterAluno.getInstance().getStudentsVec()
 					.get(index).getEmail());
 			this.telefoneTxtField.setText(ManterAluno.getInstance()
-					.getAluno_vet().get(index).getPhoneNumber());
+					.getStudentsVec().get(index).getPhoneNumber());
 			this.matriculaTxtField.setText(ManterAluno.getInstance()
-					.getAluno_vet().get(index).getEnrollmentNumber());
-			this.cpfTxtField.setText(ManterAluno.getInstance().getAluno_vet()
+					.getStudentsVec().get(index).getEnrollmentNumber());
+			this.cpfTxtField.setText(ManterAluno.getInstance().getStudentsVec()
 					.get(index).getCpf());
 
 		} catch (ClienteException ex) {
@@ -51,10 +51,10 @@ public class AlterarAluno extends CadastroCliente {
 	public void cadastroAction ( ) {
 
 		try {
-			ManterAluno.getInstance().alterar(nomeTxtField.getText(),
+			ManterAluno.getInstance().modify(nomeTxtField.getText(),
 					cpfTxtField.getText(), matriculaTxtField.getText(),
 					telefoneTxtField.getText(), emailTxtField.getText(),
-					ManterAluno.getInstance().getAluno_vet().get(index2));
+					ManterAluno.getInstance().getStudentsVec().get(index2));
 
 			JOptionPane.showMessageDialog(this, "Aluno alterado com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);

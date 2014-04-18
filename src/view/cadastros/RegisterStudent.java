@@ -25,7 +25,7 @@ public class RegisterStudent extends RegisterClient {
 
 		try {
 			if (this.registerButton.getText().equals("Cadastrar")) {
-				ManterAluno.getInstance().inserir(this.nameTxtField.getText(),
+				ManterAluno.getInstance().insert(this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
 						this.enrollmentNumberTxtField.getText(),
 						this.phoneNumberTxtField.getText(),

@@ -50,7 +50,7 @@ public class AlterarProfessor extends CadastroCliente {
 	public void cadastroAction ( ) {
 
 		try {
-			ManterProfessor.getInstance().alterar(
+			ManterProfessor.getInstance().modify(
 					this.nomeTxtField.getText(),
 					this.cpfTxtField.getText(),
 					this.matriculaTxtField.getText(),

@@ -30,7 +30,7 @@ public class AlunoView extends ClienteView {
 	public Iterator getIterator ( ) {
 
 		try {
-			return ManterAluno.getInstance().getAluno_vet().iterator();
+			return ManterAluno.getInstance().getStudentsVec().iterator();
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
@@ -80,12 +80,12 @@ public class AlunoView extends ClienteView {
 			int confirm = JOptionPane.showConfirmDialog(
 					this,
 					"Deseja mesmo excluir Aluno: "
-							+ ManterAluno.getInstance().getAluno_vet()
+							+ ManterAluno.getInstance().getStudentsVec()
 									.get(index).getName() + "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterAluno.getInstance().excluir(
-						ManterAluno.getInstance().getAluno_vet().get(index));
+				ManterAluno.getInstance().delete(
+						ManterAluno.getInstance().getStudentsVec().get(index));
 				JOptionPane.showMessageDialog(this,
 						"Aluno excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);
