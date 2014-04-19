@@ -41,7 +41,7 @@ public abstract class DAO {
 	}
 
 	// Check if a database entry exists.
-	protected boolean inDBGeneric (String query) throws SQLException {
+	protected boolean isInDBGeneric (String query) throws SQLException {
 
 		Connection factoryCon = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = factoryCon.prepareStatement(query);
@@ -68,7 +68,7 @@ public abstract class DAO {
 			ClienteException, PatrimonioException, ReservaException;
 
 	// Add or remove a database entry.
-	protected void executeQuery (String message) throws SQLException {
+	protected void execute (String message) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(message);
@@ -78,7 +78,7 @@ public abstract class DAO {
 	}
 
 	// Update a database entry.
-	protected void updateQuery (String message) throws SQLException {
+	protected void update (String message) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		connection.setAutoCommit(false);
