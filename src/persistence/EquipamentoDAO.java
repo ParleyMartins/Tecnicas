@@ -48,11 +48,11 @@ public class EquipamentoDAO {
 		if (equipment == null) {
 			throw new PatrimonioException(EQUIPAMENTO_NULO);
 		} else {
-			if (this.inDbCode(equipment.getCodigo())) {
+			if (this.isInDbCode(equipment.getCodigo())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 			} else {
-				if (!this.inDB(equipment)) {
-					this.updateQuery("INSERT INTO " + "equipamento "
+				if (!this.isInDB(equipment)) {
+					this.update("INSERT INTO " + "equipamento "
 							+ "(codigo, descricao) VALUES (" + "\""
 							+ equipment.getCodigo() + "\", " + "\""
 							+ equipment.getDescricao() + "\");");
@@ -75,18 +75,18 @@ public class EquipamentoDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
-		if (!this.inDB(oldEquipment)) {
+		if (!this.isInDB(oldEquipment)) {
 			throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
 		} else {
-			if (this.inOtherDB(oldEquipment)) {
+			if (this.isInOtherDB(oldEquipment)) {
 				throw new PatrimonioException(EQUIPAMENTO_EM_USO);
 			} else {
 				if (!newEquipment.getCodigo().equals(
 						oldEquipment.getCodigo())
-						&& this.inDbCode(newEquipment.getCodigo())) {
+						&& this.isInDbCode(newEquipment.getCodigo())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 				} else {
-					if (!this.inDB(newEquipment)) {
+					if (!this.isInDB(newEquipment)) {
 						String message = "UPDATE equipamento SET " + "codigo = \""
 								+ newEquipment.getCodigo() + "\", "
 								+ "descricao = \""
@@ -120,13 +120,13 @@ public class EquipamentoDAO {
 		if (equipment == null) {
 			throw new PatrimonioException(EQUIPAMENTO_NULO);
 		} else {
-			if (this.inOtherDB(equipment)) {
+			if (this.isInOtherDB(equipment)) {
 				throw new PatrimonioException(EQUIPAMENTO_EM_USO);
 			}
 		}
 
-		if (this.inDB(equipment)) {
-			this.updateQuery("DELETE FROM equipamento WHERE "
+		if (this.isInDB(equipment)) {
+			this.update("DELETE FROM equipamento WHERE "
 					+ "equipamento.codigo = \"" + equipment.getCodigo()
 					+ "\" and " + "equipamento.descricao = \""
 					+ equipment.getDescricao() + "\";");
@@ -185,7 +185,7 @@ public class EquipamentoDAO {
 	}
 
 	// Check if there is a database entry by query.
-	private boolean inDBGeneric (String query) throws SQLException {
+	private boolean isInDBGeneric (String query) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(query);
@@ -207,26 +207,26 @@ public class EquipamentoDAO {
 	}
 
 	// Check if there is a database entry by Equipamento.
-	private boolean inDB (Equipamento equipement) throws SQLException,
+	private boolean isInDB (Equipamento equipement) throws SQLException,
 			PatrimonioException {
 
-		return this.inDBGeneric("SELECT * FROM equipamento WHERE "
+		return this.isInDBGeneric("SELECT * FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipement.getCodigo() + "\" and "
 				+ "equipamento.descricao = \"" + equipement.getDescricao() + "\";");
 	}
 
 	// Check if there is a database entry by code id.
-	private boolean inDbCode (String code) throws SQLException {
+	private boolean isInDbCode (String code) throws SQLException {
 
-		return this.inDBGeneric("SELECT * FROM equipamento WHERE "
+		return this.isInDBGeneric("SELECT * FROM equipamento WHERE "
 				+ "codigo = \"" + code + "\";");
 	}
 
 	// Check if there is a database entry.
-	private boolean inOtherDB (Equipamento equipment) throws SQLException {
+	private boolean isInOtherDB (Equipamento equipment) throws SQLException {
 
 		return this
-				.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
+				.isInDBGeneric("SELECT * FROM reserva_equipamento WHERE "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
 						+ "equipamento.codigo = \"" + equipment.getCodigo() + "\" and "
 						+ "equipamento.descricao = \"" + equipment.getDescricao()
@@ -242,7 +242,7 @@ public class EquipamentoDAO {
 	}
 
 	// Update a query.
-	private void updateQuery (String message) throws SQLException {
+	private void update (String message) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(message);
