@@ -67,7 +67,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 							throw new ReservaException(RESERVA_EXISTENTE);
 						} else {
 							//super.executeQuery(this.delete_from_aluno(r));
-							super.executeQuery(this.insertIntoDBQuery(reservation));
+							super.execute(this.insertIntoDBQuery(reservation));
 						}
 					}
 				}
@@ -115,7 +115,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 									throw new ReservaException(
 											EQUIPAMENTO_INEXISTENTE);
 								} else {
-									super.updateQuery(this.updateQuery(oldReservation, newReservation));
+									super.update(this.updateQuery(oldReservation, newReservation));
 								}
 							}
 						}
@@ -136,7 +136,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			if (!this.reservationIsInDB(reservation)) {
 				throw new ReservaException(RESERVA_INEXISTENTE);
 			} else {
-				super.executeQuery(this.deleteQuery(reservation));
+				super.execute(this.deleteQuery(reservation));
 			}
 		}
 	}
@@ -220,7 +220,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	// Check if there is a Professor in the database.
 	private boolean teacherIsInDB (Professor teacher) throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM professor WHERE "
+		return super.isInDBGeneric("SELECT * FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
 				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
 				+ "professor.telefone = \"" + teacher.getPhoneNumber()
@@ -233,7 +233,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean equipmentIsInDB (Equipamento equipment)
 			throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM equipamento WHERE "
+		return super.isInDBGeneric("SELECT * FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getCodigo()
 				+ "\" and " + "equipamento.descricao = \""
 				+ equipment.getDescricao() + "\";");
@@ -243,7 +243,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean teacherIsInReservationDB (Professor teacher, String date,
 			String time) throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
+		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
 				+ "data = \"" + date + "\" and " + "hora = \"" + time
 				+ "\" and "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
@@ -260,7 +260,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			String date, String time) throws SQLException {
 
 		return super
-				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
+				.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 						+ "data = \""
 						+ date
 						+ "\" and "
@@ -278,7 +278,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			throws SQLException {
 
 		return super
-				.inDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
+				.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 						+ "id_professor = (SELECT id_professor FROM professor WHERE "
 						+ "professor.nome = \"" + reservation.getProfessor().getName()
 						+ "\" and "

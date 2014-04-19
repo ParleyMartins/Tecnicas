@@ -45,16 +45,16 @@ public class ProfessorDAO {
 		if (teacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
 		} else {
-			if (this.inDBCpf(teacher.getCpf())) {
+			if (this.isInDBCpf(teacher.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
-				if (this.inDbEnrollmentNumber(teacher.getEnrollmentNumber())) {
+				if (this.isInDbEnrollmentNumber(teacher.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				}
 			}
 		}
 
-		this.updateQuery("INSERT INTO "
+		this.update("INSERT INTO "
 				+ "professor (nome, cpf, telefone, email, matricula) VALUES ("
 				+ "\"" + teacher.getName() + "\", " + "\"" + teacher.getCpf()
 				+ "\", " + "\"" + teacher.getPhoneNumber() + "\", " + "\""
@@ -76,21 +76,21 @@ public class ProfessorDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
-		if (!this.inDB(oldTeacher)) {
+		if (!this.isInDB(oldTeacher)) {
 			throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
 		}
-		if (this.inOtherDB(oldTeacher)) {
+		if (this.isInOtherDB(oldTeacher)) {
 			throw new ClienteException(PROFESSOR_EM_USO);
 		} else {
 			if (!oldTeacher.getCpf().equals(newTeacher.getCpf())
-					&& this.inDBCpf(newTeacher.getCpf())) {
+					&& this.isInDBCpf(newTeacher.getCpf())) {
 				throw new ClienteException(CPF_JA_EXISTENTE);
 			} else {
 				if (!oldTeacher.getEnrollmentNumber().equals(newTeacher.getEnrollmentNumber())
-						&& this.inDbEnrollmentNumber(newTeacher.getEnrollmentNumber())) {
+						&& this.isInDbEnrollmentNumber(newTeacher.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
 				} else {
-					if (!this.inDB(newTeacher)) {
+					if (!this.isInDB(newTeacher)) {
 						String msg = "UPDATE professor SET " + "nome = \""
 								+ newTeacher.getName() + "\", " + "cpf = \""
 								+ newTeacher.getCpf() + "\", " + "telefone = \""
@@ -127,11 +127,11 @@ public class ProfessorDAO {
 		if (teacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
 		}
-		if (this.inOtherDB(teacher)) {
+		if (this.isInOtherDB(teacher)) {
 			throw new ClienteException(PROFESSOR_EM_USO);
 		} else {
-			if (this.inDB(teacher)) {
-				this.updateQuery("DELETE FROM professor WHERE "
+			if (this.isInDB(teacher)) {
+				this.update("DELETE FROM professor WHERE "
 						+ "professor.nome = \"" + teacher.getName() + "\" and "
 						+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
 						+ "professor.telefone = \"" + teacher.getPhoneNumber()
@@ -219,7 +219,7 @@ public class ProfessorDAO {
 	}
 
 	// Check if Professor exists in the database.
-	private boolean inDBGeneric (String query) throws SQLException {
+	private boolean isInDBGeneric (String query) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(query);
@@ -239,9 +239,9 @@ public class ProfessorDAO {
 	}
 
 	// Check if Professor exists in the database by Professor.
-	private boolean inDB (Professor teacher) throws SQLException {
+	private boolean isInDB (Professor teacher) throws SQLException {
 
-		return this.inDBGeneric("SELECT * FROM professor WHERE "
+		return this.isInDBGeneric("SELECT * FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
 				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
 				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
@@ -250,30 +250,30 @@ public class ProfessorDAO {
 	}
 
 	// Check if Professor exists in the database by CPF.
-	private boolean inDBCpf (String cpf) throws SQLException {
+	private boolean isInDBCpf (String cpf) throws SQLException {
 
-		return this.inDBGeneric("SELECT * FROM professor WHERE " + "cpf = \""
+		return this.isInDBGeneric("SELECT * FROM professor WHERE " + "cpf = \""
 				+ cpf + "\";");
 	}
 
 	// Check if Professor exists in the database by Matricula.
-	private boolean inDbEnrollmentNumber (String enrollmentNumber) throws SQLException {
+	private boolean isInDbEnrollmentNumber (String enrollmentNumber) throws SQLException {
 
-		return this.inDBGeneric("SELECT * FROM professor WHERE "
+		return this.isInDBGeneric("SELECT * FROM professor WHERE "
 				+ "matricula = \"" + enrollmentNumber + "\";");
 	}
 
 	// Check if Professor exists in the database by CPF.
-	private boolean inOtherDB (Professor teacher) throws SQLException {
+	private boolean isInOtherDB (Professor teacher) throws SQLException {
 
-		if (this.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
+		if (this.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
 				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
 				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + teacher.getEmail() + "\" and "
 				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\");") == false) {
-			if (this.inDBGeneric("SELECT * FROM reserva_equipamento WHERE "
+			if (this.isInDBGeneric("SELECT * FROM reserva_equipamento WHERE "
 					+ "id_professor = (SELECT id_professor FROM professor WHERE "
 					+ "professor.nome = \"" + teacher.getName() + "\" and "
 					+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
@@ -298,7 +298,7 @@ public class ProfessorDAO {
 	}
 
 	// Update a query.
-	private void updateQuery (String message) throws SQLException {
+	private void update (String message) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(message);

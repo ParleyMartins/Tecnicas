@@ -72,7 +72,7 @@ public class ResSalaProfessorDAO extends DAO {
 						} else {
 							if (this.roomIsInReservationDB(reservation.getData(), 
 									reservation.getHora())) {
-								super.executeQuery(this.deleteFromStudentQuery(reservation));
+								super.execute(this.deleteFromStudentQuery(reservation));
 							}
 						}
 					}
@@ -86,10 +86,10 @@ public class ResSalaProfessorDAO extends DAO {
 			if (this.timeIsGone(reservation.getHora())) {
 				throw new ReservaException(HORA_JA_PASSOU);
 			} else {
-				super.executeQuery(this.insertIntoQuery(reservation));
+				super.execute(this.insertIntoQuery(reservation));
 			}
 		} else {
-			super.executeQuery(this.insertIntoQuery(reservation));
+			super.execute(this.insertIntoQuery(reservation));
 		}
 	}
 
@@ -136,7 +136,7 @@ public class ResSalaProfessorDAO extends DAO {
 		if (this.timeIsGone(newReservation.getHora()) && this.dataIsNow(newReservation.getData())) {
 			throw new ReservaException(HORA_JA_PASSOU);
 		} else {
-			super.updateQuery(this.updateQuery(oldReservation, newReservation));
+			super.update(this.updateQuery(oldReservation, newReservation));
 		}
 	}
 
@@ -150,7 +150,7 @@ public class ResSalaProfessorDAO extends DAO {
 			if (!this.reservationIsInDB(reservation)) {
 				throw new ReservaException(RESERVA_INEXISTENTE);
 			} else {
-				super.executeQuery(this.deleteFromTeacherQuery(reservation));
+				super.execute(this.deleteFromTeacherQuery(reservation));
 			}
 		}
 	}
@@ -206,7 +206,7 @@ public class ResSalaProfessorDAO extends DAO {
 	// Check if there is a Professor in the database.
 	private boolean teacherIsInDB (Professor teacher) throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM professor WHERE " +
+		return super.isInDBGeneric("SELECT * FROM professor WHERE " +
 				"professor.nome = \"" + teacher.getName() + "\" and " +
 				"professor.cpf = \"" + teacher.getCpf() + "\" and " +
 				"professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
@@ -218,7 +218,7 @@ public class ResSalaProfessorDAO extends DAO {
 	// Check if there is a Sala in the database.
 	private boolean roomIsInDB (Sala room) throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM sala WHERE " +
+		return super.isInDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getCodigo() + "\" and " +
 				"sala.descricao = \"" + room.getDescricao() + "\" and " +
 				"sala.capacidade = " + room.getCapacidade() +
@@ -229,7 +229,7 @@ public class ResSalaProfessorDAO extends DAO {
 	private boolean roomIsInReservationDB (Sala room, String date, String time)
 			throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
+		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"data = \"" + date + "\" and " +
 				"hora = \"" + time + "\" and " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
@@ -241,7 +241,7 @@ public class ResSalaProfessorDAO extends DAO {
 	// Check if there is a Reserva in the database.
 	private boolean reservationIsInDB (ReservaSalaProfessor reservation) throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
+		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_professor = (SELECT id_professor FROM professor WHERE " +
 				"professor.nome = \"" + reservation.getProfessor().getName() + "\" and " +
 				"professor.cpf = \"" + reservation.getProfessor().getCpf() + "\" and " +
@@ -264,7 +264,7 @@ public class ResSalaProfessorDAO extends DAO {
 	private boolean roomIsInReservationDB (String date, String time)
 			throws SQLException {
 
-		return super.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
+		return super.isInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 				"data = \"" + date + "\" and " +
 				"hora = \"" + time + "\";");
 	}

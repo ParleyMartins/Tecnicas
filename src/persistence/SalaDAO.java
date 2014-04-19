@@ -47,11 +47,11 @@ public class SalaDAO {
 		if (room == null) {
 			throw new PatrimonioException(SALA_NULA);
 		} else {
-			if (this.inDbCode(room.getCodigo())) {
+			if (this.isInDbCode(room.getCodigo())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 			}
 		}
-		this.updateQuery("INSERT INTO " +
+		this.update("INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
 				"\"" + room.getCodigo() + "\", " +
 				"\"" + room.getDescricao() + "\", " +
@@ -72,19 +72,19 @@ public class SalaDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
-		if (!this.inDB(oldRoom)) {
+		if (!this.isInDB(oldRoom)) {
 			throw new PatrimonioException(SALA_NAO_EXISTENTE);
 		} else {
-			if (this.inOtherDB(oldRoom)) {
+			if (this.isInOtherDB(oldRoom)) {
 				throw new PatrimonioException(SALA_EM_USO);
 			} else {
 				if (!oldRoom.getCodigo().equals(newRoom.getCodigo())
-						&& this.inDbCode(newRoom.getCodigo())) {
+						&& this.isInDbCode(newRoom.getCodigo())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 				}
 			}
 		}
-		if (!this.inDB(newRoom)) {
+		if (!this.isInDB(newRoom)) {
 			String message = "UPDATE sala SET " +
 					"codigo = \"" + newRoom.getCodigo() + "\", " +
 					"descricao = \"" + newRoom.getDescricao() + "\", " +
@@ -112,11 +112,11 @@ public class SalaDAO {
 		if (room == null) {
 			throw new PatrimonioException(SALA_NULA);
 		} else {
-			if (this.inOtherDB(room)) {
+			if (this.isInOtherDB(room)) {
 				throw new PatrimonioException(SALA_EM_USO);
 			} else {
-				if (this.inDB(room)) {
-					this.updateQuery("DELETE FROM sala WHERE " +
+				if (this.isInDB(room)) {
+					this.update("DELETE FROM sala WHERE " +
 							"sala.codigo = \"" + room.getCodigo() + "\" and " +
 							"sala.descricao = \"" + room.getDescricao()
 							+ "\" and " +
@@ -187,7 +187,7 @@ public class SalaDAO {
 	}
 
 	// Check if there is an entry in the database.
-	private boolean inDBGeneric (String query) throws SQLException {
+	private boolean iInDBGeneric (String query) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(query);
@@ -207,9 +207,9 @@ public class SalaDAO {
 	}
 
 	// Check if there is a Sala in the database.
-	private boolean inDB (Sala room) throws SQLException {
+	private boolean isInDB (Sala room) throws SQLException {
 
-		return this.inDBGeneric("SELECT * FROM sala WHERE " +
+		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getCodigo() + "\" and " +
 				"sala.descricao = \"" + room.getDescricao() + "\" and " +
 				"sala.capacidade = " + room.getCapacidade() +
@@ -217,21 +217,21 @@ public class SalaDAO {
 	}
 
 	// Check if there is a Sala in the database by code.
-	private boolean inDbCode (String code) throws SQLException {
+	private boolean isInDbCode (String code) throws SQLException {
 
-		return this.inDBGeneric("SELECT * FROM sala WHERE " +
+		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + code + "\";");
 	}
 
 	// Check if there is a Sala entry in other databases.
-	private boolean inOtherDB (Sala room) throws SQLException {
+	private boolean isInOtherDB (Sala room) throws SQLException {
 
-		if (this.inDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
+		if (this.iInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getCodigo() + "\" and " +
 				"sala.descricao = \"" + room.getDescricao() + "\" and " +
 				"sala.capacidade = " + room.getCapacidade() + " );") == false) {
-			if (this.inDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
+			if (this.iInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 					"id_sala = (SELECT id_sala FROM sala WHERE " +
 					"sala.codigo = \"" + room.getCodigo() + "\" and " +
 					"sala.descricao = \"" + room.getDescricao() + "\" and " +
@@ -253,7 +253,7 @@ public class SalaDAO {
 	}
 
 	// Update a query.
-	private void updateQuery (String message) throws SQLException {
+	private void update (String message) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(message);
