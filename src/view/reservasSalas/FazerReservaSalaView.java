@@ -27,10 +27,10 @@ public class FazerReservaSalaView extends ReservaSalaView {
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.sala = sala;
-		this.dataTextField.setText(data);
-		this.salaTextArea.setText(sala.toString());
-		this.qntCadeirasTxtField.setText(sala.getCapacidade());
+		this.room = sala;
+		this.dateTextField.setText(data);
+		this.roomTextArea.setText(sala.toString());
+		this.qntChairsTxtField.setText(sala.getCapacidade());
 		this.setName("FazerReservaSalaView");
 
 	}
@@ -40,12 +40,12 @@ public class FazerReservaSalaView extends ReservaSalaView {
 	protected void reservarAluno ( ) {
 
 		try {
-			instanceAluno.insert(sala, aluno, this.dataTextField.getText(),
-					this.horaTextField.getText(),
-					this.finalidadeTextField.getText(),
-					this.qntCadeirasReservadasTextField.getText());
+			studentInstance.insert(room, student, this.dateTextField.getText(),
+					this.hourTextField.getText(),
+					this.turposeTextField.getText(),
+					this.qntChairsReservedTextField.getText());
 
-			instanceAluno.getstudentRoomReservationVector();
+			studentInstance.getstudentRoomReservationVector();
 			// System.out.println(v.toString( ));
 
 			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
@@ -78,9 +78,9 @@ public class FazerReservaSalaView extends ReservaSalaView {
 
 		try {
 
-			instanceProf.insert(sala, prof, this.dataTextField.getText(),
-					this.horaTextField.getText(),
-					this.finalidadeTextField.getText());
+			teacherInstance.insert(room, teacher, this.dateTextField.getText(),
+					this.hourTextField.getText(),
+					this.turposeTextField.getText());
 
 			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
@@ -98,41 +98,41 @@ public class FazerReservaSalaView extends ReservaSalaView {
 	@Override
 	protected void professorRadioButtonAction ( ) {
 
-		this.alunoLabel.setText(this.professorRadioButton.getText() + ": ");
-		this.alunoTextArea.setText("");
+		this.studentLabel.setText(this.teacherRadioButton.getText() + ": ");
+		this.studentTextArea.setText("");
 		this.cpfTextField.setText("");
-		this.qntCadeirasReservadasTextField.setEditable(false);
-		this.qntCadeirasReservadasTextField.setBackground(new Color(200, 208,
+		this.qntChairsReservedTextField.setEditable(false);
+		this.qntChairsReservedTextField.setBackground(new Color(200, 208,
 				254));
-		this.qntCadeirasReservadasTextField.setText(this.qntCadeirasTxtField
+		this.qntChairsReservedTextField.setText(this.qntChairsTxtField
 				.getText());
-		this.instanceProf = ManterResSalaProfessor.getInstance();
-		this.instanceAluno = null;
-		this.verificarCadeiraButton.setEnabled(false);
+		this.teacherInstance = ManterResSalaProfessor.getInstance();
+		this.studentInstance = null;
+		this.checkChairsButton.setEnabled(false);
 
 	}
 
 	@Override
 	protected void alunoRadioButtonAction ( ) {
 
-		this.instanceAluno = ManterResSalaAluno.getInstance();
-		this.alunoLabel.setText(this.alunoRadioButton.getText() + ": ");
-		this.alunoTextArea.setText("");
+		this.studentInstance = ManterResSalaAluno.getInstance();
+		this.studentLabel.setText(this.studentRadioButton.getText() + ": ");
+		this.studentTextArea.setText("");
 		this.cpfTextField.setText("");
-		this.qntCadeirasReservadasTextField.setEnabled(true);
-		this.qntCadeirasReservadasTextField.setEditable(true);
-		this.qntCadeirasReservadasTextField.setBackground(Color.white);
-		this.instanceProf = null;
-		this.verificarCadeiraButton.setEnabled(true);
+		this.qntChairsReservedTextField.setEnabled(true);
+		this.qntChairsReservedTextField.setEditable(true);
+		this.qntChairsReservedTextField.setBackground(Color.white);
+		this.teacherInstance = null;
+		this.checkChairsButton.setEnabled(true);
 	}
 
 	@Override
 	protected void verificarAction ( ) {
 
 		try {
-			this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno
-					.checkAvailableChairs(sala, this.dataTextField.getText(),
-							this.horaTextField.getText())));
+			this.qntChairsTxtField.setText(String.valueOf(studentInstance
+					.checkAvailableChairs(room, this.dateTextField.getText(),
+							this.hourTextField.getText())));
 		} catch (ReservaException ex) {
 
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
