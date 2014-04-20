@@ -95,10 +95,10 @@ public class ManterResSalaAluno {
 
 		ReservaSalaAluno oldReservation = new ReservaSalaAluno(
 				reservation.getDate(),
-				reservation.getTime(), reservation.getSala(),
-				reservation.getFinalidade(),
+				reservation.getTime(), reservation.getClassroom(),
+				reservation.getPurpose(),
 				reservation.getCadeiras_reservadas(), reservation.getAluno());
-		reservation.setFinalidade(purpose);
+		reservation.setPurpose(purpose);
 		reservation.setCadeiras_reservadas(numberDesiredChairs);
 		ResSalaAlunoDAO.getInstance().modify(oldReservation, reservation);
 	}

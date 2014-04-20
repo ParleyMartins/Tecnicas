@@ -62,10 +62,10 @@ public class ResSalaAlunoDAO extends DAO {
 			if (!this.studentIsInDB(reservation.getAluno())) {
 				throw new ReservaException(ALUNO_INEXISTENTE);
 			} else {
-				if (!this.roomIsInDB(reservation.getSala())) {
+				if (!this.roomIsInDB(reservation.getClassroom())) {
 					throw new ReservaException(SALA_INEXISTENTE);
 				} else {
-					if (this.roomIsInTeacherReservationDB(reservation.getSala(), reservation.getDate(),
+					if (this.roomIsInTeacherReservationDB(reservation.getClassroom(), reservation.getDate(),
 							reservation.getTime())) {
 						throw new ReservaException(SALA_INDISPONIVEL);
 					} else {
@@ -74,7 +74,7 @@ public class ResSalaAlunoDAO extends DAO {
 							throw new ReservaException(ALUNO_INDISPONIVEL);
 						} else {
 							if (!this.thereIsChairs(reservation.getCadeiras_reservadas(),
-									reservation.getSala(), reservation.getDate(), reservation.getTime())) {
+									reservation.getClassroom(), reservation.getDate(), reservation.getTime())) {
 								throw new ReservaException(
 										CADEIRAS_INDISPONIVEIS);
 							}
@@ -118,7 +118,7 @@ public class ResSalaAlunoDAO extends DAO {
 						if (!this.studentIsInDB(newReservation.getAluno())) {
 							throw new ReservaException(ALUNO_INEXISTENTE);
 						} else {
-							if (!this.roomIsInDB(newReservation.getSala())) {
+							if (!this.roomIsInDB(newReservation.getClassroom())) {
 								throw new ReservaException(SALA_INEXISTENTE);
 							} else {
 								if (!oldReservation.getDate().equals(newReservation.getDate())
@@ -129,7 +129,7 @@ public class ResSalaAlunoDAO extends DAO {
 												ALUNO_INDISPONIVEL);
 									} else {
 										if (this.roomIsInTeacherReservationDB(
-												newReservation.getSala(),
+												newReservation.getClassroom(),
 												newReservation.getDate(),
 												newReservation.getTime())) {
 											throw new ReservaException(
@@ -147,7 +147,7 @@ public class ResSalaAlunoDAO extends DAO {
 		if (!this.thereIsChairs(
 				"" + (Integer.parseInt(newReservation.getCadeiras_reservadas())
 						- Integer.parseInt(oldReservation.getCadeiras_reservadas())),
-				newReservation.getSala(),
+				newReservation.getClassroom(),
 				newReservation.getDate(), newReservation.getTime())) {
 			throw new ReservaException(CADEIRAS_INDISPONIVEIS);
 		}
@@ -226,7 +226,7 @@ public class ResSalaAlunoDAO extends DAO {
 
 		while (i.hasNext()) {
 			ReservaSalaAluno resrevation = i.next();
-			if (resrevation.getSala().equals(room) && resrevation.getDate().equals(date)
+			if (resrevation.getClassroom().equals(room) && resrevation.getDate().equals(date)
 					&& resrevation.getTime().equals(time)) {
 				total -= Integer.parseInt(resrevation.getCadeiras_reservadas());
 			}
@@ -326,12 +326,12 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "aluno.email = \"" + reservation.getAluno().getEmail() + "\" and "
 				+ "aluno.matricula = \"" + reservation.getAluno().getEnrollmentNumber()
 				+ "\") and " + "id_sala = (SELECT id_sala FROM sala WHERE "
-				+ "sala.codigo = \"" + reservation.getSala().getIdCode() + "\" and "
-				+ "sala.descricao = \"" + reservation.getSala().getDescription()
+				+ "sala.codigo = \"" + reservation.getClassroom().getIdCode() + "\" and "
+				+ "sala.descricao = \"" + reservation.getClassroom().getDescription()
 				+ "\" and "
-				+ "sala.capacidade = " + reservation.getSala().getCapacidade()
+				+ "sala.capacidade = " + reservation.getClassroom().getCapacidade()
 				+ " ) and "
-				+ "finalidade = \"" + reservation.getFinalidade() + "\" and "
+				+ "finalidade = \"" + reservation.getPurpose() + "\" and "
 				+ "hora = \"" + reservation.getTime() + "\" and "
 				+ "data = \"" + reservation.getDate() + "\" and "
 				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas() + ";");
@@ -474,8 +474,8 @@ public class ResSalaAlunoDAO extends DAO {
 	private String whereQuery (ReservaSalaAluno reservation) {
 
 		return " WHERE " + "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno())
-				+ " ) and " + "id_sala = ( " + selectRoomIDQuery(reservation.getSala())
-				+ " ) and " + "finalidade = \"" + reservation.getFinalidade() + "\" and "
+				+ " ) and " + "id_sala = ( " + selectRoomIDQuery(reservation.getClassroom())
+				+ " ) and " + "finalidade = \"" + reservation.getPurpose() + "\" and "
 				+ "hora = \"" + reservation.getTime() + "\" and " + "data = \""
 				+ reservation.getDate() + "\" and " + "cadeiras_reservadas = "
 				+ reservation.getCadeiras_reservadas();
@@ -485,8 +485,8 @@ public class ResSalaAlunoDAO extends DAO {
 	private String valuesReservationQuery (ReservaSalaAluno reservation) {
 
 		return "( " + selectStudentIDQuery(reservation.getAluno()) + " ), " + "( "
-				+ selectRoomIDQuery(reservation.getSala()) + " ), " + "\""
-				+ reservation.getFinalidade() + "\", " + "\"" + reservation.getTime() + "\", "
+				+ selectRoomIDQuery(reservation.getClassroom()) + " ), " + "\""
+				+ reservation.getPurpose() + "\", " + "\"" + reservation.getTime() + "\", "
 				+ "\"" + reservation.getDate() + "\", " + reservation.getCadeiras_reservadas();
 	}
 
@@ -494,8 +494,8 @@ public class ResSalaAlunoDAO extends DAO {
 	private String attributesQuery (ReservaSalaAluno reservation) {
 
 		return "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno()) + " ), "
-				+ "id_sala = ( " + selectRoomIDQuery(reservation.getSala()) + " ), "
-				+ "finalidade = \"" + reservation.getFinalidade() + "\", " + "hora = \""
+				+ "id_sala = ( " + selectRoomIDQuery(reservation.getClassroom()) + " ), "
+				+ "finalidade = \"" + reservation.getPurpose() + "\", " + "hora = \""
 				+ reservation.getTime() + "\", " + "data = \"" + reservation.getDate() + "\", "
 				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas();
 	}

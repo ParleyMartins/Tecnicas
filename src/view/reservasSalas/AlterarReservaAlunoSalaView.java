@@ -93,13 +93,13 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 		this.hourTextField.setEditable(false);
 		this.hourTextField.setText(studentReservation.getTime());
 		this.studentTextArea.setText(studentReservation.getAluno().toString());
-		this.roomTextArea.setText(studentReservation.getSala().toString());
+		this.roomTextArea.setText(studentReservation.getClassroom().toString());
 		this.dateTextField.setText(studentReservation.getDate());
 		this.qntChairsReservedLbl
-				.setText(studentReservation.getSala().getCapacidade());
+				.setText(studentReservation.getClassroom().getCapacidade());
 		this.qntChairsReservedTextField.setText(studentReservation
 				.getCadeiras_reservadas());
-		this.turposeTextField.setText(studentReservation.getFinalidade());
+		this.turposeTextField.setText(studentReservation.getPurpose());
 	}
 
 	@Override

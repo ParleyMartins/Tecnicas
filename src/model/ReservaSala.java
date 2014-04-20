@@ -13,7 +13,7 @@ public class ReservaSala extends Reserva {
 	private Sala classroom;
 	private String purpose;
 
-	// Messages.
+	// Error messages.
 	private final String NULL_CLASSROOM = "A sala esta nula.";
 	private final String NULL_PURPOSE = "A finalidade esta nula.";
 	private final String BLANK_PURPOSE = "A finalidade esta em branco.";
@@ -22,21 +22,21 @@ public class ReservaSala extends Reserva {
 			throws ReservaException {
 
 		super(date, time);
-		this.setSala(classroom);
-		this.setFinalidade(purpose);
+		this.setClassroom(classroom);
+		this.setPurpose(purpose);
 	}
 
-	public Sala getSala() {
+	public Sala getClassroom() {
 
 		return this.classroom;
 	}
 
-	public String getFinalidade() {
+	public String getPurpose() {
 
 		return this.purpose;
 	}
 
-	public void setSala(Sala classroom) throws ReservaException {
+	public void setClassroom(Sala classroom) throws ReservaException {
 
 		if (classroom == null) {
 			throw new ReservaException(NULL_CLASSROOM);
@@ -46,7 +46,7 @@ public class ReservaSala extends Reserva {
 		this.classroom = classroom;
 	}
 
-	public void setFinalidade(String purpose) throws ReservaException {
+	public void setPurpose(String purpose) throws ReservaException {
 
 		if (purpose == null) {
 			throw new ReservaException(NULL_PURPOSE);
@@ -65,15 +65,15 @@ public class ReservaSala extends Reserva {
 	public boolean equals(ReservaSala reservation) {
 
 		return (super.equals(reservation)
-				&& this.getSala().equals(reservation.getSala()) && this
-				.getFinalidade().equals(reservation.getFinalidade()));
+				&& this.getClassroom().equals(reservation.getClassroom()) && this
+				.getPurpose().equals(reservation.getPurpose()));
 	}
 
 	@Override
 	public String toString() {
 
-		return "\n" + this.getSala().toString() + "\nFinalidade="
-				+ this.getFinalidade() + super.toString();
+		return "\n" + this.getClassroom().toString() + "\nFinalidade="
+				+ this.getPurpose() + super.toString();
 	}
 
 }

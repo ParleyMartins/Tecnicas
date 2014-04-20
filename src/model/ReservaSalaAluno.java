@@ -65,7 +65,7 @@ public class ReservaSalaAluno extends ReservaSala {
 			throw new ReservaException(BLANK_CHAIRS);
 		} else {
 			if (chairs.matches(CHAIRS_PATTERN)) {
-				if (Integer.parseInt(super.getSala().getCapacidade()) < Integer
+				if (Integer.parseInt(super.getClassroom().getCapacidade()) < Integer
 						.parseInt(reservedChairs)) {
 					throw new ReservaException(OVER_LIMIT_CHAIRS);
 				} else {

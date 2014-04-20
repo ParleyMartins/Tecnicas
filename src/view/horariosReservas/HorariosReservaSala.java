@@ -46,23 +46,23 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 		Vector <String> clientData = new Vector <String>();
 		if (obj instanceof ReservaSalaAluno) {
 			ReservaSalaAluno reservation = (ReservaSalaAluno) obj;
-			if (this.room != null && (reservation.getSala().equals(this.room))) {
+			if (this.room != null && (reservation.getClassroom().equals(this.room))) {
 				clientData.add(String.valueOf(index));
 				clientData.add("Aluno");
 				clientData.add(reservation.getTime());
 				clientData.add(reservation.getAluno().getName());
 				clientData.add(reservation.getAluno().getEnrollmentNumber());
-				clientData.add(reservation.getFinalidade());
-				clientData.add(reservation.getSala().getIdCode());
-				clientData.add(reservation.getSala().getDescription());
+				clientData.add(reservation.getPurpose());
+				clientData.add(reservation.getClassroom().getIdCode());
+				clientData.add(reservation.getClassroom().getDescription());
 				clientData.add(reservation.getCadeiras_reservadas());
-				clientData.add(reservation.getSala().getCapacidade());
+				clientData.add(reservation.getClassroom().getCapacidade());
 			}
 		} else
 			if (obj instanceof ReservaSalaProfessor) {
 				ReservaSalaProfessor reservation = (ReservaSalaProfessor) obj;
 				if (this.room != null
-						&& (reservation.getSala().equals(this.room))) {
+						&& (reservation.getClassroom().equals(this.room))) {
 
 					clientData.add(String.valueOf(index));
 					clientData.add("Professor");
@@ -70,11 +70,11 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					clientData.add(reservation.getProfessor().getName());
 					clientData.add(reservation.getProfessor()
 							.getEnrollmentNumber());
-					clientData.add(reservation.getFinalidade());
-					clientData.add(reservation.getSala().getIdCode());
-					clientData.add(reservation.getSala().getDescription());
-					clientData.add(reservation.getSala().getCapacidade());
-					clientData.add(reservation.getSala().getCapacidade());
+					clientData.add(reservation.getPurpose());
+					clientData.add(reservation.getClassroom().getIdCode());
+					clientData.add(reservation.getClassroom().getDescription());
+					clientData.add(reservation.getClassroom().getCapacidade());
+					clientData.add(reservation.getClassroom().getCapacidade());
 				}
 			}
 

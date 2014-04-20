@@ -72,10 +72,10 @@ public class ManterResSalaProfessor {
 
 		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
 				newReservation.getDate(), newReservation.getTime(),
-				newReservation.getSala(),
-				newReservation.getFinalidade(), newReservation.getProfessor());
+				newReservation.getClassroom(),
+				newReservation.getPurpose(), newReservation.getProfessor());
 
-		newReservation.setFinalidade(purpose);
+		newReservation.setPurpose(purpose);
 		ResSalaProfessorDAO.getInstance().modify(oldReservation,
 				newReservation);
 
