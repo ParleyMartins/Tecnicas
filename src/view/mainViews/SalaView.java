@@ -40,8 +40,8 @@ public class SalaView extends PatrimonioView {
 
 		Vector <String> roomData = new Vector <String>();
 
-		roomData.add(room.getCodigo());
-		roomData.add(room.getDescricao());
+		roomData.add(room.getIdCode());
+		roomData.add(room.getDescription());
 		roomData.add(room.getCapacidade());
 
 		return roomData;
@@ -109,7 +109,7 @@ public class SalaView extends PatrimonioView {
 			int confirm = JOptionPane
 					.showConfirmDialog(this, "Deseja mesmo excluir Sala: "
 							+ ManterSala.getInstance().getRoomsVec()
-									.get(index).getDescricao() + "?",
+									.get(index).getDescription() + "?",
 							"Excluir",
 							JOptionPane.YES_NO_OPTION);
 

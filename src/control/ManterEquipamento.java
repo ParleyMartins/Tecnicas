@@ -56,10 +56,10 @@ public class ManterEquipamento {
 		if (newEquipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		}
-		Equipamento oldEquipment = new Equipamento(newEquipment.getCodigo(),
-				newEquipment.getDescricao());
-		newEquipment.setCodigo(equipmentCode);
-		newEquipment.setDescricao(equipmentDescription);
+		Equipamento oldEquipment = new Equipamento(newEquipment.getIdCode(),
+				newEquipment.getDescription());
+		newEquipment.setIdCode(equipmentCode);
+		newEquipment.setDescription(equipmentDescription);
 		EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
 		getEquipmentVec();
 	}

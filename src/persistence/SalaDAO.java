@@ -47,14 +47,14 @@ public class SalaDAO {
 		if (room == null) {
 			throw new PatrimonioException(SALA_NULA);
 		} else {
-			if (this.isInDbCode(room.getCodigo())) {
+			if (this.isInDbCode(room.getIdCode())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 			}
 		}
 		this.update("INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
-				"\"" + room.getCodigo() + "\", " +
-				"\"" + room.getDescricao() + "\", " +
+				"\"" + room.getIdCode() + "\", " +
+				"\"" + room.getDescription() + "\", " +
 				room.getCapacidade() + ");");
 	}
 
@@ -78,20 +78,20 @@ public class SalaDAO {
 			if (this.isInOtherDB(oldRoom)) {
 				throw new PatrimonioException(SALA_EM_USO);
 			} else {
-				if (!oldRoom.getCodigo().equals(newRoom.getCodigo())
-						&& this.isInDbCode(newRoom.getCodigo())) {
+				if (!oldRoom.getIdCode().equals(newRoom.getIdCode())
+						&& this.isInDbCode(newRoom.getIdCode())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 				}
 			}
 		}
 		if (!this.isInDB(newRoom)) {
 			String message = "UPDATE sala SET " +
-					"codigo = \"" + newRoom.getCodigo() + "\", " +
-					"descricao = \"" + newRoom.getDescricao() + "\", " +
+					"codigo = \"" + newRoom.getIdCode() + "\", " +
+					"descricao = \"" + newRoom.getDescription() + "\", " +
 					"capacidade = " + newRoom.getCapacidade() +
 					" WHERE " +
-					"sala.codigo = \"" + oldRoom.getCodigo() + "\" and " +
-					"sala.descricao = \"" + oldRoom.getDescricao() + "\" and "
+					"sala.codigo = \"" + oldRoom.getIdCode() + "\" and " +
+					"sala.descricao = \"" + oldRoom.getDescription() + "\" and "
 					+
 					"sala.capacidade = " + oldRoom.getCapacidade() + ";";
 			connection.setAutoCommit(false);
@@ -117,8 +117,8 @@ public class SalaDAO {
 			} else {
 				if (this.isInDB(room)) {
 					this.update("DELETE FROM sala WHERE " +
-							"sala.codigo = \"" + room.getCodigo() + "\" and " +
-							"sala.descricao = \"" + room.getDescricao()
+							"sala.codigo = \"" + room.getIdCode() + "\" and " +
+							"sala.descricao = \"" + room.getDescription()
 							+ "\" and " +
 							"sala.capacidade = " + room.getCapacidade() + ";"
 							);
@@ -210,8 +210,8 @@ public class SalaDAO {
 	private boolean isInDB (Sala room) throws SQLException {
 
 		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
-				"sala.codigo = \"" + room.getCodigo() + "\" and " +
-				"sala.descricao = \"" + room.getDescricao() + "\" and " +
+				"sala.codigo = \"" + room.getIdCode() + "\" and " +
+				"sala.descricao = \"" + room.getDescription() + "\" and " +
 				"sala.capacidade = " + room.getCapacidade() +
 				";");
 	}
@@ -228,13 +228,13 @@ public class SalaDAO {
 
 		if (this.iInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
-				"sala.codigo = \"" + room.getCodigo() + "\" and " +
-				"sala.descricao = \"" + room.getDescricao() + "\" and " +
+				"sala.codigo = \"" + room.getIdCode() + "\" and " +
+				"sala.descricao = \"" + room.getDescription() + "\" and " +
 				"sala.capacidade = " + room.getCapacidade() + " );") == false) {
 			if (this.iInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 					"id_sala = (SELECT id_sala FROM sala WHERE " +
-					"sala.codigo = \"" + room.getCodigo() + "\" and " +
-					"sala.descricao = \"" + room.getDescricao() + "\" and " +
+					"sala.codigo = \"" + room.getIdCode() + "\" and " +
+					"sala.descricao = \"" + room.getDescription() + "\" and " +
 					"sala.capacidade = " + room.getCapacidade() + " );") == false) {
 				return false;
 			}

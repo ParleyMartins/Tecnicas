@@ -12,31 +12,31 @@ public class Patrimonio {
 
 	private String id_code;
 	private String description;
-	
+
 	// Alerts and error messages.
 	private final String CODIGO_BRANCO = "Codigo em Branco.";
 	private final String CODIGO_NULO = "Codigo esta Nulo.";
 	private final String DESCRICAO_BRANCO = "Descricao em Branco.";
 	private final String DESCRICAO_NULO = "Descricao esta Nula.";
 
-	public Patrimonio (String code, String description)
+	public Patrimonio(String code, String description)
 			throws PatrimonioException {
 
-		this.setCodigo(code);
-		this.setDescricao(description);
+		this.setIdCode(code);
+		this.setDescription(description);
 	}
 
-	public String getCodigo ( ) {
+	public String getIdCode() {
 
 		return id_code;
 	}
 
-	public String getDescricao ( ) {
+	public String getDescription() {
 
 		return description;
 	}
 
-	public void setCodigo (String id_code) throws PatrimonioException {
+	public void setIdCode(String id_code) throws PatrimonioException {
 
 		if (id_code == null) {
 			throw new PatrimonioException(CODIGO_NULO);
@@ -44,13 +44,13 @@ public class Patrimonio {
 			if ("".equals(id_code.trim())) {
 				throw new PatrimonioException(CODIGO_BRANCO);
 			} else {
-				// Do nothing. 
+				// Do nothing.
 			}
 		}
 		this.id_code = id_code;
 	}
 
-	public void setDescricao (String description) throws PatrimonioException {
+	public void setDescription(String description) throws PatrimonioException {
 
 		if (description == null) {
 			throw new PatrimonioException(DESCRICAO_NULO);
@@ -64,22 +64,21 @@ public class Patrimonio {
 		this.description = description;
 	}
 
-	public boolean equals (Patrimonio property) {
+	public boolean equals(Patrimonio property) {
 
-		if (this.getCodigo().equals(property.getCodigo()) &&
-				this.getDescricao().equals(property.getDescricao())) {
+		if (this.getIdCode().equals(property.getIdCode())
+				&& this.getDescription().equals(property.getDescription())) {
 			return true;
 		} else {
-			// do nothing. 
+			// do nothing.
 		}
 
 		return false;
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
-		return "Codigo=" + id_code +
-				"\nDescricao=" + description;
+		return "Codigo=" + id_code + "\nDescricao=" + description;
 	}
 }

@@ -53,8 +53,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				clientData.add(reservation.getAluno().getName());
 				clientData.add(reservation.getAluno().getEnrollmentNumber());
 				clientData.add(reservation.getFinalidade());
-				clientData.add(reservation.getSala().getCodigo());
-				clientData.add(reservation.getSala().getDescricao());
+				clientData.add(reservation.getSala().getIdCode());
+				clientData.add(reservation.getSala().getDescription());
 				clientData.add(reservation.getCadeiras_reservadas());
 				clientData.add(reservation.getSala().getCapacidade());
 			}
@@ -71,8 +71,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					clientData.add(reservation.getProfessor()
 							.getEnrollmentNumber());
 					clientData.add(reservation.getFinalidade());
-					clientData.add(reservation.getSala().getCodigo());
-					clientData.add(reservation.getSala().getDescricao());
+					clientData.add(reservation.getSala().getIdCode());
+					clientData.add(reservation.getSala().getDescription());
 					clientData.add(reservation.getSala().getCapacidade());
 					clientData.add(reservation.getSala().getCapacidade());
 				}

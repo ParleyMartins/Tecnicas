@@ -281,8 +281,8 @@ public class ResSalaAlunoDAO extends DAO {
 	private boolean roomIsInDB (Sala room) throws SQLException {
 
 		return super.isInDBGeneric("SELECT * FROM sala WHERE "
-				+ "sala.codigo = \"" + room.getCodigo() + "\" and "
-				+ "sala.descricao = \"" + room.getDescricao() + "\" and "
+				+ "sala.codigo = \"" + room.getIdCode() + "\" and "
+				+ "sala.descricao = \"" + room.getDescription() + "\" and "
 				+ "sala.capacidade = " + room.getCapacidade() + ";");
 	}
 
@@ -309,8 +309,8 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "data = \"" + this.standardizeDate(date) + "\" and "
 				+ "hora = \"" + this.standardizeTime(time) + "\" and "
 				+ "id_sala = (SELECT id_sala FROM sala WHERE "
-				+ "sala.codigo = \"" + room.getCodigo() + "\" and "
-				+ "sala.descricao = \"" + room.getDescricao() + "\" and "
+				+ "sala.codigo = \"" + room.getIdCode() + "\" and "
+				+ "sala.descricao = \"" + room.getDescription() + "\" and "
 				+ "sala.capacidade = " + room.getCapacidade() + " );");
 	}
 
@@ -326,8 +326,8 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "aluno.email = \"" + reservation.getAluno().getEmail() + "\" and "
 				+ "aluno.matricula = \"" + reservation.getAluno().getEnrollmentNumber()
 				+ "\") and " + "id_sala = (SELECT id_sala FROM sala WHERE "
-				+ "sala.codigo = \"" + reservation.getSala().getCodigo() + "\" and "
-				+ "sala.descricao = \"" + reservation.getSala().getDescricao()
+				+ "sala.codigo = \"" + reservation.getSala().getIdCode() + "\" and "
+				+ "sala.descricao = \"" + reservation.getSala().getDescription()
 				+ "\" and "
 				+ "sala.capacidade = " + reservation.getSala().getCapacidade()
 				+ " ) and "
@@ -465,8 +465,8 @@ public class ResSalaAlunoDAO extends DAO {
 	private String selectRoomIDQuery (Sala room) {
 
 		return "SELECT id_sala FROM sala WHERE " + "sala.codigo = \""
-				+ room.getCodigo() + "\" and " + "sala.descricao = \""
-				+ room.getDescricao() + "\" and " + "sala.capacidade = "
+				+ room.getIdCode() + "\" and " + "sala.descricao = \""
+				+ room.getDescription() + "\" and " + "sala.capacidade = "
 				+ room.getCapacidade();
 	}
 

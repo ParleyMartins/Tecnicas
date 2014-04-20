@@ -40,8 +40,8 @@ public class EquipamentoView extends PatrimonioView {
 
 		Vector <String> dataTable = new Vector <String>();
 
-		dataTable.add(equipment.getCodigo());
-		dataTable.add(equipment.getDescricao());
+		dataTable.add(equipment.getIdCode());
+		dataTable.add(equipment.getDescription());
 
 		return dataTable;
 
@@ -111,7 +111,7 @@ public class EquipamentoView extends PatrimonioView {
 					"Deseja mesmo excluir Equipamento: "
 							+ ManterEquipamento.getInstance()
 									.getEquipmentVec().get(index)
-									.getDescricao() + "?", "Excluir",
+									.getDescription() + "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {

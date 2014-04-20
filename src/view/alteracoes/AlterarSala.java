@@ -28,11 +28,11 @@ public class AlterarSala extends CadastroPatrimonio {
 		try {
 
 			this.codeTxtField.setText(ManterSala.getInstance().getRoomsVec()
-					.get(index).getCodigo());
+					.get(index).getIdCode());
 			this.capacityTxtField.setText(ManterSala.getInstance()
 					.getRoomsVec().get(index).getCapacidade());
 			this.descriptionTxtArea.setText(ManterSala.getInstance()
-					.getRoomsVec().get(index).getDescricao());
+					.getRoomsVec().get(index).getDescription());
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {

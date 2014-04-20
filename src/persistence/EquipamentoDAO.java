@@ -48,14 +48,14 @@ public class EquipamentoDAO {
 		if (equipment == null) {
 			throw new PatrimonioException(EQUIPAMENTO_NULO);
 		} else {
-			if (this.isInDbCode(equipment.getCodigo())) {
+			if (this.isInDbCode(equipment.getIdCode())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 			} else {
 				if (!this.isInDB(equipment)) {
 					this.update("INSERT INTO " + "equipamento "
 							+ "(codigo, descricao) VALUES (" + "\""
-							+ equipment.getCodigo() + "\", " + "\""
-							+ equipment.getDescricao() + "\");");
+							+ equipment.getIdCode() + "\", " + "\""
+							+ equipment.getDescription() + "\");");
 				}
 			}
 		}
@@ -81,20 +81,20 @@ public class EquipamentoDAO {
 			if (this.isInOtherDB(oldEquipment)) {
 				throw new PatrimonioException(EQUIPAMENTO_EM_USO);
 			} else {
-				if (!newEquipment.getCodigo().equals(
-						oldEquipment.getCodigo())
-						&& this.isInDbCode(newEquipment.getCodigo())) {
+				if (!newEquipment.getIdCode().equals(
+						oldEquipment.getIdCode())
+						&& this.isInDbCode(newEquipment.getIdCode())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
 				} else {
 					if (!this.isInDB(newEquipment)) {
 						String message = "UPDATE equipamento SET " + "codigo = \""
-								+ newEquipment.getCodigo() + "\", "
+								+ newEquipment.getIdCode() + "\", "
 								+ "descricao = \""
-								+ newEquipment.getDescricao() + "\""
+								+ newEquipment.getDescription() + "\""
 								+ " WHERE " + "equipamento.codigo = \""
-								+ oldEquipment.getCodigo() + "\" and "
+								+ oldEquipment.getIdCode() + "\" and "
 								+ "equipamento.descricao = \""
-								+ oldEquipment.getDescricao() + "\";";
+								+ oldEquipment.getDescription() + "\";";
 
 						connection.setAutoCommit(false);
 						statement = connection.prepareStatement(message);
@@ -127,9 +127,9 @@ public class EquipamentoDAO {
 
 		if (this.isInDB(equipment)) {
 			this.update("DELETE FROM equipamento WHERE "
-					+ "equipamento.codigo = \"" + equipment.getCodigo()
+					+ "equipamento.codigo = \"" + equipment.getIdCode()
 					+ "\" and " + "equipamento.descricao = \""
-					+ equipment.getDescricao() + "\";");
+					+ equipment.getDescription() + "\";");
 		} else {
 			throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
 		}
@@ -211,8 +211,8 @@ public class EquipamentoDAO {
 			PatrimonioException {
 
 		return this.isInDBGeneric("SELECT * FROM equipamento WHERE "
-				+ "equipamento.codigo = \"" + equipement.getCodigo() + "\" and "
-				+ "equipamento.descricao = \"" + equipement.getDescricao() + "\";");
+				+ "equipamento.codigo = \"" + equipement.getIdCode() + "\" and "
+				+ "equipamento.descricao = \"" + equipement.getDescription() + "\";");
 	}
 
 	// Check if there is a database entry by code id.
@@ -228,8 +228,8 @@ public class EquipamentoDAO {
 		return this
 				.isInDBGeneric("SELECT * FROM reserva_equipamento WHERE "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \"" + equipment.getCodigo() + "\" and "
-						+ "equipamento.descricao = \"" + equipment.getDescricao()
+						+ "equipamento.codigo = \"" + equipment.getIdCode() + "\" and "
+						+ "equipamento.descricao = \"" + equipment.getDescription()
 						+ "\");");
 	}
 

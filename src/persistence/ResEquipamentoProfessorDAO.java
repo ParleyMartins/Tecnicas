@@ -234,9 +234,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			throws SQLException {
 
 		return super.isInDBGeneric("SELECT * FROM equipamento WHERE "
-				+ "equipamento.codigo = \"" + equipment.getCodigo()
+				+ "equipamento.codigo = \"" + equipment.getIdCode()
 				+ "\" and " + "equipamento.descricao = \""
-				+ equipment.getDescricao() + "\";");
+				+ equipment.getDescription() + "\";");
 	}
 
 	// Check if there is a Professor entry in a Reserva.
@@ -268,9 +268,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ time
 						+ "\" and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \"" + equipment.getCodigo()
+						+ "equipamento.codigo = \"" + equipment.getIdCode()
 						+ "\" and " + "equipamento.descricao = \""
-						+ equipment.getDescricao() + "\");");
+						+ equipment.getDescription() + "\");");
 	}
 
 	// Check if there is a Reserva entry in the database.
@@ -296,9 +296,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "\") and "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
 						+ "equipamento.codigo = \""
-						+ reservation.getEquipamento().getCodigo()
+						+ reservation.getEquipamento().getIdCode()
 						+ "\" and " + "equipamento.descricao = \""
-						+ reservation.getEquipamento().getDescricao() + "\" and "
+						+ reservation.getEquipamento().getDescription() + "\" and "
 						+ "hora = \"" + reservation.getHora() + "\" and "
 						+ "data = \"" + reservation.getData() + "\");");
 	}
@@ -318,9 +318,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private String selectEquipmentIDQuery (Equipamento equipment) {
 
 		return "SELECT id_equipamento FROM equipamento WHERE "
-				+ "equipamento.codigo = \"" + equipment.getCodigo()
+				+ "equipamento.codigo = \"" + equipment.getIdCode()
 				+ "\" and " + "equipamento.descricao = \""
-				+ equipment.getDescricao() + "\"";
+				+ equipment.getDescription() + "\"";
 	}
 
 	// Reuse query for WHERE clause

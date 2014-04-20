@@ -54,10 +54,10 @@ public class ManterSala {
 			String capacity,
 			Sala newRoom) throws PatrimonioException, SQLException {
 
-		Sala oldRoom = new Sala(newRoom.getCodigo(), newRoom.getDescricao(),
+		Sala oldRoom = new Sala(newRoom.getIdCode(), newRoom.getDescription(),
 				newRoom.getCapacidade());
-		newRoom.setCodigo(roomCode);
-		newRoom.setDescricao(roomDescription);
+		newRoom.setIdCode(roomCode);
+		newRoom.setDescription(roomDescription);
 		newRoom.setCapacidade(capacity);
 		SalaDAO.getInstance().modify(oldRoom, newRoom);
 	}

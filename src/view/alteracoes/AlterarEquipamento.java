@@ -31,9 +31,9 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 		try {
 
 			this.codeTxtField.setText(ManterEquipamento.getInstance()
-					.getEquipmentVec().get(index).getCodigo());
+					.getEquipmentVec().get(index).getIdCode());
 			this.descriptionTxtArea.setText(ManterEquipamento.getInstance()
-					.getEquipmentVec().get(index).getDescricao());
+					.getEquipmentVec().get(index).getDescription());
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {
