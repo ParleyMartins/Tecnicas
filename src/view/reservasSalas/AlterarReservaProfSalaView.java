@@ -69,10 +69,10 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 		this.qntChairsReservedTextField.setBackground(Color.white);
 		this.hourTextField.setBackground(blue);
 		this.hourTextField.setEditable(false);
-		this.hourTextField.setText(reservaProfessor.getHora());
+		this.hourTextField.setText(reservaProfessor.getTime());
 		this.studentTextArea.setText(reservaProfessor.getProfessor().toString());
 		this.roomTextArea.setText(reservaProfessor.getSala().toString());
-		this.dateTextField.setText(reservaProfessor.getData());
+		this.dateTextField.setText(reservaProfessor.getDate());
 		this.qntChairsTxtField.setText(reservaProfessor.getSala()
 				.getCapacidade());
 		this.qntChairsReservedTextField.setText(reservaProfessor.getSala()

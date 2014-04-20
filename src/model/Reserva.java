@@ -29,21 +29,21 @@ public class Reserva {
 
 	public Reserva(String date, String time) throws ReservaException {
 
-		this.setData(date);
-		this.setHora(time);
+		this.setDate(date);
+		this.setTime(time);
 	}
 
-	public String getHora() {
+	public String getTime() {
 
 		return this.time;
 	}
 
-	public String getData() {
+	public String getDate() {
 
 		return this.date;
 	}
 
-	public void setHora(String time) throws ReservaException {
+	public void setTime(String time) throws ReservaException {
 
 		if (time == null) {
 			throw new ReservaException(NULL_TIME);
@@ -67,10 +67,12 @@ public class Reserva {
 		}
 	}
 
-	public void setData(String date) throws ReservaException {
+	public void setDate(String date) throws ReservaException {
 
 		if (date == null) {
 			throw new ReservaException(NULL_DATE);
+		} else {
+			// Do nothing. 
 		}
 
 		date = date.trim();
@@ -78,7 +80,7 @@ public class Reserva {
 			throw new ReservaException(BLANK_DATE);
 		} else {
 			if (date.matches(DATE_PATTERN)) {
-				this.date = padronizarData(date);
+				this.date = standardizeDate(date);
 			} else {
 				throw new ReservaException(INVALID_DATE);
 			}
@@ -87,8 +89,8 @@ public class Reserva {
 
 	public boolean equals(Reserva reservation) {
 
-		return (this.time.equals(reservation.getHora()) && this.date
-				.equals(reservation.getData()));
+		return (this.time.equals(reservation.getTime()) && this.date
+				.equals(reservation.getDate()));
 	}
 
 	@Override
@@ -97,9 +99,10 @@ public class Reserva {
 		return "\nHora=" + this.time + "\nData=" + this.date;
 	}
 
-	private static String padronizarData(String date) {
+	// Apply the date pattern to a String containing a date. 
+	private static String standardizeDate(String date) {
 
-		String currentDate[] = dataAtual().split("[./-]");
+		String currentDate[] = getCurrentDate().split("[./-]");
 		String dateParts[] = date.split("[./-]");
 		String formatedDate = "";
 
@@ -119,7 +122,8 @@ public class Reserva {
 		return formatedDate;
 	}
 
-	private static String dataAtual() {
+	// Returns the actual date formated, following the default pattern. 
+	private static String getCurrentDate() {
 
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");

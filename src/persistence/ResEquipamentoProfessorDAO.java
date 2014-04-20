@@ -59,11 +59,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 					throw new ReservaException(EQUIPAMENTO_INEXISTENTE);
 				} else {
 					if (this.equipmentIsInReservationDB(reservation.getEquipamento(),
-							reservation.getData(), reservation.getHora())) {
+							reservation.getDate(), reservation.getTime())) {
 						throw new ReservaException(EQUIPAMENTO_INDISPONIVEL);
 					} else {
 						if (this.teacherIsInReservationDB(reservation.getProfessor(),
-								reservation.getData(), reservation.getHora())) {
+								reservation.getDate(), reservation.getTime())) {
 							throw new ReservaException(RESERVA_EXISTENTE);
 						} else {
 							//super.executeQuery(this.delete_from_aluno(r));
@@ -92,15 +92,15 @@ public class ResEquipamentoProfessorDAO extends DAO {
 					if (this.reservationIsInDB(newReservation)) {
 						throw new ReservaException(RESERVA_EXISTENTE);
 					} else {
-						if (!oldReservation.getData().equals(newReservation.getData())
-								|| !oldReservation.getHora().equals(newReservation.getHora())) {
+						if (!oldReservation.getDate().equals(newReservation.getDate())
+								|| !oldReservation.getTime().equals(newReservation.getTime())) {
 							if (this.teacherIsInReservationDB(newReservation.getProfessor(),
-									newReservation.getData(), newReservation.getHora())) {
+									newReservation.getDate(), newReservation.getTime())) {
 								throw new ReservaException(RESERVA_EXISTENTE);
 							} else {
 								if (this.equipmentIsInReservationDB(
 										newReservation.getEquipamento(),
-										newReservation.getData(), newReservation.getHora())) {
+										newReservation.getDate(), newReservation.getTime())) {
 									throw new ReservaException(
 											EQUIPAMENTO_INDISPONIVEL);
 								}
@@ -168,7 +168,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 		while (i.hasNext()) {
 			ReservaEquipamentoProfessor reservation = i.next();
-			if (Integer.parseInt(reservation.getData().split("[./-]")[1]) != month) {
+			if (Integer.parseInt(reservation.getDate().split("[./-]")[1]) != month) {
 				monthTeacherReservations.remove(reservation);
 			}
 		}
@@ -299,8 +299,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ reservation.getEquipamento().getIdCode()
 						+ "\" and " + "equipamento.descricao = \""
 						+ reservation.getEquipamento().getDescription() + "\" and "
-						+ "hora = \"" + reservation.getHora() + "\" and "
-						+ "data = \"" + reservation.getData() + "\");");
+						+ "hora = \"" + reservation.getTime() + "\" and "
+						+ "data = \"" + reservation.getDate() + "\");");
 	}
 
 	// Select Professor by id query.
@@ -331,8 +331,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ selectTeacherIDQuery(reservation.getProfessor()) + " ) and "
 				+ "id_equipamento = ( "
 				+ selectEquipmentIDQuery(reservation.getEquipamento()) + " ) and "
-				+ "hora = \"" + reservation.getHora() + "\" and " + "data = \""
-				+ reservation.getData() + "\"";
+				+ "hora = \"" + reservation.getTime() + "\" and " + "data = \""
+				+ reservation.getDate() + "\"";
 	}
 
 	// Reuse query for VALUES clause.
@@ -341,7 +341,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 		return "( " + selectTeacherIDQuery(reservation.getProfessor()) + " ), " + "( "
 				+ selectEquipmentIDQuery(reservation.getEquipamento()) + " ), " + "\""
-				+ reservation.getHora() + "\", " + "\"" + reservation.getData() + "\"";
+				+ reservation.getTime() + "\", " + "\"" + reservation.getDate() + "\"";
 	}
 
 	// Reuse query for ATRIBUTES query.
@@ -351,8 +351,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return "id_professor = ( " + selectTeacherIDQuery(reservation.getProfessor())
 				+ " ), " + "id_equipamento = ( "
 				+ selectEquipmentIDQuery(reservation.getEquipamento()) + " ), "
-				+ "hora = \"" + reservation.getHora() + "\", " + "data = \""
-				+ reservation.getData() + "\"";
+				+ "hora = \"" + reservation.getTime() + "\", " + "data = \""
+				+ reservation.getDate() + "\"";
 	}
 
 	// Reuse query for INSERT clause.

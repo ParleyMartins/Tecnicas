@@ -65,16 +65,16 @@ public class ResSalaAlunoDAO extends DAO {
 				if (!this.roomIsInDB(reservation.getSala())) {
 					throw new ReservaException(SALA_INEXISTENTE);
 				} else {
-					if (this.roomIsInTeacherReservationDB(reservation.getSala(), reservation.getData(),
-							reservation.getHora())) {
+					if (this.roomIsInTeacherReservationDB(reservation.getSala(), reservation.getDate(),
+							reservation.getTime())) {
 						throw new ReservaException(SALA_INDISPONIVEL);
 					} else {
-						if (this.studentIsInReservationDB(reservation.getAluno(), reservation.getData(),
-								reservation.getHora())) {
+						if (this.studentIsInReservationDB(reservation.getAluno(), reservation.getDate(),
+								reservation.getTime())) {
 							throw new ReservaException(ALUNO_INDISPONIVEL);
 						} else {
 							if (!this.thereIsChairs(reservation.getCadeiras_reservadas(),
-									reservation.getSala(), reservation.getData(), reservation.getHora())) {
+									reservation.getSala(), reservation.getDate(), reservation.getTime())) {
 								throw new ReservaException(
 										CADEIRAS_INDISPONIVEIS);
 							}
@@ -84,11 +84,11 @@ public class ResSalaAlunoDAO extends DAO {
 			}
 		}
 
-		if (this.dateIsGone(reservation.getData())) {
+		if (this.dateIsGone(reservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
 		}
-		if (this.dateIsNow(reservation.getData())) {
-			if (this.timeIsGone(reservation.getHora())) {
+		if (this.dateIsNow(reservation.getDate())) {
+			if (this.timeIsGone(reservation.getTime())) {
 				throw new ReservaException(HORA_JA_PASSOU);
 			} else {
 				super.execute(this.insertIntoQuery(reservation));
@@ -121,17 +121,17 @@ public class ResSalaAlunoDAO extends DAO {
 							if (!this.roomIsInDB(newReservation.getSala())) {
 								throw new ReservaException(SALA_INEXISTENTE);
 							} else {
-								if (!oldReservation.getData().equals(newReservation.getData())
-										|| !oldReservation.getHora().equals(newReservation.getHora())) {
+								if (!oldReservation.getDate().equals(newReservation.getDate())
+										|| !oldReservation.getTime().equals(newReservation.getTime())) {
 									if (this.studentIsInReservationDB(newReservation.getAluno(),
-											newReservation.getData(), newReservation.getHora())) {
+											newReservation.getDate(), newReservation.getTime())) {
 										throw new ReservaException(
 												ALUNO_INDISPONIVEL);
 									} else {
 										if (this.roomIsInTeacherReservationDB(
 												newReservation.getSala(),
-												newReservation.getData(),
-												newReservation.getHora())) {
+												newReservation.getDate(),
+												newReservation.getTime())) {
 											throw new ReservaException(
 													SALA_INDISPONIVEL);
 										}
@@ -148,14 +148,14 @@ public class ResSalaAlunoDAO extends DAO {
 				"" + (Integer.parseInt(newReservation.getCadeiras_reservadas())
 						- Integer.parseInt(oldReservation.getCadeiras_reservadas())),
 				newReservation.getSala(),
-				newReservation.getData(), newReservation.getHora())) {
+				newReservation.getDate(), newReservation.getTime())) {
 			throw new ReservaException(CADEIRAS_INDISPONIVEIS);
 		}
-		if (this.dateIsGone(newReservation.getData())) {
+		if (this.dateIsGone(newReservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
 		}
-		if (this.timeIsGone(newReservation.getHora()) &&
-				this.dateIsNow(newReservation.getData())) {
+		if (this.timeIsGone(newReservation.getTime()) &&
+				this.dateIsNow(newReservation.getDate())) {
 			throw new ReservaException(HORA_JA_PASSOU);
 		} else {
 			super.update(this.updateQuery(oldReservation, newReservation));
@@ -226,8 +226,8 @@ public class ResSalaAlunoDAO extends DAO {
 
 		while (i.hasNext()) {
 			ReservaSalaAluno resrevation = i.next();
-			if (resrevation.getSala().equals(room) && resrevation.getData().equals(date)
-					&& resrevation.getHora().equals(time)) {
+			if (resrevation.getSala().equals(room) && resrevation.getDate().equals(date)
+					&& resrevation.getTime().equals(time)) {
 				total -= Integer.parseInt(resrevation.getCadeiras_reservadas());
 			}
 		}
@@ -332,8 +332,8 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "sala.capacidade = " + reservation.getSala().getCapacidade()
 				+ " ) and "
 				+ "finalidade = \"" + reservation.getFinalidade() + "\" and "
-				+ "hora = \"" + reservation.getHora() + "\" and "
-				+ "data = \"" + reservation.getData() + "\" and "
+				+ "hora = \"" + reservation.getTime() + "\" and "
+				+ "data = \"" + reservation.getDate() + "\" and "
 				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas() + ";");
 	}
 
@@ -476,8 +476,8 @@ public class ResSalaAlunoDAO extends DAO {
 		return " WHERE " + "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno())
 				+ " ) and " + "id_sala = ( " + selectRoomIDQuery(reservation.getSala())
 				+ " ) and " + "finalidade = \"" + reservation.getFinalidade() + "\" and "
-				+ "hora = \"" + reservation.getHora() + "\" and " + "data = \""
-				+ reservation.getData() + "\" and " + "cadeiras_reservadas = "
+				+ "hora = \"" + reservation.getTime() + "\" and " + "data = \""
+				+ reservation.getDate() + "\" and " + "cadeiras_reservadas = "
 				+ reservation.getCadeiras_reservadas();
 	}
 
@@ -486,8 +486,8 @@ public class ResSalaAlunoDAO extends DAO {
 
 		return "( " + selectStudentIDQuery(reservation.getAluno()) + " ), " + "( "
 				+ selectRoomIDQuery(reservation.getSala()) + " ), " + "\""
-				+ reservation.getFinalidade() + "\", " + "\"" + reservation.getHora() + "\", "
-				+ "\"" + reservation.getData() + "\", " + reservation.getCadeiras_reservadas();
+				+ reservation.getFinalidade() + "\", " + "\"" + reservation.getTime() + "\", "
+				+ "\"" + reservation.getDate() + "\", " + reservation.getCadeiras_reservadas();
 	}
 
 	// Reuse query for ATRIBUTES clause.
@@ -496,7 +496,7 @@ public class ResSalaAlunoDAO extends DAO {
 		return "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno()) + " ), "
 				+ "id_sala = ( " + selectRoomIDQuery(reservation.getSala()) + " ), "
 				+ "finalidade = \"" + reservation.getFinalidade() + "\", " + "hora = \""
-				+ reservation.getHora() + "\", " + "data = \"" + reservation.getData() + "\", "
+				+ reservation.getTime() + "\", " + "data = \"" + reservation.getDate() + "\", "
 				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas();
 	}
 

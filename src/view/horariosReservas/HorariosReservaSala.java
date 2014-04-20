@@ -49,7 +49,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 			if (this.room != null && (reservation.getSala().equals(this.room))) {
 				clientData.add(String.valueOf(index));
 				clientData.add("Aluno");
-				clientData.add(reservation.getHora());
+				clientData.add(reservation.getTime());
 				clientData.add(reservation.getAluno().getName());
 				clientData.add(reservation.getAluno().getEnrollmentNumber());
 				clientData.add(reservation.getFinalidade());
@@ -66,7 +66,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 					clientData.add(String.valueOf(index));
 					clientData.add("Professor");
-					clientData.add(reservation.getHora());
+					clientData.add(reservation.getTime());
 					clientData.add(reservation.getProfessor().getName());
 					clientData.add(reservation.getProfessor()
 							.getEnrollmentNumber());

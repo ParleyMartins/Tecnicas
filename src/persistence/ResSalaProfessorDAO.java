@@ -63,15 +63,15 @@ public class ResSalaProfessorDAO extends DAO {
 				if (!this.roomIsInDB(reservation.getSala())) {
 					throw new ReservaException(SALA_INEXISTENTE);
 				} else {
-					if (this.roomIsInReservationDB(reservation.getSala(), reservation.getData(), 
-							reservation.getHora())) {
+					if (this.roomIsInReservationDB(reservation.getSala(), reservation.getDate(), 
+							reservation.getTime())) {
 						throw new ReservaException(SALA_INDISPONIVEL);
 					} else {
 						if (this.reservationIsInDB(reservation)) {
 							throw new ReservaException(RESERVA_EXISTENTE);
 						} else {
-							if (this.roomIsInReservationDB(reservation.getData(), 
-									reservation.getHora())) {
+							if (this.roomIsInReservationDB(reservation.getDate(), 
+									reservation.getTime())) {
 								super.execute(this.deleteFromStudentQuery(reservation));
 							}
 						}
@@ -79,11 +79,11 @@ public class ResSalaProfessorDAO extends DAO {
 				}
 			}
 		}
-		if (this.dateIsGone(reservation.getData())) {
+		if (this.dateIsGone(reservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
 		}
-		if (this.dataIsNow(reservation.getData())) {
-			if (this.timeIsGone(reservation.getHora())) {
+		if (this.dataIsNow(reservation.getDate())) {
+			if (this.timeIsGone(reservation.getTime())) {
 				throw new ReservaException(HORA_JA_PASSOU);
 			} else {
 				super.execute(this.insertIntoQuery(reservation));
@@ -115,10 +115,10 @@ public class ResSalaProfessorDAO extends DAO {
 							if (!this.roomIsInDB(newReservation.getSala())) {
 								throw new ReservaException(SALA_INEXISTENTE);
 							} else {
-								if (!oldReservation.getData().equals(newReservation.getData())
-										|| !oldReservation.getHora().equals(newReservation.getHora())) {
+								if (!oldReservation.getDate().equals(newReservation.getDate())
+										|| !oldReservation.getTime().equals(newReservation.getTime())) {
 									if (this.roomIsInReservationDB(newReservation.getSala(),
-											newReservation.getData(), newReservation.getHora())) {
+											newReservation.getDate(), newReservation.getTime())) {
 										throw new ReservaException(
 												SALA_INDISPONIVEL);
 									}
@@ -130,10 +130,10 @@ public class ResSalaProfessorDAO extends DAO {
 			}
 		}
 								
-		if (this.dateIsGone(newReservation.getData())) {
+		if (this.dateIsGone(newReservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
 		}
-		if (this.timeIsGone(newReservation.getHora()) && this.dataIsNow(newReservation.getData())) {
+		if (this.timeIsGone(newReservation.getTime()) && this.dataIsNow(newReservation.getDate())) {
 			throw new ReservaException(HORA_JA_PASSOU);
 		} else {
 			super.update(this.updateQuery(oldReservation, newReservation));
@@ -256,8 +256,8 @@ public class ResSalaProfessorDAO extends DAO {
 				"sala.descricao = \"" + reservation.getSala().getDescription() + "\" and " +
 				"sala.capacidade = " + reservation.getSala().getCapacidade() + " ) and " +
 				"finalidade = \"" + reservation.getFinalidade() + "\" and " +
-				"hora = \"" + reservation.getHora() + "\" and " +
-				"data = \"" + reservation.getData() + "\";");
+				"hora = \"" + reservation.getTime() + "\" and " +
+				"data = \"" + reservation.getDate() + "\";");
 	}
 
 	// Check if there is an Aluno entry in a Reserva.
@@ -408,8 +408,8 @@ public class ResSalaProfessorDAO extends DAO {
 				+ " ) and " +
 				"id_sala = ( " + selectRoomIdQuery(reservation.getSala()) + " ) and " +
 				"finalidade = \"" + reservation.getFinalidade() + "\" and " +
-				"hora = \"" + reservation.getHora() + "\" and " +
-				"data = \"" + reservation.getData() + "\"";
+				"hora = \"" + reservation.getTime() + "\" and " +
+				"data = \"" + reservation.getDate() + "\"";
 	}
 
 	// Reuse Query for VALUES clause.
@@ -419,8 +419,8 @@ public class ResSalaProfessorDAO extends DAO {
 		return "( " + selectTeacherIDQuery(reservation.getProfessor()) + " ), " +
 				"( " + selectRoomIdQuery(reservation.getSala()) + " ), " +
 				"\"" + reservation.getFinalidade() + "\", " +
-				"\"" + reservation.getHora() + "\", " +
-				"\"" + reservation.getData() + "\"";
+				"\"" + reservation.getTime() + "\", " +
+				"\"" + reservation.getDate() + "\"";
 	}
 
 	// Reuse Query for ATRIBUTES clause.
@@ -431,8 +431,8 @@ public class ResSalaProfessorDAO extends DAO {
 				+ " ), " +
 				"id_sala = ( " + selectRoomIdQuery(reservation.getSala()) + " ), " +
 				"finalidade = \"" + reservation.getFinalidade() + "\", " +
-				"hora = \"" + reservation.getHora() + "\", " +
-				"data = \"" + reservation.getData() + "\"";
+				"hora = \"" + reservation.getTime() + "\", " +
+				"data = \"" + reservation.getDate() + "\"";
 	}
 
 	// Reuse Query for INSERT clause.
@@ -459,8 +459,8 @@ public class ResSalaProfessorDAO extends DAO {
 	private String deleteFromStudentQuery (ReservaSalaProfessor reservation) {
 
 		return "DELETE FROM reserva_sala_aluno WHERE " +
-				"hora = \"" + reservation.getHora() + "\" and " +
-				"data = \"" + reservation.getData() + "\" ;";
+				"hora = \"" + reservation.getTime() + "\" and " +
+				"data = \"" + reservation.getDate() + "\" ;";
 	}
 
 	// Reuse Query for UPDATE clause.

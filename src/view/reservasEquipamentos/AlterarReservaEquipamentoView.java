@@ -60,8 +60,8 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 		this.cpfTextField.setBackground(new Color(200, 208, 254));
 		this.cpfTextField.setEditable(false);
 		this.cpfTextField.setText(this.instanceOfReserve.getProfessor().getCpf());
-		this.hourTextField.setText(this.instanceOfReserve.getHora());
-		this.dateTextField.setText(this.instanceOfReserve.getData());
+		this.hourTextField.setText(this.instanceOfReserve.getTime());
+		this.dateTextField.setText(this.instanceOfReserve.getDate());
 		this.instanceTeacherTextArea.setText(this.instanceOfReserve.getProfessor().toString());
 		this.equipmentTextArea.setText(this.instanceOfReserve.getEquipamento()
 				.toString());

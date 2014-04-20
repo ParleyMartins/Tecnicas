@@ -71,7 +71,7 @@ public class ManterResSalaProfessor {
 			throws SQLException, ReservaException {
 
 		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
-				newReservation.getData(), newReservation.getHora(),
+				newReservation.getDate(), newReservation.getTime(),
 				newReservation.getSala(),
 				newReservation.getFinalidade(), newReservation.getProfessor());
 

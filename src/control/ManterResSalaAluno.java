@@ -94,8 +94,8 @@ public class ManterResSalaAluno {
 			PatrimonioException {
 
 		ReservaSalaAluno oldReservation = new ReservaSalaAluno(
-				reservation.getData(),
-				reservation.getHora(), reservation.getSala(),
+				reservation.getDate(),
+				reservation.getTime(), reservation.getSala(),
 				reservation.getFinalidade(),
 				reservation.getCadeiras_reservadas(), reservation.getAluno());
 		reservation.setFinalidade(purpose);

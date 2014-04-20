@@ -50,7 +50,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 			if (this.equipment != null && (reservation.getEquipamento().equals(this.equipment))) {
 
 				dataVector.add(String.valueOf(index));
-				dataVector.add(reservation.getHora());
+				dataVector.add(reservation.getTime());
 				dataVector.add(reservation.getProfessor().getName());
 				dataVector.add(reservation.getProfessor().getEnrollmentNumber());
 				dataVector.add(reservation.getEquipamento().getIdCode());
