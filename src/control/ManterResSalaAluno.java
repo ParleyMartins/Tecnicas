@@ -41,7 +41,7 @@ public class ManterResSalaAluno {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResSalaAlunoDAO.getInstance().buscarPorHora(time);
+		return ResSalaAlunoDAO.getInstance().searchByTime(time);
 
 	}
 
@@ -50,7 +50,7 @@ public class ManterResSalaAluno {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResSalaAlunoDAO.getInstance().buscarPorDia(date);
+		return ResSalaAlunoDAO.getInstance().searchByDay(date);
 
 	}
 
@@ -60,7 +60,7 @@ public class ManterResSalaAluno {
 			ReservaException {
 
 		this.studentRoomReservationVector = ResSalaAlunoDAO.getInstance()
-				.buscarTodos();
+				.searchAll();
 		return this.studentRoomReservationVector;
 	}
 
@@ -69,7 +69,7 @@ public class ManterResSalaAluno {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResSalaAlunoDAO.getInstance().cadeirasDisponiveis(room, date,
+		return ResSalaAlunoDAO.getInstance().setAvailableChairs(room, date,
 				time);
 	}
 
@@ -83,7 +83,7 @@ public class ManterResSalaAluno {
 		ReservaSalaAluno reservation = new ReservaSalaAluno(date, time, room,
 				purpose,
 				numberDesiredChairs, student);
-		ResSalaAlunoDAO.getInstance().incluir(reservation);
+		ResSalaAlunoDAO.getInstance().insert(reservation);
 		this.studentRoomReservationVector.add(reservation);
 	}
 
@@ -100,14 +100,14 @@ public class ManterResSalaAluno {
 				reservation.getCadeiras_reservadas(), reservation.getAluno());
 		reservation.setFinalidade(purpose);
 		reservation.setCadeiras_reservadas(numberDesiredChairs);
-		ResSalaAlunoDAO.getInstance().alterar(oldReservation, reservation);
+		ResSalaAlunoDAO.getInstance().modify(oldReservation, reservation);
 	}
 
 	// Remove the reservation made by a student.
 	public void delete (ReservaSalaAluno reservation) throws SQLException,
 			ReservaException {
 
-		ResSalaAlunoDAO.getInstance().excluir(reservation);
+		ResSalaAlunoDAO.getInstance().delete(reservation);
 		this.studentRoomReservationVector.remove(reservation);
 	}
 }

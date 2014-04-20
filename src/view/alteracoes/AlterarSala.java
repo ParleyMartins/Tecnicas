@@ -21,17 +21,17 @@ public class AlterarSala extends CadastroPatrimonio {
 		super(parent, modal);
 		this.setTitle("Alterar");
 		this.setName("AlterarSala");
-		this.cadastroBtn.setText("Alterar");
-		this.cadastroBtn.setName("Alterar");
+		this.registerButton.setText("Alterar");
+		this.registerButton.setName("Alterar");
 		this.index2 = index;
 
 		try {
 
-			this.codigoTxtField.setText(ManterSala.getInstance().getRoomsVec()
+			this.codeTxtField.setText(ManterSala.getInstance().getRoomsVec()
 					.get(index).getCodigo());
-			this.capacidadeTxtField.setText(ManterSala.getInstance()
+			this.capacityTxtField.setText(ManterSala.getInstance()
 					.getRoomsVec().get(index).getCapacidade());
-			this.descricaoTextArea.setText(ManterSala.getInstance()
+			this.descriptionTxtArea.setText(ManterSala.getInstance()
 					.getRoomsVec().get(index).getDescricao());
 			this.index2 = index;
 
@@ -49,13 +49,13 @@ public class AlterarSala extends CadastroPatrimonio {
 	}
 
 	@Override
-	protected void cadastroAction ( ) {
+	protected void registerAction ( ) {
 
 		try {
 
-			ManterSala.getInstance().modify(this.codigoTxtField.getText(),
-					this.descricaoTextArea.getText(),
-					this.capacidadeTxtField.getText(),
+			ManterSala.getInstance().modify(this.codeTxtField.getText(),
+					this.descriptionTxtArea.getText(),
+					this.capacityTxtField.getText(),
 					ManterSala.getInstance().getRoomsVec().get(this.index2));
 
 			JOptionPane.showMessageDialog(this, "Sala Alterada com sucesso",

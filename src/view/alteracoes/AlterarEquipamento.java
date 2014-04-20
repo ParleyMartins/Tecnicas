@@ -22,17 +22,17 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 		super(parent, modal);
 		this.setTitle("Alterar");
 		this.setName("AlterarEquipamento");
-		this.cadastroBtn.setText("Alterar");
-		this.cadastroBtn.setName("Alterar");
-		this.capacidadeLbl.setVisible(false);
-		this.capacidadeTxtField.setVisible(false);
+		this.registerButton.setText("Alterar");
+		this.registerButton.setName("Alterar");
+		this.capacityLabel.setVisible(false);
+		this.capacityTxtField.setVisible(false);
 		this.index2 = index;
 
 		try {
 
-			this.codigoTxtField.setText(ManterEquipamento.getInstance()
+			this.codeTxtField.setText(ManterEquipamento.getInstance()
 					.getEquipmentVec().get(index).getCodigo());
-			this.descricaoTextArea.setText(ManterEquipamento.getInstance()
+			this.descriptionTxtArea.setText(ManterEquipamento.getInstance()
 					.getEquipmentVec().get(index).getDescricao());
 			this.index2 = index;
 
@@ -51,13 +51,13 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 	@Override
 	// This method creates an action to modify the equipment fields.
-	protected void cadastroAction ( ) {
+	protected void registerAction ( ) {
 
 		try {
 
 			ManterEquipamento.getInstance().modify(
-					this.codigoTxtField.getText(),
-					this.descricaoTextArea.getText(),
+					this.codeTxtField.getText(),
+					this.descriptionTxtArea.getText(),
 					ManterEquipamento.getInstance().getEquipmentVec()
 							.get(this.index2));
 

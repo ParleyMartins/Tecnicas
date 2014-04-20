@@ -23,39 +23,39 @@ public abstract class DAO {
 	protected Vector search (String query) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
 
-		Vector vet = new Vector();
+		Vector vector = new Vector();
 
-		Connection con = FactoryConnection.getInstance().getConnection();
+		Connection factoryCon = FactoryConnection.getInstance().getConnection();
 
-		PreparedStatement pst = con.prepareStatement(query);
-		ResultSet rs = pst.executeQuery();
+		PreparedStatement statement = factoryCon.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
 
-		while (rs.next()) {
-			vet.add(this.fetch(rs));
+		while (result.next()) {
+			vector.add(this.fetch(result));
 		}
 
-		pst.close();
-		rs.close();
-		con.close();
-		return vet;
+		statement.close();
+		result.close();
+		factoryCon.close();
+		return vector;
 	}
 
 	// Check if a database entry exists.
-	protected boolean inDBGeneric (String query) throws SQLException {
+	protected boolean isInDBGeneric (String query) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(query);
-		ResultSet rs = pst.executeQuery();
+		Connection factoryCon = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement = factoryCon.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
 
-		if (!rs.next()) {
-			rs.close();
-			pst.close();
-			con.close();
+		if (!result.next()) {
+			result.close();
+			statement.close();
+			factoryCon.close();
 			return false;
 		} else {
-			rs.close();
-			pst.close();
-			con.close();
+			result.close();
+			statement.close();
+			factoryCon.close();
 			return true;
 		}
 	}
@@ -64,28 +64,28 @@ public abstract class DAO {
 	Function signature, used on the search method. Must be implemented on the
 	following DAO classes.
 	*/
-	protected abstract Object fetch (ResultSet rs) throws SQLException,
+	protected abstract Object fetch (ResultSet result) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException;
 
 	// Add or remove a database entry.
-	protected void executeQuery (String msg) throws SQLException {
+	protected void execute (String message) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(msg);
-		pst.executeUpdate();
-		pst.close();
-		con.close();
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		PreparedStatement statement = connection.prepareStatement(message);
+		statement.executeUpdate();
+		statement.close();
+		connection.close();
 	}
 
 	// Update a database entry.
-	protected void updateQuery (String msg) throws SQLException {
+	protected void update (String message) throws SQLException {
 
-		Connection con = FactoryConnection.getInstance().getConnection();
-		con.setAutoCommit(false);
-		PreparedStatement pst = con.prepareStatement(msg);
-		pst.executeUpdate();
-		con.commit();
-		pst.close();
-		con.close();
+		Connection connection = FactoryConnection.getInstance().getConnection();
+		connection.setAutoCommit(false);
+		PreparedStatement statement = connection.prepareStatement(message);
+		statement.executeUpdate();
+		connection.commit();
+		statement.close();
+		connection.close();
 	}
 }

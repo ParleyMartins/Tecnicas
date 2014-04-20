@@ -15,36 +15,36 @@ import exception.ReservaException;
 
 public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 
-	Equipamento equipamento;
+	Equipamento instanceOfEquipment;
 
 	public FazerReservaEquipamentoView (Frame parent, boolean modal,
-			Equipamento e, String data) throws SQLException,
+			Equipamento equipmentToReserve, String dateOfBooking) throws SQLException,
 			PatrimonioException, PatrimonioException, ClienteException,
 			ReservaException {
 
 		super(parent, modal);
-		this.equipamento = e;
-		this.dataTextField.setText(data);
-		this.equipamentoTextArea.setText(e.toString());
+		this.instanceOfEquipment = equipmentToReserve;
+		this.dateTextField.setText(dateOfBooking);
+		this.equipmentTextArea.setText(equipmentToReserve.toString());
 	}
 
 	@Override
-	protected void reservarProfessor ( ) {
+	protected void reserveEquipmentToTeacher ( ) {
 
 		try {
 
-			this.instanceProf.insert(this.equipamento, this.prof,
-					this.dataTextField.getText(), this.horaTextField.getText());
+			this.instanceManageResEquipmentTeacher.insert(this.instanceOfEquipment, this.instanceTeacher,
+					this.dateTextField.getText(), this.hourTextField.getText());
 
 			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
-		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+		} catch (ReservaException excpetion) {
+			JOptionPane.showMessageDialog(this, excpetion.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(),
+		} catch (SQLException excpetion) {
+			JOptionPane.showMessageDialog(this, excpetion.getMessage(),
 					"Erro", JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

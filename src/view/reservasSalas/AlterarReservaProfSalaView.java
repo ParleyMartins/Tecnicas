@@ -28,7 +28,7 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
-		this.reservaProfessor = instanceProf.searchPerDate(data).get(index);
+		this.reservaProfessor = teacherInstance.searchPerDate(data).get(index);
 		resetComponents();
 
 	}
@@ -38,7 +38,7 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 	protected void reservarProfessor ( ) {
 
 		try {
-			instanceProf.modify(this.finalidadeTextField.getText(),
+			teacherInstance.modify(this.turposeTextField.getText(),
 					reservaProfessor);
 
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
@@ -61,26 +61,26 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 	protected void professorRadioButtonAction ( ) {
 
 		Color blue = new Color(200, 208, 254);
-		this.instanceAluno = null;
-		this.alunoRadioButton.setEnabled(false);
+		this.studentInstance = null;
+		this.studentRadioButton.setEnabled(false);
 		this.cpfTextField.setBackground(blue);
 		this.cpfTextField.setEditable(false);
-		this.qntCadeirasReservadasTextField.setEditable(true);
-		this.qntCadeirasReservadasTextField.setBackground(Color.white);
-		this.horaTextField.setBackground(blue);
-		this.horaTextField.setEditable(false);
-		this.horaTextField.setText(reservaProfessor.getHora());
-		this.alunoTextArea.setText(reservaProfessor.getProfessor().toString());
-		this.salaTextArea.setText(reservaProfessor.getSala().toString());
-		this.dataTextField.setText(reservaProfessor.getData());
-		this.qntCadeirasTxtField.setText(reservaProfessor.getSala()
+		this.qntChairsReservedTextField.setEditable(true);
+		this.qntChairsReservedTextField.setBackground(Color.white);
+		this.hourTextField.setBackground(blue);
+		this.hourTextField.setEditable(false);
+		this.hourTextField.setText(reservaProfessor.getHora());
+		this.studentTextArea.setText(reservaProfessor.getProfessor().toString());
+		this.roomTextArea.setText(reservaProfessor.getSala().toString());
+		this.dateTextField.setText(reservaProfessor.getData());
+		this.qntChairsTxtField.setText(reservaProfessor.getSala()
 				.getCapacidade());
-		this.qntCadeirasReservadasTextField.setText(reservaProfessor.getSala()
+		this.qntChairsReservedTextField.setText(reservaProfessor.getSala()
 				.getCapacidade());
-		this.qntCadeirasReservadasTextField.setBackground(blue);
-		this.qntCadeirasReservadasTextField.setEditable(false);
-		this.finalidadeTextField.setText(reservaProfessor.getFinalidade());
-		this.verificarCadeiraButton.setEnabled(false);
+		this.qntChairsReservedTextField.setBackground(blue);
+		this.qntChairsReservedTextField.setEditable(false);
+		this.turposeTextField.setText(reservaProfessor.getFinalidade());
+		this.checkChairsButton.setEnabled(false);
 	}
 
 	@Override
@@ -101,9 +101,9 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 	// This method resets some components
 	private void resetComponents ( ) {
 
-		this.reservarButton.setText("Alterar");
-		this.reservarButton.setName("AlterarButton");
-		this.professorRadioButton.setSelected(true);
+		this.reserveButton.setText("Alterar");
+		this.reserveButton.setName("AlterarButton");
+		this.teacherRadioButton.setSelected(true);
 		this.cpfLabel.setEnabled(false);
 		professorRadioButtonAction();
 	}

@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 import control.ManterAluno;
 import exception.ClienteException;
 
-public class RegisterStudent extends RegisterClient {
+public class CadastroAluno extends CadastroCliente {
 
 	// Constructor creates a RegisterStudent form.
-	public RegisterStudent(java.awt.Frame parentWindow, boolean modal) {
+	public CadastroAluno(java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
 		this.setName("CadastroAluno");

@@ -19,8 +19,8 @@ import javax.swing.WindowConstants;
 
 public abstract class DiaReservaPatrimonio extends JDialog {
 
-	protected JButton visualizarButton;
-	private JCalendar jCalendar1;
+	protected JButton viewButton;
+	private JCalendar selectDate;
 	private JPanel jPanel1;
 
 	// Constructor generates a PropertyReservationDay form.
@@ -31,28 +31,28 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 	}
 
 	// Method to visualize room or equipment.
-	protected abstract void visualizarAction (String data);
+	protected abstract void viewSelectedDayAction (String data);
 
 	// Method called from constructor to initialize the components
 	private void initComponents ( ) {
 
-		visualizarButton = new JButton();
+		viewButton = new JButton();
 		jPanel1 = new JPanel();
-		jCalendar1 = new JCalendar();
+		selectDate = new JCalendar();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-		visualizarButton.setText("Visualizar Reservas do Dia");
-		visualizarButton.setName("VisualizarButton");
-		visualizarButton.addActionListener(new ActionListener() {
+		viewButton.setText("Visualizar Reservas do Dia");
+		viewButton.setName("VisualizarButton");
+		viewButton.addActionListener(new ActionListener() {
 
-			private JCalendar jCalendar1;
+			private JCalendar selectDate;
 			private JPanel jPanel1;
-			protected JButton visualizarButton;
+			protected JButton viewButton;
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent actionPerformed) {
 
-				visualizarButtonActionPerformed(evt);
+				viewButtonActionPerformed(actionPerformed);
 			}
 		});
 
@@ -64,7 +64,7 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 				jPanel1Layout
 						.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(jCalendar1,
+						.addComponent(selectDate,
 								GroupLayout.DEFAULT_SIZE, 608,
 								Short.MAX_VALUE).addContainerGap()));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
@@ -72,7 +72,7 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 				jPanel1Layout
 						.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(jCalendar1,
+						.addComponent(selectDate,
 								GroupLayout.DEFAULT_SIZE, 434,
 								Short.MAX_VALUE).addContainerGap()));
 
@@ -94,7 +94,7 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 																		0,
 																		Short.MAX_VALUE)
 																.addComponent(
-																		visualizarButton,
+																		viewButton,
 																		GroupLayout.PREFERRED_SIZE,
 																		182,
 																		GroupLayout.PREFERRED_SIZE))
@@ -115,24 +115,24 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 										Short.MAX_VALUE)
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(visualizarButton)
+								.addComponent(viewButton)
 								.addContainerGap()));
 
 		pack();
 	}
 
 	// Method to generate the action of visualize the selected day
-	private void visualizarButtonActionPerformed (ActionEvent evt) {
+	private void viewButtonActionPerformed (ActionEvent actionPerformed) {
 
 		String data;
-		int mes = 1 + this.jCalendar1.getMonthChooser().getMonth();
-		if (mes < 10) {
-			data = this.jCalendar1.getDayChooser().getDay() + "/0" + mes + "/"
-					+ this.jCalendar1.getYearChooser().getYear();
+		int monthOfBooking = 1 + this.selectDate.getMonthChooser().getMonth();
+		if (monthOfBooking < 10) {
+			data = this.selectDate.getDayChooser().getDay() + "/0" + monthOfBooking + "/"
+					+ this.selectDate.getYearChooser().getYear();
 		} else {
-			data = this.jCalendar1.getDayChooser().getDay() + "/" + mes + "/"
-					+ this.jCalendar1.getYearChooser().getYear();
+			data = this.selectDate.getDayChooser().getDay() + "/" + monthOfBooking + "/"
+					+ this.selectDate.getYearChooser().getYear();
 		}
-		visualizarAction(data);
+		viewSelectedDayAction(data);
 	}
 }

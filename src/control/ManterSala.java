@@ -35,7 +35,7 @@ public class ManterSala {
 	public Vector <Sala> getRoomsVec ( ) throws SQLException,
 			PatrimonioException {
 
-		this.roomsVec = SalaDAO.getInstance().buscarTodos();
+		this.roomsVec = SalaDAO.getInstance().searchAll();
 		return this.roomsVec;
 	}
 
@@ -45,7 +45,7 @@ public class ManterSala {
 			throws PatrimonioException, SQLException {
 
 		Sala sala = new Sala(roomCode, roomDescription, capacity);
-		SalaDAO.getInstance().incluir(sala);
+		SalaDAO.getInstance().insert(sala);
 		this.roomsVec.add(sala);
 	}
 
@@ -59,13 +59,13 @@ public class ManterSala {
 		newRoom.setCodigo(roomCode);
 		newRoom.setDescricao(roomDescription);
 		newRoom.setCapacidade(capacity);
-		SalaDAO.getInstance().alterar(oldRoom, newRoom);
+		SalaDAO.getInstance().modify(oldRoom, newRoom);
 	}
 
 	// This method deletes room form the database.
 	public void delete (Sala room) throws SQLException, PatrimonioException {
 
-		SalaDAO.getInstance().excluir(room);
+		SalaDAO.getInstance().delete(room);
 		this.roomsVec.remove(room);
 	}
 
