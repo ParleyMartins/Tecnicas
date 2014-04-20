@@ -19,15 +19,15 @@ public class ReservaEquipamento extends Reserva {
 			throws ReservaException {
 
 		super(date, time);
-		this.setEquipamento(equipment);
+		this.setEquipment(equipment);
 	}
 
-	public Equipamento getEquipamento() {
+	public Equipamento getEquipment() {
 
 		return this.equipment;
 	}
 
-	public void setEquipamento(Equipamento equipment) throws ReservaException {
+	public void setEquipment(Equipamento equipment) throws ReservaException {
 
 		if (equipment == null) {
 			throw new ReservaException(NULL_EQUIPMENT);
@@ -39,14 +39,14 @@ public class ReservaEquipamento extends Reserva {
 
 	public boolean equals(ReservaEquipamento reservation) {
 
-		return (super.equals(reservation) && this.getEquipamento()
-				.equals(reservation.getEquipamento()));
+		return (super.equals(reservation) && this.getEquipment()
+				.equals(reservation.getEquipment()));
 	}
 
 	@Override
 	public String toString() {
 
-		return "ReservaEquipamento [equipamento=" + this.getEquipamento()
+		return "ReservaEquipamento [equipamento=" + this.getEquipment()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

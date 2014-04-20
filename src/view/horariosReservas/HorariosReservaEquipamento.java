@@ -47,14 +47,14 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 		Vector <String> dataVector = new Vector <String>();
 		if (obj instanceof ReservaEquipamentoProfessor) {
 			ReservaEquipamentoProfessor reservation = (ReservaEquipamentoProfessor) obj;
-			if (this.equipment != null && (reservation.getEquipamento().equals(this.equipment))) {
+			if (this.equipment != null && (reservation.getEquipment().equals(this.equipment))) {
 
 				dataVector.add(String.valueOf(index));
 				dataVector.add(reservation.getTime());
-				dataVector.add(reservation.getProfessor().getName());
-				dataVector.add(reservation.getProfessor().getEnrollmentNumber());
-				dataVector.add(reservation.getEquipamento().getIdCode());
-				dataVector.add(reservation.getEquipamento().getDescription());
+				dataVector.add(reservation.getTeacher().getName());
+				dataVector.add(reservation.getTeacher().getEnrollmentNumber());
+				dataVector.add(reservation.getEquipment().getIdCode());
+				dataVector.add(reservation.getEquipment().getDescription());
 			}
 		}
 

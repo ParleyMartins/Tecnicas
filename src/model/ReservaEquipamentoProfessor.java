@@ -12,22 +12,22 @@ public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 
 	private Professor teacher;
 
-	// Mensages
+	// Error messages. 
 	private final String NULL_TEACHER = "O professor esta nulo.";
 
 	public ReservaEquipamentoProfessor(String date, String time,
 			Equipamento equipment, Professor teacher) throws ReservaException {
 
 		super(date, time, equipment);
-		this.setProfessor(teacher);
+		this.setTeacher(teacher);
 	}
 
-	public Professor getProfessor() {
+	public Professor getTeacher() {
 
 		return teacher;
 	}
 
-	public void setProfessor(Professor teacher) throws ReservaException {
+	public void setTeacher(Professor teacher) throws ReservaException {
 
 		if (teacher == null) {
 			throw new ReservaException(NULL_TEACHER);
@@ -39,15 +39,15 @@ public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 
 	public boolean equals(ReservaEquipamentoProfessor reservation) {
 
-		return (super.equals(reservation) && this.getEquipamento().equals(
-				reservation.getEquipamento()));
+		return (super.equals(reservation) && this.getEquipment().equals(
+				reservation.getEquipment()));
 	}
 
 	@Override
 	public String toString() {
 
 		return "ReservaEquipamentoProfessor [professor="
-				+ this.getEquipamento().toString() + ", toString()="
+				+ this.getEquipment().toString() + ", toString()="
 				+ super.toString() + "]";
 	}
 
