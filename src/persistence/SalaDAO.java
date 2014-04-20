@@ -55,7 +55,7 @@ public class SalaDAO {
 				"sala (codigo, descricao, capacidade) VALUES (" +
 				"\"" + room.getIdCode() + "\", " +
 				"\"" + room.getDescription() + "\", " +
-				room.getCapacidade() + ");");
+				room.getCapacity() + ");");
 	}
 
 	// Change a Sala info in the database.
@@ -88,12 +88,12 @@ public class SalaDAO {
 			String message = "UPDATE sala SET " +
 					"codigo = \"" + newRoom.getIdCode() + "\", " +
 					"descricao = \"" + newRoom.getDescription() + "\", " +
-					"capacidade = " + newRoom.getCapacidade() +
+					"capacidade = " + newRoom.getCapacity() +
 					" WHERE " +
 					"sala.codigo = \"" + oldRoom.getIdCode() + "\" and " +
 					"sala.descricao = \"" + oldRoom.getDescription() + "\" and "
 					+
-					"sala.capacidade = " + oldRoom.getCapacidade() + ";";
+					"sala.capacidade = " + oldRoom.getCapacity() + ";";
 			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(message);
 			statement.executeUpdate();
@@ -120,7 +120,7 @@ public class SalaDAO {
 							"sala.codigo = \"" + room.getIdCode() + "\" and " +
 							"sala.descricao = \"" + room.getDescription()
 							+ "\" and " +
-							"sala.capacidade = " + room.getCapacidade() + ";"
+							"sala.capacidade = " + room.getCapacity() + ";"
 							);
 				} else {
 					throw new PatrimonioException(SALA_NAO_EXISTENTE);
@@ -212,7 +212,7 @@ public class SalaDAO {
 		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacidade() +
+				"sala.capacidade = " + room.getCapacity() +
 				";");
 	}
 
@@ -230,12 +230,12 @@ public class SalaDAO {
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacidade() + " );") == false) {
+				"sala.capacidade = " + room.getCapacity() + " );") == false) {
 			if (this.iInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
 					"id_sala = (SELECT id_sala FROM sala WHERE " +
 					"sala.codigo = \"" + room.getIdCode() + "\" and " +
 					"sala.descricao = \"" + room.getDescription() + "\" and " +
-					"sala.capacidade = " + room.getCapacidade() + " );") == false) {
+					"sala.capacidade = " + room.getCapacity() + " );") == false) {
 				return false;
 			}
 		}

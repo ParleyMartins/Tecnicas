@@ -222,7 +222,7 @@ public class ResSalaAlunoDAO extends DAO {
 		time = this.standardizeTime(time);
 		Vector <ReservaSalaAluno> reservationvec = this.searchAll();
 		Iterator <ReservaSalaAluno> i = reservationvec.iterator();
-		int total = Integer.parseInt(room.getCapacidade());
+		int total = Integer.parseInt(room.getCapacity());
 
 		while (i.hasNext()) {
 			ReservaSalaAluno resrevation = i.next();
@@ -283,7 +283,7 @@ public class ResSalaAlunoDAO extends DAO {
 		return super.isInDBGeneric("SELECT * FROM sala WHERE "
 				+ "sala.codigo = \"" + room.getIdCode() + "\" and "
 				+ "sala.descricao = \"" + room.getDescription() + "\" and "
-				+ "sala.capacidade = " + room.getCapacidade() + ";");
+				+ "sala.capacidade = " + room.getCapacity() + ";");
 	}
 
 	// Check if there is a Aluno entry in Reserva.
@@ -311,7 +311,7 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "id_sala = (SELECT id_sala FROM sala WHERE "
 				+ "sala.codigo = \"" + room.getIdCode() + "\" and "
 				+ "sala.descricao = \"" + room.getDescription() + "\" and "
-				+ "sala.capacidade = " + room.getCapacidade() + " );");
+				+ "sala.capacidade = " + room.getCapacity() + " );");
 	}
 
 	// Check if there is a Reserva in the database.
@@ -329,7 +329,7 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "sala.codigo = \"" + reservation.getClassroom().getIdCode() + "\" and "
 				+ "sala.descricao = \"" + reservation.getClassroom().getDescription()
 				+ "\" and "
-				+ "sala.capacidade = " + reservation.getClassroom().getCapacidade()
+				+ "sala.capacidade = " + reservation.getClassroom().getCapacity()
 				+ " ) and "
 				+ "finalidade = \"" + reservation.getPurpose() + "\" and "
 				+ "hora = \"" + reservation.getTime() + "\" and "
@@ -467,7 +467,7 @@ public class ResSalaAlunoDAO extends DAO {
 		return "SELECT id_sala FROM sala WHERE " + "sala.codigo = \""
 				+ room.getIdCode() + "\" and " + "sala.descricao = \""
 				+ room.getDescription() + "\" and " + "sala.capacidade = "
-				+ room.getCapacidade();
+				+ room.getCapacity();
 	}
 
 	// Reuse query for WHERE clause.

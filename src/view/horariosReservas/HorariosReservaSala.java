@@ -56,7 +56,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				clientData.add(reservation.getClassroom().getIdCode());
 				clientData.add(reservation.getClassroom().getDescription());
 				clientData.add(reservation.getReservedChairs());
-				clientData.add(reservation.getClassroom().getCapacidade());
+				clientData.add(reservation.getClassroom().getCapacity());
 			}
 		} else
 			if (obj instanceof ReservaSalaProfessor) {
@@ -67,14 +67,14 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					clientData.add(String.valueOf(index));
 					clientData.add("Professor");
 					clientData.add(reservation.getTime());
-					clientData.add(reservation.getProfessor().getName());
-					clientData.add(reservation.getProfessor()
+					clientData.add(reservation.getTeacher().getName());
+					clientData.add(reservation.getTeacher()
 							.getEnrollmentNumber());
 					clientData.add(reservation.getPurpose());
 					clientData.add(reservation.getClassroom().getIdCode());
 					clientData.add(reservation.getClassroom().getDescription());
-					clientData.add(reservation.getClassroom().getCapacidade());
-					clientData.add(reservation.getClassroom().getCapacidade());
+					clientData.add(reservation.getClassroom().getCapacity());
+					clientData.add(reservation.getClassroom().getCapacity());
 				}
 			}
 

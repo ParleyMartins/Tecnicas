@@ -21,15 +21,15 @@ public class Sala extends Patrimonio {
 			throws PatrimonioException {
 
 		super(id_code, desciption);
-		this.setCapacidade(capacity);
+		this.setCapacity(capacity);
 	}
 
-	public String getCapacidade() {
+	public String getCapacity() {
 
 		return capacity;
 	}
 
-	public void setCapacidade(String capacity) throws PatrimonioException {
+	public void setCapacity(String capacity) throws PatrimonioException {
 
 		if (capacity == null) {
 			throw new PatrimonioException(NULL_CAPACITY);
@@ -49,7 +49,7 @@ public class Sala extends Patrimonio {
 	public boolean equals(Sala classroom) {
 
 		if (super.equals(classroom)
-				&& this.getCapacidade().equals(classroom.getCapacidade())) {
+				&& this.getCapacity().equals(classroom.getCapacity())) {
 			return true;
 		} else {
 			// Do nothing.

@@ -30,7 +30,7 @@ public class AlterarSala extends CadastroPatrimonio {
 			this.codeTxtField.setText(ManterSala.getInstance().getRoomsVec()
 					.get(index).getIdCode());
 			this.capacityTxtField.setText(ManterSala.getInstance()
-					.getRoomsVec().get(index).getCapacidade());
+					.getRoomsVec().get(index).getCapacity());
 			this.descriptionTxtArea.setText(ManterSala.getInstance()
 					.getRoomsVec().get(index).getDescription());
 			this.index2 = index;

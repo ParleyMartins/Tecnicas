@@ -57,7 +57,7 @@ public class ResSalaProfessorDAO extends DAO {
 		if (reservation == null) {
 			throw new ReservaException(NULA);
 		} else {
-			if (!this.teacherIsInDB(reservation.getProfessor())) {
+			if (!this.teacherIsInDB(reservation.getTeacher())) {
 				throw new ReservaException(PROFESSOR_INEXISTENTE);
 			} else {
 				if (!this.roomIsInDB(reservation.getClassroom())) {
@@ -109,7 +109,7 @@ public class ResSalaProfessorDAO extends DAO {
 					if (this.reservationIsInDB(newReservation)) {
 						throw new ReservaException(RESERVA_EXISTENTE);
 					} else {
-						if (!this.teacherIsInDB(newReservation.getProfessor())) {
+						if (!this.teacherIsInDB(newReservation.getTeacher())) {
 							throw new ReservaException(PROFESSOR_INEXISTENTE);
 						} else {
 							if (!this.roomIsInDB(newReservation.getClassroom())) {
@@ -221,7 +221,7 @@ public class ResSalaProfessorDAO extends DAO {
 		return super.isInDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacidade() +
+				"sala.capacidade = " + room.getCapacity() +
 				";");
 	}
 
@@ -235,7 +235,7 @@ public class ResSalaProfessorDAO extends DAO {
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacidade() + " );");
+				"sala.capacidade = " + room.getCapacity() + " );");
 	}
 
 	// Check if there is a Reserva in the database.
@@ -243,18 +243,18 @@ public class ResSalaProfessorDAO extends DAO {
 
 		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_professor = (SELECT id_professor FROM professor WHERE " +
-				"professor.nome = \"" + reservation.getProfessor().getName() + "\" and " +
-				"professor.cpf = \"" + reservation.getProfessor().getCpf() + "\" and " +
-				"professor.telefone = \"" + reservation.getProfessor().getPhoneNumber()
+				"professor.nome = \"" + reservation.getTeacher().getName() + "\" and " +
+				"professor.cpf = \"" + reservation.getTeacher().getCpf() + "\" and " +
+				"professor.telefone = \"" + reservation.getTeacher().getPhoneNumber()
 				+ "\" and " +
-				"professor.email = \"" + reservation.getProfessor().getEmail()
+				"professor.email = \"" + reservation.getTeacher().getEmail()
 				+ "\" and " +
-				"professor.matricula = \"" + reservation.getProfessor().getEnrollmentNumber()
+				"professor.matricula = \"" + reservation.getTeacher().getEnrollmentNumber()
 				+ "\") and " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + reservation.getClassroom().getIdCode() + "\" and " +
 				"sala.descricao = \"" + reservation.getClassroom().getDescription() + "\" and " +
-				"sala.capacidade = " + reservation.getClassroom().getCapacidade() + " ) and " +
+				"sala.capacidade = " + reservation.getClassroom().getCapacity() + " ) and " +
 				"finalidade = \"" + reservation.getPurpose() + "\" and " +
 				"hora = \"" + reservation.getTime() + "\" and " +
 				"data = \"" + reservation.getDate() + "\";");
@@ -396,7 +396,7 @@ public class ResSalaProfessorDAO extends DAO {
 		return "SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacidade();
+				"sala.capacidade = " + room.getCapacity();
 	}
 
 	// Reuse Query for WHERE clause.
@@ -404,7 +404,7 @@ public class ResSalaProfessorDAO extends DAO {
 	private String whereQuery (ReservaSalaProfessor reservation) {
 
 		return " WHERE " +
-				"id_professor = ( " + selectTeacherIDQuery(reservation.getProfessor())
+				"id_professor = ( " + selectTeacherIDQuery(reservation.getTeacher())
 				+ " ) and " +
 				"id_sala = ( " + selectRoomIdQuery(reservation.getClassroom()) + " ) and " +
 				"finalidade = \"" + reservation.getPurpose() + "\" and " +
@@ -416,7 +416,7 @@ public class ResSalaProfessorDAO extends DAO {
 
 	private String valuesQuery (ReservaSalaProfessor reservation) {
 
-		return "( " + selectTeacherIDQuery(reservation.getProfessor()) + " ), " +
+		return "( " + selectTeacherIDQuery(reservation.getTeacher()) + " ), " +
 				"( " + selectRoomIdQuery(reservation.getClassroom()) + " ), " +
 				"\"" + reservation.getPurpose() + "\", " +
 				"\"" + reservation.getTime() + "\", " +
@@ -427,7 +427,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	private String attributesQuery (ReservaSalaProfessor reservation) {
 
-		return "id_professor = ( " + selectTeacherIDQuery(reservation.getProfessor())
+		return "id_professor = ( " + selectTeacherIDQuery(reservation.getTeacher())
 				+ " ), " +
 				"id_sala = ( " + selectRoomIdQuery(reservation.getClassroom()) + " ), " +
 				"finalidade = \"" + reservation.getPurpose() + "\", " +

@@ -42,7 +42,7 @@ public class SalaView extends PatrimonioView {
 
 		roomData.add(room.getIdCode());
 		roomData.add(room.getDescription());
-		roomData.add(room.getCapacidade());
+		roomData.add(room.getCapacity());
 
 		return roomData;
 

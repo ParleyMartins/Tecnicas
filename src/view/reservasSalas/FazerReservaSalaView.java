@@ -30,7 +30,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 		this.room = sala;
 		this.dateTextField.setText(data);
 		this.roomTextArea.setText(sala.toString());
-		this.qntChairsTxtField.setText(sala.getCapacidade());
+		this.qntChairsTxtField.setText(sala.getCapacity());
 		this.setName("FazerReservaSalaView");
 
 	}
