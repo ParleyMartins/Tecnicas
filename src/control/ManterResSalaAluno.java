@@ -97,9 +97,9 @@ public class ManterResSalaAluno {
 				reservation.getDate(),
 				reservation.getTime(), reservation.getClassroom(),
 				reservation.getPurpose(),
-				reservation.getCadeiras_reservadas(), reservation.getAluno());
+				reservation.getReservedChairs(), reservation.getStudent());
 		reservation.setPurpose(purpose);
-		reservation.setCadeiras_reservadas(numberDesiredChairs);
+		reservation.setReservedChairs(numberDesiredChairs);
 		ResSalaAlunoDAO.getInstance().modify(oldReservation, reservation);
 	}
 

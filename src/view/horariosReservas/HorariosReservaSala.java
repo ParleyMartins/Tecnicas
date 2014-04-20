@@ -50,12 +50,12 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				clientData.add(String.valueOf(index));
 				clientData.add("Aluno");
 				clientData.add(reservation.getTime());
-				clientData.add(reservation.getAluno().getName());
-				clientData.add(reservation.getAluno().getEnrollmentNumber());
+				clientData.add(reservation.getStudent().getName());
+				clientData.add(reservation.getStudent().getEnrollmentNumber());
 				clientData.add(reservation.getPurpose());
 				clientData.add(reservation.getClassroom().getIdCode());
 				clientData.add(reservation.getClassroom().getDescription());
-				clientData.add(reservation.getCadeiras_reservadas());
+				clientData.add(reservation.getReservedChairs());
 				clientData.add(reservation.getClassroom().getCapacidade());
 			}
 		} else

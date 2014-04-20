@@ -26,21 +26,21 @@ public class ReservaSalaAluno extends ReservaSala {
 			throws ReservaException {
 
 		super(date, time, classroom, purpose);
-		this.setAluno(student);
-		this.setCadeiras_reservadas(reserved_chairs);
+		this.setStudent(student);
+		this.setReservedChairs(reserved_chairs);
 	}
 
-	public Aluno getAluno() {
+	public Aluno getStudent() {
 
 		return this.student;
 	}
 
-	public String getCadeiras_reservadas() {
+	public String getReservedChairs() {
 
 		return this.reservedChairs;
 	}
 
-	public void setAluno(Aluno student) throws ReservaException {
+	public void setStudent(Aluno student) throws ReservaException {
 
 		if (student == null) {
 			throw new ReservaException(NULL_STUDENT);
@@ -50,7 +50,7 @@ public class ReservaSalaAluno extends ReservaSala {
 		this.student = student;
 	}
 
-	public void setCadeiras_reservadas(String reservedChairs)
+	public void setReservedChairs(String reservedChairs)
 			throws ReservaException {
 
 		// So we can modify this value after, without losing the information.
@@ -80,16 +80,16 @@ public class ReservaSalaAluno extends ReservaSala {
 	public boolean equals(ReservaSalaAluno reservation) {
 
 		return (super.equals(reservation)
-				&& this.getAluno().equals(reservation.getAluno()) && this
-				.getCadeiras_reservadas().equals(
-						reservation.getCadeiras_reservadas()));
+				&& this.getStudent().equals(reservation.getStudent()) && this
+				.getReservedChairs().equals(
+						reservation.getReservedChairs()));
 	}
 
 	@Override
 	public String toString() {
 
-		return "Aluno: " + this.getAluno().toString()
-				+ "\nCadeiras Reservadas: " + this.getCadeiras_reservadas()
+		return "Aluno: " + this.getStudent().toString()
+				+ "\nCadeiras Reservadas: " + this.getReservedChairs()
 				+ super.toString();
 	}
 

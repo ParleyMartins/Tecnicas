@@ -59,7 +59,7 @@ public class ResSalaAlunoDAO extends DAO {
 		if (reservation == null) {
 			throw new ReservaException(NULA);
 		} else {
-			if (!this.studentIsInDB(reservation.getAluno())) {
+			if (!this.studentIsInDB(reservation.getStudent())) {
 				throw new ReservaException(ALUNO_INEXISTENTE);
 			} else {
 				if (!this.roomIsInDB(reservation.getClassroom())) {
@@ -69,11 +69,11 @@ public class ResSalaAlunoDAO extends DAO {
 							reservation.getTime())) {
 						throw new ReservaException(SALA_INDISPONIVEL);
 					} else {
-						if (this.studentIsInReservationDB(reservation.getAluno(), reservation.getDate(),
+						if (this.studentIsInReservationDB(reservation.getStudent(), reservation.getDate(),
 								reservation.getTime())) {
 							throw new ReservaException(ALUNO_INDISPONIVEL);
 						} else {
-							if (!this.thereIsChairs(reservation.getCadeiras_reservadas(),
+							if (!this.thereIsChairs(reservation.getReservedChairs(),
 									reservation.getClassroom(), reservation.getDate(), reservation.getTime())) {
 								throw new ReservaException(
 										CADEIRAS_INDISPONIVEIS);
@@ -115,7 +115,7 @@ public class ResSalaAlunoDAO extends DAO {
 					if (this.reservationIsInDB(newReservation)) {
 						throw new ReservaException(RESERVA_EXISTENTE);
 					} else {
-						if (!this.studentIsInDB(newReservation.getAluno())) {
+						if (!this.studentIsInDB(newReservation.getStudent())) {
 							throw new ReservaException(ALUNO_INEXISTENTE);
 						} else {
 							if (!this.roomIsInDB(newReservation.getClassroom())) {
@@ -123,7 +123,7 @@ public class ResSalaAlunoDAO extends DAO {
 							} else {
 								if (!oldReservation.getDate().equals(newReservation.getDate())
 										|| !oldReservation.getTime().equals(newReservation.getTime())) {
-									if (this.studentIsInReservationDB(newReservation.getAluno(),
+									if (this.studentIsInReservationDB(newReservation.getStudent(),
 											newReservation.getDate(), newReservation.getTime())) {
 										throw new ReservaException(
 												ALUNO_INDISPONIVEL);
@@ -145,8 +145,8 @@ public class ResSalaAlunoDAO extends DAO {
 		}
 
 		if (!this.thereIsChairs(
-				"" + (Integer.parseInt(newReservation.getCadeiras_reservadas())
-						- Integer.parseInt(oldReservation.getCadeiras_reservadas())),
+				"" + (Integer.parseInt(newReservation.getReservedChairs())
+						- Integer.parseInt(oldReservation.getReservedChairs())),
 				newReservation.getClassroom(),
 				newReservation.getDate(), newReservation.getTime())) {
 			throw new ReservaException(CADEIRAS_INDISPONIVEIS);
@@ -228,7 +228,7 @@ public class ResSalaAlunoDAO extends DAO {
 			ReservaSalaAluno resrevation = i.next();
 			if (resrevation.getClassroom().equals(room) && resrevation.getDate().equals(date)
 					&& resrevation.getTime().equals(time)) {
-				total -= Integer.parseInt(resrevation.getCadeiras_reservadas());
+				total -= Integer.parseInt(resrevation.getReservedChairs());
 			}
 		}
 		return total;
@@ -319,12 +319,12 @@ public class ResSalaAlunoDAO extends DAO {
 
 		return super.isInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE "
 				+ "id_aluno = (SELECT id_aluno FROM aluno WHERE "
-				+ "aluno.nome = \"" + reservation.getAluno().getName() + "\" and "
-				+ "aluno.cpf = \"" + reservation.getAluno().getCpf() + "\" and "
-				+ "aluno.telefone = \"" + reservation.getAluno().getPhoneNumber()
+				+ "aluno.nome = \"" + reservation.getStudent().getName() + "\" and "
+				+ "aluno.cpf = \"" + reservation.getStudent().getCpf() + "\" and "
+				+ "aluno.telefone = \"" + reservation.getStudent().getPhoneNumber()
 				+ "\" and "
-				+ "aluno.email = \"" + reservation.getAluno().getEmail() + "\" and "
-				+ "aluno.matricula = \"" + reservation.getAluno().getEnrollmentNumber()
+				+ "aluno.email = \"" + reservation.getStudent().getEmail() + "\" and "
+				+ "aluno.matricula = \"" + reservation.getStudent().getEnrollmentNumber()
 				+ "\") and " + "id_sala = (SELECT id_sala FROM sala WHERE "
 				+ "sala.codigo = \"" + reservation.getClassroom().getIdCode() + "\" and "
 				+ "sala.descricao = \"" + reservation.getClassroom().getDescription()
@@ -334,7 +334,7 @@ public class ResSalaAlunoDAO extends DAO {
 				+ "finalidade = \"" + reservation.getPurpose() + "\" and "
 				+ "hora = \"" + reservation.getTime() + "\" and "
 				+ "data = \"" + reservation.getDate() + "\" and "
-				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas() + ";");
+				+ "cadeiras_reservadas = " + reservation.getReservedChairs() + ";");
 	}
 
 	// Gets the current date.
@@ -473,31 +473,31 @@ public class ResSalaAlunoDAO extends DAO {
 	// Reuse query for WHERE clause.
 	private String whereQuery (ReservaSalaAluno reservation) {
 
-		return " WHERE " + "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno())
+		return " WHERE " + "id_aluno = ( " + selectStudentIDQuery(reservation.getStudent())
 				+ " ) and " + "id_sala = ( " + selectRoomIDQuery(reservation.getClassroom())
 				+ " ) and " + "finalidade = \"" + reservation.getPurpose() + "\" and "
 				+ "hora = \"" + reservation.getTime() + "\" and " + "data = \""
 				+ reservation.getDate() + "\" and " + "cadeiras_reservadas = "
-				+ reservation.getCadeiras_reservadas();
+				+ reservation.getReservedChairs();
 	}
 
 	// Reuse query for VALUES clause.
 	private String valuesReservationQuery (ReservaSalaAluno reservation) {
 
-		return "( " + selectStudentIDQuery(reservation.getAluno()) + " ), " + "( "
+		return "( " + selectStudentIDQuery(reservation.getStudent()) + " ), " + "( "
 				+ selectRoomIDQuery(reservation.getClassroom()) + " ), " + "\""
 				+ reservation.getPurpose() + "\", " + "\"" + reservation.getTime() + "\", "
-				+ "\"" + reservation.getDate() + "\", " + reservation.getCadeiras_reservadas();
+				+ "\"" + reservation.getDate() + "\", " + reservation.getReservedChairs();
 	}
 
 	// Reuse query for ATRIBUTES clause.
 	private String attributesQuery (ReservaSalaAluno reservation) {
 
-		return "id_aluno = ( " + selectStudentIDQuery(reservation.getAluno()) + " ), "
+		return "id_aluno = ( " + selectStudentIDQuery(reservation.getStudent()) + " ), "
 				+ "id_sala = ( " + selectRoomIDQuery(reservation.getClassroom()) + " ), "
 				+ "finalidade = \"" + reservation.getPurpose() + "\", " + "hora = \""
 				+ reservation.getTime() + "\", " + "data = \"" + reservation.getDate() + "\", "
-				+ "cadeiras_reservadas = " + reservation.getCadeiras_reservadas();
+				+ "cadeiras_reservadas = " + reservation.getReservedChairs();
 	}
 
 	// Reuse query for INSERT clause.
