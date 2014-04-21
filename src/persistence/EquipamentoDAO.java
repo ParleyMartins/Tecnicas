@@ -36,6 +36,8 @@ public class EquipamentoDAO {
 
 		if (instance == null) {
 			instance = new EquipamentoDAO();
+		} else {
+			// Nothing here.
 		}
 
 		return instance;
@@ -56,6 +58,8 @@ public class EquipamentoDAO {
 							+ "(codigo, descricao) VALUES (" + "\""
 							+ equipment.getIdCode() + "\", " + "\""
 							+ equipment.getDescription() + "\");");
+				} else {
+					// Nothing here.
 				}
 			}
 		}
@@ -67,9 +71,13 @@ public class EquipamentoDAO {
 
 		if (oldEquipment == null) {
 			throw new PatrimonioException(EQUIPAMENTO_NULO);
+		} else {
+			// Nothing here.
 		}
 		if (newEquipment == null) {
 			throw new PatrimonioException(EQUIPAMENTO_NULO);
+		} else {
+			// Nothing here.
 		}
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
@@ -122,6 +130,8 @@ public class EquipamentoDAO {
 		} else {
 			if (this.isInOtherDB(equipment)) {
 				throw new PatrimonioException(EQUIPAMENTO_EM_USO);
+			} else {
+				// Nothing here.
 			}
 		}
 

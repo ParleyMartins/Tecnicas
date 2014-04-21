@@ -75,6 +75,8 @@ public class AlunoView extends ClienteView {
 				JOptionPane.showMessageDialog(this, "Selecione uma linha!",
 						"Erro", JOptionPane.ERROR_MESSAGE, null);
 				return;
+			} else {
+				// Nothing here.
 			}
 
 			int confirm = JOptionPane.showConfirmDialog(
@@ -89,6 +91,8 @@ public class AlunoView extends ClienteView {
 				JOptionPane.showMessageDialog(this,
 						"Aluno excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);
+			} else {
+				// Nothing here.
 			}
 			this.clientTable.setModel(fillTable());
 

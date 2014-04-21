@@ -27,8 +27,11 @@ public class ManterAluno {
 	// This constructor provides the singleton implementation.
 	public static ManterAluno getInstance ( ) {
 
-		if (instance == null)
+		if (instance == null){
 			instance = new ManterAluno( );
+		}  else {
+			// Nothing here.
+		}
 		return instance;
 	}
 

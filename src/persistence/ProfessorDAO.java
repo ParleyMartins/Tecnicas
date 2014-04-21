@@ -35,6 +35,8 @@ public class ProfessorDAO {
 
 		if (instance == null) {
 			instance = new ProfessorDAO();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -50,6 +52,8 @@ public class ProfessorDAO {
 			} else {
 				if (this.isInDbEnrollmentNumber(teacher.getEnrollmentNumber())) {
 					throw new ClienteException(MATRICULA_JA_EXISTENTE);
+				} else {
+					// Nothing here.
 				}
 			}
 		}
@@ -68,9 +72,13 @@ public class ProfessorDAO {
 
 		if (oldTeacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
+		} else {
+			// Nothing here.
 		}
 		if (newTeacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
+		} else {
+			// Nothing here.
 		}
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
@@ -78,6 +86,8 @@ public class ProfessorDAO {
 
 		if (!this.isInDB(oldTeacher)) {
 			throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
+		} else {
+			// Nothing here.
 		}
 		if (this.isInOtherDB(oldTeacher)) {
 			throw new ClienteException(PROFESSOR_EM_USO);
@@ -126,6 +136,8 @@ public class ProfessorDAO {
 
 		if (teacher == null) {
 			throw new ClienteException(PROFESSOR_NULO);
+		} else {
+			// Nothing here.
 		}
 		if (this.isInOtherDB(teacher)) {
 			throw new ClienteException(PROFESSOR_EM_USO);
@@ -282,7 +294,11 @@ public class ProfessorDAO {
 					+ "\" and " + "professor.matricula = \""
 					+ teacher.getEnrollmentNumber() + "\");") == false) {
 				return false;
+			} else {
+				// Nothing here.
 			}
+		} else {
+			// Nothing here.
 		}
 
 		return true;

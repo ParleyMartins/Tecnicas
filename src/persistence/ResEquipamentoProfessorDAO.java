@@ -40,6 +40,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 		if (instance == null) {
 			instance = new ResEquipamentoProfessorDAO();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -103,6 +105,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 										newReservation.getDate(), newReservation.getTime())) {
 									throw new ReservaException(
 											EQUIPAMENTO_INDISPONIVEL);
+								} else {
+									// Nothing here.
 								}
 							}
 						} else {
@@ -170,6 +174,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			ReservaEquipamentoProfessor reservation = i.next();
 			if (Integer.parseInt(reservation.getDate().split("[./-]")[1]) != month) {
 				monthTeacherReservations.remove(reservation);
+			} else {
+				// Nothing here.
 			}
 		}
 		return monthTeacherReservations;
@@ -185,9 +191,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		String timeH_HH = "";
 		if (time.length() == 4) {
 			timeHH_HH = "0" + time;
+		} else {
+			// Nothing here.
 		}
 		if (time.charAt(0) == '0') {
 			timeH_HH = time.substring(1);
+		} else {
+			// Nothing here.
 		}
 
 		return super

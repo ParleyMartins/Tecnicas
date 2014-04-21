@@ -65,6 +65,8 @@ public abstract class ClienteView extends JDialog {
 
 		if (client == null) {
 			return null;
+		} else {
+			// Nothing here.
 		}
 
 		dataTable.add(client.getEnrollmentNumber());
@@ -341,6 +343,8 @@ public abstract class ClienteView extends JDialog {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
+		} else {
+			// Nothing here.
 		}
 
 		alterarAction(index);

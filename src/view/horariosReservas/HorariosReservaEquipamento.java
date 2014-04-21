@@ -55,7 +55,11 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 				dataVector.add(reservation.getTeacher().getEnrollmentNumber());
 				dataVector.add(reservation.getEquipment().getIdCode());
 				dataVector.add(reservation.getEquipment().getDescription());
+			} else {
+				// Nothing here.
 			}
+		} else {
+			// Nothing here.
 		}
 
 		return dataVector;
@@ -81,11 +85,14 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 			Vector <ReservaEquipamentoProfessor> monthReservations = this.instance
 					.getReservationsPerMonth(month);
-			if (monthReservations != null)
+			if (monthReservations != null){
 				for (int i = 0 ; i < monthReservations.size() ; i++) {
 					dataTable.addRow(fillDataVector(monthReservations.get(i), i));
 
 				}
+			} else {
+				// Nothing here.
+			}
 
 		} catch (SQLException ex) {
 			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
@@ -122,6 +129,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 						"Reserva excluida com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
+			} else {
+				// Nothing here.
 			}
 
 		} catch (SQLException ex) {

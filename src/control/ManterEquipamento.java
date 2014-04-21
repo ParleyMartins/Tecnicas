@@ -27,6 +27,8 @@ public class ManterEquipamento {
 
 		if (instance == null) {
 			instance = new ManterEquipamento();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -55,13 +57,15 @@ public class ManterEquipamento {
 
 		if (newEquipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
+		} else {
+
+			Equipamento oldEquipment = new Equipamento(newEquipment.getIdCode(),
+					newEquipment.getDescription());
+			newEquipment.setIdCode(equipmentCode);
+			newEquipment.setDescription(equipmentDescription);
+			EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
+			getEquipmentVec();
 		}
-		Equipamento oldEquipment = new Equipamento(newEquipment.getIdCode(),
-				newEquipment.getDescription());
-		newEquipment.setIdCode(equipmentCode);
-		newEquipment.setDescription(equipmentDescription);
-		EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
-		getEquipmentVec();
 	}
 
 	// This method deletes the selected equipment.
@@ -70,8 +74,9 @@ public class ManterEquipamento {
 
 		if (equipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
+		} else {
+			EquipamentoDAO.getInstance().delete(equipment);
+			getEquipmentVec();
 		}
-		EquipamentoDAO.getInstance().delete(equipment);
-		getEquipmentVec();
 	}
 }

@@ -26,8 +26,11 @@ public class ManterProfessor {
 	// This constructor provides the singleton implementation.
 	public static ManterProfessor getInstance ( ) {
 
-		if (instance == null)
+		if (instance == null){
 			instance = new ManterProfessor();
+		} else {
+			// Nothing here.
+		}
 		return instance;
 	}
 

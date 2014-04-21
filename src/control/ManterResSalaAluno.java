@@ -32,6 +32,8 @@ public class ManterResSalaAluno {
 
 		if (instance == null) {
 			instance = new ManterResSalaAluno();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}

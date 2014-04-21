@@ -36,6 +36,8 @@ public class SalaView extends PatrimonioView {
 
 		if (room == null) {
 			return null;
+		} else {
+			// Nothing here.
 		}
 
 		Vector <String> roomData = new Vector <String>();
@@ -119,6 +121,8 @@ public class SalaView extends PatrimonioView {
 				JOptionPane.showMessageDialog(this,
 						"Sala excluida com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);
+			}  else {
+			// Nothing here.
 			}
 			this.propertyTable.setModel(fillTable());
 

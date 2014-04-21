@@ -36,6 +36,8 @@ public class EquipamentoView extends PatrimonioView {
 
 		if (equipment == null) {
 			return null;
+		} else {
+			// Nothing here.
 		}
 
 		Vector <String> dataTable = new Vector <String>();
@@ -122,6 +124,8 @@ public class EquipamentoView extends PatrimonioView {
 						"Equipamento excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
+			} else {
+				// Nothing here.
 			}
 			this.propertyTable.setModel(fillTable());
 

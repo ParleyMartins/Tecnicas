@@ -32,8 +32,11 @@ public class ManterResSalaProfessor {
 	// Singleton implementation.
 	public static ManterResSalaProfessor getInstance ( ) {
 
-		if (instance == null)
+		if (instance == null){
 			instance = new ManterResSalaProfessor();
+		} else {
+			// Nothing here.
+		}
 		return instance;
 	}
 

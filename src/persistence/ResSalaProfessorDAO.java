@@ -44,6 +44,8 @@ public class ResSalaProfessorDAO extends DAO {
 
 		if (instance == null) {
 			instance = new ResSalaProfessorDAO();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -73,6 +75,8 @@ public class ResSalaProfessorDAO extends DAO {
 							if (this.roomIsInReservationDB(reservation.getDate(), 
 									reservation.getTime())) {
 								super.execute(this.deleteFromStudentQuery(reservation));
+							} else {
+								// Nothing here.
 							}
 						}
 					}
@@ -81,6 +85,8 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 		if (this.dateIsGone(reservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
+		} else {
+			// Nothing here.
 		}
 		if (this.dataIsNow(reservation.getDate())) {
 			if (this.timeIsGone(reservation.getTime())) {
@@ -121,7 +127,11 @@ public class ResSalaProfessorDAO extends DAO {
 											newReservation.getDate(), newReservation.getTime())) {
 										throw new ReservaException(
 												SALA_INDISPONIVEL);
+									} else {
+										// Nothing here.
 									}
+								} else {
+									// Nothing here.
 								}
 							}
 						}
@@ -132,6 +142,8 @@ public class ResSalaProfessorDAO extends DAO {
 								
 		if (this.dateIsGone(newReservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
+		} else {
+			// Nothing here.
 		}
 		if (this.timeIsGone(newReservation.getTime()) && this.dataIsNow(newReservation.getDate())) {
 			throw new ReservaException(HORA_JA_PASSOU);
@@ -295,6 +307,8 @@ public class ResSalaProfessorDAO extends DAO {
 
 		if (Integer.parseInt(now[2]) > Integer.parseInt(dateParts[2])) {
 			return true;
+		} else {
+			// Nothing here.
 		}
 
 		differenceDates = now[1].length() - dateParts[1].length();
@@ -309,7 +323,11 @@ public class ResSalaProfessorDAO extends DAO {
 
 				if (Integer.parseInt(now[0]) > Integer.parseInt(dateParts[0])) {
 					return true;
+				} else {
+					// Nothing here.
 				}
+			} else {
+				// Nothing here.
 			}
 		}
 		return false;
@@ -326,6 +344,8 @@ public class ResSalaProfessorDAO extends DAO {
 		if (now[0].equals(dateParts[0]) && now[1].equals(dateParts[1])
 				&& now[2].equals(dateParts[2])) {
 			return true;
+		} else {
+			// Nothing here.
 		}
 		return false;
 	}
@@ -337,6 +357,8 @@ public class ResSalaProfessorDAO extends DAO {
 		String now = this.currentTime();
 		if (time.length() == 4) {
 			time = "0" + time;
+		} else {
+			// Nothing here.
 		}
 		if (Integer.parseInt(now.substring(0, 2)) > Integer.parseInt(time
 				.substring(0, 2))) {

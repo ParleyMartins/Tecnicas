@@ -37,6 +37,8 @@ public class SalaDAO {
 
 		if (instance == null) {
 			instance = new SalaDAO();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -49,6 +51,8 @@ public class SalaDAO {
 		} else {
 			if (this.isInDbCode(room.getIdCode())) {
 				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+			} else {
+				// Nothing here.
 			}
 		}
 		this.update("INSERT INTO " +
@@ -64,9 +68,13 @@ public class SalaDAO {
 
 		if (newRoom == null) {
 			throw new PatrimonioException(SALA_NULA);
+		} else {
+			// Nothing here.
 		}
 		if (oldRoom == null) {
 			throw new PatrimonioException(SALA_NULA);
+		} else {
+			// Nothing here.
 		}
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
@@ -81,6 +89,8 @@ public class SalaDAO {
 				if (!oldRoom.getIdCode().equals(newRoom.getIdCode())
 						&& this.isInDbCode(newRoom.getIdCode())) {
 					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+				} else {
+					// Nothing here.
 				}
 			}
 		}
@@ -237,7 +247,11 @@ public class SalaDAO {
 					"sala.descricao = \"" + room.getDescription() + "\" and " +
 					"sala.capacidade = " + room.getCapacity() + " );") == false) {
 				return false;
+			} else {
+				// Nothing here.
 			}
+		} else {
+			// Nothing here.
 		}
 
 		return true;

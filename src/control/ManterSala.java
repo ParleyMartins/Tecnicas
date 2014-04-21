@@ -26,8 +26,11 @@ public class ManterSala {
 	// This constructor provides the singleton implementation.
 	public static ManterSala getInstance ( ) {
 
-		if (instance == null)
+		if (instance == null){
 			instance = new ManterSala();
+		} else {
+			// Nothing here.
+		}
 		return instance;
 	}
 

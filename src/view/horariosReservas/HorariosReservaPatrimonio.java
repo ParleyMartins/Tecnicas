@@ -244,6 +244,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
+		} else {
+			// Nothing here.
 		}
 		cancelReservationAction(indexRow);
 		this.reservationTable.setModel(fillTable(this.property));
@@ -265,6 +267,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
+		} else {
+			// Nothing here.
 		}
 		modifyAction(indexRow);
 		this.reservationTable.setModel(fillTable(this.property));

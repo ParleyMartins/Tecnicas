@@ -35,6 +35,8 @@ public class AlunoDAO {
 
 		if (instance == null) {
 			instance = new AlunoDAO();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -73,10 +75,14 @@ public class AlunoDAO {
 
 		if (oldStudent == null) {
 			throw new ClienteException(ALUNO_NULO);
+		} else {
+			// Nothing here.
 		}
 
 		if (newStudent == null) {
 			throw new ClienteException(ALUNO_NULO);
+		} else {
+			// Nothing here.
 		}
 
 		Connection connection = FactoryConnection.getInstance().getConnection();

@@ -57,8 +57,10 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				clientData.add(reservation.getClassroom().getDescription());
 				clientData.add(reservation.getReservedChairs());
 				clientData.add(reservation.getClassroom().getCapacity());
+			} else {
+				// Nothing here.
 			}
-		} else
+		} else {
 			if (obj instanceof ReservaSalaProfessor) {
 				ReservaSalaProfessor reservation = (ReservaSalaProfessor) obj;
 				if (this.room != null
@@ -75,9 +77,13 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 					clientData.add(reservation.getClassroom().getDescription());
 					clientData.add(reservation.getClassroom().getCapacity());
 					clientData.add(reservation.getClassroom().getCapacity());
+				}  else {
+					// Nothing here.
 				}
+			} else {
+				// Nothing here.
 			}
-
+		}
 		return clientData;
 
 	}
@@ -106,18 +112,24 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 			Vector clientPerDate = this.teacherInstance
 					.searchPerDate(this.date);
 
-			if (clientPerDate != null)
+			if (clientPerDate != null){
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
 					Vector <String> row = fillDataVector(clientPerDate.get(i),
 							i);
-					if (!row.isEmpty())
+					if (!row.isEmpty()) {
 						dataTable.addRow(row);
+					} else {
+						// Nothing here.
+					}
 
 				}
+			}  else {
+				// Nothing here.
+			}
+			
 			clientPerDate.clear();
-
 			clientPerDate = this.studentInstance.getReservationsPerMonth(this.date);
-			if (clientPerDate != null)
+			if (clientPerDate != null) {
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
 					Vector <String> row = fillDataVector(clientPerDate.get(i),
 							i);
@@ -125,7 +137,9 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 						dataTable.addRow(row);
 
 				}
-
+			} else {
+				// Nothing here.
+			}
 		} catch (SQLException ex) {
 			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
@@ -172,8 +186,10 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 							"Reserva excluida com sucesso", "Sucesso",
 							JOptionPane.INFORMATION_MESSAGE,
 							null);
+				} else {
+					// Nothing here.
 				}
-			} else
+			} else {
 				if (clientType.equals("Professor")) {
 					int confirm = JOptionPane.showConfirmDialog(
 							this,
@@ -190,9 +206,13 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 								"Reserva excluida com sucesso", "Sucesso",
 								JOptionPane.INFORMATION_MESSAGE,
 								null);
+					} else {
+						// Nothing here.
 					}
+				} else {
+					// Nothing here.
 				}
-
+			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -243,12 +263,15 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				ReservaSalaView reserva = new AlterarReservaAlunoSalaView(
 						new JFrame(), true, index, this.date);
 				reserva.setVisible(true);
-			} else
+			} else {
 				if (clientType.equals("Professor")) {
 					ReservaSalaView reserva = new AlterarReservaProfSalaView(
 							new JFrame(), true, index, this.date);
 					reserva.setVisible(true);
+				} else {
+					// Nothing here.
 				}
+			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);

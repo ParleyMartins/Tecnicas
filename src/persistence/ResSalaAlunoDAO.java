@@ -48,6 +48,8 @@ public class ResSalaAlunoDAO extends DAO {
 
 		if (instance == null) {
 			instance = new ResSalaAlunoDAO();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
@@ -77,6 +79,8 @@ public class ResSalaAlunoDAO extends DAO {
 									reservation.getClassroom(), reservation.getDate(), reservation.getTime())) {
 								throw new ReservaException(
 										CADEIRAS_INDISPONIVEIS);
+							} else {
+								// Nothing here.
 							}
 						}
 					}
@@ -86,6 +90,8 @@ public class ResSalaAlunoDAO extends DAO {
 
 		if (this.dateIsGone(reservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
+		} else {
+			// Nothing here.
 		}
 		if (this.dateIsNow(reservation.getDate())) {
 			if (this.timeIsGone(reservation.getTime())) {
@@ -134,8 +140,12 @@ public class ResSalaAlunoDAO extends DAO {
 												newReservation.getTime())) {
 											throw new ReservaException(
 													SALA_INDISPONIVEL);
-										}
+										} else {
+												// Nothing here.
+											}
 									}
+								} else {
+									// Nothing here.
 								}
 							}
 						}
@@ -150,9 +160,13 @@ public class ResSalaAlunoDAO extends DAO {
 				newReservation.getClassroom(),
 				newReservation.getDate(), newReservation.getTime())) {
 			throw new ReservaException(CADEIRAS_INDISPONIVEIS);
+		} else {
+			// Nothing here.
 		}
 		if (this.dateIsGone(newReservation.getDate())) {
 			throw new ReservaException(DATA_JA_PASSOU);
+		} else {
+			// Nothing here.
 		}
 		if (this.timeIsGone(newReservation.getTime()) &&
 				this.dateIsNow(newReservation.getDate())) {
@@ -229,6 +243,8 @@ public class ResSalaAlunoDAO extends DAO {
 			if (resrevation.getClassroom().equals(room) && resrevation.getDate().equals(date)
 					&& resrevation.getTime().equals(time)) {
 				total -= Integer.parseInt(resrevation.getReservedChairs());
+			} else {
+				// Nothing here.
 			}
 		}
 		return total;
@@ -242,6 +258,8 @@ public class ResSalaAlunoDAO extends DAO {
 		if (this.setAvailableChairs(room, date, time) >= Integer
 				.parseInt(reservedChairs)) {
 			return true;
+		} else {
+			// Nothing here.
 		}
 		return false;
 	}
@@ -363,6 +381,8 @@ public class ResSalaAlunoDAO extends DAO {
 
 		if (Integer.parseInt(now[2]) > Integer.parseInt(dateParts[2])) {
 			return true;
+		} else {
+			// Nothing here.
 		}
 
 		differenceDates = now[1].length() - dateParts[1].length();
@@ -377,7 +397,11 @@ public class ResSalaAlunoDAO extends DAO {
 
 				if (Integer.parseInt(now[0]) > Integer.parseInt(dateParts[0])) {
 					return true;
+				} else {
+					// Nothing here.
 				}
+			} else {
+				// Nothing here.
 			}
 		}
 		return false;
@@ -393,6 +417,8 @@ public class ResSalaAlunoDAO extends DAO {
 		if (now[0].equals(dateParts[0]) && now[1].equals(dateParts[1])
 				&& now[2].equals(dateParts[2])) {
 			return true;
+		} else {
+			// Nothing here.
 		}
 		return false;
 	}
@@ -403,6 +429,8 @@ public class ResSalaAlunoDAO extends DAO {
 		String now = this.currentTime();
 		if (time.length() == 4) {
 			time = "0" + time;
+		} else {
+			// Nothing here.
 		}
 		if (Integer.parseInt(now.substring(0, 2)) > Integer.parseInt(time
 				.substring(0, 2))) {
@@ -447,6 +475,8 @@ public class ResSalaAlunoDAO extends DAO {
 
 		if (time.length() == 4) {
 			return "0" + time;
+		} else {
+			// Nothing here.
 		}
 		return time;
 	}

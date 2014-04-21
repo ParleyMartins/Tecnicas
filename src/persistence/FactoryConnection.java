@@ -30,6 +30,8 @@ public class FactoryConnection {
 
 		if (instance == null) {
 			instance = new FactoryConnection();
+		} else {
+			// Nothing here.
 		}
 
 		return instance;
