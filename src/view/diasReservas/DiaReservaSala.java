@@ -16,25 +16,25 @@ import exception.PatrimonioException;
 
 public class DiaReservaSala extends DiaReservaPatrimonio {
 
-	private Sala sala;
+	private Sala classRoomToBeReserved;
 
 	// Constructor creates a RoomReservationDay form.
-	public DiaReservaSala (Frame parent, boolean modal, int indexSala)
+	public DiaReservaSala (Frame parentWindow, boolean modal, int classRoomPosition)
 			throws SQLException, PatrimonioException {
 
-		super(parent, modal);
-		this.sala = ManterSala.getInstance().getSalas_vet().get(indexSala);
+		super(parentWindow, modal);
+		this.classRoomToBeReserved = ManterSala.getInstance().getRoomsVec().get(classRoomPosition);
 		this.setName("DiaReservaSala");
 	}
 
 	@Override
 	// Generates the visualize action to the selected day.
-	protected void visualizarAction (String data) {
+	protected void viewSelectedDayAction (String dateOfReserve) {
 
-		HorariosReservaSala reserva = new HorariosReservaSala(new JFrame(),
-				true, data, this.sala);
-		reserva.setVisible(true);
-		reserva.setResizable(false);
+		HorariosReservaSala hourOfReserve = new HorariosReservaSala(new JFrame(),
+				true, dateOfReserve, this.classRoomToBeReserved);
+		hourOfReserve.setVisible(true);
+		hourOfReserve.setResizable(false);
 	}
 
 }

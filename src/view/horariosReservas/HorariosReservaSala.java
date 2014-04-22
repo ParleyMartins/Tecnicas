@@ -29,9 +29,9 @@ import java.awt.Frame;
 
 public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
-	ManterResSalaAluno studentInstance;
-	ManterResSalaProfessor teacherInstance;
-	Sala room;
+	private ManterResSalaAluno studentInstance;
+	private ManterResSalaProfessor teacherInstance;
+	private Sala room;
 
 	public HorariosReservaSala (Frame parent, boolean modal, String date,
 			Sala room) {
@@ -41,43 +41,49 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 		this.setName("HorarioReservaSala");
 	}
 
-	protected Vector <String> fillDataVector (Object obj, int index) {
+	protected Vector <String> fillDataVector (Object obj, final int index) {
 
 		Vector <String> clientData = new Vector <String>();
 		if (obj instanceof ReservaSalaAluno) {
 			ReservaSalaAluno reservation = (ReservaSalaAluno) obj;
-			if (this.room != null && (reservation.getSala().equals(this.room))) {
+			if (this.room != null && (reservation.getClassroom().equals(this.room))) {
 				clientData.add(String.valueOf(index));
 				clientData.add("Aluno");
-				clientData.add(reservation.getHora());
-				clientData.add(reservation.getAluno().getName());
-				clientData.add(reservation.getAluno().getEnrollmentNumber());
-				clientData.add(reservation.getFinalidade());
-				clientData.add(reservation.getSala().getCodigo());
-				clientData.add(reservation.getSala().getDescricao());
-				clientData.add(reservation.getCadeiras_reservadas());
-				clientData.add(reservation.getSala().getCapacidade());
+				clientData.add(reservation.getTime());
+				clientData.add(reservation.getStudent().getName());
+				clientData.add(reservation.getStudent().getEnrollmentNumber());
+				clientData.add(reservation.getPurpose());
+				clientData.add(reservation.getClassroom().getIdCode());
+				clientData.add(reservation.getClassroom().getDescription());
+				clientData.add(reservation.getReservedChairs());
+				clientData.add(reservation.getClassroom().getCapacity());
+			} else {
+				// Nothing here.
 			}
-		} else
+		} else {
 			if (obj instanceof ReservaSalaProfessor) {
 				ReservaSalaProfessor reservation = (ReservaSalaProfessor) obj;
 				if (this.room != null
-						&& (reservation.getSala().equals(this.room))) {
+						&& (reservation.getClassroom().equals(this.room))) {
 
 					clientData.add(String.valueOf(index));
 					clientData.add("Professor");
-					clientData.add(reservation.getHora());
-					clientData.add(reservation.getProfessor().getName());
-					clientData.add(reservation.getProfessor()
+					clientData.add(reservation.getTime());
+					clientData.add(reservation.getTeacher().getName());
+					clientData.add(reservation.getTeacher()
 							.getEnrollmentNumber());
-					clientData.add(reservation.getFinalidade());
-					clientData.add(reservation.getSala().getCodigo());
-					clientData.add(reservation.getSala().getDescricao());
-					clientData.add(reservation.getSala().getCapacidade());
-					clientData.add(reservation.getSala().getCapacidade());
+					clientData.add(reservation.getPurpose());
+					clientData.add(reservation.getClassroom().getIdCode());
+					clientData.add(reservation.getClassroom().getDescription());
+					clientData.add(reservation.getClassroom().getCapacity());
+					clientData.add(reservation.getClassroom().getCapacity());
+				}  else {
+					// Nothing here.
 				}
+			} else {
+				// Nothing here.
 			}
-
+		}
 		return clientData;
 
 	}
@@ -104,20 +110,26 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 		try {
 			Vector clientPerDate = this.teacherInstance
-					.buscarPorData(this.date);
+					.searchPerDate(this.date);
 
-			if (clientPerDate != null)
+			if (clientPerDate != null){
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
 					Vector <String> row = fillDataVector(clientPerDate.get(i),
 							i);
-					if (!row.isEmpty())
+					if (!row.isEmpty()) {
 						dataTable.addRow(row);
+					} else {
+						// Nothing here.
+					}
 
 				}
+			}  else {
+				// Nothing here.
+			}
+			
 			clientPerDate.clear();
-
-			clientPerDate = this.studentInstance.getReservasMes(this.date);
-			if (clientPerDate != null)
+			clientPerDate = this.studentInstance.getReservationsPerMonth(this.date);
+			if (clientPerDate != null) {
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {
 					Vector <String> row = fillDataVector(clientPerDate.get(i),
 							i);
@@ -125,7 +137,9 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 						dataTable.addRow(row);
 
 				}
-
+			} else {
+				// Nothing here.
+			}
 		} catch (SQLException ex) {
 			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
 					Level.SEVERE, null, ex);
@@ -148,7 +162,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void cancelarReservaAction (int index) {
+	protected void cancelReservationAction (int index) {
 
 		try {
 			String clientType = (String) this.reservationTable.getModel()
@@ -159,40 +173,46 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				int confirm = JOptionPane.showConfirmDialog(
 						this,
 						"Deseja mesmo excluir Reserva?\n"
-								+ this.studentInstance.getReservasMes(date)
+								+ this.studentInstance.getReservationsPerMonth(date)
 										.get(index)
 										.toString(), "Excluir",
 						JOptionPane.YES_NO_OPTION);
 
 				if (confirm == JOptionPane.YES_OPTION) {
-					this.studentInstance.excluir(this.studentInstance
-							.getReservasMes(
+					this.studentInstance.delete(this.studentInstance
+							.getReservationsPerMonth(
 									date).get(index));
 					JOptionPane.showMessageDialog(this,
 							"Reserva excluida com sucesso", "Sucesso",
 							JOptionPane.INFORMATION_MESSAGE,
 							null);
+				} else {
+					// Nothing here.
 				}
-			} else
+			} else {
 				if (clientType.equals("Professor")) {
 					int confirm = JOptionPane.showConfirmDialog(
 							this,
 							"Deseja mesmo excluir Reserva?\n"
-									+ this.teacherInstance.buscarPorData(date)
+									+ this.teacherInstance.searchPerDate(date)
 											.get(index).toString(), "Excluir",
 							JOptionPane.YES_NO_OPTION);
 
 					if (confirm == JOptionPane.YES_OPTION) {
-						this.teacherInstance.excluir(this.teacherInstance
-								.buscarPorData(
+						this.teacherInstance.delete(this.teacherInstance
+								.searchPerDate(
 										date).get(index));
 						JOptionPane.showMessageDialog(this,
 								"Reserva excluida com sucesso", "Sucesso",
 								JOptionPane.INFORMATION_MESSAGE,
 								null);
+					} else {
+						// Nothing here.
 					}
+				} else {
+					// Nothing here.
 				}
-
+			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -209,7 +229,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void reservarAction ( ) {
+	protected void reserveAction ( ) {
 
 		try {
 			ReservaSalaView roomReservation = new FazerReservaSalaView(
@@ -232,7 +252,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected void alterarAction (int index) {
+	protected void modifyAction (int index) {
 
 		try {
 			String clientType = (String) this.reservationTable.getModel()
@@ -243,12 +263,15 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				ReservaSalaView reserva = new AlterarReservaAlunoSalaView(
 						new JFrame(), true, index, this.date);
 				reserva.setVisible(true);
-			} else
+			} else {
 				if (clientType.equals("Professor")) {
 					ReservaSalaView reserva = new AlterarReservaProfSalaView(
 							new JFrame(), true, index, this.date);
 					reserva.setVisible(true);
+				} else {
+					// Nothing here.
 				}
+			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);

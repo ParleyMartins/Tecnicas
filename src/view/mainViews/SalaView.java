@@ -36,13 +36,15 @@ public class SalaView extends PatrimonioView {
 
 		if (room == null) {
 			return null;
+		} else {
+			// Nothing here.
 		}
 
 		Vector <String> roomData = new Vector <String>();
 
-		roomData.add(room.getCodigo());
-		roomData.add(room.getDescricao());
-		roomData.add(room.getCapacidade());
+		roomData.add(room.getIdCode());
+		roomData.add(room.getDescription());
+		roomData.add(room.getCapacity());
 
 		return roomData;
 
@@ -55,7 +57,7 @@ public class SalaView extends PatrimonioView {
 		try {
 			DefaultTableModel roomTable = new DefaultTableModel();
 
-			Iterator <Sala> i = ManterSala.getInstance().getSalas_vet()
+			Iterator <Sala> i = ManterSala.getInstance().getRoomsVec()
 					.iterator();
 
 			roomTable.addColumn("Codigo");
@@ -108,17 +110,19 @@ public class SalaView extends PatrimonioView {
 		try {
 			int confirm = JOptionPane
 					.showConfirmDialog(this, "Deseja mesmo excluir Sala: "
-							+ ManterSala.getInstance().getSalas_vet()
-									.get(index).getDescricao() + "?",
+							+ ManterSala.getInstance().getRoomsVec()
+									.get(index).getDescription() + "?",
 							"Excluir",
 							JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterSala.getInstance().excluir(
-						ManterSala.getInstance().getSalas_vet().get(index));
+				ManterSala.getInstance().delete(
+						ManterSala.getInstance().getRoomsVec().get(index));
 				JOptionPane.showMessageDialog(this,
 						"Sala excluida com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE, null);
+			}  else {
+			// Nothing here.
 			}
 			this.propertyTable.setModel(fillTable());
 

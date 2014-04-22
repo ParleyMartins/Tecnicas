@@ -21,20 +21,20 @@ public class AlterarAluno extends CadastroCliente {
 		super(parent, modal);
 		this.setTitle("Alterar");
 		this.setName("AlterarAluno");
-		this.cadastroBtn.setText("Alterar");
-		this.cadastroBtn.setName("Alterar");
+		this.registerButton.setText("Alterar");
+		this.registerButton.setName("Alterar");
 		this.index2 = index;
 
 		try {
-			this.nomeTxtField.setText(ManterAluno.getInstance().getAluno_vet()
+			this.nameTxtField.setText(ManterAluno.getInstance().getStudentsVec()
 					.get(index).getName());
-			this.emailTxtField.setText(ManterAluno.getInstance().getAluno_vet()
+			this.emailTxtField.setText(ManterAluno.getInstance().getStudentsVec()
 					.get(index).getEmail());
-			this.telefoneTxtField.setText(ManterAluno.getInstance()
-					.getAluno_vet().get(index).getPhoneNumber());
-			this.matriculaTxtField.setText(ManterAluno.getInstance()
-					.getAluno_vet().get(index).getEnrollmentNumber());
-			this.cpfTxtField.setText(ManterAluno.getInstance().getAluno_vet()
+			this.phoneNumberTxtField.setText(ManterAluno.getInstance()
+					.getStudentsVec().get(index).getPhoneNumber());
+			this.enrollmentNumberTxtField.setText(ManterAluno.getInstance()
+					.getStudentsVec().get(index).getEnrollmentNumber());
+			this.cpfTxtField.setText(ManterAluno.getInstance().getStudentsVec()
 					.get(index).getCpf());
 
 		} catch (ClienteException ex) {
@@ -48,13 +48,13 @@ public class AlterarAluno extends CadastroCliente {
 
 	@Override
 	// This method creates an action to modify the student fields.
-	public void cadastroAction ( ) {
+	public void registerAction ( ) {
 
 		try {
-			ManterAluno.getInstance().alterar(nomeTxtField.getText(),
-					cpfTxtField.getText(), matriculaTxtField.getText(),
-					telefoneTxtField.getText(), emailTxtField.getText(),
-					ManterAluno.getInstance().getAluno_vet().get(index2));
+			ManterAluno.getInstance().modify(nameTxtField.getText(),
+					cpfTxtField.getText(), enrollmentNumberTxtField.getText(),
+					phoneNumberTxtField.getText(), emailTxtField.getText(),
+					ManterAluno.getInstance().getStudentsVec().get(index2));
 
 			JOptionPane.showMessageDialog(this, "Aluno alterado com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);

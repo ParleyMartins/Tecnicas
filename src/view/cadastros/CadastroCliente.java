@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
-public abstract class RegisterClient extends JDialog {
+public abstract class CadastroCliente extends JDialog {
 
 	protected JButton registerButton;
 	protected JTextField phoneNumberTxtField;
@@ -33,7 +33,7 @@ public abstract class RegisterClient extends JDialog {
 	private JLabel cpfLabel;
 
 	// Constructor generates a RegisterClient form.
-	public RegisterClient (Frame parentWindow, boolean jDialog) {
+	public CadastroCliente (Frame parentWindow, boolean jDialog) {
 
 		super(parentWindow, jDialog);
 		initComponents();

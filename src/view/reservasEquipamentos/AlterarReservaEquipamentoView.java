@@ -1,7 +1,7 @@
 /**
 EquipmentModifyReservationView
-This class allows a user to modify a equipment reservation
-https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/reservasEquipamentos
+This class allows a user to modify a equipmentToReserveuipment instanceOfReservetion
+https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/instanceOfReservesEquipamentos
  */
 
 package view.reservasEquipamentos;
@@ -19,27 +19,27 @@ import exception.ReservaException;
 public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	// int index;
-	ReservaEquipamentoProfessor reserva;
-	Equipamento equipamento;
+	ReservaEquipamentoProfessor instanceOfReserve;
+	Equipamento instanceOfEquipment;
 
 	public AlterarReservaEquipamentoView (Frame parent, boolean modal,
-			int index, int mes, Equipamento eq) throws SQLException,
+			int index, int month, Equipamento equipmentToReserve) throws SQLException,
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.equipamento = eq;
+		this.instanceOfEquipment = equipmentToReserve;
 		// this.index = index;
-		this.reserva = this.instanceProf.getReservasMes(mes).get(index);
+		this.instanceOfReserve = this.instanceManageResEquipmentTeacher.getReservationsPerMonth(month).get(index);
 		resetComponents();
 	}
 
 	@Override
-	protected void reservarProfessor ( ) {
+	protected void reserveEquipmentToTeacher ( ) {
 
 		try {
-			this.instanceProf.alterar(this.reserva,
-					this.dataTextField.getText(), this.horaTextField.getText(),
-					this.equipamento, this.reserva.getProfessor());
+			this.instanceManageResEquipmentTeacher.modify(this.instanceOfReserve,
+					this.dateTextField.getText(), this.hourTextField.getText(),
+					this.instanceOfEquipment, this.instanceOfReserve.getTeacher());
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
@@ -54,16 +54,16 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	private void resetComponents ( ) {
 
-		this.reservarButton.setText("Alterar");
-		this.reservarButton.setName("AlterarButton");
+		this.reserveButton.setText("Alterar");
+		this.reserveButton.setName("AlterarButton");
 		this.cpfLabel.setEnabled(false);
 		this.cpfTextField.setBackground(new Color(200, 208, 254));
 		this.cpfTextField.setEditable(false);
-		this.cpfTextField.setText(this.reserva.getProfessor().getCpf());
-		this.horaTextField.setText(this.reserva.getHora());
-		this.dataTextField.setText(this.reserva.getData());
-		this.professorTextArea.setText(this.reserva.getProfessor().toString());
-		this.equipamentoTextArea.setText(this.reserva.getEquipamento()
+		this.cpfTextField.setText(this.instanceOfReserve.getTeacher().getCpf());
+		this.hourTextField.setText(this.instanceOfReserve.getTime());
+		this.dateTextField.setText(this.instanceOfReserve.getDate());
+		this.instanceTeacherTextArea.setText(this.instanceOfReserve.getTeacher().toString());
+		this.equipmentTextArea.setText(this.instanceOfReserve.getEquipment()
 				.toString());
 	}
 

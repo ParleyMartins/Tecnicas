@@ -27,12 +27,14 @@ public class ManterEquipamento {
 
 		if (instance == null) {
 			instance = new ManterEquipamento();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
 
 	// This method gets a equipment vector.
-	public Vector <Equipamento> getEquipamento_vet ( ) throws SQLException,
+	public Vector <Equipamento> getEquipmentVec ( ) throws SQLException,
 			PatrimonioException {
 
 		this.equipmentVec = EquipamentoDAO.getInstance().searchAll();
@@ -41,37 +43,40 @@ public class ManterEquipamento {
 
 	// This method include code and description of the equipment in the
 	// database.
-	public void inserir (String equipmentCode, String equipmentDescription)
+	public void insert (String equipmentCode, String equipmentDescription)
 			throws PatrimonioException, SQLException {
 
 		Equipamento equipment = new Equipamento(equipmentCode, equipmentDescription);
-		EquipamentoDAO.getInstance().include(equipment);
-		getEquipamento_vet();
+		EquipamentoDAO.getInstance().insert(equipment);
+		getEquipmentVec();
 	}
 
 	// This method update code and description info in the database.
-	public void alterar (String equipmentCode, String equipmentDescription,
+	public void modify (String equipmentCode, String equipmentDescription,
 			Equipamento newEquipment) throws PatrimonioException, SQLException {
 
 		if (newEquipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
+		} else {
+
+			Equipamento oldEquipment = new Equipamento(newEquipment.getIdCode(),
+					newEquipment.getDescription());
+			newEquipment.setIdCode(equipmentCode);
+			newEquipment.setDescription(equipmentDescription);
+			EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
+			getEquipmentVec();
 		}
-		Equipamento oldEquipment = new Equipamento(newEquipment.getCodigo(),
-				newEquipment.getDescricao());
-		newEquipment.setCodigo(equipmentCode);
-		newEquipment.setDescricao(equipmentDescription);
-		EquipamentoDAO.getInstance().change(oldEquipment, newEquipment);
-		getEquipamento_vet();
 	}
 
 	// This method deletes the selected equipment.
-	public void excluir (Equipamento equipment) throws SQLException,
+	public void delete (Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
 		if (equipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
+		} else {
+			EquipamentoDAO.getInstance().delete(equipment);
+			getEquipmentVec();
 		}
-		EquipamentoDAO.getInstance().exclude(equipment);
-		getEquipamento_vet();
 	}
 }

@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 import control.ManterAluno;
 import exception.ClienteException;
 
-public class RegisterStudent extends RegisterClient {
+public class CadastroAluno extends CadastroCliente {
 
 	// Constructor creates a RegisterStudent form.
-	public RegisterStudent(java.awt.Frame parentWindow, boolean modal) {
+	public CadastroAluno(java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
 		this.setName("CadastroAluno");
@@ -25,7 +25,7 @@ public class RegisterStudent extends RegisterClient {
 
 		try {
 			if (this.registerButton.getText().equals("Cadastrar")) {
-				ManterAluno.getInstance().inserir(this.nameTxtField.getText(),
+				ManterAluno.getInstance().insert(this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
 						this.enrollmentNumberTxtField.getText(),
 						this.phoneNumberTxtField.getText(),

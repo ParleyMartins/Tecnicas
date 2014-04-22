@@ -17,24 +17,24 @@ import exception.PatrimonioException;
 
 public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 
-	private Equipamento eq;
+	private Equipamento equipmentToBeBooked;
 
 	// Constructor creates a form to reservation.
-	public DiaReservaEquipamento (Frame parent, boolean modal,
-			int indexEquipamento) throws SQLException, PatrimonioException {
+	public DiaReservaEquipamento (Frame parentWindow, boolean modal,
+			int equipmentPosition) throws SQLException, PatrimonioException {
 
-		super(parent, modal);
-		this.eq = ManterEquipamento.getInstance().getEquipamento_vet()
-				.get(indexEquipamento);
+		super(parentWindow, modal);
+		this.equipmentToBeBooked = ManterEquipamento.getInstance().getEquipmentVec()
+				.get(equipmentPosition);
 	}
 
 	@Override
 	// This method generates an action to visualize the selected day.
-	protected void visualizarAction (String data) {
+	protected void viewSelectedDayAction (String dateOfReserve) {
 
-		HorariosReservaPatrimonio reserva = new HorariosReservaEquipamento(
-				new JFrame(), true, data, this.eq);
-		reserva.setVisible(true);
-		reserva.setResizable(false);
+		HorariosReservaPatrimonio hourOfReserve = new HorariosReservaEquipamento(
+				new JFrame(), true, dateOfReserve, this.equipmentToBeBooked);
+		hourOfReserve.setVisible(true);
+		hourOfReserve.setResizable(false);
 	}
 }

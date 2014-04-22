@@ -36,12 +36,14 @@ public class EquipamentoView extends PatrimonioView {
 
 		if (equipment == null) {
 			return null;
+		} else {
+			// Nothing here.
 		}
 
 		Vector <String> dataTable = new Vector <String>();
 
-		dataTable.add(equipment.getCodigo());
-		dataTable.add(equipment.getDescricao());
+		dataTable.add(equipment.getIdCode());
+		dataTable.add(equipment.getDescription());
 
 		return dataTable;
 
@@ -55,7 +57,7 @@ public class EquipamentoView extends PatrimonioView {
 			DefaultTableModel equipmentTable = new DefaultTableModel();
 
 			Iterator <Equipamento> i = control.ManterEquipamento.getInstance()
-					.getEquipamento_vet().iterator();
+					.getEquipmentVec().iterator();
 
 			equipmentTable.addColumn("Codigo");
 			equipmentTable.addColumn("Descricao");
@@ -110,18 +112,20 @@ public class EquipamentoView extends PatrimonioView {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					"Deseja mesmo excluir Equipamento: "
 							+ ManterEquipamento.getInstance()
-									.getEquipamento_vet().get(index)
-									.getDescricao() + "?", "Excluir",
+									.getEquipmentVec().get(index)
+									.getDescription() + "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterEquipamento.getInstance().excluir(
-						ManterEquipamento.getInstance().getEquipamento_vet()
+				ManterEquipamento.getInstance().delete(
+						ManterEquipamento.getInstance().getEquipmentVec()
 								.get(index));
 				JOptionPane.showMessageDialog(this,
 						"Equipamento excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
+			} else {
+				// Nothing here.
 			}
 			this.propertyTable.setModel(fillTable());
 

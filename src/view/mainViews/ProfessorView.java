@@ -29,7 +29,7 @@ public class ProfessorView extends ClienteView {
 	public Iterator getIterator ( ) {
 
 		try {
-			return ManterProfessor.getInstance().getProfessores_vet()
+			return ManterProfessor.getInstance().getTeachersVec()
 					.iterator();
 
 		} catch (ClienteException ex) {
@@ -74,22 +74,26 @@ public class ProfessorView extends ClienteView {
 				JOptionPane.showMessageDialog(this, "Selecione uma linha!",
 						"Erro", JOptionPane.ERROR_MESSAGE, null);
 				return;
+			} else {
+				// Nothing here.
 			}
 
 			int confirm = JOptionPane.showConfirmDialog(this,
 					"Deseja mesmo excluir Professor: "
 							+ ManterProfessor.getInstance()
-									.getProfessores_vet().get(index).getName()
+									.getTeachersVec().get(index).getName()
 							+ "?", "Excluir",
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterProfessor.getInstance().excluir(
-						ManterProfessor.getInstance().getProfessores_vet()
+				ManterProfessor.getInstance().delete(
+						ManterProfessor.getInstance().getTeachersVec()
 								.get(index));
 				JOptionPane.showMessageDialog(this,
 						"Professor excluido com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
+			} else {
+				// Nothing here.
 			}
 			this.clientTable.setModel(fillTable());
 

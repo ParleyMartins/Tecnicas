@@ -21,17 +21,17 @@ import exception.ReservaException;
 public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 	int index;
-	ReservaSalaAluno reservaAluno;
-	ReservaSalaProfessor reservaProfessor;
+	ReservaSalaAluno studentReservation;
+	ReservaSalaProfessor teacherReservation;
 
 	public AlterarReservaAlunoSalaView (Frame parent, boolean modal, int index,
-			String data) throws SQLException,
+			String date) throws SQLException,
 			PatrimonioException, PatrimonioException, ClienteException,
 			ReservaException {
 
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
-		this.reservaAluno = instanceAluno.getReservasMes(data).get(index);
+		this.studentReservation = studentInstance.getReservationsPerMonth(date).get(index);
 		resetComponents();
 
 	}
@@ -41,10 +41,10 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 	protected void reservarAluno ( ) {
 
 		try {
-			instanceAluno
-					.alterar(this.finalidadeTextField.getText(),
-							this.qntCadeirasReservadasTextField.getText(),
-							reservaAluno);
+			this.studentInstance
+					.modify(this.turposeTextField.getText(),
+							this.qntChairsReservedTextField.getText(),
+							studentReservation);
 
 			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
@@ -83,32 +83,32 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 	@Override
 	protected void alunoRadioButtonAction ( ) {
 
-		this.instanceProf = null;
-		this.professorRadioButton.setEnabled(false);
+		this.teacherInstance = null;
+		this.teacherRadioButton.setEnabled(false);
 		this.cpfTextField.setBackground(new Color(200, 208, 254));
 		this.cpfTextField.setEditable(false);
-		this.qntCadeirasReservadasTextField.setEditable(true);
-		this.qntCadeirasReservadasTextField.setBackground(Color.white);
-		this.horaTextField.setBackground(new Color(200, 208, 254));
-		this.horaTextField.setEditable(false);
-		this.horaTextField.setText(reservaAluno.getHora());
-		this.alunoTextArea.setText(reservaAluno.getAluno().toString());
-		this.salaTextArea.setText(reservaAluno.getSala().toString());
-		this.dataTextField.setText(reservaAluno.getData());
-		this.qntCadeirasTxtField
-				.setText(reservaAluno.getSala().getCapacidade());
-		this.qntCadeirasReservadasTextField.setText(reservaAluno
-				.getCadeiras_reservadas());
-		this.finalidadeTextField.setText(reservaAluno.getFinalidade());
+		this.qntChairsReservedTextField.setEditable(true);
+		this.qntChairsReservedTextField.setBackground(Color.white);
+		this.hourTextField.setBackground(new Color(200, 208, 254));
+		this.hourTextField.setEditable(false);
+		this.hourTextField.setText(studentReservation.getTime());
+		this.studentTextArea.setText(studentReservation.getStudent().toString());
+		this.roomTextArea.setText(studentReservation.getClassroom().toString());
+		this.dateTextField.setText(studentReservation.getDate());
+		this.qntChairsReservedLbl
+				.setText(studentReservation.getClassroom().getCapacity());
+		this.qntChairsReservedTextField.setText(studentReservation
+				.getReservedChairs());
+		this.turposeTextField.setText(studentReservation.getPurpose());
 	}
 
 	@Override
 	protected void verificarAction ( ) {
 
 		try {
-			this.qntCadeirasTxtField.setText(String.valueOf(instanceAluno
-					.cadeirasDisponveis(sala, this.dataTextField.getText(),
-							this.horaTextField.getText())));
+			this.qntChairsReservedLbl.setText(String.valueOf(studentInstance
+					.checkAvailableChairs(room, this.dateTextField.getText(),
+							this.hourTextField.getText())));
 		} catch (ReservaException ex) {
 
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
@@ -134,9 +134,9 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 	// This method resets some components
 	private void resetComponents ( ) {
 
-		this.reservarButton.setText("Alterar");
-		this.reservarButton.setName("AlterarButton");
-		this.alunoRadioButton.setSelected(true);
+		this.reserveButton.setText("Alterar");
+		this.reserveButton.setName("AlterarButton");
+		this.studentRadioButton.setSelected(true);
 		this.cpfLabel.setEnabled(false);
 		alunoRadioButtonAction();
 	}

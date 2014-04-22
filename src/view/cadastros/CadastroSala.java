@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 import control.ManterSala;
 import exception.PatrimonioException;
 
-public class RegisterClassroom extends RegisterProperty{
+public class CadastroSala extends CadastroPatrimonio{
 
 	// Constructor creates a RegisterRoom form.
-	public RegisterClassroom (java.awt.Frame parent, boolean modal) {
+	public CadastroSala (java.awt.Frame parent, boolean modal) {
  
 		super(parent, modal);
 		this.setName("CadastroSala");
@@ -25,7 +25,7 @@ public class RegisterClassroom extends RegisterProperty{
 	protected void registerAction ( ) {
 
 		try {
-			ManterSala.getInstance().inserir(this.codeTxtField.getText(),
+			ManterSala.getInstance().insert(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText(),
 					this.capacityTxtField.getText());
 

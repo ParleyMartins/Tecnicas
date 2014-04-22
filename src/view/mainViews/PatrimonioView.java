@@ -319,6 +319,8 @@ public abstract class PatrimonioView extends JDialog {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
+		} else {
+			// Nothing here.
 		}
 		visualizarAction(index);
 	}
@@ -337,6 +339,8 @@ public abstract class PatrimonioView extends JDialog {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
+		} else {
+			// Nothing here.
 		}
 
 		alterarAction(index);
@@ -350,6 +354,8 @@ public abstract class PatrimonioView extends JDialog {
 			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
+		} else {
+			// Nothing here.
 		}
 
 		excluirAction(index);

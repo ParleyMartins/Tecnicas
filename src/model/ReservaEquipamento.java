@@ -2,7 +2,7 @@
 ReservaEquipamento. 
 Class sets exceptions of ReservaEquipamento.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamento.java.
- */
+*/
 
 package model;
 
@@ -10,41 +10,43 @@ import exception.ReservaException;
 
 public class ReservaEquipamento extends Reserva {
 
-	private Equipamento equipamento;
+	private Equipamento equipment;
 
-	// Mensages
-	private final String EQUIPAMENTO_NULO = "O equipamneto esta nulo.";
+	// Error messages.
+	private final String NULL_EQUIPMENT = "O equipamneto esta nulo.";
 
-	public ReservaEquipamento (String data, String hora, Equipamento equipamento)
+	public ReservaEquipamento(String date, String time, Equipamento equipment)
 			throws ReservaException {
 
-		super(data, hora);
-		this.setEquipamento(equipamento);
+		super(date, time);
+		this.setEquipment(equipment);
 	}
 
-	public Equipamento getEquipamento ( ) {
+	public Equipamento getEquipment() {
 
-		return this.equipamento;
+		return this.equipment;
 	}
 
-	public void setEquipamento (Equipamento equipamento)
-			throws ReservaException {
+	public void setEquipment(Equipamento equipment) throws ReservaException {
 
-		if (equipamento == null)
-			throw new ReservaException(EQUIPAMENTO_NULO);
-		this.equipamento = equipamento;
+		if (equipment == null) {
+			throw new ReservaException(NULL_EQUIPMENT);
+		} else {
+			// Do nothing.
+		}
+		this.equipment = equipment;
 	}
 
-	public boolean equals (ReservaEquipamento obj) {
+	public boolean equals(ReservaEquipamento reservation) {
 
-		return (super.equals(obj) && this.getEquipamento().equals(
-				obj.getEquipamento()));
+		return (super.equals(reservation) && this.getEquipment()
+				.equals(reservation.getEquipment()));
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
-		return "ReservaEquipamento [equipamento=" + this.getEquipamento()
+		return "ReservaEquipamento [equipamento=" + this.getEquipment()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

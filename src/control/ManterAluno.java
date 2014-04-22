@@ -27,48 +27,51 @@ public class ManterAluno {
 	// This constructor provides the singleton implementation.
 	public static ManterAluno getInstance ( ) {
 
-		if (instance == null)
+		if (instance == null){
 			instance = new ManterAluno( );
+		}  else {
+			// Nothing here.
+		}
 		return instance;
 	}
 
 	// This method looks for a student by name.
-	public Vector <Aluno> buscarNome (String studentName) throws SQLException,
+	public Vector <Aluno> searchName (String studentName) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchNome(studentName);
+		return AlunoDAO.getInstance( ).searchByName(studentName);
 	}
 
 	// This method looks for a student by the cpf.
-	public Vector <Aluno> buscarCpf (String cpf) throws SQLException,
+	public Vector <Aluno> searchCpf (String cpf) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchCpf(cpf);
+		return AlunoDAO.getInstance( ).searchByCpf(cpf);
 	}
 
 	// This method looks for a student by the enrollment number.
-	public Vector <Aluno> buscarMatricula (String enrollmentNumber) throws SQLException,
+	public Vector <Aluno> searchEnrollNumber (String enrollmentNumber) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchMatricula(enrollmentNumber);
+		return AlunoDAO.getInstance( ).searchByEnrollmentNumber(enrollmentNumber);
 	}
 
 	// This method looks for a student by e-mail.
-	public Vector <Aluno> buscarEmail (String email) throws SQLException,
+	public Vector <Aluno> searchEmail (String email) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchEmail(email);
+		return AlunoDAO.getInstance( ).searchByEmail(email);
 	}
 
 	// This method looks for a student by phone number.
-	public Vector <Aluno> buscarTelefone (String phoneNumber) throws SQLException,
+	public Vector <Aluno> searchPhoneNumber (String phoneNumber) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchTelefone(phoneNumber);
+		return AlunoDAO.getInstance( ).searchByPhoneNumber(phoneNumber);
 	}
 
 	// This method gets a student vector.
-	public Vector <Aluno> getAluno_vet ( ) throws SQLException,
+	public Vector <Aluno> getStudentsVec ( ) throws SQLException,
 			ClienteException {
 
 		this.studentsVec = AlunoDAO.getInstance( ).searchAll( );
@@ -76,17 +79,17 @@ public class ManterAluno {
 	}
 
 	// This method records a student on database.
-	public void inserir (String name, String cpf, String enrollmentNumber,
+	public void insert (String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email) throws ClienteException,
 			SQLException {
 
 		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber, email);
-		AlunoDAO.getInstance( ).include(student);
+		AlunoDAO.getInstance( ).insert(student);
 		this.studentsVec.add(student);
 	}
 
 	// This method modifies a student field.
-	public void alterar (String name, String cpf, String enrollmentNumber,
+	public void modify (String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email, Aluno newStudent)
 			throws ClienteException, SQLException {
 
@@ -97,13 +100,13 @@ public class ManterAluno {
 		newStudent.setEnrollmentNumber(enrollmentNumber);
 		newStudent.setPhoneNumber(phoneNumber);
 		newStudent.setEmail(email);
-		AlunoDAO.getInstance( ).change(oldStudent, newStudent);
+		AlunoDAO.getInstance( ).modify(oldStudent, newStudent);
 	}
 
 	// This method deletes the selected student.
-	public void excluir (Aluno student) throws SQLException, ClienteException {
+	public void delete (Aluno student) throws SQLException, ClienteException {
 
-		AlunoDAO.getInstance( ).exclude(student);
+		AlunoDAO.getInstance( ).delete(student);
 		this.studentsVec.remove(student);
 	}
 

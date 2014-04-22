@@ -32,24 +32,24 @@ import exception.ReservaException;
 
 public abstract class ReservaEquipamentoView extends JDialog {
 
-	protected ManterResEquipamentoProfessor instanceProf;
-	protected Professor prof;
-	protected JButton cancelarButton;
+	protected ManterResEquipamentoProfessor instanceManageResEquipmentTeacher;
+	protected Professor instanceTeacher;
+	protected JButton cancelButton;
 	protected JLabel cpfLabel;
 	protected JTextField cpfTextField;
-	protected JLabel dataLabel;
-	protected JTextField dataTextField;
-	protected JLabel equipamentoLabel;
-	protected JTextArea equipamentoTextArea;
-	protected JLabel horaLabel;
-	protected JTextField horaTextField;
-	protected JLabel professorLabel;
-	protected JTextArea professorTextArea;
-	protected JButton reservarButton;
+	protected JLabel dateLabel;
+	protected JTextField dateTextField;
+	protected JLabel equipmentLabel;
+	protected JTextArea equipmentTextArea;
+	protected JLabel hourLabel;
+	protected JTextField hourTextField;
+	protected JLabel instanceTeacherLabel;
+	protected JTextArea instanceTeacherTextArea;
+	protected JButton reserveButton;
 	private JScrollPane jScrollPane1;
 	private JScrollPane jScrollPane2;
-	private ButtonGroup alunoProfbuttonGroup;
-	private JButton buscarCpfButton;
+	private ButtonGroup studentTeacherGroupButton;
+	private JButton searchCpfButton;
 
 	// Constructor generates a EquipmentReservationView form.
 	public ReservaEquipamentoView (Frame parent, boolean modal)
@@ -57,31 +57,31 @@ public abstract class ReservaEquipamentoView extends JDialog {
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.instanceProf = ManterResEquipamentoProfessor.getInstance();
+		this.instanceManageResEquipmentTeacher = ManterResEquipamentoProfessor.getInstance();
 
 		initComponents();
 	}
 
 	// This method reserves a equipment.
-	abstract protected void reservarProfessor ( );
+	abstract protected void reserveEquipmentToTeacher ( );
 
 	// Method gets a teacher from database.
-	protected void getProfessor ( ) {
+	protected void getTeacherFromDB ( ) {
 
 		try {
-			Vector <Professor> professor = ManterProfessor.getInstance()
-					.buscarCpf(this.cpfTextField.getText());
-			if (professor.isEmpty()) {
+			Vector <Professor> instanceTeacher = ManterProfessor.getInstance()
+					.searchCpf(this.cpfTextField.getText());
+			if (instanceTeacher.isEmpty()) {
 				JOptionPane
 						.showMessageDialog(
 								this,
 								"Professor nao Cadastrado."
-										+ " Digite o CPF correto ou cadastre o professor desejado",
+										+ " Digite o CPF correto ou cadastre o instanceTeacher desejado",
 								"Erro", JOptionPane.ERROR_MESSAGE, null);
 				return;
 			}
-			this.prof = professor.firstElement();
-			this.professorTextArea.setText(professor.firstElement().toString());
+			this.instanceTeacher = instanceTeacher.firstElement();
+			this.instanceTeacherTextArea.setText(instanceTeacher.firstElement().toString());
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
@@ -97,33 +97,33 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	// This method initialize the components.
 	private void initComponents ( ) {
 
-		this.alunoProfbuttonGroup = new ButtonGroup();
-		this.equipamentoLabel = new JLabel();
-		this.professorLabel = new JLabel();
+		this.studentTeacherGroupButton = new ButtonGroup();
+		this.equipmentLabel = new JLabel();
+		this.instanceTeacherLabel = new JLabel();
 		this.cpfLabel = new JLabel();
 		this.cpfTextField = new JTextField();
-		this.dataLabel = new JLabel();
-		this.horaLabel = new JLabel();
-		this.horaTextField = new JTextField();
-		this.reservarButton = new JButton();
-		this.cancelarButton = new JButton();
+		this.dateLabel = new JLabel();
+		this.hourLabel = new JLabel();
+		this.hourTextField = new JTextField();
+		this.reserveButton = new JButton();
+		this.cancelButton = new JButton();
 		this.jScrollPane1 = new JScrollPane();
-		this.professorTextArea = new JTextArea();
+		this.instanceTeacherTextArea = new JTextArea();
 		this.jScrollPane2 = new JScrollPane();
-		this.equipamentoTextArea = new JTextArea();
-		this.dataTextField = new JTextField();
-		this.buscarCpfButton = new JButton();
+		this.equipmentTextArea = new JTextArea();
+		this.dateTextField = new JTextField();
+		this.searchCpfButton = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("ReservaPatrimonio");
 		setName("ReservaPatrimonio");
 		setResizable(false);
 
-		this.equipamentoLabel.setText("Equipamento:");
-		this.equipamentoLabel.setName("EquipamentoLabel");
+		this.equipmentLabel.setText("Equipamento:");
+		this.equipmentLabel.setName("EquipamentoLabel");
 
-		this.professorLabel.setText("Professor:");
-		this.professorLabel.setName("ProfessorLabel");
+		this.instanceTeacherLabel.setText("Professor:");
+		this.instanceTeacherLabel.setName("ProfessorLabel");
 
 		this.cpfLabel.setText("Digite o CPF desejado :");
 		this.cpfLabel.setName("CpfLabel");
@@ -131,64 +131,64 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.cpfTextField.setName("CPF");
 		this.cpfTextField.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				cpfTextFieldActionPerformed(evt);
+				cpfTextFieldActionPerformed(event);
 			}
 		});
 
-		this.dataLabel.setText("Data: ");
+		this.dateLabel.setText("Data: ");
 
-		this.horaLabel.setText("Hora: ");
-		this.horaLabel.setName("HoraLabel");
+		this.hourLabel.setText("Hora: ");
+		this.hourLabel.setName("HoraLabel");
 
-		this.horaTextField.setName("Hora");
+		this.hourTextField.setName("Hora");
 
-		this.reservarButton.setText("Reservar");
-		this.reservarButton.setName("Reservar");
-		this.reservarButton.addActionListener(new ActionListener() {
+		this.reserveButton.setText("Reservar");
+		this.reserveButton.setName("Reservar");
+		this.reserveButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				reservarButtonActionPerformed(evt);
+				reserveButtonActionPerformed(event);
 			}
 		});
 
-		this.cancelarButton.setText("Cancelar");
-		this.cancelarButton.setName("Cancelar");
-		this.cancelarButton.addActionListener(new ActionListener() {
+		this.cancelButton.setText("Cancelar");
+		this.cancelButton.setName("Cancelar");
+		this.cancelButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				cancelarButtonActionPerformed(evt);
+				cancelButtonActionPerformed(event);
 			}
 		});
 
-		this.professorTextArea.setEditable(false);
-		this.professorTextArea.setBackground(new Color(200, 208, 254));
-		this.professorTextArea.setColumns(20);
-		this.professorTextArea.setRows(5);
-		this.professorTextArea.setName("ProfessorTextArea");
-		this.jScrollPane1.setViewportView(this.professorTextArea);
+		this.instanceTeacherTextArea.setEditable(false);
+		this.instanceTeacherTextArea.setBackground(new Color(200, 208, 254));
+		this.instanceTeacherTextArea.setColumns(20);
+		this.instanceTeacherTextArea.setRows(5);
+		this.instanceTeacherTextArea.setName("ProfessorTextArea");
+		this.jScrollPane1.setViewportView(this.instanceTeacherTextArea);
 
-		this.equipamentoTextArea.setEditable(false);
-		this.equipamentoTextArea.setBackground(new Color(200, 208, 254));
-		this.equipamentoTextArea.setColumns(20);
-		this.equipamentoTextArea.setRows(5);
-		this.equipamentoTextArea.setName("EquipamentoTextArea");
-		this.jScrollPane2.setViewportView(this.equipamentoTextArea);
+		this.equipmentTextArea.setEditable(false);
+		this.equipmentTextArea.setBackground(new Color(200, 208, 254));
+		this.equipmentTextArea.setColumns(20);
+		this.equipmentTextArea.setRows(5);
+		this.equipmentTextArea.setName("EquipamentoTextArea");
+		this.jScrollPane2.setViewportView(this.equipmentTextArea);
 
-		this.dataTextField.setEditable(false);
-		this.dataTextField.setBackground(new Color(200, 208, 254));
-		this.dataTextField.setName("DiaTextField");
+		this.dateTextField.setEditable(false);
+		this.dateTextField.setBackground(new Color(200, 208, 254));
+		this.dateTextField.setName("DiaTextField");
 
-		this.buscarCpfButton.setText("Buscar CPF");
-		this.buscarCpfButton.setName("BuscarCpfButton");
-		this.buscarCpfButton.addActionListener(new ActionListener() {
+		this.searchCpfButton.setText("Buscar CPF");
+		this.searchCpfButton.setName("BuscarCpfButton");
+		this.searchCpfButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				buscarCpfButtonActionPerformed(evt);
+				searchCpfButtonActionPerformed(event);
 			}
 		});
 
@@ -208,14 +208,14 @@ public abstract class ReservaEquipamentoView extends JDialog {
 																		199,
 																		199)
 																.addComponent(
-																		this.reservarButton,
+																		this.reserveButton,
 																		GroupLayout.PREFERRED_SIZE,
 																		82,
 																		GroupLayout.PREFERRED_SIZE)
 																.addGap(18, 18,
 																		18)
 																.addComponent(
-																		this.cancelarButton,
+																		this.cancelButton,
 																		GroupLayout.PREFERRED_SIZE,
 																		81,
 																		GroupLayout.PREFERRED_SIZE)
@@ -241,7 +241,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 																								.addPreferredGap(
 																										LayoutStyle.ComponentPlacement.RELATED)
 																								.addComponent(
-																										this.buscarCpfButton)
+																										this.searchCpfButton)
 																								.addGap(0,
 																										0,
 																										Short.MAX_VALUE))
@@ -251,9 +251,9 @@ public abstract class ReservaEquipamentoView extends JDialog {
 																										layout.createParallelGroup(
 																												GroupLayout.Alignment.LEADING)
 																												.addComponent(
-																														this.professorLabel)
+																														this.instanceTeacherLabel)
 																												.addComponent(
-																														this.equipamentoLabel,
+																														this.equipmentLabel,
 																														GroupLayout.PREFERRED_SIZE,
 																														81,
 																														GroupLayout.PREFERRED_SIZE))
@@ -271,22 +271,22 @@ public abstract class ReservaEquipamentoView extends JDialog {
 												.addGroup(
 														layout.createSequentialGroup()
 																.addComponent(
-																		this.dataLabel)
+																		this.dateLabel)
 																.addPreferredGap(
 																		LayoutStyle.ComponentPlacement.UNRELATED)
 																.addComponent(
-																		this.dataTextField,
+																		this.dateTextField,
 																		GroupLayout.PREFERRED_SIZE,
 																		143,
 																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		LayoutStyle.ComponentPlacement.UNRELATED)
 																.addComponent(
-																		this.horaLabel)
+																		this.hourLabel)
 																.addPreferredGap(
 																		LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
-																		this.horaTextField,
+																		this.hourTextField,
 																		GroupLayout.PREFERRED_SIZE,
 																		143,
 																		GroupLayout.PREFERRED_SIZE)
@@ -312,7 +312,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														this.buscarCpfButton))
+														this.searchCpfButton))
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
@@ -321,7 +321,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 																.addGap(51, 51,
 																		51)
 																.addComponent(
-																		this.professorLabel))
+																		this.instanceTeacherLabel))
 												.addGroup(
 														layout.createSequentialGroup()
 																.addPreferredGap(
@@ -338,7 +338,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
 												.addComponent(
-														this.equipamentoLabel,
+														this.equipmentLabel,
 														GroupLayout.PREFERRED_SIZE,
 														23,
 														GroupLayout.PREFERRED_SIZE)
@@ -353,15 +353,15 @@ public abstract class ReservaEquipamentoView extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
 												.addComponent(
-														this.dataLabel,
+														this.dateLabel,
 														GroupLayout.PREFERRED_SIZE,
 														20,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														this.dataTextField)
-												.addComponent(this.horaLabel)
+														this.dateTextField)
+												.addComponent(this.hourLabel)
 												.addComponent(
-														this.horaTextField,
+														this.hourTextField,
 														GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE))
@@ -371,12 +371,12 @@ public abstract class ReservaEquipamentoView extends JDialog {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
 												.addComponent(
-														this.reservarButton,
+														this.reserveButton,
 														GroupLayout.PREFERRED_SIZE,
 														37,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														this.cancelarButton,
+														this.cancelButton,
 														GroupLayout.PREFERRED_SIZE,
 														37,
 														GroupLayout.PREFERRED_SIZE))
@@ -386,33 +386,33 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	}
 
 	// This method generates an action to cpfTextField.
-	private void cpfTextFieldActionPerformed (ActionEvent evt) {
+	private void cpfTextFieldActionPerformed (ActionEvent event) {
 
 		String nome = this.cpfTextField.getText();
 		if (nome.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", "Erro",
 					JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			getProfessor();
+			getTeacherFromDB();
 		}
 	}
 
 	// This method generates an action to reserve button.
-	private void reservarButtonActionPerformed (ActionEvent evt) {
+	private void reserveButtonActionPerformed (ActionEvent event) {
 
-		reservarProfessor();
+		reserveEquipmentToTeacher();
 	}
 
 	// This method cancels the reservation.
-	private void cancelarButtonActionPerformed (ActionEvent evt) {
+	private void cancelButtonActionPerformed (ActionEvent event) {
 
 		this.setVisible(false);
 	}
 
 	// This method performs the search for a teacher.
-	private void buscarCpfButtonActionPerformed (ActionEvent evt) {
+	private void searchCpfButtonActionPerformed (ActionEvent event) {
 
-		cpfTextFieldActionPerformed(evt);
+		cpfTextFieldActionPerformed(event);
 	}
 
 }

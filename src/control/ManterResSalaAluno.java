@@ -32,49 +32,51 @@ public class ManterResSalaAluno {
 
 		if (instance == null) {
 			instance = new ManterResSalaAluno();
+		} else {
+			// Nothing here.
 		}
 		return instance;
 	}
 
 	// Returns the room reservation made ​​by students in a period of time.
-	public Vector <ReservaSalaAluno> getReservasHora (String time)
+	public Vector <ReservaSalaAluno> getReservationPerTime (String time)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResSalaAlunoDAO.getInstance().buscarPorHora(time);
+		return ResSalaAlunoDAO.getInstance().searchByTime(time);
 
 	}
 
 	// Returns the room reservation made ​​​​by students in a month period.
-	public Vector <ReservaSalaAluno> getReservasMes (String date)
+	public Vector <ReservaSalaAluno> getReservationsPerMonth (String date)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResSalaAlunoDAO.getInstance().buscarPorDia(date);
+		return ResSalaAlunoDAO.getInstance().searchByDay(date);
 
 	}
 
 	// Returns all the reservations made ​​by students
-	public Vector <ReservaSalaAluno> getResAlunoSala_vet ( )
+	public Vector <ReservaSalaAluno> getstudentRoomReservationVector ( )
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
 		this.studentRoomReservationVector = ResSalaAlunoDAO.getInstance()
-				.buscarTodos();
+				.searchAll();
 		return this.studentRoomReservationVector;
 	}
 
 	// Returns the number of seats available to reserve in a room.
-	public int cadeirasDisponveis (Sala room, String date, String time)
+	public int checkAvailableChairs (Sala room, String date, String time)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return ResSalaAlunoDAO.getInstance().cadeirasDisponiveis(room, date,
+		return ResSalaAlunoDAO.getInstance().setAvailableChairs(room, date,
 				time);
 	}
 
 	// Include new reservation in the database.
-	public void inserir (Sala room, Aluno student,
+	public void insert (Sala room, Aluno student,
 			String date, String time, String purpose,
 			String numberDesiredChairs)
 			throws SQLException, ReservaException, ClienteException,
@@ -83,31 +85,31 @@ public class ManterResSalaAluno {
 		ReservaSalaAluno reservation = new ReservaSalaAluno(date, time, room,
 				purpose,
 				numberDesiredChairs, student);
-		ResSalaAlunoDAO.getInstance().incluir(reservation);
+		ResSalaAlunoDAO.getInstance().insert(reservation);
 		this.studentRoomReservationVector.add(reservation);
 	}
 
 	// Update reservation info from the database.
-	public void alterar (String purpose, String numberDesiredChairs,
+	public void modify (String purpose, String numberDesiredChairs,
 			ReservaSalaAluno reservation)
 			throws SQLException, ReservaException, ClienteException,
 			PatrimonioException {
 
 		ReservaSalaAluno oldReservation = new ReservaSalaAluno(
-				reservation.getData(),
-				reservation.getHora(), reservation.getSala(),
-				reservation.getFinalidade(),
-				reservation.getCadeiras_reservadas(), reservation.getAluno());
-		reservation.setFinalidade(purpose);
-		reservation.setCadeiras_reservadas(numberDesiredChairs);
-		ResSalaAlunoDAO.getInstance().alterar(oldReservation, reservation);
+				reservation.getDate(),
+				reservation.getTime(), reservation.getClassroom(),
+				reservation.getPurpose(),
+				reservation.getReservedChairs(), reservation.getStudent());
+		reservation.setPurpose(purpose);
+		reservation.setReservedChairs(numberDesiredChairs);
+		ResSalaAlunoDAO.getInstance().modify(oldReservation, reservation);
 	}
 
 	// Remove the reservation made by a student.
-	public void excluir (ReservaSalaAluno reservation) throws SQLException,
+	public void delete (ReservaSalaAluno reservation) throws SQLException,
 			ReservaException {
 
-		ResSalaAlunoDAO.getInstance().excluir(reservation);
+		ResSalaAlunoDAO.getInstance().delete(reservation);
 		this.studentRoomReservationVector.remove(reservation);
 	}
 }

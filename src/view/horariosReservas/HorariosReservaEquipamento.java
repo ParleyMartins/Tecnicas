@@ -42,20 +42,24 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	}
 
 	// This method fills the vector with data to be used on the table.
-	protected Vector <String> fillDataVector (Object obj, int index) {
+	protected Vector <String> fillDataVector (Object obj, final int index) {
 
 		Vector <String> dataVector = new Vector <String>();
 		if (obj instanceof ReservaEquipamentoProfessor) {
 			ReservaEquipamentoProfessor reservation = (ReservaEquipamentoProfessor) obj;
-			if (this.equipment != null && (reservation.getEquipamento().equals(this.equipment))) {
+			if (this.equipment != null && (reservation.getEquipment().equals(this.equipment))) {
 
 				dataVector.add(String.valueOf(index));
-				dataVector.add(reservation.getHora());
-				dataVector.add(reservation.getProfessor().getName());
-				dataVector.add(reservation.getProfessor().getEnrollmentNumber());
-				dataVector.add(reservation.getEquipamento().getCodigo());
-				dataVector.add(reservation.getEquipamento().getDescricao());
+				dataVector.add(reservation.getTime());
+				dataVector.add(reservation.getTeacher().getName());
+				dataVector.add(reservation.getTeacher().getEnrollmentNumber());
+				dataVector.add(reservation.getEquipment().getIdCode());
+				dataVector.add(reservation.getEquipment().getDescription());
+			} else {
+				// Nothing here.
 			}
+		} else {
+			// Nothing here.
 		}
 
 		return dataVector;
@@ -80,12 +84,15 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 			this.month = Integer.parseInt(this.date.substring(3, 5));
 
 			Vector <ReservaEquipamentoProfessor> monthReservations = this.instance
-					.getReservasMes(month);
-			if (monthReservations != null)
+					.getReservationsPerMonth(month);
+			if (monthReservations != null){
 				for (int i = 0 ; i < monthReservations.size() ; i++) {
 					dataTable.addRow(fillDataVector(monthReservations.get(i), i));
 
 				}
+			} else {
+				// Nothing here.
+			}
 
 		} catch (SQLException ex) {
 			Logger.getLogger(HorariosReservaPatrimonio.class.getName()).log(
@@ -106,22 +113,24 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	@Override
 	// This method cancels a reservation.
-	protected void cancelarReservaAction (int index) {
+	protected void cancelReservationAction (final int index) {
 
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					"Deseja mesmo excluir Reserva?\n"
-							+ this.instance.getReservasMes(month).get(index)
+							+ this.instance.getReservationsPerMonth(month).get(index)
 									.toString(), "Excluir",
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				this.instance.excluir(this.instance.getReservasMes(month).get(
+				this.instance.delete(this.instance.getReservationsPerMonth(month).get(
 						index));
 				JOptionPane.showMessageDialog(this,
 						"Reserva excluida com sucesso", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
+			} else {
+				// Nothing here.
 			}
 
 		} catch (SQLException ex) {
@@ -140,8 +149,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	// This method reserves a propety.
-	protected void reservarAction ( ) {
+	// This method reserves a property.
+	protected void reserveAction ( ) {
 
 		try {
 			ReservaEquipamentoView reservation = new FazerReservaEquipamentoView(
@@ -164,7 +173,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	@Override
 	// This method modifies a reservation
-	protected void alterarAction (int index) {
+	protected void modifyAction (int index) {
 
 		try {
 			index = Integer.parseInt((String)
