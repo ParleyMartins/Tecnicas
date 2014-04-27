@@ -9,6 +9,8 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -31,6 +33,10 @@ import view.mainViews.SalaView;
 
 public class Main2 extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton studentBtn;
 	private JButton equipmentBtn;
 	private JLabel backgroundLbl;
@@ -38,6 +44,11 @@ public class Main2 extends JFrame {
 	private JPanel propertyPanel;
 	private JButton teacherBtn;
 	private JButton roomBtn;
+	
+	Locale locale = new Locale("en","US");
+	ResourceBundle bundleMessages = ResourceBundle.getBundle("i18n.messages", locale);
+	ResourceBundle bundleButtons = ResourceBundle.getBundle("i18n.buttons", locale);
+	ResourceBundle bundleLabels = ResourceBundle.getBundle("i18n.labels", locale);
 
 	// Constructor generates form Main2
 	public Main2 ( ) {
@@ -95,18 +106,18 @@ public class Main2 extends JFrame {
 		this.studentBtn = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setTitle("SisRES");
+		setTitle(bundleMessages.getString("appName"));
 		setName("Main");
 		setResizable(false);
 
 		this.backgroundLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		this.backgroundLbl.setText("SisRES");
+		this.backgroundLbl.setText(bundleMessages.getString("appName"));
 
 		this.propertyPanel.setBorder(BorderFactory
-				.createTitledBorder("Reserva"));
+				.createTitledBorder(bundleLabels.getString("reservation")));
 
-		this.roomBtn.setText("Sala");
-		this.roomBtn.setName("Sala");
+		this.roomBtn.setText(bundleButtons.getString("classroom"));
+		this.roomBtn.setName(bundleButtons.getString("classroom"));
 		this.roomBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -115,8 +126,8 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.equipmentBtn.setText("Equipamento");
-		this.equipmentBtn.setName("Equipamento");
+		this.equipmentBtn.setText(bundleButtons.getString("equipment"));
+		this.equipmentBtn.setName(bundleButtons.getString("equipment"));
 		this.equipmentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -175,10 +186,10 @@ public class Main2 extends JFrame {
 												Short.MAX_VALUE)));
 
 		this.clientPanel.setBorder(BorderFactory
-				.createTitledBorder("Cadastro"));
+				.createTitledBorder(bundleLabels.getString("registration")));
 
-		this.teacherBtn.setText("Professor");
-		this.teacherBtn.setName("Professor");
+		this.teacherBtn.setText(bundleButtons.getString("teacher"));
+		this.teacherBtn.setName(bundleButtons.getString("teacher"));
 		this.teacherBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -187,8 +198,8 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.studentBtn.setText("Aluno");
-		this.studentBtn.setName("Aluno");
+		this.studentBtn.setText(bundleButtons.getString("student"));
+		this.studentBtn.setName(bundleButtons.getString("student"));
 		this.studentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
