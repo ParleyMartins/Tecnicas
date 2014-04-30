@@ -13,17 +13,20 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+
 import view.mainViews.AlunoView;
 import view.mainViews.ClienteView;
 import view.mainViews.EquipamentoView;
@@ -45,10 +48,7 @@ public class Main2 extends JFrame {
 	private JButton teacherBtn;
 	private JButton roomBtn;
 	
-	Locale locale = new Locale("en","US");
-	ResourceBundle bundleMessages = ResourceBundle.getBundle("i18n.messages", locale);
-	ResourceBundle bundleButtons = ResourceBundle.getBundle("i18n.buttons", locale);
-	ResourceBundle bundleLabels = ResourceBundle.getBundle("i18n.labels", locale);
+	
 
 	// Constructor generates form Main2
 	public Main2 ( ) {
@@ -97,6 +97,23 @@ public class Main2 extends JFrame {
 	// This method initializes the Components.
 	private void initComponents ( ) {
 
+		String[] languageOptions = {"Eu gostaria de ver o SisRES em português!",
+				"I'd like to see SisRES in English!"};
+		final int selectedOption = JOptionPane.showOptionDialog(this, 
+				"Select the language in which SisRES must be displayed",
+				"Language", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+				null, languageOptions, languageOptions[1]);
+		Locale locale;
+		if(selectedOption == JOptionPane.NO_OPTION){
+			locale = new Locale("en","US");
+			
+		} else {
+			locale = new Locale("pt","BR");
+		}
+		ResourceBundle bundleMessages = ResourceBundle.getBundle("i18n.messages", locale);
+		ResourceBundle bundleButtons = ResourceBundle.getBundle("i18n.buttons", locale);
+		ResourceBundle bundleLabels = ResourceBundle.getBundle("i18n.labels", locale);
+		
 		this.backgroundLbl = new JLabel();
 		this.propertyPanel = new JPanel();
 		this.roomBtn = new JButton();
