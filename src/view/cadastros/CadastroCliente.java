@@ -9,6 +9,7 @@ package view.cadastros;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+
+import view.International;
 
 public abstract class CadastroCliente extends JDialog {
 
@@ -59,22 +62,22 @@ public abstract class CadastroCliente extends JDialog {
 		this.cancelButton = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("Cadastro");
+		setTitle(International.getInstance().getButtons().getString("registration"));
 		setResizable(false);
 
-		this.nameLabel.setText("Nome: ");
-		this.enrrollmentNumberLabel.setText("Matricula: ");
-		this.cpfLabel.setText("CPF:");
-		this.emailLabel.setText("E-mail: ");
-		this.phoneNumberLabel.setText("Telefone: ");
-		this.nameTxtField.setName("Nome");
-		this.enrollmentNumberTxtField.setName("Matricula");
+		this.nameLabel.setText(International.getInstance().getButtons().getString("name: "));
+		this.enrrollmentNumberLabel.setText(International.getInstance().getButtons().getString("enrollment: "));
+		this.cpfLabel.setText(International.getInstance().getButtons().getString("cpf:"));
+		this.emailLabel.setText(International.getInstance().getButtons().getString("email: "));
+		this.phoneNumberLabel.setText(International.getInstance().getButtons().getString("telephone: "));
+		this.nameTxtField.setName(International.getInstance().getButtons().getString("name: "));
+		this.enrollmentNumberTxtField.setName(International.getInstance().getButtons().getString("enrollment"));
 		this.enrollmentNumberTxtField.setHorizontalAlignment(JTextField.LEFT);
-		this.cpfTxtField.setName("CPF");
-		this.emailTxtField.setName("E-mail");
-		this.phoneNumberTxtField.setName("Telefone");
-		this.registerButton.setText("Cadastrar");
-		this.registerButton.setName("Cadastrar");
+		this.cpfTxtField.setName(International.getInstance().getButtons().getString("cpf"));
+		this.emailTxtField.setName(International.getInstance().getButtons().getString("email"));
+		this.phoneNumberTxtField.setName(International.getInstance().getButtons().getString("telephone"));
+		this.registerButton.setText(International.getInstance().getButtons().getString("access"));
+		this.registerButton.setName(International.getInstance().getButtons().getString("access"));
 		this.registerButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -83,8 +86,8 @@ public abstract class CadastroCliente extends JDialog {
 			}
 		});
 
-		this.cancelButton.setText("Cancelar");
-		this.cancelButton.setName("Cancelar");
+		this.cancelButton.setText(International.getInstance().getButtons().getString("deselect"));
+		this.cancelButton.setName(International.getInstance().getButtons().getString("deselect"));
 		this.cancelButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
