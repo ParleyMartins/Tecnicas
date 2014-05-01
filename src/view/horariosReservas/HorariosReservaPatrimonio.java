@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.GroupLayout;
 
+import view.International;
+
 public abstract class HorariosReservaPatrimonio extends JDialog {
 
 	protected JButton modifyButton;
@@ -75,8 +77,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-		this.reserveButton.setText("Reservar");
-		this.reserveButton.setName("ReservarButton");
+		this.reserveButton.setText(International.getInstance().getButtons().getString("reserve"));
+		this.reserveButton.setName(International.getInstance().getButtons().getString("reserve"));
 		this.reserveButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -85,8 +87,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			}
 		});
 
-		this.modifyButton.setText("Alterar Reserva");
-		this.modifyButton.setName("AlterarButton");
+		this.modifyButton.setText(International.getInstance().getButtons().getString("modify"));
+		this.modifyButton.setName(International.getInstance().getButtons().getString("modify"));
 		this.modifyButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -95,8 +97,8 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			}
 		});
 
-		this.cancelReservationButton.setText("Cancelar Reserva");
-		this.cancelReservationButton.setName("CancelarReservaButton");
+		this.cancelReservationButton.setText(International.getInstance().getButtons().getString("cancel"));
+		this.cancelReservationButton.setName(International.getInstance().getButtons().getString("cancel"));
 		this.cancelReservationButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -241,7 +243,10 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		int indexRow;
 		indexRow = this.reservationTable.getSelectedRow();
 		if (indexRow < 0) {
-			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+			JOptionPane.showMessageDialog(this, International.getInstance().
+					getMessages().getString("selectRow"), International
+					.getInstance().
+					getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		} else {
@@ -264,7 +269,10 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		int indexRow;
 		indexRow = this.reservationTable.getSelectedRow();
 		if (indexRow < 0) {
-			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+			JOptionPane.showMessageDialog(this, International.getInstance().
+					getMessages().getString("selectRow"), International
+					.getInstance().
+					getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		} else {
