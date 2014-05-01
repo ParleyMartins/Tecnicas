@@ -36,9 +36,6 @@ import view.mainViews.SalaView;
 
 public class Main2 extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JButton studentBtn;
 	private JButton equipmentBtn;
@@ -48,14 +45,13 @@ public class Main2 extends JFrame {
 	private JButton teacherBtn;
 	private JButton roomBtn;
 	
-	
 
 	// Constructor generates form Main2
 	public Main2 ( ) {
 
 		initComponents();
 	}
-
+	
 	// Function main.
 	public static void main (String args[]) {
 
@@ -93,27 +89,12 @@ public class Main2 extends JFrame {
 			}
 		});
 	}
+	
 
+	
 	// This method initializes the Components.
 	private void initComponents ( ) {
-
-		String[] languageOptions = {"Eu gostaria de ver o SisRES em português!",
-				"I'd like to see SisRES in English!"};
-		final int selectedOption = JOptionPane.showOptionDialog(this, 
-				"Select the language in which SisRES must be displayed",
-				"Language", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-				null, languageOptions, languageOptions[1]);
-		Locale locale;
-		if(selectedOption == JOptionPane.NO_OPTION){
-			locale = new Locale("en","US");
-			
-		} else {
-			locale = new Locale("pt","BR");
-		}
-		ResourceBundle bundleMessages = ResourceBundle.getBundle("i18n.messages", locale);
-		ResourceBundle bundleButtons = ResourceBundle.getBundle("i18n.buttons", locale);
-		ResourceBundle bundleLabels = ResourceBundle.getBundle("i18n.labels", locale);
-		
+				
 		this.backgroundLbl = new JLabel();
 		this.propertyPanel = new JPanel();
 		this.roomBtn = new JButton();
@@ -123,18 +104,22 @@ public class Main2 extends JFrame {
 		this.studentBtn = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setTitle(bundleMessages.getString("appName"));
+		setTitle(International.getInstance().getMessages().getString("appName"));
 		setName("Main");
 		setResizable(false);
 
 		this.backgroundLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		this.backgroundLbl.setText(bundleMessages.getString("appName"));
+		this.backgroundLbl.setText(International.getInstance().getMessages()
+				.getString("appName"));
 
 		this.propertyPanel.setBorder(BorderFactory
-				.createTitledBorder(bundleLabels.getString("reservation")));
+				.createTitledBorder(International.getInstance().getLabels()
+						.getString("reservation")));
 
-		this.roomBtn.setText(bundleButtons.getString("classroom"));
-		this.roomBtn.setName(bundleButtons.getString("classroom"));
+		this.roomBtn.setText(International.getInstance().getButtons()
+				.getString("classroom"));
+		this.roomBtn.setName(International.getInstance().getButtons()
+				.getString("classroom"));
 		this.roomBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -143,8 +128,10 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.equipmentBtn.setText(bundleButtons.getString("equipment"));
-		this.equipmentBtn.setName(bundleButtons.getString("equipment"));
+		this.equipmentBtn.setText(International.getInstance().getButtons()
+				.getString("equipment"));
+		this.equipmentBtn.setName(International.getInstance().getButtons()
+				.getString("equipment"));
 		this.equipmentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -203,10 +190,13 @@ public class Main2 extends JFrame {
 												Short.MAX_VALUE)));
 
 		this.clientPanel.setBorder(BorderFactory
-				.createTitledBorder(bundleLabels.getString("registration")));
+				.createTitledBorder(International.getInstance().getLabels()
+						.getString("registration")));
 
-		this.teacherBtn.setText(bundleButtons.getString("teacher"));
-		this.teacherBtn.setName(bundleButtons.getString("teacher"));
+		this.teacherBtn.setText(International.getInstance().getButtons()
+				.getString("teacher"));
+		this.teacherBtn.setName(International.getInstance().getButtons()
+				.getString("teacher"));
 		this.teacherBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -215,8 +205,10 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.studentBtn.setText(bundleButtons.getString("student"));
-		this.studentBtn.setName(bundleButtons.getString("student"));
+		this.studentBtn.setText(International.getInstance().getButtons()
+				.getString("student"));
+		this.studentBtn.setName(International.getInstance().getButtons()
+				.getString("student"));
 		this.studentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
