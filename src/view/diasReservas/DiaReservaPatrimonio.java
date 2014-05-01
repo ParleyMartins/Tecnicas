@@ -7,15 +7,21 @@ https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/diasReserva
 package view.diasReservas;
 
 import javax.swing.JButton;
+
 import com.toedter.calendar.JCalendar;
+
 import javax.swing.JPanel;
+
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+
+import view.International;
 
 public abstract class DiaReservaPatrimonio extends JDialog {
 
@@ -42,8 +48,8 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-		viewButton.setText("Visualizar Reservas do Dia");
-		viewButton.setName("VisualizarButton");
+		viewButton.setText(International.getInstance().getButtons().getString("visualizeDay"));
+		viewButton.setName("VisualizeButton");
 		viewButton.addActionListener(new ActionListener() {
 
 			private JCalendar selectDate;
@@ -125,12 +131,12 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 	private void viewButtonActionPerformed (ActionEvent actionPerformed) {
 
 		String data;
-		int monthOfBooking = 1 + this.selectDate.getMonthChooser().getMonth();
-		if (monthOfBooking < 10) {
-			data = this.selectDate.getDayChooser().getDay() + "/0" + monthOfBooking + "/"
+		int monthOfReservation = 1 + this.selectDate.getMonthChooser().getMonth();
+		if (monthOfReservation < 10) {
+			data = this.selectDate.getDayChooser().getDay() + "/0" + monthOfReservation + "/"
 					+ this.selectDate.getYearChooser().getYear();
 		} else {
-			data = this.selectDate.getDayChooser().getDay() + "/" + monthOfBooking + "/"
+			data = this.selectDate.getDayChooser().getDay() + "/" + monthOfReservation + "/"
 					+ this.selectDate.getYearChooser().getYear();
 		}
 		viewSelectedDayAction(data);
