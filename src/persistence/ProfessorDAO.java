@@ -285,7 +285,7 @@ public class ProfessorDAO {
 				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + teacher.getEmail() + "\" and "
 				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\");") == false) {
-			if (this.isInDBGeneric("SELECT * FROM reserva_equipamento WHERE "
+			if (this.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 					+ "id_professor = (SELECT id_professor FROM professor WHERE "
 					+ "professor.nome = \"" + teacher.getName() + "\" and "
 					+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
