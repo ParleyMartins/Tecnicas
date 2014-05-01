@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaEquipamen
 
 package model;
 
+import view.International;
 import exception.ReservaException;
 
 public class ReservaEquipamento extends Reserva {
@@ -13,7 +14,7 @@ public class ReservaEquipamento extends Reserva {
 	private Equipamento equipment;
 
 	// Error messages.
-	private final String NULL_EQUIPMENT = "O equipamneto esta nulo.";
+	private final String BLANK_EQUIPMENT = International.getInstance().getMessages().getString("blankEquipment");
 
 	public ReservaEquipamento(String date, String time, Equipamento equipment)
 			throws ReservaException {
@@ -30,7 +31,7 @@ public class ReservaEquipamento extends Reserva {
 	public void setEquipment(Equipamento equipment) throws ReservaException {
 
 		if (equipment == null) {
-			throw new ReservaException(NULL_EQUIPMENT);
+			throw new ReservaException(BLANK_EQUIPMENT);
 		} else {
 			// Do nothing.
 		}
