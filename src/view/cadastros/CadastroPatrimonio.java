@@ -8,6 +8,7 @@ package view.cadastros;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,6 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+
+import view.International;
 
 public abstract class CadastroPatrimonio extends JDialog {
 
@@ -54,23 +57,22 @@ public abstract class CadastroPatrimonio extends JDialog {
 		this.descriptionTxtArea = new JTextArea();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("Cadastro");
+		setTitle(International.getInstance().getButtons().getString("registration"));
 		setResizable(false);
 
-		this.codeLabel.setText("Codigo: ");
+		this.codeLabel.setText(International.getInstance().getButtons().getString("code"));
 
-		this.capacityLabel.setText("Capacidade: ");
-
-		this.descriptionLabel.setText("Descricao:");
+		this.capacityLabel.setText(International.getInstance().getButtons().getString("fullCapacity"));
+		this.descriptionLabel.setText(International.getInstance().getButtons().getString("description"));
 
 		this.capacityTxtField.setHorizontalAlignment(JTextField.LEFT);
 
-		this.codeTxtField.setName("Codigo");
-		this.capacityTxtField.setName("Capacidade");
-		this.descriptionTxtArea.setName("Descricao");
-
-		this.registerButton.setText("Cadastrar");
-		this.registerButton.setName("Cadastrar");
+		this.codeTxtField.setName(International.getInstance().getButtons().getString("code"));
+		this.capacityTxtField.setName(International.getInstance().getButtons().getString("fullCapacity"));;
+		this.descriptionTxtArea.setName(International.getInstance().getButtons().getString("description"));
+		
+		this.registerButton.setText(International.getInstance().getButtons().getString("access"));
+		this.registerButton.setName(International.getInstance().getButtons().getString("access"));
 		this.registerButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -79,8 +81,8 @@ public abstract class CadastroPatrimonio extends JDialog {
 			}
 		});
 
-		this.cancelButton.setText("Cancelar");
-		this.cancelButton.setName("Cancelar");
+		this.cancelButton.setText(International.getInstance().getButtons().getString("deselect"));
+		this.cancelButton.setName(International.getInstance().getButtons().getString("deselect"));
 		this.cancelButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
