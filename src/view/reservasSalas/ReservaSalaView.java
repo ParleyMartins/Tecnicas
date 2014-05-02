@@ -273,7 +273,7 @@ public abstract class ReservaSalaView extends JDialog {
 												Short.MAX_VALUE))
 				);
 
-		this.cpfLabel.setText(International.getInstance().getMessages().getString("enterCpf"));
+		this.cpfLabel.setText(International.getInstance().getLabels().getString("searchCpfLabel"));
 		this.cpfLabel.setName(International.getInstance().getLabels().getString("cpf"));
 
 		this.cpfTextField.setName(International.getInstance().getLabels().getString("cpf"));
@@ -290,32 +290,32 @@ public abstract class ReservaSalaView extends JDialog {
 
 		this.turposeTextField.setName(International.getInstance().getLabels().getString("finality"));
 
-		this.qntChairsLabel.setText("Quantidade de Cadeiras Disponiveis: ");
-		this.qntChairsLabel.setName("QuantidadeCadeirasDisponiveisLabel");
+		this.qntChairsLabel.setText(International.getInstance().getLabels().getString("amountOfChairs"));
+		this.qntChairsLabel.setName(International.getInstance().getLabels().getString("amountOfChairs"));
 
 		this.qntChairsTxtField.setEditable(false);
 		this.qntChairsTxtField.setBackground(new Color(200, 208, 254));
-		this.qntChairsTxtField.setName("Quantidade de Cadeiras Disponiveis");
+		this.qntChairsTxtField.setName(International.getInstance().getLabels().getString("amountOfChairs"));
 
 		this.qntChairsReservedLbl
-				.setText("Quantidade de Cadeiras Reservadas: ");
+				.setText(International.getInstance().getLabels().getString("amountOfChairs"));
 		this.qntChairsReservedLbl
-				.setName("QuantidadeCadeirasReservadasLabel");
+				.setName(International.getInstance().getLabels().getString("amountOfChairs"));
 
 		this.qntChairsReservedTextField.setBackground(new Color(200, 208,
 				254));
 		this.qntChairsReservedTextField
-				.setName("Quantidade de Cadeiras Reservadas");
+				.setName(International.getInstance().getLabels().getString("amountOfChairs"));
 
-		this.dateLabel.setText("Data: ");
+		this.dateLabel.setText(International.getInstance().getLabels().getString("date"));
 
-		this.hourLabel.setText("Hora: ");
-		this.hourLabel.setName("HoraLabel");
+		this.hourLabel.setText(International.getInstance().getLabels().getString("time"));
+		this.hourLabel.setName(International.getInstance().getLabels().getString("time"));
 
-		this.hourTextField.setName("Hora");
+		this.hourTextField.setName(International.getInstance().getLabels().getString("time"));
 
-		this.reserveButton.setText("Reservar");
-		this.reserveButton.setName("Reservar");
+		this.reserveButton.setText(International.getInstance().getLabels().getString("reservation"));
+		this.reserveButton.setName(International.getInstance().getLabels().getString("reservation"));
 		this.reserveButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -324,8 +324,8 @@ public abstract class ReservaSalaView extends JDialog {
 			}
 		});
 
-		this.cancelButton.setText("Cancelar");
-		this.cancelButton.setName("Cancelar");
+		this.cancelButton.setText(International.getInstance().getButtons().getString("cancel"));
+		this.cancelButton.setName(International.getInstance().getButtons().getString("cancel"));
 		this.cancelButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -338,7 +338,7 @@ public abstract class ReservaSalaView extends JDialog {
 		studentTextArea.setBackground(new Color(200, 208, 254));
 		studentTextArea.setColumns(20);
 		studentTextArea.setRows(5);
-		studentTextArea.setName("AlunoTextArea");
+		studentTextArea.setName(International.getInstance().getLabels().getString("amountOfChairs"));
 		this.jScrollPane1.setViewportView(studentTextArea);
 
 		this.roomTextArea.setEditable(false);
@@ -352,7 +352,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.dateTextField.setBackground(new Color(200, 208, 254));
 		this.dateTextField.setName("DiaTextField");
 
-		this.searchCpfButton.setText("Buscar CPF");
+		this.searchCpfButton.setText(International.getInstance().getButtons().getString("searchCpfButton"));
 		this.searchCpfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -361,8 +361,8 @@ public abstract class ReservaSalaView extends JDialog {
 			}
 		});
 
-		this.checkChairsButton.setText("Verificar Cadeiras Disponiveis");
-		this.checkChairsButton.setName("VerificarCadeirasButton");
+		this.checkChairsButton.setText(International.getInstance().getButtons().getString("verifyAvaibleChairs"));
+		this.checkChairsButton.setName(International.getInstance().getButtons().getString("verifyAvaibleChairs"));
 		this.checkChairsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -673,7 +673,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		String name = this.cpfTextField.getText();
 		if (name.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", International.getInstance().getLabels().getString("error"),
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("blankCPF"), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 			this.studentTextArea.setText("");
 		} else {
@@ -717,7 +717,7 @@ public abstract class ReservaSalaView extends JDialog {
 				break;
 			default:
 				JOptionPane.showMessageDialog(this,
-						"Selecione Aluno ou Professor", International.getInstance().getLabels().getString("error"),
+						International.getInstance().getMessages().getString("selectTeacherOrStudent"), International.getInstance().getLabels().getString("error"),
 						JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
