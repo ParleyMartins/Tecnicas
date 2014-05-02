@@ -15,6 +15,7 @@ import model.ReservaEquipamentoProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
+import view.International;
 
 public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
@@ -40,11 +41,11 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 			this.instanceManageResEquipmentTeacher.modify(this.instanceOfReserve,
 					this.dateTextField.getText(), this.hourTextField.getText(),
 					this.instanceOfEquipment, this.instanceOfReserve.getTeacher());
-			JOptionPane.showMessageDialog(this, "Reserva alterada com sucesso",
-					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
+			JOptionPane.showMessageDialog(this,International.getInstance().getMessages().getString("reserveChangeSucess") ,
+					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(),International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
@@ -54,8 +55,8 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	private void resetComponents ( ) {
 
-		this.reserveButton.setText("Alterar");
-		this.reserveButton.setName("AlterarButton");
+		this.reserveButton.setText(International.getInstance().getLabels().getString("change"));
+		this.reserveButton.setName(International.getInstance().getButtons().getString("modify"));
 		this.cpfLabel.setEnabled(false);
 		this.cpfTextField.setBackground(new Color(200, 208, 254));
 		this.cpfTextField.setEditable(false);

@@ -12,17 +12,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import view.International;
 import model.Equipamento;
 import exception.PatrimonioException;
 
 public class EquipamentoDAO {
 
 	// Exception messages.
-	private static final String EQUIPAMENTO_JA_EXISTENTE = "Equipamento ja cadastrado.";
-	private static final String EQUIPAMENTO_NAO_EXISTENTE = "Equipamento nao cadastrado.";
-	private static final String EQUIPAMENTO_NULO = "Equipamento esta nulo.";
-	private static final String EQUIPAMENTO_EM_USO = "Equipamento esta sendo utilizado em uma reserva.";
-	private static final String CODIGO_JA_EXISTENTE = "Equipamento com o mesmo codigo ja cadastrado.";
+	private static final String EXISTING_EQUIPMENT = International.getInstance().getMessages().getString("existingEquipment");
+	private static final String NO_EXISTING_EQUIPMENT = International.getInstance().getMessages().getString("noExistingEquipment");
+	private static final String NULL_EQUIPMENT = International.getInstance().getMessages().getString("nullEquipament");
+	private static final String EQUIPMENT_IN_USE = International.getInstance().getMessages().getString("equipamentInUse");
+	private static final String CODE_ALREADY_EXISTS = International.getInstance().getMessages().getString("codeAlreadyExists");
 
 	// Singleton implementation.
 	private static EquipamentoDAO instance;
@@ -48,10 +49,10 @@ public class EquipamentoDAO {
 			PatrimonioException {
 
 		if (equipment == null) {
-			throw new PatrimonioException(EQUIPAMENTO_NULO);
+			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {
 			if (this.isInDbCode(equipment.getIdCode())) {
-				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+				throw new PatrimonioException(CODE_ALREADY_EXISTS);
 			} else {
 				if (!this.isInDB(equipment)) {
 					this.update("INSERT INTO " + "equipamento "
@@ -70,12 +71,12 @@ public class EquipamentoDAO {
 			throws SQLException, PatrimonioException {
 
 		if (oldEquipment == null) {
-			throw new PatrimonioException(EQUIPAMENTO_NULO);
+			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {
 			// Nothing here.
 		}
 		if (newEquipment == null) {
-			throw new PatrimonioException(EQUIPAMENTO_NULO);
+			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {
 			// Nothing here.
 		}
@@ -84,15 +85,15 @@ public class EquipamentoDAO {
 		PreparedStatement statement;
 
 		if (!this.isInDB(oldEquipment)) {
-			throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
+			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
 		} else {
 			if (this.isInOtherDB(oldEquipment)) {
-				throw new PatrimonioException(EQUIPAMENTO_EM_USO);
+				throw new PatrimonioException(EQUIPMENT_IN_USE);
 			} else {
 				if (!newEquipment.getIdCode().equals(
 						oldEquipment.getIdCode())
 						&& this.isInDbCode(newEquipment.getIdCode())) {
-					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+					throw new PatrimonioException(CODE_ALREADY_EXISTS);
 				} else {
 					if (!this.isInDB(newEquipment)) {
 						String message = "UPDATE equipamento SET " + "codigo = \""
@@ -112,7 +113,7 @@ public class EquipamentoDAO {
 						statement.close();
 
 					} else {
-						throw new PatrimonioException(EQUIPAMENTO_JA_EXISTENTE);
+						throw new PatrimonioException(EXISTING_EQUIPMENT);
 					}
 				}
 			}
@@ -126,10 +127,10 @@ public class EquipamentoDAO {
 			PatrimonioException {
 
 		if (equipment == null) {
-			throw new PatrimonioException(EQUIPAMENTO_NULO);
+			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {
 			if (this.isInOtherDB(equipment)) {
-				throw new PatrimonioException(EQUIPAMENTO_EM_USO);
+				throw new PatrimonioException(EQUIPMENT_IN_USE);
 			} else {
 				// Nothing here.
 			}
@@ -141,7 +142,7 @@ public class EquipamentoDAO {
 					+ "\" and " + "equipamento.descricao = \""
 					+ equipment.getDescription() + "\";");
 		} else {
-			throw new PatrimonioException(EQUIPAMENTO_NAO_EXISTENTE);
+			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
 		}
 	}
 
