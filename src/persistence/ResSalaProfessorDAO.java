@@ -12,10 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
+import view.International;
 import model.Professor;
 import model.ReservaSalaProfessor;
 import model.Sala;
-
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -23,14 +23,14 @@ import exception.ReservaException;
 public class ResSalaProfessorDAO extends DAO {
 
 	// Excpetion messages and alerts.
-	private final String NULA = "Termo nulo.";
-	private final String SALA_INDISPONIVEL = "A Sala esta reservada no mesmo dia e horario.";
-	private final String PROFESSOR_INEXISTENTE = "Professor inexistente.";
-	private final String SALA_INEXISTENTE = "Sala inexistente";
-	private final String RESERVA_INEXISTENTE = "Reserva inexistente";
-	private final String RESERVA_EXISTENTE = "A reserva ja existe.";
-	private final String DATA_JA_PASSOU = "A data escolhida ja passou.";
-	private final String HORA_JA_PASSOU = "A hora escolhida ja passou.";
+	private final String NULL = International.getInstance().getMessages().getString("null");
+	private final String ROOM_UNAVAILABLE = International.getInstance().getMessages().getString("roomUnavailable");
+	private final String TEACHER_INEXISTENT = International.getInstance().getMessages().getString("teacherInexistent");
+	private final String ROOM_INEXISTENT = International.getInstance().getMessages().getString("roomInexistent");
+	private final String RESERVATION_INEXISTENT = International.getInstance().getMessages().getString("reservationInexistent");
+	private final String RESERVATION_EXISTENT = International.getInstance().getMessages().getString("reservationExistent");
+	private final String DATE_IS_GONE = International.getInstance().getMessages().getString("dateIsGone");
+	private final String TIME_IS_GONE = International.getInstance().getMessages().getString("timeIsGone");
 
 	// Singleton implementation.
 	private static ResSalaProfessorDAO instance;
@@ -57,20 +57,20 @@ public class ResSalaProfessorDAO extends DAO {
 			SQLException {
 
 		if (reservation == null) {
-			throw new ReservaException(NULA);
+			throw new ReservaException(NULL);
 		} else {
 			if (!this.teacherIsInDB(reservation.getTeacher())) {
-				throw new ReservaException(PROFESSOR_INEXISTENTE);
+				throw new ReservaException(TEACHER_INEXISTENT);
 			} else {
 				if (!this.roomIsInDB(reservation.getClassroom())) {
-					throw new ReservaException(SALA_INEXISTENTE);
+					throw new ReservaException(ROOM_INEXISTENT);
 				} else {
 					if (this.roomIsInReservationDB(reservation.getClassroom(), reservation.getDate(), 
 							reservation.getTime())) {
-						throw new ReservaException(SALA_INDISPONIVEL);
+						throw new ReservaException(ROOM_UNAVAILABLE);
 					} else {
 						if (this.reservationIsInDB(reservation)) {
-							throw new ReservaException(RESERVA_EXISTENTE);
+							throw new ReservaException(RESERVATION_EXISTENT);
 						} else {
 							if (this.roomIsInReservationDB(reservation.getDate(), 
 									reservation.getTime())) {
@@ -84,13 +84,13 @@ public class ResSalaProfessorDAO extends DAO {
 			}
 		}
 		if (this.dateIsGone(reservation.getDate())) {
-			throw new ReservaException(DATA_JA_PASSOU);
+			throw new ReservaException(DATE_IS_GONE);
 		} else {
 			// Nothing here.
 		}
 		if (this.dataIsNow(reservation.getDate())) {
 			if (this.timeIsGone(reservation.getTime())) {
-				throw new ReservaException(HORA_JA_PASSOU);
+				throw new ReservaException(TIME_IS_GONE);
 			} else {
 				super.execute(this.insertIntoQuery(reservation));
 			}
@@ -104,29 +104,29 @@ public class ResSalaProfessorDAO extends DAO {
 			throws ReservaException, SQLException {
 
 		if (oldReservation == null) {
-			throw new ReservaException(NULA);
+			throw new ReservaException(NULL);
 		} else {
 			if (newReservation == null) {
-				throw new ReservaException(NULA);
+				throw new ReservaException(NULL);
 			} else {
 				if (!this.reservationIsInDB(oldReservation)) {
-					throw new ReservaException(RESERVA_INEXISTENTE);
+					throw new ReservaException(RESERVATION_INEXISTENT);
 				} else {
 					if (this.reservationIsInDB(newReservation)) {
-						throw new ReservaException(RESERVA_EXISTENTE);
+						throw new ReservaException(RESERVATION_EXISTENT);
 					} else {
 						if (!this.teacherIsInDB(newReservation.getTeacher())) {
-							throw new ReservaException(PROFESSOR_INEXISTENTE);
+							throw new ReservaException(TEACHER_INEXISTENT);
 						} else {
 							if (!this.roomIsInDB(newReservation.getClassroom())) {
-								throw new ReservaException(SALA_INEXISTENTE);
+								throw new ReservaException(ROOM_INEXISTENT);
 							} else {
 								if (!oldReservation.getDate().equals(newReservation.getDate())
 										|| !oldReservation.getTime().equals(newReservation.getTime())) {
 									if (this.roomIsInReservationDB(newReservation.getClassroom(),
 											newReservation.getDate(), newReservation.getTime())) {
 										throw new ReservaException(
-												SALA_INDISPONIVEL);
+												ROOM_UNAVAILABLE);
 									} else {
 										// Nothing here.
 									}
@@ -141,12 +141,12 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 								
 		if (this.dateIsGone(newReservation.getDate())) {
-			throw new ReservaException(DATA_JA_PASSOU);
+			throw new ReservaException(DATE_IS_GONE);
 		} else {
 			// Nothing here.
 		}
 		if (this.timeIsGone(newReservation.getTime()) && this.dataIsNow(newReservation.getDate())) {
-			throw new ReservaException(HORA_JA_PASSOU);
+			throw new ReservaException(TIME_IS_GONE);
 		} else {
 			super.update(this.updateQuery(oldReservation, newReservation));
 		}
@@ -157,10 +157,10 @@ public class ResSalaProfessorDAO extends DAO {
 			SQLException {
 
 		if (reservation == null) {
-			throw new ReservaException(NULA);
+			throw new ReservaException(NULL);
 		} else {
 			if (!this.reservationIsInDB(reservation)) {
-				throw new ReservaException(RESERVA_INEXISTENTE);
+				throw new ReservaException(RESERVATION_INEXISTENT);
 			} else {
 				super.execute(this.deleteFromTeacherQuery(reservation));
 			}
