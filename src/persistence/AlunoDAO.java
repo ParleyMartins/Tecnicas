@@ -11,17 +11,18 @@ import model.Aluno;
 import java.sql.*;
 import java.util.Vector;
 
+import view.International;
 import exception.ClienteException;
 
 public class AlunoDAO {
 
 	// Exception messages.
-	private static final String ALUNO_JA_EXISTENTE = "O Aluno ja esta cadastrado.";
-	private static final String ALUNO_NULO = "O Aluno esta nulo.";
-	private static final String ALUNO_NAO_EXISTENTE = "O Aluno nao esta cadastrado.";
-	private static final String ALUNO_EM_USO = "Sala esta sendo utilizada em uma reserva.";
-	private static final String CPF_JA_EXISTENTE = "Ja existe um aluno cadastrado com esse CPF.";
-	private static final String MATRICULA_JA_EXISTENTE = "Ja existe um aluno cadastrado com essa matricula.";
+	private static final String EXISTING_STUDENT = International.getInstance().getMessages().getString("existingStudent");
+	private static final String NULL_STUDENT = International.getInstance().getMessages().getString("nullStudent");
+	private static final String STUDENT_NOT_EXISTS = International.getInstance().getMessages().getString("studentNotExists");
+	private static final String STUDENT_IN_USE = International.getInstance().getMessages().getString("studentInUse");
+	private static final String CPF_ALREADY_EXISTS = International.getInstance().getMessages().getString("cpfAlreadyExists");
+	private static final String ENROLLMENT_ALREADY_EXISTS = International.getInstance().getMessages().getString("enrollmentAlreadyExists");
 
 	// Singleton implementation.
 	private static AlunoDAO instance;
@@ -45,13 +46,13 @@ public class AlunoDAO {
 	public void insert (Aluno student) throws SQLException, ClienteException {
 
 		if (student == null) {
-			throw new ClienteException(ALUNO_NULO);
+			throw new ClienteException(NULL_STUDENT);
 		} else {
 			if (this.isInDBCpf(student.getCpf())) {
-				throw new ClienteException(CPF_JA_EXISTENTE);
+				throw new ClienteException(CPF_ALREADY_EXISTS);
 			} else {
 				if (this.isInDbEnrollmentNumber(student.getEnrollmentNumber())) {
-					throw new ClienteException(MATRICULA_JA_EXISTENTE);
+					throw new ClienteException(ENROLLMENT_ALREADY_EXISTS);
 				} else {
 					if (!this.isInDB(student)) {
 						this.update("INSERT INTO "
@@ -62,7 +63,7 @@ public class AlunoDAO {
 								+ student.getEmail() + "\", " + "\""
 								+ student.getEnrollmentNumber() + "\"); ");
 					} else {
-						throw new ClienteException(ALUNO_JA_EXISTENTE);
+						throw new ClienteException(EXISTING_STUDENT);
 					}
 				}
 			}
@@ -74,13 +75,13 @@ public class AlunoDAO {
 			throws SQLException, ClienteException {
 
 		if (oldStudent == null) {
-			throw new ClienteException(ALUNO_NULO);
+			throw new ClienteException(NULL_STUDENT);
 		} else {
 			// Nothing here.
 		}
 
 		if (newStudent == null) {
-			throw new ClienteException(ALUNO_NULO);
+			throw new ClienteException(NULL_STUDENT);
 		} else {
 			// Nothing here.
 		}
@@ -89,19 +90,19 @@ public class AlunoDAO {
 		PreparedStatement statement;
 
 		if (!this.isInDB(oldStudent)) {
-			throw new ClienteException(ALUNO_NAO_EXISTENTE);
+			throw new ClienteException(STUDENT_NOT_EXISTS);
 		} else {
 			if (this.isInOtherDB(oldStudent)) {
-				throw new ClienteException(ALUNO_EM_USO);
+				throw new ClienteException(STUDENT_IN_USE);
 			} else {
 				if (!oldStudent.getCpf().equals(newStudent.getCpf())
 						&& this.isInDBCpf(newStudent.getCpf())) {
-					throw new ClienteException(CPF_JA_EXISTENTE);
+					throw new ClienteException(CPF_ALREADY_EXISTS);
 				} else {
 					if (!oldStudent.getEnrollmentNumber().equals(
 							newStudent.getEnrollmentNumber())
 							&& this.isInDbEnrollmentNumber(newStudent.getEnrollmentNumber())) {
-						throw new ClienteException(MATRICULA_JA_EXISTENTE);
+						throw new ClienteException(ENROLLMENT_ALREADY_EXISTS);
 					} else {
 						if (!this.isInDB(newStudent)) {
 							String message = "UPDATE aluno SET " + "nome = \""
@@ -127,7 +128,7 @@ public class AlunoDAO {
 							statement.executeUpdate();
 							connection.commit();
 						} else {
-							throw new ClienteException(ALUNO_JA_EXISTENTE);
+							throw new ClienteException(EXISTING_STUDENT);
 						}
 					}
 				}
@@ -142,10 +143,10 @@ public class AlunoDAO {
 	public void delete (Aluno student) throws SQLException, ClienteException {
 
 		if (student == null) {
-			throw new ClienteException(ALUNO_NULO);
+			throw new ClienteException(NULL_STUDENT);
 		} else {
 			if (this.isInOtherDB(student)) {
-				throw new ClienteException(ALUNO_EM_USO);
+				throw new ClienteException(STUDENT_IN_USE);
 			} else {
 				if (this.isInDB(student)) {
 					this.update("DELETE FROM aluno WHERE "
@@ -156,7 +157,7 @@ public class AlunoDAO {
 							+ "\" and " + "aluno.matricula = \""
 							+ student.getEnrollmentNumber() + "\";");
 				} else {
-					throw new ClienteException(ALUNO_NAO_EXISTENTE);
+					throw new ClienteException(STUDENT_NOT_EXISTS);
 				}
 			}
 		}
