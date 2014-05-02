@@ -49,7 +49,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 

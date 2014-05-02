@@ -12,6 +12,7 @@ import model.Equipamento;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
+import view.International;
 
 public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 
@@ -36,16 +37,16 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 			this.instanceManageResEquipmentTeacher.insert(this.instanceOfEquipment, this.instanceTeacher,
 					this.dateTextField.getText(), this.hourTextField.getText());
 
-			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveSucess"),
 					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
 		} catch (ReservaException excpetion) {
-			JOptionPane.showMessageDialog(this, excpetion.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, excpetion.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException excpetion) {
 			JOptionPane.showMessageDialog(this, excpetion.getMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
