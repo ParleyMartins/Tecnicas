@@ -41,17 +41,17 @@ public abstract class PatrimonioView extends JDialog {
 	protected JButton visualizeBtn;
 
 	// Constructor creates a PropertyView form.
-	public PatrimonioView (Frame parent, boolean modal) {
+	public PatrimonioView(Frame parent, boolean modal) {
 
 		super(parent, modal);
 		initComponents();
 	}
 
 	// This method fills a table with the properties on database.
-	protected abstract DefaultTableModel fillTable ( );
+	protected abstract DefaultTableModel fillTable();
 
 	// This method generates the action to search a property.
-	protected void pesquisarTextFieldActionPerformed (ActionEvent evt) {
+	protected void pesquisarTextFieldActionPerformed(ActionEvent evt) {
 
 		String propertyName = this.searchTextField.getText();
 		if (propertyName.isEmpty()) {
@@ -60,27 +60,27 @@ public abstract class PatrimonioView extends JDialog {
 			String errorMessage = International.getInstance().getLabels()
 					.getString("error");
 
-			JOptionPane.showMessageDialog(this, noTextMessage,
-					errorMessage, JOptionPane.ERROR_MESSAGE, null);
+			JOptionPane.showMessageDialog(this, noTextMessage, errorMessage,
+					JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			// Do nothing. 
+			// Do nothing.
 		}
 	}
 
 	// Method generates a property visualize form.
-	protected abstract void visualizarAction (int index);
+	protected abstract void visualizarAction(int index);
 
 	// Method generates a property register form.
-	protected abstract void cadastrarAction ( );
+	protected abstract void cadastrarAction();
 
 	// Method generates a property modify form.
-	protected abstract void alterarAction (int index);
+	protected abstract void alterarAction(int index);
 
 	// Method deletes a property.
-	protected abstract void excluirAction (int index);
+	protected abstract void excluirAction(int index);
 
 	// This method initializes the components.
-	private void initComponents ( ) {
+	private void initComponents() {
 
 		buttonsPanel = new JPanel();
 		registerBtn = new JButton();
@@ -105,7 +105,7 @@ public abstract class PatrimonioView extends JDialog {
 				.getString("register"));
 		registerBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				cadastrarActionPerformed(evt);
 			}
@@ -117,7 +117,7 @@ public abstract class PatrimonioView extends JDialog {
 				.getString("change"));
 		modiftyBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				alterarActionPerformed(evt);
 			}
@@ -129,7 +129,7 @@ public abstract class PatrimonioView extends JDialog {
 				.getString("remove"));
 		deleteBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				excluirActionPerformed(evt);
 			}
@@ -142,7 +142,7 @@ public abstract class PatrimonioView extends JDialog {
 		visualizeBtn.setEnabled(true);
 		visualizeBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				visualizarActionPerformed(evt);
 			}
@@ -215,7 +215,7 @@ public abstract class PatrimonioView extends JDialog {
 
 		searchTextField.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				pesquisarTextFieldActionPerformed(evt);
 			}
@@ -235,8 +235,7 @@ public abstract class PatrimonioView extends JDialog {
 												LayoutStyle.ComponentPlacement.UNRELATED)
 										.addComponent(searchTextField,
 												GroupLayout.PREFERRED_SIZE,
-												304,
-												GroupLayout.PREFERRED_SIZE)
+												304, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addContainerGap()));
@@ -327,7 +326,7 @@ public abstract class PatrimonioView extends JDialog {
 
 	// This method generates the action to visualize the reservations to a
 	// property.
-	private void visualizarActionPerformed (ActionEvent evt) {
+	private void visualizarActionPerformed(ActionEvent evt) {
 
 		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
@@ -335,7 +334,7 @@ public abstract class PatrimonioView extends JDialog {
 					.getString("selectRow");
 			String errorMessage = International.getInstance().getLabels()
 					.getString("error");
-			
+
 			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
@@ -346,13 +345,13 @@ public abstract class PatrimonioView extends JDialog {
 	}
 
 	// This method generates the action to register a property.
-	private void cadastrarActionPerformed (ActionEvent evt) {
+	private void cadastrarActionPerformed(ActionEvent evt) {
 
 		cadastrarAction();
 	}
 
 	// This method generates the action to modify a property.
-	private void alterarActionPerformed (ActionEvent evt) {
+	private void alterarActionPerformed(ActionEvent evt) {
 
 		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
@@ -360,7 +359,7 @@ public abstract class PatrimonioView extends JDialog {
 					.getString("selectRow");
 			String errorMessage = International.getInstance().getLabels()
 					.getString("error");
-			
+
 			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
@@ -372,7 +371,7 @@ public abstract class PatrimonioView extends JDialog {
 	}
 
 	// This method generates the action to delete a property.
-	private void excluirActionPerformed (ActionEvent evt) {
+	private void excluirActionPerformed(ActionEvent evt) {
 
 		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
@@ -380,7 +379,7 @@ public abstract class PatrimonioView extends JDialog {
 					.getString("selectRow");
 			String errorMessage = International.getInstance().getLabels()
 					.getString("error");
-			
+
 			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
