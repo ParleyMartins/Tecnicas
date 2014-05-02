@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Sala;
+import view.International;
 import view.alteracoes.AlterarSala;
 import view.cadastros.CadastroPatrimonio;
 import view.cadastros.CadastroSala;
@@ -23,16 +24,20 @@ import exception.PatrimonioException;
 
 public class SalaView extends PatrimonioView {
 
+	private static final long serialVersionUID = 1L;
+
 	// Constructor generates a RoomView form.
-	public SalaView (Frame parent, boolean modal) {
+	public SalaView(Frame parent, boolean modal) {
 
 		super(parent, modal);
-		searchLbl.setText("Digite a sala desejada: ");
-		this.setName("SalaView");
+		searchLbl.setText(International.getInstance().getLabels()
+				.getString("searchClassroomLabel"));
+		this.setName(International.getInstance().getLabels()
+				.getString("classroom"));
 	}
 
 	// This method fills a vector with the rooms on database.
-	protected Vector <String> fillDataVector (Sala room) {
+	protected Vector<String> fillDataVector(Sala room) {
 
 		if (room == null) {
 			return null;
@@ -40,7 +45,7 @@ public class SalaView extends PatrimonioView {
 			// Nothing here.
 		}
 
-		Vector <String> roomData = new Vector <String>();
+		Vector<String> roomData = new Vector<String>();
 
 		roomData.add(room.getIdCode());
 		roomData.add(room.getDescription());
@@ -52,17 +57,23 @@ public class SalaView extends PatrimonioView {
 
 	@Override
 	// This method fills a table with the rooms on database.
-	protected DefaultTableModel fillTable ( ) {
+	protected DefaultTableModel fillTable() {
+
+		String errorMessage = International.getInstance().getLabels()
+				.getString("error");
 
 		try {
 			DefaultTableModel roomTable = new DefaultTableModel();
 
-			Iterator <Sala> i = ManterSala.getInstance().getRoomsVec()
+			Iterator<Sala> i = ManterSala.getInstance().getRoomsVec()
 					.iterator();
 
-			roomTable.addColumn("Codigo");
-			roomTable.addColumn("Nome");
-			roomTable.addColumn("Capacidade");
+			roomTable.addColumn(International.getInstance().getLabels()
+					.getString("code"));
+			roomTable.addColumn(International.getInstance().getLabels()
+					.getString("name"));
+			roomTable.addColumn(International.getInstance().getLabels()
+					.getString("fullCapacity"));
 			while (i.hasNext()) {
 				Sala sala = i.next();
 				roomTable.addRow(fillDataVector(sala));
@@ -71,10 +82,10 @@ public class SalaView extends PatrimonioView {
 			return roomTable;
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 
@@ -83,10 +94,9 @@ public class SalaView extends PatrimonioView {
 
 	@Override
 	// Method generates a room register form.
-	protected void cadastrarAction ( ) {
+	protected void cadastrarAction() {
 
-		CadastroPatrimonio registerRoom = new CadastroSala(
-				new JFrame(), true);
+		CadastroPatrimonio registerRoom = new CadastroSala(new JFrame(), true);
 		registerRoom.setResizable(false);
 		registerRoom.setVisible(true);
 		this.propertyTable.setModel(fillTable());
@@ -94,10 +104,9 @@ public class SalaView extends PatrimonioView {
 
 	@Override
 	// Method generates a room modify form.
-	protected void alterarAction (int index) {
+	protected void alterarAction(int index) {
 
-		AlterarSala modifyRoom = new AlterarSala(new JFrame(), true,
-				index);
+		AlterarSala modifyRoom = new AlterarSala(new JFrame(), true, index);
 		modifyRoom.setResizable(false);
 		modifyRoom.setVisible(true);
 		this.propertyTable.setModel(fillTable());
@@ -105,50 +114,61 @@ public class SalaView extends PatrimonioView {
 
 	@Override
 	// Method deletes a room.
-	protected void excluirAction (int index) {
+	protected void excluirAction(int index) {
+
+		String successMessage = International.getInstance().getLabels()
+				.getString("success");
+		String removeMessage = International.getInstance().getLabels()
+				.getString("delete");
+		String errorMessage = International.getInstance().getLabels()
+				.getString("error");
+		String removeQuestion = International.getInstance().getMessages()
+				.getString("classroomDeleteQuestion");
+		String removeConfirmation = International.getInstance().getMessages()
+				.getString("classroomDeleteSuccess");
 
 		try {
-			int confirm = JOptionPane
-					.showConfirmDialog(this, "Deseja mesmo excluir Sala: "
-							+ ManterSala.getInstance().getRoomsVec()
-									.get(index).getDescription() + "?",
-							"Excluir",
-							JOptionPane.YES_NO_OPTION);
+			int confirm = JOptionPane.showConfirmDialog(this, removeQuestion
+					+ ManterSala.getInstance().getRoomsVec().get(index)
+							.getDescription() + "?", removeMessage,
+					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
 				ManterSala.getInstance().delete(
 						ManterSala.getInstance().getRoomsVec().get(index));
-				JOptionPane.showMessageDialog(this,
-						"Sala excluida com sucesso", "Sucesso",
-						JOptionPane.INFORMATION_MESSAGE, null);
-			}  else {
-			// Nothing here.
+				JOptionPane.showMessageDialog(this, removeConfirmation,
+						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
+			} else {
+				// Nothing here.
 			}
 			this.propertyTable.setModel(fillTable());
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
 	@Override
 	// Method generates a visualize form.
-	protected void visualizarAction (int index) {
+	protected void visualizarAction(int index) {
+
+		String errorMessage = International.getInstance().getLabels()
+				.getString("error");
 
 		try {
-			DiaReservaSala dayReservation = new DiaReservaSala(
-					new JFrame(), true, index);
+			DiaReservaSala dayReservation = new DiaReservaSala(new JFrame(),
+					true, index);
 			dayReservation.setResizable(false);
 			dayReservation.setVisible(true);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
