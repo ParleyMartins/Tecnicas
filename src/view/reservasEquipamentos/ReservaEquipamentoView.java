@@ -169,22 +169,22 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.instanceTeacherTextArea.setBackground(new Color(200, 208, 254));
 		this.instanceTeacherTextArea.setColumns(20);
 		this.instanceTeacherTextArea.setRows(5);
-		this.instanceTeacherTextArea.setName("ProfessorTextArea");
+		this.instanceTeacherTextArea.setName(International.getInstance().getLabels().getString("teacher"));
 		this.jScrollPane1.setViewportView(this.instanceTeacherTextArea);
 
 		this.equipmentTextArea.setEditable(false);
 		this.equipmentTextArea.setBackground(new Color(200, 208, 254));
 		this.equipmentTextArea.setColumns(20);
 		this.equipmentTextArea.setRows(5);
-		this.equipmentTextArea.setName("EquipamentoTextArea");
+		this.equipmentTextArea.setName(International.getInstance().getLabels().getString("equipment"));
 		this.jScrollPane2.setViewportView(this.equipmentTextArea);
 
 		this.dateTextField.setEditable(false);
 		this.dateTextField.setBackground(new Color(200, 208, 254));
-		this.dateTextField.setName("DiaTextField");
+		this.dateTextField.setName(International.getInstance().getLabels().getString("date"));
 
-		this.searchCpfButton.setText("Buscar CPF");
-		this.searchCpfButton.setName("BuscarCpfButton");
+		this.searchCpfButton.setText(International.getInstance().getButtons().getString("searchCpf"));
+		this.searchCpfButton.setName(International.getInstance().getButtons().getString("searchCpf"));
 		this.searchCpfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -391,7 +391,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 
 		String nome = this.cpfTextField.getText();
 		if (nome.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", International.getInstance().getLabels().getString("error"),
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("cpfBlank"), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} else {
 			getTeacherFromDB();
