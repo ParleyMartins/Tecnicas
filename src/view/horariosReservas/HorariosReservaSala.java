@@ -110,11 +110,17 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 		dataTable.addColumn(International.getInstance().getLabels().getString("reservedChairs"));
 		dataTable.addColumn(International.getInstance().getLabels().getString("fullCapacity"));
 
+		if (this.date.length() < 10) {
+			
+			this.date = "0" + this.date;
+		} else {
+			
+			// Nothing here.
+		}
 		this.month = Integer.parseInt(this.date.substring(3, 5));
 
 		try {
-			Vector clientPerDate = this.teacherInstance
-					.searchPerDate(this.date);
+			Vector clientPerDate = this.teacherInstance.searchPerDate(this.date);
 
 			if (clientPerDate != null){
 				for (int i = 0 ; i < clientPerDate.size() ; i++) {

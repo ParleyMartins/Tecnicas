@@ -1,6 +1,6 @@
 /**
 ManterSala
-Include the code and description of the room, change, and delete devices.
+Include the code and description of the room, modify, and delete devices.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterSala.java
 */
 package control;

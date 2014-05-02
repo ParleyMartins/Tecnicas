@@ -99,7 +99,7 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 	}
 
-	// Change an entry in the database.
+	// Modify an entry in the database.
 	public void modify (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation)
 			throws ReservaException, SQLException {
 

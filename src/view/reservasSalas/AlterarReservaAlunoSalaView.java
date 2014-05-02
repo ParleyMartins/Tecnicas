@@ -48,7 +48,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 							this.qntChairsReservedTextField.getText(),
 							studentReservation);
 
-			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveChangeSucess"),
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveModifySucess"),
 					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
@@ -136,8 +136,8 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 	// This method resets some components
 	private void resetComponents ( ) {
 
-		this.reserveButton.setText(International.getInstance().getButtons().getString("change"));
-		this.reserveButton.setName(International.getInstance().getLabels().getString("change"));
+		this.reserveButton.setText(International.getInstance().getButtons().getString("modify"));
+		this.reserveButton.setName(International.getInstance().getLabels().getString("modify"));
 		this.studentRadioButton.setSelected(true);
 		this.cpfLabel.setEnabled(false);
 		alunoRadioButtonAction();

@@ -42,7 +42,7 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 			teacherInstance.modify(this.turposeTextField.getText(),
 					reservaProfessor);
 
-			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveChangeSucess"),
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveModifySucess"),
 					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
@@ -102,8 +102,8 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 	// This method resets some components
 	private void resetComponents ( ) {
 
-		this.reserveButton.setText(International.getInstance().getButtons().getString("change"));
-		this.reserveButton.setName(International.getInstance().getButtons().getString("change"));
+		this.reserveButton.setText(International.getInstance().getButtons().getString("modify"));
+		this.reserveButton.setName(International.getInstance().getButtons().getString("modify"));
 		this.teacherRadioButton.setSelected(true);
 		this.cpfLabel.setEnabled(false);
 		professorRadioButtonAction();

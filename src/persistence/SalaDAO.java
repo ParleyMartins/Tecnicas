@@ -63,7 +63,7 @@ public class SalaDAO {
 				room.getCapacity() + ");");
 	}
 
-	// Change a Sala info in the database.
+	// Modify a Sala info in the database.
 	public void modify (Sala oldRoom, Sala newRoom) throws SQLException,
 			PatrimonioException {
 

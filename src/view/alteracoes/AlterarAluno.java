@@ -6,7 +6,10 @@ https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
 package view.alteracoes;
 
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+
+import view.International;
 import view.cadastros.CadastroCliente;
 import control.ManterAluno;
 import exception.ClienteException;
@@ -19,8 +22,8 @@ public class AlterarAluno extends CadastroCliente {
 	public AlterarAluno (java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setTitle("Alterar");
-		this.setName("AlterarAluno");
+		this.setTitle(International.getInstance().getButtons().getString("register"));
+		this.setName(International.getInstance().getButtons().getString("register"));
 		this.registerButton.setText("Alterar");
 		this.registerButton.setName("Alterar");
 		this.index2 = index;

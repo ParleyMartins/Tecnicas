@@ -62,22 +62,22 @@ public abstract class CadastroCliente extends JDialog {
 		this.cancelButton = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle(International.getInstance().getButtons().getString("registration"));
+		setTitle(International.getInstance().getLabels().getString("registration"));
 		setResizable(false);
 
-		this.nameLabel.setText(International.getInstance().getButtons().getString("name: "));
-		this.enrrollmentNumberLabel.setText(International.getInstance().getButtons().getString("enrollment: "));
-		this.cpfLabel.setText(International.getInstance().getButtons().getString("cpf:"));
-		this.emailLabel.setText(International.getInstance().getButtons().getString("email: "));
-		this.phoneNumberLabel.setText(International.getInstance().getButtons().getString("telephone: "));
-		this.nameTxtField.setName(International.getInstance().getButtons().getString("name: "));
-		this.enrollmentNumberTxtField.setName(International.getInstance().getButtons().getString("enrollment"));
+		this.nameLabel.setText(International.getInstance().getLabels().getString("name"));
+		this.enrrollmentNumberLabel.setText(International.getInstance().getLabels().getString("enrollment"));
+		this.cpfLabel.setText(International.getInstance().getLabels().getString("cpf"));
+		this.emailLabel.setText(International.getInstance().getLabels().getString("email"));
+		this.phoneNumberLabel.setText(International.getInstance().getLabels().getString("telephone"));
+		this.nameTxtField.setName(International.getInstance().getLabels().getString("name"));
+		this.enrollmentNumberTxtField.setName(International.getInstance().getLabels().getString("enrollment"));
 		this.enrollmentNumberTxtField.setHorizontalAlignment(JTextField.LEFT);
-		this.cpfTxtField.setName(International.getInstance().getButtons().getString("cpf"));
-		this.emailTxtField.setName(International.getInstance().getButtons().getString("email"));
-		this.phoneNumberTxtField.setName(International.getInstance().getButtons().getString("telephone"));
-		this.registerButton.setText(International.getInstance().getButtons().getString("access"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("access"));
+		this.cpfTxtField.setName(International.getInstance().getLabels().getString("cpf"));
+		this.emailTxtField.setName(International.getInstance().getLabels().getString("email"));
+		this.phoneNumberTxtField.setName(International.getInstance().getLabels().getString("telephone"));
+		this.registerButton.setText(International.getInstance().getButtons().getString("register"));
+		this.registerButton.setName(International.getInstance().getButtons().getString("register"));
 		this.registerButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {

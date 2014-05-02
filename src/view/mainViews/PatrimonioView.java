@@ -112,9 +112,9 @@ public abstract class PatrimonioView extends JDialog {
 		});
 
 		modiftyBtn.setText(International.getInstance().getButtons()
-				.getString("change"));
+				.getString("modify"));
 		modiftyBtn.setName(International.getInstance().getButtons()
-				.getString("change"));
+				.getString("modify"));
 		modiftyBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent evt) {

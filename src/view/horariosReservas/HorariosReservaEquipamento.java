@@ -86,7 +86,13 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 					.getString("code"));
 			dataTable.addColumn(International.getInstance().getLabels()
 					.getString("description"));
-
+			if (this.date.length() < 10) {
+				
+				this.date = "0" + this.date;
+			} else {
+				
+				// Nothing here.
+			}
 			this.month = Integer.parseInt(this.date.substring(3, 5));
 
 			Vector <ReservaEquipamentoProfessor> monthReservations = this.instance

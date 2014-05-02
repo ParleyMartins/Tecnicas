@@ -140,9 +140,9 @@ public abstract class ClienteView extends JDialog {
 		});
 
 		modifyBtn.setText(International.getInstance().getButtons()
-				.getString("change"));
+				.getString("modify"));
 		modifyBtn.setName(International.getInstance().getButtons()
-				.getString("change"));
+				.getString("modify"));
 		modifyBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent evt) {

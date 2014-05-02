@@ -41,7 +41,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 			this.instanceManageResEquipmentTeacher.modify(this.instanceOfReserve,
 					this.dateTextField.getText(), this.hourTextField.getText(),
 					this.instanceOfEquipment, this.instanceOfReserve.getTeacher());
-			JOptionPane.showMessageDialog(this,International.getInstance().getMessages().getString("reserveChangeSucess") ,
+			JOptionPane.showMessageDialog(this,International.getInstance().getMessages().getString("reserveModifySucess") ,
 					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ReservaException ex) {
@@ -55,7 +55,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	private void resetComponents ( ) {
 
-		this.reserveButton.setText(International.getInstance().getLabels().getString("change"));
+		this.reserveButton.setText(International.getInstance().getLabels().getString("modify"));
 		this.reserveButton.setName(International.getInstance().getButtons().getString("modify"));
 		this.cpfLabel.setEnabled(false);
 		this.cpfTextField.setBackground(new Color(200, 208, 254));

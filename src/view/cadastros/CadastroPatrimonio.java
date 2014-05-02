@@ -57,22 +57,22 @@ public abstract class CadastroPatrimonio extends JDialog {
 		this.descriptionTxtArea = new JTextArea();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle(International.getInstance().getButtons().getString("registration"));
+		setTitle(International.getInstance().getButtons().getString("register"));
 		setResizable(false);
 
-		this.codeLabel.setText(International.getInstance().getButtons().getString("code"));
+		this.codeLabel.setText(International.getInstance().getLabels().getString("code"));
 
-		this.capacityLabel.setText(International.getInstance().getButtons().getString("fullCapacity"));
-		this.descriptionLabel.setText(International.getInstance().getButtons().getString("description"));
+		this.capacityLabel.setText(International.getInstance().getLabels().getString("fullCapacity"));
+		this.descriptionLabel.setText(International.getInstance().getLabels().getString("description"));
 
 		this.capacityTxtField.setHorizontalAlignment(JTextField.LEFT);
 
-		this.codeTxtField.setName(International.getInstance().getButtons().getString("code"));
-		this.capacityTxtField.setName(International.getInstance().getButtons().getString("fullCapacity"));;
-		this.descriptionTxtArea.setName(International.getInstance().getButtons().getString("description"));
+		this.codeTxtField.setName(International.getInstance().getLabels().getString("code"));
+		this.capacityTxtField.setName(International.getInstance().getLabels().getString("fullCapacity"));;
+		this.descriptionTxtArea.setName(International.getInstance().getLabels().getString("description"));
 		
-		this.registerButton.setText(International.getInstance().getButtons().getString("access"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("access"));
+		this.registerButton.setText(International.getInstance().getButtons().getString("register"));
+		this.registerButton.setName(International.getInstance().getButtons().getString("register"));
 		this.registerButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
