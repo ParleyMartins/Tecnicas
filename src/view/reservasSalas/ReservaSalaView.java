@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -25,6 +26,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+
+import view.International;
 import model.Aluno;
 import model.Professor;
 import model.Sala;
@@ -82,7 +85,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.teacherInstance = ManterResSalaProfessor.getInstance();
 		this.studentInstance = ManterResSalaAluno.getInstance();
 		initComponents();
-		this.searchCpfButton.setName("BuscarCpfButton");
+		this.searchCpfButton.setName(International.getInstance().getButtons().getString("searchCpf"));
 
 	}
 
@@ -103,9 +106,9 @@ public abstract class ReservaSalaView extends JDialog {
 			Vector <Aluno> alunos = ManterAluno.getInstance().searchCpf(
 					this.cpfTextField.getText());
 			if (alunos.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Aluno nao Cadastrado."
-						+ " Digite o CPF correto ou cadastre o aluno desejado",
-						"Erro", JOptionPane.ERROR_MESSAGE, null);
+				JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("studentNotExists")
+						+ International.getInstance().getMessages().getString("correctCPForRegisterStudent"),
+						International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 				this.studentTextArea.setText("");
 				this.student = null;
 				return;
@@ -113,14 +116,14 @@ public abstract class ReservaSalaView extends JDialog {
 			this.student = alunos.firstElement();
 			this.studentTextArea.setText(this.student.toString());
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
@@ -133,9 +136,9 @@ public abstract class ReservaSalaView extends JDialog {
 				JOptionPane
 						.showMessageDialog(
 								this,
-								"Professor nao Cadastrado."
-										+ " Digite o CPF correto ou cadastre o professor desejado",
-								"Erro", JOptionPane.ERROR_MESSAGE, null);
+								International.getInstance().getMessages().getString("teacherNotExists")
+										+ International.getInstance().getMessages().getString("correctCPForRegisterTeacher"),
+								International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 				this.studentTextArea.setText("");
 				this.teacher = null;
 				return;
@@ -143,14 +146,14 @@ public abstract class ReservaSalaView extends JDialog {
 			this.teacher = professor.firstElement();
 			this.studentTextArea.setText(professor.firstElement().toString());
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
@@ -200,14 +203,14 @@ public abstract class ReservaSalaView extends JDialog {
 		setName("ReservaPatrimonio");
 		setResizable(false);
 
-		this.roomLabel.setText("Sala: ");
-		this.roomLabel.setName("SalaLabel");
+		this.roomLabel.setText(International.getInstance().getLabels().getString("classroom"));
+		this.roomLabel.setName(International.getInstance().getLabels().getString("classroom"));
 
-		this.studentLabel.setText("Aluno:");
-		this.studentLabel.setName("AlunoLabel");
+		this.studentLabel.setText(International.getInstance().getLabels().getString("student"));
+		this.studentLabel.setName(International.getInstance().getLabels().getString("student"));
 
 		this.studentTeacherbuttonGroup.add(this.teacherRadioButton);
-		this.teacherRadioButton.setText("Professor");
+		this.teacherRadioButton.setText(International.getInstance().getButtons().getString("teacher"));
 		this.teacherRadioButton.setName("this.professorRadioButton");
 		this.teacherRadioButton.addActionListener(new ActionListener() {
 
@@ -218,7 +221,7 @@ public abstract class ReservaSalaView extends JDialog {
 		});
 
 		this.studentTeacherbuttonGroup.add(this.studentRadioButton);
-		this.studentRadioButton.setText("Aluno");
+		this.studentRadioButton.setText(International.getInstance().getButtons().getString("student"));
 		this.studentRadioButton.setName("this.alunoRadioButton");
 		this.studentRadioButton.addActionListener(new ActionListener() {
 
@@ -270,10 +273,10 @@ public abstract class ReservaSalaView extends JDialog {
 												Short.MAX_VALUE))
 				);
 
-		this.cpfLabel.setText("Digite o CPF desejado :");
-		this.cpfLabel.setName("CpfLabel");
+		this.cpfLabel.setText(International.getInstance().getMessages().getString("enterCpf"));
+		this.cpfLabel.setName(International.getInstance().getLabels().getString("cpf"));
 
-		this.cpfTextField.setName("CPF");
+		this.cpfTextField.setName(International.getInstance().getLabels().getString("cpf"));
 		this.cpfTextField.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -282,10 +285,10 @@ public abstract class ReservaSalaView extends JDialog {
 			}
 		});
 
-		this.turposeTextLabel.setText("Finalidade: ");
-		this.turposeTextLabel.setName("FinalidadeLabel");
+		this.turposeTextLabel.setText(International.getInstance().getLabels().getString("finality"));
+		this.turposeTextLabel.setName(International.getInstance().getLabels().getString("finality"));
 
-		this.turposeTextField.setName("Finalidade");
+		this.turposeTextField.setName(International.getInstance().getLabels().getString("finality"));
 
 		this.qntChairsLabel.setText("Quantidade de Cadeiras Disponiveis: ");
 		this.qntChairsLabel.setName("QuantidadeCadeirasDisponiveisLabel");
@@ -670,7 +673,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		String name = this.cpfTextField.getText();
 		if (name.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", "Erro",
+			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 			this.studentTextArea.setText("");
 		} else {
@@ -683,7 +686,7 @@ public abstract class ReservaSalaView extends JDialog {
 					break;
 				default:
 					JOptionPane.showMessageDialog(this,
-							"Selecione Aluno ou Professor", "Erro",
+							"Selecione Aluno ou Professor", International.getInstance().getLabels().getString("error"),
 							JOptionPane.ERROR_MESSAGE, null);
 			}
 		}
@@ -714,7 +717,7 @@ public abstract class ReservaSalaView extends JDialog {
 				break;
 			default:
 				JOptionPane.showMessageDialog(this,
-						"Selecione Aluno ou Professor", "Erro",
+						"Selecione Aluno ou Professor", International.getInstance().getLabels().getString("error"),
 						JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

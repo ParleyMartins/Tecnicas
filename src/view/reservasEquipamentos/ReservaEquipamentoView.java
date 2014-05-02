@@ -77,7 +77,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 						.showMessageDialog(
 								this,
 								International.getInstance().getMessages().getString("noTeacherExting")
-										+ International.getInstance().getMessages().getString("correctCPForRegister"),
+										+ International.getInstance().getMessages().getString("correctCPForRegisterTeacher"),
 										International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 				return;
 			}
