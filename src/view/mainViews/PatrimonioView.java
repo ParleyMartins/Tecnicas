@@ -24,8 +24,11 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import view.International;
+
 public abstract class PatrimonioView extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	protected JButton modiftyBtn;
 	protected JButton registerBtn;
 	protected JButton deleteBtn;
@@ -52,11 +55,15 @@ public abstract class PatrimonioView extends JDialog {
 
 		String propertyName = this.searchTextField.getText();
 		if (propertyName.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum texto digitado",
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+			String noTextMessage = International.getInstance().getMessages()
+					.getString("noText");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
+
+			JOptionPane.showMessageDialog(this, noTextMessage,
+					errorMessage, JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			JOptionPane.showMessageDialog(this, "Funciona", "Teste",
-					JOptionPane.WARNING_MESSAGE, null);
+			// Do nothing. 
 		}
 	}
 
@@ -92,8 +99,10 @@ public abstract class PatrimonioView extends JDialog {
 		buttonsPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		registerBtn.setText("Cadastrar");
-		registerBtn.setName("Cadastrar");
+		registerBtn.setText(International.getInstance().getButtons()
+				.getString("register"));
+		registerBtn.setName(International.getInstance().getButtons()
+				.getString("register"));
 		registerBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -102,8 +111,10 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		modiftyBtn.setText("Alterar");
-		modiftyBtn.setName("Alterar");
+		modiftyBtn.setText(International.getInstance().getButtons()
+				.getString("change"));
+		modiftyBtn.setName(International.getInstance().getButtons()
+				.getString("change"));
 		modiftyBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -112,8 +123,10 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		deleteBtn.setText("Excluir");
-		deleteBtn.setName("Excluir");
+		deleteBtn.setText(International.getInstance().getButtons()
+				.getString("remove"));
+		deleteBtn.setName(International.getInstance().getButtons()
+				.getString("remove"));
 		deleteBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -122,8 +135,10 @@ public abstract class PatrimonioView extends JDialog {
 			}
 		});
 
-		visualizeBtn.setText("Visualizar Horarios");
-		visualizeBtn.setName("Visualizar Horarios");
+		visualizeBtn.setText(International.getInstance().getButtons()
+				.getString("viewSchedule"));
+		visualizeBtn.setName(International.getInstance().getButtons()
+				.getString("viewSchedule"));
 		visualizeBtn.setEnabled(true);
 		visualizeBtn.addActionListener(new ActionListener() {
 
@@ -316,7 +331,12 @@ public abstract class PatrimonioView extends JDialog {
 
 		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
-			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+			String lineMessage = International.getInstance().getMessages()
+					.getString("selectRow");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
+			
+			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		} else {
@@ -336,7 +356,12 @@ public abstract class PatrimonioView extends JDialog {
 
 		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
-			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+			String lineMessage = International.getInstance().getMessages()
+					.getString("selectRow");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
+			
+			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		} else {
@@ -351,7 +376,12 @@ public abstract class PatrimonioView extends JDialog {
 
 		int index = this.propertyTable.getSelectedRow();
 		if (index < 0) {
-			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+			String lineMessage = International.getInstance().getMessages()
+					.getString("selectRow");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
+			
+			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		} else {

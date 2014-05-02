@@ -341,12 +341,7 @@ public abstract class ClienteView extends JDialog {
 			JOptionPane.showMessageDialog(this, noTextMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			String worksMessage = International.getInstance().getMessages()
-					.getString("selectRow");
-			String errorMessage = International.getInstance().getLabels()
-					.getString("error");
-			JOptionPane.showMessageDialog(this, worksMessage, errorMessage,
-					JOptionPane.WARNING_MESSAGE, null);
+			// Do nothing.
 		}
 	}
 
