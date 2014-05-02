@@ -43,28 +43,28 @@ public abstract class ClienteView extends JDialog {
 	private JTextField searchTextField;
 
 	// Constructor creates a ClientView form.
-	public ClienteView (Frame parent, boolean modal) {
+	public ClienteView(Frame parent, boolean modal) {
 
 		super(parent, modal);
 		initComponents();
 	}
 
 	// Method gets the iterator from a Client.
-	public abstract Iterator getIterator ( );
+	public abstract Iterator getIterator();
 
 	// Method generates a client register form.
-	public abstract void cadastrarAction ( );
+	public abstract void cadastrarAction();
 
 	// Method generates a client modify form.
-	public abstract void alterarAction (int index);
+	public abstract void alterarAction(int index);
 
 	// Method deletes a client.
-	public abstract void excluirAction ( );
+	public abstract void excluirAction();
 
 	// This method fills a vector with the clients on database.
-	protected Vector <String> fillDataVector (Cliente client) {
+	protected Vector<String> fillDataVector(Cliente client) {
 
-		Vector <String> dataTable = new Vector <String>();
+		Vector<String> dataTable = new Vector<String>();
 
 		if (client == null) {
 			return null;
@@ -83,17 +83,22 @@ public abstract class ClienteView extends JDialog {
 	}
 
 	// This method fills a table with the clients on database.
-	protected DefaultTableModel fillTable ( ) {
+	protected DefaultTableModel fillTable() {
 
 		DefaultTableModel clientTable = new DefaultTableModel();
 
-		Iterator <Cliente> i = getIterator();
+		Iterator<Cliente> i = getIterator();
 
-		clientTable.addColumn(International.getInstance().getLabels().getString("enrollmentNumber"));
-		clientTable.addColumn(International.getInstance().getLabels().getString("name"));
-		clientTable.addColumn(International.getInstance().getLabels().getString("telephone"));
-		clientTable.addColumn(International.getInstance().getLabels().getString("cpf"));
-		clientTable.addColumn(International.getInstance().getLabels().getString("email"));
+		clientTable.addColumn(International.getInstance().getLabels()
+				.getString("enrollmentNumber"));
+		clientTable.addColumn(International.getInstance().getLabels()
+				.getString("name"));
+		clientTable.addColumn(International.getInstance().getLabels()
+				.getString("telephone"));
+		clientTable.addColumn(International.getInstance().getLabels()
+				.getString("cpf"));
+		clientTable.addColumn(International.getInstance().getLabels()
+				.getString("email"));
 
 		while (i.hasNext()) {
 			Cliente cliente = i.next();
@@ -104,7 +109,7 @@ public abstract class ClienteView extends JDialog {
 	}
 
 	// This method initializes the components.
-	private void initComponents ( ) {
+	private void initComponents() {
 
 		buttonsPanel = new JPanel();
 		registerBtn = new JButton();
@@ -122,31 +127,37 @@ public abstract class ClienteView extends JDialog {
 		buttonsPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		registerBtn.setText(International.getInstance().getButtons().getString("register"));
-		registerBtn.setName(International.getInstance().getButtons().getString("register"));
+		registerBtn.setText(International.getInstance().getButtons()
+				.getString("register"));
+		registerBtn.setName(International.getInstance().getButtons()
+				.getString("register"));
 		registerBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				cadastrarBtnActionPerformed(evt);
 			}
 		});
 
-		modifyBtn.setText(International.getInstance().getButtons().getString("change"));
-		modifyBtn.setName(International.getInstance().getButtons().getString("change"));
+		modifyBtn.setText(International.getInstance().getButtons()
+				.getString("change"));
+		modifyBtn.setName(International.getInstance().getButtons()
+				.getString("change"));
 		modifyBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				alterarBtnActionPerformed(evt);
 			}
 		});
 
-		deleteBtn.setText(International.getInstance().getButtons().getString("remove"));
-		deleteBtn.setName(International.getInstance().getButtons().getString("remove"));
+		deleteBtn.setText(International.getInstance().getButtons()
+				.getString("remove"));
+		deleteBtn.setName(International.getInstance().getButtons()
+				.getString("remove"));
 		deleteBtn.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				excluirBtnActionPerformed(evt);
 			}
@@ -203,11 +214,12 @@ public abstract class ClienteView extends JDialog {
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap(78, Short.MAX_VALUE)));
 
-		searchLbl.setText(International.getInstance().getLabels().getString("searchLabel"));
+		searchLbl.setText(International.getInstance().getLabels()
+				.getString("searchLabel"));
 
 		searchTextField.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 
 				pesquisarTextFieldActionPerformed(evt);
 			}
@@ -215,17 +227,15 @@ public abstract class ClienteView extends JDialog {
 
 		GroupLayout mainPanelLayout = new GroupLayout(mainPanel);
 		mainPanel.setLayout(mainPanelLayout);
-		mainPanelLayout
-				.setHorizontalGroup(mainPanelLayout
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(
-								mainPanelLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(searchLbl)
-										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(searchTextField)));
+		mainPanelLayout.setHorizontalGroup(mainPanelLayout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGroup(
+				mainPanelLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(searchLbl)
+						.addPreferredGap(
+								LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(searchTextField)));
 		mainPanelLayout.setVerticalGroup(mainPanelLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				mainPanelLayout
@@ -319,38 +329,44 @@ public abstract class ClienteView extends JDialog {
 	}
 
 	// This method generates the action to search a client.
-	private void pesquisarTextFieldActionPerformed (ActionEvent evt) {
+	private void pesquisarTextFieldActionPerformed(ActionEvent evt) {
 
 		String clientName = this.searchTextField.getText();
 		if (clientName.isEmpty()) {
-			String noTextMessage = International.getInstance().getMessages().getString("noText");
-			String errorMessage = International.getInstance().getLabels().getString("error");
-	
-			JOptionPane.showMessageDialog(this, noTextMessage,
-					errorMessage, JOptionPane.ERROR_MESSAGE, null);
+			String noTextMessage = International.getInstance().getMessages()
+					.getString("noText");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
+
+			JOptionPane.showMessageDialog(this, noTextMessage, errorMessage,
+					JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			String worksMessage = International.getInstance().getMessages().getString("selectRow");
-			String errorMessage = International.getInstance().getLabels().getString("error");
+			String worksMessage = International.getInstance().getMessages()
+					.getString("selectRow");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
 			JOptionPane.showMessageDialog(this, worksMessage, errorMessage,
 					JOptionPane.WARNING_MESSAGE, null);
 		}
 	}
 
 	// This method generates the action to register a client.
-	private void cadastrarBtnActionPerformed (ActionEvent evt) {
+	private void cadastrarBtnActionPerformed(ActionEvent evt) {
 
 		cadastrarAction();
 
 	}
 
 	// This method generates the action to modify a client.
-	private void alterarBtnActionPerformed (ActionEvent evt) {
+	private void alterarBtnActionPerformed(ActionEvent evt) {
 
 		int index = this.clientTable.getSelectedRow();
 		if (index < 0) {
-			String lineMessage = International.getInstance().getMessages().getString("selectRow");
-			String errorMessage = International.getInstance().getLabels().getString("error");
-			
+			String lineMessage = International.getInstance().getMessages()
+					.getString("selectRow");
+			String errorMessage = International.getInstance().getLabels()
+					.getString("error");
+
 			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
@@ -363,7 +379,7 @@ public abstract class ClienteView extends JDialog {
 	}
 
 	// This method generates the action to delete a client.
-	private void excluirBtnActionPerformed (ActionEvent evt) {
+	private void excluirBtnActionPerformed(ActionEvent evt) {
 
 		excluirAction();
 
