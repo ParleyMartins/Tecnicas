@@ -25,10 +25,13 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+
+import view.International;
 import model.Cliente;
 
 public abstract class ClienteView extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	protected JTable clientTable;
 	private JButton modifyBtn;
 	private JButton registerBtn;
@@ -86,11 +89,11 @@ public abstract class ClienteView extends JDialog {
 
 		Iterator <Cliente> i = getIterator();
 
-		clientTable.addColumn("Matricula");
-		clientTable.addColumn("Nome");
-		clientTable.addColumn("Telefone");
-		clientTable.addColumn("CPF");
-		clientTable.addColumn("E-mail");
+		clientTable.addColumn(International.getInstance().getLabels().getString("enrollmentNumber"));
+		clientTable.addColumn(International.getInstance().getLabels().getString("name"));
+		clientTable.addColumn(International.getInstance().getLabels().getString("telephone"));
+		clientTable.addColumn(International.getInstance().getLabels().getString("cpf"));
+		clientTable.addColumn(International.getInstance().getLabels().getString("email"));
 
 		while (i.hasNext()) {
 			Cliente cliente = i.next();
@@ -119,8 +122,8 @@ public abstract class ClienteView extends JDialog {
 		buttonsPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		registerBtn.setText("Cadastrar");
-		registerBtn.setName("Cadastrar");
+		registerBtn.setText(International.getInstance().getButtons().getString("register"));
+		registerBtn.setName(International.getInstance().getButtons().getString("register"));
 		registerBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -129,8 +132,8 @@ public abstract class ClienteView extends JDialog {
 			}
 		});
 
-		modifyBtn.setText("Alterar");
-		modifyBtn.setName("Alterar");
+		modifyBtn.setText(International.getInstance().getButtons().getString("change"));
+		modifyBtn.setName(International.getInstance().getButtons().getString("change"));
 		modifyBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -139,8 +142,8 @@ public abstract class ClienteView extends JDialog {
 			}
 		});
 
-		deleteBtn.setText("Excluir");
-		deleteBtn.setName("Excluir");
+		deleteBtn.setText(International.getInstance().getButtons().getString("remove"));
+		deleteBtn.setName(International.getInstance().getButtons().getString("remove"));
 		deleteBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -200,7 +203,7 @@ public abstract class ClienteView extends JDialog {
 												GroupLayout.PREFERRED_SIZE)
 										.addContainerGap(78, Short.MAX_VALUE)));
 
-		searchLbl.setText("Digite a matricula desejada: ");
+		searchLbl.setText(International.getInstance().getLabels().getString("searchLabel"));
 
 		searchTextField.addActionListener(new ActionListener() {
 
@@ -320,10 +323,15 @@ public abstract class ClienteView extends JDialog {
 
 		String clientName = this.searchTextField.getText();
 		if (clientName.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum texto digitado",
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+			String noTextMessage = International.getInstance().getMessages().getString("noText");
+			String errorMessage = International.getInstance().getLabels().getString("error");
+	
+			JOptionPane.showMessageDialog(this, noTextMessage,
+					errorMessage, JOptionPane.ERROR_MESSAGE, null);
 		} else {
-			JOptionPane.showMessageDialog(this, "Funciona", "Teste",
+			String worksMessage = International.getInstance().getMessages().getString("selectRow");
+			String errorMessage = International.getInstance().getLabels().getString("error");
+			JOptionPane.showMessageDialog(this, worksMessage, errorMessage,
 					JOptionPane.WARNING_MESSAGE, null);
 		}
 	}
@@ -340,7 +348,10 @@ public abstract class ClienteView extends JDialog {
 
 		int index = this.clientTable.getSelectedRow();
 		if (index < 0) {
-			JOptionPane.showMessageDialog(this, "Selecione uma linha!", "Erro",
+			String lineMessage = International.getInstance().getMessages().getString("selectRow");
+			String errorMessage = International.getInstance().getLabels().getString("error");
+			
+			JOptionPane.showMessageDialog(this, lineMessage, errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		} else {
