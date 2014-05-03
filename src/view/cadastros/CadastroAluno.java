@@ -35,7 +35,7 @@ public class CadastroAluno extends CadastroCliente {
 						this.emailTxtField.getText());
 
 				JOptionPane.showMessageDialog(this,
-						International.getInstance().getMessages().getString("successTeacher"), 
+						International.getInstance().getMessages().getString("successStudent"), 
 						International.getInstance().getLabels().getString("success"),
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
