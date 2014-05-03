@@ -22,6 +22,7 @@ import view.International;
 
 public abstract class CadastroCliente extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	protected JButton registerButton;
 	protected JTextField phoneNumberTxtField;
 	protected JTextField nameTxtField;

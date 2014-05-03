@@ -15,6 +15,8 @@ import exception.ClienteException;
 
 public class CadastroAluno extends CadastroCliente {
 
+	private static final long serialVersionUID = 1L;
+
 	// Constructor creates a RegisterStudent form.
 	public CadastroAluno(java.awt.Frame parentWindow, boolean modal) {
 
@@ -27,7 +29,7 @@ public class CadastroAluno extends CadastroCliente {
 	public void registerAction ( ) {
 
 		try {
-			if (this.registerButton.getText().equals("Cadastrar")) {
+			if (this.registerButton.getText().equals(International.getInstance().getButtons().getString("register"))) {
 				ManterAluno.getInstance().insert(this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
 						this.enrollmentNumberTxtField.getText(),
@@ -35,7 +37,7 @@ public class CadastroAluno extends CadastroCliente {
 						this.emailTxtField.getText());
 
 				JOptionPane.showMessageDialog(this,
-						International.getInstance().getMessages().getString("successTeacher"), 
+						International.getInstance().getMessages().getString("successStudent"), 
 						International.getInstance().getLabels().getString("success"),
 						JOptionPane.INFORMATION_MESSAGE,
 						null);

@@ -7,12 +7,16 @@ package view.cadastros;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
+import view.International;
 import control.ManterEquipamento;
 import exception.PatrimonioException;
 
 public class CadastroEquipamento extends CadastroPatrimonio {
 
-	public CadastroEquipamento (java.awt.Frame parentWindow, boolean modal) {
+	private static final long serialVersionUID = 1L;
+
+	public CadastroEquipamento(java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
 		this.setName("CadastroEquipamento");
@@ -20,25 +24,28 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 		this.capacityTxtField.setVisible(false);
 	}
 
-	
-	protected void registerAction ( ) {
+	protected void registerAction() {
+
+		String errorMessage = International.getInstance().getLabels()
+				.getString("error");
+		String successMessage = International.getInstance().getLabels()
+				.getString("success");
+		String createdMessage = International.getInstance().getMessages()
+				.getString("successEquipment");
 
 		try {
-			ManterEquipamento.getInstance().insert(
-					this.codeTxtField.getText(),
+			ManterEquipamento.getInstance().insert(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText());
 
-			JOptionPane.showMessageDialog(this,
-					"Equipamento Cadastrado com sucesso", "Sucesso",
-					JOptionPane.INFORMATION_MESSAGE,
-					null);
+			JOptionPane.showMessageDialog(this, createdMessage, successMessage,
+					JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),

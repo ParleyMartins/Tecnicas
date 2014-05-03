@@ -23,6 +23,7 @@ import view.International;
 
 public abstract class CadastroPatrimonio extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	protected JButton registerButton;
 	protected JButton cancelButton;
 	protected JLabel codeLabel;
