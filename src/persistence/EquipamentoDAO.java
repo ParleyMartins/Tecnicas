@@ -237,7 +237,7 @@ public class EquipamentoDAO {
 	private boolean isInOtherDB (Equipamento equipment) throws SQLException {
 
 		return this
-				.isInDBGeneric("SELECT * FROM reserva_equipamento WHERE "
+				.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
 						+ "equipamento.codigo = \"" + equipment.getIdCode() + "\" and "
 						+ "equipamento.descricao = \"" + equipment.getDescription()
