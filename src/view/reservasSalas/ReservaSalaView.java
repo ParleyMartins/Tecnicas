@@ -41,6 +41,7 @@ import exception.ReservaException;
 
 public abstract class ReservaSalaView extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	protected final int STUDENT = 1;
 	protected final int TEACHER = 2;
 	protected final int ERROR = -1;
@@ -273,7 +274,7 @@ public abstract class ReservaSalaView extends JDialog {
 												Short.MAX_VALUE))
 				);
 
-		this.cpfLabel.setText(International.getInstance().getLabels().getString("searchCpfLabel"));
+		this.cpfLabel.setText(International.getInstance().getLabels().getString("searchCPFLabel"));
 		this.cpfLabel.setName(International.getInstance().getLabels().getString("cpf"));
 
 		this.cpfTextField.setName(International.getInstance().getLabels().getString("cpf"));
@@ -352,7 +353,7 @@ public abstract class ReservaSalaView extends JDialog {
 		this.dateTextField.setBackground(new Color(200, 208, 254));
 		this.dateTextField.setName("DiaTextField");
 
-		this.searchCpfButton.setText(International.getInstance().getButtons().getString("searchCpfButton"));
+		this.searchCpfButton.setText(International.getInstance().getButtons().getString("searchCpf"));
 		this.searchCpfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -361,8 +362,8 @@ public abstract class ReservaSalaView extends JDialog {
 			}
 		});
 
-		this.checkChairsButton.setText(International.getInstance().getButtons().getString("verifyAvaibleChairs"));
-		this.checkChairsButton.setName(International.getInstance().getButtons().getString("verifyAvaibleChairs"));
+		this.checkChairsButton.setText(International.getInstance().getButtons().getString("verifyAvailableChairs"));
+		this.checkChairsButton.setName(International.getInstance().getButtons().getString("verifyAvailableChairs"));
 		this.checkChairsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {

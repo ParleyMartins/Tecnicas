@@ -25,6 +25,7 @@ import view.International;
 
 public abstract class DiaReservaPatrimonio extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	protected JButton viewButton;
 	private JCalendar selectDate;
 	private JPanel jPanel1;
@@ -51,10 +52,6 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 		viewButton.setText(International.getInstance().getButtons().getString("visualizeDay"));
 		viewButton.setName("VisualizeButton");
 		viewButton.addActionListener(new ActionListener() {
-
-			private JCalendar selectDate;
-			private JPanel jPanel1;
-			protected JButton viewButton;
 
 			public void actionPerformed (ActionEvent actionPerformed) {
 

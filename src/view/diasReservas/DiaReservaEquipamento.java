@@ -17,6 +17,7 @@ import exception.PatrimonioException;
 
 public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 
+	private static final long serialVersionUID = 1L;
 	private Equipamento equipmentToBeReserved;
 
 	// Constructor creates a form to reservation.
