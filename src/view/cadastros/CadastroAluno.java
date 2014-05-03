@@ -6,7 +6,10 @@ https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
 package view.cadastros;
 
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+
+import view.International;
 import control.ManterAluno;
 import exception.ClienteException;
 
@@ -32,21 +35,29 @@ public class CadastroAluno extends CadastroCliente {
 						this.emailTxtField.getText());
 
 				JOptionPane.showMessageDialog(this,
-						"Aluno Cadastrado com sucesso", "Sucesso",
+						International.getInstance().getMessages().getString("successStudent"), 
+						International.getInstance().getLabels().getString("success"),
 						JOptionPane.INFORMATION_MESSAGE,
 						null);
 
 				this.setVisible(false);
 			}
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
+			
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"),
+					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
+
 }

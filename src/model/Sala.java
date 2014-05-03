@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Sala.java.
 
 package model;
 
+import view.International;
 import exception.PatrimonioException;
 
 public class Sala extends Patrimonio {
@@ -13,9 +14,8 @@ public class Sala extends Patrimonio {
 	private String capacity;
 
 	// Alerts and error messages.
-	private final String INVALID_CAPACITY = "Capacidade Invalida.";
-	private final String BLANK_CAPACITY = "Capacidade em Branco.";
-	private final String NULL_CAPACITY = "Capacidade esta nula.";
+	private final String INVALID_CAPACITY = International.getInstance().getMessages().getString("invalidCapacity");
+	private final String BLANK_CAPACITY = International.getInstance().getMessages().getString("blankCapacity");
 
 	public Sala(String id_code, String desciption, String capacity)
 			throws PatrimonioException {
@@ -32,7 +32,7 @@ public class Sala extends Patrimonio {
 	public void setCapacity(String capacity) throws PatrimonioException {
 
 		if (capacity == null) {
-			throw new PatrimonioException(NULL_CAPACITY);
+			throw new PatrimonioException(BLANK_CAPACITY);
 		} else {
 			if ("".equals(capacity.trim())) {
 				throw new PatrimonioException(BLANK_CAPACITY);

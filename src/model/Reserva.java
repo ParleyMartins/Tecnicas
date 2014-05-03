@@ -9,6 +9,7 @@ package model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import view.International;
 import exception.ReservaException;
 
 public class Reserva {
@@ -17,12 +18,10 @@ public class Reserva {
 	private String date;
 
 	// Error Messages and alerts
-	private final String NULL_TIME = "A hora esta nula.";
-	private final String INVALID_TIME = "A hora eh invalida.";
-	private final String BLANK_TIME = "A hora esta em branco.";
-	private final String NULL_DATE = "A data esta nula.";
-	private final String INVALID_DATE = "A data eh invalida.";
-	private final String BLANK_DATE = "A data esta em branco.";
+	private final String INVALID_TIME = International.getInstance().getMessages().getString("invalidTime");
+	private final String BLANK_TIME = International.getInstance().getMessages().getString("blankTime");
+	private final String INVALID_DATE = International.getInstance().getMessages().getString("invalidDate");
+	private final String BLANK_DATE = International.getInstance().getMessages().getString("blankDate");
 
 	private final String TIME_PATTERN = "^[012]?[\\d]:[0-5][\\d]$";
 	private final String DATE_PATTERN = "^[0123]?[\\d]([./-])[01]?[\\d]\\1[\\d]{2,4}$";
@@ -46,7 +45,7 @@ public class Reserva {
 	public void setTime(String time) throws ReservaException {
 
 		if (time == null) {
-			throw new ReservaException(NULL_TIME);
+			throw new ReservaException(BLANK_TIME);
 		} else {
 			// Do nothing.
 		}
@@ -70,7 +69,7 @@ public class Reserva {
 	public void setDate(String date) throws ReservaException {
 
 		if (date == null) {
-			throw new ReservaException(NULL_DATE);
+			throw new ReservaException(BLANK_DATE);
 		} else {
 			// Do nothing. 
 		}

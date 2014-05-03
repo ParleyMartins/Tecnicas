@@ -6,13 +6,13 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Professor.java.
 
 package model;
 
+import view.International;
 import exception.ClienteException;
 
 public class Professor extends Cliente {
 
 	// Alerts and error messages.
-	private final String BLANK_ENROLLMENT_NUMBER = "Matricula em Branco.";
-	private final String NULL_ENROLLMENT_NUMBER = "Matricula esta Nula.";
+	private final String BLANK_ENROLLMENT_NUMBER = International.getInstance().getMessages().getString("blankEnrollment");
 
 	public Professor (String name, String cpf, String enrollment_number,
 			String phone_number, String email) throws ClienteException {
@@ -23,7 +23,7 @@ public class Professor extends Cliente {
 	public void setEnrollmentNumber(String enrollment_number) throws ClienteException {
 
 		if (enrollment_number == null) {
-			throw new ClienteException(NULL_ENROLLMENT_NUMBER);
+			throw new ClienteException(BLANK_ENROLLMENT_NUMBER);
 		} else {
 			if ("".equals(enrollment_number.trim())) {
 				throw new ClienteException(BLANK_ENROLLMENT_NUMBER);

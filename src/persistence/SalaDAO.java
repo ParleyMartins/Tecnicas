@@ -14,16 +14,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import view.International;
 import exception.PatrimonioException;
 
 public class SalaDAO {
 
 	// Exception messages and alerts.
-	private static final String SALA_JA_EXISTENTE = "Sala ja cadastrada.";
-	private static final String SALA_NAO_EXISTENTE = "Sala nao cadastrada.";
-	private static final String SALA_EM_USO = "Sala esta sendo utilizada em uma reserva.";
-	private static final String SALA_NULA = "Sala esta nula.";
-	private static final String CODIGO_JA_EXISTENTE = "Sala com o mesmo codigo ja cadastrada.";
+	private static final String EXISTING_ROOM = International.getInstance().getMessages().getString("existingRoom");
+	private static final String NO_EXISTING_ROOM = International.getInstance().getMessages().getString("noExistingRoom");
+	private static final String ROOM_IN_USE = International.getInstance().getMessages().getString("roomInUse");
+	private static final String NULL_ROOM = International.getInstance().getMessages().getString("nullRoom");
+	private static final String CODE_ROOM_ALREADY_EXISTS = International.getInstance().getMessages().getString("codeRoomAlreadyExists");
 
 	// Singleton implementation.
 	private static SalaDAO instance;
@@ -47,10 +48,10 @@ public class SalaDAO {
 	public void insert (Sala room) throws SQLException, PatrimonioException {
 
 		if (room == null) {
-			throw new PatrimonioException(SALA_NULA);
+			throw new PatrimonioException(NULL_ROOM);
 		} else {
 			if (this.isInDbCode(room.getIdCode())) {
-				throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+				throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
 			} else {
 				// Nothing here.
 			}
@@ -62,17 +63,17 @@ public class SalaDAO {
 				room.getCapacity() + ");");
 	}
 
-	// Change a Sala info in the database.
+	// Modify a Sala info in the database.
 	public void modify (Sala oldRoom, Sala newRoom) throws SQLException,
 			PatrimonioException {
 
 		if (newRoom == null) {
-			throw new PatrimonioException(SALA_NULA);
+			throw new PatrimonioException(NULL_ROOM);
 		} else {
 			// Nothing here.
 		}
 		if (oldRoom == null) {
-			throw new PatrimonioException(SALA_NULA);
+			throw new PatrimonioException(NULL_ROOM);
 		} else {
 			// Nothing here.
 		}
@@ -81,14 +82,14 @@ public class SalaDAO {
 		PreparedStatement statement;
 
 		if (!this.isInDB(oldRoom)) {
-			throw new PatrimonioException(SALA_NAO_EXISTENTE);
+			throw new PatrimonioException(NO_EXISTING_ROOM);
 		} else {
 			if (this.isInOtherDB(oldRoom)) {
-				throw new PatrimonioException(SALA_EM_USO);
+				throw new PatrimonioException(ROOM_IN_USE);
 			} else {
 				if (!oldRoom.getIdCode().equals(newRoom.getIdCode())
 						&& this.isInDbCode(newRoom.getIdCode())) {
-					throw new PatrimonioException(CODIGO_JA_EXISTENTE);
+					throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
 				} else {
 					// Nothing here.
 				}
@@ -109,7 +110,7 @@ public class SalaDAO {
 			statement.executeUpdate();
 			connection.commit();
 		} else {
-			throw new PatrimonioException(SALA_JA_EXISTENTE);
+			throw new PatrimonioException(EXISTING_ROOM);
 		}
 
 		statement.close();
@@ -120,10 +121,10 @@ public class SalaDAO {
 	public void delete (Sala room) throws SQLException, PatrimonioException {
 
 		if (room == null) {
-			throw new PatrimonioException(SALA_NULA);
+			throw new PatrimonioException(NULL_ROOM);
 		} else {
 			if (this.isInOtherDB(room)) {
-				throw new PatrimonioException(SALA_EM_USO);
+				throw new PatrimonioException(ROOM_IN_USE);
 			} else {
 				if (this.isInDB(room)) {
 					this.update("DELETE FROM sala WHERE " +
@@ -133,7 +134,7 @@ public class SalaDAO {
 							"sala.capacidade = " + room.getCapacity() + ";"
 							);
 				} else {
-					throw new PatrimonioException(SALA_NAO_EXISTENTE);
+					throw new PatrimonioException(NO_EXISTING_ROOM);
 				}
 			}
 		}

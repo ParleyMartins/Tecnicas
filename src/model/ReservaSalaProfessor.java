@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSalaProfe
 
 package model;
 
+import view.International;
 import exception.ReservaException;
 
 public class ReservaSalaProfessor extends ReservaSala {
@@ -13,8 +14,8 @@ public class ReservaSalaProfessor extends ReservaSala {
 	private Professor teacher;
 
 	// Error messages.
-	private final String NULL_PROFESSOR = "O professor esta nulo.";
-
+	private final String BLANK_PROFESSOR = International.getInstance().getMessages().getString("blankTeacher");
+	
 	public ReservaSalaProfessor(String date, String time, Sala classroom,
 			String purpose, Professor teacher) throws ReservaException {
 
@@ -30,7 +31,7 @@ public class ReservaSalaProfessor extends ReservaSala {
 	public void setTeacher(Professor teacher) throws ReservaException {
 
 		if (teacher == null) {
-			throw new ReservaException(NULL_PROFESSOR);
+			throw new ReservaException(BLANK_PROFESSOR);
 		} else {
 			// Do nothing.
 		}

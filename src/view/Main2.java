@@ -9,19 +9,24 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+
 import view.mainViews.AlunoView;
 import view.mainViews.ClienteView;
 import view.mainViews.EquipamentoView;
@@ -31,6 +36,7 @@ import view.mainViews.SalaView;
 
 public class Main2 extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JButton studentBtn;
 	private JButton equipmentBtn;
 	private JLabel backgroundLbl;
@@ -38,13 +44,14 @@ public class Main2 extends JFrame {
 	private JPanel propertyPanel;
 	private JButton teacherBtn;
 	private JButton roomBtn;
+	
 
 	// Constructor generates form Main2
 	public Main2 ( ) {
 
 		initComponents();
 	}
-
+	
 	// Function main.
 	public static void main (String args[]) {
 
@@ -82,10 +89,12 @@ public class Main2 extends JFrame {
 			}
 		});
 	}
+	
 
+	
 	// This method initializes the Components.
 	private void initComponents ( ) {
-
+				
 		this.backgroundLbl = new JLabel();
 		this.propertyPanel = new JPanel();
 		this.roomBtn = new JButton();
@@ -95,18 +104,22 @@ public class Main2 extends JFrame {
 		this.studentBtn = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setTitle("SisRES");
+		setTitle(International.getInstance().getMessages().getString("appName"));
 		setName("Main");
 		setResizable(false);
 
 		this.backgroundLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		this.backgroundLbl.setText("SisRES");
+		this.backgroundLbl.setText(International.getInstance().getMessages()
+				.getString("appName"));
 
 		this.propertyPanel.setBorder(BorderFactory
-				.createTitledBorder("Reserva"));
+				.createTitledBorder(International.getInstance().getLabels()
+						.getString("reservation")));
 
-		this.roomBtn.setText("Sala");
-		this.roomBtn.setName("Sala");
+		this.roomBtn.setText(International.getInstance().getButtons()
+				.getString("classroom"));
+		this.roomBtn.setName(International.getInstance().getButtons()
+				.getString("classroom"));
 		this.roomBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -115,8 +128,10 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.equipmentBtn.setText("Equipamento");
-		this.equipmentBtn.setName("Equipamento");
+		this.equipmentBtn.setText(International.getInstance().getButtons()
+				.getString("equipment"));
+		this.equipmentBtn.setName(International.getInstance().getButtons()
+				.getString("equipment"));
 		this.equipmentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -175,10 +190,13 @@ public class Main2 extends JFrame {
 												Short.MAX_VALUE)));
 
 		this.clientPanel.setBorder(BorderFactory
-				.createTitledBorder("Cadastro"));
+				.createTitledBorder(International.getInstance().getLabels()
+						.getString("registration")));
 
-		this.teacherBtn.setText("Professor");
-		this.teacherBtn.setName("Professor");
+		this.teacherBtn.setText(International.getInstance().getButtons()
+				.getString("teacher"));
+		this.teacherBtn.setName(International.getInstance().getButtons()
+				.getString("teacher"));
 		this.teacherBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -187,8 +205,10 @@ public class Main2 extends JFrame {
 			}
 		});
 
-		this.studentBtn.setText("Aluno");
-		this.studentBtn.setName("Aluno");
+		this.studentBtn.setText(International.getInstance().getButtons()
+				.getString("student"));
+		this.studentBtn.setName(International.getInstance().getButtons()
+				.getString("student"));
 		this.studentBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {

@@ -24,7 +24,7 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 
 		super(parentWindow, modal);
 		this.classRoomToBeReserved = ManterSala.getInstance().getRoomsVec().get(classRoomPosition);
-		this.setName("DiaReservaSala");
+		this.setName("RoomReservationDay");
 	}
 
 	@Override

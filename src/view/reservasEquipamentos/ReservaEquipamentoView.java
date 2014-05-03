@@ -29,6 +29,7 @@ import control.ManterResEquipamentoProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
+import view.International;
 
 public abstract class ReservaEquipamentoView extends JDialog {
 
@@ -75,22 +76,22 @@ public abstract class ReservaEquipamentoView extends JDialog {
 				JOptionPane
 						.showMessageDialog(
 								this,
-								"Professor nao Cadastrado."
-										+ " Digite o CPF correto ou cadastre o instanceTeacher desejado",
-								"Erro", JOptionPane.ERROR_MESSAGE, null);
+								International.getInstance().getMessages().getString("noTeacherExting")
+										+ International.getInstance().getMessages().getString("correctCPForRegisterTeacher"),
+										International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 				return;
 			}
 			this.instanceTeacher = instanceTeacher.firstElement();
 			this.instanceTeacherTextArea.setText(instanceTeacher.firstElement().toString());
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
@@ -119,16 +120,16 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		setName("ReservaPatrimonio");
 		setResizable(false);
 
-		this.equipmentLabel.setText("Equipamento:");
-		this.equipmentLabel.setName("EquipamentoLabel");
+		this.equipmentLabel.setText(International.getInstance().getLabels().getString("searchEquipmentLabel"));
+		this.equipmentLabel.setName(International.getInstance().getLabels().getString("equipment"));
 
-		this.instanceTeacherLabel.setText("Professor:");
-		this.instanceTeacherLabel.setName("ProfessorLabel");
+		this.instanceTeacherLabel.setText(International.getInstance().getLabels().getString("searchTeacherLabel"));
+		this.instanceTeacherLabel.setName(International.getInstance().getLabels().getString("teacher"));
 
-		this.cpfLabel.setText("Digite o CPF desejado :");
-		this.cpfLabel.setName("CpfLabel");
+		this.cpfLabel.setText(International.getInstance().getLabels().getString("searchCPFLabel"));
+		this.cpfLabel.setName(International.getInstance().getLabels().getString("cpf"));
 
-		this.cpfTextField.setName("CPF");
+		this.cpfTextField.setName(International.getInstance().getLabels().getString("cpf"));
 		this.cpfTextField.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -137,15 +138,15 @@ public abstract class ReservaEquipamentoView extends JDialog {
 			}
 		});
 
-		this.dateLabel.setText("Data: ");
+		this.dateLabel.setText(International.getInstance().getLabels().getString("date"));
 
-		this.hourLabel.setText("Hora: ");
-		this.hourLabel.setName("HoraLabel");
+		this.hourLabel.setText(International.getInstance().getLabels().getString("time"));
+		this.hourLabel.setName(International.getInstance().getLabels().getString("time"));
 
-		this.hourTextField.setName("Hora");
+		this.hourTextField.setName(International.getInstance().getLabels().getString("time"));
 
-		this.reserveButton.setText("Reservar");
-		this.reserveButton.setName("Reservar");
+		this.reserveButton.setText(International.getInstance().getButtons().getString("reserve"));
+		this.reserveButton.setName(International.getInstance().getButtons().getString("reserve"));
 		this.reserveButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -154,8 +155,8 @@ public abstract class ReservaEquipamentoView extends JDialog {
 			}
 		});
 
-		this.cancelButton.setText("Cancelar");
-		this.cancelButton.setName("Cancelar");
+		this.cancelButton.setText(International.getInstance().getButtons().getString("cancel"));
+		this.cancelButton.setName(International.getInstance().getButtons().getString("cancel"));
 		this.cancelButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -168,22 +169,22 @@ public abstract class ReservaEquipamentoView extends JDialog {
 		this.instanceTeacherTextArea.setBackground(new Color(200, 208, 254));
 		this.instanceTeacherTextArea.setColumns(20);
 		this.instanceTeacherTextArea.setRows(5);
-		this.instanceTeacherTextArea.setName("ProfessorTextArea");
+		this.instanceTeacherTextArea.setName(International.getInstance().getLabels().getString("teacher"));
 		this.jScrollPane1.setViewportView(this.instanceTeacherTextArea);
 
 		this.equipmentTextArea.setEditable(false);
 		this.equipmentTextArea.setBackground(new Color(200, 208, 254));
 		this.equipmentTextArea.setColumns(20);
 		this.equipmentTextArea.setRows(5);
-		this.equipmentTextArea.setName("EquipamentoTextArea");
+		this.equipmentTextArea.setName(International.getInstance().getLabels().getString("equipment"));
 		this.jScrollPane2.setViewportView(this.equipmentTextArea);
 
 		this.dateTextField.setEditable(false);
 		this.dateTextField.setBackground(new Color(200, 208, 254));
-		this.dateTextField.setName("DiaTextField");
+		this.dateTextField.setName(International.getInstance().getLabels().getString("date"));
 
-		this.searchCpfButton.setText("Buscar CPF");
-		this.searchCpfButton.setName("BuscarCpfButton");
+		this.searchCpfButton.setText(International.getInstance().getButtons().getString("searchCpf"));
+		this.searchCpfButton.setName(International.getInstance().getButtons().getString("searchCpf"));
 		this.searchCpfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -390,7 +391,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 
 		String nome = this.cpfTextField.getText();
 		if (nome.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum CPF digitado", "Erro",
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("cpfBlank"), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} else {
 			getTeacherFromDB();

@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSalaAluno
 
 package model;
 
+import view.International;
 import exception.ReservaException;
 
 public class ReservaSalaAluno extends ReservaSala {
@@ -14,11 +15,10 @@ public class ReservaSalaAluno extends ReservaSala {
 	private String reservedChairs;
 
 	// Error messages.
-	private final String NULL_STUDENT = "O aluno esta nulo.";
-	private final String NULL_CHAIRS = "O numero de cadeiras esta nulo.";
-	private final String BLANK_CHAIRS = "O numero de cadeiras esta em branco.";
-	private final String INVALID_CHAIRS = "O numero de cadeira eh invalido.";
-	private final String OVER_LIMIT_CHAIRS = "A sala nao possui este numero de cadeiras para reservar.";
+	private final String BLANK_STUDENT = International.getInstance().getMessages().getString("blankStudent");
+	private final String BLANK_CHAIRS = International.getInstance().getMessages().getString("blankNumberOfChairs");
+	private final String INVALID_CHAIRS = International.getInstance().getMessages().getString("invalidNumberOfChairs");
+	private final String OVER_LIMIT_CHAIRS = International.getInstance().getMessages().getString("outOfRangeNumberOfChairs");
 	private final String CHAIRS_PATTERN = "^[\\d]+$";
 
 	public ReservaSalaAluno(String date, String time, Sala classroom,
@@ -43,7 +43,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	public void setStudent(Aluno student) throws ReservaException {
 
 		if (student == null) {
-			throw new ReservaException(NULL_STUDENT);
+			throw new ReservaException(BLANK_STUDENT);
 		} else {
 			// Do nothing.
 		}
@@ -56,7 +56,7 @@ public class ReservaSalaAluno extends ReservaSala {
 		// So we can modify this value after, without losing the information.
 		String chairs = reservedChairs;
 		if (chairs == null) {
-			throw new ReservaException(NULL_CHAIRS);
+			throw new ReservaException(BLANK_CHAIRS);
 		} else {
 			// Do nothing.
 		}

@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
 
 package model;
 
+import view.International;
 import exception.PatrimonioException;
 
 public class Patrimonio {
@@ -14,10 +15,8 @@ public class Patrimonio {
 	private String description;
 
 	// Alerts and error messages.
-	private final String CODIGO_BRANCO = "Codigo em Branco.";
-	private final String CODIGO_NULO = "Codigo esta Nulo.";
-	private final String DESCRICAO_BRANCO = "Descricao em Branco.";
-	private final String DESCRICAO_NULO = "Descricao esta Nula.";
+	private final String BLANK_CODE = International.getInstance().getMessages().getString("blankCode");
+	private final String BLANK_DESCRIPTION = International.getInstance().getMessages().getString("blankDescription");
 
 	public Patrimonio(String code, String description)
 			throws PatrimonioException {
@@ -39,10 +38,10 @@ public class Patrimonio {
 	public void setIdCode(String id_code) throws PatrimonioException {
 
 		if (id_code == null) {
-			throw new PatrimonioException(CODIGO_NULO);
+			throw new PatrimonioException(BLANK_CODE);
 		} else {
 			if ("".equals(id_code.trim())) {
-				throw new PatrimonioException(CODIGO_BRANCO);
+				throw new PatrimonioException(BLANK_CODE);
 			} else {
 				// Do nothing.
 			}
@@ -53,10 +52,10 @@ public class Patrimonio {
 	public void setDescription(String description) throws PatrimonioException {
 
 		if (description == null) {
-			throw new PatrimonioException(DESCRICAO_NULO);
+			throw new PatrimonioException(BLANK_DESCRIPTION);
 		} else {
 			if ("".equals(description.trim())) {
-				throw new PatrimonioException(DESCRICAO_BRANCO);
+				throw new PatrimonioException(BLANK_DESCRIPTION);
 			} else {
 				// Do nothing.
 			}

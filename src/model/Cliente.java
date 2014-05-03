@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Cliente.java.
 
 package model;
 
+import view.International;
 import exception.ClienteException;
 
 public abstract class Cliente {
@@ -20,15 +21,13 @@ public abstract class Cliente {
 	protected String enrollmentNumber;
 
 	// Error messagens and alerts
-	private final String INVALID_NAME = "Nome Invalido.";
-	private final String BLANK_NAME = "Nome em Branco.";
-	private final String NULL_NAME = "Nome esta Nulo.";
-	private final String INVALID_CPF = "CPF Invalido.";
-	private final String BLANK_CPF = "CPF em Branco.";
-	private final String NULL_CPF = "CPF esta Nulo.";
-	private final String INVALID_PHONE_NUMBER = "Telefone Invalido.";
-	private final String NULL_PHONE_NUMBER = "Telefone esta Nulo.";
-	private final String NULL_EMAIL = "E-mail esta Nulo.";
+	private final String INVALID_NAME = International.getInstance().getMessages().getString("invalidName");
+	private final String BLANK_NAME = International.getInstance().getMessages().getString("blankName");
+	private final String INVALID_CPF = International.getInstance().getMessages().getString("invalidCPF");
+	private final String BLANK_CPF = International.getInstance().getMessages().getString("blankCPF");
+	private final String INVALID_PHONE_NUMBER = International.getInstance().getMessages().getString("invalidPhone");
+	private final String BLANK_PHONE_NUMBER = International.getInstance().getMessages().getString("blankPhone");
+	private final String BLANK_EMAIL = International.getInstance().getMessages().getString("blankEmail");
 
 	public Cliente(String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email) throws ClienteException {
@@ -68,7 +67,7 @@ public abstract class Cliente {
 	public void setName(String name) throws ClienteException {
 
 		if (name == null) {
-			throw new ClienteException(NULL_NAME);
+			throw new ClienteException(BLANK_NAME);
 		} else {
 			if ("".equals(name.trim())) {
 				throw new ClienteException(BLANK_NAME);
@@ -85,7 +84,7 @@ public abstract class Cliente {
 	public void setCpf(String cpf) throws ClienteException {
 
 		if (cpf == null) {
-			throw new ClienteException(NULL_CPF);
+			throw new ClienteException(BLANK_CPF);
 		} else {
 			if ("".equals(cpf)) {
 				throw new ClienteException(BLANK_CPF);
@@ -109,7 +108,7 @@ public abstract class Cliente {
 	public void setPhoneNumber(String phoneNumber) throws ClienteException {
 
 		if (phoneNumber == null) {
-			throw new ClienteException(NULL_PHONE_NUMBER);
+			throw new ClienteException(BLANK_PHONE_NUMBER);
 		} else {
 			if ("".equals(phoneNumber)) {
 				this.phoneNumber = phoneNumber;
@@ -128,7 +127,7 @@ public abstract class Cliente {
 	public void setEmail(String email) throws ClienteException {
 
 		if (email == null) {
-			throw new ClienteException(NULL_EMAIL);
+			throw new ClienteException(BLANK_EMAIL);
 		} else {
 			this.email = email;
 		}

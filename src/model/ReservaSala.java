@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/ReservaSala.java
 
 package model;
 
+import view.International;
 import exception.ReservaException;
 
 public class ReservaSala extends Reserva {
@@ -14,9 +15,8 @@ public class ReservaSala extends Reserva {
 	private String purpose;
 
 	// Error messages.
-	private final String NULL_CLASSROOM = "A sala esta nula.";
-	private final String NULL_PURPOSE = "A finalidade esta nula.";
-	private final String BLANK_PURPOSE = "A finalidade esta em branco.";
+	private final String BLANK_CLASSROOM = International.getInstance().getMessages().getString("blankRoom");
+	private final String BLANK_PURPOSE = International.getInstance().getMessages().getString("blankPurpose");
 
 	public ReservaSala(String date, String time, Sala classroom, String purpose)
 			throws ReservaException {
@@ -39,7 +39,7 @@ public class ReservaSala extends Reserva {
 	public void setClassroom(Sala classroom) throws ReservaException {
 
 		if (classroom == null) {
-			throw new ReservaException(NULL_CLASSROOM);
+			throw new ReservaException(BLANK_CLASSROOM);
 		} else {
 			// Do nothing.
 		}
@@ -49,7 +49,7 @@ public class ReservaSala extends Reserva {
 	public void setPurpose(String purpose) throws ReservaException {
 
 		if (purpose == null) {
-			throw new ReservaException(NULL_PURPOSE);
+			throw new ReservaException(BLANK_PURPOSE);
 		} else {
 			// Do nothing.
 		}

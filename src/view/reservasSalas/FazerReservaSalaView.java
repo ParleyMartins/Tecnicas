@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import view.International;
 import model.Sala;
 import control.ManterResSalaAluno;
 import control.ManterResSalaProfessor;
@@ -48,28 +49,28 @@ public class FazerReservaSalaView extends ReservaSalaView {
 			studentInstance.getstudentRoomReservationVector();
 			// System.out.println(v.toString( ));
 
-			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
-					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
+			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveModifySucess"),
+					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
 		} catch (ReservaException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
@@ -82,16 +83,16 @@ public class FazerReservaSalaView extends ReservaSalaView {
 					this.hourTextField.getText(),
 					this.turposeTextField.getText());
 
-			JOptionPane.showMessageDialog(this, "Reserva feita com sucesso",
-					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
+			JOptionPane.showMessageDialog(this,International.getInstance().getMessages().getString("reserveSucess"),
+					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
 		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
@@ -135,22 +136,22 @@ public class FazerReservaSalaView extends ReservaSalaView {
 							this.hourTextField.getText())));
 		} catch (ReservaException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (ClienteException ex) {
 
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
 
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"), JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 }

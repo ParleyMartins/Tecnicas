@@ -11,17 +11,18 @@ import model.Professor;
 import java.sql.*;
 import java.util.Vector;
 
+import view.International;
 import exception.ClienteException;
 
 public class ProfessorDAO {
 
 	// Exception messages.
-	private static final String PROFESSOR_JA_EXISTENTE = "O Professor ja esta cadastrado.";
-	private static final String PROFESSOR_NAO_EXISTENTE = "O Professor nao esta cadastrado.";
-	private static final String PROFESSOR_NULO = "O Professor esta nulo.";
-	private static final String PROFESSOR_EM_USO = "Sala esta sendo utilizada em uma reserva.";
-	private static final String CPF_JA_EXISTENTE = "Ja existe um professor cadastrado com esse CPF.";
-	private static final String MATRICULA_JA_EXISTENTE = "Ja existe um professor cadastrado com essa matricula.";
+	private static final String TEACHER_EXISTING = International.getInstance().getMessages().getString("teacherExisting");
+	private static final String NO_EXISTING_TEACHER = International.getInstance().getMessages().getString("noTeacherExting");
+	private static final String NULL_TEACHER = International.getInstance().getMessages().getString("nullTeacher");
+	private static final String TEACHER_IN_USE = International.getInstance().getMessages().getString("teacherInUse");
+	private static final String CPF_EXISTING = International.getInstance().getMessages().getString("cpfExisting");
+	private static final String REGISTRATION_ALREADY_EXISTS = International.getInstance().getMessages().getString("registrationAlreadyExists");
 
 	// Singleton implementation.
 	private static ProfessorDAO instance;
@@ -45,13 +46,13 @@ public class ProfessorDAO {
 	public void insert (Professor teacher) throws SQLException, ClienteException {
 
 		if (teacher == null) {
-			throw new ClienteException(PROFESSOR_NULO);
+			throw new ClienteException(NULL_TEACHER);
 		} else {
 			if (this.isInDBCpf(teacher.getCpf())) {
-				throw new ClienteException(CPF_JA_EXISTENTE);
+				throw new ClienteException(CPF_EXISTING);
 			} else {
 				if (this.isInDbEnrollmentNumber(teacher.getEnrollmentNumber())) {
-					throw new ClienteException(MATRICULA_JA_EXISTENTE);
+					throw new ClienteException(REGISTRATION_ALREADY_EXISTS);
 				} else {
 					// Nothing here.
 				}
@@ -71,12 +72,12 @@ public class ProfessorDAO {
 			throws SQLException, ClienteException {
 
 		if (oldTeacher == null) {
-			throw new ClienteException(PROFESSOR_NULO);
+			throw new ClienteException(NULL_TEACHER);
 		} else {
 			// Nothing here.
 		}
 		if (newTeacher == null) {
-			throw new ClienteException(PROFESSOR_NULO);
+			throw new ClienteException(NULL_TEACHER);
 		} else {
 			// Nothing here.
 		}
@@ -85,20 +86,20 @@ public class ProfessorDAO {
 		PreparedStatement statement;
 
 		if (!this.isInDB(oldTeacher)) {
-			throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
+			throw new ClienteException(NO_EXISTING_TEACHER);
 		} else {
 			// Nothing here.
 		}
 		if (this.isInOtherDB(oldTeacher)) {
-			throw new ClienteException(PROFESSOR_EM_USO);
+			throw new ClienteException(TEACHER_IN_USE);
 		} else {
 			if (!oldTeacher.getCpf().equals(newTeacher.getCpf())
 					&& this.isInDBCpf(newTeacher.getCpf())) {
-				throw new ClienteException(CPF_JA_EXISTENTE);
+				throw new ClienteException(CPF_EXISTING);
 			} else {
 				if (!oldTeacher.getEnrollmentNumber().equals(newTeacher.getEnrollmentNumber())
 						&& this.isInDbEnrollmentNumber(newTeacher.getEnrollmentNumber())) {
-					throw new ClienteException(MATRICULA_JA_EXISTENTE);
+					throw new ClienteException(REGISTRATION_ALREADY_EXISTS);
 				} else {
 					if (!this.isInDB(newTeacher)) {
 						String msg = "UPDATE professor SET " + "nome = \""
@@ -121,7 +122,7 @@ public class ProfessorDAO {
 						statement.executeUpdate();
 						connection.commit();
 					} else {
-						throw new ClienteException(PROFESSOR_JA_EXISTENTE);
+						throw new ClienteException(TEACHER_EXISTING);
 					}
 				}
 			}
@@ -135,12 +136,12 @@ public class ProfessorDAO {
 	public void delete (Professor teacher) throws SQLException, ClienteException {
 
 		if (teacher == null) {
-			throw new ClienteException(PROFESSOR_NULO);
+			throw new ClienteException(NULL_TEACHER);
 		} else {
 			// Nothing here.
 		}
 		if (this.isInOtherDB(teacher)) {
-			throw new ClienteException(PROFESSOR_EM_USO);
+			throw new ClienteException(TEACHER_IN_USE);
 		} else {
 			if (this.isInDB(teacher)) {
 				this.update("DELETE FROM professor WHERE "
@@ -151,7 +152,7 @@ public class ProfessorDAO {
 						+ "\" and " + "professor.matricula = \""
 						+ teacher.getEnrollmentNumber() + "\";");
 			} else {
-				throw new ClienteException(PROFESSOR_NAO_EXISTENTE);
+				throw new ClienteException(NO_EXISTING_TEACHER);
 			}
 		}
 	}
@@ -285,7 +286,7 @@ public class ProfessorDAO {
 				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + teacher.getEmail() + "\" and "
 				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\");") == false) {
-			if (this.isInDBGeneric("SELECT * FROM reserva_equipamento WHERE "
+			if (this.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
 					+ "id_professor = (SELECT id_professor FROM professor WHERE "
 					+ "professor.nome = \"" + teacher.getName() + "\" and "
 					+ "professor.cpf = \"" + teacher.getCpf() + "\" and "

@@ -76,7 +76,7 @@ public class ManterResEquipamentoProfessor {
 		this.teacherEquipReservationVector.add(reserva);
 	}
 
-	// Change reservation of equipment in the database
+	// Modify reservation of equipment in the database
 	public void modify (ReservaEquipamentoProfessor oldReservation, String date,
 			String time, Equipamento equipment, Professor teacher)
 			throws SQLException, ReservaException {

@@ -6,10 +6,14 @@ https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/alteracoes
 package view.alteracoes;
 
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+
+import view.International;
 import view.cadastros.CadastroCliente;
 import control.ManterProfessor;
 import exception.ClienteException;
+import exception.PatrimonioException;
 
 public class AlterarProfessor extends CadastroCliente {
 
@@ -19,9 +23,9 @@ public class AlterarProfessor extends CadastroCliente {
 	public AlterarProfessor (java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setName("AlterarProfessor");
-		this.registerButton.setText("Alterar");
-		this.registerButton.setName("Alterar");
+		this.setName(International.getInstance().getLabels().getString("modify"));
+		this.registerButton.setText(International.getInstance().getButtons().getString("modify"));
+		this.registerButton.setName(International.getInstance().getButtons().getString("modify"));
 		this.index2 = index;
 
 		try {
@@ -37,11 +41,16 @@ public class AlterarProfessor extends CadastroCliente {
 					.getTeachersVec().get(index).getCpf());
 
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(),
+					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		}
 	}
 
@@ -60,14 +69,27 @@ public class AlterarProfessor extends CadastroCliente {
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this,
-					"Cadastro alterado com sucesso", "Sucesso",
-					JOptionPane.INFORMATION_MESSAGE, null);
+					International.getInstance().getMessages().getString("successModifyTeacher"), 
+					International.getInstance().getLabels().getString("success"),
+					JOptionPane.INFORMATION_MESSAGE,
+					null);
 			this.setVisible(false);
+
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(),
+					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
+					JOptionPane.ERROR_MESSAGE, null);
+			
+		} catch (NullPointerException ex) {
+			
+			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
+					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
