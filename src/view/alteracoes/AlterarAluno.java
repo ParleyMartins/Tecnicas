@@ -16,23 +16,31 @@ import exception.ClienteException;
 
 public class AlterarAluno extends CadastroCliente {
 
+	private static final long serialVersionUID = 1L;
 	int index2 = 0;
 
 	// Constructor creates the ModifyStudent form.
-	public AlterarAluno (java.awt.Frame parent, boolean modal, int index) {
+	public AlterarAluno(java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setTitle(International.getInstance().getButtons().getString("register"));
-		this.setName(International.getInstance().getButtons().getString("register"));
-		this.registerButton.setText("Alterar");
-		this.registerButton.setName("Alterar");
+		this.setTitle(International.getInstance().getButtons()
+				.getString("register"));
+		this.setName(International.getInstance().getButtons()
+				.getString("register"));
+		this.registerButton.setText(International.getInstance().getButtons()
+				.getString("modify"));
+		this.registerButton.setName(International.getInstance().getButtons()
+				.getString("modify"));
 		this.index2 = index;
 
+		String errorMessage = International.getInstance().getLabels()
+				.getString("error");
+
 		try {
-			this.nameTxtField.setText(ManterAluno.getInstance().getStudentsVec()
-					.get(index).getName());
-			this.emailTxtField.setText(ManterAluno.getInstance().getStudentsVec()
-					.get(index).getEmail());
+			this.nameTxtField.setText(ManterAluno.getInstance()
+					.getStudentsVec().get(index).getName());
+			this.emailTxtField.setText(ManterAluno.getInstance()
+					.getStudentsVec().get(index).getEmail());
 			this.phoneNumberTxtField.setText(ManterAluno.getInstance()
 					.getStudentsVec().get(index).getPhoneNumber());
 			this.enrollmentNumberTxtField.setText(ManterAluno.getInstance()
@@ -41,17 +49,24 @@ public class AlterarAluno extends CadastroCliente {
 					.get(index).getCpf());
 
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
 
 	@Override
 	// This method creates an action to modify the student fields.
-	public void registerAction ( ) {
+	public void registerAction() {
+
+		String errorMessage = International.getInstance().getLabels()
+				.getString("error");
+		String successMessage = International.getInstance().getLabels()
+				.getString("success");
+		String modifiedMessage = International.getInstance().getMessages()
+				.getString("successModifiedRegister");
 
 		try {
 			ManterAluno.getInstance().modify(nameTxtField.getText(),
@@ -59,14 +74,14 @@ public class AlterarAluno extends CadastroCliente {
 					phoneNumberTxtField.getText(), emailTxtField.getText(),
 					ManterAluno.getInstance().getStudentsVec().get(index2));
 
-			JOptionPane.showMessageDialog(this, "Aluno alterado com sucesso",
-					"Sucesso", JOptionPane.INFORMATION_MESSAGE, null);
+			JOptionPane.showMessageDialog(this, modifiedMessage,
+					successMessage, JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ClienteException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro",
+			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}
