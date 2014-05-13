@@ -68,9 +68,16 @@ public class ManterSala {
 	public void modify(String roomCode, String roomDescription,
 			String capacity, Sala newRoom) throws PatrimonioException,
 			SQLException {
-
-		Sala oldRoom = new Sala(newRoom.getIdCode(), newRoom.getDescription(),
-				newRoom.getCapacity());
+		
+		// Take the values from the room that will be updated. 
+		String oldRoomIdCode = newRoom.getIdCode();
+		String oldRoomDescription = newRoom.getDescription();
+		String oldRoomCapacity = newRoom.getCapacity();
+		
+		Sala oldRoom = new Sala(oldRoomIdCode, oldRoomDescription, 
+				oldRoomCapacity);
+		
+		// Change the desired values and save back to the database. 
 		newRoom.setIdCode(roomCode);
 		newRoom.setDescription(roomDescription);
 		newRoom.setCapacity(capacity);
