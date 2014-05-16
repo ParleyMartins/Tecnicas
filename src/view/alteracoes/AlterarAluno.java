@@ -23,6 +23,7 @@ public class AlterarAluno extends CadastroCliente {
 	public AlterarAluno(java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
+<<<<<<< HEAD
 		this.setTitle(International.getInstance().getButtons()
 				.getString("register"));
 		this.setName(International.getInstance().getButtons()
@@ -31,6 +32,12 @@ public class AlterarAluno extends CadastroCliente {
 				.getString("modify"));
 		this.registerButton.setName(International.getInstance().getButtons()
 				.getString("modify"));
+=======
+		this.setTitle(International.getInstance().getLabels().getString("modify"));
+		this.setName(International.getInstance().getLabels().getString("modify"));
+		this.registerButton.setText(International.getInstance().getButtons().getString("modify"));
+		this.registerButton.setName(International.getInstance().getButtons().getString("modify"));
+>>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 		this.index2 = index;
 
 		String errorMessage = International.getInstance().getLabels()
@@ -49,11 +56,24 @@ public class AlterarAluno extends CadastroCliente {
 					.get(index).getCpf());
 
 		} catch (ClienteException ex) {
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
+=======
+			JOptionPane.showMessageDialog(this, ex.getMessage(),
+					International.getInstance().getLabels().getString("error"),
+>>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		} catch (SQLException ex) {
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
+=======
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
+>>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		}
 	}
 
@@ -74,15 +94,35 @@ public class AlterarAluno extends CadastroCliente {
 					phoneNumberTxtField.getText(), emailTxtField.getText(),
 					ManterAluno.getInstance().getStudentsVec().get(index2));
 
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this, modifiedMessage,
 					successMessage, JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
+=======
+			JOptionPane.showMessageDialog(this,
+					International.getInstance().getMessages().getString("successModifyStudent"), 
+					International.getInstance().getLabels().getString("success"),
+					JOptionPane.INFORMATION_MESSAGE,
+					null);
+			this.setVisible(false);
+		} catch (ClienteException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(),
+					International.getInstance().getLabels().getString("error"),
+>>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		} catch (SQLException ex) {
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
+=======
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
+>>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
+			
 		}
 	}
 }

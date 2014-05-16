@@ -6,6 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/cadastros
 package view.cadastros;
 
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import view.International;
@@ -37,6 +38,7 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 			ManterEquipamento.getInstance().insert(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText());
 
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this, createdMessage, successMessage,
 					JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
@@ -46,11 +48,29 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
+=======
+			JOptionPane.showMessageDialog(this,
+					International.getInstance().getMessages().getString("successEquipment"), 
+					International.getInstance().getLabels().getString("success"),
+					JOptionPane.INFORMATION_MESSAGE,
+					null);
+			this.setVisible(false);
+
+		} catch (PatrimonioException ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(),
+					International.getInstance().getLabels().getString("error"),
+					JOptionPane.ERROR_MESSAGE, null);
+		} catch (SQLException ex) {
+			
+			JOptionPane.showMessageDialog(this, ex.getMessage(), 
+					International.getInstance().getLabels().getString("error"),
+>>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
+			
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					"Erro", JOptionPane.ERROR_MESSAGE, null);
+					International.getInstance().getLabels().getString("error"),
+					JOptionPane.ERROR_MESSAGE, null);
 		}
-
 	}
 }
