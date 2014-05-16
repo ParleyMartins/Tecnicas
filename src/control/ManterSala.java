@@ -1,8 +1,10 @@
 /**
 ManterSala
-Include the code and description of the room, modify, and delete devices.
+Sala controller, include the procedures to access, modify, and delete the room
+informations. In this class, we use Singleton to guarantee just one instance at
+time, since this is a MVC controller.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterSala.java
-*/
+ */
 package control;
 
 import java.sql.SQLException;
@@ -16,17 +18,21 @@ public class ManterSala {
 
 	private static ManterSala instance;
 
-	private Vector <Sala> roomsVec = new Vector <Sala>();
+	private Vector<Sala> rooms = new Vector<Sala>();
 
-	private ManterSala ( ) {
+	// Private constructor, to guarantee the use via singleton. 
+	private ManterSala() {
 
 		// Blank constructor.
 	}
 
-	// This constructor provides the singleton implementation.
-	public static ManterSala getInstance ( ) {
+	/* 
+	Provides the singleton implementation. Return the active instance, since it
+	will be just one instance at time.  
+	*/
+	public static ManterSala getInstance() {
 
-		if (instance == null){
+		if (instance == null) {
 			instance = new ManterSala();
 		} else {
 			// Nothing here.
@@ -34,42 +40,59 @@ public class ManterSala {
 		return instance;
 	}
 
-	// Gets a vector of room.
-	public Vector <Sala> getRoomsVec ( ) throws SQLException,
-			PatrimonioException {
+	// Returns a vector with all registered rooms. 
+	public Vector<Sala> getRoomsVec() throws SQLException, PatrimonioException {
 
-		this.roomsVec = SalaDAO.getInstance().searchAll();
-		return this.roomsVec;
+		this.rooms = SalaDAO.getInstance().searchAll();
+		return this.rooms;
 	}
 
-	// This method include code and description of the room in the database.
-	public void insert (String roomCode, String roomDescription,
-			String capacity)
-			throws PatrimonioException, SQLException {
+	/* 
+	Registers a new room in the database. Can return a PatrimonioException
+	if the room information is invalid, or a SQLException if happen some
+	error with the SQL transaction/connection. 
+	*/
+	public void insert(String roomCode, String roomDescription, 
+			String roomCapacity) throws PatrimonioException, SQLException {
 
-		Sala sala = new Sala(roomCode, roomDescription, capacity);
+		Sala sala = new Sala(roomCode, roomDescription, roomCapacity);
 		SalaDAO.getInstance().insert(sala);
-		this.roomsVec.add(sala);
+		this.rooms.add(sala);
 	}
 
-	// This method Update code and description info in the database.
-	public void modify (String roomCode, String roomDescription,
-			String capacity,
-			Sala newRoom) throws PatrimonioException, SQLException {
-
-		Sala oldRoom = new Sala(newRoom.getIdCode(), newRoom.getDescription(),
-				newRoom.getCapacity());
+	/* 
+	Modify the information of an existing room. Can return a PatrimonioException
+	if the new information is invalid, or a SQLException if happen some
+	error with the SQL transaction/connection. 
+	*/
+	public void modify(String roomCode, String roomDescription,
+			String capacity, Sala newRoom) throws PatrimonioException,
+			SQLException {
+		
+		// Take the values from the room that will be updated. 
+		String oldRoomIdCode = newRoom.getIdCode();
+		String oldRoomDescription = newRoom.getDescription();
+		String oldRoomCapacity = newRoom.getCapacity();
+		
+		Sala oldRoom = new Sala(oldRoomIdCode, oldRoomDescription, 
+				oldRoomCapacity);
+		
+		// Change the desired values and save back to the database. 
 		newRoom.setIdCode(roomCode);
 		newRoom.setDescription(roomDescription);
 		newRoom.setCapacity(capacity);
 		SalaDAO.getInstance().modify(oldRoom, newRoom);
 	}
 
-	// This method deletes room form the database.
-	public void delete (Sala room) throws SQLException, PatrimonioException {
+	/* 
+	Remove a room from the database. Will a PatrimonioException if the room
+	is null, or a SQLException if happen some error with the SQL 
+	transaction/connection. 
+	*/
+	public void delete(Sala room) throws SQLException, PatrimonioException {
 
 		SalaDAO.getInstance().delete(room);
-		this.roomsVec.remove(room);
+		this.rooms.remove(room);
 	}
 
 }
