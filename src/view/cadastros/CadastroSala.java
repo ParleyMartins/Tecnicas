@@ -41,42 +41,17 @@ public class CadastroSala extends CadastroPatrimonio {
 					this.descriptionTxtArea.getText(),
 					this.capacityTxtField.getText());
 
-<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this, createdMessage, successMessage,
 					JOptionPane.INFORMATION_MESSAGE, null);
 			this.setVisible(false);
 
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
-=======
-			JOptionPane.showMessageDialog(this,
-					International.getInstance().getMessages().getString("successRoom"), 
-					International.getInstance().getLabels().getString("success"),
-					JOptionPane.INFORMATION_MESSAGE,
-					null);
-			this.setVisible(false);
-
-		} catch (PatrimonioException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(),
-					International.getInstance().getLabels().getString("error"),
->>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
 			
 		} catch (SQLException ex) {
-<<<<<<< HEAD
 			JOptionPane.showMessageDialog(this,
 					ex.getSQLState() + "\n" + ex.getMessage(), errorMessage,
-=======
-			
-			JOptionPane.showMessageDialog(this, ex.getMessage(), 
-					International.getInstance().getLabels().getString("error"),
-					JOptionPane.ERROR_MESSAGE, null);
-			
-		} catch (NullPointerException ex) {
-			
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					International.getInstance().getLabels().getString("error"),
->>>>>>> e1eccbe92480ea28a66e302e4c5eb99dc344e107
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 	}

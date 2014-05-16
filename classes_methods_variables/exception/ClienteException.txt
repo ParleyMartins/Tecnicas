@@ -1,9 +1,0 @@
-class ClienteException
-
-	// Constructor creates a ClientExcpetion without any argument.
-	public ClienteException
-
-	// Constructor creates a ClientExcpetion with a message.
-	public ClienteException
-		String message // The message that will be returned with the exception. Describes the error.
-
