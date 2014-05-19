@@ -1,10 +1,11 @@
 /**
 ManterSala
-Sala controller, include the procedures to access, modify, and delete the room
-informations. In this class, we use Singleton to guarantee just one instance at
-time, since this is a MVC controller.
+Classroom controller, include the procedures to access, modify, and delete the 
+room informations. In this class, we use Singleton to guarantee just one 
+instance at time, since this is a MVC controller. To execute the described 
+actions, this class need to communicate with the DAO layer.  
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterSala.java
- */
+*/
 package control;
 
 import java.sql.SQLException;
@@ -16,10 +17,11 @@ import model.Sala;
 
 public class ManterSala {
 
-	private static ManterSala instance;
-
+	// This Vector will hold all classrooms in memory.
 	private Vector<Sala> rooms = new Vector<Sala>();
 
+	private static ManterSala instance;
+	
 	// Private constructor, to guarantee the use via singleton. 
 	private ManterSala() {
 
