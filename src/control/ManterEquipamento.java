@@ -1,6 +1,9 @@
 /**
 ManageEquipment
-This class receives equipments data and give them to persistence classes.
+Include the procedures to access, modify, and delete equipments. In this class, 
+we use Singleton to guarantee just one instance at time, since this is a MVC 
+controller. To execute the described actions, this class need to communicate 
+with the DAO layer.  
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterEquipamento.java
 */
 package control;
@@ -13,17 +16,22 @@ import model.Equipamento;
 
 public class ManterEquipamento {
 
-	private Vector <Equipamento> equipmentVec = new Vector <Equipamento>();
+	// This Vector will hold all equipments in memory.
+	private Vector<Equipamento> equipments = new Vector<Equipamento>();
 
 	private static ManterEquipamento instance;
 
-	private ManterEquipamento ( ) {
+	// Private constructor, to guarantee the use via singleton.
+	private ManterEquipamento() {
 
 		// Blank constructor.
 	}
 
-	// This constructor provides the singleton implementation.
-	public static ManterEquipamento getInstance ( ) {
+	/*
+	Provides the singleton implementation. Return the active instance, since
+	it will be just one instance at time.
+	*/
+	public static ManterEquipamento getInstance() {
 
 		if (instance == null) {
 			instance = new ManterEquipamento();
@@ -33,50 +41,51 @@ public class ManterEquipamento {
 		return instance;
 	}
 
-	// This method gets a equipment vector.
-	public Vector <Equipamento> getEquipmentVec ( ) throws SQLException,
+	// Returns all registered equipments.
+	public Vector<Equipamento> getAllEquipments() throws SQLException,
 			PatrimonioException {
 
-		this.equipmentVec = EquipamentoDAO.getInstance().searchAll();
-		return this.equipmentVec;
+		this.equipments = EquipamentoDAO.getInstance().searchAll();
+		return this.equipments;
 	}
 
-	// This method include code and description of the equipment in the
-	// database.
-	public void insert (String equipmentCode, String equipmentDescription)
+	// Register a new equipment.
+	public void insert(String equipmentCode, String equipmentDescription)
 			throws PatrimonioException, SQLException {
 
-		Equipamento equipment = new Equipamento(equipmentCode, equipmentDescription);
+		Equipamento equipment = new Equipamento(equipmentCode,
+				equipmentDescription);
 		EquipamentoDAO.getInstance().insert(equipment);
-		getEquipmentVec();
+		// We need to update the Vector after the insertion.
+		getAllEquipments();
 	}
 
-	// This method update code and description info in the database.
-	public void modify (String equipmentCode, String equipmentDescription,
-			Equipamento newEquipment) throws PatrimonioException, SQLException {
+	// Updates id code and description of some equipment.
+	public void modify(String newCode, String newDescription,
+			Equipamento oldEquipment) throws PatrimonioException, SQLException {
 
-		if (newEquipment == null) {
+		if (oldEquipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		} else {
 
-			Equipamento oldEquipment = new Equipamento(newEquipment.getIdCode(),
-					newEquipment.getDescription());
-			newEquipment.setIdCode(equipmentCode);
-			newEquipment.setDescription(equipmentDescription);
-			EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
-			getEquipmentVec();
+			Equipamento newEquipment = new Equipamento(newCode, newDescription);
+
+			// We need to updates the database and the Vector.
+			EquipamentoDAO.getInstance().modify(newEquipment, oldEquipment);
+			getAllEquipments();
 		}
 	}
 
-	// This method deletes the selected equipment.
-	public void delete (Equipamento equipment) throws SQLException,
+	// Removes a equipment from the database.
+	public void delete(Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
 		if (equipment == null) {
 			throw new PatrimonioException("Equipamento em branco");
 		} else {
 			EquipamentoDAO.getInstance().delete(equipment);
-			getEquipmentVec();
+			// We need to update the Vector after the insertion.
+			getAllEquipments();
 		}
 	}
 }

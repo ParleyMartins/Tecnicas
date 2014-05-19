@@ -38,9 +38,9 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 		try {
 
 			this.codeTxtField.setText(ManterEquipamento.getInstance()
-					.getEquipmentVec().get(index).getIdCode());
+					.getAllEquipments().get(index).getIdCode());
 			this.descriptionTxtArea.setText(ManterEquipamento.getInstance()
-					.getEquipmentVec().get(index).getDescription());
+					.getAllEquipments().get(index).getDescription());
 			this.index2 = index;
 
 		} catch (PatrimonioException ex) {
@@ -75,7 +75,7 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 			ManterEquipamento.getInstance().modify(
 					this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText(),
-					ManterEquipamento.getInstance().getEquipmentVec()
+					ManterEquipamento.getInstance().getAllEquipments()
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this, modifiedMessage,

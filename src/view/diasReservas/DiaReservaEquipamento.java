@@ -25,7 +25,7 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 			int equipmentPosition) throws SQLException, PatrimonioException {
 
 		super(parentWindow, modal);
-		this.equipmentToBeReserved = ManterEquipamento.getInstance().getEquipmentVec()
+		this.equipmentToBeReserved = ManterEquipamento.getInstance().getAllEquipments()
 				.get(equipmentPosition);
 	}
 

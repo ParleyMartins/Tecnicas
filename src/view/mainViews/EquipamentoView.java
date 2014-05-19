@@ -66,7 +66,7 @@ public class EquipamentoView extends PatrimonioView {
 			DefaultTableModel equipmentTable = new DefaultTableModel();
 
 			Iterator<Equipamento> i = control.ManterEquipamento.getInstance()
-					.getEquipmentVec().iterator();
+					.getAllEquipments().iterator();
 
 			equipmentTable.addColumn(International.getInstance().getLabels()
 					.getString("code"));
@@ -133,13 +133,13 @@ public class EquipamentoView extends PatrimonioView {
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					removeQuestion
-							+ ManterEquipamento.getInstance().getEquipmentVec()
+							+ ManterEquipamento.getInstance().getAllEquipments()
 									.get(index).getDescription() + "?",
 					removeMessage, JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
 				ManterEquipamento.getInstance().delete(
-						ManterEquipamento.getInstance().getEquipmentVec()
+						ManterEquipamento.getInstance().getAllEquipments()
 								.get(index));
 				JOptionPane.showMessageDialog(this, removeConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
