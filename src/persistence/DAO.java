@@ -83,11 +83,11 @@ public abstract class DAO {
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-
 	protected abstract Object fetch (ResultSet result) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException;
 
-	/** This executes a query.
+	/** 
+	 * This executes a query.
 	 * 
 	 * @param query The query to be executed.
 	 * @throws SQLException if an exception related to the database is activated
