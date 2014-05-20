@@ -5,7 +5,7 @@ we use Singleton to guarantee just one instance at time, since this is a MVC
 controller. To execute the described actions, this class need to communicate 
 with the DAO layer.  
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterEquipamento.java
-*/
+ */
 package control;
 
 import java.sql.SQLException;
@@ -27,10 +27,12 @@ public class ManterEquipamento {
 		// Blank constructor.
 	}
 
-	/*
-	Provides the singleton implementation. Return the active instance, since
-	it will be just one instance at time.
-	*/
+	/**
+	 * Provides the singleton implementation
+	 * 
+	 * @return the active ManterEquipamento instance, since it will be just one
+	 *         at time.
+	 */
 	public static ManterEquipamento getInstance() {
 
 		if (instance == null) {
@@ -41,7 +43,13 @@ public class ManterEquipamento {
 		return instance;
 	}
 
-	// Returns all registered equipments.
+	/**
+	 * @return a Vector with all registered equipments
+	 * @throws SQLException
+	 *             If has some problem during the database search
+	 * @throws PatrimonioException
+	 *             If some of the equipment info is invalid
+	 */
 	public Vector<Equipamento> getAllEquipments() throws SQLException,
 			PatrimonioException {
 
@@ -49,7 +57,19 @@ public class ManterEquipamento {
 		return this.equipments;
 	}
 
-	// Register a new equipment.
+	/**
+	 * Register a new equipment.
+	 * 
+	 * @param equipmentCode
+	 *            ID Code for the equipment
+	 * @param equipmentDescription
+	 *            Description to the equipment
+	 * @throws PatrimonioException
+	 *             If the equipment information is invalid
+	 * @throws SQLException
+	 *             If has some problem during the database insertion
+	 */
+	//
 	public void insert(String equipmentCode, String equipmentDescription)
 			throws PatrimonioException, SQLException {
 
@@ -60,7 +80,20 @@ public class ManterEquipamento {
 		getAllEquipments();
 	}
 
-	// Updates id code and description of some equipment.
+	/**
+	 * Updates id code and description of some equipment
+	 * 
+	 * @param newCode
+	 *            New ID Code for the equipment
+	 * @param newDescription
+	 *            New description for the equipment
+	 * @param oldEquipment
+	 *            Object to the equipment to be updated
+	 * @throws PatrimonioException
+	 *             If the equipment information is invalid
+	 * @throws SQLException
+	 *             If has some problem during the database update
+	 */
 	public void modify(String newCode, String newDescription,
 			Equipamento oldEquipment) throws PatrimonioException, SQLException {
 
@@ -76,7 +109,16 @@ public class ManterEquipamento {
 		}
 	}
 
-	// Removes a equipment from the database.
+	/**
+	 * Removes an equipment from the database.
+	 * 
+	 * @param equipment
+	 *            Object of the equipment to be removed
+	 * @throws SQLException
+	 *             If has some problem during the database deletion
+	 * @throws PatrimonioException
+	 *             If the equipment information is invalid
+	 */
 	public void delete(Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
