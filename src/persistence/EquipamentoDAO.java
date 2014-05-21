@@ -1,6 +1,6 @@
 /**
 EquipmentDAO.java
-This class manages the DAO functions of a Equipment
+This class manages the DAO functions of an Equipment
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/EquipamentoDAO.java
 */
 
@@ -39,7 +39,8 @@ public class EquipamentoDAO {
 		// Blank constructor.
 	}
 
-	/** Singleton implementation.
+	/**
+	 * Singleton implementation.
 	 * @return the current instance of this class.
 	 */
 	public static EquipamentoDAO getInstance ( ) {
@@ -81,7 +82,7 @@ public class EquipamentoDAO {
 	}
 
 	/** 
-	 * This updates a Equipment on the database.
+	 * This updates an Equipment on the database.
 	 * @param oldEquipment The Equipment with the old info in the database
 	 * @param newEquipment The Equipment with the new info to be inserted into the database
 	 * @throws SQLException if an exception related to the database is activated
@@ -144,7 +145,7 @@ public class EquipamentoDAO {
 	}
 
 	/**
-	 * This removes a Equipment from the database.
+	 * This removes an Equipment from the database.
 	 * @param equipment The Equipment to be removed.
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
@@ -200,7 +201,7 @@ public class EquipamentoDAO {
 	}
 
 	/**
-	 * This searches a Equipment with the given description.
+	 * This searches an equipment with the given description.
 	 * @param description The String with the desired Equipment description
 	 * @return A Vector with all the Equipments found on the search.
 	 * @throws SQLException if an exception related to the database is activated
@@ -245,9 +246,9 @@ public class EquipamentoDAO {
 	}
 
 	/**
-	 * This checks if a equipment in on any database.
+	 * This checks if an equipment in on any database.
 	 * @param query The String with the search query
-	 * @return true if a equipment is found, false otherwise.
+	 * @return true if an equipment is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
 	private boolean isInDBGeneric (String query) throws SQLException {
@@ -289,9 +290,9 @@ public class EquipamentoDAO {
 	}
 
 	/**
-	 * This checks if the given a equipment is in any database.
+	 * This checks if the given an equipment is in any database.
 	 * @param code The Equipment code to the search.
-	 * @return true if a equipment with the code is found, false otherwise.
+	 * @return true if an equipment with the code is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
 	private boolean isInDbCode (String code) throws SQLException {
@@ -320,7 +321,7 @@ public class EquipamentoDAO {
 	}
 
 	/**
-	 * This fetches a Equipment using a result.
+	 * This fetches an equipment using a result.
 	 * @param result The ResultSet used to fetch the equipment
 	 * @return a instance of Equipment with the given data.
 	 * @throws SQLException if an exception related to the database is activated
