@@ -56,8 +56,8 @@ public class AlunoDAO {
 		return instance;
 	}
 
-	/** This includes new Aluno in the database.
-	 * 
+	/**
+	 * This includes new Aluno in the database.
 	 * @param student An instance of a Student model.
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
@@ -94,8 +94,8 @@ public class AlunoDAO {
 		}
 	}
 
-	/** This updates a Student info in the database.
-	 * 
+	/**
+	 * This updates a Student info in the database.
 	 * @param oldStudent The instance of Student that will be modified.
 	 * @param newStudent The instance of Student with the new info.
 	 * @throws SQLException if an exception related to the database is activated
@@ -176,7 +176,6 @@ public class AlunoDAO {
 
 	/** 
 	 * This removes a Student from the database.
-	 * 
 	 * @param student The Student instance that will be deleted from database
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
@@ -207,7 +206,6 @@ public class AlunoDAO {
 
 	/** 
 	 * This searches for all Students from the database.
-	 * 
 	 * @return all the Students on the database
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
@@ -219,7 +217,6 @@ public class AlunoDAO {
 
 	/** 
 	 * This searches for a Student by name.
-	 * 
 	 * @param name The String with the wanted name.
 	 * @return a Vector with all the Students with the wanted name.
 	 * @throws SQLException if an exception related to the database is activated
@@ -232,8 +229,8 @@ public class AlunoDAO {
 				+ "\";");
 	}
 
-	/** This searches for a Student by CPF.
-	 * 
+	/**
+	 * This searches for a Student by CPF.
 	 * @param cpf The Student wanted CPF
 	 * @return a Vector with all the Students with the wanted cpf.
 	 * @throws SQLException if an exception related to the database is activated
@@ -246,8 +243,8 @@ public class AlunoDAO {
 				+ "\";");
 	}
 
-	/** This searches a Student by the Enrollment Number.
-	 * 
+	/**
+	 * This searches a Student by the Enrollment Number.
 	 * @param enrollmentNumber the wanted enrollment number. 
 	 * @return a Vector with all the Students with the wanted enrollment number
 	 * @throws SQLException if an exception related to the database is activated
@@ -261,8 +258,8 @@ public class AlunoDAO {
 				+ enrollmentNumber + "\";");
 	}
 
-	/** This searches a Student by the email address.
-	 * 
+	/**
+	 * This searches a Student by the email address.
 	 * @param email the wanted email address
 	 * @return a Vector with all the Students with the wanted email address.
 	 * @throws SQLException if an exception related to the database is activated
@@ -275,8 +272,8 @@ public class AlunoDAO {
 				+ "\";");
 	}
 
-	/** This searches a Student by the phone number.
-	 * 
+	/**
+	 * This searches a Student by the phone number.
 	 * @param phoneNumber the wanted phone number
 	 * @return a Vector with all the Students with the wanted phone number.
 	 * @throws SQLException if an exception related to the database is activated
@@ -294,8 +291,8 @@ public class AlunoDAO {
 	 * Private Methods
 	 */
 
-	/** This searches a database for a given entry.
-	 * 
+	/**
+	 * This searches a database for a given entry.
 	 * @param query The String with the search content.
 	 * @return a Vector with the Students that match the search content.
 	 * @throws SQLException if an exception related to the database is activated
@@ -322,8 +319,8 @@ public class AlunoDAO {
 		return studentVec;
 	}
 
-	/** This checks if there is a given query in the database.
-	 * 
+	/**
+	 * This checks if there is a given query in the database.
 	 * @param query The string that will be searched in the database.
 	 * @return true if the query is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
@@ -349,8 +346,8 @@ public class AlunoDAO {
 		}
 	}
 
-	/** This checks if there is a given Student in the database.
-	 * 
+	/**
+	 * This checks if there is a given Student in the database.
 	 * @param student The Student that will be searched in the database.
 	 * @return true if the student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
@@ -367,8 +364,8 @@ public class AlunoDAO {
 	}
 
 	
-	/** This checks if there is a given cpf in the database.
-	 * 
+	/**
+	 * This checks if there is a given cpf in the database.
 	 * @param cpf The cpf that will be searched in the database.
 	 * @return true if a student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
@@ -380,8 +377,8 @@ public class AlunoDAO {
 				+ cpf + "\";");
 	}
 
-	/** This checks if there is a given enrollment number in the database.
-	 * 
+	/**
+	 * This checks if there is a given enrollment number in the database.
 	 * @param enrollmentNumber The String that will be searched in the database.
 	 * @return true if a student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
@@ -393,8 +390,8 @@ public class AlunoDAO {
 				+ "aluno.matricula = \"" + enrollmentNumber + "\";");
 	}
 
-	/** This checks if there is a given Student in reservation database.
-	 * 
+	/**
+	 * This checks if there is a given Student in reservation database.
 	 * @param student The Student that will be searched in the database.
 	 * @return true if the student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
@@ -412,8 +409,8 @@ public class AlunoDAO {
 				+ "\");");
 	}
 
-	/**This fetches a Student.
-	 * 
+	/**
+	 * This fetches a Student.
 	 * @param result The ResultSet that will be used to fetch the Student
 	 * @return the fetched Student.
 	 * @throws SQLException if an exception related to the database is activated
@@ -427,8 +424,8 @@ public class AlunoDAO {
 				result.getString("email"));
 	}
 
-	/**This updates a database.
-	 * 
+	/**
+	 * This updates a database.
 	 * @param query String given to update the database.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
