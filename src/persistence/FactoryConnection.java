@@ -18,7 +18,7 @@ public class FactoryConnection {
 	private final String user = "testuser";
 	private final String password = "password";
 
-	// Singleton implementation.
+	// Instance for the singleton
 	private static FactoryConnection instance;
 
 	private FactoryConnection ( ) {
@@ -26,6 +26,10 @@ public class FactoryConnection {
 		// Blank constructor.
 	}
 
+	/**
+	 * Singleton implementation.
+	 * @return the initialized instance.
+	 */
 	public static FactoryConnection getInstance ( ) {
 
 		if (instance == null) {
@@ -37,7 +41,11 @@ public class FactoryConnection {
 		return instance;
 	}
 
-	// Create and return the connection with the database server.
+	/**
+	 * This generates the connection with the database server.
+	 * @return the Connection with the database
+	 * @throws SQLException
+	 */
 	public Connection getConnection ( ) throws SQLException {
 
 		Connection connection = null;
