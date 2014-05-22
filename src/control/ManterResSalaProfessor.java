@@ -36,9 +36,8 @@ public class ManterResSalaProfessor {
 	}
 
 	/**
-	 * Provides the singleton implementation. Return the active instance, since
-	 * it will be just one instance at time.
-	 * @return the active instance, since it will be just one instance at time.
+	 * Provides the singleton implementation
+	 * @return the active instance, since it will be just one instance at time
 	 */
 	public static ManterResSalaProfessor getInstance() {
 
