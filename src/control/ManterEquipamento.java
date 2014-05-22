@@ -92,7 +92,7 @@ public class ManterEquipamento {
 			Equipamento newEquipment = new Equipamento(newCode, newDescription);
 
 			// We need to updates the database and the Vector.
-			EquipamentoDAO.getInstance().modify(newEquipment, oldEquipment);
+			EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
 			getAllEquipments();
 		}
 	}

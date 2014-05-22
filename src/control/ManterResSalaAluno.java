@@ -147,15 +147,23 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 */
-	public void modify(String purpose, String numberDesiredChairs,
-			ReservaSalaAluno oldReservation) throws SQLException,
-			ReservaException, ClienteException, PatrimonioException {
-
-		ReservaSalaAluno newReservation = oldReservation;
-
-		newReservation.setPurpose(purpose);
-		newReservation.setReservedChairs(numberDesiredChairs);
-		ResSalaAlunoDAO.getInstance().modify(oldReservation, newReservation);
+	public void modify (String purpose, String numberDesiredChairs,
+			ReservaSalaAluno reservation)
+			throws SQLException, ReservaException, ClienteException,
+			PatrimonioException {
+		
+		/*
+		 *  If we don't create a new object here, this code does'nt work.
+		 *  Need to investigate.
+		 */
+		ReservaSalaAluno oldReservation = new ReservaSalaAluno(
+				reservation.getDate(),
+				reservation.getTime(), reservation.getClassroom(),
+				reservation.getPurpose(),
+				reservation.getReservedChairs(), reservation.getStudent());
+		reservation.setPurpose(purpose);
+		reservation.setReservedChairs(numberDesiredChairs);
+		ResSalaAlunoDAO.getInstance().modify(oldReservation, reservation);
 	}
 
 	/**

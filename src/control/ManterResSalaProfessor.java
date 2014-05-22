@@ -112,16 +112,19 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database update
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void modify(String newPurpose, ReservaSalaProfessor oldReservation)
+	public void modify (String purpose, ReservaSalaProfessor reservation)
 			throws SQLException, ReservaException {
-
-		// Copy the old reservation info and changes the purpose.
-		ReservaSalaProfessor newReservation = oldReservation;
-		newReservation.setPurpose(newPurpose);
-
-		ResSalaProfessorDAO.getInstance()
-				.modify(oldReservation, newReservation);
-
+		
+		/*
+		 *  If we don't create a new object here, this code does'nt work.
+		 *  Need to investigate.
+		 */
+		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
+				reservation.getDate(),
+				reservation.getTime(), reservation.getClassroom(),
+				reservation.getPurpose(), reservation.getTeacher());
+		reservation.setPurpose(purpose);
+		ResSalaProfessorDAO.getInstance().modify(oldReservation, reservation);
 	}
 
 	/**

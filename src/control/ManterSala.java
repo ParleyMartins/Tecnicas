@@ -90,7 +90,7 @@ public class ManterSala {
 
 		// Creates a object to the new classroom and updates the database.
 		Sala newRoom = new Sala(roomCode, roomDescription, capacity);
-		SalaDAO.getInstance().modify(newRoom, oldRoom);
+		SalaDAO.getInstance().modify(oldRoom, newRoom);
 	}
 
 	/**
