@@ -22,7 +22,9 @@ public class ManterSala {
 
 	private static ManterSala instance;
 
-	// Private constructor, to guarantee the use via singleton.
+	/*
+	 * Private constructor to provide singleton implementation.
+	 */
 	private ManterSala() {
 
 		// Blank constructor.
@@ -30,9 +32,8 @@ public class ManterSala {
 
 	/**
 	 * Provides the singleton implementation
-	 * 
 	 * @return the active ManterSala instance, since it will be just one at
-	 *         time.
+	 * time.
 	 */
 	public static ManterSala getInstance() {
 
@@ -46,10 +47,8 @@ public class ManterSala {
 
 	/**
 	 * @return a Vector with all registered rooms.
-	 * @throws SQLException
-	 *             If has some problem with the database search
-	 * @throws PatrimonioException
-	 *             If some of the classroom info is invalid
+	 * @throws SQLException If has some problem with the database search
+	 * @throws PatrimonioException If some of the classroom info is invalid
 	 */
 	//
 	public Vector<Sala> getRoomsVec() throws SQLException, PatrimonioException {
@@ -62,17 +61,11 @@ public class ManterSala {
 	 * Registers a new room in the database. Can return a PatrimonioException if
 	 * the room information is invalid, or a SQLException if happen some error
 	 * with the SQL transaction/connection.
-	 * 
-	 * @param roomCode
-	 *            The classroom ID Code
-	 * @param roomDescription
-	 *            Description of the classroom
-	 * @param roomCapacity
-	 *            Capacity of the classroom
-	 * @throws PatrimonioException
-	 *             If the classroom information is invalid
-	 * @throws SQLException
-	 *             If has some problem during the database insertion
+	 * @param roomCode The classroom ID Code
+	 * @param roomDescription Description of the classroom
+	 * @param roomCapacity Capacity of the classroom
+	 * @throws PatrimonioException If the classroom information is invalid
+	 * @throws SQLException If has some problem during the database insertion
 	 */
 	public void insert(String roomCode, String roomDescription,
 			String roomCapacity) throws PatrimonioException, SQLException {
@@ -84,19 +77,12 @@ public class ManterSala {
 
 	/**
 	 * Modify the information of an existing room.
-	 * 
-	 * @param roomCode
-	 *            New ID Code to the classroom
-	 * @param roomDescription
-	 *            New description to the classroom
-	 * @param capacity
-	 *            New capacity to the classroom
-	 * @param oldRoom
-	 *            Object of the classroom to be updated
-	 * @throws PatrimonioException
-	 *             If the classroom information is invalid
-	 * @throws SQLException
-	 *             If has some problem during the database update
+	 * @param roomCode New ID Code to the classroom
+	 * @param roomDescription New description to the classroom
+	 * @param capacity New capacity to the classroom
+	 * @param oldRoom Object of the classroom to be updated
+	 * @throws PatrimonioException If the classroom information is invalid
+	 * @throws SQLException If has some problem during the database update
 	 */
 	public void modify(String roomCode, String roomDescription,
 			String capacity, Sala oldRoom) throws PatrimonioException,
@@ -111,13 +97,9 @@ public class ManterSala {
 	 * Remove a room from the database. Will a PatrimonioException if the room
 	 * is null, or a SQLException if happen some error with the SQL
 	 * transaction/connection.
-	 * 
-	 * @param room
-	 *            Classroom that will be removed from the database
-	 * @throws SQLException
-	 *             If has some problem during the database deletion
-	 * @throws PatrimonioException
-	 *             If the classroom information is invalid
+	 * @param room Classroom that will be removed from the database
+	 * @throws SQLException If has some problem during the database deletion
+	 * @throws PatrimonioException If the classroom information is invalid
 	 */
 	public void delete(Sala room) throws SQLException, PatrimonioException {
 
