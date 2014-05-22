@@ -289,14 +289,21 @@ public class ResSalaProfessorDAO extends DAO {
 		return formatter.format(date);
 	}
 
-	// Get the current time.
+	/**
+	 * This gets the current system time.
+	 * @return a String with the current time.
+	 */
 	private String currentTime ( ) {
 
 		Date date = new Date(System.currentTimeMillis());
 		return date.toString().substring(11, 16);
 	}
 
-	// Check if the date is passed.
+	/**
+	 * This checks if a given date has passed.
+	 * @param date the date that will be checked
+	 * @return true if the given date has passed, false otherwise.
+	 */
 	private boolean dateIsGone (String date) {
 
 		String now[] = this.currentDate().split("[./-]");
@@ -333,8 +340,11 @@ public class ResSalaProfessorDAO extends DAO {
 		return false;
 	}
 
-	// Check if the date is equals.
-
+	/**
+	 * This checks if a given the date is today.
+	 * @param date The date that is going to be checked
+	 * @return true if the given date is today, false otherwise.
+	 */
 	public boolean dataIsNow (String date) {
 
 		date = this.standardizeDate(date);
@@ -349,9 +359,12 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 		return false;
 	}
-
-	// Check if the time is passed.
-
+	
+	/**
+	 * This method checks if a given time is already gone.
+	 * @param time The String with the time that will be checked
+	 * @return true if time is gone, false otherwise.
+	 */
 	private boolean timeIsGone (String time) {
 
 		String now = this.currentTime();
@@ -378,8 +391,12 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 	}
 
-	// Standardize the date.
 	
+	/**
+	 * This method standardizes the date
+	 * @param date the String with a date.
+	 * @return A String with date following the XX/XX/XXXX pattern. 
+	 */
 	private String standardizeDate (String date) {
 
 		String now[] = currentDate().split("[./-]");
@@ -399,8 +416,12 @@ public class ResSalaProfessorDAO extends DAO {
 		return standardDate;
 	}
 
-	// Reuse query for SELECT PROFESSOR BY ID clause.
-
+	
+	/**
+	 * This generates a query to select a teacher by the database id.
+	 * @param teacher The teacher that is going to be selected.
+	 * @return the query to select the given Teacher.
+	 */
 	private String selectTeacherIDQuery (Professor teacher) {
 
 		return "SELECT id_professor FROM professor WHERE " +
@@ -411,8 +432,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"professor.matricula = \"" + teacher.getEnrollmentNumber() + "\"";
 	}
 
-	// Reuse query for SELECT SALA BY ID clause.
-
+	
+	/**
+	 * This generates a query to select a room by the database id.
+	 * @param room The room that is going to be selected.
+	 * @return the query to select the given Room
+	 */
 	private String selectRoomIdQuery (Sala room) {
 
 		return "SELECT id_sala FROM sala WHERE " +
@@ -421,8 +446,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"sala.capacidade = " + room.getCapacity();
 	}
 
-	// Reuse Query for WHERE clause.
-
+	
+	/**
+	 * This generates a WHERE query with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the WHERE query
+	 */
 	private String whereQuery (ReservaSalaProfessor reservation) {
 
 		return " WHERE " +
@@ -434,8 +463,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"data = \"" + reservation.getDate() + "\"";
 	}
 
-	// Reuse Query for VALUES clause.
-
+	
+	/**
+	 * This generates a query with the VALUES of a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the VALUE query
+	 */
 	private String valuesQuery (ReservaSalaProfessor reservation) {
 
 		return "( " + selectTeacherIDQuery(reservation.getTeacher()) + " ), " +
@@ -445,8 +478,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"\"" + reservation.getDate() + "\"";
 	}
 
-	// Reuse Query for ATRIBUTES clause.
 	
+	/**
+	 * This generates a query with the ATTRIBUTES of a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the ATTRIBUTES query
+	 */
 	private String attributesQuery (ReservaSalaProfessor reservation) {
 
 		return "id_professor = ( " + selectTeacherIDQuery(reservation.getTeacher())
@@ -457,8 +494,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"data = \"" + reservation.getDate() + "\"";
 	}
 
-	// Reuse Query for INSERT clause.
-
+	
+	/**
+	 * This generates a INSERT query with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the INSERT query
+	 */
 	private String insertIntoQuery (ReservaSalaProfessor reservation) {
 
 		return "INSERT INTO "
@@ -468,16 +509,24 @@ public class ResSalaProfessorDAO extends DAO {
 				"VALUES ( " + valuesQuery(reservation) + " );";
 	}
 
-	// Reuse Query for DELETE PROFESSOR clause.
-
+	
+	/**
+	 * This generates a DELETE query from teacher reservations with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the DELETE query
+	 */
 	private String deleteFromTeacherQuery (ReservaSalaProfessor reservation) {
 
 		return "DELETE FROM reserva_sala_professor "
 				+ this.whereQuery(reservation) + " ;";
 	}
 
-	// Reuse Query for DELETE ALUNO clause.
-
+	
+	/**
+	 * This generates a DELETE query from student reservations with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the DELETE query
+	 */
 	private String deleteFromStudentQuery (ReservaSalaProfessor reservation) {
 
 		return "DELETE FROM reserva_sala_aluno WHERE " +
@@ -485,8 +534,13 @@ public class ResSalaProfessorDAO extends DAO {
 				"data = \"" + reservation.getDate() + "\" ;";
 	}
 
-	// Reuse Query for UPDATE clause.
-
+	
+	/**
+	 * This generates a UPDATE query 
+	 * @param oldReservation The reservation that is going to be updated
+	 * @param newReservation The reservation with the new info
+	 * @return the UPDATE query
+	 */
 	private String updateQuery (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation) {
 
 		return "UPDATE reserva_sala_professor SET " +

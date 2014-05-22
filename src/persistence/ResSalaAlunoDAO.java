@@ -25,16 +25,26 @@ import model.Sala;
 public class ResSalaAlunoDAO extends DAO {
 
 	// Exception messages and alerts.
-	private final String NULL = International.getInstance().getMessages().getString("null");
-	private final String STUDENT_UNAVAILABLE = International.getInstance().getMessages().getString("studentUnavailable");
-	private final String ROOM_UNAVAILABLE = International.getInstance().getMessages().getString("roomUnavailable");
-	private final String STUDENT_INEXISTENT = International.getInstance().getMessages().getString("studentInexistent");
-	private final String ROOM_INEXISTENT = International.getInstance().getMessages().getString("roomInexistent");
-	private final String RESERVATION_INEXISTENT = International.getInstance().getMessages().getString("reservationInexistent");
-	private final String RESERVATION_EXISTENT = International.getInstance().getMessages().getString("reservationExistent");
-	private final String CHAIRS_UNAVAILABLE = International.getInstance().getMessages().getString("chairsUnavailable");
-	private final String DATE_IS_GONE = International.getInstance().getMessages().getString("dateIsGone");
-	private final String TIME_IS_GONE = International.getInstance().getMessages().getString("timeIsGone");
+	private final String NULL = International.getInstance().getMessages()
+			.getString("null");
+	private final String STUDENT_UNAVAILABLE = International.getInstance()
+			.getMessages().getString("studentUnavailable");
+	private final String ROOM_UNAVAILABLE = International.getInstance()
+			.getMessages().getString("roomUnavailable");
+	private final String STUDENT_INEXISTENT = International.getInstance()
+			.getMessages().getString("studentInexistent");
+	private final String ROOM_INEXISTENT = International.getInstance()
+			.getMessages().getString("roomInexistent");
+	private final String RESERVATION_INEXISTENT = International.getInstance()
+			.getMessages().getString("reservationInexistent");
+	private final String RESERVATION_EXISTENT = International.getInstance()
+			.getMessages().getString("reservationExistent");
+	private final String CHAIRS_UNAVAILABLE = International.getInstance()
+			.getMessages().getString("chairsUnavailable");
+	private final String DATE_IS_GONE = International.getInstance()
+			.getMessages().getString("dateIsGone");
+	private final String TIME_IS_GONE = International.getInstance()
+			.getMessages().getString("timeIsGone");
 
 	// Singleton implementation.
 	private static ResSalaAlunoDAO instance;

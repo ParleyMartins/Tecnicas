@@ -475,8 +475,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	/**
-	 * This generates a UPDATE query with a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * This generates a UPDATE query 
+	 * @param oldReservation The reservation that is going to be updated
+	 * @param newReservation The reservation with the new info
 	 * @return the UPDATE query
 	 */
 	private String updateQuery (ReservaEquipamentoProfessor oldReservation,
