@@ -32,7 +32,8 @@ public class ManterResSalaAluno {
 
 	/**
 	 * Provides the singleton implementation
-	 * @return the active instance, since it will be just one at time
+	 * @return the active ManterResSalaAluno instance, since it will be just one
+	 * at time
 	 */
 	public static ManterResSalaAluno getInstance() {
 
@@ -147,19 +148,17 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 */
-	public void modify (String purpose, String numberDesiredChairs,
-			ReservaSalaAluno reservation)
-			throws SQLException, ReservaException, ClienteException,
-			PatrimonioException {
-		
+	public void modify(String purpose, String numberDesiredChairs,
+			ReservaSalaAluno reservation) throws SQLException,
+			ReservaException, ClienteException, PatrimonioException {
+
 		/*
-		 *  If we don't create a new object here, this code does'nt work.
-		 *  Need to investigate.
+		 * If we don't create a new object here, this code does'nt work. Need to
+		 * investigate.
 		 */
 		ReservaSalaAluno oldReservation = new ReservaSalaAluno(
-				reservation.getDate(),
-				reservation.getTime(), reservation.getClassroom(),
-				reservation.getPurpose(),
+				reservation.getDate(), reservation.getTime(),
+				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getReservedChairs(), reservation.getStudent());
 		reservation.setPurpose(purpose);
 		reservation.setReservedChairs(numberDesiredChairs);

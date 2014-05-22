@@ -37,7 +37,8 @@ public class ManterResSalaProfessor {
 
 	/**
 	 * Provides the singleton implementation
-	 * @return the active instance, since it will be just one instance at time
+	 * @return the active ManterResSalaProfessor instance, since it will be just
+	 * one instance at time
 	 */
 	public static ManterResSalaProfessor getInstance() {
 
@@ -112,17 +113,17 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database update
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void modify (String purpose, ReservaSalaProfessor reservation)
+	public void modify(String purpose, ReservaSalaProfessor reservation)
 			throws SQLException, ReservaException {
-		
+
 		/*
-		 *  If we don't create a new object here, this code does'nt work.
-		 *  Need to investigate.
+		 * If we don't create a new object here, this code does'nt work. Need to
+		 * investigate.
 		 */
 		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
-				reservation.getDate(),
-				reservation.getTime(), reservation.getClassroom(),
-				reservation.getPurpose(), reservation.getTeacher());
+				reservation.getDate(), reservation.getTime(),
+				reservation.getClassroom(), reservation.getPurpose(),
+				reservation.getTeacher());
 		reservation.setPurpose(purpose);
 		ResSalaProfessorDAO.getInstance().modify(oldReservation, reservation);
 	}
