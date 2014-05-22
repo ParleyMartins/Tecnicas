@@ -1,6 +1,6 @@
 /**
 ResEquipamentoProfessorDAO
-Manage the DAO of the relation between Equipamento and Professor
+This manages the DAO functions of the equipment reservation.
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/ResEquipamentoProfessorDAO.java
 */
 
@@ -22,14 +22,20 @@ import exception.ReservaException;
 public class ResEquipamentoProfessorDAO extends DAO {
 
 	// Exception messages and alerts.
-	private final String NULL = International.getInstance().getMessages().getString("null");
-	private final String EQUIPMENT_UNAVAILABLE = International.getInstance().getMessages().getString("equipmentUnavailabe");
-	private final String TEACHER_INEXISTENT = International.getInstance().getMessages().getString("teacherInexistent");
-	private final String EQUIPMENT_INEXISTENT = International.getInstance().getMessages().getString("equipmentInexixtent");
-	private final String RESERVATION_INEXISTENT = International.getInstance().getMessages().getString("reservationInexistent");
-	private final String RESERVATION_EXISTING = International.getInstance().getMessages().getString("reservationExisting");
+	private final String NULL = International.getInstance().getMessages()
+			.getString("null");
+	private final String EQUIPMENT_UNAVAILABLE = International.getInstance()
+			.getMessages().getString("equipmentUnavailabe");
+	private final String TEACHER_INEXISTENT = International.getInstance()
+			.getMessages().getString("teacherInexistent");
+	private final String EQUIPMENT_INEXISTENT = International.getInstance()
+			.getMessages().getString("equipmentInexixtent");
+	private final String RESERVATION_INEXISTENT = International.getInstance()
+			.getMessages().getString("reservationInexistent");
+	private final String RESERVATION_EXISTING = International.getInstance()
+			.getMessages().getString("reservationExisting");
 
-	// Singleton implementation.
+	// Instance to the singleton.
 	private static ResEquipamentoProfessorDAO instance;
 
 	private ResEquipamentoProfessorDAO ( ) {
@@ -37,6 +43,10 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		// Blank constructor.
 	}
 
+	/**
+	 * Singleton implementation.
+	 * @return the initialized instance
+	 */
 	public static ResEquipamentoProfessorDAO getInstance ( ) {
 
 		if (instance == null) {
@@ -47,7 +57,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return instance;
 	}
 	
-	// Include new Reserva in the database.
+	/**
+	 * This inserts a new reservation in the database.
+	 * @param reservation An instance of a EquipmentReservation.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void insert (ReservaEquipamentoProfessor reservation)
 			throws ReservaException,
 			SQLException {
@@ -78,7 +93,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		}
 	}
 
-	// Update Reserva info in the database.
+	/**
+	 * This updates a reservation in the database.
+	 * @param oldReservation The reservation that will be modified.
+	 * @param newReservation The reservation with the new info.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void modify (ReservaEquipamentoProfessor oldReservation,
 			ReservaEquipamentoProfessor newReservation) throws ReservaException,
 			SQLException {
@@ -130,7 +151,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		}
 	}
 
-	// Remove Reserva from database.
+	/**
+	 * This removes a reservation from database.
+	 * @param reservation The reservation that will be deleted.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void delete (ReservaEquipamentoProfessor reservation)
 			throws ReservaException,
 			SQLException {
@@ -146,7 +172,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		}
 	}
 
-	// Select all Reservas from the database.
+	/** 
+	 * This searches for all Equipment Reservations from the database.
+	 * @return all the EquipmentReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <Object> searchAll ( ) throws SQLException,
 			ClienteException,
@@ -157,8 +190,15 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
 						+ "INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
 	}
-
-	// Select Reserva by month.
+	
+	/** 
+	 * This searches for all Equipment Reservations from the database, in the given month.
+	 * @return all the EquipmentReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <ReservaEquipamentoProfessor> searchByMonth (int month)
 			throws SQLException, ClienteException, PatrimonioException,
@@ -182,7 +222,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return monthTeacherReservations;
 	}
 
-	// Select Reserva by hour.
+	/**
+	 * This searches for all Equipment Reservations from the database, in the given time
+	 * @return all the EquipmentReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <ReservaEquipamentoProfessor> searchByTime (String time)
 			throws SQLException, ClienteException, PatrimonioException,
@@ -209,7 +256,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ timeHH_HH + "\" or hora = \"" + timeH_HH + "\";");
 	}
 
-	// Fetch Reserva using a result.
+	// Implementation of the inherited method.
 	@Override
 	protected Object fetch (ResultSet result) throws SQLException,
 			ClienteException,
@@ -228,7 +275,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return reservation;
 	}
 
-	// Check if there is a Professor in the database.
+	/**
+	 * This checks if a given teacher is in the teachers database.
+	 * @param teacher The Teacher that is going to be searched for.
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean teacherIsInDB (Professor teacher) throws SQLException {
 
 		return super.isInDBGeneric("SELECT * FROM professor WHERE "
@@ -240,7 +292,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ teacher.getEnrollmentNumber() + "\";");
 	}
 
-	// Check if there is an Equipamento in the database.
+	/**
+	 * This checks if a given equipment is in the equipment the database.
+	 * @param teacher The Equipment that is going to be searched for.
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean equipmentIsInDB (Equipamento equipment)
 			throws SQLException {
 
@@ -250,7 +307,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ equipment.getDescription() + "\";");
 	}
 
-	// Check if there is a Professor entry in a Reserva.
+	/**
+	 * This checks if a given teacher is in a reservation on a determined day and time.
+	 * @param teacher The wanted teacher.
+	 * @param date The String with the wanted reservation date.
+	 * @param time The String with the wanted reservation time.
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean teacherIsInReservationDB (Professor teacher, String date,
 			String time) throws SQLException {
 
@@ -266,7 +330,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ teacher.getEnrollmentNumber() + "\");");
 	}
 
-	// Check if there is a Equipamento entry in a Reserva.
+	/**
+	 * This checks if a given equipment is reserved on a determined day and time..
+	 * @param equipment The wanted equipment.
+	 * @param date The String with the wanted reservation date.
+	 * @param time The String with the wanted reservation time.
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean equipmentIsInReservationDB (Equipamento equipment,
 			String date, String time) throws SQLException {
 
@@ -284,7 +355,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ equipment.getDescription() + "\");");
 	}
 
-	// Check if there is a Reserva entry in the database.
+	/**
+	 * This checks if a reservation is in the database.
+	 * @param reservation The wanted reservation
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean reservationIsInDB (ReservaEquipamentoProfessor reservation)
 			throws SQLException {
 
@@ -314,7 +390,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 						+ "data = \"" + reservation.getDate() + "\");");
 	}
 
-	// Select Professor by id query.
+	/**
+	 * This generates a query to select a teacher by the database id.
+	 * @param teacher The teacher that is going to be selected.
+	 * @return the query to select the given Teacher.
+	 */
 	private String selectTeacherIDQuery (Professor teacher) {
 
 		return "SELECT id_professor FROM professor WHERE "
@@ -325,7 +405,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\"";
 	}
 
-	// Select Equipamento by id query.
+	/**
+	 * This generates a query to select a equipment by the database id.
+	 * @param equipment The equipment that is going to be selected.
+	 * @return the query to select the given Equipment
+	 */
 	private String selectEquipmentIDQuery (Equipamento equipment) {
 
 		return "SELECT id_equipamento FROM equipamento WHERE "
@@ -334,7 +418,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ equipment.getDescription() + "\"";
 	}
 
-	// Reuse query for WHERE clause
+	/**
+	 * This generates a WHERE query with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the WHERE query
+	 */
 	private String whereQuery (
 			ReservaEquipamentoProfessor reservation) {
 
@@ -346,7 +434,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ reservation.getDate() + "\"";
 	}
 
-	// Reuse query for VALUES clause.
+	/**
+	 * This generates a query with the VALUES of a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the VALUE query
+	 */
 	private String valueReservationQuery (
 			ReservaEquipamentoProfessor reservation) {
 
@@ -355,7 +447,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ reservation.getTime() + "\", " + "\"" + reservation.getDate() + "\"";
 	}
 
-	// Reuse query for ATRIBUTES query.
+	/**
+	 * This generates a query with the ATTRIBUTES of a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the ATTRIBUTES query
+	 */
 	private String attributesQuery (
 			ReservaEquipamentoProfessor reservation) {
 
@@ -366,7 +462,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ reservation.getDate() + "\"";
 	}
 
-	// Reuse query for INSERT clause.
+	/**
+	 * This generates a INSERT query with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the INSERT query
+	 */
 	private String insertIntoDBQuery (ReservaEquipamentoProfessor reservation) {
 
 		return "INSERT INTO "
@@ -374,7 +474,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "VALUES ( " + valueReservationQuery(reservation) + " );";
 	}
 
-	// Reuse query for UPDATE clause.
+	/**
+	 * This generates a UPDATE query with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the UPDATE query
+	 */
 	private String updateQuery (ReservaEquipamentoProfessor oldReservation,
 			ReservaEquipamentoProfessor newReservation) {
 
@@ -383,7 +487,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ this.whereQuery(oldReservation) + " ;";
 	}
 
-	// Reuse query for DELETE Professor clause.
+	/**
+	 * This generates a DELETE query with a given reservation
+	 * @param reservation The EquipmentReservation to generate the query 
+	 * @return the DELETE query
+	 */
 	private String deleteQuery (ReservaEquipamentoProfessor reservation) {
 
 		return "DELETE FROM reserva_equipamento_professor "

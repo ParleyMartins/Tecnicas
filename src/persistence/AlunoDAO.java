@@ -363,7 +363,6 @@ public class AlunoDAO {
 				+ "\";");
 	}
 
-	
 	/**
 	 * This checks if there is a given cpf in the database.
 	 * @param cpf The cpf that will be searched in the database.
