@@ -24,7 +24,7 @@ public class ManterResSalaAluno {
 
 	private static ManterResSalaAluno instance;
 	private static ResSalaAlunoDAO resDAOInstance;
-	
+
 	private Vector<ReservaSalaAluno> studentRoomReservationVector = new Vector<ReservaSalaAluno>();
 
 	/*
@@ -64,7 +64,8 @@ public class ManterResSalaAluno {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		Vector<ReservaSalaAluno> reservations = resDAOInstance.searchByTime(time);
+		Vector<ReservaSalaAluno> reservations = resDAOInstance
+				.searchByTime(time);
 		return reservations;
 
 	}
@@ -81,8 +82,9 @@ public class ManterResSalaAluno {
 	public Vector<ReservaSalaAluno> getReservationsPerMonth(String date)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
-		
-		Vector<ReservaSalaAluno> reservations = resDAOInstance.searchByDay(date); 
+
+		Vector<ReservaSalaAluno> reservations = resDAOInstance
+				.searchByDay(date);
 		return reservations;
 
 	}
@@ -118,8 +120,7 @@ public class ManterResSalaAluno {
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		return resDAOInstance.setAvailableChairs(room, date,
-				time);
+		return resDAOInstance.setAvailableChairs(room, date, time);
 	}
 
 	/**
@@ -141,7 +142,7 @@ public class ManterResSalaAluno {
 
 		ReservaSalaAluno reservation = new ReservaSalaAluno(date, time, room,
 				purpose, numberDesiredChairs, student);
-		
+
 		resDAOInstance.insert(reservation);
 		this.studentRoomReservationVector.add(reservation);
 	}
@@ -168,10 +169,10 @@ public class ManterResSalaAluno {
 				reservation.getDate(), reservation.getTime(),
 				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getReservedChairs(), reservation.getStudent());
-		
+
 		reservation.setPurpose(purpose);
 		reservation.setReservedChairs(numberDesiredChairs);
-		
+
 		resDAOInstance.modify(oldReservation, reservation);
 	}
 
