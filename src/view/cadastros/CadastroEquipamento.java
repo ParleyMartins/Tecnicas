@@ -17,6 +17,11 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor generates a RegisterEquipment form.
+	 * @param parentWindow  parent of current window.
+	 * @param modal argument to JFrame .
+	 */
 	public CadastroEquipamento(java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
@@ -25,6 +30,9 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 		this.capacityTxtField.setVisible(false);
 	}
 
+	/**
+	 * This method is going to perform the register action in each child class.
+	 */
 	protected void registerAction() {
 
 		String errorMessage = International.getInstance().getLabels()

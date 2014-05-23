@@ -17,15 +17,20 @@ public class CadastroAluno extends CadastroCliente {
 
 	private static final long serialVersionUID = 1L;
 
-	// Constructor creates a RegisterStudent form.
+	/**
+	 * Constructor creates a RegisterStudent form.
+	 * @param parentWindow  parent of current window.
+	 * @param modal argument to JFrame .
+	 */
 	public CadastroAluno(java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
 		this.setName("CadastroAluno");
 	}
 
-	@Override
-	// This method registers a student
+	/**
+	 * This method registers a student
+	 */
 	public void registerAction ( ) {
 
 		try {

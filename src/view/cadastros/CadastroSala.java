@@ -18,15 +18,21 @@ public class CadastroSala extends CadastroPatrimonio {
 
 	private static final long serialVersionUID = 1L;
 
-	// Constructor creates a RegisterRoom form.
+	/**
+	 * Constructor creates a RegisterRoom form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame .
+	 */
 	public CadastroSala(java.awt.Frame parent, boolean modal) {
 
 		super(parent, modal);
 		this.setName("CadastroSala");
 	}
 
-	@Override
-	// This method registers a student.
+
+	/**
+	 * This method registers a room.
+	 */
 	protected void registerAction() {
 
 		String errorMessage = International.getInstance().getLabels()

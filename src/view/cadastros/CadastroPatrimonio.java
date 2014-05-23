@@ -34,14 +34,20 @@ public abstract class CadastroPatrimonio extends JDialog {
 	protected JTextField capacityTxtField;
 	protected JTextArea descriptionTxtArea;
 
-	// Creates a new form RegisterProperty
+	/**
+	 * Creates a new form RegisterProperty
+	 * @param parent  parent of current frame.
+	 * @param modal	argument to JFrame .
+	 */
 	public CadastroPatrimonio (Frame parent, boolean modal) {
 
 		super(parent, modal);
 		initComponents();
 	}
 
-	// This method is going to perform the register action in each child class.
+	/**
+	 * This method is going to perform the register action in each child class.
+	 */
 	protected abstract void registerAction ( );
 
 	// Method called from within the constructor to initialize components.
@@ -61,34 +67,48 @@ public abstract class CadastroPatrimonio extends JDialog {
 		setTitle(International.getInstance().getButtons().getString("register"));
 		setResizable(false);
 
-		this.codeLabel.setText(International.getInstance().getLabels().getString("code"));
+		this.codeLabel.setText(International.getInstance().getLabels()
+				.getString("code"));
 
-		this.capacityLabel.setText(International.getInstance().getLabels().getString("fullCapacity"));
-		this.descriptionLabel.setText(International.getInstance().getLabels().getString("description"));
+		this.capacityLabel.setText(International.getInstance().getLabels()
+				.getString("fullCapacity"));
+		this.descriptionLabel.setText(International.getInstance().getLabels()
+				.getString("description"));
 
 		this.capacityTxtField.setHorizontalAlignment(JTextField.LEFT);
 
-		this.codeTxtField.setName(International.getInstance().getLabels().getString("code"));
-		this.capacityTxtField.setName(International.getInstance().getLabels().getString("fullCapacity"));;
-		this.descriptionTxtArea.setName(International.getInstance().getLabels().getString("description"));
-		
-		this.registerButton.setText(International.getInstance().getButtons().getString("register"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("register"));
+		this.codeTxtField.setName(International.getInstance().getLabels()
+				.getString("code"));
+		this.capacityTxtField.setName(International.getInstance().getLabels()
+				.getString("fullCapacity"));
+		this.descriptionTxtArea.setName(International.getInstance().getLabels()
+				.getString("description"));
+
+		this.registerButton.setText(International.getInstance().getButtons()
+				.getString("register"));
+		this.registerButton.setName(International.getInstance().getButtons()
+				.getString("register"));
 		this.registerButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			/**
+			 * 
+			 */
+			public void actionPerformed (ActionEvent event) {
 
-				registerButtonActionPerformed(evt);
+				registerButtonActionPerformed(event);
 			}
 		});
 
-		this.cancelButton.setText(International.getInstance().getButtons().getString("deselect"));
-		this.cancelButton.setName(International.getInstance().getButtons().getString("deselect"));
+		this.cancelButton.setText(International.getInstance().getButtons()
+				.getString("deselect"));
+		this.cancelButton.setName(International.getInstance().getButtons()
+				.getString("deselect"));
 		this.cancelButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			
+			public void actionPerformed (ActionEvent event) {
 
-				cancelButtonActionPerformed(evt);
+				cancelButtonActionPerformed(event);
 			}
 		});
 
@@ -223,14 +243,18 @@ public abstract class CadastroPatrimonio extends JDialog {
 		pack();
 	}
 
-	// Method used to call the abstract function in each child class.
-	private void registerButtonActionPerformed (ActionEvent evt) {
+	/**
+	 * Method used to call the abstract function in each child class.
+	 */
+	private void registerButtonActionPerformed (ActionEvent event) {
 
 		registerAction();
 	}
 
-	// Method used to cancel a registration.
-	protected void cancelButtonActionPerformed (ActionEvent evt) {
+	/**
+	 * Method used to cancel a registration.
+	 */
+	protected void cancelButtonActionPerformed (ActionEvent event) {
 
 		this.setVisible(false);
 	}

@@ -18,7 +18,11 @@ public class CadastroProfessor extends CadastroCliente {
 
 	private static final long serialVersionUID = 1L;
 
-	// Constructor creates a RegisterTeacher form.
+	/**
+	 * Constructor creates a RegisterTeacher form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame .
+	 */
 	public CadastroProfessor(java.awt.Frame parent, boolean modal) {
 
 		super(parent, modal);
@@ -26,8 +30,9 @@ public class CadastroProfessor extends CadastroCliente {
 
 	}
 
-	@Override
-	// This method registers a student
+	/**
+	 * This method registers a student
+	 */
 	public void registerAction() {
 
 		try {

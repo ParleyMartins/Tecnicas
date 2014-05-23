@@ -36,14 +36,20 @@ public abstract class CadastroCliente extends JDialog {
 	private JButton cancelButton;
 	private JLabel cpfLabel;
 
-	// Constructor generates a RegisterClient form.
+	/**
+	 * Constructor generates a RegisterClient form.
+	 * @param parentWindow  parent of current window.
+	 * @param jDialog The main class for creating a dialog window.
+	 */
 	public CadastroCliente (Frame parentWindow, boolean jDialog) {
 
 		super(parentWindow, jDialog);
 		initComponents();
 	}
 
-	// This method is going to perform the register action in each child class.
+	/**
+	 * This method is going to perform the register action in each child class.
+	 */
 	public abstract void registerAction ( );
 
 	// Method called from within the constructor to initialize components.
@@ -63,22 +69,38 @@ public abstract class CadastroCliente extends JDialog {
 		this.cancelButton = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle(International.getInstance().getLabels().getString("registration"));
+		setTitle(International.getInstance().getLabels()
+				.getString("registration"));
 		setResizable(false);
 
-		this.nameLabel.setText(International.getInstance().getLabels().getString("name"));
-		this.enrrollmentNumberLabel.setText(International.getInstance().getLabels().getString("enrollment"));
-		this.cpfLabel.setText(International.getInstance().getLabels().getString("cpf"));
-		this.emailLabel.setText(International.getInstance().getLabels().getString("email"));
-		this.phoneNumberLabel.setText(International.getInstance().getLabels().getString("telephone"));
-		this.nameTxtField.setName(International.getInstance().getLabels().getString("name"));
-		this.enrollmentNumberTxtField.setName(International.getInstance().getLabels().getString("enrollment"));
+		this.nameLabel.setText(International.getInstance().getLabels()
+				.getString("name"));
+		this.enrrollmentNumberLabel.setText(International.getInstance()
+				.getLabels()
+				.getString("enrollment"));
+		this.cpfLabel.setText(International.getInstance().getLabels()
+				.getString("cpf"));
+		this.emailLabel.setText(International.getInstance().getLabels()
+				.getString("email"));
+		this.phoneNumberLabel.setText(International.getInstance().getLabels()
+				.getString("telephone"));
+		this.nameTxtField.setName(International.getInstance().getLabels()
+				.getString("name"));
+		this.enrollmentNumberTxtField.setName(International.getInstance()
+				.getLabels()
+				.getString("enrollment"));
 		this.enrollmentNumberTxtField.setHorizontalAlignment(JTextField.LEFT);
-		this.cpfTxtField.setName(International.getInstance().getLabels().getString("cpf"));
-		this.emailTxtField.setName(International.getInstance().getLabels().getString("email"));
-		this.phoneNumberTxtField.setName(International.getInstance().getLabels().getString("telephone"));
-		this.registerButton.setText(International.getInstance().getButtons().getString("register"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("register"));
+		this.cpfTxtField.setName(International.getInstance().getLabels()
+				.getString("cpf"));
+		this.emailTxtField.setName(International.getInstance().getLabels()
+				.getString("email"));
+		this.phoneNumberTxtField.setName(International.getInstance()
+				.getLabels()
+				.getString("telephone"));
+		this.registerButton.setText(International.getInstance().getButtons()
+				.getString("register"));
+		this.registerButton.setName(International.getInstance().getButtons()
+				.getString("register"));
 		this.registerButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent event) {
@@ -87,13 +109,16 @@ public abstract class CadastroCliente extends JDialog {
 			}
 		});
 
-		this.cancelButton.setText(International.getInstance().getButtons().getString("deselect"));
-		this.cancelButton.setName(International.getInstance().getButtons().getString("deselect"));
+		this.cancelButton.setText(International.getInstance().getButtons()
+				.getString("deselect"));
+		this.cancelButton.setName(International.getInstance().getButtons()
+				.getString("deselect"));
 		this.cancelButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			
+			public void actionPerformed (ActionEvent event) {
 
-				cancelButtonActionPerformed(evt);
+				cancelButtonActionPerformed(event);
 			}
 		});
 
@@ -275,14 +300,19 @@ public abstract class CadastroCliente extends JDialog {
 		pack();
 	}
 
-	// Method used to call the abstract function in each child class.
-	private void registerButtonActionPerformed (ActionEvent evt) {
+	
+	/**
+	 * Method used to call the abstract function in each child class.
+	 */
+	private void registerButtonActionPerformed (ActionEvent event) {
 
 		registerAction();
 	}
 
-	// Method used to cancel a register.
-	private void cancelButtonActionPerformed (ActionEvent evt) {
+	/**
+	 * Method used to cancel a register.
+	 */
+	private void cancelButtonActionPerformed (ActionEvent event) {
 
 		this.setVisible(false);
 	}
