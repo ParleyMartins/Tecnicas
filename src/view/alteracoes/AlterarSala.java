@@ -19,14 +19,23 @@ public class AlterarSala extends CadastroPatrimonio {
 	private static final long serialVersionUID = 1L;
 	private int index2 = 0;
 
-	// Constructor creates a ModifyRoom form.
+	/**
+	 * Constructor creates a ModifyRoom form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor.
+	 * @param index index of the room at the controller vector
+	 */
 	public AlterarSala(java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setTitle(International.getInstance().getLabels().getString("modify"));
-		this.setName(International.getInstance().getLabels().getString("modify"));
-		this.registerButton.setText(International.getInstance().getButtons().getString("modify"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("modify"));
+		this.setTitle(International.getInstance().getLabels()
+				.getString("modify"));
+		this.setName(International.getInstance().getLabels()
+				.getString("modify"));
+		this.registerButton.setText(International.getInstance().getButtons()
+				.getString("modify"));
+		this.registerButton.setName(International.getInstance().getButtons()
+				.getString("modify"));
 		this.index2 = index;
 
 		String errorMessage = International.getInstance().getLabels()
@@ -45,11 +54,11 @@ public class AlterarSala extends CadastroPatrimonio {
 		} catch (PatrimonioException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
-			
+
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
-			
+
 		} catch (NullPointerException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
@@ -57,7 +66,9 @@ public class AlterarSala extends CadastroPatrimonio {
 
 	}
 
-	@Override
+	/**
+	 * Creates an action to modify a room.
+	 */
 	protected void registerAction() {
 
 		String errorMessage = International.getInstance().getLabels()

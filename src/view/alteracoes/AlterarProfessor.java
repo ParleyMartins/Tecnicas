@@ -20,15 +20,23 @@ public class AlterarProfessor extends CadastroCliente {
 	private static final long serialVersionUID = 1L;
 	int index2 = 0;
 
-	// Constructor creates a ModifyTeacher form.
+	/**
+	 * Constructor creates a ModifyTeacher form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor.
+	 * @param index index of the teacher at the controller vector.
+	 */
 	public AlterarProfessor (java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setName(International.getInstance().getLabels().getString("modify"));
-		this.registerButton.setText(International.getInstance().getButtons().getString("modify"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("modify"));
+		this.setName(International.getInstance().getLabels()
+				.getString("modify"));
+		this.registerButton.setText(International.getInstance().getButtons()
+				.getString("modify"));
+		this.registerButton.setName(International.getInstance().getButtons()
+				.getString("modify"));
 		this.index2 = index;
-		
+
 		String errorMessage = International.getInstance().getLabels()
 				.getString("error");
 
@@ -47,16 +55,18 @@ public class AlterarProfessor extends CadastroCliente {
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
-			
+
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
 					JOptionPane.ERROR_MESSAGE, null);
-			
+
 		}
 	}
 
-	@Override
-	// Creates an action to modify a teacher.
+	
+	/**
+	 * Creates an action to modify a teacher.
+	 */
 	public void registerAction ( ) {
 		
 		String errorMessage = International.getInstance().getLabels()

@@ -19,14 +19,23 @@ public class AlterarAluno extends CadastroCliente {
 	private static final long serialVersionUID = 1L;
 	int index2 = 0;
 
-	// Constructor creates the ModifyStudent form.
+	/**
+	 * Constructor creates the ModifyStudent form.
+	 * @param parent  parent of current frame.
+	 * @param modal	  argument to JFrame .
+	 * @param index   index of the students at the controller vector
+	 */
 	public AlterarAluno(java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setTitle(International.getInstance().getLabels().getString("modify"));
-		this.setName(International.getInstance().getLabels().getString("modify"));
-		this.registerButton.setText(International.getInstance().getButtons().getString("modify"));
-		this.registerButton.setName(International.getInstance().getButtons().getString("modify"));
+		this.setTitle(International.getInstance().getLabels()
+				.getString("modify"));
+		this.setName(International.getInstance().getLabels()
+				.getString("modify"));
+		this.registerButton.setText(International.getInstance().getButtons()
+				.getString("modify"));
+		this.registerButton.setName(International.getInstance().getButtons()
+				.getString("modify"));
 		this.index2 = index;
 
 		String errorMessage = International.getInstance().getLabels()
@@ -55,8 +64,10 @@ public class AlterarAluno extends CadastroCliente {
 		}
 	}
 
-	@Override
-	// This method creates an action to modify the student fields.
+	
+	/**
+	 * This method creates an action to modify the student fields.
+	 */
 	public void registerAction() {
 
 		String errorMessage = International.getInstance().getLabels()

@@ -20,14 +20,23 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 	private static final long serialVersionUID = 1L;
 	private int index2 = 0;
 
-	// Constructor creates the ModifyEquipment form.
+	/**
+	 * Constructor creates the ModifyEquipment form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor.
+	 * @param index index of the equipment at the controller vector.
+	 */
 	public AlterarEquipamento(java.awt.Frame parent, boolean modal, int index) {
 
 		super(parent, modal);
-		this.setTitle(International.getInstance().getLabels().getString("modify"));
-		this.setName(International.getInstance().getLabels().getString("modify"));
-		this.registerButton.setText(International.getInstance().getLabels().getString("modify"));
-		this.registerButton.setName(International.getInstance().getLabels().getString("modify"));
+		this.setTitle(International.getInstance().getLabels()
+				.getString("modify"));
+		this.setName(International.getInstance().getLabels()
+				.getString("modify"));
+		this.registerButton.setText(International.getInstance().getLabels()
+				.getString("modify"));
+		this.registerButton.setName(International.getInstance().getLabels()
+				.getString("modify"));
 		this.capacityLabel.setVisible(false);
 		this.capacityTxtField.setVisible(false);
 		this.index2 = index;
@@ -59,8 +68,10 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 	}
 
-	@Override
-	// This method creates an action to modify the equipment fields.
+	
+	/**
+	 * This method creates an action to modify the equipment fields.
+	 */
 	protected void registerAction() {
 
 		String errorMessage = International.getInstance().getLabels()
