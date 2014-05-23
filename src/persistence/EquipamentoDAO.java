@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import view.International;
+import model.Aluno;
 import model.Equipamento;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -45,17 +46,17 @@ public class EquipamentoDAO {
 	 */
 	public static EquipamentoDAO getInstance ( ) {
 
-		if (instance == null) {
-			instance = new EquipamentoDAO();
-		} else {
+		if (instance != null) {
 			// Nothing here.
+		} else {
+			instance = new EquipamentoDAO();
 		}
 
 		return instance;
 	}
 
 	/**
-	 *  Include new Equipamento in the database.
+	 * Include new Equipamento in the database.
 	 * @param equipment The Equipment to be inserted into the database.
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
@@ -65,20 +66,19 @@ public class EquipamentoDAO {
 
 		if (equipment == null) {
 			throw new PatrimonioException(NULL_EQUIPMENT);
-		} else {
-			if (this.isInDbCode(equipment.getIdCode())) {
-				throw new PatrimonioException(CODE_ALREADY_EXISTS);
-			} else {
-				if (!this.isInDB(equipment)) {
-					this.update("INSERT INTO " + "equipamento "
+		}
+		if (this.isInDbCode(equipment.getIdCode())) {
+			throw new PatrimonioException(CODE_ALREADY_EXISTS);
+		}
+		
+		if (this.isInDB(equipment)) {
+			throw new PatrimonioException(EXISTING_EQUIPMENT);
+		}
+		
+		this.update("INSERT INTO " + "equipamento "
 							+ "(codigo, descricao) VALUES (" + "\""
 							+ equipment.getIdCode() + "\", " + "\""
 							+ equipment.getDescription() + "\");");
-				} else {
-					// Nothing here.
-				}
-			}
-		}
 	}
 
 	/** 
@@ -91,13 +91,33 @@ public class EquipamentoDAO {
 	public void modify (Equipamento oldEquipment, Equipamento newEquipment)
 			throws SQLException, PatrimonioException {
 
-		if (oldEquipment == null) {
+		if (oldEquipment == null && newEquipment == null) {
 			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {
 			// Nothing here.
 		}
-		if (newEquipment == null) {
-			throw new PatrimonioException(NULL_EQUIPMENT);
+		
+		if (!this.isInDB(oldEquipment)) {
+			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (this.isInOtherDB(oldEquipment)) {
+			throw new PatrimonioException(EQUIPMENT_IN_USE);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!newEquipment.getIdCode().equals(oldEquipment.getIdCode())
+						&& this.isInDbCode(newEquipment.getIdCode())) {
+			throw new PatrimonioException(CODE_ALREADY_EXISTS);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!this.isInDB(newEquipment)) {
+			throw new PatrimonioException(EXISTING_EQUIPMENT);
 		} else {
 			// Nothing here.
 		}
@@ -105,41 +125,22 @@ public class EquipamentoDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
-		if (!this.isInDB(oldEquipment)) {
-			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
-		} else {
-			if (this.isInOtherDB(oldEquipment)) {
-				throw new PatrimonioException(EQUIPMENT_IN_USE);
-			} else {
-				if (!newEquipment.getIdCode().equals(
-						oldEquipment.getIdCode())
-						&& this.isInDbCode(newEquipment.getIdCode())) {
-					throw new PatrimonioException(CODE_ALREADY_EXISTS);
-				} else {
-					if (!this.isInDB(newEquipment)) {
-						String message = "UPDATE equipamento SET "
-								+ "codigo = \""
-								+ newEquipment.getIdCode() + "\", "
-								+ "descricao = \""
-								+ newEquipment.getDescription() + "\""
-								+ " WHERE " + "equipamento.codigo = \""
-								+ oldEquipment.getIdCode() + "\" and "
-								+ "equipamento.descricao = \""
-								+ oldEquipment.getDescription() + "\";";
+		String message = "UPDATE equipamento SET "
+				+ "codigo = \""
+				+ newEquipment.getIdCode() + "\", "
+				+ "descricao = \""
+				+ newEquipment.getDescription() + "\""
+				+ " WHERE " + "equipamento.codigo = \""
+				+ oldEquipment.getIdCode() + "\" and "
+				+ "equipamento.descricao = \""
+				+ oldEquipment.getDescription() + "\";";
 
-						connection.setAutoCommit(false);
-						statement = connection.prepareStatement(message);
-						statement.executeUpdate();
-						connection.commit();
+		connection.setAutoCommit(false);
+		statement = connection.prepareStatement(message);
+		statement.executeUpdate();
+		connection.commit();
 
-						statement.close();
-
-					} else {
-						throw new PatrimonioException(EXISTING_EQUIPMENT);
-					}
-				}
-			}
-		}
+		statement.close();
 
 		connection.close();
 	}
@@ -156,21 +157,25 @@ public class EquipamentoDAO {
 		if (equipment == null) {
 			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {
-			if (this.isInOtherDB(equipment)) {
+			// Nothing here.
+		} 
+		
+		if (this.isInOtherDB(equipment)) {
 				throw new PatrimonioException(EQUIPMENT_IN_USE);
-			} else {
-				// Nothing here.
-			}
+		} else {
+			// Nothing here.
 		}
 
 		if (this.isInDB(equipment)) {
-			this.update("DELETE FROM equipamento WHERE "
-					+ "equipamento.codigo = \"" + equipment.getIdCode()
-					+ "\" and " + "equipamento.descricao = \""
-					+ equipment.getDescription() + "\";");
-		} else {
 			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
+		} else {
+			// Nothing here.
 		}
+		
+		this.update("DELETE FROM equipamento WHERE "
+				+ "equipamento.codigo = \"" + equipment.getIdCode()
+				+ "\" and " + "equipamento.descricao = \""
+				+ equipment.getDescription() + "\";");
 	}
 
 	/**
@@ -181,8 +186,10 @@ public class EquipamentoDAO {
 	 */
 	public Vector <Equipamento> searchAll ( ) throws SQLException,
 			PatrimonioException {
-
-		return this.search("SELECT * FROM equipamento;");
+		
+		String selectQuery = "SELECT * FROM equipamento;";
+		Vector<Equipamento> selectedEquipments =this.search(selectQuery); 
+		return selectedEquipments;
 	}
 
 	/**
@@ -196,8 +203,10 @@ public class EquipamentoDAO {
 			throws SQLException,
 			PatrimonioException {
 
-		return this.search("SELECT * FROM equipamento WHERE codigo = " + "\""
-				+ code + "\";");
+		String selectQuery = "SELECT * FROM equipamento WHERE codigo = " + "\""
+				+ code + "\";";
+		Vector<Equipamento> selectedEquipments =this.search(selectQuery); 
+		return selectedEquipments;
 	}
 
 	/**
@@ -210,8 +219,11 @@ public class EquipamentoDAO {
 	public Vector <Equipamento> searchByDescription (String description)
 			throws SQLException, PatrimonioException {
 
-		return this.search("SELECT * FROM equipamento WHERE descricao = "
-				+ "\"" + description + "\";");
+		String selectQuery = "SELECT * FROM equipamento WHERE descricao = "
+				+ "\"" + description + "\";";
+		Vector<Equipamento> selectedEquipments =this.search(selectQuery); 
+		return selectedEquipments;
+		
 	}
 
 	/*
@@ -257,19 +269,18 @@ public class EquipamentoDAO {
 		PreparedStatement statement = connection.prepareStatement(query);
 		ResultSet result = statement.executeQuery();
 
-		if (!result.next()) {
-			result.close();
-			statement.close();
-			connection.close();
+		boolean isFound = result.next();
 
-			return false;
-		} else {
-			result.close();
-			statement.close();
-			connection.close();
+		result.close();
+		statement.close();
+		connection.close();
 
+		if (isFound) {
 			return true;
+		} else {
+			return false;
 		}
+
 	}
 
 	/**
@@ -282,11 +293,13 @@ public class EquipamentoDAO {
 	private boolean isInDB (Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
-		return this.isInDBGeneric("SELECT * FROM equipamento WHERE "
+		String selectQuery = "SELECT * FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getIdCode()
 				+ "\" and "
 				+ "equipamento.descricao = \"" + equipment.getDescription()
-				+ "\";");
+				+ "\";";
+		boolean equipmentFound = this.isInDBGeneric(selectQuery); 
+		return equipmentFound;
 	}
 
 	/**
@@ -297,8 +310,10 @@ public class EquipamentoDAO {
 	 */
 	private boolean isInDbCode (String code) throws SQLException {
 
-		return this.isInDBGeneric("SELECT * FROM equipamento WHERE "
-				+ "codigo = \"" + code + "\";");
+		String selectQuery = "SELECT * FROM equipamento WHERE "
+				+ "codigo = \"" + code + "\";";
+		boolean equipmentFound = this.isInDBGeneric(selectQuery); 
+		return equipmentFound;
 	}
 
 	/**
@@ -309,15 +324,16 @@ public class EquipamentoDAO {
 	 */
 	private boolean isInOtherDB (Equipamento equipment) throws SQLException {
 
-		return this
-				.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
-						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \""
-						+ equipment.getIdCode()
-						+ "\" and "
-						+ "equipamento.descricao = \""
-						+ equipment.getDescription()
-						+ "\");");
+		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
+				+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
+				+ "equipamento.codigo = \""
+				+ equipment.getIdCode()
+				+ "\" and "
+				+ "equipamento.descricao = \""
+				+ equipment.getDescription()
+				+ "\");";
+		boolean equipmentFound = this.isInDBGeneric(selectQuery); 
+		return equipmentFound;
 	}
 
 	/**
@@ -329,9 +345,10 @@ public class EquipamentoDAO {
 	 */
 	private Equipamento fetchEquipamento (ResultSet result)
 			throws PatrimonioException, SQLException {
-
-		return new Equipamento(result.getString("codigo"),
-				result.getString("descricao"));
+		String code = result.getString("codigo");
+		String description = result.getString("descricao");
+		Equipamento newEquipment = new Equipamento(code, description); 
+		return newEquipment;
 	}
 
 	/**
