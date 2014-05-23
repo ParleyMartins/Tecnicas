@@ -10,7 +10,9 @@ package control;
 
 import java.sql.SQLException;
 import java.util.Vector;
+
 import persistence.EquipamentoDAO;
+import view.International;
 import exception.PatrimonioException;
 import model.Equipamento;
 
@@ -70,6 +72,7 @@ public class ManterEquipamento {
 		Equipamento equipment = new Equipamento(equipmentCode,
 				equipmentDescription);
 		EquipamentoDAO.getInstance().insert(equipment);
+		
 		// We need to update the Vector after the insertion.
 		getAllEquipments();
 	}
@@ -86,7 +89,9 @@ public class ManterEquipamento {
 			Equipamento oldEquipment) throws PatrimonioException, SQLException {
 
 		if (oldEquipment == null) {
-			throw new PatrimonioException("Equipamento em branco");
+			String blankEquipmentError = International.getInstance()
+					.getMessages().getString("blankEquipment");
+			throw new PatrimonioException(blankEquipmentError);
 		} else {
 
 			Equipamento newEquipment = new Equipamento(newCode, newDescription);
@@ -107,10 +112,12 @@ public class ManterEquipamento {
 			PatrimonioException {
 
 		if (equipment == null) {
-			throw new PatrimonioException("Equipamento em branco");
+			String blankEquipmentError = International.getInstance()
+					.getMessages().getString("blankEquipment");
+			throw new PatrimonioException(blankEquipmentError);
 		} else {
 			EquipamentoDAO.getInstance().delete(equipment);
-			// We need to update the Vector after the insertion.
+			// We need to update the Vector after the remotion.
 			getAllEquipments();
 		}
 	}
