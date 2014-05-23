@@ -20,7 +20,7 @@ import model.Equipamento;
 public class ManterEquipamento {
 
 	// This Vector will hold all equipments in memory.
-	private Vector<Equipamento> equipments = new Vector<Equipamento>();
+	private Vector<Equipamento> allEquipments = new Vector<Equipamento>();
 
 	private static ManterEquipamento instance;
 	private static EquipamentoDAO equipmentDAOInstance;
@@ -62,8 +62,8 @@ public class ManterEquipamento {
 	public Vector<Equipamento> getAllEquipments() throws SQLException,
 			PatrimonioException {
 
-		this.equipments = equipmentDAOInstance.searchAll();
-		return this.equipments;
+		this.allEquipments = equipmentDAOInstance.searchAll();
+		return this.allEquipments;
 	}
 
 	/**

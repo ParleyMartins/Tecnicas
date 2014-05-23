@@ -18,8 +18,9 @@ import model.Professor;
 public class ManterProfessor {
 
 	private static ManterProfessor instance;
+	private static ProfessorDAO teacherDAOInstance;
 
-	private Vector<Professor> teachersVec = new Vector<Professor>();
+	private Vector<Professor> allTeachers = new Vector<Professor>();
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -38,6 +39,7 @@ public class ManterProfessor {
 
 		if (instance == null) {
 			instance = new ManterProfessor();
+			teacherDAOInstance = ProfessorDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -53,8 +55,9 @@ public class ManterProfessor {
 	 */
 	public Vector<Professor> searchName(String name) throws SQLException,
 			ClienteException {
-
-		return ProfessorDAO.getInstance().searchByName(name);
+		
+		Vector<Professor> teachers = teacherDAOInstance.searchByName(name); 
+		return teachers;
 	}
 
 	/**
@@ -66,8 +69,9 @@ public class ManterProfessor {
 	 */
 	public Vector<Professor> searchCpf(String cpf) throws SQLException,
 			ClienteException {
-
-		return ProfessorDAO.getInstance().searchByCpf(cpf);
+		
+		Vector<Professor> teachers = teacherDAOInstance.searchByCpf(cpf);
+		return teachers;
 	}
 
 	/**
@@ -80,8 +84,9 @@ public class ManterProfessor {
 	public Vector<Professor> searchEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
 
-		return ProfessorDAO.getInstance().searchByEnrollmentNumber(
+		Vector<Professor> teachers = teacherDAOInstance.searchByEnrollmentNumber(
 				enrollmentNumber);
+		return teachers;
 	}
 
 	/**
@@ -94,7 +99,8 @@ public class ManterProfessor {
 	public Vector<Professor> searchEmail(String email) throws SQLException,
 			ClienteException {
 
-		return ProfessorDAO.getInstance().searchByEmail(email);
+		Vector<Professor> teachers = teacherDAOInstance.searchByEmail(email);
+		return teachers;
 	}
 
 	/**
@@ -106,8 +112,10 @@ public class ManterProfessor {
 	 */
 	public Vector<Professor> searchPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
-
-		return ProfessorDAO.getInstance().searchByPhoneNumber(phoneNumber);
+		
+		Vector<Professor> teachers = teacherDAOInstance
+				.searchByPhoneNumber(phoneNumber);
+		return teachers;
 	}
 
 	/**
@@ -119,8 +127,8 @@ public class ManterProfessor {
 	public Vector<Professor> getAllTeachers() throws SQLException,
 			ClienteException {
 
-		this.teachersVec = ProfessorDAO.getInstance().searchAll();
-		return this.teachersVec;
+		this.allTeachers = teacherDAOInstance.searchAll();
+		return this.allTeachers;
 	}
 
 	/**
@@ -139,8 +147,9 @@ public class ManterProfessor {
 
 		Professor teacher = new Professor(name, cpf, enrollmentNumber,
 				phoneNumber, email);
-		ProfessorDAO.getInstance().insert(teacher);
-		this.teachersVec.add(teacher);
+		
+		teacherDAOInstance.insert(teacher);
+		this.allTeachers.add(teacher);
 	}
 
 	/**
@@ -159,7 +168,7 @@ public class ManterProfessor {
 			throws ClienteException, SQLException {
 		
 		Professor newTeacher = new Professor(name, cpf, enrollmentNumber, phoneNumber, email);
-		ProfessorDAO.getInstance().update(oldTeacher, newTeacher);
+		teacherDAOInstance.update(oldTeacher, newTeacher);
 	}
 
 	/**
@@ -171,8 +180,8 @@ public class ManterProfessor {
 	// This method deletes the selected teacher.
 	public void delete(Professor teacher) throws SQLException, ClienteException {
 
-		ProfessorDAO.getInstance().delete(teacher);
-		this.teachersVec.remove(teacher);
+		teacherDAOInstance.delete(teacher);
+		this.allTeachers.remove(teacher);
 	}
 
 }

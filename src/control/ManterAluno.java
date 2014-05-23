@@ -21,7 +21,7 @@ public class ManterAluno {
 	private static ManterAluno instance;
 	private static AlunoDAO studentDAOInstance;
 
-	private Vector<Aluno> students = new Vector<Aluno>();
+	private Vector<Aluno> allStudents = new Vector<Aluno>();
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -130,8 +130,8 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> getAllStudents() throws SQLException, ClienteException {
 
-		this.students = studentDAOInstance.searchAll();
-		return this.students;
+		this.allStudents = studentDAOInstance.searchAll();
+		return this.allStudents;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class ManterAluno {
 				email);
 		
 		studentDAOInstance.insert(student);
-		this.students.add(student);
+		this.allStudents.add(student);
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class ManterAluno {
 	public void delete(Aluno student) throws SQLException, ClienteException {
 
 		studentDAOInstance.delete(student);
-		this.students.remove(student);
+		this.allStudents.remove(student);
 	}
 
 }
