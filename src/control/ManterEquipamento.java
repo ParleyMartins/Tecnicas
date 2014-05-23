@@ -9,6 +9,7 @@ https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterEquipame
 package control;
 
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 import persistence.EquipamentoDAO;
@@ -22,6 +23,8 @@ public class ManterEquipamento {
 	private Vector<Equipamento> equipments = new Vector<Equipamento>();
 
 	private static ManterEquipamento instance;
+	private static EquipamentoDAO equipmentDAOInstance;
+	private static ResourceBundle messages;
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
@@ -40,6 +43,10 @@ public class ManterEquipamento {
 
 		if (instance == null) {
 			instance = new ManterEquipamento();
+			equipmentDAOInstance = EquipamentoDAO.getInstance();
+			
+			International internationalInstance = International.getInstance();
+			messages = internationalInstance.getMessages(); 
 		} else {
 			// Nothing here.
 		}
@@ -55,7 +62,7 @@ public class ManterEquipamento {
 	public Vector<Equipamento> getAllEquipments() throws SQLException,
 			PatrimonioException {
 
-		this.equipments = EquipamentoDAO.getInstance().searchAll();
+		this.equipments = equipmentDAOInstance.searchAll();
 		return this.equipments;
 	}
 
@@ -71,7 +78,7 @@ public class ManterEquipamento {
 
 		Equipamento equipment = new Equipamento(equipmentCode,
 				equipmentDescription);
-		EquipamentoDAO.getInstance().insert(equipment);
+		equipmentDAOInstance.insert(equipment);
 		
 		// We need to update the Vector after the insertion.
 		getAllEquipments();
@@ -89,15 +96,14 @@ public class ManterEquipamento {
 			Equipamento oldEquipment) throws PatrimonioException, SQLException {
 
 		if (oldEquipment == null) {
-			String blankEquipmentError = International.getInstance()
-					.getMessages().getString("blankEquipment");
+			String blankEquipmentError = messages.getString("blankEquipment");
 			throw new PatrimonioException(blankEquipmentError);
 		} else {
 
 			Equipamento newEquipment = new Equipamento(newCode, newDescription);
 
 			// We need to updates the database and the Vector.
-			EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
+			equipmentDAOInstance.modify(oldEquipment, newEquipment);
 			getAllEquipments();
 		}
 	}
@@ -112,11 +118,10 @@ public class ManterEquipamento {
 			PatrimonioException {
 
 		if (equipment == null) {
-			String blankEquipmentError = International.getInstance()
-					.getMessages().getString("blankEquipment");
+			String blankEquipmentError = messages.getString("blankEquipment");
 			throw new PatrimonioException(blankEquipmentError);
 		} else {
-			EquipamentoDAO.getInstance().delete(equipment);
+			equipmentDAOInstance.delete(equipment);
 			// We need to update the Vector after the remotion.
 			getAllEquipments();
 		}
