@@ -15,12 +15,26 @@ public class ReservaSalaAluno extends ReservaSala {
 	private String reservedChairs;
 
 	// Error messages.
-	private final String BLANK_STUDENT = International.getInstance().getMessages().getString("blankStudent");
-	private final String BLANK_CHAIRS = International.getInstance().getMessages().getString("blankNumberOfChairs");
-	private final String INVALID_CHAIRS = International.getInstance().getMessages().getString("invalidNumberOfChairs");
-	private final String OVER_LIMIT_CHAIRS = International.getInstance().getMessages().getString("outOfRangeNumberOfChairs");
+	private final String BLANK_STUDENT = International.getInstance().getMessages()
+					.getString("blankStudent");
+	private final String BLANK_CHAIRS = International.getInstance().getMessages()
+					.getString("blankNumberOfChairs");
+	private final String INVALID_CHAIRS = International.getInstance().getMessages()
+					.getString("invalidNumberOfChairs");
+	private final String OVER_LIMIT_CHAIRS = International.getInstance().getMessages()
+					.getString("outOfRangeNumberOfChairs");
 	private final String CHAIRS_PATTERN = "^[\\d]+$";
 
+	/**
+	 * This method is to reserve a private room for student.
+	 * @param date Reservation date.
+	 * @param time Reservation time.
+	 * @param classroom place of study.
+	 * @param purpose reason of reservation.
+	 * @param reserved_chairs amount of reserved chairs.
+	 * @param student the person who performs the reservation of the room.
+	 * @throws ReservaException It ensures that every parameter passed is valid. 
+	 */
 	public ReservaSalaAluno(String date, String time, Sala classroom,
 			String purpose, String reserved_chairs, Aluno student)
 			throws ReservaException {
@@ -30,16 +44,29 @@ public class ReservaSalaAluno extends ReservaSala {
 		this.setReservedChairs(reserved_chairs);
 	}
 
+	/**
+	 * This method gets a student. 
+	 * @return The content in the student field.
+	 */
 	public Aluno getStudent() {
 
 		return this.student;
 	}
 
+	/**
+	 * This method gets reserved chairs.
+	 * @return reserved chairs.
+	 */
 	public String getReservedChairs() {
 
 		return this.reservedChairs;
 	}
 
+	/**
+	 * This method modifies the student field.
+	 * @param student the person who performs the reservation of the room.
+	 * @throws ReservaException It ensures that every parameter passed is valid. 
+	 */
 	public void setStudent(Aluno student) throws ReservaException {
 
 		if (student == null) {
@@ -50,6 +77,11 @@ public class ReservaSalaAluno extends ReservaSala {
 		this.student = student;
 	}
 
+	/**
+	 * This method modifies the reserva of chairs field.
+	 * @param reservedChairs amount of reserved chairs.
+	 * @throws ReservaException It ensures that every parameter passed is valid. 
+	 */
 	public void setReservedChairs(String reservedChairs)
 			throws ReservaException {
 
@@ -77,6 +109,11 @@ public class ReservaSalaAluno extends ReservaSala {
 		}
 	}
 
+	/**
+	 * This method checks a classroom .
+	 * @param reservation  A reservation.
+	 * @return the existence or absence of reserve.
+	 */
 	public boolean equals(ReservaSalaAluno reservation) {
 
 		return (super.equals(reservation)
@@ -85,7 +122,9 @@ public class ReservaSalaAluno extends ReservaSala {
 						reservation.getReservedChairs()));
 	}
 
-	@Override
+	/** This method returns a String object representing the data.
+	 * @return A reservation.
+	 */
 	public String toString() {
 
 		return "Aluno: " + this.getStudent().toString()
