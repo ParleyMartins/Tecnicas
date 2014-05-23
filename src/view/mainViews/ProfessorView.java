@@ -36,7 +36,7 @@ public class ProfessorView extends ClienteView {
 				.getString("error");
 
 		try {
-			return ManterProfessor.getInstance().getTeachersVec().iterator();
+			return ManterProfessor.getInstance().getAllTeachers().iterator();
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
@@ -100,12 +100,12 @@ public class ProfessorView extends ClienteView {
 			}
 
 			int confirm = JOptionPane.showConfirmDialog(this, deleteQuestion
-					+ ManterProfessor.getInstance().getTeachersVec().get(index)
+					+ ManterProfessor.getInstance().getAllTeachers().get(index)
 							.getName() + "?", deleteMessage,
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
 				ManterProfessor.getInstance().delete(
-						ManterProfessor.getInstance().getTeachersVec()
+						ManterProfessor.getInstance().getAllTeachers()
 								.get(index));
 				JOptionPane.showMessageDialog(this, deleteConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);

@@ -34,14 +34,14 @@ public class AlterarAluno extends CadastroCliente {
 
 		try {
 			this.nameTxtField.setText(ManterAluno.getInstance()
-					.getStudentsVec().get(index).getName());
+					.getAllStudents().get(index).getName());
 			this.emailTxtField.setText(ManterAluno.getInstance()
-					.getStudentsVec().get(index).getEmail());
+					.getAllStudents().get(index).getEmail());
 			this.phoneNumberTxtField.setText(ManterAluno.getInstance()
-					.getStudentsVec().get(index).getPhoneNumber());
+					.getAllStudents().get(index).getPhoneNumber());
 			this.enrollmentNumberTxtField.setText(ManterAluno.getInstance()
-					.getStudentsVec().get(index).getEnrollmentNumber());
-			this.cpfTxtField.setText(ManterAluno.getInstance().getStudentsVec()
+					.getAllStudents().get(index).getEnrollmentNumber());
+			this.cpfTxtField.setText(ManterAluno.getInstance().getAllStudents()
 					.get(index).getCpf());
 
 		} catch (ClienteException ex) {
@@ -70,7 +70,7 @@ public class AlterarAluno extends CadastroCliente {
 			ManterAluno.getInstance().modify(nameTxtField.getText(),
 					cpfTxtField.getText(), enrollmentNumberTxtField.getText(),
 					phoneNumberTxtField.getText(), emailTxtField.getText(),
-					ManterAluno.getInstance().getStudentsVec().get(index2));
+					ManterAluno.getInstance().getAllStudents().get(index2));
 
 			JOptionPane.showMessageDialog(this, modifiedMessage,
 					successMessage, JOptionPane.INFORMATION_MESSAGE, null);

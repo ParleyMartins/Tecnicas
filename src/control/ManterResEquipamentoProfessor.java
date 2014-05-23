@@ -19,19 +19,26 @@ import exception.ReservaException;
 
 public class ManterResEquipamentoProfessor {
 
-	private Vector <Object> teacherEquipReservationVector = new Vector <Object>();
+	private Vector<Object> teacherEquipReservationVector = new Vector<Object>();
 
 	private static ManterResEquipamentoProfessor instance;
 
-	private ManterResEquipamentoProfessor ( ) {
+	/*
+	 * Private constructor, to guarantee the use via singleton.
+	 */
+	private ManterResEquipamentoProfessor() {
 
 		// Blank constructor.
 	}
 
-	// Singleton implementation.
-	public static ManterResEquipamentoProfessor getInstance ( ) {
+	/**
+	 * Provides the singleton implementation
+	 * @return the active ManterResEquipamentoProfessor instance, since it will
+	 * be just one at time
+	 */
+	public static ManterResEquipamentoProfessor getInstance() {
 
-		if (instance == null){
+		if (instance == null) {
 			instance = new ManterResEquipamentoProfessor();
 		} else {
 			// Nothing here.
@@ -39,25 +46,48 @@ public class ManterResEquipamentoProfessor {
 		return instance;
 	}
 
-	// Returns the equipment reservation made ​​by a teacher in a period of time.
-	public Vector <ReservaEquipamentoProfessor> getReservationsPerTime (String time)
-			throws SQLException, PatrimonioException,
+	/**
+	 * Provides the equipment reservation made by a teacher in a period of time
+	 * @param time period of interest (HH:MM)
+	 * @return a Vector with all equipments reserved at the period
+	 * @throws SQLException If has some problem with the database search
+	 * @throws PatrimonioException If some of the equipment info is invalid
+	 * @throws ClienteException If some of the teacher info is invalid
+	 * @throws ReservaException If some of the equipment info is invalid
+	 */
+	public Vector<ReservaEquipamentoProfessor> getReservationsPerTime(
+			String time) throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
 		return ResEquipamentoProfessorDAO.getInstance().searchByTime(time);
 
 	}
 
-	// Returns the equipment reservation made ​​​​by a teacher in a month period.
-	public Vector <ReservaEquipamentoProfessor> getReservationsPerMonth (int month)
+	/**
+	 * Provides the equipment reservation made by a teacher in a month period.
+	 * @param month period of interest (dd/mm/YYYY)
+	 * @return a Vector with all equipments reserved at the period
+	 * @throws SQLException If has some problem with the database search
+	 * @throws PatrimonioException If some of the equipment info is invalid
+	 * @throws ClienteException If some of the teacher info is invalid
+	 * @throws ReservaException If some of the equipment info is invalid
+	 */
+	public Vector<ReservaEquipamentoProfessor> getReservationsPerMonth(int month)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
 		return ResEquipamentoProfessorDAO.getInstance().searchByMonth(month);
 	}
 
-	// Returns the object that the teacher reserved.
-	public Vector <Object> getTeacherEquipReservationVector ( )
+	/**
+	 * Provides all equipments reservations made by teachers
+	 * @return a Vector with all equipments reservations made by teachers
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the teacher info is invalid
+	 * @throws PatrimonioException If some of the equipment info is invalid
+	 * @throws ReservaException If some of the equipment info is invalid
+	 */
+	public Vector<Object> getTeacherEquipReservationVector()
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -66,8 +96,16 @@ public class ManterResEquipamentoProfessor {
 		return this.teacherEquipReservationVector;
 	}
 
-	// Inserts equipment, teacher, date and time of a reservation in the database
-	public void insert (Equipamento equipment, Professor teacher, String date,
+	/**
+	 * Insert a new reservation in the database
+	 * @param equipment equipment to be reserved
+	 * @param teacher teacher that will make the reserve
+	 * @param date reservation date (dd/mm/YYYY)
+	 * @param time reservation time (HH:MM)
+	 * @throws SQLException If has some problem with the database insertion
+	 * @throws ReservaException If some of the equipment info is invalid
+	 */
+	public void insert(Equipamento equipment, Professor teacher, String date,
 			String time) throws SQLException, ReservaException {
 
 		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(
@@ -76,29 +114,38 @@ public class ManterResEquipamentoProfessor {
 		this.teacherEquipReservationVector.add(reserva);
 	}
 
-	// Modify reservation of equipment in the database
-	public void modify (ReservaEquipamentoProfessor oldReservation, String date,
+	/**
+	 * Modify reservation of a equipment in the database
+	 * @param oldReservation reservation to be updated
+	 * @param date new reservation date (dd/mm/YYYY)
+	 * @param time new reservation time (HH:MM)
+	 * @param equipment new equipment to be reserved
+	 * @param teacher new teacher that will make the reserve
+	 * @throws SQLException If has some problem with the database update
+	 * @throws ReservaException If some of the equipment info is invalid
+	 */
+	public void modify(ReservaEquipamentoProfessor oldReservation, String date,
 			String time, Equipamento equipment, Professor teacher)
 			throws SQLException, ReservaException {
 
-		ReservaEquipamentoProfessor reserva_new  = new ReservaEquipamentoProfessor(
-				date, time, equipment, teacher); 
-		
-		ResEquipamentoProfessorDAO.getInstance().modify(oldReservation, reserva_new);
+		ReservaEquipamentoProfessor reserva_new = new ReservaEquipamentoProfessor(
+				date, time, equipment, teacher);
+
+		ResEquipamentoProfessorDAO.getInstance().modify(oldReservation,
+				reserva_new);
 
 	}
 
-	// Remove the reservation made by a teacher.
-	public void delete (ReservaEquipamentoProfessor reservation)
+	/**
+	 * Remove a reservation made by a teacher from the database
+	 * @param reservation reservation to be removed
+	 * @throws SQLException If has some problem with the database deletion
+	 * @throws ReservaException If some of the equipment info is invalid
+	 */
+	public void delete(ReservaEquipamentoProfessor reservation)
 			throws SQLException, ReservaException {
 
 		ResEquipamentoProfessorDAO.getInstance().delete(reservation);
 		this.teacherEquipReservationVector.remove(reservation);
-	}
-
-	public void modify () {
-
-		// TODO Auto-generated method stub
-		
 	}
 }

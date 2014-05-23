@@ -50,7 +50,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 			// System.out.println(v.toString( ));
 
 			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveModifySucess"),
-					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
+					International.getInstance().getLabels().getString("success"), JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
 		} catch (ReservaException ex) {
