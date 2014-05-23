@@ -19,7 +19,14 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 	private static final long serialVersionUID = 1L;
 	private Sala classRoomToBeReserved;
 
-	// Constructor creates a RoomReservationDay form.
+	/**
+	 * Constructor creates a RoomReservationDay form.
+	 * @param parentWindow parent of current window.
+	 * @param modal argument to JFrame constructor.
+	 * @param classRoomPosition position of classroom.
+	 * @throws SQLException  if has some problem during the database search.
+	 * @throws PatrimonioException if some of the equipment info is invalid
+	 */
 	public DiaReservaSala (Frame parentWindow, boolean modal, int classRoomPosition)
 			throws SQLException, PatrimonioException {
 
@@ -28,7 +35,6 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 		this.setName("RoomReservationDay");
 	}
 
-	@Override
 	// Generates the visualize action to the selected day.
 	protected void viewSelectedDayAction (String dateOfReserve) {
 

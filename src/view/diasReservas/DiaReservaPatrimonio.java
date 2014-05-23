@@ -30,14 +30,21 @@ public abstract class DiaReservaPatrimonio extends JDialog {
 	private JCalendar selectDate;
 	private JPanel jPanel1;
 
-	// Constructor generates a PropertyReservationDay form.
+	/**
+	 * Constructor generates a PropertyReservationDay form.
+	 * @param parent parent of current frame.
+	 * @param modal  argument to JFrame .
+	 */
 	public DiaReservaPatrimonio (Frame parent, boolean modal) {
 
 		super(parent, modal);
 		initComponents();
 	}
 
-	// Method to visualize room or equipment.
+	/**
+	 * Method to visualize room or equipment.
+	 * @param data date of reservation .
+	 */
 	protected abstract void viewSelectedDayAction (String data);
 
 	// Method called from constructor to initialize the components

@@ -20,7 +20,14 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 	private static final long serialVersionUID = 1L;
 	private Equipamento equipmentToBeReserved;
 
-	// Constructor creates a form to reservation.
+	/**
+	 * Constructor creates a form to reservation.
+	 * @param parentWindow parent of current window.
+	 * @param modal argument to JFrame constructor.
+	 * @param equipmentPosition position of equipment.
+	 * @throws SQLException if has some problem during the database search.
+	 * @throws PatrimonioException  if some of the equipment info is invalid
+	 */
 	public DiaReservaEquipamento (Frame parentWindow, boolean modal,
 			int equipmentPosition) throws SQLException, PatrimonioException {
 
@@ -29,8 +36,10 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 				.get(equipmentPosition);
 	}
 
-	@Override
-	// This method generates an action to visualize the selected day.
+	/**
+	 * This method generates an action to visualize the selected day.
+	 * @param dateOfReserve  date of reservation .
+	 */
 	protected void viewSelectedDayAction (String dateOfReserve) {
 
 		HorariosReservaPatrimonio hourOfReserve = new HorariosReservaEquipamento(
