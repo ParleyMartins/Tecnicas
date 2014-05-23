@@ -104,7 +104,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 
-			Vector <Aluno> alunos = ManterAluno.getInstance().searchCpf(
+			Vector <Aluno> alunos = ManterAluno.getInstance().searchByCpf(
 					this.cpfTextField.getText());
 			if (alunos.isEmpty()) {
 				JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("studentNotExists")

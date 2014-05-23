@@ -52,10 +52,12 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchName(String studentName) throws SQLException,
+	public Vector<Aluno> searchByName(String studentName) throws SQLException,
 			ClienteException {
-
-		return AlunoDAO.getInstance().searchByName(studentName);
+		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		Vector<Aluno> students = alunoDAOInstance.searchByName(studentName); 
+		
+		return students;
 	}
 
 	/**
@@ -65,10 +67,12 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchCpf(String cpf) throws SQLException,
+	public Vector<Aluno> searchByCpf(String cpf) throws SQLException,
 			ClienteException {
-
-		return AlunoDAO.getInstance().searchByCpf(cpf);
+		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		Vector<Aluno> students = alunoDAOInstance.searchByCpf(cpf); 
+		
+		return students;
 	}
 
 	/**
@@ -78,11 +82,14 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchEnrollNumber(String enrollmentNumber)
+	public Vector<Aluno> searchByEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
 
-		return AlunoDAO.getInstance()
+		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		Vector<Aluno> students = alunoDAOInstance
 				.searchByEnrollmentNumber(enrollmentNumber);
+
+		return students;
 	}
 
 	/**
@@ -92,7 +99,7 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchEmail(String email) throws SQLException,
+	public Vector<Aluno> searchByEmail(String email) throws SQLException,
 			ClienteException {
 
 		return AlunoDAO.getInstance().searchByEmail(email);
@@ -105,10 +112,13 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchPhoneNumber(String phoneNumber)
+	public Vector<Aluno> searchByPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
-
-		return AlunoDAO.getInstance().searchByPhoneNumber(phoneNumber);
+		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		Vector<Aluno> students = alunoDAOInstance
+				.searchByPhoneNumber(phoneNumber);
+		
+		return students;
 	}
 
 	/**
@@ -139,6 +149,7 @@ public class ManterAluno {
 
 		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
 				email);
+		
 		AlunoDAO.getInstance().insert(student);
 		this.studentsVec.add(student);
 	}
@@ -158,7 +169,8 @@ public class ManterAluno {
 			String phoneNumber, String email, Aluno oldStudent)
 			throws ClienteException, SQLException {
 
-		Aluno newStudent = new Aluno(name, cpf, enrollmentNumber, phoneNumber, email);
+		Aluno newStudent = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
+				email);
 		AlunoDAO.getInstance().modify(oldStudent, newStudent);
 	}
 
