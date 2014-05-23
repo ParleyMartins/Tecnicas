@@ -27,6 +27,7 @@ public class ManterResSalaProfessor {
 	private Vector<ReservaSalaProfessor> resevations = new Vector<ReservaSalaProfessor>();
 
 	private static ManterResSalaProfessor instance;
+	private static ResSalaProfessorDAO resDAOInstance;
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
@@ -45,6 +46,7 @@ public class ManterResSalaProfessor {
 
 		if (instance == null) {
 			instance = new ManterResSalaProfessor();
+			resDAOInstance = ResSalaProfessorDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -65,8 +67,7 @@ public class ManterResSalaProfessor {
 			ReservaException {
 
 		// Makes a call to DAO layer to retrieve the data.
-		Vector<ReservaSalaProfessor> reservations = ResSalaProfessorDAO
-				.getInstance().searchByDate(date);
+		Vector<ReservaSalaProfessor> reservations = resDAOInstance.searchByDate(date);
 		return reservations;
 	}
 
@@ -82,7 +83,7 @@ public class ManterResSalaProfessor {
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		this.resevations = ResSalaProfessorDAO.getInstance().searchAll();
+		this.resevations = resDAOInstance.searchAll();
 		return this.resevations;
 	}
 
@@ -103,7 +104,7 @@ public class ManterResSalaProfessor {
 				room, purpose, teacher);
 
 		// Add the new reservation both to the database and the Vector.
-		ResSalaProfessorDAO.getInstance().insert(reservation);
+		resDAOInstance.insert(reservation);
 		this.resevations.add(reservation);
 	}
 
@@ -127,8 +128,7 @@ public class ManterResSalaProfessor {
 				reservation.getTeacher());
 		
 		reservation.setPurpose(purpose);
-		
-		ResSalaProfessorDAO.getInstance().modify(oldReservation, reservation);
+		resDAOInstance.modify(oldReservation, reservation);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class ManterResSalaProfessor {
 			ReservaException {
 
 		// We need to remove both from the Vector and the database.
-		ResSalaProfessorDAO.getInstance().delete(reservation);
+		resDAOInstance.delete(reservation);
 		this.resevations.remove(reservation);
 	}
 }
