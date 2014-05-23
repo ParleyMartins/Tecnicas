@@ -15,9 +15,19 @@ public class ReservaSala extends Reserva {
 	private String purpose;
 
 	// Error messages.
-	private final String BLANK_CLASSROOM = International.getInstance().getMessages().getString("blankRoom");
-	private final String BLANK_PURPOSE = International.getInstance().getMessages().getString("blankPurpose");
+	private final String BLANK_CLASSROOM = International.getInstance().getMessages()
+					.getString("blankRoom");
+	private final String BLANK_PURPOSE = International.getInstance().getMessages()
+					.getString("blankPurpose");
 
+	/**
+	 *  This method is for classroom reservation.
+	 * @param date reservation date room.
+	 * @param time reservation time room.
+	 * @param classroom place of study.
+	 * @param purpose reason of reservation.
+	 * @throws ReservaException It ensures that every parameter passed is valid.
+	 */
 	public ReservaSala(String date, String time, Sala classroom, String purpose)
 			throws ReservaException {
 
@@ -26,16 +36,29 @@ public class ReservaSala extends Reserva {
 		this.setPurpose(purpose);
 	}
 
+	/**
+	 * This method gets a classrom.
+	 * @return The content in the classroom field.
+	 */
 	public Sala getClassroom() {
 
 		return this.classroom;
 	}
 
+	/**
+	 * This method gets a purpose.
+	 * @return The content in the purpose field.
+	 */
 	public String getPurpose() {
 
 		return this.purpose;
 	}
 
+	/**
+	 * This method modifies the classroom field.
+	 * @param classroom  place of study.
+	 * @throws ReservaException It ensures that every parameter passed is valid.
+	 */
 	public void setClassroom(Sala classroom) throws ReservaException {
 
 		if (classroom == null) {
@@ -46,6 +69,11 @@ public class ReservaSala extends Reserva {
 		this.classroom = classroom;
 	}
 
+	/**
+	 * This method modifies the purpose field.
+	 * @param purpose reason of reservation.
+	 * @throws ReservaException It ensures that every parameter passed is valid.
+	 */
 	public void setPurpose(String purpose) throws ReservaException {
 
 		if (purpose == null) {
@@ -62,6 +90,11 @@ public class ReservaSala extends Reserva {
 		}
 	}
 
+	/**
+	 * This method checks a classroom.
+	 * @param reservation  A reservation.
+	 * @returnthe existence or absence of reserve.
+	 */
 	public boolean equals(ReservaSala reservation) {
 
 		return (super.equals(reservation)
@@ -69,7 +102,9 @@ public class ReservaSala extends Reserva {
 				.getPurpose().equals(reservation.getPurpose()));
 	}
 
-	@Override
+	/**This method returns a String object representing the data.
+	 * @return A reservation.
+	 */
 	public String toString() {
 
 		return "\n" + this.getClassroom().toString() + "\nFinalidade="
