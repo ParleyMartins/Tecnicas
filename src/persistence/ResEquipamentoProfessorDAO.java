@@ -49,10 +49,10 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 */
 	public static ResEquipamentoProfessorDAO getInstance ( ) {
 
-		if (instance == null) {
-			instance = new ResEquipamentoProfessorDAO();
-		} else {
+		if (instance != null) {
 			// Nothing here.
+		} else {
+			instance = new ResEquipamentoProfessorDAO();
 		}
 		return instance;
 	}
@@ -70,27 +70,36 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		if (reservation == null) {
 			throw new ReservaException(NULL);
 		} else {
-			if (!this.teacherIsInDB(reservation.getTeacher())) {
-				throw new ReservaException(TEACHER_INEXISTENT);
-			} else {
-				if (!this.equipmentIsInDB(reservation.getEquipment())) {
-					throw new ReservaException(EQUIPMENT_INEXISTENT);
-				} else {
-					if (this.equipmentIsInReservationDB(reservation.getEquipment(),
-							reservation.getDate(), reservation.getTime())) {
-						throw new ReservaException(EQUIPMENT_UNAVAILABLE);
-					} else {
-						if (this.teacherIsInReservationDB(reservation.getTeacher(),
-								reservation.getDate(), reservation.getTime())) {
-							throw new ReservaException(RESERVATION_INEXISTENT);
-						} else {
-							//super.executeQuery(this.delete_from_aluno(r));
-							super.execute(this.insertIntoDBQuery(reservation));
-						}
-					}
-				}
-			}
+			// Nothing here.
 		}
+		
+		if (!this.teacherIsInDB(reservation.getTeacher())) {
+			throw new ReservaException(TEACHER_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		if (!this.equipmentIsInDB(reservation.getEquipment())) {
+			throw new ReservaException(EQUIPMENT_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+
+		if (this.equipmentIsInReservationDB(reservation.getEquipment(),
+				reservation.getDate(), reservation.getTime())) {
+			throw new ReservaException(EQUIPMENT_UNAVAILABLE);
+		} else {
+			// Nothing here.
+		}
+
+		if (this.teacherIsInReservationDB(reservation.getTeacher(),
+				reservation.getDate(), reservation.getTime())) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+
+				
+		super.execute(this.insertIntoDBQuery(reservation));
 	}
 
 	/**
@@ -101,54 +110,67 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
 	public void modify (ReservaEquipamentoProfessor oldReservation,
-			ReservaEquipamentoProfessor newReservation) throws ReservaException,
+			ReservaEquipamentoProfessor newReservation)
+			throws ReservaException,
 			SQLException {
 
 		if (oldReservation == null) {
 			throw new ReservaException(NULL);
 		} else {
-			if (newReservation == null) {
-				throw new ReservaException(NULL);
-			} else {
-				if (!this.reservationIsInDB(oldReservation)) {
-					throw new ReservaException(RESERVATION_INEXISTENT);
-				} else {
-					if (this.reservationIsInDB(newReservation)) {
-						throw new ReservaException(RESERVATION_INEXISTENT);
-					} else {
-						if (!oldReservation.getDate().equals(newReservation.getDate())
-								|| !oldReservation.getTime().equals(newReservation.getTime())) {
-							if (this.teacherIsInReservationDB(newReservation.getTeacher(),
-									newReservation.getDate(), newReservation.getTime())) {
-								throw new ReservaException(RESERVATION_INEXISTENT);
-							} else {
-								if (this.equipmentIsInReservationDB(
-										newReservation.getEquipment(),
-										newReservation.getDate(), newReservation.getTime())) {
-									throw new ReservaException(
-											EQUIPMENT_UNAVAILABLE);
-								} else {
-									// Nothing here.
-								}
-							}
-						} else {
-							if (!this.teacherIsInDB(newReservation.getTeacher())) {
-								throw new ReservaException(
-										TEACHER_INEXISTENT);
-							} else {
-								if (!this.equipmentIsInDB(newReservation
-										.getEquipment())) {
-									throw new ReservaException(
-											EQUIPMENT_INEXISTENT);
-								} else {
-									super.update(this.updateQuery(oldReservation, newReservation));
-								}
-							}
-						}
-					}
-				}
-			}
+			// Nothing here.
 		}
+		
+		if (newReservation == null) {
+			throw new ReservaException(NULL);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!this.reservationIsInDB(oldReservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+	
+		if (this.reservationIsInDB(newReservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!oldReservation.getDate().equals(newReservation.getDate())
+				|| !oldReservation.getTime().equals(newReservation.getTime())) {
+		} else {
+			// Nothing here.
+		}
+		
+		if (this.teacherIsInReservationDB(newReservation.getTeacher(),
+				newReservation.getDate(), newReservation.getTime())) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (this.equipmentIsInReservationDB(newReservation.getEquipment(),
+				newReservation.getDate(), newReservation.getTime())) {
+			throw new ReservaException(EQUIPMENT_UNAVAILABLE);
+		} else {
+			// Nothing here.
+		}
+
+		if (!this.teacherIsInDB(newReservation.getTeacher())) {
+			throw new ReservaException(TEACHER_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+
+		if (!this.equipmentIsInDB(newReservation.getEquipment())) {
+			throw new ReservaException(EQUIPMENT_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		String updateQuery = this.updateQuery(oldReservation, newReservation);
+		super.update(updateQuery);
 	}
 
 	/**
@@ -164,12 +186,16 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		if (reservation == null) {
 			throw new ReservaException(NULL);
 		} else {
-			if (!this.reservationIsInDB(reservation)) {
-				throw new ReservaException(RESERVATION_INEXISTENT);
-			} else {
-				super.execute(this.deleteQuery(reservation));
-			}
+			// Nothing here.
 		}
+		
+		if (!this.reservationIsInDB(reservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here;
+		}
+		String deleteQuery = this.deleteQuery(reservation); 
+		super.execute(deleteQuery);
 	}
 
 	/** 
@@ -184,11 +210,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	public Vector <Object> searchAll ( ) throws SQLException,
 			ClienteException,
 			PatrimonioException, ReservaException {
-
-		return super
-				.search("SELECT * FROM reserva_sala_professor "
-						+ "INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
-						+ "INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
+		
+		String query = "SELECT * FROM reserva_sala_professor "
+				+ "INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
+				+ "INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;";
+		
+		Vector <Object> allReservations =super.search(query); 
+		return allReservations;
 	}
 	
 	/** 
@@ -204,13 +232,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	public Vector <ReservaEquipamentoProfessor> searchByMonth (int month)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
-
-		Vector <ReservaEquipamentoProfessor> monthTeacherReservations = super
-				.search("SELECT * FROM reserva_equipamento_professor "
-						+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
-						+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;");
-		Iterator <ReservaEquipamentoProfessor> i = monthTeacherReservations
-				.iterator();
+		String selectQuery = "SELECT * FROM reserva_equipamento_professor "
+				+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
+				+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;";
+		
+		Vector <ReservaEquipamentoProfessor> monthTeacherReservations = super.search(selectQuery);
+		Iterator <ReservaEquipamentoProfessor> i = monthTeacherReservations.iterator();
 
 		while (i.hasNext()) {
 			ReservaEquipamentoProfessor reservation = i.next();
@@ -249,13 +276,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		} else {
 			// Nothing here.
 		}
+		
+		String selectQuery = "SELECT * FROM reserva_equipamento_professor "
+				+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
+				+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor "
+				+ " WHERE hora = \"" + time + "\" or hora = \""
+				+ timeHH_HH + "\" or hora = \"" + timeH_HH + "\";";
 
-		return super
-				.search("SELECT * FROM reserva_equipamento_professor "
-						+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
-						+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor "
-						+ " WHERE hora = \"" + time + "\" or hora = \""
-						+ timeHH_HH + "\" or hora = \"" + timeH_HH + "\";");
+		return super.search(selectQuery);
 	}
 
 	// Implementation of the inherited method.
@@ -264,15 +292,21 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			ClienteException,
 			PatrimonioException, ReservaException {
 
-		Professor teacher = new Professor(result.getString("nome"), result.getString("cpf"),
-				result.getString("matricula"), result.getString("telefone"),
-				result.getString("email"));
+		String name = result.getString("nome");
+		String cpf = result.getString("cpf");
+		String matricula = result.getString("matricula");
+		String phoneNumber = result.getString("telefone");
+		String email = result.getString("email");
+		Professor teacher = new Professor(name, cpf, matricula, phoneNumber, email);
 
-		Equipamento equipment = new Equipamento(result.getString("codigo"),
-				result.getString("descricao"));
+		String code = result.getString("codigo");
+		String description = result.getString("descricao");
+		Equipamento equipment = new Equipamento(code, description);
 
+		String date = result.getString("data");
+		String time = result.getString("hora");
 		ReservaEquipamentoProfessor reservation = new ReservaEquipamentoProfessor(
-				result.getString("data"), result.getString("hora"), equipment, teacher);
+				date, time, equipment, teacher);
 
 		return reservation;
 	}
@@ -285,13 +319,15 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 */
 	private boolean teacherIsInDB (Professor teacher) throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM professor WHERE "
+		String selectQuery = "SELECT * FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
 				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
 				+ "professor.telefone = \"" + teacher.getPhoneNumber()
 				+ "\" and " + "professor.email = \"" + teacher.getEmail()
 				+ "\" and " + "professor.matricula = \""
-				+ teacher.getEnrollmentNumber() + "\";");
+				+ teacher.getEnrollmentNumber() + "\";";
+		boolean itWasFound =this.isInDBGeneric(selectQuery); 
+		return itWasFound;
 	}
 
 	/**
@@ -303,10 +339,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean equipmentIsInDB (Equipamento equipment)
 			throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM equipamento WHERE "
+		String selectQuery = "SELECT * FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getIdCode()
 				+ "\" and " + "equipamento.descricao = \""
-				+ equipment.getDescription() + "\";");
+				+ equipment.getDescription() + "\";";
+		boolean itWasFound =this.isInDBGeneric(selectQuery); 
+		return itWasFound;
 	}
 
 	/**
@@ -319,8 +357,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 */
 	private boolean teacherIsInReservationDB (Professor teacher, String date,
 			String time) throws SQLException {
-
-		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE "
+		
+		String selectQuery = "SELECT * FROM reserva_sala_professor WHERE "
 				+ "data = \"" + date + "\" and " + "hora = \"" + time
 				+ "\" and "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
@@ -329,7 +367,10 @@ public class ResEquipamentoProfessorDAO extends DAO {
 				+ "professor.telefone = \"" + teacher.getPhoneNumber()
 				+ "\" and " + "professor.email = \"" + teacher.getEmail()
 				+ "\" and " + "professor.matricula = \""
-				+ teacher.getEnrollmentNumber() + "\");");
+				+ teacher.getEnrollmentNumber() + "\");";
+		boolean itWasFound = this.isInDBGeneric(selectQuery);
+		
+		return itWasFound;
 	}
 
 	/**
@@ -343,18 +384,20 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean equipmentIsInReservationDB (Equipamento equipment,
 			String date, String time) throws SQLException {
 
-		return super
-				.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
-						+ "data = \""
-						+ date
-						+ "\" and "
-						+ "hora = \""
-						+ time
-						+ "\" and "
-						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \"" + equipment.getIdCode()
-						+ "\" and " + "equipamento.descricao = \""
-						+ equipment.getDescription() + "\");");
+		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
+				+ "data = \""
+				+ date
+				+ "\" and "
+				+ "hora = \""
+				+ time
+				+ "\" and "
+				+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
+				+ "equipamento.codigo = \"" + equipment.getIdCode()
+				+ "\" and " + "equipamento.descricao = \""
+				+ equipment.getDescription() + "\");";
+		boolean itWasFound = this.isInDBGeneric(selectQuery);
+
+		return itWasFound;
 	}
 
 	/**
@@ -366,30 +409,33 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean reservationIsInDB (ReservaEquipamentoProfessor reservation)
 			throws SQLException {
 
-		return super
-				.isInDBGeneric("SELECT * FROM reserva_equipamento_professor WHERE "
-						+ "id_professor = (SELECT id_professor FROM professor WHERE "
-						+ "professor.nome = \"" + reservation.getTeacher().getName()
-						+ "\" and "
-						+ "professor.cpf = \""
-						+ reservation.getTeacher().getCpf()
-						+ "\" and "
-						+ "professor.telefone = \""
-						+ reservation.getTeacher().getPhoneNumber()
-						+ "\" and "
-						+ "professor.email = \""
-						+ reservation.getTeacher().getEmail()
-						+ "\" and "
-						+ "professor.matricula = \""
-						+ reservation.getTeacher().getEnrollmentNumber()
-						+ "\") and "
-						+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
-						+ "equipamento.codigo = \""
-						+ reservation.getEquipment().getIdCode()
-						+ "\" and " + "equipamento.descricao = \""
-						+ reservation.getEquipment().getDescription() + "\" and "
-						+ "hora = \"" + reservation.getTime() + "\" and "
-						+ "data = \"" + reservation.getDate() + "\");");
+		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
+				+ "id_professor = (SELECT id_professor FROM professor WHERE "
+				+ "professor.nome = \"" + reservation.getTeacher().getName()
+				+ "\" and "
+				+ "professor.cpf = \""
+				+ reservation.getTeacher().getCpf()
+				+ "\" and "
+				+ "professor.telefone = \""
+				+ reservation.getTeacher().getPhoneNumber()
+				+ "\" and "
+				+ "professor.email = \""
+				+ reservation.getTeacher().getEmail()
+				+ "\" and "
+				+ "professor.matricula = \""
+				+ reservation.getTeacher().getEnrollmentNumber()
+				+ "\") and "
+				+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
+				+ "equipamento.codigo = \""
+				+ reservation.getEquipment().getIdCode()
+				+ "\" and " + "equipamento.descricao = \""
+				+ reservation.getEquipment().getDescription() + "\" and "
+				+ "hora = \"" + reservation.getTime() + "\" and "
+				+ "data = \"" + reservation.getDate() + "\");";
+		
+		boolean itWasFound = this.isInDBGeneric(selectQuery);
+
+		return itWasFound;
 	}
 
 	/**
@@ -398,13 +444,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 * @return the query to select the given Teacher.
 	 */
 	private String selectTeacherIDQuery (Professor teacher) {
-
-		return "SELECT id_professor FROM professor WHERE "
+		String query = "SELECT id_professor FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
 				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
 				+ "professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
 				+ "professor.email = \"" + teacher.getEmail() + "\" and "
-				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\"";
+				+ "professor.matricula = \"" + teacher.getEnrollmentNumber() + "\""; 
+		return query;
 	}
 
 	/**
@@ -414,10 +460,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 */
 	private String selectEquipmentIDQuery (Equipamento equipment) {
 
-		return "SELECT id_equipamento FROM equipamento WHERE "
+		String query = "SELECT id_equipamento FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getIdCode()
 				+ "\" and " + "equipamento.descricao = \""
 				+ equipment.getDescription() + "\"";
+		
+		return query;
+
 	}
 
 	/**
@@ -428,12 +477,17 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private String whereQuery (
 			ReservaEquipamentoProfessor reservation) {
 
-		return " WHERE " + "id_professor = ( "
-				+ selectTeacherIDQuery(reservation.getTeacher()) + " ) and "
+		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
+		String selectEquipment = selectEquipmentIDQuery(reservation.getEquipment());
+		
+		String query = " WHERE " + "id_professor = ( "
+				+ selectTeacher + " ) and "
 				+ "id_equipamento = ( "
-				+ selectEquipmentIDQuery(reservation.getEquipment()) + " ) and "
+				+ selectEquipment + " ) and "
 				+ "hora = \"" + reservation.getTime() + "\" and " + "data = \""
 				+ reservation.getDate() + "\"";
+		
+		return query;
 	}
 
 	/**
@@ -444,9 +498,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private String valueReservationQuery (
 			ReservaEquipamentoProfessor reservation) {
 
-		return "( " + selectTeacherIDQuery(reservation.getTeacher()) + " ), " + "( "
-				+ selectEquipmentIDQuery(reservation.getEquipment()) + " ), " + "\""
+		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
+		String selectEquipment = selectEquipmentIDQuery(reservation.getEquipment());
+		
+		String query = "( " + selectTeacher + " ), " + "( "
+				+ selectEquipment + " ), " + "\""
 				+ reservation.getTime() + "\", " + "\"" + reservation.getDate() + "\"";
+		
+		return query;
 	}
 
 	/**
@@ -457,11 +516,17 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private String attributesQuery (
 			ReservaEquipamentoProfessor reservation) {
 
-		return "id_professor = ( " + selectTeacherIDQuery(reservation.getTeacher())
+		
+		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
+		String selectEquipment = selectEquipmentIDQuery(reservation.getEquipment());
+		
+		String query = "id_professor = ( " + selectTeacher
 				+ " ), " + "id_equipamento = ( "
-				+ selectEquipmentIDQuery(reservation.getEquipment()) + " ), "
+				+ selectEquipment + " ), "
 				+ "hora = \"" + reservation.getTime() + "\", " + "data = \""
 				+ reservation.getDate() + "\"";
+		
+		return query;
 	}
 
 	/**
@@ -471,9 +536,14 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 */
 	private String insertIntoDBQuery (ReservaEquipamentoProfessor reservation) {
 
-		return "INSERT INTO "
+		String valueQuery = valueReservationQuery(reservation);
+		
+		String query = "INSERT INTO "
 				+ "reserva_equipamento_professor (id_professor, id_equipamento, hora, data) "
-				+ "VALUES ( " + valueReservationQuery(reservation) + " );";
+				+ "VALUES ( " + valueQuery + " );";
+		
+		return query;
+		
 	}
 
 	/**
@@ -485,9 +555,13 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private String updateQuery (ReservaEquipamentoProfessor oldReservation,
 			ReservaEquipamentoProfessor newReservation) {
 
-		return "UPDATE reserva_equipamento_professor SET "
-				+ this.attributesQuery(newReservation)
-				+ this.whereQuery(oldReservation) + " ;";
+		String attributes = this.attributesQuery(newReservation);
+		String where = this.whereQuery(oldReservation);
+		
+		String query = "UPDATE reserva_equipamento_professor SET "
+				+ attributes + where + " ;";
+		
+		return query;
 	}
 
 	/**
@@ -497,8 +571,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 */
 	private String deleteQuery (ReservaEquipamentoProfessor reservation) {
 
-		return "DELETE FROM reserva_equipamento_professor "
-				+ this.whereQuery(reservation) + " ;";
+		String where = this.whereQuery(reservation);
+		
+		String query = "DELETE FROM reserva_equipamento_professor "
+				+ where + " ;";
+		
+		return query;
 	}
 
 }
