@@ -1,5 +1,5 @@
 /**
-ManageEquipment
+ManterEquipamento
 Include the procedures to access, modify, and delete equipments. In this class, 
 we use Singleton to guarantee just one instance at time, since this is a MVC 
 controller. To execute the described actions, this class need to communicate 

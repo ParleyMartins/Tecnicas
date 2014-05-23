@@ -1,5 +1,5 @@
 /**
-ManterProfessor
+ManterAluno
 Student controller, include the procedures to access, modify, and delete student
 informations. In this class, we use Singleton to guarantee just one 
 instance at time, since this is a MVC controller. To execute the described 

@@ -1,8 +1,11 @@
 /**
-  ManterResEquipamentoProfessor
-  Check reservations for equipment made by teacher
-  https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src
-  /controlManterResEquipamentoProfessor.java
+ * ManterResEquipamentoProfessor 
+ * Controller of the relation between equipment and teacher. Include the 
+ * procedures to access, modify, and delete this kind of reservations. In this 
+ * class, we use Singleton to guarantee just one instance at time, since this 
+ * is a MVC controller. To execute the described actions, this class need to 
+ * communicate with the DAO layer.
+ * https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterResEquipamentoProfessor.java
  */
 package control;
 

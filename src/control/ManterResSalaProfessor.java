@@ -1,10 +1,11 @@
 /**
-ManterResSalaProfessor
-Include the procedures to access, modify, and delete the reservation that is the 
-relation between rooms and teachers. In this class, we use Singleton to guarantee 
-just one instance at time, since this is a MVC controller. To execute the 
-described actions, this class need to communicate with the DAO layer.  
-https://github.com/ParleyMartins/Tecnicas/tree/master/src/control//ManterResSalaProfessor.java
+ * ManterResSalaProfessor 
+ * Controller of the relation between teacher and classroom. Include the 
+ * procedures to access, modify, and delete this kind of reservations. In this 
+ * class, we use Singleton to guarantee just one instance at time, since this 
+ * is a MVC controller. To execute the described actions, this class need to 
+ * communicate with the DAO layer.
+ * https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterResSalaProfessor.java
  */
 package control;
 
@@ -124,7 +125,9 @@ public class ManterResSalaProfessor {
 				reservation.getDate(), reservation.getTime(),
 				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getTeacher());
+		
 		reservation.setPurpose(purpose);
+		
 		ResSalaProfessorDAO.getInstance().modify(oldReservation, reservation);
 	}
 

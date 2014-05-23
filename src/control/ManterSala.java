@@ -50,7 +50,6 @@ public class ManterSala {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 */
-	//
 	public Vector<Sala> getRoomsVec() throws SQLException, PatrimonioException {
 
 		this.rooms = SalaDAO.getInstance().searchAll();

@@ -1,7 +1,11 @@
 /**
-ManterResSalaAluno
-Manages the reservations made by students.
-https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterResSalaAluno.java
+ * ManterResSalaAluno 
+ * Controller of the relation between student and classroom. Include the 
+ * procedures to access, modify, and delete this kind of reservations. In this 
+ * class, we use Singleton to guarantee just one instance at time, since this 
+ * is a MVC controller. To execute the described actions, this class need to 
+ * communicate with the DAO layer.
+ * https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterResSalaAluno.java
  */
 package control;
 
@@ -160,8 +164,10 @@ public class ManterResSalaAluno {
 				reservation.getDate(), reservation.getTime(),
 				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getReservedChairs(), reservation.getStudent());
+		
 		reservation.setPurpose(purpose);
 		reservation.setReservedChairs(numberDesiredChairs);
+		
 		ResSalaAlunoDAO.getInstance().modify(oldReservation, reservation);
 	}
 
