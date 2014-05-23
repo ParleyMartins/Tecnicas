@@ -1,5 +1,5 @@
 /**
-ResEquipamentoProfessorDAO
+ResEquipamentoProfessorDAO.java
 This manages the DAO functions of the equipment reservation.
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/ResEquipamentoProfessorDAO.java
 */
@@ -193,6 +193,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	
 	/** 
 	 * This searches for all Equipment Reservations from the database, in the given month.
+	 * @param month The Integer with the given month. January is month one.
 	 * @return all the EquipmentReservation on the database
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
@@ -224,6 +225,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 	/**
 	 * This searches for all Equipment Reservations from the database, in the given time
+	 * @param time The String with the wanted time.
 	 * @return all the EquipmentReservation on the database
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
@@ -294,8 +296,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 
 	/**
 	 * This checks if a given equipment is in the equipment the database.
-	 * @param teacher The Equipment that is going to be searched for.
-	 * @return true if the Teacher is found, false otherwise.
+	 * @param equipment The Equipment that is going to be searched for.
+	 * @return true if the Equipment is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
 	private boolean equipmentIsInDB (Equipamento equipment)
@@ -335,7 +337,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 * @param equipment The wanted equipment.
 	 * @param date The String with the wanted reservation date.
 	 * @param time The String with the wanted reservation time.
-	 * @return true if the Teacher is found, false otherwise.
+	 * @return true if the Equipment is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
 	private boolean equipmentIsInReservationDB (Equipamento equipment,
@@ -358,7 +360,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	/**
 	 * This checks if a reservation is in the database.
 	 * @param reservation The wanted reservation
-	 * @return true if the Teacher is found, false otherwise.
+	 * @return true if the Reservation is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
 	private boolean reservationIsInDB (ReservaEquipamentoProfessor reservation)

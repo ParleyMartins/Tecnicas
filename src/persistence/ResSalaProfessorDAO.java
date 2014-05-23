@@ -1,6 +1,6 @@
 /**
-ResSalaProfessorDAO
-Manage DAO relations between ReservaSala and Professor
+ResSalaProfessorDAO.java
+This class manages DAO relations between ReservaSala and Professor
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/
 */
 
@@ -23,16 +23,24 @@ import exception.ReservaException;
 public class ResSalaProfessorDAO extends DAO {
 
 	// Excpetion messages and alerts.
-	private final String NULL = International.getInstance().getMessages().getString("null");
-	private final String ROOM_UNAVAILABLE = International.getInstance().getMessages().getString("roomUnavailable");
-	private final String TEACHER_INEXISTENT = International.getInstance().getMessages().getString("teacherInexistent");
-	private final String ROOM_INEXISTENT = International.getInstance().getMessages().getString("roomInexistent");
-	private final String RESERVATION_INEXISTENT = International.getInstance().getMessages().getString("reservationInexistent");
-	private final String RESERVATION_EXISTENT = International.getInstance().getMessages().getString("reservationExistent");
-	private final String DATE_IS_GONE = International.getInstance().getMessages().getString("dateIsGone");
-	private final String TIME_IS_GONE = International.getInstance().getMessages().getString("timeIsGone");
+	private final String NULL = International.getInstance().getMessages()
+			.getString("null");
+	private final String ROOM_UNAVAILABLE = International.getInstance()
+			.getMessages().getString("roomUnavailable");
+	private final String TEACHER_INEXISTENT = International.getInstance()
+			.getMessages().getString("teacherInexistent");
+	private final String ROOM_INEXISTENT = International.getInstance()
+			.getMessages().getString("roomInexistent");
+	private final String RESERVATION_INEXISTENT = International.getInstance()
+			.getMessages().getString("reservationInexistent");
+	private final String RESERVATION_EXISTENT = International.getInstance()
+			.getMessages().getString("reservationExistent");
+	private final String DATE_IS_GONE = International.getInstance()
+			.getMessages().getString("dateIsGone");
+	private final String TIME_IS_GONE = International.getInstance()
+			.getMessages().getString("timeIsGone");
 
-	// Singleton implementation.
+	// Instance to the singleton.
 	private static ResSalaProfessorDAO instance;
 
 	private ResSalaProfessorDAO ( ) {
@@ -40,6 +48,10 @@ public class ResSalaProfessorDAO extends DAO {
 		// Blank constructor.
 	}
 
+	/**
+	 * Singleton implementation.
+	 * @return the initialized instance of the class.
+	 */
 	public static ResSalaProfessorDAO getInstance ( ) {
 
 		if (instance == null) {
@@ -50,9 +62,12 @@ public class ResSalaProfessorDAO extends DAO {
 		return instance;
 	}
 
-	
-
-	// Include a new entry in the database.
+	/**
+	 * This inserts a new reservation in the database.
+	 * @param reservation An instance of a RoomReservation.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void insert (ReservaSalaProfessor reservation) throws ReservaException,
 			SQLException {
 
@@ -99,7 +114,13 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 	}
 
-	// Modify an entry in the database.
+	/**
+	 * This updates a reservation in the database.
+	 * @param oldReservation The reservation that will be modified.
+	 * @param newReservation The reservation with the new info.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void modify (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation)
 			throws ReservaException, SQLException {
 
@@ -152,7 +173,12 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 	}
 
-	// Remove an entry from the database.
+	/**
+	 * This removes a reservation from database.
+	 * @param reservation The reservation that will be deleted.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void delete (ReservaSalaProfessor reservation) throws ReservaException,
 			SQLException {
 
@@ -167,7 +193,14 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 	}
 
-	// Select all entries from the database.
+	/** 
+	 * This searches for all Room Reservations from the database.
+	 * @return a Vector with all the RoomReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <ReservaSalaProfessor> searchAll ( ) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
@@ -180,7 +213,15 @@ public class ResSalaProfessorDAO extends DAO {
 						"INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
 	}
 
-	// Select entries from the database by date.
+	/** 
+	 * This searches for all Room Reservations from the database, in the given date.
+	 * @param date The String with wanted date.
+	 * @return all the RoomReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <ReservaSalaProfessor> searchByDate (String date)
 			throws SQLException, ClienteException, PatrimonioException,
@@ -196,7 +237,7 @@ public class ResSalaProfessorDAO extends DAO {
 						" WHERE data = \"" + this.standardizeDate(date) + "\";");
 	}
 
-	// Fetch an entry using a string.
+	// Implementation of the inherited method.
 	@Override
 	protected Object fetch (ResultSet result) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
@@ -215,7 +256,12 @@ public class ResSalaProfessorDAO extends DAO {
 		return reservation;
 	}
 
-	// Check if there is a Professor in the database.
+	/**
+	 * This checks if a given teacher is in the teachers database.
+	 * @param teacher The Teacher that is going to be searched for.
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean teacherIsInDB (Professor teacher) throws SQLException {
 
 		return super.isInDBGeneric("SELECT * FROM professor WHERE " +
@@ -227,7 +273,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"professor.matricula = \"" + teacher.getEnrollmentNumber() + "\";");
 	}
 
-	// Check if there is a Sala in the database.
+	/**
+	 * This checks if a given room is in the room the database.
+	 * @param room The Room that is going to be searched for.
+	 * @return true if the Room is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean roomIsInDB (Sala room) throws SQLException {
 
 		return super.isInDBGeneric("SELECT * FROM sala WHERE " +
@@ -237,7 +288,14 @@ public class ResSalaProfessorDAO extends DAO {
 				";");
 	}
 
-	// Check if there is a Sala entry in a Reserva.
+	/**
+	 * This checks if a given room is in a reservation on a determined day and time.
+	 * @param room The wanted room.
+	 * @param date The String with the wanted reservation date.
+	 * @param time The String with the wanted reservation time.
+	 * @return true if the Room is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean roomIsInReservationDB (Sala room, String date, String time)
 			throws SQLException {
 
@@ -250,7 +308,12 @@ public class ResSalaProfessorDAO extends DAO {
 				"sala.capacidade = " + room.getCapacity() + " );");
 	}
 
-	// Check if there is a Reserva in the database.
+	/**
+	 * This checks if a reservation is in the database.
+	 * @param reservation The wanted reservation
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean reservationIsInDB (ReservaSalaProfessor reservation) throws SQLException {
 
 		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
@@ -272,7 +335,13 @@ public class ResSalaProfessorDAO extends DAO {
 				"data = \"" + reservation.getDate() + "\";");
 	}
 
-	// Check if there is an Aluno entry in a Reserva.
+	/**
+	 * This checks if a room is reserved by a Student on given date and time.
+	 * @param date The String with the wanted date. It must have the XX/XX/XXXX pattern.
+	 * @param time The String with the wanted time. It must have the XX:XX pattern.
+	 * @return true if the room is reserved, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean roomIsInReservationDB (String date, String time)
 			throws SQLException {
 
@@ -281,7 +350,10 @@ public class ResSalaProfessorDAO extends DAO {
 				"hora = \"" + time + "\";");
 	}
 
-	// Get the current date.
+	/**
+	 * This gets the current system date.
+	 * @return a String with the current date.
+	 */
 	private String currentDate ( ) {
 
 		Date date = new Date(System.currentTimeMillis());
@@ -449,7 +521,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	/**
 	 * This generates a WHERE query with a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * @param reservation The RoomReservation to generate the query 
 	 * @return the WHERE query
 	 */
 	private String whereQuery (ReservaSalaProfessor reservation) {
@@ -466,7 +538,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	/**
 	 * This generates a query with the VALUES of a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * @param reservation The RoomReservation to generate the query 
 	 * @return the VALUE query
 	 */
 	private String valuesQuery (ReservaSalaProfessor reservation) {
@@ -481,7 +553,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	/**
 	 * This generates a query with the ATTRIBUTES of a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * @param reservation The RoomReservation to generate the query 
 	 * @return the ATTRIBUTES query
 	 */
 	private String attributesQuery (ReservaSalaProfessor reservation) {
@@ -497,7 +569,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	/**
 	 * This generates a INSERT query with a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * @param reservation The RoomReservation to generate the query 
 	 * @return the INSERT query
 	 */
 	private String insertIntoQuery (ReservaSalaProfessor reservation) {
@@ -512,7 +584,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	/**
 	 * This generates a DELETE query from teacher reservations with a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * @param reservation The RoomReservation to generate the query 
 	 * @return the DELETE query
 	 */
 	private String deleteFromTeacherQuery (ReservaSalaProfessor reservation) {
@@ -524,7 +596,7 @@ public class ResSalaProfessorDAO extends DAO {
 	
 	/**
 	 * This generates a DELETE query from student reservations with a given reservation
-	 * @param reservation The EquipmentReservation to generate the query 
+	 * @param reservation The RoomReservation to generate the query 
 	 * @return the DELETE query
 	 */
 	private String deleteFromStudentQuery (ReservaSalaProfessor reservation) {
