@@ -15,9 +15,17 @@ public class Patrimonio {
 	private String description;
 
 	// Alerts and error messages.
-	private final String BLANK_CODE = International.getInstance().getMessages().getString("blankCode");
-	private final String BLANK_DESCRIPTION = International.getInstance().getMessages().getString("blankDescription");
+	private final String BLANK_CODE = International.getInstance().getMessages()
+					.getString("blankCode");
+	private final String BLANK_DESCRIPTION = International.getInstance().getMessages()
+					.getString("blankDescription");
 
+	/**
+	 * This method sets informations relared to a patrimony. 
+	 * @param code An equipment id number .
+	 * @param description An equipment description. 
+	 * @throws PatrimonioException It ensures that every parameter passed is not null.
+	 */
 	public Patrimonio(String code, String description)
 			throws PatrimonioException {
 
@@ -25,16 +33,29 @@ public class Patrimonio {
 		this.setDescription(description);
 	}
 
+	/**
+	 * This method gets an id_code.
+	 * @return The content in the id_code field. 
+	 */
 	public String getIdCode() {
 
 		return id_code;
 	}
 
+	/**
+	 * This method gets an description. 
+	 * @return The content in the field description. 
+	 */
 	public String getDescription() {
 
 		return description;
 	}
 
+	/**
+	 * This method modifies the id_code field. 
+	 * @param id_code An equipment code. 
+	 * @throws PatrimonioException It ensures that every parameter passed is not null.
+	 */
 	public void setIdCode(String id_code) throws PatrimonioException {
 
 		if (id_code == null) {
@@ -49,6 +70,11 @@ public class Patrimonio {
 		this.id_code = id_code;
 	}
 
+	/**
+	 * This method modifies the description field. 
+	 * @param description An equipment description. 
+	 * @throws PatrimonioException It ensures that every parameter passed is not null. 
+	 */
 	public void setDescription(String description) throws PatrimonioException {
 
 		if (description == null) {
@@ -63,6 +89,11 @@ public class Patrimonio {
 		this.description = description;
 	}
 
+	/**
+	 * This method checks if an equipment is registered.
+	 * @param property An equipment location. 
+	 * @return true if an equipment is registered. false otherwise. 
+	 */
 	public boolean equals(Patrimonio property) {
 
 		if (this.getIdCode().equals(property.getIdCode())
@@ -74,8 +105,10 @@ public class Patrimonio {
 
 		return false;
 	}
-
-	@Override
+	
+	/** This method returns a String object representing the data.
+	 * @return A heritage code. 
+	 */
 	public String toString() {
 
 		return "Codigo=" + id_code + "\nDescricao=" + description;
