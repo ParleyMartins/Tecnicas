@@ -150,29 +150,15 @@ public class ManterProfessor {
 	 * @param enrollmentNumber new enrollment number for the teacher
 	 * @param phoneNumber new phone number for the teacher [(xx)xxxx-xxxx]
 	 * @param email new email for the teacher
-	 * @param newTeacher object of teacher to be updated
+	 * @param oldTeacher object of teacher to be updated
 	 * @throws ClienteException If some of the teacher info is invalid
 	 * @throws SQLException If has some problem with the database update
 	 */
 	public void modify(String name, String cpf, String enrollmentNumber,
-			String phoneNumber, String email, Professor newTeacher)
+			String phoneNumber, String email, Professor oldTeacher)
 			throws ClienteException, SQLException {
-
-		/*
-		 * If we don't create a new object here the code don't work. Need to
-		 * investigate.
-		 */
-
-		Professor oldTeacher = new Professor(newTeacher.getName(),
-				newTeacher.getCpf(), newTeacher.getEnrollmentNumber(),
-				newTeacher.getPhoneNumber(), newTeacher.getEmail());
-
-		newTeacher.setName(name);
-		newTeacher.setCpf(cpf);
-		newTeacher.setEnrollmentNumber(enrollmentNumber);
-		newTeacher.setPhoneNumber(phoneNumber);
-		newTeacher.setEmail(email);
-
+		
+		Professor newTeacher = new Professor(name, cpf, enrollmentNumber, phoneNumber, email);
 		ProfessorDAO.getInstance().update(oldTeacher, newTeacher);
 	}
 

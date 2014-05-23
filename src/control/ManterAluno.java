@@ -20,12 +20,12 @@ public class ManterAluno {
 
 	private static ManterAluno instance;
 
-	private Vector <Aluno> studentsVec = new Vector <Aluno>( );
+	private Vector<Aluno> studentsVec = new Vector<Aluno>();
 
 	/*
 	 * Private constructor to provide singleton implementation.
 	 */
-	private ManterAluno ( ) {
+	private ManterAluno() {
 
 		// Empty constructor.
 	}
@@ -35,11 +35,11 @@ public class ManterAluno {
 	 * @return the active ManterAluno instance, since it will be just one at
 	 * time.
 	 */
-	public static ManterAluno getInstance ( ) {
+	public static ManterAluno getInstance() {
 
-		if (instance == null){
-			instance = new ManterAluno( );
-		}  else {
+		if (instance == null) {
+			instance = new ManterAluno();
+		} else {
 			// Nothing here.
 		}
 		return instance;
@@ -52,10 +52,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector <Aluno> searchName (String studentName) throws SQLException,
+	public Vector<Aluno> searchName(String studentName) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchByName(studentName);
+		return AlunoDAO.getInstance().searchByName(studentName);
 	}
 
 	/**
@@ -65,10 +65,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector <Aluno> searchCpf (String cpf) throws SQLException,
+	public Vector<Aluno> searchCpf(String cpf) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchByCpf(cpf);
+		return AlunoDAO.getInstance().searchByCpf(cpf);
 	}
 
 	/**
@@ -78,10 +78,11 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector <Aluno> searchEnrollNumber (String enrollmentNumber) throws SQLException,
-			ClienteException {
+	public Vector<Aluno> searchEnrollNumber(String enrollmentNumber)
+			throws SQLException, ClienteException {
 
-		return AlunoDAO.getInstance( ).searchByEnrollmentNumber(enrollmentNumber);
+		return AlunoDAO.getInstance()
+				.searchByEnrollmentNumber(enrollmentNumber);
 	}
 
 	/**
@@ -91,10 +92,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector <Aluno> searchEmail (String email) throws SQLException,
+	public Vector<Aluno> searchEmail(String email) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance( ).searchByEmail(email);
+		return AlunoDAO.getInstance().searchByEmail(email);
 	}
 
 	/**
@@ -104,10 +105,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector <Aluno> searchPhoneNumber (String phoneNumber) throws SQLException,
-			ClienteException {
+	public Vector<Aluno> searchPhoneNumber(String phoneNumber)
+			throws SQLException, ClienteException {
 
-		return AlunoDAO.getInstance( ).searchByPhoneNumber(phoneNumber);
+		return AlunoDAO.getInstance().searchByPhoneNumber(phoneNumber);
 	}
 
 	/**
@@ -116,16 +117,15 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector <Aluno> getAllStudents ( ) throws SQLException,
-			ClienteException {
+	public Vector<Aluno> getAllStudents() throws SQLException, ClienteException {
 
-		this.studentsVec = AlunoDAO.getInstance( ).searchAll( );
+		this.studentsVec = AlunoDAO.getInstance().searchAll();
 		return this.studentsVec;
 	}
 
 	/**
 	 * Insert a new student on database
-	 * @param name name of the student 
+	 * @param name name of the student
 	 * @param cpf CPF for the student [xxx.xxx.xxx-xx]
 	 * @param enrollmentNumber student enrollment number
 	 * @param phoneNumber student phone number [(xx)xxxx-xxxx]
@@ -133,38 +133,33 @@ public class ManterAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws SQLException If has some problem with the database insertion
 	 */
-	public void insert (String name, String cpf, String enrollmentNumber,
+	public void insert(String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email) throws ClienteException,
 			SQLException {
 
-		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber, email);
-		AlunoDAO.getInstance( ).insert(student);
+		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
+				email);
+		AlunoDAO.getInstance().insert(student);
 		this.studentsVec.add(student);
 	}
 
 	/**
 	 * Update student information in database
-	 * @param name new name for the student 
+	 * @param name new name for the student
 	 * @param cpf new CPF for the student [xxx.xxx.xxx-xx]
 	 * @param enrollmentNumber new enrollment number for the student
 	 * @param phoneNumber new phone number for the student [(xx)xxxx-xxxx]
 	 * @param email new email for the student
-	 * @param newStudent object of the student to be updated
+	 * @param oldStudent object of the student to be updated
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws SQLException If has some problem with the database update
 	 */
-	public void modify (String name, String cpf, String enrollmentNumber,
-			String phoneNumber, String email, Aluno newStudent)
+	public void modify(String name, String cpf, String enrollmentNumber,
+			String phoneNumber, String email, Aluno oldStudent)
 			throws ClienteException, SQLException {
 
-		Aluno oldStudent = new Aluno(newStudent.getName( ), newStudent.getCpf( ),
-				newStudent.getEnrollmentNumber( ), newStudent.getPhoneNumber( ), newStudent.getEmail( ));
-		newStudent.setName(name);
-		newStudent.setCpf(cpf);
-		newStudent.setEnrollmentNumber(enrollmentNumber);
-		newStudent.setPhoneNumber(phoneNumber);
-		newStudent.setEmail(email);
-		AlunoDAO.getInstance( ).modify(oldStudent, newStudent);
+		Aluno newStudent = new Aluno(name, cpf, enrollmentNumber, phoneNumber, email);
+		AlunoDAO.getInstance().modify(oldStudent, newStudent);
 	}
 
 	/**
@@ -173,9 +168,9 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database remotion
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public void delete (Aluno student) throws SQLException, ClienteException {
+	public void delete(Aluno student) throws SQLException, ClienteException {
 
-		AlunoDAO.getInstance( ).delete(student);
+		AlunoDAO.getInstance().delete(student);
 		this.studentsVec.remove(student);
 	}
 
