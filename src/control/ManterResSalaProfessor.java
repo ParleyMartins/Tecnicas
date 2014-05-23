@@ -67,7 +67,8 @@ public class ManterResSalaProfessor {
 			ReservaException {
 
 		// Makes a call to DAO layer to retrieve the data.
-		Vector<ReservaSalaProfessor> reservations = resDAOInstance.searchByDate(date);
+		Vector<ReservaSalaProfessor> reservations = resDAOInstance
+				.searchByDate(date);
 		return reservations;
 	}
 
@@ -126,7 +127,7 @@ public class ManterResSalaProfessor {
 				reservation.getDate(), reservation.getTime(),
 				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getTeacher());
-		
+
 		reservation.setPurpose(purpose);
 		resDAOInstance.modify(oldReservation, reservation);
 	}

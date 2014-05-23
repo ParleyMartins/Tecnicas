@@ -1,6 +1,6 @@
 /**
-ResSalaProfessorDAO
-Manage DAO relations between ReservaSala and Professor
+ResSalaProfessorDAO.java
+This class manages DAO relations between ReservaSala and Professor
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/
 */
 
@@ -13,7 +13,9 @@ import java.util.Date;
 import java.util.Vector;
 
 import view.International;
+import model.Aluno;
 import model.Professor;
+import model.ReservaSalaAluno;
 import model.ReservaSalaProfessor;
 import model.Sala;
 import exception.ClienteException;
@@ -23,16 +25,24 @@ import exception.ReservaException;
 public class ResSalaProfessorDAO extends DAO {
 
 	// Excpetion messages and alerts.
-	private final String NULL = International.getInstance().getMessages().getString("null");
-	private final String ROOM_UNAVAILABLE = International.getInstance().getMessages().getString("roomUnavailable");
-	private final String TEACHER_INEXISTENT = International.getInstance().getMessages().getString("teacherInexistent");
-	private final String ROOM_INEXISTENT = International.getInstance().getMessages().getString("roomInexistent");
-	private final String RESERVATION_INEXISTENT = International.getInstance().getMessages().getString("reservationInexistent");
-	private final String RESERVATION_EXISTENT = International.getInstance().getMessages().getString("reservationExistent");
-	private final String DATE_IS_GONE = International.getInstance().getMessages().getString("dateIsGone");
-	private final String TIME_IS_GONE = International.getInstance().getMessages().getString("timeIsGone");
+	private final String NULL = International.getInstance().getMessages()
+			.getString("null");
+	private final String ROOM_UNAVAILABLE = International.getInstance()
+			.getMessages().getString("roomUnavailable");
+	private final String TEACHER_INEXISTENT = International.getInstance()
+			.getMessages().getString("teacherInexistent");
+	private final String ROOM_INEXISTENT = International.getInstance()
+			.getMessages().getString("roomInexistent");
+	private final String RESERVATION_INEXISTENT = International.getInstance()
+			.getMessages().getString("reservationInexistent");
+	private final String RESERVATION_EXISTENT = International.getInstance()
+			.getMessages().getString("reservationExistent");
+	private final String DATE_IS_GONE = International.getInstance()
+			.getMessages().getString("dateIsGone");
+	private final String TIME_IS_GONE = International.getInstance()
+			.getMessages().getString("timeIsGone");
 
-	// Singleton implementation.
+	// Instance to the singleton.
 	private static ResSalaProfessorDAO instance;
 
 	private ResSalaProfessorDAO ( ) {
@@ -40,106 +50,119 @@ public class ResSalaProfessorDAO extends DAO {
 		// Blank constructor.
 	}
 
+	/**
+	 * Singleton implementation.
+	 * @return the initialized instance of the class.
+	 */
 	public static ResSalaProfessorDAO getInstance ( ) {
 
-		if (instance == null) {
-			instance = new ResSalaProfessorDAO();
-		} else {
+		if (instance != null) {
 			// Nothing here.
+		} else {
+			instance = new ResSalaProfessorDAO();
 		}
 		return instance;
 	}
 
-	
-
-	// Include a new entry in the database.
+	/**
+	 * This inserts a new reservation in the database.
+	 * @param reservation An instance of a RoomReservation.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void insert (ReservaSalaProfessor reservation) throws ReservaException,
 			SQLException {
 
 		if (reservation == null) {
 			throw new ReservaException(NULL);
-		} else {
-			if (!this.teacherIsInDB(reservation.getTeacher())) {
-				throw new ReservaException(TEACHER_INEXISTENT);
-			} else {
-				if (!this.roomIsInDB(reservation.getClassroom())) {
-					throw new ReservaException(ROOM_INEXISTENT);
-				} else {
-					if (this.roomIsInReservationDB(reservation.getClassroom(), reservation.getDate(), 
-							reservation.getTime())) {
-						throw new ReservaException(ROOM_UNAVAILABLE);
-					} else {
-						if (this.reservationIsInDB(reservation)) {
-							throw new ReservaException(RESERVATION_EXISTENT);
-						} else {
-							if (this.roomIsInReservationDB(reservation.getDate(), 
-									reservation.getTime())) {
-								super.execute(this.deleteFromStudentQuery(reservation));
-							} else {
-								// Nothing here.
-							}
-						}
-					}
-				}
-			}
+		} 
+		
+		if (!this.teacherIsInDB(reservation.getTeacher())) {
+			throw new ReservaException(TEACHER_INEXISTENT);
 		}
+		
+		if (!this.roomIsInDB(reservation.getClassroom())) {
+			throw new ReservaException(ROOM_INEXISTENT);
+		}
+		
+		if (this.roomIsInReservationDB(reservation.getClassroom(), reservation.getDate(), 
+				reservation.getTime())) {
+			throw new ReservaException(ROOM_UNAVAILABLE);
+		}
+		
+		if (this.reservationIsInDB(reservation)) {
+			throw new ReservaException(RESERVATION_EXISTENT);
+		}
+
+		if (this.roomIsInReservationDB(reservation.getDate(), 
+				reservation.getTime())) {
+			super.execute(this.deleteFromStudentQuery(reservation));
+		} else {
+			// Nothing here.
+		}
+
 		if (this.dateIsGone(reservation.getDate())) {
 			throw new ReservaException(DATE_IS_GONE);
 		} else {
 			// Nothing here.
 		}
-		if (this.dataIsNow(reservation.getDate())) {
-			if (this.timeIsGone(reservation.getTime())) {
-				throw new ReservaException(TIME_IS_GONE);
-			} else {
-				super.execute(this.insertIntoQuery(reservation));
-			}
+		if (this.dataIsNow(reservation.getDate()) && this.timeIsGone(reservation.getTime())) {
+			throw new ReservaException(TIME_IS_GONE);
 		} else {
-			super.execute(this.insertIntoQuery(reservation));
+			// Nothing here.
 		}
+		
+		super.execute(this.insertIntoQuery(reservation));
 	}
 
-	// Modify an entry in the database.
+	/**
+	 * This updates a reservation in the database.
+	 * @param oldReservation The reservation that will be modified.
+	 * @param newReservation The reservation with the new info.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void modify (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation)
 			throws ReservaException, SQLException {
 
-		if (oldReservation == null) {
+		if (oldReservation == null || newReservation == null) {
 			throw new ReservaException(NULL);
 		} else {
-			if (newReservation == null) {
-				throw new ReservaException(NULL);
-			} else {
-				if (!this.reservationIsInDB(oldReservation)) {
-					throw new ReservaException(RESERVATION_INEXISTENT);
-				} else {
-					if (this.reservationIsInDB(newReservation)) {
-						throw new ReservaException(RESERVATION_EXISTENT);
-					} else {
-						if (!this.teacherIsInDB(newReservation.getTeacher())) {
-							throw new ReservaException(TEACHER_INEXISTENT);
-						} else {
-							if (!this.roomIsInDB(newReservation.getClassroom())) {
-								throw new ReservaException(ROOM_INEXISTENT);
-							} else {
-								if (!oldReservation.getDate().equals(newReservation.getDate())
-										|| !oldReservation.getTime().equals(newReservation.getTime())) {
-									if (this.roomIsInReservationDB(newReservation.getClassroom(),
-											newReservation.getDate(), newReservation.getTime())) {
-										throw new ReservaException(
-												ROOM_UNAVAILABLE);
-									} else {
-										// Nothing here.
-									}
-								} else {
-									// Nothing here.
-								}
-							}
-						}
-					}
-				}
-			}
+			// Nothing here.
+		} 
+
+		if (!this.reservationIsInDB(oldReservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
 		}
-								
+		
+		if (this.reservationIsInDB(newReservation)) {
+			throw new ReservaException(RESERVATION_EXISTENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!this.teacherIsInDB(newReservation.getTeacher())) {
+			throw new ReservaException(TEACHER_INEXISTENT);
+		}
+		
+		if (!this.roomIsInDB(newReservation.getClassroom())) {
+			throw new ReservaException(ROOM_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!oldReservation.getDate().equals(newReservation.getDate()) 
+				|| !oldReservation.getTime().equals(newReservation.getTime())) {
+			if (this.roomIsInReservationDB(newReservation.getClassroom(),
+					newReservation.getDate(), newReservation.getTime())) {
+				throw new ReservaException(ROOM_UNAVAILABLE);
+			} else {
+				// Nothing here.
+			}
+		} else {
+			// Nothing here.
+		}
+		
 		if (this.dateIsGone(newReservation.getDate())) {
 			throw new ReservaException(DATE_IS_GONE);
 		} else {
@@ -148,140 +171,226 @@ public class ResSalaProfessorDAO extends DAO {
 		if (this.timeIsGone(newReservation.getTime()) && this.dataIsNow(newReservation.getDate())) {
 			throw new ReservaException(TIME_IS_GONE);
 		} else {
-			super.update(this.updateQuery(oldReservation, newReservation));
+			// Nothing here
 		}
+		
+		super.update(this.updateQuery(oldReservation, newReservation));
 	}
 
-	// Remove an entry from the database.
+	/**
+	 * This removes a reservation from database.
+	 * @param reservation The reservation that will be deleted.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
 	public void delete (ReservaSalaProfessor reservation) throws ReservaException,
 			SQLException {
 
 		if (reservation == null) {
 			throw new ReservaException(NULL);
 		} else {
-			if (!this.reservationIsInDB(reservation)) {
-				throw new ReservaException(RESERVATION_INEXISTENT);
-			} else {
-				super.execute(this.deleteFromTeacherQuery(reservation));
-			}
+			// Nothing here.
 		}
+		
+		if (!this.reservationIsInDB(reservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		
+		super.execute(this.deleteFromTeacherQuery(reservation));
 	}
 
-	// Select all entries from the database.
+	/** 
+	 * This searches for all Room Reservations from the database.
+	 * @return a Vector with all the RoomReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <ReservaSalaProfessor> searchAll ( ) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
 
-		return super
-				.search("SELECT * FROM reserva_sala_professor "
+		String query = "SELECT * FROM reserva_sala_professor "
 						+
 						"INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
 						+
-						"INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;");
+						"INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;";
+		
+		return super.search(query);
 	}
 
-	// Select entries from the database by date.
+	/** 
+	 * This searches for all Room Reservations from the database, in the given date.
+	 * @param date The String with wanted date.
+	 * @return all the RoomReservation on the database
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 * @throws ClienteException if an exception related to the client is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
 	@SuppressWarnings ("unchecked")
 	public Vector <ReservaSalaProfessor> searchByDate (String date)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		return super
-				.search("SELECT * FROM reserva_sala_professor "
+		String query = "SELECT * FROM reserva_sala_professor "
 						+
 						"INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
 						+
 						"INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor"
 						+
-						" WHERE data = \"" + this.standardizeDate(date) + "\";");
+						" WHERE data = \"" + this.standardizeDate(date) + "\";";
+		return super.search(query);
 	}
 
-	// Fetch an entry using a string.
+	// Implementation of the inherited method.
 	@Override
 	protected Object fetch (ResultSet result) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
+	
+		String name = result.getString("nome");
+		String cpf = result.getString("cpf");
+		String matricula = result.getString("matricula");
+		String phoneNumber = result.getString("telefone");
+		String email = result.getString("email");
+		Professor teacher = new Professor(name, cpf, matricula, phoneNumber, email);
 
-		Professor teacher = new Professor(result.getString("nome"), result.getString("cpf"),
-				result.getString("matricula"),
-				result.getString("telefone"), result.getString("email"));
+		String code = result.getString("codigo");
+		String description = result.getString("descricao");
+		String capacity = result.getString("capacidade");
+		Sala room = new Sala(code, description, capacity);
 
-		Sala room = new Sala(result.getString("codigo"), result.getString("descricao"),
-				result.getString("capacidade"));
-
-		ReservaSalaProfessor reservation = new ReservaSalaProfessor(result.getString("data"),
-				result.getString("hora"),
-				room, result.getString("finalidade"), teacher);
-
+		String date = result.getString("data");
+		String time = result.getString("hora");
+		String purpose = result.getString("finalidade");
+		
+		ReservaSalaProfessor reservation = new ReservaSalaProfessor(date, time, room, purpose, teacher);
 		return reservation;
 	}
 
-	// Check if there is a Professor in the database.
+	/**
+	 * This checks if a given teacher is in the teachers database.
+	 * @param teacher The Teacher that is going to be searched for.
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean teacherIsInDB (Professor teacher) throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM professor WHERE " +
+		String query = "SELECT * FROM professor WHERE " +
 				"professor.nome = \"" + teacher.getName() + "\" and " +
 				"professor.cpf = \"" + teacher.getCpf() + "\" and " +
 				"professor.telefone = \"" + teacher.getPhoneNumber() + "\" and "
 				+
 				"professor.email = \"" + teacher.getEmail() + "\" and " +
-				"professor.matricula = \"" + teacher.getEnrollmentNumber() + "\";");
+				"professor.matricula = \"" + teacher.getEnrollmentNumber() + "\";";
+		
+		boolean itWasFound = this.isInDBGeneric(query);
+
+		return itWasFound;
 	}
 
-	// Check if there is a Sala in the database.
+	/**
+	 * This checks if a given room is in the room the database.
+	 * @param room The Room that is going to be searched for.
+	 * @return true if the Room is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean roomIsInDB (Sala room) throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM sala WHERE " +
+		String query = "SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacity() +
-				";");
+				"sala.capacidade = " + room.getCapacity() +";";
+		
+		boolean itWasFound = this.isInDBGeneric(query);
+
+		return itWasFound;
 	}
 
-	// Check if there is a Sala entry in a Reserva.
+	/**
+	 * This checks if a given room is in a reservation on a determined day and time.
+	 * @param room The wanted room.
+	 * @param date The String with the wanted reservation date.
+	 * @param time The String with the wanted reservation time.
+	 * @return true if the Room is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean roomIsInReservationDB (Sala room, String date, String time)
 			throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
+		String query = "SELECT * FROM reserva_sala_professor WHERE " +
 				"data = \"" + date + "\" and " +
 				"hora = \"" + time + "\" and " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacity() + " );");
+				"sala.capacidade = " + room.getCapacity() + " );";
+		
+		boolean itWasFound = this.isInDBGeneric(query);
+
+		return itWasFound;
 	}
 
-	// Check if there is a Reserva in the database.
+	/**
+	 * This checks if a reservation is in the database.
+	 * @param reservation The wanted reservation
+	 * @return true if the Teacher is found, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean reservationIsInDB (ReservaSalaProfessor reservation) throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
+		Professor teacher = reservation.getTeacher();
+		Sala room = reservation.getClassroom();
+		
+		String query = "SELECT * FROM reserva_sala_professor WHERE " +
 				"id_professor = (SELECT id_professor FROM professor WHERE " +
-				"professor.nome = \"" + reservation.getTeacher().getName() + "\" and " +
-				"professor.cpf = \"" + reservation.getTeacher().getCpf() + "\" and " +
-				"professor.telefone = \"" + reservation.getTeacher().getPhoneNumber()
+				"professor.nome = \"" + teacher.getName() + "\" and " +
+				"professor.cpf = \"" + teacher.getCpf() + "\" and " +
+				"professor.telefone = \"" + teacher.getPhoneNumber()
 				+ "\" and " +
-				"professor.email = \"" + reservation.getTeacher().getEmail()
+				"professor.email = \"" + teacher.getEmail()
 				+ "\" and " +
-				"professor.matricula = \"" + reservation.getTeacher().getEnrollmentNumber()
+				"professor.matricula = \"" + teacher.getEnrollmentNumber()
 				+ "\") and " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
-				"sala.codigo = \"" + reservation.getClassroom().getIdCode() + "\" and " +
-				"sala.descricao = \"" + reservation.getClassroom().getDescription() + "\" and " +
-				"sala.capacidade = " + reservation.getClassroom().getCapacity() + " ) and " +
+				"sala.codigo = \"" + room.getIdCode() + "\" and " +
+				"sala.descricao = \"" + room.getDescription() + "\" and " +
+				"sala.capacidade = " + room.getCapacity() + " ) and " +
 				"finalidade = \"" + reservation.getPurpose() + "\" and " +
 				"hora = \"" + reservation.getTime() + "\" and " +
-				"data = \"" + reservation.getDate() + "\";");
+				"data = \"" + reservation.getDate() + "\";";
+				
+		boolean itWasFound = this.isInDBGeneric(query);
+
+		return itWasFound;
 	}
 
-	// Check if there is an Aluno entry in a Reserva.
+	/**
+	 * This checks if a room is reserved by a Student on given date and time.
+	 * @param date The String with the wanted date. It must have the XX/XX/XXXX pattern.
+	 * @param time The String with the wanted time. It must have the XX:XX pattern.
+	 * @return true if the room is reserved, false otherwise.
+	 * @throws SQLException if an exception related to the database is activated
+	 */
 	private boolean roomIsInReservationDB (String date, String time)
 			throws SQLException {
 
-		return super.isInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
+		String query = "SELECT * FROM reserva_sala_aluno WHERE " +
 				"data = \"" + date + "\" and " +
-				"hora = \"" + time + "\";");
+				"hora = \"" + time + "\";";
+		
+		boolean itWasFound = this.isInDBGeneric(query);
+
+		return itWasFound;
 	}
 
-	// Get the current date.
+	/**
+	 * This gets the current system date.
+	 * @return a String with the current date.
+	 */
 	private String currentDate ( ) {
 
 		Date date = new Date(System.currentTimeMillis());
@@ -289,14 +398,21 @@ public class ResSalaProfessorDAO extends DAO {
 		return formatter.format(date);
 	}
 
-	// Get the current time.
+	/**
+	 * This gets the current system time.
+	 * @return a String with the current time.
+	 */
 	private String currentTime ( ) {
 
 		Date date = new Date(System.currentTimeMillis());
 		return date.toString().substring(11, 16);
 	}
 
-	// Check if the date is passed.
+	/**
+	 * This checks if a given date has passed.
+	 * @param date the date that will be checked
+	 * @return true if the given date has passed, false otherwise.
+	 */
 	private boolean dateIsGone (String date) {
 
 		String now[] = this.currentDate().split("[./-]");
@@ -333,8 +449,11 @@ public class ResSalaProfessorDAO extends DAO {
 		return false;
 	}
 
-	// Check if the date is equals.
-
+	/**
+	 * This checks if a given the date is today.
+	 * @param date The date that is going to be checked
+	 * @return true if the given date is today, false otherwise.
+	 */
 	public boolean dataIsNow (String date) {
 
 		date = this.standardizeDate(date);
@@ -345,13 +464,15 @@ public class ResSalaProfessorDAO extends DAO {
 				&& now[2].equals(dateParts[2])) {
 			return true;
 		} else {
-			// Nothing here.
+			return false;
 		}
-		return false;
 	}
-
-	// Check if the time is passed.
-
+	
+	/**
+	 * This method checks if a given time is already gone.
+	 * @param time The String with the time that will be checked
+	 * @return true if time is gone, false otherwise.
+	 */
 	private boolean timeIsGone (String time) {
 
 		String now = this.currentTime();
@@ -378,8 +499,12 @@ public class ResSalaProfessorDAO extends DAO {
 		}
 	}
 
-	// Standardize the date.
 	
+	/**
+	 * This method standardizes the date
+	 * @param date the String with a date.
+	 * @return A String with date following the XX/XX/XXXX pattern. 
+	 */
 	private String standardizeDate (String date) {
 
 		String now[] = currentDate().split("[./-]");
@@ -399,98 +524,166 @@ public class ResSalaProfessorDAO extends DAO {
 		return standardDate;
 	}
 
-	// Reuse query for SELECT PROFESSOR BY ID clause.
-
+	
+	/**
+	 * This generates a query to select a teacher by the database id.
+	 * @param teacher The teacher that is going to be selected.
+	 * @return the query to select the given Teacher.
+	 */
 	private String selectTeacherIDQuery (Professor teacher) {
 
-		return "SELECT id_professor FROM professor WHERE " +
+		String query = "SELECT id_professor FROM professor WHERE " +
 				"professor.nome = \"" + teacher.getName() + "\" and " +
 				"professor.cpf = \"" + teacher.getCpf() + "\" and " +
 				"professor.telefone = \"" + teacher.getPhoneNumber() + "\" and " +
 				"professor.email = \"" + teacher.getEmail() + "\" and " +
 				"professor.matricula = \"" + teacher.getEnrollmentNumber() + "\"";
+		
+		return query;
 	}
 
-	// Reuse query for SELECT SALA BY ID clause.
-
+	
+	/**
+	 * This generates a query to select a room by the database id.
+	 * @param room The room that is going to be selected.
+	 * @return the query to select the given Room
+	 */
 	private String selectRoomIdQuery (Sala room) {
 
-		return "SELECT id_sala FROM sala WHERE " +
+		String query = "SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
 				"sala.descricao = \"" + room.getDescription() + "\" and " +
 				"sala.capacidade = " + room.getCapacity();
+		
+		return query;
 	}
 
-	// Reuse Query for WHERE clause.
-
+	
+	/**
+	 * This generates a WHERE query with a given reservation
+	 * @param reservation The RoomReservation to generate the query 
+	 * @return the WHERE query
+	 */
 	private String whereQuery (ReservaSalaProfessor reservation) {
 
-		return " WHERE " +
-				"id_professor = ( " + selectTeacherIDQuery(reservation.getTeacher())
+		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
+		String selectRoom = selectRoomIdQuery(reservation.getClassroom());
+		
+		String query =  " WHERE " +
+				"id_professor = ( " + selectTeacher
 				+ " ) and " +
-				"id_sala = ( " + selectRoomIdQuery(reservation.getClassroom()) + " ) and " +
+				"id_sala = ( " + selectRoom + " ) and " +
 				"finalidade = \"" + reservation.getPurpose() + "\" and " +
 				"hora = \"" + reservation.getTime() + "\" and " +
 				"data = \"" + reservation.getDate() + "\"";
+		
+		return query;
 	}
 
-	// Reuse Query for VALUES clause.
-
+	
+	/**
+	 * This generates a query with the VALUES of a given reservation
+	 * @param reservation The RoomReservation to generate the query 
+	 * @return the VALUE query
+	 */
 	private String valuesQuery (ReservaSalaProfessor reservation) {
 
-		return "( " + selectTeacherIDQuery(reservation.getTeacher()) + " ), " +
-				"( " + selectRoomIdQuery(reservation.getClassroom()) + " ), " +
+		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
+		String selectRoom = selectRoomIdQuery(reservation.getClassroom());
+		
+		String query =  "( " + selectTeacher + " ), " +
+				"( " + selectRoom + " ), " +
 				"\"" + reservation.getPurpose() + "\", " +
 				"\"" + reservation.getTime() + "\", " +
 				"\"" + reservation.getDate() + "\"";
+		return query;
 	}
 
-	// Reuse Query for ATRIBUTES clause.
 	
+	/**
+	 * This generates a query with the ATTRIBUTES of a given reservation
+	 * @param reservation The RoomReservation to generate the query 
+	 * @return the ATTRIBUTES query
+	 */
 	private String attributesQuery (ReservaSalaProfessor reservation) {
 
-		return "id_professor = ( " + selectTeacherIDQuery(reservation.getTeacher())
+		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
+		String selectRoom = selectRoomIdQuery(reservation.getClassroom());
+		
+		String query = "id_professor = ( " + selectTeacher
 				+ " ), " +
-				"id_sala = ( " + selectRoomIdQuery(reservation.getClassroom()) + " ), " +
+				"id_sala = ( " + selectRoom + " ), " +
 				"finalidade = \"" + reservation.getPurpose() + "\", " +
 				"hora = \"" + reservation.getTime() + "\", " +
 				"data = \"" + reservation.getDate() + "\"";
+		
+		return query;
 	}
 
-	// Reuse Query for INSERT clause.
-
+	
+	/**
+	 * This generates a INSERT query with a given reservation
+	 * @param reservation The RoomReservation to generate the query 
+	 * @return the INSERT query
+	 */
 	private String insertIntoQuery (ReservaSalaProfessor reservation) {
 
-		return "INSERT INTO "
-				+
-				"reserva_sala_professor (id_professor, id_sala, finalidade, hora, data) "
-				+
-				"VALUES ( " + valuesQuery(reservation) + " );";
+		String valueQuery = valuesQuery(reservation);
+		
+		
+		String query = "INSERT INTO "
+				+ "reserva_sala_professor (id_professor, id_sala, finalidade, hora, data) "
+				+ "VALUES ( " + valueQuery + " );";
+		return query;
+
 	}
 
-	// Reuse Query for DELETE PROFESSOR clause.
-
+	
+	/**
+	 * This generates a DELETE query from teacher reservations with a given reservation
+	 * @param reservation The RoomReservation to generate the query 
+	 * @return the DELETE query
+	 */
 	private String deleteFromTeacherQuery (ReservaSalaProfessor reservation) {
 
-		return "DELETE FROM reserva_sala_professor "
-				+ this.whereQuery(reservation) + " ;";
+		String where = this.whereQuery(reservation);
+		
+		String query = "DELETE FROM reserva_sala_professor "
+				+ where + " ;";
+		
+		return query;
 	}
 
-	// Reuse Query for DELETE ALUNO clause.
-
+	
+	/**
+	 * This generates a DELETE query from student reservations with a given reservation
+	 * @param reservation The RoomReservation to generate the query 
+	 * @return the DELETE query
+	 */
 	private String deleteFromStudentQuery (ReservaSalaProfessor reservation) {
 
-		return "DELETE FROM reserva_sala_aluno WHERE " +
+		String query = "DELETE FROM reserva_sala_aluno WHERE " +
 				"hora = \"" + reservation.getTime() + "\" and " +
 				"data = \"" + reservation.getDate() + "\" ;";
+		
+		return query;
 	}
 
-	// Reuse Query for UPDATE clause.
-
+	
+	/**
+	 * This generates a UPDATE query 
+	 * @param oldReservation The reservation that is going to be updated
+	 * @param newReservation The reservation with the new info
+	 * @return the UPDATE query
+	 */
 	private String updateQuery (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation) {
 
-		return "UPDATE reserva_sala_professor SET " +
-				this.attributesQuery(newReservation) +
-				this.whereQuery(oldReservation) + " ;";
+		String attributes = this.attributesQuery(newReservation);
+		String where = this.whereQuery(oldReservation);
+		
+		String query = "UPDATE reserva_sala_professor SET " +
+				attributes + where + " ;";
+		
+		return query;
 	}
 }

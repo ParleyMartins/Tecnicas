@@ -20,7 +20,6 @@ public abstract class DAO {
 
 	/**
 	 * This method searches for a database entry according to the query.
-	 * 
 	 * @param query String that will be searched on the database
 	 * @return a Vector with the found entries
 	 * @throws SQLException if an exception related to the database is activated
@@ -46,12 +45,12 @@ public abstract class DAO {
 		statement.close();
 		result.close();
 		factoryCon.close();
+	
 		return vector;
 	}
 
 	/**
 	 * This checks if a database entry exists.
-	 * 
 	 * @param query The entry that will be searched.
 	 * @return true if the query is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
@@ -66,16 +65,15 @@ public abstract class DAO {
 		statement.close();
 		factoryCon.close();
 
-		if (!result.next()) {
-			return false;
-		} else {
+		if (result.next()) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
 	/**
 	 * This creates an object with the result of a search.
-	 * 
 	 * @param result The result of a search on the database.
 	 * @return the object created based on the search.
 	 * @throws SQLException if an exception related to the database is activated

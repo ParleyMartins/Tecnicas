@@ -64,7 +64,8 @@ public class ManterResEquipamentoProfessor {
 			String time) throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
-		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance.searchByTime(time);
+		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance
+				.searchByTime(time);
 		return reservations;
 	}
 
@@ -80,8 +81,9 @@ public class ManterResEquipamentoProfessor {
 	public Vector<ReservaEquipamentoProfessor> getReservationsPerMonth(int month)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
-		
-		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance.searchByMonth(month); 
+
+		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance
+				.searchByMonth(month);
 		return reservations;
 	}
 
@@ -136,8 +138,7 @@ public class ManterResEquipamentoProfessor {
 		ReservaEquipamentoProfessor reserva_new = new ReservaEquipamentoProfessor(
 				date, time, equipment, teacher);
 
-		resDAOInstance.modify(oldReservation,
-				reserva_new);
+		resDAOInstance.modify(oldReservation, reserva_new);
 
 	}
 

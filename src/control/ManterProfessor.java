@@ -55,8 +55,8 @@ public class ManterProfessor {
 	 */
 	public Vector<Professor> searchName(String name) throws SQLException,
 			ClienteException {
-		
-		Vector<Professor> teachers = teacherDAOInstance.searchByName(name); 
+
+		Vector<Professor> teachers = teacherDAOInstance.searchByName(name);
 		return teachers;
 	}
 
@@ -69,7 +69,7 @@ public class ManterProfessor {
 	 */
 	public Vector<Professor> searchCpf(String cpf) throws SQLException,
 			ClienteException {
-		
+
 		Vector<Professor> teachers = teacherDAOInstance.searchByCpf(cpf);
 		return teachers;
 	}
@@ -84,8 +84,8 @@ public class ManterProfessor {
 	public Vector<Professor> searchEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
 
-		Vector<Professor> teachers = teacherDAOInstance.searchByEnrollmentNumber(
-				enrollmentNumber);
+		Vector<Professor> teachers = teacherDAOInstance
+				.searchByEnrollmentNumber(enrollmentNumber);
 		return teachers;
 	}
 
@@ -112,7 +112,7 @@ public class ManterProfessor {
 	 */
 	public Vector<Professor> searchPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
-		
+
 		Vector<Professor> teachers = teacherDAOInstance
 				.searchByPhoneNumber(phoneNumber);
 		return teachers;
@@ -147,7 +147,7 @@ public class ManterProfessor {
 
 		Professor teacher = new Professor(name, cpf, enrollmentNumber,
 				phoneNumber, email);
-		
+
 		teacherDAOInstance.insert(teacher);
 		this.allTeachers.add(teacher);
 	}
@@ -166,8 +166,9 @@ public class ManterProfessor {
 	public void modify(String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email, Professor oldTeacher)
 			throws ClienteException, SQLException {
-		
-		Professor newTeacher = new Professor(name, cpf, enrollmentNumber, phoneNumber, email);
+
+		Professor newTeacher = new Professor(name, cpf, enrollmentNumber,
+				phoneNumber, email);
 		teacherDAOInstance.update(oldTeacher, newTeacher);
 	}
 

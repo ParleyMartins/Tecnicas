@@ -19,13 +19,24 @@ import exception.ReservaException;
 
 public class AlterarReservaProfSalaView extends ReservaSalaView {
 
+	private static final long serialVersionUID = 1L;
 	int index;
 	ReservaSalaProfessor reservaProfessor;
 
+	/**
+	 * Constructor to generate the form
+	 * @param parent parent of current frame
+	 * @param modal argument to JFrame constructor
+	 * @param index index of the classroom at the controller vector
+	 * @param data date of reservation 
+	 * @throws SQLException if has some problem during the database search
+	 * @throws PatrimonioException if some of the classroom info is invalid
+	 * @throws ClienteException if some of the client info is invalid
+	 * @throws ReservaException if some of the reservation info is invalid
+	 */
 	public AlterarReservaProfSalaView (Frame parent, boolean modal, int index,
-			String data) throws SQLException,
-			PatrimonioException, PatrimonioException, ClienteException,
-			ReservaException {
+			String data) throws SQLException, PatrimonioException, 
+			ClienteException, ReservaException {
 
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
@@ -34,7 +45,10 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 
 	}
 
-	// Implementation of the abstract methods of the mother-class.
+	/*
+	 * Implementation of the abstract methods of the mother-class.
+	 * @see view.reservasSalas.ReservaSalaView#reservarProfessor()
+	 */
 	@Override
 	protected void reservarProfessor ( ) {
 

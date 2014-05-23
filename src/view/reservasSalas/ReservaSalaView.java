@@ -1,5 +1,7 @@
 /**
- * RoomReservationView This mother-class provides the room reservation form.
+ * RoomReservationView 
+ * This mother-class provides the room reservation form
+ * This class uses a lot of generated code. 
  * https://github.com/ParleyMartins/Tecnicas/tree/estiloDesign/src/view/
  * reservasSalas
  */
@@ -77,10 +79,17 @@ public abstract class ReservaSalaView extends JDialog {
 	private JScrollPane jScrollPane2;
 	private ButtonGroup studentTeacherbuttonGroup;
 
-	// Constructor generates a RoomReservationView form.
+	/**
+	 * Constructor to generate the form
+	 * @param parent parent of current frame
+	 * @param modal argument to JFrame 
+	 * @throws SQLException if has some problem during the database search
+	 * @throws PatrimonioException if some of the classroom info is invalid
+	 * @throws ClienteException if some of the client info is invalid
+	 * @throws ReservaException if some of the reservation info is invalid
+	 */
 	public ReservaSalaView (Frame parent, boolean modal) throws SQLException,
-			PatrimonioException, PatrimonioException,
-			ClienteException, ReservaException {
+			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
 		this.teacherInstance = ManterResSalaProfessor.getInstance();
@@ -169,7 +178,9 @@ public abstract class ReservaSalaView extends JDialog {
 		return ERROR;
 	}
 
-	// This method initialize the components
+	/*
+	 *  This method initialize the components
+	 */
 	private void initComponents ( ) {
 
 		this.studentTeacherbuttonGroup = new ButtonGroup();
@@ -663,13 +674,17 @@ public abstract class ReservaSalaView extends JDialog {
 		pack();
 	}
 
-	// This method generates an action to verify number of chairs available.
+	/*
+	 *  This method generates an action to verify number of chairs available.
+	 */
 	private void verificarCadeiraButtonActionPerformed (ActionEvent evt) {
 
 		verificarAction();
 	}
 
-	// This method generates an action to cpfTextField.
+	/*
+	 *  This method generates an action to cpfTextField.
+	 */
 	private void cpfTextFieldActionPerformed (ActionEvent evt) {
 
 		String name = this.cpfTextField.getText();
@@ -693,20 +708,26 @@ public abstract class ReservaSalaView extends JDialog {
 		}
 	}
 
-	// This method generates an action to the student radio button.
+	/*
+	 *  This method generates an action to the student radio button.
+	 */
 	private void alunoRadioButtonActionPerformed (ActionEvent evt) {
 
 		alunoRadioButtonAction();
 
 	}
 
-	// This method generates an action to the teacher radio button.
+	/*
+	 *  This method generates an action to the teacher radio button.
+	 */
 	private void professorRadioButtonActionPerformed (ActionEvent evt) {
 
 		professorRadioButtonAction();
 	}
 
-	// This method generates an action to reserve button.
+	/*
+	 *  This method generates an action to reserve button.
+	 */
 	private void reservarButtonActionPerformed (ActionEvent evt) {
 
 		switch (getManterInstance()) {
@@ -723,13 +744,17 @@ public abstract class ReservaSalaView extends JDialog {
 		}
 	}
 
-	// This method cancels the reservation.
+	/*
+	 *  This method cancels the reservation.
+	 */
 	private void cancelarButtonActionPerformed (ActionEvent evt) {
 
 		this.setVisible(false);
 	}
 
-	// This method generates an action to search.
+	/*
+	 *  This method generates an action to search.
+	 */
 	private void bucarCpfButtonActionPerformed (ActionEvent evt) {
 
 		cpfTextFieldActionPerformed(evt);

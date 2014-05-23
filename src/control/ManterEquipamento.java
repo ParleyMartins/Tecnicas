@@ -44,9 +44,9 @@ public class ManterEquipamento {
 		if (instance == null) {
 			instance = new ManterEquipamento();
 			equipmentDAOInstance = EquipamentoDAO.getInstance();
-			
+
 			International internationalInstance = International.getInstance();
-			messages = internationalInstance.getMessages(); 
+			messages = internationalInstance.getMessages();
 		} else {
 			// Nothing here.
 		}
@@ -79,7 +79,7 @@ public class ManterEquipamento {
 		Equipamento equipment = new Equipamento(equipmentCode,
 				equipmentDescription);
 		equipmentDAOInstance.insert(equipment);
-		
+
 		// We need to update the Vector after the insertion.
 		getAllEquipments();
 	}

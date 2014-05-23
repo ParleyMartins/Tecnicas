@@ -56,9 +56,9 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByName(String studentName) throws SQLException,
 			ClienteException {
-		
-		Vector<Aluno> students = studentDAOInstance.searchByName(studentName); 
-		
+
+		Vector<Aluno> students = studentDAOInstance.searchByName(studentName);
+
 		return students;
 	}
 
@@ -71,9 +71,9 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByCpf(String cpf) throws SQLException,
 			ClienteException {
-		
-		Vector<Aluno> students = studentDAOInstance.searchByCpf(cpf); 
-		
+
+		Vector<Aluno> students = studentDAOInstance.searchByCpf(cpf);
+
 		return students;
 	}
 
@@ -86,7 +86,7 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
-		
+
 		Vector<Aluno> students = studentDAOInstance
 				.searchByEnrollmentNumber(enrollmentNumber);
 
@@ -115,10 +115,10 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
-		
+
 		Vector<Aluno> students = studentDAOInstance
 				.searchByPhoneNumber(phoneNumber);
-		
+
 		return students;
 	}
 
@@ -150,7 +150,7 @@ public class ManterAluno {
 
 		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
 				email);
-		
+
 		studentDAOInstance.insert(student);
 		this.allStudents.add(student);
 	}

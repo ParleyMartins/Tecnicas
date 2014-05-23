@@ -72,7 +72,7 @@ public class ManterSala {
 			String roomCapacity) throws PatrimonioException, SQLException {
 
 		Sala sala = new Sala(roomCode, roomDescription, roomCapacity);
-		
+
 		classroomDAOInstance.insert(sala);
 		this.rooms.add(sala);
 	}
