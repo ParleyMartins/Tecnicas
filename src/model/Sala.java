@@ -14,9 +14,18 @@ public class Sala extends Patrimonio {
 	private String capacity;
 
 	// Alerts and error messages.
-	private final String INVALID_CAPACITY = International.getInstance().getMessages().getString("invalidCapacity");
-	private final String BLANK_CAPACITY = International.getInstance().getMessages().getString("blankCapacity");
+	private final String INVALID_CAPACITY = International.getInstance().getMessages()
+					.getString("invalidCapacity");
+	private final String BLANK_CAPACITY = International.getInstance().getMessages()
+					.getString("blankCapacity");
 
+	/**
+	 * This method modifies the classroom field.
+	 * @param id_code  An id for each classroom.
+	 * @param desciption An classroom description.
+	 * @param capacity amount of usable space.
+	 * @throws PatrimonioException It ensures that every parameter passed is not null.
+	 */
 	public Sala(String id_code, String desciption, String capacity)
 			throws PatrimonioException {
 
@@ -24,11 +33,20 @@ public class Sala extends Patrimonio {
 		this.setCapacity(capacity);
 	}
 
+	/**
+	 * This method gets a capacity.
+	 * @return The content in the capacity field.
+	 */
 	public String getCapacity() {
 
 		return capacity;
 	}
 
+	/**
+	 * This method modifies the capacity field.
+	 * @param capacity amount of usable space.
+	 * @throws PatrimonioException It ensures that every parameter passed is not null.
+	 */
 	public void setCapacity(String capacity) throws PatrimonioException {
 
 		if (capacity == null) {
@@ -46,6 +64,11 @@ public class Sala extends Patrimonio {
 		}
 	}
 
+	/**
+	 * This method checks a classroom .
+	 * @param classroom place of study.
+	 * @return true if there is a reservation. false otherwise.
+	 */
 	public boolean equals(Sala classroom) {
 
 		if (super.equals(classroom)
