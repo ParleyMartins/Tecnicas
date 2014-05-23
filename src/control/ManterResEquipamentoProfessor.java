@@ -25,6 +25,7 @@ public class ManterResEquipamentoProfessor {
 	private Vector<Object> teacherEquipReservationVector = new Vector<Object>();
 
 	private static ManterResEquipamentoProfessor instance;
+	private static ResEquipamentoProfessorDAO resDAOInstance;
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
@@ -43,6 +44,7 @@ public class ManterResEquipamentoProfessor {
 
 		if (instance == null) {
 			instance = new ManterResEquipamentoProfessor();
+			resDAOInstance = ResEquipamentoProfessorDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -62,8 +64,8 @@ public class ManterResEquipamentoProfessor {
 			String time) throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
-		return ResEquipamentoProfessorDAO.getInstance().searchByTime(time);
-
+		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance.searchByTime(time);
+		return reservations;
 	}
 
 	/**
@@ -78,8 +80,9 @@ public class ManterResEquipamentoProfessor {
 	public Vector<ReservaEquipamentoProfessor> getReservationsPerMonth(int month)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
-
-		return ResEquipamentoProfessorDAO.getInstance().searchByMonth(month);
+		
+		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance.searchByMonth(month); 
+		return reservations;
 	}
 
 	/**
@@ -94,8 +97,7 @@ public class ManterResEquipamentoProfessor {
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
-		this.teacherEquipReservationVector = ResEquipamentoProfessorDAO
-				.getInstance().searchAll();
+		this.teacherEquipReservationVector = resDAOInstance.searchAll();
 		return this.teacherEquipReservationVector;
 	}
 
@@ -113,7 +115,7 @@ public class ManterResEquipamentoProfessor {
 
 		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(
 				date, time, equipment, teacher);
-		ResEquipamentoProfessorDAO.getInstance().insert(reserva);
+		resDAOInstance.insert(reserva);
 		this.teacherEquipReservationVector.add(reserva);
 	}
 
@@ -134,7 +136,7 @@ public class ManterResEquipamentoProfessor {
 		ReservaEquipamentoProfessor reserva_new = new ReservaEquipamentoProfessor(
 				date, time, equipment, teacher);
 
-		ResEquipamentoProfessorDAO.getInstance().modify(oldReservation,
+		resDAOInstance.modify(oldReservation,
 				reserva_new);
 
 	}
@@ -148,7 +150,7 @@ public class ManterResEquipamentoProfessor {
 	public void delete(ReservaEquipamentoProfessor reservation)
 			throws SQLException, ReservaException {
 
-		ResEquipamentoProfessorDAO.getInstance().delete(reservation);
+		resDAOInstance.delete(reservation);
 		this.teacherEquipReservationVector.remove(reservation);
 	}
 }
