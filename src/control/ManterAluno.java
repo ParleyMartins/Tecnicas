@@ -19,8 +19,9 @@ import model.Aluno;
 public class ManterAluno {
 
 	private static ManterAluno instance;
+	private static AlunoDAO alunoDAOInstance;
 
-	private Vector<Aluno> studentsVec = new Vector<Aluno>();
+	private Vector<Aluno> students = new Vector<Aluno>();
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -39,6 +40,7 @@ public class ManterAluno {
 
 		if (instance == null) {
 			instance = new ManterAluno();
+			alunoDAOInstance = AlunoDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -54,7 +56,7 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByName(String studentName) throws SQLException,
 			ClienteException {
-		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		
 		Vector<Aluno> students = alunoDAOInstance.searchByName(studentName); 
 		
 		return students;
@@ -69,7 +71,7 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByCpf(String cpf) throws SQLException,
 			ClienteException {
-		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		
 		Vector<Aluno> students = alunoDAOInstance.searchByCpf(cpf); 
 		
 		return students;
@@ -84,8 +86,7 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
-
-		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		
 		Vector<Aluno> students = alunoDAOInstance
 				.searchByEnrollmentNumber(enrollmentNumber);
 
@@ -102,7 +103,7 @@ public class ManterAluno {
 	public Vector<Aluno> searchByEmail(String email) throws SQLException,
 			ClienteException {
 
-		return AlunoDAO.getInstance().searchByEmail(email);
+		return alunoDAOInstance.searchByEmail(email);
 	}
 
 	/**
@@ -114,7 +115,7 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> searchByPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
-		AlunoDAO alunoDAOInstance = AlunoDAO.getInstance();
+		
 		Vector<Aluno> students = alunoDAOInstance
 				.searchByPhoneNumber(phoneNumber);
 		
@@ -129,8 +130,8 @@ public class ManterAluno {
 	 */
 	public Vector<Aluno> getAllStudents() throws SQLException, ClienteException {
 
-		this.studentsVec = AlunoDAO.getInstance().searchAll();
-		return this.studentsVec;
+		this.students = alunoDAOInstance.searchAll();
+		return this.students;
 	}
 
 	/**
@@ -150,8 +151,8 @@ public class ManterAluno {
 		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
 				email);
 		
-		AlunoDAO.getInstance().insert(student);
-		this.studentsVec.add(student);
+		alunoDAOInstance.insert(student);
+		this.students.add(student);
 	}
 
 	/**
@@ -171,7 +172,7 @@ public class ManterAluno {
 
 		Aluno newStudent = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
 				email);
-		AlunoDAO.getInstance().modify(oldStudent, newStudent);
+		alunoDAOInstance.modify(oldStudent, newStudent);
 	}
 
 	/**
@@ -182,8 +183,8 @@ public class ManterAluno {
 	 */
 	public void delete(Aluno student) throws SQLException, ClienteException {
 
-		AlunoDAO.getInstance().delete(student);
-		this.studentsVec.remove(student);
+		alunoDAOInstance.delete(student);
+		this.students.remove(student);
 	}
 
 }
