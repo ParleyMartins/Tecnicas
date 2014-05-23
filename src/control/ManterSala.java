@@ -21,6 +21,7 @@ public class ManterSala {
 	private Vector<Sala> rooms = new Vector<Sala>();
 
 	private static ManterSala instance;
+	private static SalaDAO classroomDAOInstance;
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -39,6 +40,7 @@ public class ManterSala {
 
 		if (instance == null) {
 			instance = new ManterSala();
+			classroomDAOInstance = SalaDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -52,7 +54,7 @@ public class ManterSala {
 	 */
 	public Vector<Sala> getRoomsVec() throws SQLException, PatrimonioException {
 
-		this.rooms = SalaDAO.getInstance().searchAll();
+		this.rooms = classroomDAOInstance.searchAll();
 		return this.rooms;
 	}
 
@@ -70,7 +72,8 @@ public class ManterSala {
 			String roomCapacity) throws PatrimonioException, SQLException {
 
 		Sala sala = new Sala(roomCode, roomDescription, roomCapacity);
-		SalaDAO.getInstance().insert(sala);
+		
+		classroomDAOInstance.insert(sala);
 		this.rooms.add(sala);
 	}
 
@@ -89,7 +92,7 @@ public class ManterSala {
 
 		// Creates a object to the new classroom and updates the database.
 		Sala newRoom = new Sala(roomCode, roomDescription, capacity);
-		SalaDAO.getInstance().modify(oldRoom, newRoom);
+		classroomDAOInstance.modify(oldRoom, newRoom);
 	}
 
 	/**
@@ -102,7 +105,7 @@ public class ManterSala {
 	 */
 	public void delete(Sala room) throws SQLException, PatrimonioException {
 
-		SalaDAO.getInstance().delete(room);
+		classroomDAOInstance.delete(room);
 		this.rooms.remove(room);
 	}
 
