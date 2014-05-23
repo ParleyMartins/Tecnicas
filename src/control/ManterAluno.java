@@ -1,7 +1,10 @@
 /**
-	ManageStudent
-	This class receives students' data and give them to persistence classes.
-	https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterAluno.java
+ManterProfessor
+Student controller, include the procedures to access, modify, and delete student
+informations. In this class, we use Singleton to guarantee just one 
+instance at time, since this is a MVC controller. To execute the described 
+actions, this class need to communicate with the DAO layer.  
+https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterAluno.java
  */
 
 package control;
@@ -19,12 +22,19 @@ public class ManterAluno {
 
 	private Vector <Aluno> studentsVec = new Vector <Aluno>( );
 
+	/*
+	 * Private constructor to provide singleton implementation.
+	 */
 	private ManterAluno ( ) {
 
 		// Empty constructor.
 	}
 
-	// This constructor provides the singleton implementation.
+	/**
+	 * Provides the singleton implementation
+	 * @return the active ManterAluno instance, since it will be just one at
+	 * time.
+	 */
 	public static ManterAluno getInstance ( ) {
 
 		if (instance == null){
@@ -35,50 +45,94 @@ public class ManterAluno {
 		return instance;
 	}
 
-	// This method looks for a student by name.
+	/**
+	 * This method looks for a student by name
+	 * @param studentName name to search for
+	 * @return a Vector with the students with the desired name
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the student info is invalid
+	 */
 	public Vector <Aluno> searchName (String studentName) throws SQLException,
 			ClienteException {
 
 		return AlunoDAO.getInstance( ).searchByName(studentName);
 	}
 
-	// This method looks for a student by the cpf.
+	/**
+	 * This method looks for a student by the CPF
+	 * @param cpf the CPF to search for [xxx.xxx.xxx-xx]
+	 * @return a Vector with the student with the desired CPF
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the student info is invalid
+	 */
 	public Vector <Aluno> searchCpf (String cpf) throws SQLException,
 			ClienteException {
 
 		return AlunoDAO.getInstance( ).searchByCpf(cpf);
 	}
 
-	// This method looks for a student by the enrollment number.
+	/**
+	 * This method looks for a student by the enrollment number
+	 * @param enrollmentNumber enrollment number to search for
+	 * @return a Vector with the student with the desired enrollment number
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the student info is invalid
+	 */
 	public Vector <Aluno> searchEnrollNumber (String enrollmentNumber) throws SQLException,
 			ClienteException {
 
 		return AlunoDAO.getInstance( ).searchByEnrollmentNumber(enrollmentNumber);
 	}
 
-	// This method looks for a student by e-mail.
+	/**
+	 * This method looks for a student by e-mail
+	 * @param email email to look for
+	 * @return a Vector with the students with the desired email
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the student info is invalid
+	 */
 	public Vector <Aluno> searchEmail (String email) throws SQLException,
 			ClienteException {
 
 		return AlunoDAO.getInstance( ).searchByEmail(email);
 	}
 
-	// This method looks for a student by phone number.
+	/**
+	 * This method looks for a student by phone number
+	 * @param phoneNumber phone number to look for [(xx)xxxx-xxxx]
+	 * @return a Vector with the students with the desired phone number
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the student info is invalid
+	 */
 	public Vector <Aluno> searchPhoneNumber (String phoneNumber) throws SQLException,
 			ClienteException {
 
 		return AlunoDAO.getInstance( ).searchByPhoneNumber(phoneNumber);
 	}
 
-	// This method gets a student vector.
-	public Vector <Aluno> getStudentsVec ( ) throws SQLException,
+	/**
+	 * Provides all students registered in database
+	 * @return a Vector with all students of database
+	 * @throws SQLException If has some problem with the database search
+	 * @throws ClienteException If some of the student info is invalid
+	 */
+	public Vector <Aluno> getAllStudents ( ) throws SQLException,
 			ClienteException {
 
 		this.studentsVec = AlunoDAO.getInstance( ).searchAll( );
 		return this.studentsVec;
 	}
 
-	// This method records a student on database.
+	/**
+	 * Insert a new student on database
+	 * @param name name of the student 
+	 * @param cpf CPF for the student [xxx.xxx.xxx-xx]
+	 * @param enrollmentNumber student enrollment number
+	 * @param phoneNumber student phone number [(xx)xxxx-xxxx]
+	 * @param email student email
+	 * @throws ClienteException If some of the student info is invalid
+	 * @throws SQLException If has some problem with the database insertion
+	 */
 	public void insert (String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email) throws ClienteException,
 			SQLException {
@@ -88,7 +142,17 @@ public class ManterAluno {
 		this.studentsVec.add(student);
 	}
 
-	// This method modifies a student field.
+	/**
+	 * Update student information in database
+	 * @param name new name for the student 
+	 * @param cpf new CPF for the student [xxx.xxx.xxx-xx]
+	 * @param enrollmentNumber new enrollment number for the student
+	 * @param phoneNumber new phone number for the student [(xx)xxxx-xxxx]
+	 * @param email new email for the student
+	 * @param newStudent object of the student to be updated
+	 * @throws ClienteException If some of the student info is invalid
+	 * @throws SQLException If has some problem with the database update
+	 */
 	public void modify (String name, String cpf, String enrollmentNumber,
 			String phoneNumber, String email, Aluno newStudent)
 			throws ClienteException, SQLException {
@@ -103,7 +167,12 @@ public class ManterAluno {
 		AlunoDAO.getInstance( ).modify(oldStudent, newStudent);
 	}
 
-	// This method deletes the selected student.
+	/**
+	 * Removes a student from the database
+	 * @param student object of the student to be removed
+	 * @throws SQLException If has some problem with the database remotion
+	 * @throws ClienteException If some of the student info is invalid
+	 */
 	public void delete (Aluno student) throws SQLException, ClienteException {
 
 		AlunoDAO.getInstance( ).delete(student);
