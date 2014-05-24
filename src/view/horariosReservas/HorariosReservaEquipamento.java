@@ -33,7 +33,13 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	private Equipamento equipment;
 	private ManterResEquipamentoProfessor instance;
 
-	// Constructor generates a EquipmentReservertionTime form.
+	/**
+	 * Constructor to generate the form
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor
+	 * @param date date of reservation
+	 * @param tempEquipment
+	 */
 	public HorariosReservaEquipamento (Frame parent, boolean modal,
 			String date, Equipamento tempEquipment) {
 
@@ -42,12 +48,17 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 		this.modifyButton.setVisible(false);
 	}
 
-	// This method fills the vector with data to be used on the table.
-	protected Vector <String> fillDataVector (Object obj, final int index) {
+	/*
+	 * This method fills the vector with data to be used on the table.
+	 * @param object 
+	 * @param index index of the equipment at the controller vector
+	 * @return dataVector
+	 */
+	protected Vector <String> fillDataVector (Object object, final int index) {
 
 		Vector <String> dataVector = new Vector <String>();
-		if (obj instanceof ReservaEquipamentoProfessor) {
-			ReservaEquipamentoProfessor reservation = (ReservaEquipamentoProfessor) obj;
+		if (object instanceof ReservaEquipamentoProfessor) {
+			ReservaEquipamentoProfessor reservation = (ReservaEquipamentoProfessor) object;
 			if (this.equipment != null && (reservation.getEquipment().equals(this.equipment))) {
 
 				dataVector.add(String.valueOf(index));
@@ -67,8 +78,9 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	}
 
-	@Override
-	// This method fills the Table with the properties on the database
+	/*
+	 * This method fills the Table with the properties on the database
+	 */
 	protected DefaultTableModel fillTable (Patrimonio tempEquipment) {
 
 		this.equipment = (Equipamento) tempEquipment;
@@ -124,8 +136,9 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	}
 
-	@Override
-	// This method cancels a reservation.
+	/*
+	 * This method cancels a reservation.
+	 */
 	protected void cancelReservationAction (final int index) {
 
 		try {
@@ -177,8 +190,9 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 		}
 	}
 
-	@Override
-	// This method reserves a property.
+	/*
+	 * This method reserves a property.
+	 */
 	protected void reserveAction ( ) {
 
 		try {
@@ -204,8 +218,9 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 		}
 	}
 
-	@Override
-	// This method modifies a reservation
+	/*
+	 * This method modifies a reservation
+	 */
 	protected void modifyAction (int index) {
 
 		try {

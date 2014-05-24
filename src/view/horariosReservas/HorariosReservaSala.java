@@ -37,6 +37,13 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	private ManterResSalaProfessor teacherInstance;
 	private Sala room;
 
+	/**
+	 * Constructor to generate the form
+	 * @param parent  parent of current frame.
+	 * @param modal argument to JFrame constructor.
+	 * @param date date of reservation
+	 * @param room room of reservation.
+	 */
 	public HorariosReservaSala (Frame parent, boolean modal, String date,
 			Sala room) {
 
@@ -45,11 +52,11 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 		this.setName("RoomReservationTime");
 	}
 
-	protected Vector <String> fillDataVector (Object obj, final int index) {
+	protected Vector <String> fillDataVector (Object object, final int index) {
 
 		Vector <String> clientData = new Vector <String>();
-		if (obj instanceof ReservaSalaAluno) {
-			ReservaSalaAluno reservation = (ReservaSalaAluno) obj;
+		if (object instanceof ReservaSalaAluno) {
+			ReservaSalaAluno reservation = (ReservaSalaAluno) object;
 			if (this.room != null && (reservation.getClassroom().equals(this.room))) {
 				clientData.add(String.valueOf(index));
 				clientData.add(International.getInstance().getLabels().getString("student"));
@@ -65,8 +72,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				// Nothing here.
 			}
 		} else {
-			if (obj instanceof ReservaSalaProfessor) {
-				ReservaSalaProfessor reservation = (ReservaSalaProfessor) obj;
+			if (object instanceof ReservaSalaProfessor) {
+				ReservaSalaProfessor reservation = (ReservaSalaProfessor) object;
 				if (this.room != null
 						&& (reservation.getClassroom().equals(this.room))) {
 
