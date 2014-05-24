@@ -1,8 +1,0 @@
-class PatrimonioException
-
-	// Constructor creates a PatrimonioExcpetion without any argument.
-	public PatrimonioException
-	
-	// Constructor creates a PatrimonioExcpetion with a message.
-	public PatrimonioException
-		String msg // The message that will be returned with the exception. Describes the error.

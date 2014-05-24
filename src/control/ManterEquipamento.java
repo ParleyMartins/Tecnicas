@@ -1,82 +1,129 @@
 /**
-ManageEquipment
-This class receives equipments data and give them to persistence classes.
+ManterEquipamento
+Include the procedures to access, modify, and delete equipments. In this class, 
+we use Singleton to guarantee just one instance at time, since this is a MVC 
+controller. To execute the described actions, this class need to communicate 
+with the DAO layer.  
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterEquipamento.java
-*/
+ */
 package control;
 
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.Vector;
+
 import persistence.EquipamentoDAO;
+import view.International;
 import exception.PatrimonioException;
 import model.Equipamento;
 
 public class ManterEquipamento {
 
-	private Vector <Equipamento> equipmentVec = new Vector <Equipamento>();
+	// This Vector will hold all equipments in memory.
+	private Vector<Equipamento> allEquipments = new Vector<Equipamento>();
 
 	private static ManterEquipamento instance;
+	private static EquipamentoDAO equipmentDAOInstance;
+	private static ResourceBundle messages;
 
-	private ManterEquipamento ( ) {
+	/*
+	 * Private constructor, to guarantee the use via singleton.
+	 */
+	private ManterEquipamento() {
 
 		// Blank constructor.
 	}
 
-	// This constructor provides the singleton implementation.
-	public static ManterEquipamento getInstance ( ) {
+	/**
+	 * Provides the singleton implementation
+	 * @return the active ManterEquipamento instance, since it will be just one
+	 * at time.
+	 */
+	public static ManterEquipamento getInstance() {
 
 		if (instance == null) {
 			instance = new ManterEquipamento();
+			equipmentDAOInstance = EquipamentoDAO.getInstance();
+
+			International internationalInstance = International.getInstance();
+			messages = internationalInstance.getMessages();
 		} else {
 			// Nothing here.
 		}
 		return instance;
 	}
 
-	// This method gets a equipment vector.
-	public Vector <Equipamento> getEquipmentVec ( ) throws SQLException,
+	/**
+	 * Returns all equipments.
+	 * @return a Vector with all registered equipments
+	 * @throws SQLException If has some problem during the database search
+	 * @throws PatrimonioException If some of the equipment info is invalid
+	 */
+	public Vector<Equipamento> getAllEquipments() throws SQLException,
 			PatrimonioException {
 
-		this.equipmentVec = EquipamentoDAO.getInstance().searchAll();
-		return this.equipmentVec;
+		this.allEquipments = equipmentDAOInstance.searchAll();
+		return this.allEquipments;
 	}
 
-	// This method include code and description of the equipment in the
-	// database.
-	public void insert (String equipmentCode, String equipmentDescription)
+	/**
+	 * Register a new equipment.
+	 * @param equipmentCode ID Code for the equipment
+	 * @param equipmentDescription Description to the equipment
+	 * @throws PatrimonioException If the equipment information is invalid
+	 * @throws SQLException If has some problem during the database insertion
+	 */
+	public void insert(String equipmentCode, String equipmentDescription)
 			throws PatrimonioException, SQLException {
 
-		Equipamento equipment = new Equipamento(equipmentCode, equipmentDescription);
-		EquipamentoDAO.getInstance().insert(equipment);
-		getEquipmentVec();
+		Equipamento equipment = new Equipamento(equipmentCode,
+				equipmentDescription);
+		equipmentDAOInstance.insert(equipment);
+
+		// We need to update the Vector after the insertion.
+		getAllEquipments();
 	}
 
-	// This method update code and description info in the database.
-	public void modify (String equipmentCode, String equipmentDescription,
-			Equipamento newEquipment) throws PatrimonioException, SQLException {
+	/**
+	 * Updates id code and description of some equipment
+	 * @param newCode New ID Code for the equipment
+	 * @param newDescription New description for the equipment
+	 * @param oldEquipment Object to the equipment to be updated
+	 * @throws PatrimonioException If the equipment information is invalid
+	 * @throws SQLException If has some problem during the database update
+	 */
+	public void modify(String newCode, String newDescription,
+			Equipamento oldEquipment) throws PatrimonioException, SQLException {
 
-		if (newEquipment == null) {
-			throw new PatrimonioException("Equipamento em branco");
+		if (oldEquipment == null) {
+			String blankEquipmentError = messages.getString("blankEquipment");
+			throw new PatrimonioException(blankEquipmentError);
 		} else {
 
-			Equipamento oldEquipment = new Equipamento(newEquipment.getIdCode(),
-					newEquipment.getDescription());
-			newEquipment.setIdCode(equipmentCode);
-			newEquipment.setDescription(equipmentDescription);
-			EquipamentoDAO.getInstance().modify(oldEquipment, newEquipment);
-			getEquipmentVec();
+			Equipamento newEquipment = new Equipamento(newCode, newDescription);
+
+			// We need to updates the database and the Vector.
+			equipmentDAOInstance.modify(oldEquipment, newEquipment);
+			getAllEquipments();
 		}
 	}
 
-	// This method deletes the selected equipment.
-	public void delete (Equipamento equipment) throws SQLException,
+	/**
+	 * Removes an equipment from the database.
+	 * @param equipment Object of the equipment to be removed
+	 * @throws SQLException If has some problem during the database deletion
+	 * @throws PatrimonioException If the equipment information is invalid
+	 */
+	public void delete(Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
 		if (equipment == null) {
-			throw new PatrimonioException("Equipamento em branco");
+			String blankEquipmentError = messages.getString("blankEquipment");
+			throw new PatrimonioException(blankEquipmentError);
 		} else {
-			EquipamentoDAO.getInstance().delete(equipment);
-			getEquipmentVec();
+			equipmentDAOInstance.delete(equipment);
+			// We need to update the Vector after the remotion.
+			getAllEquipments();
 		}
 	}
 }

@@ -15,19 +15,26 @@ import exception.ClienteException;
 
 public class CadastroAluno extends CadastroCliente {
 
-	// Constructor creates a RegisterStudent form.
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor creates a RegisterStudent form.
+	 * @param parentWindow  parent of current window.
+	 * @param modal argument to JFrame .
+	 */
 	public CadastroAluno(java.awt.Frame parentWindow, boolean modal) {
 
 		super(parentWindow, modal);
 		this.setName("CadastroAluno");
 	}
 
-	@Override
-	// This method registers a student
+	/**
+	 * This method registers a student
+	 */
 	public void registerAction ( ) {
 
 		try {
-			if (this.registerButton.getText().equals("Cadastrar")) {
+			if (this.registerButton.getText().equals(International.getInstance().getButtons().getString("register"))) {
 				ManterAluno.getInstance().insert(this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
 						this.enrollmentNumberTxtField.getText(),

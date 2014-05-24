@@ -1,9 +1,0 @@
-class AlterarSala
-
-	int index2 // Room's position in the Controller's ArrayList.
-
-	// Constructor creates a ModifyRoom form.
-	public AlterarSala
-		java.awt.Frame parent // Frame representing the parent window.  
-		boolean modal // Parameter to JDialog's constructor. 
-		int index // Room's position in the Controller's ArrayList.

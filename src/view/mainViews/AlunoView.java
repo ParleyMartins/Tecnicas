@@ -37,7 +37,7 @@ public class AlunoView extends ClienteView {
 				.getString("error");
 
 		try {
-			return ManterAluno.getInstance().getStudentsVec().iterator();
+			return ManterAluno.getInstance().getAllStudents().iterator();
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
@@ -99,12 +99,12 @@ public class AlunoView extends ClienteView {
 			}
 
 			int confirm = JOptionPane.showConfirmDialog(this, deleteQuestion
-					+ ManterAluno.getInstance().getStudentsVec().get(index)
+					+ ManterAluno.getInstance().getAllStudents().get(index)
 							.getName() + "?", deleteMessage,
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
 				ManterAluno.getInstance().delete(
-						ManterAluno.getInstance().getStudentsVec().get(index));
+						ManterAluno.getInstance().getAllStudents().get(index));
 				JOptionPane.showMessageDialog(this, deleteConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
 			} else {

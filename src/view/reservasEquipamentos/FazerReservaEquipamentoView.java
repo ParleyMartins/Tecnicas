@@ -17,10 +17,21 @@ import view.International;
 public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 
 	Equipamento instanceOfEquipment;
-
+	
+	/**
+	 *  Constructor to generate the form
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor.
+	 * @param equipmentToReserve equipment to reserve.
+	 * @param dateOfBooking date of reservation.
+	 * @throws SQLException if has some problem during the database search.
+	 * @throws PatrimonioException if some of the classroom info is invalid
+	 * @throws ClienteException if some of the client info is invalid.
+	 * @throws ReservaException if some of the reservation info is invalid.
+	 */
 	public FazerReservaEquipamentoView (Frame parent, boolean modal,
 			Equipamento equipmentToReserve, String dateOfBooking) throws SQLException,
-			PatrimonioException, PatrimonioException, ClienteException,
+			PatrimonioException,  ClienteException,
 			ReservaException {
 
 		super(parent, modal);

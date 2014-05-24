@@ -22,14 +22,25 @@ import view.International;
 
 public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
+	private static final long serialVersionUID = 1L;
 	int index;
 	ReservaSalaAluno studentReservation;
 	ReservaSalaProfessor teacherReservation;
 
+	/**
+	 * Constructor to generate the form
+	 * @param parent parent of current frame
+	 * @param modal argument to JFrame constructor
+	 * @param index index of the classroom at the controller vector
+	 * @param data date of reservation
+	 * @throws SQLException if has some problem during the database search
+	 * @throws PatrimonioException if some of the classroom info is invalid
+	 * @throws ClienteException if some of the client info is invalid
+	 * @throws ReservaException if some of the reservation info is invalid
+	 */
 	public AlterarReservaAlunoSalaView (Frame parent, boolean modal, int index,
-			String date) throws SQLException,
-			PatrimonioException, PatrimonioException, ClienteException,
-			ReservaException {
+			String date) throws SQLException, PatrimonioException, 
+			ClienteException, ReservaException {
 
 		super(parent, modal);
 		this.setName("AlterarReservaSalaView");
@@ -38,7 +49,10 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 	}
 
-	// Implementation of the abstract methods of the mother-class.
+	/*
+	 * Implementation of the abstract methods of the mother-class
+	 * @see view.reservasSalas.ReservaSalaView#reservarAluno()
+	 */
 	@Override
 	protected void reservarAluno ( ) {
 
@@ -49,7 +63,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 							studentReservation);
 
 			JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("reserveModifySucess"),
-					International.getInstance().getLabels().getString("sucess"), JOptionPane.INFORMATION_MESSAGE, null);
+					International.getInstance().getLabels().getString("success"), JOptionPane.INFORMATION_MESSAGE, null);
 
 			this.setVisible(false);
 		} catch (ReservaException ex) {
@@ -133,7 +147,9 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 	}
 
-	// This method resets some components
+	/*
+	 *  This method resets some components
+	 */
 	private void resetComponents ( ) {
 
 		this.reserveButton.setText(International.getInstance().getButtons().getString("modify"));

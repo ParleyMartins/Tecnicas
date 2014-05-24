@@ -1,6 +1,6 @@
 /**
 ReservaException
-Exception type to Reserva's errors
+Client Exceptions include constructors to create a exceptions for the erros related to client.
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/exception/ReservaException.java
 */
 

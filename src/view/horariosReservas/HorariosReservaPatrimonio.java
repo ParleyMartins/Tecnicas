@@ -41,6 +41,13 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	private JPanel tablePanel;
 	private JScrollPane scrollPane;
 
+	/**
+	 * Constructor to generate the form
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor
+	 * @param date date of reservation
+	 * @param property property of reservation
+	 */
 	public HorariosReservaPatrimonio (Frame parent, boolean modal, String date,
 			Patrimonio property) {
 
@@ -52,19 +59,29 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 	}
 
-	// This method fills the Table with the properties on the database
-	protected abstract DefaultTableModel fillTable (Patrimonio p);
+	/*
+	 * This method fills the Table with the properties on the database
+	 */
+	protected abstract DefaultTableModel fillTable (Patrimonio patrimonio);
 
-	// This method cancels a reservation.
+	/*
+	 * This method cancels a reservation.
+	 */
 	protected abstract void cancelReservationAction (final int indexRow);
 
-	// This method reserves a property.
+	/*
+	 * This method reserves a property.
+	 */
 	protected abstract void reserveAction ( );
-
-	// This method modifies a reservation
+	
+	/*
+	 * This method modifies a reservation
+	 */
 	protected abstract void modifyAction (final int indexLinha);
 
-	// This method initialize the components.
+	/*
+	 * This method initialize the components.
+	 */
 	private void initComponents ( ) {
 
 		this.tablePanel = new JPanel();
@@ -77,8 +94,10 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-		this.reserveButton.setText(International.getInstance().getButtons().getString("reserve"));
-		this.reserveButton.setName(International.getInstance().getButtons().getString("reserve"));
+		this.reserveButton.setText(International.getInstance().getButtons()
+					.getString("reserve"));
+		this.reserveButton.setName(International.getInstance().getButtons()
+					.getString("reserve"));
 		this.reserveButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed (ActionEvent evt) {
@@ -87,23 +106,28 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 			}
 		});
 
-		this.modifyButton.setText(International.getInstance().getButtons().getString("modify"));
-		this.modifyButton.setName(International.getInstance().getButtons().getString("modify"));
+		this.modifyButton.setText(International.getInstance().getButtons()
+					.getString("modify"));
+		this.modifyButton.setName(International.getInstance().getButtons()
+					.getString("modify"));
 		this.modifyButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				modifyActionPerformed(evt);
+				modifyActionPerformed(event);
 			}
 		});
 
-		this.cancelReservationButton.setText(International.getInstance().getButtons().getString("cancel"));
-		this.cancelReservationButton.setName(International.getInstance().getButtons().getString("cancel"));
+		this.cancelReservationButton.setText(International.getInstance()
+				.getButtons()
+				.getString("cancel"));
+		this.cancelReservationButton.setName(International.getInstance()
+				.getButtons().getString("cancel"));
 		this.cancelReservationButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed (ActionEvent event) {
 
-				cancelActionPerformed(evt);
+				cancelActionPerformed(event);
 			}
 		});
 
@@ -237,8 +261,10 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		pack();
 	}
 
-	// This methods generates the cancel action.
-	private void cancelActionPerformed (ActionEvent evt) {
+	/*
+	 * This methods generates the cancel action.
+	 */
+	private void cancelActionPerformed (ActionEvent event) {
 
 		int indexRow;
 		indexRow = this.reservationTable.getSelectedRow();
@@ -256,15 +282,19 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 		this.reservationTable.setModel(fillTable(this.property));
 	}
 
-	// This methods generates the reservation action.
-	private void reserveActionPerformed (ActionEvent evt) {
+	/*
+	 * This methods generates the reservation action.
+	 */
+	private void reserveActionPerformed (ActionEvent event) {
 
 		reserveAction();
 		this.reservationTable.setModel(fillTable(this.property));
 	}
 
-	// This methods generates the modify reservation action.
-	private void modifyActionPerformed (ActionEvent evt) {
+	/*
+	 * This methods generates the modify reservation action.
+	 */
+	private void modifyActionPerformed (ActionEvent event) {
 
 		int indexRow;
 		indexRow = this.reservationTable.getSelectedRow();

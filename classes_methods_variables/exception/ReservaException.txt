@@ -1,8 +1,0 @@
-class ReservaException
-	
-	// Constructor creates a ReservaExcpetion without any argument
-	public ReservaException
-	
-	// Constructor creates a ReservaExcpetion with a message.
-	public ReservaException
-		String msg // The message that will be returned with the exception. Describes the error.

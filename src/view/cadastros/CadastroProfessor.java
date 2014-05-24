@@ -16,22 +16,30 @@ import exception.ClienteException;
 
 public class CadastroProfessor extends CadastroCliente {
 
-	// Constructor creates a RegisterTeacher form.
-	public CadastroProfessor (java.awt.Frame parent, boolean modal) {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor creates a RegisterTeacher form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame .
+	 */
+	public CadastroProfessor(java.awt.Frame parent, boolean modal) {
 
 		super(parent, modal);
 		this.setName("CadastroProfessor");
 
 	}
 
-	@Override
-	// This method registers a student
-	public void registerAction ( ) {
+	/**
+	 * This method registers a student
+	 */
+	public void registerAction() {
 
 		try {
-			if (this.registerButton.getText().equals(International.getInstance().
-					getButtons().getString("register"))) {
-				
+			if (this.registerButton.getText().equals(
+					International.getInstance().getButtons()
+							.getString("register"))) {
+
 				ManterProfessor.getInstance().insert(
 						this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
@@ -39,26 +47,28 @@ public class CadastroProfessor extends CadastroCliente {
 						this.phoneNumberTxtField.getText(),
 						this.emailTxtField.getText());
 
-				JOptionPane.showMessageDialog(this,
-						International.getInstance().getMessages().getString("successTeacher"), 
-						International.getInstance().getLabels().getString("success"),
-						JOptionPane.INFORMATION_MESSAGE,
-						null);
+				JOptionPane.showMessageDialog(
+						this,
+						International.getInstance().getMessages()
+								.getString("successTeacher"),
+						International.getInstance().getLabels()
+								.getString("success"),
+						JOptionPane.INFORMATION_MESSAGE, null);
 
 				this.setVisible(false);
 			}
 		} catch (ClienteException ex) {
-			
-			JOptionPane.showMessageDialog(this, ex.getMessage(), 
-					International.getInstance().getLabels().getString("error"),
+
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International
+					.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (SQLException ex) {
-			
-			JOptionPane.showMessageDialog(this, ex.getMessage(), 
-					International.getInstance().getLabels().getString("error"),
+
+			JOptionPane.showMessageDialog(this, ex.getMessage(), International
+					.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);
 		} catch (NullPointerException ex) {
-			
+
 			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
 					International.getInstance().getLabels().getString("error"),
 					JOptionPane.ERROR_MESSAGE, null);

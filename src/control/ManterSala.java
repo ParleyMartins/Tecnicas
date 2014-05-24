@@ -1,8 +1,11 @@
 /**
 ManterSala
-Include the code and description of the room, modify, and delete devices.
+Classroom controller, include the procedures to access, modify, and delete the 
+room informations. In this class, we use Singleton to guarantee just one 
+instance at time, since this is a MVC controller. To execute the described 
+actions, this class need to communicate with the DAO layer.  
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/control/ManterSala.java
-*/
+ */
 package control;
 
 import java.sql.SQLException;
@@ -14,62 +17,96 @@ import model.Sala;
 
 public class ManterSala {
 
+	// This Vector will hold all classrooms in memory.
+	private Vector<Sala> rooms = new Vector<Sala>();
+
 	private static ManterSala instance;
+	private static SalaDAO classroomDAOInstance;
 
-	private Vector <Sala> roomsVec = new Vector <Sala>();
-
-	private ManterSala ( ) {
+	/*
+	 * Private constructor to provide singleton implementation.
+	 */
+	private ManterSala() {
 
 		// Blank constructor.
 	}
 
-	// This constructor provides the singleton implementation.
-	public static ManterSala getInstance ( ) {
+	/**
+	 * Provides the singleton implementation
+	 * @return the active ManterSala instance, since it will be just one at
+	 * time.
+	 */
+	public static ManterSala getInstance() {
 
-		if (instance == null){
+		if (instance == null) {
 			instance = new ManterSala();
+			classroomDAOInstance = SalaDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
 		return instance;
 	}
 
-	// Gets a vector of room.
-	public Vector <Sala> getRoomsVec ( ) throws SQLException,
-			PatrimonioException {
+	/**
+	 * @return a Vector with all registered rooms.
+	 * @throws SQLException If has some problem with the database search
+	 * @throws PatrimonioException If some of the classroom info is invalid
+	 */
+	public Vector<Sala> getRoomsVec() throws SQLException, PatrimonioException {
 
-		this.roomsVec = SalaDAO.getInstance().searchAll();
-		return this.roomsVec;
+		this.rooms = classroomDAOInstance.searchAll();
+		return this.rooms;
 	}
 
-	// This method include code and description of the room in the database.
-	public void insert (String roomCode, String roomDescription,
-			String capacity)
-			throws PatrimonioException, SQLException {
+	/**
+	 * Registers a new room in the database. Can return a PatrimonioException if
+	 * the room information is invalid, or a SQLException if happen some error
+	 * with the SQL transaction/connection.
+	 * @param roomCode The classroom ID Code
+	 * @param roomDescription Description of the classroom
+	 * @param roomCapacity Capacity of the classroom
+	 * @throws PatrimonioException If the classroom information is invalid
+	 * @throws SQLException If has some problem during the database insertion
+	 */
+	public void insert(String roomCode, String roomDescription,
+			String roomCapacity) throws PatrimonioException, SQLException {
 
-		Sala sala = new Sala(roomCode, roomDescription, capacity);
-		SalaDAO.getInstance().insert(sala);
-		this.roomsVec.add(sala);
+		Sala sala = new Sala(roomCode, roomDescription, roomCapacity);
+
+		classroomDAOInstance.insert(sala);
+		this.rooms.add(sala);
 	}
 
-	// This method Update code and description info in the database.
-	public void modify (String roomCode, String roomDescription,
-			String capacity,
-			Sala newRoom) throws PatrimonioException, SQLException {
+	/**
+	 * Modify the information of an existing room.
+	 * @param roomCode New ID Code to the classroom
+	 * @param roomDescription New description to the classroom
+	 * @param capacity New capacity to the classroom
+	 * @param oldRoom Object of the classroom to be updated
+	 * @throws PatrimonioException If the classroom information is invalid
+	 * @throws SQLException If has some problem during the database update
+	 */
+	public void modify(String roomCode, String roomDescription,
+			String capacity, Sala oldRoom) throws PatrimonioException,
+			SQLException {
 
-		Sala oldRoom = new Sala(newRoom.getIdCode(), newRoom.getDescription(),
-				newRoom.getCapacity());
-		newRoom.setIdCode(roomCode);
-		newRoom.setDescription(roomDescription);
-		newRoom.setCapacity(capacity);
-		SalaDAO.getInstance().modify(oldRoom, newRoom);
+		// Creates a object to the new classroom and updates the database.
+		Sala newRoom = new Sala(roomCode, roomDescription, capacity);
+		classroomDAOInstance.modify(oldRoom, newRoom);
 	}
 
-	// This method deletes room form the database.
-	public void delete (Sala room) throws SQLException, PatrimonioException {
+	/**
+	 * Remove a room from the database. Will a PatrimonioException if the room
+	 * is null, or a SQLException if happen some error with the SQL
+	 * transaction/connection.
+	 * @param room Classroom that will be removed from the database
+	 * @throws SQLException If has some problem during the database deletion
+	 * @throws PatrimonioException If the classroom information is invalid
+	 */
+	public void delete(Sala room) throws SQLException, PatrimonioException {
 
-		SalaDAO.getInstance().delete(room);
-		this.roomsVec.remove(room);
+		classroomDAOInstance.delete(room);
+		this.rooms.remove(room);
 	}
 
 }

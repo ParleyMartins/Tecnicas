@@ -1,9 +1,0 @@
-class CadastroProfessor
-
-	// Constructor creates a RegisterTeacher form.
-	public CadastroProfessor
-		java.awt.Frame parent // Frame representing the parent window.  
-		boolean modal // Parameter to JDialog's constructor. 
-
-	// This method registers a student
-	public void cadastroAction

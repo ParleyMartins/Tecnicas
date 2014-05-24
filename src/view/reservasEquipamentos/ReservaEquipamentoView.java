@@ -52,21 +52,34 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	private ButtonGroup studentTeacherGroupButton;
 	private JButton searchCpfButton;
 
-	// Constructor generates a EquipmentReservationView form.
+	/**
+	 * Constructor generates a EquipmentReservationView form.
+	 * @param parent parent of current frame.
+	 * @param modal argument to JFrame constructor.
+	 * @throws SQLException if has some problem during the database search.
+	 * @throws PatrimonioException if some of the classroom info is invalid
+	 * @throws ClienteException if some of the client info is invalid.
+	 * @throws ReservaException if some of the reservation info is invalid.
+	 */
 	public ReservaEquipamentoView (Frame parent, boolean modal)
-			throws SQLException, PatrimonioException,
+			throws SQLException, 
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.instanceManageResEquipmentTeacher = ManterResEquipamentoProfessor.getInstance();
+		this.instanceManageResEquipmentTeacher = ManterResEquipamentoProfessor
+				.getInstance();
 
 		initComponents();
 	}
 
-	// This method reserves a equipment.
+	/*
+	 * This method reserves a equipment.
+	 */
 	abstract protected void reserveEquipmentToTeacher ( );
 
-	// Method gets a teacher from database.
+	/*
+	 * Method gets a teacher from database.
+	 */
 	protected void getTeacherFromDB ( ) {
 
 		try {
