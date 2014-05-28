@@ -116,7 +116,7 @@ public class EquipamentoDAO {
 			// Nothing here.
 		}
 		
-		if (!this.isInDB(newEquipment)) {
+		if (this.isInDB(newEquipment)) {
 			throw new PatrimonioException(EXISTING_EQUIPMENT);
 		} else {
 			// Nothing here.
@@ -166,7 +166,7 @@ public class EquipamentoDAO {
 			// Nothing here.
 		}
 
-		if (this.isInDB(equipment)) {
+		if (!this.isInDB(equipment)) {
 			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
 		} else {
 			// Nothing here.
