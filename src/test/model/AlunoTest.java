@@ -31,7 +31,7 @@ public class AlunoTest {
 	@Test
 	public void testNome() throws ClienteException {
 		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste do Nome do Aluno", "Nome" == a.getNome());
+		assertTrue("Teste do Nome do Aluno", "Nome" == a.getName());
 	}
 
 	@Test
@@ -43,13 +43,13 @@ public class AlunoTest {
 	@Test
 	public void testMatricula() throws ClienteException {
 		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste da Matricula do Aluno", "123456" == a.getMatricula());
+		assertTrue("Teste da Matricula do Aluno", "123456" == a.getEnrollmentNumber());
 	}
 	
 	@Test
 	public void testTelefone() throws ClienteException {
 		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste de Telefone do Aluno", "1234-5678" == a.getTelefone());
+		assertTrue("Teste de Telefone do Aluno", "1234-5678" == a.getPhoneNumber());
 	}
 	
 	@Test
@@ -124,7 +124,7 @@ public class AlunoTest {
 	@Test
 	public void testTelefoneVazio() throws ClienteException {
 		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "", "Nome@email");
-		assertTrue("Teste de Telefone Vazio do Aluno", "" == a.getTelefone());
+		assertTrue("Teste de Telefone Vazio do Aluno", "" == a.getPhoneNumber());
 	}
 	
 	@Test (expected= ClienteException.class)
