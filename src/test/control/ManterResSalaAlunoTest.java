@@ -34,18 +34,18 @@ public class ManterResSalaAlunoTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		vet = ManterResSalaAluno.getInstance().getResAlunoSala_vet();
+		vet = ManterResSalaAluno.getInstance().getstudentRoomReservationVector();
 		sala1 = new Sala("123", "Sala de Aula", "120");
 		aluno1 = new Aluno("testInstance", "501.341.852-69", "456678", "", "");
 		
-		AlunoDAO.getInstance().incluir(aluno1);
-		SalaDAO.getInstance().incluir(sala1);
+		AlunoDAO.getInstance().insert(aluno1);
+		SalaDAO.getInstance().insert(sala1);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		AlunoDAO.getInstance().excluir(aluno1);
-		SalaDAO.getInstance().excluir(sala1);
+		AlunoDAO.getInstance().delete(aluno1);
+		SalaDAO.getInstance().delete(sala1);
 	}
 
 	
@@ -67,7 +67,7 @@ public class ManterResSalaAlunoTest {
 		String data = "20/12/33";
 		String hora = "9:11";
 		ReservaSalaAluno r = new ReservaSalaAluno(data, hora, sala1, finalidade, cadeiras_reservadas, aluno1);
-		ManterResSalaAluno.getInstance().inserir(sala1, aluno1, data, hora, finalidade, cadeiras_reservadas);
+		ManterResSalaAluno.getInstance().insert(sala1, aluno1, data, hora, finalidade, cadeiras_reservadas);
 		boolean resultado = this.inDB(r);
 		boolean resultado2 = r.equals(vet.lastElement());
 		if(resultado)
@@ -84,7 +84,7 @@ public class ManterResSalaAlunoTest {
 		this.insert_into(r);
 		vet.add(r);
 		ReservaSalaAluno r2 = new ReservaSalaAluno(data, hora, sala1, finalidade, "100", aluno1);
-		ManterResSalaAluno.getInstance().alterar(finalidade, "100", vet.lastElement());
+		ManterResSalaAluno.getInstance().modify(finalidade, "100", vet.lastElement());
 		boolean resultado = this.inDB(r2);
 		boolean resultado2 = r2.equals(vet.lastElement());
 		if(resultado)
@@ -102,7 +102,7 @@ public class ManterResSalaAlunoTest {
 		ReservaSalaAluno r = new ReservaSalaAluno(data, hora, sala1, finalidade, cadeiras_reservadas, aluno1);
 		this.insert_into(r);
 		vet.add(r);
-		ManterResSalaAluno.getInstance().excluir(r);
+		ManterResSalaAluno.getInstance().delete(r);
 		boolean resultado = this.inDB(r);
 		boolean resultado2 = true;
 		if(vet.size() > 0)
@@ -118,15 +118,15 @@ public class ManterResSalaAlunoTest {
 		ReservaSalaAluno r = new ReservaSalaAluno("1/3/20", "9:11", sala1, "Sala de Estudos", "60", aluno1);
 		ReservaSalaAluno r2 = new ReservaSalaAluno("1/3/20", "9:11", sala1,"Sala de Estudos", "30", aluno2);
 		ReservaSalaAluno r3 = new ReservaSalaAluno("1/3/20", "10:00", sala1,"Sala de Estudos", "120", aluno1);
-		AlunoDAO.getInstance().incluir(aluno2);
+		AlunoDAO.getInstance().insert(aluno2);
 		this.insert_into(r);
 		this.insert_into(r2);
 		this.insert_into(r3);
-		Vector<ReservaSalaAluno> vet2 = ManterResSalaAluno.getInstance().getReservasMes("1/3/20");
+		Vector<ReservaSalaAluno> vet2 = ManterResSalaAluno.getInstance().getReservationsPerMonth("1/3/20");
 		this.delete_from(r);
 		this.delete_from(r2);
 		this.delete_from(r3);
-		AlunoDAO.getInstance().excluir(aluno2);
+		AlunoDAO.getInstance().delete(aluno2);
 		boolean resultado = false;
 		boolean resultado2 = false;
 		boolean resultado3 = false;
@@ -151,15 +151,15 @@ public class ManterResSalaAlunoTest {
 		ReservaSalaAluno r = new ReservaSalaAluno("26/02/2013", "20:00", sala1, "Sala de Estudos", "60", aluno1);
 		ReservaSalaAluno r2 = new ReservaSalaAluno("26/02/2013", "20:00", sala1,"Sala de Estudos", "30", aluno2);
 		ReservaSalaAluno r3 = new ReservaSalaAluno("26/02/2013", "21:00", sala1,"Sala de Estudos", "120", aluno1);
-		AlunoDAO.getInstance().incluir(aluno2);
+		AlunoDAO.getInstance().insert(aluno2);
 		this.insert_into(r);
 		this.insert_into(r2);
 		this.insert_into(r3);
-		Vector<ReservaSalaAluno> vet2 = ManterResSalaAluno.getInstance().getReservasMes("26/02/2013");
+		Vector<ReservaSalaAluno> vet2 = ManterResSalaAluno.getInstance().getReservationsPerMonth("26/02/2013");
 		this.delete_from(r);
 		this.delete_from(r2);
 		this.delete_from(r3);
-		AlunoDAO.getInstance().excluir(aluno2);
+		AlunoDAO.getInstance().delete(aluno2);
 		boolean resultado = false;
 		boolean resultado2 = false;
 		boolean resultado3 = false;
@@ -181,34 +181,34 @@ public class ManterResSalaAlunoTest {
 	
 	private String select_id_aluno(Aluno a){
 		return "SELECT id_aluno FROM aluno WHERE " +
-				"aluno.nome = \"" + a.getNome() + "\" and " +
+				"aluno.nome = \"" + a.getName() + "\" and " +
 				"aluno.cpf = \"" + a.getCpf() + "\" and " +
-				"aluno.telefone = \"" + a.getTelefone() + "\" and " +
+				"aluno.telefone = \"" + a.getPhoneNumber() + "\" and " +
 				"aluno.email = \"" + a.getEmail() + "\" and " +
-				"aluno.matricula = \"" + a.getMatricula() + "\"";
+				"aluno.matricula = \"" + a.getEnrollmentNumber() + "\"";
 	}
 	private String select_id_sala(Sala sala){
 		return "SELECT id_sala FROM sala WHERE " +
-				"sala.codigo = \"" + sala.getCodigo() + "\" and " +
-				"sala.descricao = \"" + sala.getDescricao() +  "\" and " +
-				"sala.capacidade = " + sala.getCapacidade();
+				"sala.codigo = \"" + sala.getIdCode() + "\" and " +
+				"sala.descricao = \"" + sala.getDescription() +  "\" and " +
+				"sala.capacidade = " + sala.getCapacity ();
 	}
 	private String where_reserva_sala_aluno(ReservaSalaAluno r){
 		return " WHERE " +
-		"id_aluno = ( " + select_id_aluno(r.getAluno()) + " ) and " +
-		"id_sala = ( " + select_id_sala(r.getSala()) + " ) and " +
-		"finalidade = \"" + r.getFinalidade() + "\" and " +
-		"hora = \"" + r.getHora() + "\" and " +
-		"data = \"" + r.getData() + "\" and " +
-		"cadeiras_reservadas = " + r.getCadeiras_reservadas();
+		"id_aluno = ( " + select_id_aluno(r.getStudent()) + " ) and " +
+		"id_sala = ( " + select_id_sala(r.getClassroom()) + " ) and " +
+		"finalidade = \"" + r.getPurpose() + "\" and " +
+		"hora = \"" + r.getTime() + "\" and " +
+		"data = \"" + r.getDate() + "\" and " +
+		"cadeiras_reservadas = " + r.getReservedChairs();
 	}
 	private String values_reserva_sala_aluno(ReservaSalaAluno r){
-		return "( " + select_id_aluno(r.getAluno()) + " ), " +
-		"( " + select_id_sala(r.getSala()) + " ), " +
-		"\"" + r.getFinalidade() + "\", " +
-		"\"" + r.getHora() + "\", " +
-		"\"" + r.getData() + "\", " +
-		r.getCadeiras_reservadas();
+		return "( " + select_id_aluno(r.getStudent()) + " ), " +
+		"( " + select_id_sala(r.getClassroom()) + " ), " +
+		"\"" + r.getPurpose() + "\", " +
+		"\"" + r.getTime() + "\", " +
+		"\"" + r.getDate() + "\", " +
+		r.getReservedChairs();
 	}
 	private void insert_into(ReservaSalaAluno r){
 		try {
