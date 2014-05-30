@@ -13,8 +13,6 @@ import java.util.Vector;
 
 import view.International;
 import exception.ClienteException;
-import exception.PatrimonioException;
-import exception.ReservaException;
 
 public class AlunoDAO {
 
@@ -124,7 +122,7 @@ public class AlunoDAO {
 			// Nothing here.
 		}
 		
-		if (oldStudent.getCpf().equals(newStudent.getCpf()) 
+		if (!oldStudent.getCpf().equals(newStudent.getCpf()) 
 				&& this.isInDBCpf(newStudent.getCpf())) {
 			throw new ClienteException(CPF_ALREADY_EXISTS);
 		} else {
