@@ -109,7 +109,7 @@ public class ResSalaAlunoTest {
 		ReservaSalaAluno reserva = new ReservaSalaAluno(this.dataAtual(),
 				hora, sala,
 				"Grupo de Estudos", "120", aluno);
-		assertTrue("", reserva.getHora() == hora);
+		assertTrue("", reserva.getTime() == hora);
 	}
 	@Test (expected= ReservaException.class)
 	public void testHoraNula() throws PatrimonioException, ClienteException, ReservaException {
@@ -140,7 +140,7 @@ public class ResSalaAlunoTest {
 		ReservaSalaAluno reserva = new ReservaSalaAluno(data,
 				"8:00", sala, "Grupo de Estudos", "120", aluno);
 
-		assertTrue("", reserva.getData().equals("12/02/2033"));
+		assertTrue("", reserva.getDate().equals("12/02/2033"));
 	}
 	@Test (expected= ReservaException.class)
 	public void testDataNula() throws PatrimonioException, ClienteException, ReservaException {

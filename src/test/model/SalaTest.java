@@ -64,37 +64,37 @@ public class SalaTest {
 	@Test
 	public void testCodigo() throws PatrimonioException {
 		setUp();
-		assertEquals("codigo diferente instanciado", "codigo", sala.getCodigo());
+		assertEquals("codigo diferente instanciado", "codigo", sala.getIdCode());
 		tearDown();
 	}
 	
 	@Test
 	public void testDescricao() throws PatrimonioException {
 		setUp();
-		assertEquals("Descricao diferente instanciada", "descricao", sala.getDescricao());
+		assertEquals("Descricao diferente instanciada", "descricao", sala.getDescription());
 		tearDown();
 	}	
 	
 	@Test
 	public void testCapacidade() throws PatrimonioException {
 		setUp();
-		assertEquals("Capacidade diferente instanciada", "1", sala.getCapacidade());
+		assertEquals("Capacidade diferente instanciada", "1", sala.getCapacity());
 		tearDown();
 	}
 	
 	@Test(expected = exception.PatrimonioException.class)
 	public void testCapacidadeNegativo() throws PatrimonioException {
 		setUp();
-		sala.setCapacidade("-1");
-		assertEquals("Capacidade diferente instanciada", "1", sala.getCapacidade());
+		sala.setCapacity("-1");
+		assertEquals("Capacidade diferente instanciada", "1", sala.getCapacity());
 		tearDown();
 	}
 	
 	@Test(expected = exception.PatrimonioException.class)
 	public void testCapacidadeLetra() throws PatrimonioException {
 		setUp();
-		sala.setCapacidade("a");
-		assertEquals("Capacidade diferente instanciada", "1", sala.getCapacidade());
+		sala.setCapacity("a");
+		assertEquals("Capacidade diferente instanciada", "1", sala.getCapacity());
 		tearDown();
 	}
 	

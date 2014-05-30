@@ -8,13 +8,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import persistence.FactoryConnection;
 import control.ManterSala;
 import model.Sala;
 import exception.PatrimonioException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
@@ -144,16 +141,6 @@ public class ManterSalaTest {
 			}
 		}
 		return null;
-	}
-
-
-	
-	private void executaNoBanco(String msg) throws SQLException{
-		Connection con =  FactoryConnection.getInstance().getConnection();
-		PreparedStatement pst = con.prepareStatement(msg);
-		pst.executeUpdate();
-		pst.close();
-		con.close();
 	}
 	
 }

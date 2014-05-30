@@ -35,12 +35,12 @@ public class EquipamentoTest {
 	
 	@Test
 	public void testNome() throws PatrimonioException {
-		assertTrue("codigo diferente instanciado", "codigo" == eq.getCodigo());
+		assertTrue("codigo diferente instanciado", "codigo" == eq.getIdCode());
 	}
 	
 	@Test
 	public void testDescricao() throws PatrimonioException {
-		assertTrue("Descricao diferente instanciada", "descricao" == eq.getDescricao());
+		assertTrue("Descricao diferente instanciada", "descricao" == eq.getDescription());
 	}
 	
 	@Test
