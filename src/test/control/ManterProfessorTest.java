@@ -16,159 +16,169 @@ import org.junit.Test;
 
 import persistence.FactoryConnection;
 
-
 import control.ManterProfessor;
 import exception.ClienteException;
 
 public class ManterProfessorTest {
 
-	private static Vector<Professor> vet;
-	
+	private static Vector<Professor> allTeachers;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		vet = ManterProfessor.getInstance().getAllTeachers();
+
+		allTeachers = ManterProfessor.getInstance().getAllTeachers();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+
 	}
 
-	
-	
 	@Test
 	public void testInstance() {
-		assertTrue("Teste de Intancia de ManterProfessor", ManterProfessor.getInstance() instanceof ManterProfessor);
+
+		assertTrue("Should be a ManterProfessor instance.",
+				ManterProfessor.getInstance() instanceof ManterProfessor);
 	}
-	
+
 	@Test
 	public void testSingleton() {
-		ManterProfessor p = ManterProfessor.getInstance();
-		ManterProfessor q = ManterProfessor.getInstance();
-		assertSame("Teste Singleton de ManterProfessor", p, q);
+
+		ManterProfessor instanceOne = ManterProfessor.getInstance();
+		ManterProfessor instanceTwo = ManterProfessor.getInstance();
+		assertSame("Instances should be the same.", instanceOne, instanceTwo);
 	}
-	
-	
-	
+
 	@Test
 	public void testInserirVet() throws ClienteException, SQLException {
-		Professor prof = new Professor("Nome para Incluir", "868.563.327-34", "123456", "1234-5678", "Nome@email");
-		ManterProfessor.getInstance().insert("Nome para Incluir", "868.563.327-34", "123456", "1234-5678", "Nome@email");
-		
-		boolean resultado = this.estaNoBanco("SELECT * FROM professor WHERE " +
-				"professor.nome = \"" + prof.getName() + "\" and " +
-				"professor.cpf = \"" + prof.getCpf() + "\" and " +
-				"professor.telefone = \"" + prof.getPhoneNumber() + "\" and " +
-				"professor.email = \"" + prof.getEmail() + "\" and " +
-				"professor.matricula = \"" + prof.getEnrollmentNumber() + "\";");
-				
-		if(resultado){
-			this.executaNoBanco("DELETE FROM professor WHERE " +
-					"professor.nome = \"" + prof.getName() + "\" and " +
-					"professor.cpf = \"" + prof.getCpf() + "\" and " +
-					"professor.telefone = \"" + prof.getPhoneNumber() + "\" and " +
-					"professor.email = \"" + prof.getEmail() + "\" and " +
-					"professor.matricula = \"" + prof.getEnrollmentNumber() + "\";");
+
+		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+				"123456", "1234-5678", "Nome@email");
+		ManterProfessor.getInstance().insert("Nome para Incluir",
+				"868.563.327-34", "123456", "1234-5678", "Nome@email");
+
+		boolean isOnDatabase;
+		isOnDatabase = select(teacher);
+
+		if (isOnDatabase) {
+			delete(teacher);
 		}
+
+		Professor otherTeacher = allTeachers.lastElement();
+		boolean areEquals = teacher.equals(otherTeacher);
+		allTeachers.remove(allTeachers.lastElement());
 		
-		Professor p = vet.lastElement();
-		boolean resultado2 = prof.equals(p);
-		vet.remove(vet.lastElement());
-		assertTrue("Teste de Inclusao do Professor.", resultado == true && resultado2 == true);
+		assertTrue("Teacher should be inserted.", isOnDatabase == true
+				&& areEquals == true);
 	}
-	
+
 	@Test
 	public void testAlterarVet() throws ClienteException, SQLException {
-		Professor prof = new Professor("Nome para Incluir", "868.563.327-34", "123456", "1234-5678", "Nome@email");
-		Professor p = new Professor("Nome para Alterar", "868.563.327-34", "123456", "1234-5678", "Nome@email");
+
+		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+				"123456", "1234-5678", "Nome@email");
+		Professor otherTeacher = new Professor("Nome para Alterar", "868.563.327-34",
+				"123456", "1234-5678", "Nome@email");
+
+		insert(teacher);
+
+		ManterProfessor.getInstance().modify("Nome para Alterar",
+				"868.563.327-34", "123456", "1234-5678", "Nome@email", teacher);
+
+		boolean isOnDatabase;
+		isOnDatabase = select(otherTeacher);
 		
-		this.executaNoBanco("INSERT INTO " +
-				"professor (nome, cpf, telefone, email, matricula) VALUES (" +
-				"\"" + prof.getName() + "\", " +
-				"\"" + prof.getCpf()+ "\", " +
-				"\"" + prof.getPhoneNumber() + "\", " +
-				"\"" + prof.getEmail() + "\", " +
-				"\"" + prof.getEnrollmentNumber() + "\"); ");
-		
-		ManterProfessor.getInstance().modify("Nome para Alterar", "868.563.327-34", "123456", 
-				"1234-5678", "Nome@email", prof);
-		
-		boolean resultado =  this.estaNoBanco("SELECT * FROM professor WHERE " +
-				"professor.nome = \"" + p.getName() + "\" and " +
-				"professor.cpf = \"" + p.getCpf() + "\" and " +
-				"professor.telefone = \"" + p.getPhoneNumber() + "\" and " +
-				"professor.email = \"" + p.getEmail() + "\" and " +
-				"professor.matricula = \"" + p.getEnrollmentNumber() + "\";");
-		if(resultado)
-			this.executaNoBanco("DELETE FROM professor WHERE " +
-					"professor.nome = \"" + p.getName() + "\" and " +
-					"professor.cpf = \"" + p.getCpf() + "\" and " +
-					"professor.telefone = \"" + p.getPhoneNumber() + "\" and " +
-					"professor.email = \"" + p.getEmail() + "\" and " +
-					"professor.matricula = \"" + p.getEnrollmentNumber() + "\";");
-		
-		assertTrue("Teste de Alteracao do Professor.", resultado);
+		if (isOnDatabase) {
+			delete(otherTeacher);
+		}
+
+		assertTrue("Teacher should be updated.", isOnDatabase);
 	}
-	
+
 	@Test
 	public void testExcluirVet() throws ClienteException, SQLException {
-		Professor prof = new Professor("Nome para Incluir", "868.563.327-34", "123456", "1234-5678", "Nome@email");
+
+		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+				"123456", "1234-5678", "Nome@email");
+
+		insert(teacher);
+
+		ManterProfessor.getInstance().delete(teacher);
+
+		boolean isOnDatabase;
+		isOnDatabase = select(teacher);
 		
-		this.executaNoBanco("INSERT INTO " +
-				"professor (nome, cpf, telefone, email, matricula) VALUES (" +
-				"\"" + prof.getName() + "\", " +
-				"\"" + prof.getCpf()+ "\", " +
-				"\"" + prof.getPhoneNumber() + "\", " +
-				"\"" + prof.getEmail() + "\", " +
-				"\"" + prof.getEnrollmentNumber() + "\");");
+		if (isOnDatabase) {
+			delete(teacher);
+		}
+
+		boolean areEquals = true;
 		
-		ManterProfessor.getInstance().delete(prof);
-		
-		boolean resultado =  this.estaNoBanco("SELECT * FROM professor WHERE " +
-				"professor.nome = \"" + prof.getName() + "\" and " +
-				"professor.cpf = \"" + prof.getCpf() + "\" and " +
-				"professor.telefone = \"" + prof.getPhoneNumber() + "\" and " +
-				"professor.email = \"" + prof.getEmail() + "\" and " +
-				"professor.matricula = \"" + prof.getEnrollmentNumber() + "\";");
-		if(resultado)
-			this.executaNoBanco("DELETE FROM professor WHERE " +
-					"professor.nome = \"" + prof.getName() + "\" and " +
-					"professor.cpf = \"" + prof.getCpf() + "\" and " +
-					"professor.telefone = \"" + prof.getPhoneNumber() + "\" and " +
-					"professor.email = \"" + prof.getEmail() + "\" and " +
-					"professor.matricula = \"" + prof.getEnrollmentNumber() + "\";");
-		
-		boolean resultado2 = true;
-		if(vet.size() > 0)
-			resultado2 = !vet.lastElement().equals(prof);
-		
-		assertTrue("Teste de Exclusao do Professor.", resultado == false && resultado2 == true);
+		if (allTeachers.size() > 0) {
+			areEquals = !allTeachers.lastElement().equals(teacher);
+		}
+
+		assertTrue("Teacher should be removed.", isOnDatabase == false
+				&& areEquals == true);
 	}
-	
-	
-	
-	
-	
-	
-	private void executaNoBanco(String msg) throws SQLException{
-		Connection con =  FactoryConnection.getInstance().getConnection();
+
+	private void insert(Professor teacher) throws SQLException {
+
+		this.executaNoBanco("INSERT INTO "
+				+ "professor (nome, cpf, telefone, email, matricula) VALUES ("
+				+ "\"" + teacher.getName() + "\", " + "\"" + teacher.getCpf()
+				+ "\", " + "\"" + teacher.getPhoneNumber() + "\", " + "\""
+				+ teacher.getEmail() + "\", " + "\""
+				+ teacher.getEnrollmentNumber() + "\");");
+	}
+
+	private void delete(Professor teacher) throws SQLException {
+
+		this.executaNoBanco("DELETE FROM professor WHERE "
+				+ "professor.nome = \"" + teacher.getName() + "\" and "
+				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
+				+ "professor.telefone = \"" + teacher.getPhoneNumber()
+				+ "\" and " + "professor.email = \"" + teacher.getEmail()
+				+ "\" and " + "professor.matricula = \""
+				+ teacher.getEnrollmentNumber() + "\";");
+	}
+
+	private boolean select(Professor teacher) throws SQLException {
+
+		boolean isOnDatabase;
+
+		isOnDatabase = this.estaNoBanco("SELECT * FROM professor WHERE "
+				+ "professor.nome = \"" + teacher.getName() + "\" and "
+				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "
+				+ "professor.telefone = \"" + teacher.getPhoneNumber()
+				+ "\" and " + "professor.email = \"" + teacher.getEmail()
+				+ "\" and " + "professor.matricula = \""
+				+ teacher.getEnrollmentNumber() + "\";");
+
+		return isOnDatabase;
+	}
+
+	private void executaNoBanco(String msg) throws SQLException {
+
+		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(msg);
 		pst.executeUpdate();
 		pst.close();
 		con.close();
 	}
-	private boolean estaNoBanco(String query) throws SQLException{
+
+	private boolean estaNoBanco(String query) throws SQLException {
+
 		Connection con = FactoryConnection.getInstance().getConnection();
 		PreparedStatement pst = con.prepareStatement(query);
 		ResultSet rs = pst.executeQuery();
-		
-		if(!rs.next())
-		{
+
+		if (!rs.next()) {
 			rs.close();
 			pst.close();
 			con.close();
 			return false;
-		}
-		else {
+		} else {
 			rs.close();
 			pst.close();
 			con.close();
