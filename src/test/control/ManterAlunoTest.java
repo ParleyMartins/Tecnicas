@@ -140,7 +140,117 @@ public class ManterAlunoTest {
 
 		ManterAluno.getInstance().delete(aluno);
 	}
+	
+	@Test
+	public void searchByName() throws ClienteException, SQLException {
+		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+		Vector<Aluno> alunos;
 
+		insert(aluno);
+
+		alunos = ManterAluno.getInstance().searchByName(aluno.getName());
+		assertEquals(1, alunos.size());
+		
+		delete(aluno);
+	}
+	
+	@Test
+	public void searchByNameInexistent() throws ClienteException, SQLException {
+		Vector<Aluno> alunos;
+		
+		alunos = ManterAluno.getInstance().searchByName("Nome do aluno");
+		assertEquals(0, alunos.size());
+	}
+	
+	@Test
+	public void searchByCPF() throws ClienteException, SQLException {
+		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+		Vector<Aluno> alunos;
+
+		insert(aluno);
+
+		alunos = ManterAluno.getInstance().searchByCpf(aluno.getCpf());
+		assertEquals(1, alunos.size());
+		
+		delete(aluno);
+	}
+	
+	@Test
+	public void searchByCPFInexistent() throws ClienteException, SQLException {
+		Vector<Aluno> alunos;
+		
+		alunos = ManterAluno.getInstance().searchByCpf("040.757.021-70");
+		assertEquals(0, alunos.size());
+	}
+	
+	@Test
+	public void searchByEnrollmentNumber() throws ClienteException, SQLException {
+		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+		Vector<Aluno> alunos;
+
+		insert(aluno);
+
+		alunos = ManterAluno.getInstance().searchByEnrollNumber(aluno.getEnrollmentNumber());
+		assertEquals(1, alunos.size());
+		
+		delete(aluno);
+	}
+	
+	@Test
+	public void searchByEnrollmentNumberInexistent() throws ClienteException, SQLException {
+		Vector<Aluno> alunos;
+		
+		alunos = ManterAluno.getInstance().searchByEnrollNumber("1111");
+		assertEquals(0, alunos.size());
+	}
+
+	@Test
+	public void searchByEmail() throws ClienteException, SQLException {
+		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+		Vector<Aluno> alunos;
+
+		insert(aluno);
+
+		alunos = ManterAluno.getInstance().searchByEmail(aluno.getEmail());
+		assertEquals(1, alunos.size());
+		
+		delete(aluno);
+	}
+	
+	@Test
+	public void searchByEmailInexistent() throws ClienteException, SQLException {
+		Vector<Aluno> alunos;
+		
+		alunos = ManterAluno.getInstance().searchByEmail("aluno@email");
+		assertEquals(0, alunos.size());
+	}
+	
+	@Test
+	public void searchByPhoneNumber() throws ClienteException, SQLException {
+		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+		Vector<Aluno> alunos;
+
+		insert(aluno);
+
+		alunos = ManterAluno.getInstance().searchByPhoneNumber(aluno.getPhoneNumber());
+		assertEquals(1, alunos.size());
+		
+		delete(aluno);
+	}
+	
+	@Test
+	public void searchByPhoneNumberInexistent() throws ClienteException, SQLException {
+		Vector<Aluno> alunos;
+		
+		alunos = ManterAluno.getInstance().searchByEmail("9999-9999");
+		assertEquals(0, alunos.size());
+	}
+	
 	private void insert(Aluno aluno) throws SQLException {
 
 		this.executaNoBanco("INSERT INTO "
