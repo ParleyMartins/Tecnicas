@@ -96,6 +96,16 @@ public class ManterAlunoTest {
 
 		assertTrue("Student should be updated.", isOnDatabase);
 	}
+	
+	@Test(expected = ClienteException.class)
+	public void testModifyInexistent() throws ClienteException, SQLException {
+
+		Aluno student = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+		
+		ManterAluno.getInstance().modify("Alterando", "040.757.021-70",
+				"123456", "9999-9999", "Nome@email", student);
+	}
 
 	@Test
 	public void testDelete() throws ClienteException, SQLException {
@@ -120,6 +130,15 @@ public class ManterAlunoTest {
 
 		assertTrue("Student should be removed.", resultado == false
 				&& resultado2 == true);
+	}
+	
+	@Test(expected = ClienteException.class)
+	public void testDeleteInexistent() throws ClienteException, SQLException {
+
+		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+				"9999-9999", "aluno@email");
+
+		ManterAluno.getInstance().delete(aluno);
 	}
 
 	private void insert(Aluno aluno) throws SQLException {
