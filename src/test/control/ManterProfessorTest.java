@@ -50,7 +50,7 @@ public class ManterProfessorTest {
 	}
 
 	@Test
-	public void testInserirVet() throws ClienteException, SQLException {
+	public void testInsert() throws ClienteException, SQLException {
 
 		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
@@ -73,7 +73,7 @@ public class ManterProfessorTest {
 	}
 
 	@Test
-	public void testAlterarVet() throws ClienteException, SQLException {
+	public void testModify() throws ClienteException, SQLException {
 
 		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
@@ -94,9 +94,19 @@ public class ManterProfessorTest {
 
 		assertTrue("Teacher should be updated.", isOnDatabase);
 	}
+	
+	@Test(expected = ClienteException.class)
+	public void testModifyInexistent() throws ClienteException, SQLException {
+
+		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+				"123456", "1234-5678", "Nome@email");
+
+		ManterProfessor.getInstance().modify("Nome para Alterar",
+				"868.563.327-34", "123456", "1234-5678", "Nome@email", teacher);
+	}
 
 	@Test
-	public void testExcluirVet() throws ClienteException, SQLException {
+	public void testDelete() throws ClienteException, SQLException {
 
 		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
@@ -120,6 +130,15 @@ public class ManterProfessorTest {
 
 		assertTrue("Teacher should be removed.", isOnDatabase == false
 				&& areEquals == true);
+	}
+	
+	@Test(expected = ClienteException.class)
+	public void testDeleteInexstent() throws ClienteException, SQLException {
+
+		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+				"123456", "1234-5678", "Nome@email");
+
+		ManterProfessor.getInstance().delete(teacher);
 	}
 
 	private void insert(Professor teacher) throws SQLException {

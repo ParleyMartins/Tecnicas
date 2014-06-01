@@ -81,14 +81,14 @@ public class ManterEquipamentoTest {
 	}
 
 	@Test
-	public void testIncluirVet() throws SQLException, PatrimonioException {
+	public void testInsert() throws SQLException, PatrimonioException {
 
 		assertNotNull("Equipment should be included",
 				procurarNoVetor(equipment));
 	}
 
 	@Test
-	public void testAlterarVet() throws SQLException, PatrimonioException {
+	public void testModify() throws SQLException, PatrimonioException {
 
 		instance.modify("codigo alterado", "descricao alterarda", equipment);
 		Equipamento e2 = new Equipamento("codigo alterado",
@@ -98,7 +98,7 @@ public class ManterEquipamentoTest {
 	}
 
 	@Test(expected = PatrimonioException.class)
-	public void testAlterarNaoExistente() throws SQLException,
+	public void testModifyInexistent() throws SQLException,
 			PatrimonioException {
 
 		Equipamento eq = new Equipamento("codigo", "nao existe");
@@ -112,13 +112,13 @@ public class ManterEquipamentoTest {
 	}
 
 	@Test(expected = PatrimonioException.class)
-	public void testExcluirNull() throws SQLException, PatrimonioException {
+	public void testDeleteNull() throws SQLException, PatrimonioException {
 
 		equipment = null;
 		instance.delete(equipment);
 	}
 
-	public Equipamento procurarNoVetor(Equipamento teste)
+	private Equipamento procurarNoVetor(Equipamento teste)
 			throws PatrimonioException, SQLException {
 
 		allEquipments = instance.getAllEquipments();

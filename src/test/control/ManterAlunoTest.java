@@ -52,7 +52,7 @@ public class ManterAlunoTest {
 	}
 
 	@Test
-	public void testInserir() throws ClienteException, SQLException {
+	public void testInsert() throws ClienteException, SQLException {
 
 		Aluno student = new Aluno("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
@@ -75,7 +75,7 @@ public class ManterAlunoTest {
 	}
 
 	@Test
-	public void testAlterar() throws ClienteException, SQLException {
+	public void testModify() throws ClienteException, SQLException {
 
 		Aluno student = new Aluno("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
@@ -98,7 +98,7 @@ public class ManterAlunoTest {
 	}
 
 	@Test
-	public void testExcluir() throws ClienteException, SQLException {
+	public void testDelete() throws ClienteException, SQLException {
 
 		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
