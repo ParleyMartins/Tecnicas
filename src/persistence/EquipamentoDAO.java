@@ -64,22 +64,14 @@ public class EquipamentoDAO {
 	public void insert (Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
-		if (equipment == null) {
-			throw new PatrimonioException(NULL_EQUIPMENT);
-		}
-		if (this.isInDbCode(equipment.getIdCode())) {
-			throw new PatrimonioException(CODE_ALREADY_EXISTS);
-		}
-		
-		if (this.isInDB(equipment)) {
-			throw new PatrimonioException(EXISTING_EQUIPMENT);
-		}
+		checkInsertEquipment(equipment);
 		
 		this.update("INSERT INTO " + "equipamento "
 							+ "(codigo, descricao) VALUES (" + "\""
 							+ equipment.getIdCode() + "\", " + "\""
 							+ equipment.getDescription() + "\");");
 	}
+
 
 	/** 
 	 * This updates an Equipment on the database.
@@ -91,39 +83,7 @@ public class EquipamentoDAO {
 	public void modify (Equipamento oldEquipment, Equipamento newEquipment)
 			throws SQLException, PatrimonioException {
 
-		if (oldEquipment == null && newEquipment == null) {
-			throw new PatrimonioException(NULL_EQUIPMENT);
-		} else {
-			// Nothing here.
-		}
-		
-		if (!this.isInDB(oldEquipment)) {
-			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
-		} else {
-			// Nothing here.
-		}
-		
-		if (this.isInOtherDB(oldEquipment)) {
-			throw new PatrimonioException(EQUIPMENT_IN_USE);
-		} else {
-			// Nothing here.
-		}
-		
-		if (!newEquipment.getIdCode().equals(oldEquipment.getIdCode())
-						&& this.isInDbCode(newEquipment.getIdCode())) {
-			throw new PatrimonioException(CODE_ALREADY_EXISTS);
-		} else {
-			// Nothing here.
-		}
-		
-		if (this.isInDB(newEquipment)) {
-			throw new PatrimonioException(EXISTING_EQUIPMENT);
-		} else {
-			// Nothing here.
-		}
-
-		Connection connection = FactoryConnection.getInstance().getConnection();
-		PreparedStatement statement;
+		this.checkModifyEquipment(oldEquipment, newEquipment);
 
 		String message = "UPDATE equipamento SET "
 				+ "codigo = \""
@@ -135,15 +95,9 @@ public class EquipamentoDAO {
 				+ "equipamento.descricao = \""
 				+ oldEquipment.getDescription() + "\";";
 
-		connection.setAutoCommit(false);
-		statement = connection.prepareStatement(message);
-		statement.executeUpdate();
-		connection.commit();
-
-		statement.close();
-
-		connection.close();
+		this.update(message);
 	}
+
 
 	/**
 	 * This removes an Equipment from the database.
@@ -154,23 +108,7 @@ public class EquipamentoDAO {
 	public void delete (Equipamento equipment) throws SQLException,
 			PatrimonioException {
 
-		if (equipment == null) {
-			throw new PatrimonioException(NULL_EQUIPMENT);
-		} else {
-			// Nothing here.
-		} 
-		
-		if (this.isInOtherDB(equipment)) {
-				throw new PatrimonioException(EQUIPMENT_IN_USE);
-		} else {
-			// Nothing here.
-		}
-
-		if (!this.isInDB(equipment)) {
-			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
-		} else {
-			// Nothing here.
-		}
+		this.checkDeleteEquipment(equipment);
 		
 		this.update("DELETE FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getIdCode()
@@ -221,7 +159,7 @@ public class EquipamentoDAO {
 
 		String selectQuery = "SELECT * FROM equipamento WHERE descricao = "
 				+ "\"" + description + "\";";
-		Vector<Equipamento> selectedEquipments =this.search(selectQuery); 
+		Vector<Equipamento> selectedEquipments = this.search(selectQuery);
 		return selectedEquipments;
 		
 	}
@@ -359,11 +297,109 @@ public class EquipamentoDAO {
 	private void update (String query) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
+		connection.setAutoCommit(false);
+		
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.executeUpdate();
-
+		connection.commit();
+		
 		statement.close();
 		connection.close();
 	}
 
+	/**
+	 * This method checks if a equipment must return an exception
+	 * @param equipment The given equipment
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
+	private void checkEquipment (Equipamento equipment) throws PatrimonioException, SQLException {
+
+		if (equipment == null) {
+			throw new PatrimonioException(NULL_EQUIPMENT);
+		}
+		
+		if (this.isInDB(equipment)) {
+			throw new PatrimonioException(EXISTING_EQUIPMENT);
+		}
+		
+		if (this.isInOtherDB(equipment)) {
+			throw new PatrimonioException(EQUIPMENT_IN_USE);
+		} else {
+			// Nothing here.
+		}
+				
+	}
+	
+	/**
+	 * This method checks if a equipment must return an exception when it's going to be inserted in the database
+	 * @param equipment The given equipment
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
+	private void checkInsertEquipment (Equipamento equipment) throws PatrimonioException, SQLException {		
+		checkEquipment(equipment);
+
+		if (this.isInDbCode(equipment.getIdCode())) {
+			throw new PatrimonioException(EXISTING_EQUIPMENT);
+		}
+
+	}
+	
+	/**
+	 * This method checks if a equipment must return an exception when modifying it.
+	 * @param oldEquipment The given equipment to be modified.
+	 * @param newEquipment The equipment with the new info.
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
+	private void checkModifyEquipment (Equipamento oldEquipment,
+			Equipamento newEquipment) throws PatrimonioException, SQLException {
+
+		if (oldEquipment == null) {
+			throw new PatrimonioException(NULL_EQUIPMENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!this.isInDB(oldEquipment)) {
+			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
+		} else {
+			// Nothing here.
+		}
+		
+		if (this.isInOtherDB(oldEquipment)) {
+			throw new PatrimonioException(EQUIPMENT_IN_USE);
+		} else {
+			// Nothing here.
+		}
+		
+		this.checkEquipment(newEquipment);
+	}
+	
+	/**
+	 * This method checks if a equipment must return an exception when deleting it.
+	 * @param equipment The given equipment
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws PatrimonioException if an exception related to the property is activated
+	 */
+	private void checkDeleteEquipment (Equipamento equipment) throws PatrimonioException, SQLException{
+		if (equipment == null) {
+			throw new PatrimonioException(NULL_EQUIPMENT);
+		} else {
+			// Nothing here.
+		} 
+		
+		if (this.isInOtherDB(equipment)) {
+				throw new PatrimonioException(EQUIPMENT_IN_USE);
+		} else {
+			// Nothing here.
+		}
+
+		if (!this.isInDB(equipment)) {
+			throw new PatrimonioException(NO_EXISTING_EQUIPMENT);
+		} else {
+			// Nothing here.
+		}
+	}
 }
