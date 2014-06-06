@@ -56,6 +56,7 @@ public class ResSalaProfessorDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+
 		RoomDAO.getInstance().delete(sala_a);
 		RoomDAO.getInstance().delete(sala_b);
 		ProfessorDAO.getInstance().delete(professor1);

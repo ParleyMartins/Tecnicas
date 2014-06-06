@@ -10,6 +10,7 @@ import test.persistence.RoomDAOTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({SalaTest.class, RoomDAOTest.class, ManterSalaTest.class })
+
 public class SalaSuite {
 
 }

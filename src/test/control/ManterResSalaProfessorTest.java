@@ -38,6 +38,7 @@ public class ManterResSalaProfessorTest {
 		
 		ProfessorDAO.getInstance().insert(professor1);
 		RoomDAO.getInstance().insert(sala1);
+
 	}
 
 	@AfterClass

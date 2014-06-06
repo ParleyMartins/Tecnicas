@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Aluno;
+import model.Student;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -21,7 +21,7 @@ import exception.ClienteException;
 
 public class ManterAlunoTest {
 
-	private static Vector<Aluno> students;
+	private static Vector<Student> students;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -54,7 +54,7 @@ public class ManterAlunoTest {
 	@Test
 	public void testInsert() throws ClienteException, SQLException {
 
-		Aluno student = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student student = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
 		ManterAluno.getInstance().insert("Incluindo", "040.757.021-70",
 				"123456", "9999-9999", "aluno@email");
@@ -66,7 +66,7 @@ public class ManterAlunoTest {
 			delete(student);
 		}
 
-		Aluno otherStudent = students.lastElement();
+		Student otherStudent = students.lastElement();
 		boolean resultado2 = student.equals(otherStudent);
 		students.remove(students.lastElement());
 
@@ -77,9 +77,9 @@ public class ManterAlunoTest {
 	@Test
 	public void testModify() throws ClienteException, SQLException {
 
-		Aluno student = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student student = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Aluno otherStudent = new Aluno("Alterando", "040.757.021-70", "123456",
+		Student otherStudent = new Student("Alterando", "040.757.021-70", "123456",
 				"9999-9999", "Nome@email");
 
 		insert(student);
@@ -100,7 +100,7 @@ public class ManterAlunoTest {
 	@Test(expected = ClienteException.class)
 	public void testModifyInexistent() throws ClienteException, SQLException {
 
-		Aluno student = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student student = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
 		
 		ManterAluno.getInstance().modify("Alterando", "040.757.021-70",
@@ -110,7 +110,7 @@ public class ManterAlunoTest {
 	@Test
 	public void testDelete() throws ClienteException, SQLException {
 
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
 
 		insert(aluno);
@@ -135,7 +135,7 @@ public class ManterAlunoTest {
 	@Test(expected = ClienteException.class)
 	public void testDeleteInexistent() throws ClienteException, SQLException {
 
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
 
 		ManterAluno.getInstance().delete(aluno);
@@ -143,9 +143,9 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByName() throws ClienteException, SQLException {
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 
 		insert(aluno);
 
@@ -157,7 +157,7 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByNameInexistent() throws ClienteException, SQLException {
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 		
 		alunos = ManterAluno.getInstance().searchByName("Nome do aluno");
 		assertEquals(0, alunos.size());
@@ -165,9 +165,9 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByCPF() throws ClienteException, SQLException {
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 
 		insert(aluno);
 
@@ -179,7 +179,7 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByCPFInexistent() throws ClienteException, SQLException {
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 		
 		alunos = ManterAluno.getInstance().searchByCpf("040.757.021-70");
 		assertEquals(0, alunos.size());
@@ -187,9 +187,9 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByEnrollmentNumber() throws ClienteException, SQLException {
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 
 		insert(aluno);
 
@@ -201,7 +201,7 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByEnrollmentNumberInexistent() throws ClienteException, SQLException {
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 		
 		alunos = ManterAluno.getInstance().searchByEnrollNumber("1111");
 		assertEquals(0, alunos.size());
@@ -209,9 +209,9 @@ public class ManterAlunoTest {
 
 	@Test
 	public void searchByEmail() throws ClienteException, SQLException {
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 
 		insert(aluno);
 
@@ -223,7 +223,7 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByEmailInexistent() throws ClienteException, SQLException {
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 		
 		alunos = ManterAluno.getInstance().searchByEmail("aluno@email");
 		assertEquals(0, alunos.size());
@@ -231,9 +231,9 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByPhoneNumber() throws ClienteException, SQLException {
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "123456",
+		Student aluno = new Student("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 
 		insert(aluno);
 
@@ -245,13 +245,13 @@ public class ManterAlunoTest {
 	
 	@Test
 	public void searchByPhoneNumberInexistent() throws ClienteException, SQLException {
-		Vector<Aluno> alunos;
+		Vector<Student> alunos;
 		
 		alunos = ManterAluno.getInstance().searchByEmail("9999-9999");
 		assertEquals(0, alunos.size());
 	}
 	
-	private void insert(Aluno aluno) throws SQLException {
+	private void insert(Student aluno) throws SQLException {
 
 		this.executaNoBanco("INSERT INTO "
 				+ "aluno (nome, cpf, telefone, email, matricula) VALUES ("
@@ -261,7 +261,7 @@ public class ManterAlunoTest {
 				+ aluno.getEnrollmentNumber() + "\");");
 	}
 
-	private void delete(Aluno aluno) throws SQLException {
+	private void delete(Student aluno) throws SQLException {
 
 		this.executaNoBanco("DELETE FROM aluno WHERE " + "aluno.nome = \""
 				+ aluno.getName() + "\" and " + "aluno.cpf = \""
@@ -271,7 +271,7 @@ public class ManterAlunoTest {
 				+ aluno.getEnrollmentNumber() + "\";");
 	}
 
-	private boolean select(Aluno aluno) throws SQLException {
+	private boolean select(Student aluno) throws SQLException {
 
 		boolean isOnDatabase;
 

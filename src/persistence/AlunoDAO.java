@@ -6,7 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/Alun
 
 package persistence;
 
-import model.Aluno;
+import model.Student;
 
 import java.sql.*;
 import java.util.Vector;
@@ -58,7 +58,7 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public void insert (Aluno student) throws SQLException, ClienteException {
+	public void insert (Student student) throws SQLException, ClienteException {
 
 		if (student == null) {
 			throw new ClienteException(NULL_STUDENT);
@@ -101,7 +101,7 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public void modify (Aluno oldStudent, Aluno newStudent)
+	public void modify (Student oldStudent, Student newStudent)
 			throws SQLException, ClienteException {
 
 		if (oldStudent == null && newStudent == null) {
@@ -177,7 +177,7 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public void delete (Aluno student) throws SQLException, ClienteException {
+	public void delete (Student student) throws SQLException, ClienteException {
 
 		if (student == null) {
 			throw new ClienteException(NULL_STUDENT);
@@ -213,10 +213,10 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Aluno> searchAll ( ) throws SQLException, ClienteException {
+	public Vector <Student> searchAll ( ) throws SQLException, ClienteException {
 		
 		String selectAllQuery = "SELECT * FROM aluno;";
-		Vector<Aluno> allStudents =this.search(selectAllQuery); 
+		Vector<Student> allStudents =this.search(selectAllQuery); 
 		return allStudents;
 	}
 
@@ -227,12 +227,12 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Aluno> searchByName (String name) throws SQLException,
+	public Vector <Student> searchByName (String name) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM aluno WHERE nome = " + "\"" + name
 				+ "\";";
-		Vector<Aluno> studentsByName =this.search(selectQuery); 
+		Vector<Student> studentsByName =this.search(selectQuery); 
 		return studentsByName;
 	}
 
@@ -243,12 +243,12 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Aluno> searchByCpf (String cpf) throws SQLException,
+	public Vector <Student> searchByCpf (String cpf) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM aluno WHERE cpf = " + "\"" + cpf
 				+ "\";";
-		Vector<Aluno> studentsByCpf =this.search(selectQuery); 
+		Vector<Student> studentsByCpf =this.search(selectQuery); 
 		return studentsByCpf;
 	}
 
@@ -259,13 +259,13 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Aluno> searchByEnrollmentNumber (String enrollmentNumber)
+	public Vector <Student> searchByEnrollmentNumber (String enrollmentNumber)
 			throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM aluno WHERE matricula = " + "\""
 				+ enrollmentNumber + "\";";
-		Vector<Aluno> studentsByEnrollmentNumber =this.search(selectQuery); 
+		Vector<Student> studentsByEnrollmentNumber =this.search(selectQuery); 
 		return studentsByEnrollmentNumber;
 	}
 
@@ -276,12 +276,12 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Aluno> searchByEmail (String email) throws SQLException,
+	public Vector <Student> searchByEmail (String email) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM aluno WHERE email = " + "\"" + email
 				+ "\";";
-		Vector<Aluno> studentsByEmail =this.search(selectQuery); 
+		Vector<Student> studentsByEmail =this.search(selectQuery); 
 		return studentsByEmail;
 	}
 
@@ -292,13 +292,13 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Aluno> searchByPhoneNumber (String phoneNumber)
+	public Vector <Student> searchByPhoneNumber (String phoneNumber)
 			throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM aluno WHERE telefone = " + "\""
 				+ phoneNumber + "\";";
-		Vector<Aluno> studentsByPhoneNumber =this.search(selectQuery); 
+		Vector<Student> studentsByPhoneNumber =this.search(selectQuery); 
 		return studentsByPhoneNumber;
 	}
 
@@ -313,10 +313,10 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	private Vector <Aluno> search (String query) throws SQLException,
+	private Vector <Student> search (String query) throws SQLException,
 			ClienteException {
 
-		Vector <Aluno> studentVec = new Vector <Aluno>();
+		Vector <Student> studentVec = new Vector <Student>();
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 
@@ -365,7 +365,7 @@ public class AlunoDAO {
 	 * @return true if the student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInDB (Aluno student) throws SQLException {
+	private boolean isInDB (Student student) throws SQLException {
 
 		String selectQuery = "SELECT * FROM aluno WHERE "
 				+ "aluno.nome = \"" + student.getName() + "\" and "
@@ -414,7 +414,7 @@ public class AlunoDAO {
 	 * @return true if the student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInOtherDB (Aluno student) throws SQLException,
+	private boolean isInOtherDB (Student student) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM reserva_sala_aluno WHERE "
@@ -436,7 +436,7 @@ public class AlunoDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	private Aluno fetchAluno (ResultSet result) throws ClienteException,
+	private Student fetchAluno (ResultSet result) throws ClienteException,
 			SQLException {
 
 		String name = result.getString("nome");
@@ -444,7 +444,7 @@ public class AlunoDAO {
 		String enrollmentNb = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Aluno newStudent = new Aluno(name, cpf, enrollmentNb, phoneNumber, email);
+		Student newStudent = new Student(name, cpf, enrollmentNb, phoneNumber, email);
 		return newStudent;
 	}
 
@@ -458,7 +458,6 @@ public class AlunoDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.executeUpdate();
-
 		statement.close();
 		connection.close();
 	}

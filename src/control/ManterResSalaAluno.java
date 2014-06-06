@@ -12,7 +12,7 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Aluno;
+import model.Student;
 import model.ReservaSalaAluno;
 import model.Sala;
 import persistence.ResSalaAlunoDAO;
@@ -136,7 +136,7 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public void insert(Sala room, Aluno student, String date, String time,
+	public void insert(Sala room, Student student, String date, String time,
 			String purpose, String numberDesiredChairs) throws SQLException,
 			ReservaException, ClienteException, PatrimonioException {
 

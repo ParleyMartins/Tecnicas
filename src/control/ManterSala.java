@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import persistence.RoomDAO;
+
 import exception.PatrimonioException;
 import model.Sala;
 
@@ -41,6 +42,7 @@ public class ManterSala {
 		if (instance == null) {
 			instance = new ManterSala();
 			classroomDAOInstance = RoomDAO.getInstance();
+
 		} else {
 			// Nothing here.
 		}

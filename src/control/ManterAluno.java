@@ -14,14 +14,14 @@ import java.util.Vector;
 
 import persistence.AlunoDAO;
 import exception.ClienteException;
-import model.Aluno;
+import model.Student;
 
 public class ManterAluno {
 
 	private static ManterAluno instance;
 	private static AlunoDAO studentDAOInstance;
 
-	private Vector<Aluno> allStudents = new Vector<Aluno>();
+	private Vector<Student> allStudents = new Vector<Student>();
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -54,10 +54,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchByName(String studentName) throws SQLException,
+	public Vector<Student> searchByName(String studentName) throws SQLException,
 			ClienteException {
 
-		Vector<Aluno> students = studentDAOInstance.searchByName(studentName);
+		Vector<Student> students = studentDAOInstance.searchByName(studentName);
 
 		return students;
 	}
@@ -69,10 +69,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchByCpf(String cpf) throws SQLException,
+	public Vector<Student> searchByCpf(String cpf) throws SQLException,
 			ClienteException {
 
-		Vector<Aluno> students = studentDAOInstance.searchByCpf(cpf);
+		Vector<Student> students = studentDAOInstance.searchByCpf(cpf);
 
 		return students;
 	}
@@ -84,10 +84,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchByEnrollNumber(String enrollmentNumber)
+	public Vector<Student> searchByEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
 
-		Vector<Aluno> students = studentDAOInstance
+		Vector<Student> students = studentDAOInstance
 				.searchByEnrollmentNumber(enrollmentNumber);
 
 		return students;
@@ -100,7 +100,7 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchByEmail(String email) throws SQLException,
+	public Vector<Student> searchByEmail(String email) throws SQLException,
 			ClienteException {
 
 		return studentDAOInstance.searchByEmail(email);
@@ -113,10 +113,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> searchByPhoneNumber(String phoneNumber)
+	public Vector<Student> searchByPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
 
-		Vector<Aluno> students = studentDAOInstance
+		Vector<Student> students = studentDAOInstance
 				.searchByPhoneNumber(phoneNumber);
 
 		return students;
@@ -128,7 +128,7 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public Vector<Aluno> getAllStudents() throws SQLException, ClienteException {
+	public Vector<Student> getAllStudents() throws SQLException, ClienteException {
 
 		this.allStudents = studentDAOInstance.searchAll();
 		return this.allStudents;
@@ -148,7 +148,7 @@ public class ManterAluno {
 			String phoneNumber, String email) throws ClienteException,
 			SQLException {
 
-		Aluno student = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
+		Student student = new Student(name, cpf, enrollmentNumber, phoneNumber,
 				email);
 
 		studentDAOInstance.insert(student);
@@ -167,10 +167,10 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database update
 	 */
 	public void modify(String name, String cpf, String enrollmentNumber,
-			String phoneNumber, String email, Aluno oldStudent)
+			String phoneNumber, String email, Student oldStudent)
 			throws ClienteException, SQLException {
 
-		Aluno newStudent = new Aluno(name, cpf, enrollmentNumber, phoneNumber,
+		Student newStudent = new Student(name, cpf, enrollmentNumber, phoneNumber,
 				email);
 		studentDAOInstance.modify(oldStudent, newStudent);
 	}
@@ -181,7 +181,7 @@ public class ManterAluno {
 	 * @throws SQLException If has some problem with the database remotion
 	 * @throws ClienteException If some of the student info is invalid
 	 */
-	public void delete(Aluno student) throws SQLException, ClienteException {
+	public void delete(Student student) throws SQLException, ClienteException {
 
 		studentDAOInstance.delete(student);
 		this.allStudents.remove(student);

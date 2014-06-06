@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Aluno;
+import model.Student;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -48,7 +48,7 @@ public class AlunoDAOTest {
 	@Test
 	public void testInsert() throws ClienteException, SQLException {
 		boolean resultado = false;
-		Aluno student = new Aluno("Incluindo", "040.757.021-70", "098765", "9999-9999", "aluno@email");
+		Student student = new Student("Incluindo", "040.757.021-70", "098765", "9999-9999", "aluno@email");
 		AlunoDAO.getInstance().insert(student);
 		
 		resultado = this.estaNoBanco("SELECT * FROM aluno WHERE " +
@@ -77,8 +77,8 @@ public class AlunoDAOTest {
 	@Test (expected= ClienteException.class)
 	public void testIncluirComMesmoCpf() throws ClienteException, SQLException {
 		boolean resultado = true;
-		Aluno student = new Aluno("Incluindo", "040.757.021-70", "098765", "1111-1111", "aluno@email");
-		Aluno student2 = new Aluno("Incluindo CPF Igual", "040.747.021-70", "987654", "2222-2222", "aluno2@email");
+		Student student = new Student("Incluindo", "040.757.021-70", "098765", "1111-1111", "aluno@email");
+		Student student2 = new Student("Incluindo CPF Igual", "040.747.021-70", "987654", "2222-2222", "aluno2@email");
 		AlunoDAO.getInstance().insert(student);
 		try{
 			AlunoDAO.getInstance().insert(student2);
@@ -110,8 +110,8 @@ public class AlunoDAOTest {
 	@Test (expected= ClienteException.class)
 	public void testIncluirComMesmaMatricula() throws ClienteException, SQLException {
 		boolean resultado = true;
-		Aluno student = new Aluno("Incluindo", "040.757.021-70", "111111", "1111-1111", "aluno@email");
-		Aluno student2 = new Aluno("Incluindo Matricula Igual", "490.491.781-20", "111111", "2222-2222", "aluno2@email");
+		Student student = new Student("Incluindo", "040.757.021-70", "111111", "1111-1111", "aluno@email");
+		Student student2 = new Student("Incluindo Matricula Igual", "490.491.781-20", "111111", "2222-2222", "aluno2@email");
 		AlunoDAO.getInstance().insert(student);
 		try{
 			AlunoDAO.getInstance().insert(student2);
@@ -143,8 +143,8 @@ public class AlunoDAOTest {
 	@Test (expected= ClienteException.class)
 	public void testIncluirJaExistente() throws ClienteException, SQLException {
 		boolean resultado = true;
-		Aluno aluno = new Aluno("Incluindo", "040.757.021-70", "58801", "3333-3333", "aluno@email");
-		Aluno aluno2 = new Aluno("Incluindo", "040.757.021-70", "58801", "3333-3333", "aluno@email");
+		Student aluno = new Student("Incluindo", "040.757.021-70", "58801", "3333-3333", "aluno@email");
+		Student aluno2 = new Student("Incluindo", "040.757.021-70", "58801", "3333-3333", "aluno@email");
 		AlunoDAO.getInstance().insert(aluno);
 		try{
 			AlunoDAO.getInstance().insert(aluno2);
@@ -178,8 +178,8 @@ public class AlunoDAOTest {
 	@Test
 	public void testAlterar() throws ClienteException, SQLException {
 		boolean resultado = false;
-		Aluno a = new Aluno("Incluindo", "868.563.327-34", "123456", "1234-5678", "Nome@email");
-		Aluno an = new Aluno("Alterando", "387.807.647-97", "098765", "(123)4567-8899", "email@Nome");
+		Student a = new Student("Incluindo", "868.563.327-34", "123456", "1234-5678", "Nome@email");
+		Student an = new Student("Alterando", "387.807.647-97", "098765", "(123)4567-8899", "email@Nome");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -222,20 +222,20 @@ public class AlunoDAOTest {
 	
 	@Test (expected= ClienteException.class)
 	public void testAlterarPrimeiroArgNulo() throws ClienteException, SQLException {
-		Aluno an = new Aluno("Alterando", "00.757.021-70", "123456", "(999)9999-9999", "aluno@email");
+		Student an = new Student("Alterando", "00.757.021-70", "123456", "(999)9999-9999", "aluno@email");
 		AlunoDAO.getInstance().modify(null, an);
 	}
 	
 	@Test (expected= ClienteException.class)
 	public void testAlterarSegundoArgNulo() throws ClienteException, SQLException {
-		Aluno an = new Aluno("Alterando", "00.757.021-70", "123456", "(999)9999-9999", "aluno@email");
+		Student an = new Student("Alterando", "00.757.021-70", "123456", "(999)9999-9999", "aluno@email");
 		AlunoDAO.getInstance().modify(an, null);
 	}
 	@Test (expected= ClienteException.class)
 	public void testAlterarNaoExistente() throws ClienteException, SQLException {
 		boolean resultado = true;
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "1111-1111", "aluno@email");
-		Aluno an = new Aluno("Alterando", "490.491.781-20", "098765", "(999)9999-9999", "email@aluno");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "1111-1111", "aluno@email");
+		Student an = new Student("Alterando", "490.491.781-20", "098765", "(999)9999-9999", "email@aluno");
 		
 		try{
 			AlunoDAO.getInstance().modify(a, an);
@@ -260,8 +260,8 @@ public class AlunoDAOTest {
 	public void testAlterarParaJaExistente() throws ClienteException, SQLException {
 		boolean resultado = true;
 		boolean resultado2 = false;
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "058801", "9999-9999", "aluno@email");
-		Aluno an = new Aluno("Incluindo", "040.757.021-70", "058801", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "058801", "9999-9999", "aluno@email");
+		Student an = new Student("Incluindo", "040.757.021-70", "058801", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -307,9 +307,9 @@ public class AlunoDAOTest {
 		boolean resultado = true;
 		boolean resultado2 = false;
 		boolean resultado3 = false;
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
-		Aluno an = new Aluno("Incluindo Segundo", "490.491.781-20", "1234", "4444-4444", "novoAluno@email");
-		Aluno ann = new Aluno("Incluindo Segundo", "040.757.021-70", "1234", "4444-4444", "novoAluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student an = new Student("Incluindo Segundo", "490.491.781-20", "1234", "4444-4444", "novoAluno@email");
+		Student ann = new Student("Incluindo Segundo", "040.757.021-70", "1234", "4444-4444", "novoAluno@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -375,9 +375,9 @@ public class AlunoDAOTest {
 		boolean resultado = true;
 		boolean resultado2 = false;
 		boolean resultado3 = false;
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-99999", "aluno@email");
-		Aluno an = new Aluno("Incluindo Segundo", "490.491.781-20", "0987", "5555-5555", "alunoNovo@email");
-		Aluno ann = new Aluno("Incluindo Segundo", "490.491.781-20", "123456", "5555-5555", "alunoNovo@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-99999", "aluno@email");
+		Student an = new Student("Incluindo Segundo", "490.491.781-20", "0987", "5555-5555", "alunoNovo@email");
+		Student ann = new Student("Incluindo Segundo", "490.491.781-20", "123456", "5555-5555", "alunoNovo@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -448,7 +448,7 @@ public class AlunoDAOTest {
 	@Test
 	public void testExcluir() throws ClienteException, SQLException {
 		boolean resultado = true;
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "058801", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "058801", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -486,7 +486,7 @@ public class AlunoDAOTest {
 	}
 	@Test (expected= ClienteException.class)
 	public void testExcluirNaoExistente() throws ClienteException, SQLException {
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
 		AlunoDAO.getInstance().delete(a);
 	}
 	
@@ -494,7 +494,7 @@ public class AlunoDAOTest {
 	
 	@Test
 	public void testBuscarNome() throws ClienteException, SQLException {
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -503,7 +503,7 @@ public class AlunoDAOTest {
 						"\"" + a.getEmail() + "\", " +
 						"\"" + a.getEnrollmentNumber() + "\"); ");
 		
-		Vector<Aluno> vet = AlunoDAO.getInstance().searchByName("Incluindo");
+		Vector<Student> vet = AlunoDAO.getInstance().searchByName("Incluindo");
 
 		this.executaNoBanco("DELETE FROM aluno WHERE " +
 					"aluno.nome = \"" + a.getName() + "\" and " +
@@ -516,7 +516,7 @@ public class AlunoDAOTest {
 	}
 	@Test
 	public void testBuscarCpf() throws ClienteException, SQLException {
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -525,7 +525,7 @@ public class AlunoDAOTest {
 						"\"" + a.getEmail() + "\", " +
 						"\"" + a.getEnrollmentNumber() + "\"); ");
 		
-		Vector<Aluno> vet = AlunoDAO.getInstance().searchByCpf("040.757.021-70");
+		Vector<Student> vet = AlunoDAO.getInstance().searchByCpf("040.757.021-70");
 
 		this.executaNoBanco("DELETE FROM aluno WHERE " +
 					"aluno.nome = \"" + a.getName() + "\" and " +
@@ -538,7 +538,7 @@ public class AlunoDAOTest {
 	}
 	@Test
 	public void testBuscarMatricula() throws ClienteException, SQLException {
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 						"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 						"\"" + a.getName() + "\", " +
@@ -547,7 +547,7 @@ public class AlunoDAOTest {
 						"\"" + a.getEmail() + "\", " +
 						"\"" + a.getEnrollmentNumber() + "\"); ");
 		
-		Vector<Aluno> vet = AlunoDAO.getInstance().searchByEnrollmentNumber("123456");
+		Vector<Student> vet = AlunoDAO.getInstance().searchByEnrollmentNumber("123456");
 
 		this.executaNoBanco("DELETE FROM aluno WHERE " +
 					"aluno.nome = \"" + a.getName() + "\" and " +
@@ -560,7 +560,7 @@ public class AlunoDAOTest {
 	}
 	@Test
 	public void testBuscarTelefone() throws ClienteException, SQLException {
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 				"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 				"\"" + a.getName() + "\", " +
@@ -569,7 +569,7 @@ public class AlunoDAOTest {
 				"\"" + a.getEmail() + "\", " +
 				"\"" + a.getEnrollmentNumber() + "\"); ");
 		
-		Vector<Aluno> vet = AlunoDAO.getInstance().searchByPhoneNumber("9999-9999");
+		Vector<Student> vet = AlunoDAO.getInstance().searchByPhoneNumber("9999-9999");
 
 		this.executaNoBanco("DELETE FROM aluno WHERE " +
 				"aluno.nome = \"" + a.getName() + "\" and " +
@@ -582,7 +582,7 @@ public class AlunoDAOTest {
 	}
 	@Test
 	public void testBuscarEmail() throws ClienteException, SQLException {
-		Aluno a = new Aluno("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
+		Student a = new Student("Incluindo", "040.757.021-70", "123456", "9999-9999", "aluno@email");
 		this.executaNoBanco("INSERT INTO " +
 				"aluno (nome, cpf, telefone, email, matricula) VALUES (" +
 				"\"" + a.getName() + "\", " +
@@ -591,7 +591,7 @@ public class AlunoDAOTest {
 				"\"" + a.getEmail() + "\", " +
 				"\"" + a.getEnrollmentNumber() + "\"); ");
 		
-		Vector<Aluno> vet = AlunoDAO.getInstance().searchByEmail("aluno@email");
+		Vector<Student> vet = AlunoDAO.getInstance().searchByEmail("aluno@email");
 
 		this.executaNoBanco("DELETE FROM aluno WHERE " +
 				"aluno.nome = \"" + a.getName() + "\" and " +

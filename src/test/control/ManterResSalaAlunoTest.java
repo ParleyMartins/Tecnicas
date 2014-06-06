@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Aluno;
+import model.Student;
 import model.ReservaSalaAluno;
 import model.Sala;
 
@@ -27,19 +27,21 @@ import persistence.AlunoDAO;
 import persistence.FactoryConnection;
 import persistence.RoomDAO;
 
+
 public class ManterResSalaAlunoTest {
 	private static Sala sala1;
-	private static Aluno aluno1;
+	private static Student aluno1;
 	private static Vector<ReservaSalaAluno> vet;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		vet = ManterResSalaAluno.getInstance().getstudentRoomReservationVector();
 		sala1 = new Sala("123", "Sala de Aula", "120");
-		aluno1 = new Aluno("testInstance", "501.341.852-69", "456678", "", "");
+		aluno1 = new Student("testInstance", "501.341.852-69", "456678", "", "");
 		
 		AlunoDAO.getInstance().insert(aluno1);
 		RoomDAO.getInstance().insert(sala1);
+
 	}
 
 	@AfterClass
@@ -114,7 +116,7 @@ public class ManterResSalaAlunoTest {
 	
 	@Test
 	public void testVetDia() throws SQLException, ReservaException, ClienteException, PatrimonioException {
-		Aluno aluno2 = new Aluno("testInswewee", "490.491.781-20", "4324678", "", "");
+		Student aluno2 = new Student("testInswewee", "490.491.781-20", "4324678", "", "");
 		ReservaSalaAluno r = new ReservaSalaAluno("1/3/20", "9:11", sala1, "Sala de Estudos", "60", aluno1);
 		ReservaSalaAluno r2 = new ReservaSalaAluno("1/3/20", "9:11", sala1,"Sala de Estudos", "30", aluno2);
 		ReservaSalaAluno r3 = new ReservaSalaAluno("1/3/20", "10:00", sala1,"Sala de Estudos", "120", aluno1);
@@ -147,7 +149,7 @@ public class ManterResSalaAlunoTest {
 	
 	@Test
 	public void testVetDiaHoje() throws SQLException, ReservaException, ClienteException, PatrimonioException {
-		Aluno aluno2 = new Aluno("testInswewee", "490.491.781-20", "4324678", "", "");
+		Student aluno2 = new Student("testInswewee", "490.491.781-20", "4324678", "", "");
 		ReservaSalaAluno r = new ReservaSalaAluno("26/02/2013", "20:00", sala1, "Sala de Estudos", "60", aluno1);
 		ReservaSalaAluno r2 = new ReservaSalaAluno("26/02/2013", "20:00", sala1,"Sala de Estudos", "30", aluno2);
 		ReservaSalaAluno r3 = new ReservaSalaAluno("26/02/2013", "21:00", sala1,"Sala de Estudos", "120", aluno1);
@@ -179,7 +181,7 @@ public class ManterResSalaAlunoTest {
 	}
 	
 	
-	private String select_id_aluno(Aluno a){
+	private String select_id_aluno(Student a){
 		return "SELECT id_aluno FROM aluno WHERE " +
 				"aluno.nome = \"" + a.getName() + "\" and " +
 				"aluno.cpf = \"" + a.getCpf() + "\" and " +

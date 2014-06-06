@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Aluno;
+import model.Student;
 import model.ReservaSalaAluno;
 import model.Sala;
 
@@ -32,20 +32,21 @@ public class ResSalaAlunoDAOTest {
 
 	private static Sala sala1;
 	private static Sala sala2;
-	private static Aluno aluno1;
-	private static Aluno aluno2;
+	private static Student aluno1;
+	private static Student aluno2;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		sala1 = new Sala("123", "Sala de Aula", "120");
 		sala2 = new Sala("543", "Laboratorio", "30");
-		aluno1 = new Aluno("testInstance", "501.341.852-69", "456678", "", "");
-		aluno2 = new Aluno("Incluindo Matricula Igual", "490.491.781-20", "345543", "2222-2222", "aluno2@email");
+		aluno1 = new Student("testInstance", "501.341.852-69", "456678", "", "");
+		aluno2 = new Student("Incluindo Matricula Igual", "490.491.781-20", "345543", "2222-2222", "aluno2@email");
 		
 		AlunoDAO.getInstance().insert(aluno1);
 		AlunoDAO.getInstance().insert(aluno2);
 		RoomDAO.getInstance().insert(sala1);
 		RoomDAO.getInstance().insert(sala2);
+
 	}
 
 	@AfterClass
@@ -86,7 +87,7 @@ public class ResSalaAlunoDAOTest {
 	@Test (expected= ReservaException.class)
 	public void testIncluirAlunoInexistente() throws ReservaException, ClienteException, PatrimonioException, SQLException {
 		ReservaSalaAluno reserva = new ReservaSalaAluno("20/12/34", "8:00", sala1,
-				"Grupo de Estudos", "120", new Aluno("tepp", "501.341.852-69", "456678", "", ""));
+				"Grupo de Estudos", "120", new Student("tepp", "501.341.852-69", "456678", "", ""));
 		
 		try{
 			ResSalaAlunoDAO.getInstance().insert(reserva);
@@ -354,7 +355,7 @@ public class ResSalaAlunoDAOTest {
 		this.insert_into(reserva);
 		
 		ReservaSalaAluno reserva2 = new ReservaSalaAluno("20/12/34", "8:00", sala1,
-				"Grupo de Estudos", "120", new Aluno("tepp", "501.341.852-69", "456678", "", ""));
+				"Grupo de Estudos", "120", new Student("tepp", "501.341.852-69", "456678", "", ""));
 		
 		try{
 			ResSalaAlunoDAO.getInstance().modify(reserva, reserva2);
@@ -633,7 +634,7 @@ public class ResSalaAlunoDAOTest {
 	}
 	
 	
-	private String select_id_aluno(Aluno a){
+	private String select_id_aluno(Student a){
 		return "SELECT id_aluno FROM aluno WHERE " +
 				"aluno.nome = \"" + a.getName() + "\" and " +
 				"aluno.cpf = \"" + a.getCpf() + "\" and " +
