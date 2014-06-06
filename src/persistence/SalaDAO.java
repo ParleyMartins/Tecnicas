@@ -69,11 +69,13 @@ public class SalaDAO {
 			// Nothing here.
 		}
 		
-		this.update("INSERT INTO " +
+		String insertionQuery = "INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
 				"\"" + room.getIdCode() + "\", " +
 				"\"" + room.getDescription() + "\", " +
-				room.getCapacity() + ");");
+				room.getCapacity() + ");"; 
+		
+		this.update(insertionQuery);
 	}
 
 	/** 
@@ -89,7 +91,6 @@ public class SalaDAO {
 		checkRoomNull(newRoom);
 		checkRoomNull(oldRoom);
 		
-
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
@@ -98,11 +99,8 @@ public class SalaDAO {
 		} else {
 			// Nothing here.
 		}
-		if (this.isInOtherDB(oldRoom)) {
-			throw new PatrimonioException(ROOM_IN_USE);
-		} else {
-			// Nothing here.
-		}
+		checkRoomInOtherDB(oldRoom);
+		
 		if (!oldRoom.getIdCode().equals(newRoom.getIdCode())
 				&& this.isInDbCode(newRoom.getIdCode())) {
 			throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
@@ -141,16 +139,9 @@ public class SalaDAO {
 	 */
 	public void delete (Sala room) throws SQLException, PatrimonioException {
 
-		if (room == null) {
-			throw new PatrimonioException(NULL_ROOM);
-		} else {
-			// Do nothing.
-		}
-		if (this.isInOtherDB(room)) {
-			throw new PatrimonioException(ROOM_IN_USE);
-		} else {
-			// Do nothing.
-		}
+		checkRoomNull(room);
+		checkRoomInOtherDB(room);
+		
 		if (this.isInDB(room)) {
 			this.update("DELETE FROM sala WHERE " +
 					"sala.codigo = \"" + room.getIdCode() + "\" and " +
@@ -184,7 +175,7 @@ public class SalaDAO {
 	 */
 	public Vector <Sala> searchByCode (String code) throws SQLException,
 			PatrimonioException {
-
+		
 		return this.search("SELECT * FROM sala WHERE codigo = " + "\"" + code
 				+ "\";");
 	}
@@ -340,7 +331,7 @@ public class SalaDAO {
 	 */
 	private Sala fetchSala (ResultSet result) throws PatrimonioException,
 			SQLException {
-
+		
 		return new Sala(result.getString("codigo"),
 				result.getString("descricao"),
 				result.getString("capacidade"));
@@ -363,6 +354,14 @@ public class SalaDAO {
 	private void checkRoomNull(Sala room) throws PatrimonioException {
 		if (room == null) {
 			throw new PatrimonioException(NULL_ROOM);
+		} else {
+			// Nothing here.
+		}
+	}
+	
+	private void checkRoomInOtherDB(Sala room) throws PatrimonioException, SQLException {
+		if (this.isInOtherDB(room)) {
+			throw new PatrimonioException(ROOM_IN_USE);
 		} else {
 			// Nothing here.
 		}
