@@ -11,7 +11,7 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import persistence.SalaDAO;
+import persistence.RoomDAO;
 import exception.PatrimonioException;
 import model.Sala;
 
@@ -21,7 +21,7 @@ public class ManterSala {
 	private Vector<Sala> rooms = new Vector<Sala>();
 
 	private static ManterSala instance;
-	private static SalaDAO classroomDAOInstance;
+	private static RoomDAO classroomDAOInstance;
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -40,7 +40,7 @@ public class ManterSala {
 
 		if (instance == null) {
 			instance = new ManterSala();
-			classroomDAOInstance = SalaDAO.getInstance();
+			classroomDAOInstance = RoomDAO.getInstance();
 		} else {
 			// Nothing here.
 		}

@@ -32,7 +32,7 @@ import persistence.FactoryConnection;
 
 import persistence.ResSalaAlunoDAO;
 import persistence.ResSalaProfessorDAO;
-import persistence.SalaDAO;
+import persistence.RoomDAO;
 
 public class ResSalaProfessorDAOTest {
 	
@@ -48,16 +48,16 @@ public class ResSalaProfessorDAOTest {
 		professor1 = new Professor("ProfessorUm", "490.491.781-20", "58801", "3333-3333", "prof@email");
 		professor2 = new Professor("ProfessorDois", "040.757.021-70", "36106", "3628-3079", "prof@email");
 		
-		SalaDAO.getInstance().insert(sala_a);
-		SalaDAO.getInstance().insert(sala_b);
+		RoomDAO.getInstance().insert(sala_a);
+		RoomDAO.getInstance().insert(sala_b);
 		ProfessorDAO.getInstance().insert(professor1);
 		ProfessorDAO.getInstance().insert(professor2);		
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		SalaDAO.getInstance().delete(sala_a);
-		SalaDAO.getInstance().delete(sala_b);
+		RoomDAO.getInstance().delete(sala_a);
+		RoomDAO.getInstance().delete(sala_b);
 		ProfessorDAO.getInstance().delete(professor1);
 		ProfessorDAO.getInstance().delete(professor2);	
 	}

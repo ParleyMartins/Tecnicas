@@ -22,7 +22,7 @@ import org.junit.Test;
 import persistence.AlunoDAO;
 import persistence.FactoryConnection;
 import persistence.ResSalaAlunoDAO;
-import persistence.SalaDAO;
+import persistence.RoomDAO;
 
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -44,16 +44,16 @@ public class ResSalaAlunoDAOTest {
 		
 		AlunoDAO.getInstance().insert(aluno1);
 		AlunoDAO.getInstance().insert(aluno2);
-		SalaDAO.getInstance().insert(sala1);
-		SalaDAO.getInstance().insert(sala2);
+		RoomDAO.getInstance().insert(sala1);
+		RoomDAO.getInstance().insert(sala2);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		AlunoDAO.getInstance().delete(aluno1);
 		AlunoDAO.getInstance().delete(aluno2);
-		SalaDAO.getInstance().delete(sala1);
-		SalaDAO.getInstance().delete(sala2);
+		RoomDAO.getInstance().delete(sala1);
+		RoomDAO.getInstance().delete(sala2);
 	}
 
 	@Test
