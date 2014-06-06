@@ -62,12 +62,8 @@ public class SalaDAO {
 	public void insert (Sala room) throws SQLException, PatrimonioException {
 
 		checkRoomNull(room);
+		checkIfRoomExists(room);
 		
-		if (this.isInDbCode(room.getIdCode())) {
-			throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
-		} else {
-			// Nothing here.
-		}
 		
 		String insertionQuery = "INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
@@ -99,16 +95,10 @@ public class SalaDAO {
 		} else {
 			// Nothing here.
 		}
+		
 		checkRoomInOtherDB(oldRoom);
-		
-		if (!oldRoom.getIdCode().equals(newRoom.getIdCode())
-				&& this.isInDbCode(newRoom.getIdCode())) {
-			throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
-		} else {
-			// Nothing here.
-		}
-		
-		
+		checkIfRoomExists(newRoom);
+				
 		if (!this.isInDB(newRoom)) {
 			String message = "UPDATE sala SET " +
 					"codigo = \"" + newRoom.getIdCode() + "\", " +
@@ -360,8 +350,21 @@ public class SalaDAO {
 	}
 	
 	private void checkRoomInOtherDB(Sala room) throws PatrimonioException, SQLException {
-		if (this.isInOtherDB(room)) {
+		boolean roomInUse = this.isInOtherDB(room); 
+		
+		if (roomInUse) {
 			throw new PatrimonioException(ROOM_IN_USE);
+		} else {
+			// Nothing here.
+		}
+	}
+	
+	private void checkIfRoomExists(Sala room) throws PatrimonioException, SQLException {
+		String roomIdCode = room.getIdCode();
+		boolean roomExists = this.isInDbCode(roomIdCode); 
+		
+		if (roomExists) {
+			throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
 		} else {
 			// Nothing here.
 		}
