@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Vector;
 
 import view.International;
-import model.Aluno;
+import model.Student;
 import model.Professor;
 import model.ReservaSalaAluno;
 import model.ReservaSalaProfessor;

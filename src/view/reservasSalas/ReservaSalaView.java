@@ -30,7 +30,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
 import view.International;
-import model.Aluno;
+import model.Student;
 import model.Professor;
 import model.Sala;
 import control.ManterAluno;
@@ -50,7 +50,7 @@ public abstract class ReservaSalaView extends JDialog {
 	protected ManterResSalaAluno studentInstance;
 	protected ManterResSalaProfessor teacherInstance;
 	protected Sala room;
-	protected Aluno student;
+	protected Student student;
 	protected Professor teacher;
 	protected JLabel studentLabel;
 	protected JRadioButton teacherRadioButton;
@@ -113,7 +113,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 
-			Vector <Aluno> alunos = ManterAluno.getInstance().searchByCpf(
+			Vector <Student> alunos = ManterAluno.getInstance().searchByCpf(
 					this.cpfTextField.getText());
 			if (alunos.isEmpty()) {
 				JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("studentNotExists")

@@ -11,7 +11,7 @@ import org.junit.Test;
 import persistence.FactoryConnection;
 import control.ManterAluno;
 import control.ManterSala;
-import model.Aluno;
+import model.Student;
 import model.Sala;
 import exception.ClienteException;
 import exception.PatrimonioException;

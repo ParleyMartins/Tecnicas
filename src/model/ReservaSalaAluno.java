@@ -11,7 +11,7 @@ import exception.ReservaException;
 
 public class ReservaSalaAluno extends ReservaSala {
 
-	private Aluno student;
+	private Student student;
 	private String reservedChairs;
 
 	// Error messages.
@@ -36,7 +36,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	 * @throws ReservaException It ensures that every parameter passed is valid. 
 	 */
 	public ReservaSalaAluno(String date, String time, Sala classroom,
-			String purpose, String reserved_chairs, Aluno student)
+			String purpose, String reserved_chairs, Student student)
 			throws ReservaException {
 
 		super(date, time, classroom, purpose);
@@ -48,7 +48,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	 * This method gets a student. 
 	 * @return The content in the student field.
 	 */
-	public Aluno getStudent() {
+	public Student getStudent() {
 
 		return this.student;
 	}
@@ -67,7 +67,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	 * @param student the person who performs the reservation of the room.
 	 * @throws ReservaException It ensures that every parameter passed is valid. 
 	 */
-	public void setStudent(Aluno student) throws ReservaException {
+	public void setStudent(Student student) throws ReservaException {
 
 		if (student == null) {
 			throw new ReservaException(BLANK_STUDENT);

@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ClienteException;
 
-public class Aluno extends Cliente {
+public class Student extends Cliente {
 
 	// Error messages and alerts.
 	private final String BLANK_ENROLLMENT_NUMBER = International.getInstance().getMessages()
@@ -24,7 +24,7 @@ public class Aluno extends Cliente {
 	 * @param email is the electronic address of the student.
 	 * @throws ClienteExceptionprevention error when calling the method.
 	 */
-	public Aluno(String name, String cpf, String enrollment_number,
+	public Student(String name, String cpf, String enrollment_number,
 			String phone_number, String email) throws ClienteException {
 
 		super(name, cpf, enrollment_number, phone_number, email);

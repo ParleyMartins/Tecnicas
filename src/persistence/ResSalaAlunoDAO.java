@@ -17,7 +17,7 @@ import view.International;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
-import model.Aluno;
+import model.Student;
 import model.ReservaSalaAluno;
 import model.Sala;
 
@@ -371,7 +371,7 @@ public class ResSalaAlunoDAO extends DAO {
 		String matricula = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Aluno student = new Aluno(name, cpf, matricula, phoneNumber, email);
+		Student student = new Student(name, cpf, matricula, phoneNumber, email);
 
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
@@ -395,7 +395,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return true if the Student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean studentIsInDB (Aluno student) throws SQLException {
+	private boolean studentIsInDB (Student student) throws SQLException {
 
 		String query = "SELECT * FROM aluno WHERE "
 				+ "aluno.nome = \"" + student.getName() + "\" and "
@@ -435,7 +435,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	private boolean studentIsInReservationDB (Aluno student, String date, String time)
+	private boolean studentIsInReservationDB (Student student, String date, String time)
 			throws SQLException {
 
 		
@@ -486,7 +486,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 */
 	private boolean reservationIsInDB (ReservaSalaAluno reservation) throws SQLException {
 
-		Aluno student = reservation.getStudent();
+		Student student = reservation.getStudent();
 		Sala room = reservation.getClassroom();
 		String query = "SELECT * FROM reserva_sala_aluno WHERE "
 				+ "id_aluno = (SELECT id_aluno FROM aluno WHERE "
@@ -668,7 +668,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param student The student that is going to be selected.
 	 * @return the query to select the given Student
 	 */
-	private String selectStudentIDQuery (Aluno student) {
+	private String selectStudentIDQuery (Student student) {
 
 		String query = "SELECT id_aluno FROM aluno WHERE " + "aluno.nome = \""
 				+ student.getName() + "\" and " + "aluno.cpf = \"" + student.getCpf()

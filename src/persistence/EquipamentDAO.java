@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import view.International;
-import model.Aluno;
+import model.Student;
 import model.Equipamento;
 import exception.ClienteException;
 import exception.PatrimonioException;
