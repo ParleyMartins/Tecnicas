@@ -72,9 +72,9 @@ public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 	 */
 	public String toString() {
 
-		return "ReservaEquipamentoProfessor [professor="
-				+ this.getEquipment().toString() + ", toString()="
-				+ super.toString() + "]";
+		return "ReservaEquipamentoProfessor " + 
+				"\nProfessor = " + this.getTeacher().toString() + 
+				"\nEquipment = " + super.toString() + "]";
 	}
 
 }

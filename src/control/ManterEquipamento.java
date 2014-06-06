@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-import persistence.EquipamentoDAO;
+import persistence.EquipamentDAO;
 import view.International;
 import exception.PatrimonioException;
 import model.Equipamento;
@@ -23,7 +23,7 @@ public class ManterEquipamento {
 	private Vector<Equipamento> allEquipments = new Vector<Equipamento>();
 
 	private static ManterEquipamento instance;
-	private static EquipamentoDAO equipmentDAOInstance;
+	private static EquipamentDAO equipmentDAOInstance;
 	private static ResourceBundle messages;
 
 	/*
@@ -43,7 +43,7 @@ public class ManterEquipamento {
 
 		if (instance == null) {
 			instance = new ManterEquipamento();
-			equipmentDAOInstance = EquipamentoDAO.getInstance();
+			equipmentDAOInstance = EquipamentDAO.getInstance();
 
 			International internationalInstance = International.getInstance();
 			messages = internationalInstance.getMessages();

@@ -46,7 +46,7 @@ public class AlunoDAOTest {
 	
 
 	@Test
-	public void testIncluir() throws ClienteException, SQLException {
+	public void testInsert() throws ClienteException, SQLException {
 		boolean resultado = false;
 		Aluno student = new Aluno("Incluindo", "040.757.021-70", "098765", "9999-9999", "aluno@email");
 		AlunoDAO.getInstance().insert(student);
