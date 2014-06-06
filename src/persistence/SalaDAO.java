@@ -90,32 +90,27 @@ public class SalaDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
-		if (!this.isInDB(oldRoom)) {
-			throw new PatrimonioException(NO_EXISTING_ROOM);
-		} else {
-			// Nothing here.
-		}
+		checkRoomNotInDB(oldRoom);
 		
 		checkRoomInOtherDB(oldRoom);
 		checkIfRoomExists(newRoom);
 				
-		if (!this.isInDB(newRoom)) {
-			String message = "UPDATE sala SET " +
-					"codigo = \"" + newRoom.getIdCode() + "\", " +
-					"descricao = \"" + newRoom.getDescription() + "\", " +
-					"capacidade = " + newRoom.getCapacity() +
-					" WHERE " +
-					"sala.codigo = \"" + oldRoom.getIdCode() + "\" and " +
-					"sala.descricao = \"" + oldRoom.getDescription() + "\" and "
-					+
-					"sala.capacidade = " + oldRoom.getCapacity() + ";";
-			connection.setAutoCommit(false);
-			statement = connection.prepareStatement(message);
-			statement.executeUpdate();
-			connection.commit();
-		} else {
-			throw new PatrimonioException(EXISTING_ROOM);
-		}
+		checkRoomInDB(newRoom);
+		
+		String message = "UPDATE sala SET " +
+				"codigo = \"" + newRoom.getIdCode() + "\", " +
+				"descricao = \"" + newRoom.getDescription() + "\", " +
+				"capacidade = " + newRoom.getCapacity() +
+				" WHERE " +
+				"sala.codigo = \"" + oldRoom.getIdCode() + "\" and " +
+				"sala.descricao = \"" + oldRoom.getDescription() + "\" and "
+				+
+				"sala.capacidade = " + oldRoom.getCapacity() + ";";
+
+		connection.setAutoCommit(false);
+		statement = connection.prepareStatement(message);
+		statement.executeUpdate();
+		connection.commit();
 
 		statement.close();
 		connection.close();
@@ -354,6 +349,26 @@ public class SalaDAO {
 		
 		if (roomInUse) {
 			throw new PatrimonioException(ROOM_IN_USE);
+		} else {
+			// Nothing here.
+		}
+	}
+	
+	private void checkRoomNotInDB(Sala room) throws PatrimonioException, SQLException {
+		boolean roomInDB = this.isInDB(room); 
+		
+		if (!roomInDB) {
+			throw new PatrimonioException(NO_EXISTING_ROOM);
+		} else {
+			// Nothing here.
+		}
+	}
+	
+	private void checkRoomInDB(Sala room) throws PatrimonioException, SQLException {
+		boolean roomInDB = this.isInDB(room); 
+		
+		if (roomInDB) {
+			throw new PatrimonioException(EXISTING_ROOM);
 		} else {
 			// Nothing here.
 		}
