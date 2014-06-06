@@ -19,7 +19,7 @@ import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
 
-public class ResEquipamentoProfessorDAO extends DAO {
+public class TeacherEquipmentReservationDAO extends DAO {
 
 	// Exception messages and alerts.
 	private final String NULL = International.getInstance().getMessages()
@@ -36,9 +36,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			.getMessages().getString("reservationExisting");
 
 	// Instance to the singleton.
-	private static ResEquipamentoProfessorDAO instance;
+	private static TeacherEquipmentReservationDAO instance;
 
-	private ResEquipamentoProfessorDAO ( ) {
+	private TeacherEquipmentReservationDAO ( ) {
 
 		// Blank constructor.
 	}
@@ -47,12 +47,12 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	 * Singleton implementation.
 	 * @return the initialized instance
 	 */
-	public static ResEquipamentoProfessorDAO getInstance ( ) {
+	public static TeacherEquipmentReservationDAO getInstance ( ) {
 
 		if (instance != null) {
 			// Nothing here.
 		} else {
-			instance = new ResEquipamentoProfessorDAO();
+			instance = new TeacherEquipmentReservationDAO();
 		}
 		return instance;
 	}
@@ -67,110 +67,8 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			throws ReservaException,
 			SQLException {
 
-		if (reservation == null) {
-			throw new ReservaException(NULL);
-		} else {
-			// Nothing here.
-		}
-		
-		if (!this.teacherIsInDB(reservation.getTeacher())) {
-			throw new ReservaException(TEACHER_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-		if (!this.equipmentIsInDB(reservation.getEquipment())) {
-			throw new ReservaException(EQUIPMENT_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-
-		if (this.equipmentIsInReservationDB(reservation.getEquipment(),
-				reservation.getDate(), reservation.getTime())) {
-			throw new ReservaException(EQUIPMENT_UNAVAILABLE);
-		} else {
-			// Nothing here.
-		}
-
-		if (this.teacherIsInReservationDB(reservation.getTeacher(),
-				reservation.getDate(), reservation.getTime())) {
-			throw new ReservaException(RESERVATION_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-
-				
+		this.checkInsertReservation(reservation);		
 		super.execute(this.insertIntoDBQuery(reservation));
-	}
-
-	/**
-	 * This updates a reservation in the database.
-	 * @param oldReservation The reservation that will be modified.
-	 * @param newReservation The reservation with the new info.
-	 * @throws SQLException if an exception related to the database is activated
-	 * @throws ReservaException if an exception related to the reservation is activated
-	 */
-	public void modify (ReservaEquipamentoProfessor oldReservation,
-			ReservaEquipamentoProfessor newReservation)
-			throws ReservaException,
-			SQLException {
-
-		if (oldReservation == null) {
-			throw new ReservaException(NULL);
-		} else {
-			// Nothing here.
-		}
-		
-		if (newReservation == null) {
-			throw new ReservaException(NULL);
-		} else {
-			// Nothing here.
-		}
-		
-		if (!this.reservationIsInDB(oldReservation)) {
-			throw new ReservaException(RESERVATION_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-	
-		if (this.reservationIsInDB(newReservation)) {
-			throw new ReservaException(RESERVATION_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-		
-		if (!oldReservation.getDate().equals(newReservation.getDate())
-				|| !oldReservation.getTime().equals(newReservation.getTime())) {
-		} else {
-			// Nothing here.
-		}
-		
-		if (this.teacherIsInReservationDB(newReservation.getTeacher(),
-				newReservation.getDate(), newReservation.getTime())) {
-			throw new ReservaException(RESERVATION_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-		
-		if (this.equipmentIsInReservationDB(newReservation.getEquipment(),
-				newReservation.getDate(), newReservation.getTime())) {
-			throw new ReservaException(EQUIPMENT_UNAVAILABLE);
-		} else {
-			// Nothing here.
-		}
-
-		if (!this.teacherIsInDB(newReservation.getTeacher())) {
-			throw new ReservaException(TEACHER_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-
-		if (!this.equipmentIsInDB(newReservation.getEquipment())) {
-			throw new ReservaException(EQUIPMENT_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-		String updateQuery = this.updateQuery(oldReservation, newReservation);
-		super.update(updateQuery);
 	}
 
 	/**
@@ -182,18 +80,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	public void delete (ReservaEquipamentoProfessor reservation)
 			throws ReservaException,
 			SQLException {
-
-		if (reservation == null) {
-			throw new ReservaException(NULL);
-		} else {
-			// Nothing here.
-		}
 		
-		if (!this.reservationIsInDB(reservation)) {
-			throw new ReservaException(RESERVATION_INEXISTENT);
-		} else {
-			// Nothing here;
-		}
+		checkDeleteReservation(reservation);
+		
 		String deleteQuery = this.deleteQuery(reservation); 
 		super.execute(deleteQuery);
 	}
@@ -211,9 +100,9 @@ public class ResEquipamentoProfessorDAO extends DAO {
 			ClienteException,
 			PatrimonioException, ReservaException {
 		
-		String query = "SELECT * FROM reserva_sala_professor "
-				+ "INNER JOIN sala ON sala.id_sala = reserva_sala_professor.id_sala "
-				+ "INNER JOIN professor ON professor.id_professor = reserva_sala_professor.id_professor;";
+		String query = "SELECT * FROM reserva_equipamento_professor "
+				+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
+				+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;";
 		
 		Vector <Object> allReservations =super.search(query); 
 		return allReservations;
@@ -242,7 +131,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		while (i.hasNext()) {
 			ReservaEquipamentoProfessor reservation = i.next();
 			if (Integer.parseInt(reservation.getDate().split("[./-]")[1]) != month) {
-				monthTeacherReservations.remove(reservation);
+				i.remove();
 			} else {
 				// Nothing here.
 			}
@@ -286,6 +175,11 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return super.search(selectQuery);
 	}
 
+	
+	/*
+	 * Private Methods
+	 */
+	
 	// Implementation of the inherited method.
 	@Override
 	protected Object fetch (ResultSet result) throws SQLException,
@@ -358,7 +252,7 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	private boolean teacherIsInReservationDB (Professor teacher, String date,
 			String time) throws SQLException {
 		
-		String selectQuery = "SELECT * FROM reserva_sala_professor WHERE "
+		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
 				+ "data = \"" + date + "\" and " + "hora = \"" + time
 				+ "\" and "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
@@ -547,24 +441,6 @@ public class ResEquipamentoProfessorDAO extends DAO {
 	}
 
 	/**
-	 * This generates a UPDATE query 
-	 * @param oldReservation The reservation that is going to be updated
-	 * @param newReservation The reservation with the new info
-	 * @return the UPDATE query
-	 */
-	private String updateQuery (ReservaEquipamentoProfessor oldReservation,
-			ReservaEquipamentoProfessor newReservation) {
-
-		String attributes = this.attributesQuery(newReservation);
-		String where = this.whereQuery(oldReservation);
-		
-		String query = "UPDATE reserva_equipamento_professor SET "
-				+ attributes + where + " ;";
-		
-		return query;
-	}
-
-	/**
 	 * This generates a DELETE query with a given reservation
 	 * @param reservation The EquipmentReservation to generate the query 
 	 * @return the DELETE query
@@ -579,4 +455,64 @@ public class ResEquipamentoProfessorDAO extends DAO {
 		return query;
 	}
 
+	/**
+	 * This checks if a reservation has to throw an exception at the insertion in the database.
+	 * @param reservation the Given reservation
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
+	private void checkInsertReservation(ReservaEquipamentoProfessor reservation)
+			throws SQLException, ReservaException{
+		if (reservation == null) {
+			throw new ReservaException(NULL);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!this.teacherIsInDB(reservation.getTeacher())) {
+			throw new ReservaException(TEACHER_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+		if (!this.equipmentIsInDB(reservation.getEquipment())) {
+			throw new ReservaException(EQUIPMENT_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+
+		if (this.equipmentIsInReservationDB(reservation.getEquipment(),
+				reservation.getDate(), reservation.getTime())) {
+			throw new ReservaException(EQUIPMENT_UNAVAILABLE);
+		} else {
+			// Nothing here.
+		}
+
+		if (this.teacherIsInReservationDB(reservation.getTeacher(),
+				reservation.getDate(), reservation.getTime())) {
+			throw new ReservaException(RESERVATION_EXISTING);
+		} else {
+			// Nothing here.
+		}
+	}
+	
+	/**
+	 * This checks if a reservation has to throw an exception at the deletion in the database.
+	 * @param reservation the Given reservation
+	 * @throws SQLException if an exception related to the database is activated
+	 * @throws ReservaException if an exception related to the reservation is activated
+	 */
+	private void checkDeleteReservation(ReservaEquipamentoProfessor reservation) 
+			throws ReservaException, SQLException{
+		if (reservation == null) {
+			throw new ReservaException(NULL);
+		} else {
+			// Nothing here.
+		}
+		
+		if (!this.reservationIsInDB(reservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here;
+		}
+	}
 }

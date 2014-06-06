@@ -49,30 +49,6 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	@Override
 	protected void reserveEquipmentToTeacher ( ) {
 
-		try {
-			this.instanceManageResEquipmentTeacher.modify(
-					this.instanceOfReserve,
-					this.dateTextField.getText(), this.hourTextField.getText(),
-					this.instanceOfEquipment,
-					this.instanceOfReserve.getTeacher());
-			JOptionPane
-					.showMessageDialog(
-							this,
-							International.getInstance().getMessages()
-									.getString("reserveModifySucess"),
-							International.getInstance().getLabels()
-									.getString("sucess"),
-							JOptionPane.INFORMATION_MESSAGE, null);
-			this.setVisible(false);
-		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), International
-					.getInstance().getLabels().getString("error"),
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					International.getInstance().getLabels().getString("error"),
-					JOptionPane.ERROR_MESSAGE, null);
-		}
 	}
 
 	private void resetComponents ( ) {
