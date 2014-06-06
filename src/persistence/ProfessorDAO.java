@@ -6,7 +6,6 @@ https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/Prof
 
 package persistence;
 
-import model.Aluno;
 import model.Professor;
 
 import java.sql.*;

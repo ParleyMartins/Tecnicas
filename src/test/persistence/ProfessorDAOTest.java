@@ -19,9 +19,8 @@ import exception.ClienteException;
 
 import persistence.FactoryConnection;
 import persistence.ProfessorDAO;
-
 public class ProfessorDAOTest {
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}

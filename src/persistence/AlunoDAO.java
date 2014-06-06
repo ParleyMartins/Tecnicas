@@ -458,7 +458,6 @@ public class AlunoDAO {
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.executeUpdate();
-
 		statement.close();
 		connection.close();
 	}

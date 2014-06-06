@@ -8,10 +8,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import persistence.FactoryConnection;
+import control.ManterAluno;
 import control.ManterSala;
+import model.Aluno;
 import model.Sala;
+import exception.ClienteException;
 import exception.PatrimonioException;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
@@ -19,10 +26,10 @@ import java.util.Vector;
 
 public class ManterSalaTest {
 	
-	static ManterSala instance;
+	static Vector<Sala> rooms;
 
 	Vector<Sala> allRooms;
-	Sala room;
+	Sala classroom;
 	
 	public ManterSalaTest() {
 
@@ -30,54 +37,24 @@ public class ManterSalaTest {
 
 	
 	@BeforeClass
-	public static void setUpClass() throws PatrimonioException{
+	public static void setUpBeforeClass() throws PatrimonioException, SQLException{
 		
-		instance = ManterSala.getInstance();
+		rooms = ManterSala.getInstance().getRoomsVec();
 		
 	}
 
 	@AfterClass
-	public static void tearDownClass(){
+	public static void tearDownAfterClass(){
 		
-		instance = null;
+		rooms = null;
 		
-	}
-	
-	@Before
-	public void setUp() throws Exception {
-		
-		room = new Sala("code", "description","capacity");
-		instance.insert("code","description", "capacity");
-		allRooms = instance.getRoomsVec();
-
-	}
-	
-	@After
-	public void tearDown() throws SQLException, PatrimonioException {
-		
-		allRooms = instance.getRoomsVec();
-		Iterator<Sala> iterator = allRooms.iterator();
-
-		// Remove each Vector equipment from database.
-		while (iterator.hasNext()) {
-			
-			room = iterator.next();
-			instance.delete(room);
-		}
-		
-		room = null;
-		
-	}
-	
-	@Test
-	public void testGetSala_vet() throws Exception {
-		assertNotNull(allRooms);
 	}
 	
 	@Test
 	public void testGetInstance() {
 		
-		assertTrue("Should be a instance of ManterAluno.", ManterSala.getInstance() instanceof ManterSala);
+		ManterSala instance = ManterSala.getInstance();
+		assertTrue("Should be a instance of ManterAluno.", instance instanceof ManterSala);
 	}
 	
 	@Test
@@ -89,58 +66,139 @@ public class ManterSalaTest {
 	}
 
 	
-	public void testIncluirVet() throws SQLException, PatrimonioException {
+	public void testInsert() throws SQLException, PatrimonioException {
 		
-		assertNotNull("Equipment should be included",
-				procurarNoVetor(room));
+		Sala room = new Sala("01", "Incluindo", "10");
+		ManterSala.getInstance().insert("01", "Incluindo", "10");
+		boolean isOnDatabase;
+		isOnDatabase = select(room);
+
+		if (isOnDatabase) {
+			delete(room);
+		}
+
+		Sala otherStudent = rooms.lastElement();
+		boolean resultado2 = rooms.equals(otherStudent);
+		rooms.remove(rooms.lastElement());
+
+		assertTrue("Student should be included.", isOnDatabase == true
+				&& resultado2 == true);
 	}
 
 	@Test
-	public void testAlterarVet() throws SQLException, PatrimonioException {
+	public void testModify() throws SQLException, PatrimonioException {
 
-		instance.modify("codigo alterado", "descricao alterarda","capacidade alterada", room);
-		Sala room2 = new Sala("codigo alterado",
-				"descricao alterarda","capacidade alterada");
+		Sala room = new Sala("01", "Incluindo", "10");
+		Sala otherRoom = new Sala("02", "Alterando", "12");
 
-		assertNotNull("Equipment should be updated", procurarNoVetor(room2));
-	}
+		insert(room);
 
-	@Test(expected = PatrimonioException.class)
-	public void testAlterarNaoExistente() throws SQLException, PatrimonioException {
+	    ManterSala.getInstance().modify("01", "Alterando", "10", room);
 
-		Sala room3 = new Sala("codigo", "nao existe","capacidade");
-		instance.modify("codigo alterado", "descricao alterarda","capacidade alterada", room3);
-	}
+		boolean isOnDatabase;
+		isOnDatabase = select(otherRoom);
 
-	@Test(expected = PatrimonioException.class)
-	public void testAlterarNull() throws SQLException, PatrimonioException {
-
-		instance.modify("codigo alterado", "descricao alterarda", "capacidade alterada", null);
-		
-	}
-	
-	
-	@Test(expected = PatrimonioException.class)
-	public void testExcluirNull() throws SQLException, PatrimonioException {
-
-		room = null;
-		instance.delete(room);
-	}
-	
-	public Sala procurarNoVetor(Sala teste)
-			throws PatrimonioException, SQLException {
-
-		allRooms = instance.getRoomsVec();
-		Iterator<Sala> iterator = allRooms.iterator();
-
-		while (iterator.hasNext()) {
-			Sala room4 = iterator.next();
-
-			if (room4.equals(teste)) {
-				return room4;
-			}
+		if (isOnDatabase) {
+			delete(otherRoom);
 		}
-		return null;
+
+		assertTrue("Room should be updated.", isOnDatabase);
+	}
+
+	@Test(expected = ClienteException.class)
+	public void testModifyInexistent() throws ClienteException, SQLException, PatrimonioException {
+
+		Sala room = new Sala("01", "Incluindo", "10");
+		ManterSala.getInstance().modify("01", "Alterando", "10",room);
 	}
 	
+	public void testDelete() throws ClienteException, SQLException, PatrimonioException {
+
+		Sala room = new Sala("01", "Incluindo", "10");
+
+		insert(room);
+
+		ManterSala.getInstance().delete(room);
+
+		boolean resultado = select(room);
+
+		if (resultado) {
+			delete(room);
+		}
+
+		boolean resultado2 = true;
+		if (rooms.size() > 0) {
+			resultado2 = !rooms.lastElement().equals(room);
+		}
+
+		assertTrue("Student should be removed.", resultado == false
+				&& resultado2 == true);
+	}
+
+	@Test(expected = ClienteException.class)
+	public void testDeleteInexistent() throws ClienteException, SQLException, PatrimonioException {
+
+		Sala room = new Sala("01", "Incluindo", "10");
+
+		ManterSala.getInstance().delete(room);
+	}
+	
+	private void insert(Sala room) throws SQLException {
+
+		this.executaNoBanco("INSERT INTO " +
+				"sala (codigo, descricao, capacidade) VALUES (" +
+				"\"" + room.getIdCode() + "\", " +
+				"\"" + room.getDescription() + "\", " +
+				room.getCapacity() + "\"); ");
+	}
+
+	private void delete(Sala room) throws SQLException {
+
+		this.executaNoBanco("DELETE FROM sala WHERE " +
+				"sala.codigo = \"" + room.getIdCode() + "\" and " +
+				"sala.descricao = \"" + room.getDescription()
+				+ "\" and " +
+				"sala.capacidade = " + room.getCapacity() + "\";");
+	}
+
+	private boolean select(Sala room) throws SQLException {
+
+		boolean isOnDatabase;
+
+		isOnDatabase = this.estaNoBanco("SELECT * FROM sala WHERE " +
+				"sala.codigo = \"" + room.getIdCode() + "\" and " +
+				"sala.descricao = \"" + room.getDescription() + "\" and " +
+				"sala.capacidade = " + room.getCapacity() +
+				"\";");
+
+		return isOnDatabase;
+	}
+
+	private void executaNoBanco(String msg) throws SQLException {
+
+		Connection con = FactoryConnection.getInstance().getConnection();
+		PreparedStatement pst = con.prepareStatement(msg);
+		pst.executeUpdate();
+		pst.close();
+		con.close();
+	}
+
+	private boolean estaNoBanco(String query) throws SQLException {
+
+		Connection con = FactoryConnection.getInstance().getConnection();
+		PreparedStatement pst = con.prepareStatement(query);
+		ResultSet rs = pst.executeQuery();
+
+		if (!rs.next()) {
+			rs.close();
+			pst.close();
+			con.close();
+			return false;
+		} else {
+			rs.close();
+			pst.close();
+			con.close();
+			return true;
+		}
+	}
 }

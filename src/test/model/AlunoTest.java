@@ -21,41 +21,40 @@ public class AlunoTest {
 	}
 	
 	
-
 	@Test
 	public void testInstance() throws ClienteException {
-		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste de Instanciamento do Aluno", a instanceof Aluno);
+		Aluno student = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
+		assertTrue("Teste de Instanciamento do Aluno", student instanceof Aluno);
 	}
 	
 	@Test
 	public void testNome() throws ClienteException {
-		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste do Nome do Aluno", "Nome" == a.getName());
+		Aluno student = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
+		assertTrue("Teste do Nome do Aluno", "Nome" == student.getName());
 	}
 
 	@Test
 	public void testCpf() throws ClienteException {
-		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste do CPF do Aluno", "040.757.021-70" == a.getCpf());
+		Aluno student = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
+		assertTrue("Teste do CPF do Aluno", "040.757.021-70" == student.getCpf());
 	}
 	
 	@Test
 	public void testMatricula() throws ClienteException {
-		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste da Matricula do Aluno", "123456" == a.getEnrollmentNumber());
+		Aluno student = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
+		assertTrue("Teste da Matricula do Aluno", "123456" == student.getEnrollmentNumber());
 	}
 	
 	@Test
 	public void testTelefone() throws ClienteException {
-		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste de Telefone do Aluno", "1234-5678" == a.getPhoneNumber());
+		Aluno student = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
+		assertTrue("Teste de Telefone do Aluno", "1234-5678" == student.getPhoneNumber());
 	}
 	
 	@Test
 	public void testEmail() throws ClienteException {
-		Aluno a = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
-		assertTrue("Teste do E-mail do Aluno", "Nome@email" == a.getEmail());
+		Aluno student = new Aluno("Nome", "040.757.021-70", "123456", "1234-5678", "Nome@email");
+		assertTrue("Teste do E-mail do Aluno", "Nome@email" == student.getEmail());
 	}
 
 	
