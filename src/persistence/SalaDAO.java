@@ -2,7 +2,7 @@
 SalaDAO.java
 This manages the DAO functions for Room
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/SalaDAO.java
-*/
+ */
 
 package persistence;
 
@@ -34,7 +34,7 @@ public class SalaDAO {
 	// Instance to the singleton.
 	private static SalaDAO instance;
 
-	private SalaDAO ( ) {
+	private SalaDAO() {
 
 		// Blank constructor.
 	}
@@ -43,7 +43,7 @@ public class SalaDAO {
 	 * Singleton implementation.
 	 * @return the current instance of this class.
 	 */
-	public static SalaDAO getInstance ( ) {
+	public static SalaDAO getInstance() {
 
 		if (instance == null) {
 			instance = new SalaDAO();
@@ -57,55 +57,53 @@ public class SalaDAO {
 	 * This inserts a Room in the database.
 	 * @param room the Room to be inserted into the database
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public void insert (Sala room) throws SQLException, PatrimonioException {
+	public void insert(Sala room) throws SQLException, PatrimonioException {
 
 		checkRoomNull(room);
 		checkIfRoomExists(room);
-		
-		
-		String insertionQuery = "INSERT INTO " +
-				"sala (codigo, descricao, capacidade) VALUES (" +
-				"\"" + room.getIdCode() + "\", " +
-				"\"" + room.getDescription() + "\", " +
-				room.getCapacity() + ");"; 
-		
+
+		String insertionQuery = "INSERT INTO "
+				+ "sala (codigo, descricao, capacidade) VALUES (" + "\""
+				+ room.getIdCode() + "\", " + "\"" + room.getDescription()
+				+ "\", " + room.getCapacity() + ");";
+
 		this.update(insertionQuery);
 	}
 
-	/** 
+	/**
 	 * This updates a Room on the database.
 	 * @param oldRoom The Room with the old info in the database
-	 * @param newRoom The Room with the new info to be inserted into the database
+	 * @param newRoom The Room with the new info to be inserted into the
+	 * database
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public void modify (Sala oldRoom, Sala newRoom) throws SQLException,
+	public void modify(Sala oldRoom, Sala newRoom) throws SQLException,
 			PatrimonioException {
 
+		// Check the conditions to update a classroom
 		checkRoomNull(newRoom);
 		checkRoomNull(oldRoom);
-		
+		checkRoomNotInDB(oldRoom);
+		checkRoomInOtherDB(oldRoom);
+		checkIfRoomExists(newRoom);
+		checkRoomInDB(newRoom);
+
+		// Opens the connection and do the update
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement;
 
-		checkRoomNotInDB(oldRoom);
-		
-		checkRoomInOtherDB(oldRoom);
-		checkIfRoomExists(newRoom);
-				
-		checkRoomInDB(newRoom);
-		
-		String message = "UPDATE sala SET " +
-				"codigo = \"" + newRoom.getIdCode() + "\", " +
-				"descricao = \"" + newRoom.getDescription() + "\", " +
-				"capacidade = " + newRoom.getCapacity() +
-				" WHERE " +
-				"sala.codigo = \"" + oldRoom.getIdCode() + "\" and " +
-				"sala.descricao = \"" + oldRoom.getDescription() + "\" and "
-				+
-				"sala.capacidade = " + oldRoom.getCapacity() + ";";
+		String message = "UPDATE sala SET " + "codigo = \""
+				+ newRoom.getIdCode() + "\", " + "descricao = \""
+				+ newRoom.getDescription() + "\", " + "capacidade = "
+				+ newRoom.getCapacity() + " WHERE " + "sala.codigo = \""
+				+ oldRoom.getIdCode() + "\" and " + "sala.descricao = \""
+				+ oldRoom.getDescription() + "\" and " + "sala.capacidade = "
+				+ oldRoom.getCapacity() + ";";
 
 		connection.setAutoCommit(false);
 		statement = connection.prepareStatement(message);
@@ -120,35 +118,35 @@ public class SalaDAO {
 	 * This removes a Room from the database.
 	 * @param room The Room to be removed.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public void delete (Sala room) throws SQLException, PatrimonioException {
+	public void delete(Sala room) throws SQLException, PatrimonioException {
 
+		// Check the conditions to the remotion
 		checkRoomNull(room);
 		checkRoomInOtherDB(room);
-		
-		if (this.isInDB(room)) {
-			this.update("DELETE FROM sala WHERE " +
-					"sala.codigo = \"" + room.getIdCode() + "\" and " +
-					"sala.descricao = \"" + room.getDescription()
-					+ "\" and " +
-					"sala.capacidade = " + room.getCapacity() + ";"
-					);
-		} else {
-			throw new PatrimonioException(NO_EXISTING_ROOM);
-		}
+		checkRoomNotInDB(room);
+
+		// Do the remotion on database
+		String remotionQuery = "DELETE FROM sala WHERE " + "sala.codigo = \""
+				+ room.getIdCode() + "\" and " + "sala.descricao = \""
+				+ room.getDescription() + "\" and " + "sala.capacidade = "
+				+ room.getCapacity() + ";";
+		this.update(remotionQuery);
 	}
 
 	/**
 	 * This gets all the Rooms from the database.
 	 * @return a Vector with all the rooms
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public Vector <Sala> searchAll ( ) throws SQLException,
-			PatrimonioException {
+	public Vector<Sala> searchAll() throws SQLException, PatrimonioException {
 
-		return this.search("SELECT * FROM sala;");
+		Vector<Sala> allRooms = this.search("SELECT * FROM sala;");
+		return allRooms;
 	}
 
 	/**
@@ -156,13 +154,16 @@ public class SalaDAO {
 	 * @param code The String with the desired Room code.
 	 * @return A Vector with all the Rooms found on the search.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public Vector <Sala> searchByCode (String code) throws SQLException,
+	public Vector<Sala> searchByCode(String code) throws SQLException,
 			PatrimonioException {
-		
-		return this.search("SELECT * FROM sala WHERE codigo = " + "\"" + code
-				+ "\";");
+
+		Vector<Sala> searchResult = this
+				.search("SELECT * FROM sala WHERE codigo = " + "\"" + code
+						+ "\";");
+		return searchResult;
 	}
 
 	/**
@@ -170,14 +171,16 @@ public class SalaDAO {
 	 * @param description The String with the desired Room description
 	 * @return A Vector with all the Rooms found on the search.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public Vector <Sala> searchByDescription (String description)
-			throws SQLException,
-			PatrimonioException {
+	public Vector<Sala> searchByDescription(String description)
+			throws SQLException, PatrimonioException {
 
-		return this.search("SELECT * FROM sala WHERE descricao = " + "\""
-				+ description + "\";");
+		Vector<Sala> searchResult = this
+				.search("SELECT * FROM sala WHERE descricao = " + "\""
+						+ description + "\";");
+		return searchResult;
 	}
 
 	/**
@@ -185,33 +188,36 @@ public class SalaDAO {
 	 * @param description The String with the desired Room capacity
 	 * @return A Vector with all the Rooms found on the search.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	public Vector <Sala> searchByCapacity (String capacity)
-			throws SQLException, PatrimonioException {
+	public Vector<Sala> searchByCapacity(String capacity) throws SQLException,
+			PatrimonioException {
 
-		return this.search("SELECT * FROM sala WHERE capacidade = " + capacity
-				+ ";");
+		Vector<Sala> searchResult = this
+				.search("SELECT * FROM sala WHERE capacidade = " + capacity
+						+ ";");
+		return searchResult;
 	}
 
 	/*
-	Private methods.
-	*/
+	 * Private methods.
+	 */
 
 	/**
 	 * This searches the Room database by a generic query
 	 * @param query The String with the search command.
 	 * @return A Vector with all the Rooms found on the search.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	private Vector <Sala> search (String query) throws SQLException,
+	private Vector<Sala> search(String query) throws SQLException,
 			PatrimonioException {
 
-		Vector <Sala> roomVec = new Vector <Sala>();
+		Vector<Sala> roomVec = new Vector<Sala>();
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
-
 		PreparedStatement statement = connection.prepareStatement(query);
 		ResultSet result = statement.executeQuery();
 
@@ -224,14 +230,14 @@ public class SalaDAO {
 		connection.close();
 		return roomVec;
 	}
-
+	
 	/**
 	 * This checks if a room in on any database.
 	 * @param query The String with the search query
 	 * @return true if a room is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean iInDBGeneric (String query) throws SQLException {
+	private boolean iInDBGeneric(String query) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(query);
@@ -252,18 +258,21 @@ public class SalaDAO {
 
 	/**
 	 * This checks if the given Room is in any database.
-	 * @param room The Room to be searched for. 
+	 * @param room The Room to be searched for.
 	 * @return true if the room was found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	private boolean isInDB (Sala room) throws SQLException {
+	private boolean isInDB(Sala room) throws SQLException {
 
-		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
-				"sala.codigo = \"" + room.getIdCode() + "\" and " +
-				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacity() +
-				";");
+		String selectQuery = "SELECT * FROM sala WHERE " + "sala.codigo = \""
+				+ room.getIdCode() + "\" and " + "sala.descricao = \""
+				+ room.getDescription() + "\" and " + "sala.capacidade = "
+				+ room.getCapacity() + ";";
+		boolean isInDB = this.iInDBGeneric(selectQuery);
+
+		return isInDB;
 	}
 
 	/**
@@ -272,10 +281,13 @@ public class SalaDAO {
 	 * @return true if a room with the code is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInDbCode (String code) throws SQLException {
+	private boolean isInDbCode(String code) throws SQLException {
 
-		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
-				"sala.codigo = \"" + code + "\";");
+		String selectQuery = "SELECT * FROM sala WHERE " + "sala.codigo = \""
+				+ code + "\";";
+		boolean isInDB = this.iInDBGeneric(selectQuery);
+
+		return isInDB;
 	}
 
 	/**
@@ -284,27 +296,32 @@ public class SalaDAO {
 	 * @return true if the Room was found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInOtherDB (Sala room) throws SQLException {
+	private boolean isInOtherDB(Sala room) throws SQLException {
 
-		if (this.iInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
-				"id_sala = (SELECT id_sala FROM sala WHERE " +
-				"sala.codigo = \"" + room.getIdCode() + "\" and " +
-				"sala.descricao = \"" + room.getDescription() + "\" and " +
-				"sala.capacidade = " + room.getCapacity() + " );") == false) {
-			if (this.iInDBGeneric("SELECT * FROM reserva_sala_aluno WHERE " +
-					"id_sala = (SELECT id_sala FROM sala WHERE " +
-					"sala.codigo = \"" + room.getIdCode() + "\" and " +
-					"sala.descricao = \"" + room.getDescription() + "\" and " +
-					"sala.capacidade = " + room.getCapacity() + " );") == false) {
-				return false;
-			} else {
-				// Nothing here.
-			}
-		} else {
-			// Nothing here.
-		}
+		boolean isOnDB = true;
 
-		return true;
+		String selectTeacherQuery = "SELECT * FROM reserva_sala_professor WHERE "
+				+ "id_sala = (SELECT id_sala FROM sala WHERE "
+				+ "sala.codigo = \""
+				+ room.getIdCode()
+				+ "\" and "
+				+ "sala.descricao = \""
+				+ room.getDescription()
+				+ "\" and "
+				+ "sala.capacidade = " + room.getCapacity() + " );";
+		String selectStudentQuery = "SELECT * FROM reserva_sala_aluno WHERE "
+				+ "id_sala = (SELECT id_sala FROM sala WHERE "
+				+ "sala.codigo = \"" + room.getIdCode() + "\" and "
+				+ "sala.descricao = \"" + room.getDescription() + "\" and "
+				+ "sala.capacidade = " + room.getCapacity() + " );";
+
+		boolean isOnTeacherDB = this.iInDBGeneric(selectTeacherQuery);
+		boolean isOnStudentDB = this.iInDBGeneric(selectStudentQuery);
+
+		// If is in one table or another, should be true
+		isOnDB = isOnTeacherDB || isOnStudentDB;
+
+		return isOnDB;
 	}
 
 	/**
@@ -312,14 +329,18 @@ public class SalaDAO {
 	 * @param result The ResultSet used to fetch the room
 	 * @return a instance of Room with the given data.
 	 * @throws SQLException if an exception related to the database is activated
-	 * @throws PatrimonioException if an exception related to the property is activated
+	 * @throws PatrimonioException if an exception related to the property is
+	 * activated
 	 */
-	private Sala fetchSala (ResultSet result) throws PatrimonioException,
+	private Sala fetchSala(ResultSet result) throws PatrimonioException,
 			SQLException {
-		
-		return new Sala(result.getString("codigo"),
-				result.getString("descricao"),
-				result.getString("capacidade"));
+
+		String idCode = result.getString("codigo");
+		String description = result.getString("descricao");
+		String capacity = result.getString("capacidade");
+		Sala classroom = new Sala(idCode, description, capacity);
+
+		return classroom;
 	}
 
 	/**
@@ -327,7 +348,7 @@ public class SalaDAO {
 	 * @param query The String with the Query to be updated.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private void update (String message) throws SQLException {
+	private void update(String message) throws SQLException {
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 		PreparedStatement statement = connection.prepareStatement(message);
@@ -335,49 +356,58 @@ public class SalaDAO {
 		statement.close();
 		connection.close();
 	}
-	
+
 	private void checkRoomNull(Sala room) throws PatrimonioException {
+
 		if (room == null) {
 			throw new PatrimonioException(NULL_ROOM);
 		} else {
 			// Nothing here.
 		}
 	}
-	
-	private void checkRoomInOtherDB(Sala room) throws PatrimonioException, SQLException {
-		boolean roomInUse = this.isInOtherDB(room); 
-		
+
+	private void checkRoomInOtherDB(Sala room) throws PatrimonioException,
+			SQLException {
+
+		boolean roomInUse = this.isInOtherDB(room);
+
 		if (roomInUse) {
 			throw new PatrimonioException(ROOM_IN_USE);
 		} else {
 			// Nothing here.
 		}
 	}
-	
-	private void checkRoomNotInDB(Sala room) throws PatrimonioException, SQLException {
-		boolean roomInDB = this.isInDB(room); 
-		
+
+	private void checkRoomNotInDB(Sala room) throws PatrimonioException,
+			SQLException {
+
+		boolean roomInDB = this.isInDB(room);
+
 		if (!roomInDB) {
 			throw new PatrimonioException(NO_EXISTING_ROOM);
 		} else {
 			// Nothing here.
 		}
 	}
-	
-	private void checkRoomInDB(Sala room) throws PatrimonioException, SQLException {
-		boolean roomInDB = this.isInDB(room); 
-		
+
+	private void checkRoomInDB(Sala room) throws PatrimonioException,
+			SQLException {
+
+		boolean roomInDB = this.isInDB(room);
+
 		if (roomInDB) {
 			throw new PatrimonioException(EXISTING_ROOM);
 		} else {
 			// Nothing here.
 		}
 	}
-	
-	private void checkIfRoomExists(Sala room) throws PatrimonioException, SQLException {
+
+	private void checkIfRoomExists(Sala room) throws PatrimonioException,
+			SQLException {
+
 		String roomIdCode = room.getIdCode();
-		boolean roomExists = this.isInDbCode(roomIdCode); 
-		
+		boolean roomExists = this.isInDbCode(roomIdCode);
+
 		if (roomExists) {
 			throw new PatrimonioException(CODE_ROOM_ALREADY_EXISTS);
 		} else {
