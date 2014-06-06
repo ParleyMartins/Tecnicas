@@ -18,11 +18,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import persistence.FactoryConnection;
-import persistence.SalaDAO;
+import persistence.ClassroomDAO;
 import exception.PatrimonioException;
 
 
-public class SalaDAOTest {
+public class ClassroomDAOTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -36,12 +36,12 @@ public class SalaDAOTest {
 	
 	@Test
 	public void testInstance() {
-		assertTrue("Instanciando SalaDAO", SalaDAO.getInstance() instanceof SalaDAO);
+		assertTrue("Instanciando SalaDAO", ClassroomDAO.getInstance() instanceof ClassroomDAO);
 	}
 	@Test
 	public void testSingleton() {
-		SalaDAO inst1 = SalaDAO.getInstance();
-		SalaDAO inst2 = SalaDAO.getInstance();
+		ClassroomDAO inst1 = ClassroomDAO.getInstance();
+		ClassroomDAO inst2 = ClassroomDAO.getInstance();
 		assertSame("Testando o Padrao Singleton", inst2, inst1);
 	}
 	
@@ -51,7 +51,7 @@ public class SalaDAOTest {
 		Sala s = new Sala("CodigoInc", "Descricao Da Sala Inclusao", "123");
 		boolean rs = false;
 		
-		SalaDAO.getInstance().insert(s);
+		ClassroomDAO.getInstance().insert(s);
 		
 		rs = this.estaNoBanco("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + s.getIdCode() + "\" and " +
@@ -69,7 +69,7 @@ public class SalaDAOTest {
 	}
 	@Test (expected= PatrimonioException.class)
 	public void testIncluirNulo() throws PatrimonioException, SQLException {
-		SalaDAO.getInstance().insert(null);
+		ClassroomDAO.getInstance().insert(null);
 	}
 	@Test (expected= PatrimonioException.class)
 	public void testIncluirCodigoExistente() throws PatrimonioException, SQLException {
@@ -77,9 +77,9 @@ public class SalaDAOTest {
 		Sala s2 = new Sala("CodigoInc", "Descricao Dois", "200");
 		boolean rs = false;
 		
-		SalaDAO.getInstance().insert(s2);
+		ClassroomDAO.getInstance().insert(s2);
 		try{
-			SalaDAO.getInstance().insert(s);
+			ClassroomDAO.getInstance().insert(s);
 		} finally {
 			rs = this.estaNoBanco("SELECT * FROM sala WHERE " +
 					"sala.codigo = \"" + s.getIdCode() + "\" and " +
@@ -111,7 +111,7 @@ public class SalaDAOTest {
 				"\"" + s.getDescription() + "\", " +
 				s.getCapacity() + ");");
 		
-		SalaDAO.getInstance().modify(s, s2);
+		ClassroomDAO.getInstance().modify(s, s2);
 		
 		rs = this.estaNoBanco("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + s.getIdCode() + "\" and " +
@@ -142,12 +142,12 @@ public class SalaDAOTest {
 	@Test (expected= PatrimonioException.class)
 	public void testAletarPrimeiroNulo() throws PatrimonioException, SQLException {
 		Sala s = new Sala("CodigoInc", "Descricao Da Sala Inclusao", "123");
-		SalaDAO.getInstance().modify(null, s);
+		ClassroomDAO.getInstance().modify(null, s);
 	}
 	@Test (expected= PatrimonioException.class)
 	public void testAletarSegundoNulo() throws PatrimonioException, SQLException {
 		Sala s = new Sala("CodigoInc", "Descricao Da Sala Inclusao", "123");
-		SalaDAO.getInstance().modify(s, null);
+		ClassroomDAO.getInstance().modify(s, null);
 	}
 	@Test (expected= PatrimonioException.class)
 	public void testAletarNaoExistente() throws PatrimonioException, SQLException {
@@ -156,7 +156,7 @@ public class SalaDAOTest {
 		boolean rs2 = true;
 		
 		try{
-			SalaDAO.getInstance().modify(s, s2);
+			ClassroomDAO.getInstance().modify(s, s2);
 		} finally {		
 		
 		rs2 = this.estaNoBanco("SELECT * FROM sala WHERE " +
@@ -195,7 +195,7 @@ public class SalaDAOTest {
 				s2.getCapacity() + ");");
 		
 		try{
-			SalaDAO.getInstance().modify(s, s2);
+			ClassroomDAO.getInstance().modify(s, s2);
 		} finally {
 		
 		rs = this.estaNoBanco("SELECT * FROM sala WHERE " +
@@ -248,7 +248,7 @@ public class SalaDAOTest {
 				s.getCapacity() + ");");
 		
 		try{
-			SalaDAO.getInstance().modify(s, s2);
+			ClassroomDAO.getInstance().modify(s, s2);
 		} finally {
 		
 		rs = this.estaNoBanco("SELECT * FROM sala WHERE " +
@@ -289,7 +289,7 @@ public class SalaDAOTest {
 				"\"" + s.getDescription() + "\", " +
 				s.getCapacity() + ");");
 		
-		SalaDAO.getInstance().delete(s);
+		ClassroomDAO.getInstance().delete(s);
 		
 		rs = this.estaNoBanco("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + s.getIdCode() + "\" and " +
@@ -307,7 +307,7 @@ public class SalaDAOTest {
 	}
 	@Test (expected= PatrimonioException.class)
 	public void testExcluirNulo() throws PatrimonioException, SQLException {
-		SalaDAO.getInstance().delete(null);
+		ClassroomDAO.getInstance().delete(null);
 	}
 	@Ignore // (expected= PatrimonioException.class)
 	public void testExcluirEnvolvidoEmReserva() throws PatrimonioException, SQLException {
@@ -316,7 +316,7 @@ public class SalaDAOTest {
 	@Test (expected= PatrimonioException.class)
 	public void testExcluirNaoExistente() throws PatrimonioException, SQLException {
 		Sala s = new Sala("CodigoInc", "Descricao Da Sala Inclusao", "123");
-		SalaDAO.getInstance().delete(s);
+		ClassroomDAO.getInstance().delete(s);
 	}
 	
 	
@@ -330,7 +330,7 @@ public class SalaDAOTest {
 				"\"" + s.getDescription() + "\", " +
 				s.getCapacity() + ");");
 		
-		Vector<Sala> vet = SalaDAO.getInstance().searchByCode("CodigoInc");
+		Vector<Sala> vet = ClassroomDAO.getInstance().searchByCode("CodigoInc");
 		
 		this.executaNoBanco("DELETE FROM sala WHERE " +
 				"sala.codigo = \"" + s.getIdCode() + "\" and " +
@@ -349,7 +349,7 @@ public class SalaDAOTest {
 				"\"" + s.getDescription() + "\", " +
 				s.getCapacity() + ");");
 		
-		Vector<Sala> vet = SalaDAO.getInstance().searchByDescription("Descricao Da Sala Inclusao");
+		Vector<Sala> vet = ClassroomDAO.getInstance().searchByDescription("Descricao Da Sala Inclusao");
 		
 		this.executaNoBanco("DELETE FROM sala WHERE " +
 				"sala.codigo = \"" + s.getIdCode() + "\" and " +
@@ -368,7 +368,7 @@ public class SalaDAOTest {
 				"\"" + s.getDescription() + "\", " +
 				s.getCapacity() + ");");
 		
-		Vector<Sala> vet = SalaDAO.getInstance().searchByCapacity("123");
+		Vector<Sala> vet = ClassroomDAO.getInstance().searchByCapacity("123");
 		
 		this.executaNoBanco("DELETE FROM sala WHERE " +
 				"sala.codigo = \"" + s.getIdCode() + "\" and " +

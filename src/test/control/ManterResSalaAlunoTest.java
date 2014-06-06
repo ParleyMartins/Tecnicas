@@ -25,7 +25,7 @@ import exception.ReservaException;
 
 import persistence.AlunoDAO;
 import persistence.FactoryConnection;
-import persistence.SalaDAO;
+import persistence.ClassroomDAO;
 
 public class ManterResSalaAlunoTest {
 	private static Sala sala1;
@@ -39,13 +39,13 @@ public class ManterResSalaAlunoTest {
 		aluno1 = new Aluno("testInstance", "501.341.852-69", "456678", "", "");
 		
 		AlunoDAO.getInstance().insert(aluno1);
-		SalaDAO.getInstance().insert(sala1);
+		ClassroomDAO.getInstance().insert(sala1);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		AlunoDAO.getInstance().delete(aluno1);
-		SalaDAO.getInstance().delete(sala1);
+		ClassroomDAO.getInstance().delete(sala1);
 	}
 
 	

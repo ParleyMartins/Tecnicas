@@ -17,7 +17,7 @@ import java.util.Vector;
 import view.International;
 import exception.PatrimonioException;
 
-public class SalaDAO {
+public class ClassroomDAO {
 
 	// Exception messages and alerts.
 	private static final String EXISTING_ROOM = International.getInstance()
@@ -32,9 +32,9 @@ public class SalaDAO {
 			.getInstance().getMessages().getString("codeRoomAlreadyExists");
 
 	// Instance to the singleton.
-	private static SalaDAO instance;
+	private static ClassroomDAO instance;
 
-	private SalaDAO() {
+	private ClassroomDAO() {
 
 		// Blank constructor.
 	}
@@ -43,10 +43,10 @@ public class SalaDAO {
 	 * Singleton implementation.
 	 * @return the current instance of this class.
 	 */
-	public static SalaDAO getInstance() {
+	public static ClassroomDAO getInstance() {
 
 		if (instance == null) {
-			instance = new SalaDAO();
+			instance = new ClassroomDAO();
 		} else {
 			// Nothing here.
 		}

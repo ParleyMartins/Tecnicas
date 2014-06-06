@@ -6,10 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import test.control.ManterSalaTest;
 import test.model.SalaTest;
-import test.persistence.SalaDAOTest;
+import test.persistence.ClassroomDAOTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({SalaTest.class, SalaDAOTest.class, ManterSalaTest.class })
+@SuiteClasses({SalaTest.class, ClassroomDAOTest.class, ManterSalaTest.class })
 public class SalaSuite {
 
 }
