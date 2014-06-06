@@ -66,10 +66,12 @@ public class EquipamentDAO {
 
 		checkInsertEquipment(equipment);
 		
-		this.update("INSERT INTO " + "equipamento "
-							+ "(codigo, descricao) VALUES (" + "\""
-							+ equipment.getIdCode() + "\", " + "\""
-							+ equipment.getDescription() + "\");");
+		String query = "INSERT INTO " + "equipamento "
+				+ "(codigo, descricao) VALUES (" + "\""
+				+ equipment.getIdCode() + "\", " + "\""
+				+ equipment.getDescription() + "\");"; 
+		
+		this.update(query);
 	}
 
 	/** 
@@ -108,10 +110,12 @@ public class EquipamentDAO {
 
 		this.checkDeleteEquipment(equipment);
 		
-		this.update("DELETE FROM equipamento WHERE "
+		String query = "DELETE FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getIdCode()
 				+ "\" and " + "equipamento.descricao = \""
-				+ equipment.getDescription() + "\";");
+				+ equipment.getDescription() + "\";";
+		
+		this.update(query);
 	}
 
 	/**

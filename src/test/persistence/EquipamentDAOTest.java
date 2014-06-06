@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import model.Equipamento;
+import model.Sala;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,8 +38,8 @@ public class EquipamentDAOTest {
 	
 	@Before
 	public void setUp() throws PatrimonioException, SQLException {
-		 oldEq = new Equipamento("codigo", "descricao - antigo");
-		 newEq = new Equipamento("codigo", "descricao - alterada");
+		 oldEq = new Equipamento("999", "descricao - antigo");
+		 newEq = new Equipamento("0001", "descricao - alterada");
 		 instance.insert(oldEq);
 		 all = instance.searchAll();
 	}
@@ -85,25 +86,6 @@ public class EquipamentDAOTest {
 		instance.insert(null);
 		fail("Equipment should not be inserted if it is null");
 	}
-	
-	
-	@Test
-	public void testSearchAll() throws SQLException, PatrimonioException {
-		assertNotNull("All elements should have appeared on the vector", all);
-	}
-	
-	@Test
-	public void testSearchByCode() throws SQLException, PatrimonioException {
-		assertNotNull("All elements with the given code should have appeared on the vector",
-				instance.searchByCode(oldEq.getIdCode()));
-	}
-	
-	@Test
-	public void testSearchByNullCode() throws SQLException, PatrimonioException {
-		assertTrue("Code should be never null.",
-				instance.searchByCode(null).isEmpty());
-	}
-	
 	
 	@Test
 	public void testModify() throws PatrimonioException, SQLException {
@@ -156,6 +138,27 @@ public class EquipamentDAOTest {
 		assertNull("Equipment should have been modified", searchOnVector(eq));
 	}
 	
+	
+	public void testSearchAll() throws SQLException, PatrimonioException{
+		instance.insert(newEq);
+		assertNotNull("The vector should contain all inserted elements",
+				searchOnVector(oldEq));
+		assertNotNull("The vector should contain all inserted elements",
+				searchOnVector(newEq));
+	}
+	
+	@Test 
+	public void testSearchByCode() throws SQLException, PatrimonioException{
+		Vector <Equipamento> allByCode = instance.searchByCode(oldEq.getIdCode());
+		assertFalse("The vector should not be empty", allByCode.isEmpty());
+	}
+	
+	@Test 
+	public void testSearchByCodeNotRegistered() throws SQLException, PatrimonioException{
+		Vector <Equipamento> allByCode = instance.searchByCode(newEq.getIdCode());
+		assertTrue("The vector should be empty", allByCode.isEmpty());
+	}
+
 	
 	private Equipamento searchOnVector(Equipamento equipment) throws PatrimonioException, SQLException {
 		all = instance.searchAll();
