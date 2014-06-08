@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Equipamento;
+import model.Equipment;
 import model.Professor;
 import model.ReservaEquipamentoProfessor;
 
@@ -28,9 +28,9 @@ public class TeacherEquipmentReservationDAOTest{
 	static ProfessorDAO teacherDAO = ProfessorDAO.getInstance();
 	static EquipamentDAO equipmentDAO = EquipamentDAO.getInstance();
 	ReservaEquipamentoProfessor reservation;
-	static Equipamento equipment1;
+	static Equipment equipment1;
 	static Professor teacher1;
-	static Equipamento equipment2;
+	static Equipment equipment2;
 	static Professor teacher2;
 	static String cpf1 = "888.822.318-52";
 	static String cpf2 = "567.614.150-63";
@@ -55,11 +55,11 @@ public class TeacherEquipmentReservationDAOTest{
 		
 		String code = "12345";
 		String description = "test equipment";
-		equipment1 = new Equipamento(code, description);
+		equipment1 = new Equipment(code, description);
 		
 		code = "1234";
 		description = "test equipment 2";
-		equipment2 = new Equipamento(code, description);
+		equipment2 = new Equipment(code, description);
 		
 		equipmentDAO.insert(equipment1);
 		teacherDAO.insert(teacher1);
@@ -95,7 +95,7 @@ public class TeacherEquipmentReservationDAOTest{
 			// Nothing here.
 		}
 		
-		Vector <Equipamento> allEqs = equipmentDAO.searchByCode(equipment2.getIdCode());
+		Vector <Equipment> allEqs = equipmentDAO.searchByCode(equipment2.getIdCode());
 		if(!allEqs.isEmpty()){
 			equipmentDAO.delete(equipment2);
 		}else {

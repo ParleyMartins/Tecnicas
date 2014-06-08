@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import model.Equipamento;
+import model.Equipment;
 import model.Patrimonio;
 import model.ReservaEquipamentoProfessor;
 import view.International;
@@ -30,7 +30,7 @@ import exception.ReservaException;
 
 public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
-	private Equipamento equipment;
+	private Equipment equipment;
 	private ManterResEquipamentoProfessor instance;
 
 	/**
@@ -41,7 +41,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	 * @param tempEquipment
 	 */
 	public HorariosReservaEquipamento (Frame parent, boolean modal,
-			String date, Equipamento tempEquipment) {
+			String date, Equipment tempEquipment) {
 
 		super(parent, modal, date, tempEquipment);
 		this.equipment = tempEquipment;
@@ -83,7 +83,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	 */
 	protected DefaultTableModel fillTable (Patrimonio tempEquipment) {
 
-		this.equipment = (Equipamento) tempEquipment;
+		this.equipment = (Equipment) tempEquipment;
 		DefaultTableModel dataTable = new DefaultTableModel();
 		this.instance = ManterResEquipamentoProfessor.getInstance();
 		try {

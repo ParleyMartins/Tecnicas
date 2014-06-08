@@ -11,7 +11,7 @@ import exception.ReservaException;
 
 public class ReservaEquipamento extends Reserva {
 
-	private Equipamento equipment;
+	private Equipment equipment;
 
 	// Error messages.
 	private final String BLANK_EQUIPMENT = International.getInstance().getMessages()
@@ -24,7 +24,7 @@ public class ReservaEquipamento extends Reserva {
 	 * @param equipment object to be reservation.
 	 * @throws ReservaException It ensures that every parameter passed is valid. 
 	 */
-	public ReservaEquipamento(String date, String time, Equipamento equipment)
+	public ReservaEquipamento(String date, String time, Equipment equipment)
 			throws ReservaException {
 
 		super(date, time);
@@ -35,7 +35,7 @@ public class ReservaEquipamento extends Reserva {
 	 * This method gets a equipment. 
 	 * @return The content in the equipment field.
 	 */
-	public Equipamento getEquipment() {
+	public Equipment getEquipment() {
 
 		return this.equipment;
 	}
@@ -45,7 +45,7 @@ public class ReservaEquipamento extends Reserva {
 	 * @param equipment object to be reservation.
 	 * @throws ReservaException It ensures that every parameter passed is valid.
 	 */
-	public void setEquipment(Equipamento equipment) throws ReservaException {
+	public void setEquipment(Equipment equipment) throws ReservaException {
 
 		if (equipment == null) {
 			throw new ReservaException(BLANK_EQUIPMENT);

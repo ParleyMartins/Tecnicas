@@ -93,19 +93,19 @@ public class SupportRoomTest {
 		
 		SupportRoom.getInstance().delete(room);
 		
-		boolean resultado = select(room);
+		boolean isOnDatabase = select(room);
 
-		if (resultado) {
+		if (isOnDatabase) {
 			delete(room);
 		}
 
-		boolean resultado2 = true;
+		boolean isOnDatabase2 = true;
 		if (allRooms.size() > 0) {
-			resultado2 = !allRooms.lastElement().equals(room);
+			isOnDatabase2 = !allRooms.lastElement().equals(room);
 		}
 
-		assertTrue("Student should be removed.", resultado == false
-				&& resultado2 == true);
+		assertTrue("Student should be removed.", isOnDatabase == false
+				&& isOnDatabase2 == true);
 
 	}
 

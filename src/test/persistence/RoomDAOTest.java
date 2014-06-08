@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Equipamento;
+import model.Equipment;
 import model.ReservaEquipamentoProfessor;
 import model.Sala;
 

@@ -26,7 +26,7 @@ public class ReservaEquipamentoProfessor extends ReservaEquipamento {
 	 * @throws ReservaException  It ensures that every parameter passed is valid.
 	 */
 	public ReservaEquipamentoProfessor(String date, String time,
-			Equipamento equipment, Professor teacher) throws ReservaException {
+			Equipment equipment, Professor teacher) throws ReservaException {
 
 		super(date, time, equipment);
 		this.setTeacher(teacher);

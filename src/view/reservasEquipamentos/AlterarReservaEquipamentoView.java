@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.Equipamento;
+import model.Equipment;
 import model.ReservaEquipamentoProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -21,7 +21,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	// int index;
 	ReservaEquipamentoProfessor instanceOfReserve;
-	Equipamento instanceOfEquipment;
+	Equipment instanceOfEquipment;
 	
 	/**
 	 * Constructor to generate the form
@@ -36,7 +36,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	 * @throws ReservaException if some of the reservation info is invalid.
 	 */
 	public AlterarReservaEquipamentoView (Frame parent, boolean modal,
-			int index, int month, Equipamento equipmentToReserve) throws SQLException,
+			int index, int month, Equipment equipmentToReserve) throws SQLException,
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);

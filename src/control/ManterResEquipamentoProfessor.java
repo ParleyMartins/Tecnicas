@@ -12,7 +12,7 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Equipamento;
+import model.Equipment;
 import model.Professor;
 import model.ReservaEquipamentoProfessor;
 import persistence.TeacherEquipmentReservationDAO;
@@ -112,7 +112,7 @@ public class ManterResEquipamentoProfessor {
 	 * @throws SQLException If has some problem with the database insertion
 	 * @throws ReservaException If some of the equipment info is invalid
 	 */
-	public void insert(Equipamento equipment, Professor teacher, String date,
+	public void insert(Equipment equipment, Professor teacher, String date,
 			String time) throws SQLException, ReservaException {
 
 		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(

@@ -1,6 +1,6 @@
 /**
-Equipamento
-Class sets exceptions of Equipamento.
+Equipment
+Class sets exceptions of Equipment.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Equipamento.java.
 */
 
@@ -8,7 +8,7 @@ package model;
 
 import exception.PatrimonioException;
 
-public class Equipamento extends Patrimonio {
+public class Equipment extends Patrimonio {
 
 	/**
 	 * Fields of a client. 
@@ -16,7 +16,7 @@ public class Equipamento extends Patrimonio {
 	 * @param description An equipment description. 
 	 * @throws PatrimonioException It ensures that every parameter passed is not null.
 	 */
-	public Equipamento(String id_code, String description)
+	public Equipment(String id_code, String description)
 			throws PatrimonioException {
 
 		super(id_code, description);

@@ -15,12 +15,12 @@ import java.util.Vector;
 import persistence.EquipamentDAO;
 import view.International;
 import exception.PatrimonioException;
-import model.Equipamento;
+import model.Equipment;
 
 public class ManterEquipamento {
 
 	// This Vector will hold all equipments in memory.
-	private Vector<Equipamento> allEquipments = new Vector<Equipamento>();
+	private Vector<Equipment> allEquipments = new Vector<Equipment>();
 
 	private static ManterEquipamento instance;
 	private static EquipamentDAO equipmentDAOInstance;
@@ -59,7 +59,7 @@ public class ManterEquipamento {
 	 * @throws SQLException If has some problem during the database search
 	 * @throws PatrimonioException If some of the equipment info is invalid
 	 */
-	public Vector<Equipamento> getAllEquipments() throws SQLException,
+	public Vector<Equipment> getAllEquipments() throws SQLException,
 			PatrimonioException {
 
 		this.allEquipments = equipmentDAOInstance.searchAll();
@@ -76,7 +76,7 @@ public class ManterEquipamento {
 	public void insert(String equipmentCode, String equipmentDescription)
 			throws PatrimonioException, SQLException {
 
-		Equipamento equipment = new Equipamento(equipmentCode,
+		Equipment equipment = new Equipment(equipmentCode,
 				equipmentDescription);
 		equipmentDAOInstance.insert(equipment);
 
@@ -93,14 +93,14 @@ public class ManterEquipamento {
 	 * @throws SQLException If has some problem during the database update
 	 */
 	public void modify(String newCode, String newDescription,
-			Equipamento oldEquipment) throws PatrimonioException, SQLException {
+			Equipment oldEquipment) throws PatrimonioException, SQLException {
 
 		if (oldEquipment == null) {
 			String blankEquipmentError = messages.getString("blankEquipment");
 			throw new PatrimonioException(blankEquipmentError);
 		} else {
 
-			Equipamento newEquipment = new Equipamento(newCode, newDescription);
+			Equipment newEquipment = new Equipment(newCode, newDescription);
 
 			// We need to updates the database and the Vector.
 			equipmentDAOInstance.modify(oldEquipment, newEquipment);
@@ -114,7 +114,7 @@ public class ManterEquipamento {
 	 * @throws SQLException If has some problem during the database deletion
 	 * @throws PatrimonioException If the equipment information is invalid
 	 */
-	public void delete(Equipamento equipment) throws SQLException,
+	public void delete(Equipment equipment) throws SQLException,
 			PatrimonioException {
 
 		if (equipment == null) {

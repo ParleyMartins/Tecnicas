@@ -13,7 +13,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Equipamento;
+import model.Equipment;
 import view.International;
 import view.alteracoes.AlterarEquipamento;
 import view.cadastros.CadastroEquipamento;
@@ -38,7 +38,7 @@ public class EquipamentoView extends PatrimonioView {
 	}
 
 	// This method fills a vector with the equipments on database.
-	private Vector<String> fillDataVector(Equipamento equipment) {
+	private Vector<String> fillDataVector(Equipment equipment) {
 
 		if (equipment == null) {
 			return null;
@@ -65,7 +65,7 @@ public class EquipamentoView extends PatrimonioView {
 		try {
 			DefaultTableModel equipmentTable = new DefaultTableModel();
 
-			Iterator<Equipamento> i = control.ManterEquipamento.getInstance()
+			Iterator<Equipment> i = control.ManterEquipamento.getInstance()
 					.getAllEquipments().iterator();
 
 			equipmentTable.addColumn(International.getInstance().getLabels()
@@ -74,7 +74,7 @@ public class EquipamentoView extends PatrimonioView {
 					.getString("description"));
 
 			while (i.hasNext()) {
-				Equipamento equipamento = i.next();
+				Equipment equipamento = i.next();
 				equipmentTable.addRow(fillDataVector(equipamento));
 			}
 			return equipmentTable;

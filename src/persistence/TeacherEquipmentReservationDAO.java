@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import view.International;
-import model.Equipamento;
+import model.Equipment;
 import model.Professor;
 import model.ReservaEquipamentoProfessor;
 import exception.ClienteException;
@@ -195,7 +195,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
-		Equipamento equipment = new Equipamento(code, description);
+		Equipment equipment = new Equipment(code, description);
 
 		String date = result.getString("data");
 		String time = result.getString("hora");
@@ -230,7 +230,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return true if the Equipment is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean equipmentIsInDB (Equipamento equipment)
+	private boolean equipmentIsInDB (Equipment equipment)
 			throws SQLException {
 
 		String selectQuery = "SELECT * FROM equipamento WHERE "
@@ -275,7 +275,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return true if the Equipment is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean equipmentIsInReservationDB (Equipamento equipment,
+	private boolean equipmentIsInReservationDB (Equipment equipment,
 			String date, String time) throws SQLException {
 
 		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
@@ -352,7 +352,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @param equipment The equipment that is going to be selected.
 	 * @return the query to select the given Equipment
 	 */
-	private String selectEquipmentIDQuery (Equipamento equipment) {
+	private String selectEquipmentIDQuery (Equipment equipment) {
 
 		String query = "SELECT id_equipamento FROM equipamento WHERE "
 				+ "equipamento.codigo = \"" + equipment.getIdCode()

@@ -14,7 +14,7 @@ import java.util.Vector;
 
 import view.International;
 import model.Student;
-import model.Equipamento;
+import model.Equipment;
 import exception.ClienteException;
 import exception.PatrimonioException;
 
@@ -61,7 +61,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void insert (Equipamento equipment) throws SQLException,
+	public void insert (Equipment equipment) throws SQLException,
 			PatrimonioException {
 
 		checkInsertEquipment(equipment);
@@ -81,7 +81,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void modify (Equipamento oldEquipment, Equipamento newEquipment)
+	public void modify (Equipment oldEquipment, Equipment newEquipment)
 			throws SQLException, PatrimonioException {
 
 		this.checkModifyEquipment(oldEquipment, newEquipment);
@@ -105,7 +105,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void delete (Equipamento equipment) throws SQLException,
+	public void delete (Equipment equipment) throws SQLException,
 			PatrimonioException {
 
 		this.checkDeleteEquipment(equipment);
@@ -124,11 +124,11 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <Equipamento> searchAll ( ) throws SQLException,
+	public Vector <Equipment> searchAll ( ) throws SQLException,
 			PatrimonioException {
 		
 		String selectQuery = "SELECT * FROM equipamento;";
-		Vector<Equipamento> selectedEquipments =this.search(selectQuery); 
+		Vector<Equipment> selectedEquipments =this.search(selectQuery); 
 		return selectedEquipments;
 	}
 
@@ -139,13 +139,13 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <Equipamento> searchByCode (String code)
+	public Vector <Equipment> searchByCode (String code)
 			throws SQLException,
 			PatrimonioException {
 
 		String selectQuery = "SELECT * FROM equipamento WHERE codigo = " + "\""
 				+ code + "\";";
-		Vector<Equipamento> selectedEquipments =this.search(selectQuery); 
+		Vector<Equipment> selectedEquipments =this.search(selectQuery); 
 		return selectedEquipments;
 	}
 
@@ -160,10 +160,10 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private Vector <Equipamento> search (String query) throws SQLException,
+	private Vector <Equipment> search (String query) throws SQLException,
 			PatrimonioException {
 
-		Vector <Equipamento> equipmentVec = new Vector <Equipamento>();
+		Vector <Equipment> equipmentVec = new Vector <Equipment>();
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 
@@ -213,7 +213,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private boolean isInDB (Equipamento equipment) throws SQLException,
+	private boolean isInDB (Equipment equipment) throws SQLException,
 			PatrimonioException {
 
 		String selectQuery = "SELECT * FROM equipamento WHERE "
@@ -245,7 +245,7 @@ public class EquipamentDAO {
 	 * @return true if the Equipment was found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInOtherDB (Equipamento equipment) throws SQLException {
+	private boolean isInOtherDB (Equipment equipment) throws SQLException {
 
 		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
 				+ "id_equipamento = (SELECT id_equipamento FROM equipamento WHERE "
@@ -266,11 +266,11 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private Equipamento fetchEquipamento (ResultSet result)
+	private Equipment fetchEquipamento (ResultSet result)
 			throws PatrimonioException, SQLException {
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
-		Equipamento newEquipment = new Equipamento(code, description); 
+		Equipment newEquipment = new Equipment(code, description); 
 		return newEquipment;
 	}
 
@@ -298,7 +298,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkEquipment (Equipamento equipment) throws PatrimonioException, SQLException {
+	private void checkEquipment (Equipment equipment) throws PatrimonioException, SQLException {
 
 		if (equipment == null) {
 			throw new PatrimonioException(NULL_EQUIPMENT);
@@ -322,7 +322,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkInsertEquipment (Equipamento equipment) throws PatrimonioException, SQLException {		
+	private void checkInsertEquipment (Equipment equipment) throws PatrimonioException, SQLException {		
 		checkEquipment(equipment);
 
 		if (this.isInDbCode(equipment.getIdCode())) {
@@ -338,8 +338,8 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkModifyEquipment (Equipamento oldEquipment,
-			Equipamento newEquipment) throws PatrimonioException, SQLException {
+	private void checkModifyEquipment (Equipment oldEquipment,
+			Equipment newEquipment) throws PatrimonioException, SQLException {
 
 		if (oldEquipment == null) {
 			throw new PatrimonioException(NULL_EQUIPMENT);
@@ -368,7 +368,7 @@ public class EquipamentDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkDeleteEquipment (Equipamento equipment) throws PatrimonioException, SQLException{
+	private void checkDeleteEquipment (Equipment equipment) throws PatrimonioException, SQLException{
 		if (equipment == null) {
 			throw new PatrimonioException(NULL_EQUIPMENT);
 		} else {

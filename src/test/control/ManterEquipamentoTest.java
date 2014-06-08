@@ -6,7 +6,7 @@ import exception.PatrimonioException;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
-import model.Equipamento;
+import model.Equipment;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,8 +19,8 @@ import org.junit.Test;
 public class ManterEquipamentoTest {
 
 	static ManterEquipamento instance;
-	Vector<Equipamento> allEquipments;
-	Equipamento equipment;
+	Vector<Equipment> allEquipments;
+	Equipment equipment;
 
 	public ManterEquipamentoTest() {
 
@@ -41,7 +41,7 @@ public class ManterEquipamentoTest {
 	@Before
 	public void setUp() throws Exception {
 
-		equipment = new Equipamento("codigo", "descricao");
+		equipment = new Equipment("codigo", "descricao");
 		instance.insert("codigo", "descricao");
 		allEquipments = instance.getAllEquipments();
 	}
@@ -50,7 +50,7 @@ public class ManterEquipamentoTest {
 	public void tearDown() throws SQLException, PatrimonioException {
 
 		allEquipments = instance.getAllEquipments();
-		Iterator<Equipamento> iterator = allEquipments.iterator();
+		Iterator<Equipment> iterator = allEquipments.iterator();
 
 		// Remove each Vector equipment from database.
 		while (iterator.hasNext()) {
@@ -91,7 +91,7 @@ public class ManterEquipamentoTest {
 	public void testModify() throws SQLException, PatrimonioException {
 
 		instance.modify("codigo alterado", "descricao alterarda", equipment);
-		Equipamento e2 = new Equipamento("codigo alterado",
+		Equipment e2 = new Equipment("codigo alterado",
 				"descricao alterarda");
 
 		assertNotNull("Equipment should be updated", procurarNoVetor(e2));
@@ -101,7 +101,7 @@ public class ManterEquipamentoTest {
 	public void testModifyInexistent() throws SQLException,
 			PatrimonioException {
 
-		Equipamento eq = new Equipamento("codigo", "nao existe");
+		Equipment eq = new Equipment("codigo", "nao existe");
 		instance.modify("codigo alterado", "descricao alterarda", eq);
 	}
 
@@ -118,14 +118,14 @@ public class ManterEquipamentoTest {
 		instance.delete(equipment);
 	}
 
-	private Equipamento procurarNoVetor(Equipamento teste)
+	private Equipment procurarNoVetor(Equipment teste)
 			throws PatrimonioException, SQLException {
 
 		allEquipments = instance.getAllEquipments();
-		Iterator<Equipamento> iterator = allEquipments.iterator();
+		Iterator<Equipment> iterator = allEquipments.iterator();
 
 		while (iterator.hasNext()) {
-			Equipamento eequipment = iterator.next();
+			Equipment eequipment = iterator.next();
 
 			if (eequipment.equals(teste)) {
 				return eequipment;

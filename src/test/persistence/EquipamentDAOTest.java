@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Equipamento;
+import model.Equipment;
 import model.Sala;
 
 import org.junit.After;
@@ -22,8 +22,8 @@ import exception.PatrimonioException;
 public class EquipamentDAOTest {
 	
 	static EquipamentDAO instance;
-	Equipamento oldEq, newEq;
-	Vector <Equipamento> all;
+	Equipment oldEq, newEq;
+	Vector <Equipment> all;
 	
 	@BeforeClass
 	public static void setUpClass() throws PatrimonioException, SQLException {
@@ -38,8 +38,8 @@ public class EquipamentDAOTest {
 	
 	@Before
 	public void setUp() throws PatrimonioException, SQLException {
-		 oldEq = new Equipamento("999", "descricao - antigo");
-		 newEq = new Equipamento("0001", "descricao - alterada");
+		 oldEq = new Equipment("999", "descricao - antigo");
+		 newEq = new Equipment("0001", "descricao - alterada");
 		 instance.insert(oldEq);
 		 all = instance.searchAll();
 	}
@@ -47,9 +47,9 @@ public class EquipamentDAOTest {
 	@After
 	public void tearDown() throws SQLException, PatrimonioException {
 		all = instance.searchAll();
-		Iterator<Equipamento> i = all.iterator();
+		Iterator<Equipment> i = all.iterator();
 		while(i.hasNext()){
-			Equipamento e = i.next();
+			Equipment e = i.next();
 			instance.delete(e);
 		}
 		oldEq = null;
@@ -107,8 +107,8 @@ public class EquipamentDAOTest {
 	
 	@Test (expected = PatrimonioException.class)
 	public void testModifyUnexistentFirstEquipment() throws PatrimonioException, SQLException {
-		Equipamento equip = new Equipamento("codigo", "eqpt nao existente");
-		Equipamento equipAlter = new Equipamento("codigo", "eqpt nao existente alteraddo");
+		Equipment equip = new Equipment("codigo", "eqpt nao existente");
+		Equipment equipAlter = new Equipment("codigo", "eqpt nao existente alteraddo");
 		instance.modify(equip, equipAlter);
 	}
 	
@@ -133,7 +133,7 @@ public class EquipamentDAOTest {
 	
 	@Test (expected = PatrimonioException.class)
 	public void testDeleteNonExistentEquipment() throws PatrimonioException, SQLException {
-		Equipamento eq = new Equipamento("codigo"," nao existe descricao");
+		Equipment eq = new Equipment("codigo"," nao existe descricao");
 		instance.delete(eq);
 		assertNull("Equipment should have been modified", searchOnVector(eq));
 	}
@@ -149,22 +149,22 @@ public class EquipamentDAOTest {
 	
 	@Test 
 	public void testSearchByCode() throws SQLException, PatrimonioException{
-		Vector <Equipamento> allByCode = instance.searchByCode(oldEq.getIdCode());
+		Vector <Equipment> allByCode = instance.searchByCode(oldEq.getIdCode());
 		assertFalse("The vector should not be empty", allByCode.isEmpty());
 	}
 	
 	@Test 
 	public void testSearchByCodeNotRegistered() throws SQLException, PatrimonioException{
-		Vector <Equipamento> allByCode = instance.searchByCode(newEq.getIdCode());
+		Vector <Equipment> allByCode = instance.searchByCode(newEq.getIdCode());
 		assertTrue("The vector should be empty", allByCode.isEmpty());
 	}
 
 	
-	private Equipamento searchOnVector(Equipamento equipment) throws PatrimonioException, SQLException {
+	private Equipment searchOnVector(Equipment equipment) throws PatrimonioException, SQLException {
 		all = instance.searchAll();
-		Iterator<Equipamento> i = all.iterator();
+		Iterator<Equipment> i = all.iterator();
 		while(i.hasNext()){
-			Equipamento e = i.next();
+			Equipment e = i.next();
 			if(e.equals(equipment))
 				return e;			
 		}
