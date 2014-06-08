@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import view.International;
-import model.ReservaSalaProfessor;
+import model.TeacherReserveRoom;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -21,7 +21,7 @@ public class AlterarReservaProfSalaView extends ReservaSalaView {
 
 	private static final long serialVersionUID = 1L;
 	int index;
-	ReservaSalaProfessor reservaProfessor;
+	TeacherReserveRoom reservaProfessor;
 
 	/**
 	 * Constructor to generate the form

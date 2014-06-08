@@ -16,7 +16,7 @@ import view.International;
 import model.Student;
 import model.Professor;
 import model.StudentReserveRoom;
-import model.ReservaSalaProfessor;
+import model.TeacherReserveRoom;
 import model.Room;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -70,7 +70,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	public void insert (ReservaSalaProfessor reservation) throws ReservaException,
+	public void insert (TeacherReserveRoom reservation) throws ReservaException,
 			SQLException {
 
 		if (reservation == null) {
@@ -122,7 +122,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	public void modify (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation)
+	public void modify (TeacherReserveRoom oldReservation, TeacherReserveRoom newReservation)
 			throws ReservaException, SQLException {
 
 		if (oldReservation == null || newReservation == null) {
@@ -183,7 +183,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	public void delete (ReservaSalaProfessor reservation) throws ReservaException,
+	public void delete (TeacherReserveRoom reservation) throws ReservaException,
 			SQLException {
 
 		if (reservation == null) {
@@ -210,7 +210,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
 	@SuppressWarnings ("unchecked")
-	public Vector <ReservaSalaProfessor> searchAll ( ) throws SQLException,
+	public Vector <TeacherReserveRoom> searchAll ( ) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
 
 		String query = "SELECT * FROM reserva_sala_professor "
@@ -232,7 +232,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
 	@SuppressWarnings ("unchecked")
-	public Vector <ReservaSalaProfessor> searchByDate (String date)
+	public Vector <TeacherReserveRoom> searchByDate (String date)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -267,7 +267,7 @@ public class ResSalaProfessorDAO extends DAO {
 		String time = result.getString("hora");
 		String purpose = result.getString("finalidade");
 		
-		ReservaSalaProfessor reservation = new ReservaSalaProfessor(date, time, room, purpose, teacher);
+		TeacherReserveRoom reservation = new TeacherReserveRoom(date, time, room, purpose, teacher);
 		return reservation;
 	}
 
@@ -340,7 +340,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @return true if the Teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean reservationIsInDB (ReservaSalaProfessor reservation) throws SQLException {
+	private boolean reservationIsInDB (TeacherReserveRoom reservation) throws SQLException {
 
 		Professor teacher = reservation.getTeacher();
 		Room room = reservation.getClassroom();
@@ -564,7 +564,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the WHERE query
 	 */
-	private String whereQuery (ReservaSalaProfessor reservation) {
+	private String whereQuery (TeacherReserveRoom reservation) {
 
 		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
 		String selectRoom = selectRoomIdQuery(reservation.getClassroom());
@@ -586,7 +586,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the VALUE query
 	 */
-	private String valuesQuery (ReservaSalaProfessor reservation) {
+	private String valuesQuery (TeacherReserveRoom reservation) {
 
 		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
 		String selectRoom = selectRoomIdQuery(reservation.getClassroom());
@@ -605,7 +605,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the ATTRIBUTES query
 	 */
-	private String attributesQuery (ReservaSalaProfessor reservation) {
+	private String attributesQuery (TeacherReserveRoom reservation) {
 
 		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
 		String selectRoom = selectRoomIdQuery(reservation.getClassroom());
@@ -626,7 +626,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the INSERT query
 	 */
-	private String insertIntoQuery (ReservaSalaProfessor reservation) {
+	private String insertIntoQuery (TeacherReserveRoom reservation) {
 
 		String valueQuery = valuesQuery(reservation);
 		
@@ -644,7 +644,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the DELETE query
 	 */
-	private String deleteFromTeacherQuery (ReservaSalaProfessor reservation) {
+	private String deleteFromTeacherQuery (TeacherReserveRoom reservation) {
 
 		String where = this.whereQuery(reservation);
 		
@@ -660,7 +660,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the DELETE query
 	 */
-	private String deleteFromStudentQuery (ReservaSalaProfessor reservation) {
+	private String deleteFromStudentQuery (TeacherReserveRoom reservation) {
 
 		String query = "DELETE FROM reserva_sala_aluno WHERE " +
 				"hora = \"" + reservation.getTime() + "\" and " +
@@ -676,7 +676,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param newReservation The reservation with the new info
 	 * @return the UPDATE query
 	 */
-	private String updateQuery (ReservaSalaProfessor oldReservation, ReservaSalaProfessor newReservation) {
+	private String updateQuery (TeacherReserveRoom oldReservation, TeacherReserveRoom newReservation) {
 
 		String attributes = this.attributesQuery(newReservation);
 		String where = this.whereQuery(oldReservation);

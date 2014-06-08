@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ReservaException;
 
-public class ReservaSalaProfessor extends ReservaSala {
+public class TeacherReserveRoom extends ReservaSala {
 
 	private Professor teacher;
 
@@ -26,7 +26,7 @@ public class ReservaSalaProfessor extends ReservaSala {
 	 * @param teacher professional who teaches.
 	 * @throws ReservaException
 	 */
-	public ReservaSalaProfessor(String date, String time, Room classroom,
+	public TeacherReserveRoom(String date, String time, Room classroom,
 			String purpose, Professor teacher) throws ReservaException {
 
 		super(date, time, classroom, purpose);
@@ -62,7 +62,7 @@ public class ReservaSalaProfessor extends ReservaSala {
 	 * @param reservation A reservation.
 	 * @return the existence or absence of reserve.
 	 */
-	public boolean equals(ReservaSalaProfessor reservation) {
+	public boolean equals(TeacherReserveRoom reservation) {
 
 		return (super.equals(reservation) && this.getTeacher().equals(
 				reservation.getTeacher()));

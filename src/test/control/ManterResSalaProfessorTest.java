@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import model.Professor;
-import model.ReservaSalaProfessor;
+import model.TeacherReserveRoom;
 import model.Room;
 
 import org.junit.AfterClass;
@@ -28,7 +28,7 @@ import persistence.RoomDAO;
 public class ManterResSalaProfessorTest {
 	private static Room sala1;
 	private static Professor professor1;
-	private static Vector<ReservaSalaProfessor> vet;
+	private static Vector<TeacherReserveRoom> vet;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -62,7 +62,7 @@ public class ManterResSalaProfessorTest {
 		String finalidade = "Sala de Estudos";
 		String data = "20/12/33";
 		String hora = "9:11";
-		ReservaSalaProfessor reserva = new ReservaSalaProfessor(data, hora, sala1, finalidade, professor1);
+		TeacherReserveRoom reserva = new TeacherReserveRoom(data, hora, sala1, finalidade, professor1);
 		ManterResSalaProfessor.getInstance().insert(sala1, professor1, data, hora, finalidade);
 		boolean resultado = this.inDB(reserva);
 		boolean resultado2 = reserva.equals(vet.lastElement());
@@ -73,10 +73,10 @@ public class ManterResSalaProfessorTest {
 	@Test
 	public void testAlterar() throws ReservaException, SQLException, ClienteException, PatrimonioException {
 		
-		ReservaSalaProfessor reserva = new ReservaSalaProfessor("20/12/33", "9:11", sala1, "Pesquisa", professor1);
+		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/33", "9:11", sala1, "Pesquisa", professor1);
 		this.insert_into(reserva);
 		vet.add(reserva);
-		ReservaSalaProfessor reserva2 = new ReservaSalaProfessor("20/12/33", "9:11", sala1, "Reuniao", professor1);
+		TeacherReserveRoom reserva2 = new TeacherReserveRoom("20/12/33", "9:11", sala1, "Reuniao", professor1);
 		ManterResSalaProfessor.getInstance().modify("Reuniao", vet.lastElement());
 		boolean resultado = this.inDB(reserva2);
 		boolean resultado2 = reserva2.equals(vet.lastElement());
@@ -91,7 +91,7 @@ public class ManterResSalaProfessorTest {
 		String finalidade = "Pesquisa";
 		String data = "20/12/33";
 		String hora = "9:11";
-		ReservaSalaProfessor reserva = new ReservaSalaProfessor(data, hora, sala1, finalidade, professor1);
+		TeacherReserveRoom reserva = new TeacherReserveRoom(data, hora, sala1, finalidade, professor1);
 		this.insert_into(reserva);
 		vet.add(reserva);
 		ManterResSalaProfessor.getInstance().delete(reserva);
@@ -117,7 +117,7 @@ public class ManterResSalaProfessorTest {
 				"sala.descricao = \"" + sala.getDescription() +  "\" and " +
 				"sala.capacidade = " + sala.getCapacity();
 	}
-	private String where_reserva_sala_professor(ReservaSalaProfessor reserva){
+	private String where_reserva_sala_professor(TeacherReserveRoom reserva){
 		return " WHERE " +
 		"id_professor = ( " + select_id_professor(reserva.getTeacher()) + " ) and " +
 		"id_sala = ( " + select_id_sala(reserva.getClassroom()) + " ) and " +
@@ -125,14 +125,14 @@ public class ManterResSalaProfessorTest {
 		"hora = \"" + reserva.getTime() + "\" and " +
 		"data = \"" + reserva.getDate() + "\" ";
 	}
-	private String values_reserva_sala_professor(ReservaSalaProfessor reserva){
+	private String values_reserva_sala_professor(TeacherReserveRoom reserva){
 		return "( " + select_id_professor(reserva.getTeacher()) + " ), " +
 		"( " + select_id_sala(reserva.getClassroom()) + " ), " +
 		"\"" + reserva.getPurpose() + "\", " +
 		"\"" + reserva.getTime() + "\", " +
 		"\"" + reserva.getDate() + "\"";
 	}
-	private void insert_into(ReservaSalaProfessor reserva){
+	private void insert_into(TeacherReserveRoom reserva){
 		try {
 			this.executeQuery("INSERT INTO " +
 					"reserva_sala_professor (id_professor, id_sala, finalidade, hora, data) " +
@@ -141,7 +141,7 @@ public class ManterResSalaProfessorTest {
 			e.printStackTrace();
 		}
 	}
-	private void delete_from(ReservaSalaProfessor reserva){
+	private void delete_from(TeacherReserveRoom reserva){
 		try {
 			this.executeQuery("DELETE FROM reserva_sala_professor " + 
 								this.where_reserva_sala_professor(reserva) + " ;");
@@ -149,7 +149,7 @@ public class ManterResSalaProfessorTest {
 			e.printStackTrace();
 		}
 	}
-	private boolean inDB(ReservaSalaProfessor reserva) throws SQLException{
+	private boolean inDB(TeacherReserveRoom reserva) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM reserva_sala_professor " + 
 								this.where_reserva_sala_professor(reserva) + " ;");
 	}
