@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import model.Professor;
-import model.ReservaSalaAluno;
+import model.StudentReserveRoom;
 import model.ReservaSalaProfessor;
 
 import model.Room;

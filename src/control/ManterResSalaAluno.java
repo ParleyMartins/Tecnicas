@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import model.Student;
-import model.ReservaSalaAluno;
+import model.StudentReserveRoom;
 import model.Room;
 import persistence.ResSalaAlunoDAO;
 import exception.ClienteException;
@@ -25,7 +25,7 @@ public class ManterResSalaAluno {
 	private static ManterResSalaAluno instance;
 	private static ResSalaAlunoDAO resDAOInstance;
 
-	private Vector<ReservaSalaAluno> studentRoomReservationVector = new Vector<ReservaSalaAluno>();
+	private Vector<StudentReserveRoom> studentRoomReservationVector = new Vector<StudentReserveRoom>();
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
@@ -60,11 +60,11 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public Vector<ReservaSalaAluno> getReservationPerTime(String time)
+	public Vector<StudentReserveRoom> getReservationPerTime(String time)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		Vector<ReservaSalaAluno> reservations = resDAOInstance
+		Vector<StudentReserveRoom> reservations = resDAOInstance
 				.searchByTime(time);
 		return reservations;
 
@@ -79,11 +79,11 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public Vector<ReservaSalaAluno> getReservationsPerMonth(String date)
+	public Vector<StudentReserveRoom> getReservationsPerMonth(String date)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		Vector<ReservaSalaAluno> reservations = resDAOInstance
+		Vector<StudentReserveRoom> reservations = resDAOInstance
 				.searchByDay(date);
 		return reservations;
 
@@ -97,7 +97,7 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public Vector<ReservaSalaAluno> getstudentRoomReservationVector()
+	public Vector<StudentReserveRoom> getstudentRoomReservationVector()
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -140,7 +140,7 @@ public class ManterResSalaAluno {
 			String purpose, String numberDesiredChairs) throws SQLException,
 			ReservaException, ClienteException, PatrimonioException {
 
-		ReservaSalaAluno reservation = new ReservaSalaAluno(date, time, room,
+		StudentReserveRoom reservation = new StudentReserveRoom(date, time, room,
 				purpose, numberDesiredChairs, student);
 
 		resDAOInstance.insert(reservation);
@@ -158,14 +158,14 @@ public class ManterResSalaAluno {
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 */
 	public void modify(String purpose, String numberDesiredChairs,
-			ReservaSalaAluno reservation) throws SQLException,
+			StudentReserveRoom reservation) throws SQLException,
 			ReservaException, ClienteException, PatrimonioException {
 
 		/*
 		 * If we don't create a new object here, this code does'nt work. Need to
 		 * investigate.
 		 */
-		ReservaSalaAluno oldReservation = new ReservaSalaAluno(
+		StudentReserveRoom oldReservation = new StudentReserveRoom(
 				reservation.getDate(), reservation.getTime(),
 				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getReservedChairs(), reservation.getStudent());
@@ -182,7 +182,7 @@ public class ManterResSalaAluno {
 	 * @throws SQLException If has some problem with the database remotion
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public void delete(ReservaSalaAluno reservation) throws SQLException,
+	public void delete(StudentReserveRoom reservation) throws SQLException,
 			ReservaException {
 
 		ResSalaAlunoDAO.getInstance().delete(reservation);

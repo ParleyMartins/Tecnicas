@@ -15,7 +15,7 @@ import java.util.Vector;
 import view.International;
 import model.Student;
 import model.Professor;
-import model.ReservaSalaAluno;
+import model.StudentReserveRoom;
 import model.ReservaSalaProfessor;
 import model.Room;
 import exception.ClienteException;

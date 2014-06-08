@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Patrimonio;
-import model.ReservaSalaAluno;
+import model.StudentReserveRoom;
 import model.ReservaSalaProfessor;
 import model.Room;
 import view.International;
@@ -55,8 +55,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	protected Vector <String> fillDataVector (Object object, final int index) {
 
 		Vector <String> clientData = new Vector <String>();
-		if (object instanceof ReservaSalaAluno) {
-			ReservaSalaAluno reservation = (ReservaSalaAluno) object;
+		if (object instanceof StudentReserveRoom) {
+			StudentReserveRoom reservation = (StudentReserveRoom) object;
 			if (this.room != null && (reservation.getClassroom().equals(this.room))) {
 				clientData.add(String.valueOf(index));
 				clientData.add(International.getInstance().getLabels().getString("student"));

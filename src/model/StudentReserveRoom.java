@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ReservaException;
 
-public class ReservaSalaAluno extends ReservaSala {
+public class StudentReserveRoom extends ReservaSala {
 
 	private Student student;
 	private String reservedChairs;
@@ -35,7 +35,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	 * @param student the person who performs the reservation of the room.
 	 * @throws ReservaException It ensures that every parameter passed is valid. 
 	 */
-	public ReservaSalaAluno(String date, String time, Room classroom,
+	public StudentReserveRoom(String date, String time, Room classroom,
 			String purpose, String reserved_chairs, Student student)
 			throws ReservaException {
 
@@ -114,7 +114,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	 * @param reservation  A reservation.
 	 * @return the existence or absence of reserve.
 	 */
-	public boolean equals(ReservaSalaAluno reservation) {
+	public boolean equals(StudentReserveRoom reservation) {
 
 		return (super.equals(reservation)
 				&& this.getStudent().equals(reservation.getStudent()) && this

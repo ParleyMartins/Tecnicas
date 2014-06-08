@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import model.ReservaSalaAluno;
+import model.StudentReserveRoom;
 import model.ReservaSalaProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -24,7 +24,7 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 	private static final long serialVersionUID = 1L;
 	int index;
-	ReservaSalaAluno studentReservation;
+	StudentReserveRoom studentReservation;
 	ReservaSalaProfessor teacherReservation;
 
 	/**
