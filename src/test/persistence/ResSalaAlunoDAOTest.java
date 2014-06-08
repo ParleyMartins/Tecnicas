@@ -19,7 +19,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import persistence.AlunoDAO;
+import persistence.StudentDAO;
 import persistence.FactoryConnection;
 import persistence.ResSalaAlunoDAO;
 import persistence.RoomDAO;
@@ -42,8 +42,8 @@ public class ResSalaAlunoDAOTest {
 		aluno1 = new Student("testInstance", "501.341.852-69", "456678", "", "");
 		aluno2 = new Student("Incluindo Matricula Igual", "490.491.781-20", "345543", "2222-2222", "aluno2@email");
 		
-		AlunoDAO.getInstance().insert(aluno1);
-		AlunoDAO.getInstance().insert(aluno2);
+		StudentDAO.getInstance().insert(aluno1);
+		StudentDAO.getInstance().insert(aluno2);
 		RoomDAO.getInstance().insert(sala1);
 		RoomDAO.getInstance().insert(sala2);
 
@@ -51,8 +51,8 @@ public class ResSalaAlunoDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		AlunoDAO.getInstance().delete(aluno1);
-		AlunoDAO.getInstance().delete(aluno2);
+		StudentDAO.getInstance().delete(aluno1);
+		StudentDAO.getInstance().delete(aluno2);
 		RoomDAO.getInstance().delete(sala1);
 		RoomDAO.getInstance().delete(sala2);
 	}

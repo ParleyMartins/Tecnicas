@@ -12,14 +12,14 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import persistence.AlunoDAO;
+import persistence.StudentDAO;
 import exception.ClienteException;
 import model.Student;
 
 public class ManterAluno {
 
 	private static ManterAluno instance;
-	private static AlunoDAO studentDAOInstance;
+	private static StudentDAO studentDAOInstance;
 
 	private Vector<Student> allStudents = new Vector<Student>();
 
@@ -40,7 +40,7 @@ public class ManterAluno {
 
 		if (instance == null) {
 			instance = new ManterAluno();
-			studentDAOInstance = AlunoDAO.getInstance();
+			studentDAOInstance = StudentDAO.getInstance();
 		} else {
 			// Nothing here.
 		}

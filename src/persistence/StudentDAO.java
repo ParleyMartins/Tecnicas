@@ -14,7 +14,7 @@ import java.util.Vector;
 import view.International;
 import exception.ClienteException;
 
-public class AlunoDAO {
+public class StudentDAO {
 
 	// Exception messages.
 	private static final String EXISTING_STUDENT = International.getInstance()
@@ -31,9 +31,9 @@ public class AlunoDAO {
 			.getInstance().getMessages().getString("enrollmentAlreadyExists");
 
 	// Instance to the singleton.
-	private static AlunoDAO instance;
+	private static StudentDAO instance;
 
-	private AlunoDAO ( ) {
+	private StudentDAO ( ) {
 
 		// Empty constructor.
 	}
@@ -42,12 +42,12 @@ public class AlunoDAO {
 	 * Singleton implementation.
 	 * @return the current instance of this class.
 	 */
-	public static AlunoDAO getInstance ( ) {
+	public static StudentDAO getInstance ( ) {
 
 		if (instance != null) {
 			// Nothing here.
 		} else {
-			instance = new AlunoDAO();
+			instance = new StudentDAO();
 		}
 		return instance;
 	}
