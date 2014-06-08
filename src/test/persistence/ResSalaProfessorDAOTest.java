@@ -26,7 +26,7 @@ import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
 
-import persistence.ProfessorDAO;
+import persistence.TeacherDAO;
 
 import persistence.FactoryConnection;
 
@@ -50,8 +50,8 @@ public class ResSalaProfessorDAOTest {
 		
 		RoomDAO.getInstance().insert(sala_a);
 		RoomDAO.getInstance().insert(sala_b);
-		ProfessorDAO.getInstance().insert(professor1);
-		ProfessorDAO.getInstance().insert(professor2);		
+		TeacherDAO.getInstance().insert(professor1);
+		TeacherDAO.getInstance().insert(professor2);		
 	}
 
 	@AfterClass
@@ -59,8 +59,8 @@ public class ResSalaProfessorDAOTest {
 
 		RoomDAO.getInstance().delete(sala_a);
 		RoomDAO.getInstance().delete(sala_b);
-		ProfessorDAO.getInstance().delete(professor1);
-		ProfessorDAO.getInstance().delete(professor2);	
+		TeacherDAO.getInstance().delete(professor1);
+		TeacherDAO.getInstance().delete(professor2);	
 	}
 
 	@Test

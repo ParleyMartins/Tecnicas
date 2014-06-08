@@ -11,14 +11,14 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import persistence.ProfessorDAO;
+import persistence.TeacherDAO;
 import exception.ClienteException;
 import model.Professor;
 
 public class ManterProfessor {
 
 	private static ManterProfessor instance;
-	private static ProfessorDAO teacherDAOInstance;
+	private static TeacherDAO teacherDAOInstance;
 
 	private Vector<Professor> allTeachers = new Vector<Professor>();
 
@@ -39,7 +39,7 @@ public class ManterProfessor {
 
 		if (instance == null) {
 			instance = new ManterProfessor();
-			teacherDAOInstance = ProfessorDAO.getInstance();
+			teacherDAOInstance = TeacherDAO.getInstance();
 		} else {
 			// Nothing here.
 		}

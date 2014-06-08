@@ -17,7 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.EquipamentDAO;
-import persistence.ProfessorDAO;
+import persistence.TeacherDAO;
 import persistence.TeacherEquipmentReservationDAO;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -25,7 +25,7 @@ import exception.ReservaException;
 
 public class TeacherEquipmentReservationDAOTest{
 
-	static ProfessorDAO teacherDAO = ProfessorDAO.getInstance();
+	static TeacherDAO teacherDAO = TeacherDAO.getInstance();
 	static EquipamentDAO equipmentDAO = EquipamentDAO.getInstance();
 	ReservaEquipamentoProfessor reservation;
 	static Equipment equipment1;

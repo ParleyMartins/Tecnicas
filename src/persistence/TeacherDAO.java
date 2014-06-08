@@ -14,7 +14,7 @@ import java.util.Vector;
 import view.International;
 import exception.ClienteException;
 
-public class ProfessorDAO {
+public class TeacherDAO {
 
 	// Exception messages.
 	private static final String TEACHER_EXISTING = International.getInstance()
@@ -31,9 +31,9 @@ public class ProfessorDAO {
 			.getInstance().getMessages().getString("registrationAlreadyExists");
 
 	// Instance to the singleton.
-	private static ProfessorDAO instance;
+	private static TeacherDAO instance;
 
-	private ProfessorDAO ( ) {
+	private TeacherDAO ( ) {
 
 		// Blank constructor.
 	}
@@ -42,12 +42,12 @@ public class ProfessorDAO {
 	 * Singleton implementation.
 	 * @return the current instance of this class.
 	 */
-	public static ProfessorDAO getInstance ( ) {
+	public static TeacherDAO getInstance ( ) {
 
 		if (instance != null) {
 			// Nothing here.
 		} else {
-			instance = new ProfessorDAO();
+			instance = new TeacherDAO();
 		}
 		return instance;
 	}
