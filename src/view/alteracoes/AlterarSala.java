@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 import view.International;
 import view.cadastros.CadastroPatrimonio;
-import control.ManterSala;
+import control.SupportRoom;
 import exception.PatrimonioException;
 
 public class AlterarSala extends CadastroPatrimonio {
@@ -43,11 +43,11 @@ public class AlterarSala extends CadastroPatrimonio {
 
 		try {
 
-			this.codeTxtField.setText(ManterSala.getInstance().getRoomsVec()
+			this.codeTxtField.setText(SupportRoom.getInstance().getRoomsVec()
 					.get(index).getIdCode());
-			this.capacityTxtField.setText(ManterSala.getInstance()
+			this.capacityTxtField.setText(SupportRoom.getInstance()
 					.getRoomsVec().get(index).getCapacity());
-			this.descriptionTxtArea.setText(ManterSala.getInstance()
+			this.descriptionTxtArea.setText(SupportRoom.getInstance()
 					.getRoomsVec().get(index).getDescription());
 			this.index2 = index;
 
@@ -80,10 +80,10 @@ public class AlterarSala extends CadastroPatrimonio {
 
 		try {
 
-			ManterSala.getInstance().modify(this.codeTxtField.getText(),
+			SupportRoom.getInstance().modify(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText(),
 					this.capacityTxtField.getText(),
-					ManterSala.getInstance().getRoomsVec().get(this.index2));
+					SupportRoom.getInstance().getRoomsVec().get(this.index2));
 
 			JOptionPane.showMessageDialog(this, modifiedMessage,
 					successMessage, JOptionPane.INFORMATION_MESSAGE, null);

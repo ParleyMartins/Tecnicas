@@ -19,7 +19,7 @@ import view.alteracoes.AlterarSala;
 import view.cadastros.CadastroPatrimonio;
 import view.cadastros.CadastroSala;
 import view.diasReservas.DiaReservaSala;
-import control.ManterSala;
+import control.SupportRoom;
 import exception.PatrimonioException;
 
 public class SalaView extends PatrimonioView {
@@ -65,7 +65,7 @@ public class SalaView extends PatrimonioView {
 		try {
 			DefaultTableModel roomTable = new DefaultTableModel();
 
-			Iterator<Sala> i = ManterSala.getInstance().getRoomsVec()
+			Iterator<Sala> i = SupportRoom.getInstance().getRoomsVec()
 					.iterator();
 
 			roomTable.addColumn(International.getInstance().getLabels()
@@ -129,13 +129,13 @@ public class SalaView extends PatrimonioView {
 
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this, removeQuestion
-					+ ManterSala.getInstance().getRoomsVec().get(index)
+					+ SupportRoom.getInstance().getRoomsVec().get(index)
 							.getDescription() + "?", removeMessage,
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterSala.getInstance().delete(
-						ManterSala.getInstance().getRoomsVec().get(index));
+				SupportRoom.getInstance().delete(
+						SupportRoom.getInstance().getRoomsVec().get(index));
 				JOptionPane.showMessageDialog(this, removeConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
 			} else {

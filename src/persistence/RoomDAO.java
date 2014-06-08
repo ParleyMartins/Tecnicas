@@ -58,7 +58,7 @@ public class RoomDAO {
 	 * @param room the Room to be inserted into the database
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
-	 */
+	 */	
 	public void insert (Sala room) throws SQLException, PatrimonioException {
 
 		checkInsertRoom(room);

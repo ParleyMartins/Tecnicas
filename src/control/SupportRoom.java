@@ -16,18 +16,18 @@ import persistence.RoomDAO;
 import exception.PatrimonioException;
 import model.Sala;
 
-public class ManterSala {
+public class SupportRoom {
 
 	// This Vector will hold all classrooms in memory.
 	private Vector<Sala> rooms = new Vector<Sala>();
 
-	private static ManterSala instance;
+	private static SupportRoom instance;
 	private static RoomDAO classroomDAOInstance;
 
 	/*
 	 * Private constructor to provide singleton implementation.
 	 */
-	private ManterSala() {
+	private SupportRoom() {
 
 		// Blank constructor.
 	}
@@ -37,10 +37,10 @@ public class ManterSala {
 	 * @return the active ManterSala instance, since it will be just one at
 	 * time.
 	 */
-	public static ManterSala getInstance() {
+	public static SupportRoom getInstance() {
 
 		if (instance == null) {
-			instance = new ManterSala();
+			instance = new SupportRoom();
 			classroomDAOInstance = RoomDAO.getInstance();
 
 		} else {

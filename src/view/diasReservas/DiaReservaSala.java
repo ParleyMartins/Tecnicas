@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import model.Sala;
 import view.horariosReservas.HorariosReservaSala;
-import control.ManterSala;
+import control.SupportRoom;
 import exception.PatrimonioException;
 
 public class DiaReservaSala extends DiaReservaPatrimonio {
@@ -31,7 +31,7 @@ public class DiaReservaSala extends DiaReservaPatrimonio {
 			throws SQLException, PatrimonioException {
 
 		super(parentWindow, modal);
-		this.classRoomToBeReserved = ManterSala.getInstance().getRoomsVec().get(classRoomPosition);
+		this.classRoomToBeReserved = SupportRoom.getInstance().getRoomsVec().get(classRoomPosition);
 		this.setName("RoomReservationDay");
 	}
 
