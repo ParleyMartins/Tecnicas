@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Patrimonio;
 import model.ReservaSalaAluno;
 import model.ReservaSalaProfessor;
-import model.Sala;
+import model.Room;
 import view.International;
 import view.reservasSalas.AlterarReservaAlunoSalaView;
 import view.reservasSalas.AlterarReservaProfSalaView;
@@ -35,7 +35,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 	private ManterResSalaAluno studentInstance;
 	private ManterResSalaProfessor teacherInstance;
-	private Sala room;
+	private Room room;
 
 	/**
 	 * Constructor to generate the form
@@ -45,7 +45,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	 * @param room room of reservation.
 	 */
 	public HorariosReservaSala (Frame parent, boolean modal, String date,
-			Sala room) {
+			Room room) {
 
 		super(parent, modal, date, room);
 		this.room = room;
@@ -102,7 +102,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	@Override
 	protected DefaultTableModel fillTable (Patrimonio room) {
 
-		this.room = (Sala) room;
+		this.room = (Room) room;
 		DefaultTableModel dataTable = new DefaultTableModel();
 		this.studentInstance = ManterResSalaAluno.getInstance();
 		this.teacherInstance = ManterResSalaProfessor.getInstance();

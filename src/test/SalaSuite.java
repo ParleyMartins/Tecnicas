@@ -5,11 +5,11 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import test.control.SupportRoomTest;
-import test.model.SalaTest;
+import test.model.RoomTest;
 import test.persistence.RoomDAOTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({SalaTest.class, RoomDAOTest.class, SupportRoomTest.class })
+@SuiteClasses({RoomTest.class, RoomDAOTest.class, SupportRoomTest.class })
 
 public class SalaSuite {
 

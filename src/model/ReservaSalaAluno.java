@@ -35,7 +35,7 @@ public class ReservaSalaAluno extends ReservaSala {
 	 * @param student the person who performs the reservation of the room.
 	 * @throws ReservaException It ensures that every parameter passed is valid. 
 	 */
-	public ReservaSalaAluno(String date, String time, Sala classroom,
+	public ReservaSalaAluno(String date, String time, Room classroom,
 			String purpose, String reserved_chairs, Student student)
 			throws ReservaException {
 

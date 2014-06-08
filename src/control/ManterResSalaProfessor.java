@@ -16,7 +16,7 @@ import persistence.ResSalaProfessorDAO;
 
 import model.Professor;
 import model.ReservaSalaProfessor;
-import model.Sala;
+import model.Room;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -98,7 +98,7 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database insert
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void insert(Sala room, Professor teacher, String date, String time,
+	public void insert(Room room, Professor teacher, String date, String time,
 			String purpose) throws SQLException, ReservaException {
 
 		ReservaSalaProfessor reservation = new ReservaSalaProfessor(date, time,

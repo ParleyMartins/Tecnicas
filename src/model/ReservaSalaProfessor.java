@@ -26,7 +26,7 @@ public class ReservaSalaProfessor extends ReservaSala {
 	 * @param teacher professional who teaches.
 	 * @throws ReservaException
 	 */
-	public ReservaSalaProfessor(String date, String time, Sala classroom,
+	public ReservaSalaProfessor(String date, String time, Room classroom,
 			String purpose, Professor teacher) throws ReservaException {
 
 		super(date, time, classroom, purpose);

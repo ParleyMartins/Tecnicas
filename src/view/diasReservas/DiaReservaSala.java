@@ -9,7 +9,7 @@ package view.diasReservas;
 import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JFrame;
-import model.Sala;
+import model.Room;
 import view.horariosReservas.HorariosReservaSala;
 import control.SupportRoom;
 import exception.PatrimonioException;
@@ -17,7 +17,7 @@ import exception.PatrimonioException;
 public class DiaReservaSala extends DiaReservaPatrimonio {
 
 	private static final long serialVersionUID = 1L;
-	private Sala classRoomToBeReserved;
+	private Room classRoomToBeReserved;
 
 	/**
 	 * Constructor creates a RoomReservationDay form.

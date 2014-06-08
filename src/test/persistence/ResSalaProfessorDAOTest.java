@@ -15,7 +15,7 @@ import model.Professor;
 import model.ReservaSalaAluno;
 import model.ReservaSalaProfessor;
 
-import model.Sala;
+import model.Room;
 
 
 import org.junit.AfterClass;
@@ -36,15 +36,15 @@ import persistence.RoomDAO;
 
 public class ResSalaProfessorDAOTest {
 	
-	private static Sala sala_a;
-	private static Sala sala_b;
+	private static Room sala_a;
+	private static Room sala_b;
 	private static Professor professor1;
 	private static Professor professor2;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		sala_a = new Sala("S2", "Sala de aula", "130");
-		sala_b = new Sala("I6", "Laboratorio", "40");
+		sala_a = new Room("S2", "Sala de aula", "130");
+		sala_b = new Room("I6", "Laboratorio", "40");
 		professor1 = new Professor("ProfessorUm", "490.491.781-20", "58801", "3333-3333", "prof@email");
 		professor2 = new Professor("ProfessorDois", "040.757.021-70", "36106", "3628-3079", "prof@email");
 		
@@ -101,7 +101,7 @@ public class ResSalaProfessorDAOTest {
 	
 	@Test (expected= ReservaException.class)
 	public void testIncluirSalaInexistente() throws ReservaException, ClienteException, PatrimonioException, SQLException {
-		ReservaSalaProfessor reserva = new ReservaSalaProfessor("20/12/34", "8:00", new Sala("222", "Laboratorio", "20"),
+		ReservaSalaProfessor reserva = new ReservaSalaProfessor("20/12/34", "8:00", new Room("222", "Laboratorio", "20"),
 				"Grupo de Estudos", professor1);
 		
 		try{
@@ -458,7 +458,7 @@ public class ResSalaProfessorDAOTest {
 				"Grupo de pesquisa", professor1);
 		this.insert_into(reserva);
 		
-		ReservaSalaProfessor reserva2 = new ReservaSalaProfessor("20/12/34", "8:00", new Sala("S5", "Sala de aula", "120"),
+		ReservaSalaProfessor reserva2 = new ReservaSalaProfessor("20/12/34", "8:00", new Room("S5", "Sala de aula", "120"),
 				"Grupo de Estudos", professor1);
 		
 		try{
@@ -548,7 +548,7 @@ public class ResSalaProfessorDAOTest {
 				"professor.email = \"" + p.getEmail() + "\" and " +
 				"professor.matricula = \"" + p.getEnrollmentNumber() + "\"";
 	}
-	private String select_id_sala(Sala sala){
+	private String select_id_sala(Room sala){
 		return "SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + sala.getIdCode() + "\" and " +
 				"sala.descricao = \"" + sala.getDescription() +  "\" and " +

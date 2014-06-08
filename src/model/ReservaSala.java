@@ -11,7 +11,7 @@ import exception.ReservaException;
 
 public class ReservaSala extends Reserva {
 
-	private Sala classroom;
+	private Room classroom;
 	private String purpose;
 
 	// Error messages.
@@ -28,7 +28,7 @@ public class ReservaSala extends Reserva {
 	 * @param purpose reason of reservation.
 	 * @throws ReservaException It ensures that every parameter passed is valid.
 	 */
-	public ReservaSala(String date, String time, Sala classroom, String purpose)
+	public ReservaSala(String date, String time, Room classroom, String purpose)
 			throws ReservaException {
 
 		super(date, time);
@@ -40,7 +40,7 @@ public class ReservaSala extends Reserva {
 	 * This method gets a classrom.
 	 * @return The content in the classroom field.
 	 */
-	public Sala getClassroom() {
+	public Room getClassroom() {
 
 		return this.classroom;
 	}
@@ -59,7 +59,7 @@ public class ReservaSala extends Reserva {
 	 * @param classroom  place of study.
 	 * @throws ReservaException It ensures that every parameter passed is valid.
 	 */
-	public void setClassroom(Sala classroom) throws ReservaException {
+	public void setClassroom(Room classroom) throws ReservaException {
 
 		if (classroom == null) {
 			throw new ReservaException(BLANK_CLASSROOM);

@@ -15,7 +15,7 @@ import java.util.Vector;
 
 import model.Equipment;
 import model.ReservaEquipamentoProfessor;
-import model.Sala;
+import model.Room;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -32,14 +32,14 @@ import exception.PatrimonioException;
 public class RoomDAOTest {
 	
 	RoomDAO instance;
-	Sala oldRoom;
-	Sala newRoom;
+	Room oldRoom;
+	Room newRoom;
 	
 	@Before
 	public void setUp() throws Exception {
 		instance = RoomDAO.getInstance();
-		oldRoom = new Sala("999", "old description", "20");
-		newRoom = new Sala("0001", "new description", "21");
+		oldRoom = new Room("999", "old description", "20");
+		newRoom = new Room("0001", "new description", "21");
 		instance.insert(oldRoom);
 	}
 
@@ -80,7 +80,7 @@ public class RoomDAOTest {
 	
 	@Test (expected = PatrimonioException.class)
 	public void testInsertWithSameCode() throws SQLException, PatrimonioException {
-		newRoom = new Sala("999", "new description", "20");
+		newRoom = new Room("999", "new description", "20");
 		instance.insert(newRoom);
 	}
 	
@@ -108,7 +108,7 @@ public class RoomDAOTest {
 	
 	@Test (expected = PatrimonioException.class)
 	public void testModifySameCode() throws SQLException, PatrimonioException{
-		newRoom = new Sala("999", "new description", "20");
+		newRoom = new Room("999", "new description", "20");
 		instance.modify(oldRoom, newRoom);
 	}
 	
@@ -148,47 +148,47 @@ public class RoomDAOTest {
 	
 	@Test 
 	public void testSearchByCode() throws SQLException, PatrimonioException{
-		Vector <Sala> allByCode = instance.searchByCode(oldRoom.getIdCode());
+		Vector <Room> allByCode = instance.searchByCode(oldRoom.getIdCode());
 		assertFalse("The vector should not be empty", allByCode.isEmpty());
 	}
 	
 	@Test 
 	public void testSearchByCodeNotRegistered() throws SQLException, PatrimonioException{
-		Vector <Sala> allByCode = instance.searchByCode(newRoom.getIdCode());
+		Vector <Room> allByCode = instance.searchByCode(newRoom.getIdCode());
 		assertTrue("The vector should be empty", allByCode.isEmpty());
 	}
 	
 	@Test 
 	public void testSearchByDescription() throws SQLException, PatrimonioException{
-		Vector <Sala> allByCode = instance.searchByDescription(oldRoom.getDescription());
+		Vector <Room> allByCode = instance.searchByDescription(oldRoom.getDescription());
 		assertFalse("The vector should not be empty", allByCode.isEmpty());
 	}
 	
 	@Test 
 	public void testSearchByDescriptionNotRegistered() throws SQLException, PatrimonioException{
-		Vector <Sala> allByCode = instance.searchByDescription(newRoom.getDescription());
+		Vector <Room> allByCode = instance.searchByDescription(newRoom.getDescription());
 		assertTrue("The vector should be empty", allByCode.isEmpty());
 	}
 	
 	@Test 
 	public void testSearchByCapacity() throws SQLException, PatrimonioException{
-		Vector <Sala> allByCode = instance.searchByCapacity(oldRoom.getCapacity());
+		Vector <Room> allByCode = instance.searchByCapacity(oldRoom.getCapacity());
 		assertFalse("The vector should not be empty", allByCode.isEmpty());
 	}
 	
 	@Test 
 	public void testSearchByCapacityNotRegistered() throws SQLException, PatrimonioException{
-		Vector <Sala> allByCode = instance.searchByCapacity(newRoom.getCapacity());
+		Vector <Room> allByCode = instance.searchByCapacity(newRoom.getCapacity());
 		assertTrue("The vector should be empty", allByCode.isEmpty());
 	}
 	
 	
-	private boolean searchOnVector(Sala room) throws SQLException, PatrimonioException{
-		Vector <Sala> all = instance.searchAll();
+	private boolean searchOnVector(Room room) throws SQLException, PatrimonioException{
+		Vector <Room> all = instance.searchAll();
 		//System.out.println(all);
-		Iterator <Sala> i = all.iterator();
+		Iterator <Room> i = all.iterator();
 		while(i.hasNext()){
-			Sala r = i.next();
+			Room r = i.next();
 			if(r.equals(room)){
 				return true;
 			}

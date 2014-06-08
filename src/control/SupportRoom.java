@@ -14,12 +14,12 @@ import java.util.Vector;
 import persistence.RoomDAO;
 
 import exception.PatrimonioException;
-import model.Sala;
+import model.Room;
 
 public class SupportRoom {
 
 	// This Vector will hold all classrooms in memory.
-	private Vector<Sala> rooms = new Vector<Sala>();
+	private Vector<Room> rooms = new Vector<Room>();
 
 	private static SupportRoom instance;
 	private static RoomDAO classroomDAOInstance;
@@ -54,7 +54,7 @@ public class SupportRoom {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 */
-	public Vector<Sala> getRoomsVec() throws SQLException, PatrimonioException {
+	public Vector<Room> getRoomsVec() throws SQLException, PatrimonioException {
 
 		this.rooms = classroomDAOInstance.searchAll();
 		return this.rooms;
@@ -73,7 +73,7 @@ public class SupportRoom {
 	public void insert(String roomCode, String roomDescription,
 			String roomCapacity) throws PatrimonioException, SQLException {
 
-		Sala sala = new Sala(roomCode, roomDescription, roomCapacity);
+		Room sala = new Room(roomCode, roomDescription, roomCapacity);
 
 		classroomDAOInstance.insert(sala);
 		this.rooms.add(sala);
@@ -89,11 +89,11 @@ public class SupportRoom {
 	 * @throws SQLException If has some problem during the database update
 	 */
 	public void modify(String roomCode, String roomDescription,
-			String capacity, Sala oldRoom) throws PatrimonioException,
+			String capacity, Room oldRoom) throws PatrimonioException,
 			SQLException {
 
 		// Creates a object to the new classroom and updates the database.
-		Sala newRoom = new Sala(roomCode, roomDescription, capacity);
+		Room newRoom = new Room(roomCode, roomDescription, capacity);
 		classroomDAOInstance.modify(oldRoom, newRoom);
 	}
 
@@ -105,7 +105,7 @@ public class SupportRoom {
 	 * @throws SQLException If has some problem during the database deletion
 	 * @throws PatrimonioException If the classroom information is invalid
 	 */
-	public void delete(Sala room) throws SQLException, PatrimonioException {
+	public void delete(Room room) throws SQLException, PatrimonioException {
 
 		classroomDAOInstance.delete(room);
 		this.rooms.remove(room);

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import persistence.FactoryConnection;
 import control.SupportRoom;
-import model.Sala;
+import model.Room;
 import exception.PatrimonioException;
 
 import java.sql.Connection;
@@ -21,7 +21,7 @@ import java.util.Vector;
 
 public class SupportRoomTest {
 	
-	private static Vector<Sala> allRooms;
+	private static Vector<Room> allRooms;
 	
 	@BeforeClass
 	public static void setUpClass() throws SQLException, PatrimonioException{
@@ -50,7 +50,7 @@ public class SupportRoomTest {
 	@Test
 	public void testInsert() throws PatrimonioException, SQLException {
 		
-		Sala room = new Sala("code1", "description1", "1");
+		Room room = new Room("code1", "description1", "1");
 		SupportRoom.getInstance().insert("code1", "description1", "1");
 		
 		assertNotNull("Falha ao inserir", this.searchInVec(room));
@@ -59,8 +59,8 @@ public class SupportRoomTest {
 
 	@Test
 	public void testModify() throws PatrimonioException, SQLException {
-		Sala room = new Sala("code2", "description2", "2");
-		Sala otherRoom = new Sala("code3", "description3", "3");
+		Room room = new Room("code2", "description2", "2");
+		Room otherRoom = new Room("code3", "description3", "3");
 		
 		insert(room);
 		
@@ -80,14 +80,14 @@ public class SupportRoomTest {
 	@Test(expected = PatrimonioException.class)
 	public void testModifyInexistent() throws PatrimonioException, SQLException {
 
-		Sala room = new Sala("code5","description5","5");
+		Room room = new Room("code5","description5","5");
 		
 		SupportRoom.getInstance().modify("code5","Modifydescription5","5", room);
 	}
 	
 	@Test
 	public void testDelete() throws SQLException, PatrimonioException {
-		Sala room = new Sala("code4", "description4", "4");
+		Room room = new Room("code4", "description4", "4");
 		
 		insert(room);
 		
@@ -112,7 +112,7 @@ public class SupportRoomTest {
 	@Test(expected = PatrimonioException.class)
 	public void testDeleteInexistent() throws PatrimonioException, SQLException {
 
-		Sala room = new Sala("code6", "description6", "6");
+		Room room = new Room("code6", "description6", "6");
 
 		SupportRoom.getInstance().delete(room);
 	}
@@ -125,23 +125,23 @@ public class SupportRoomTest {
 
 	@Test(expected = PatrimonioException.class)
 	public void testDeletNull() throws SQLException, PatrimonioException {
-		Sala room;
+		Room room;
 		room = null;
 		SupportRoom.getInstance().delete(room);
 	}
 		
-	public Sala searchInVec(Sala teste) throws PatrimonioException, SQLException {
-		Vector<Sala> todos = SupportRoom.getInstance().getRoomsVec();
-		Iterator<Sala> i = todos.iterator();
+	public Room searchInVec(Room teste) throws PatrimonioException, SQLException {
+		Vector<Room> todos = SupportRoom.getInstance().getRoomsVec();
+		Iterator<Room> i = todos.iterator();
 		while(i.hasNext()){
-			Sala e = i.next();
+			Room e = i.next();
 			if(e.equals(teste))
 				return e;			
 		}
 		return null;
 	}
 		
-	private void insert(Sala room) throws SQLException {
+	private void insert(Room room) throws SQLException {
 		this.executaNoBanco("INSERT INTO " +
 				"sala (codigo, descricao, capacidade) VALUES (" +
 				"\"" + room.getIdCode() + "\", " +
@@ -149,7 +149,7 @@ public class SupportRoomTest {
 				room.getCapacity() + ");");
 	}
 	
-	private void delete(Sala room) throws SQLException {
+	private void delete(Room room) throws SQLException {
 
 		this.executaNoBanco("DELETE FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
@@ -159,7 +159,7 @@ public class SupportRoomTest {
 				);
 	}
 	
-	private boolean select(Sala room) throws SQLException {
+	private boolean select(Room room) throws SQLException {
 
 		boolean isOnDatabase;
 

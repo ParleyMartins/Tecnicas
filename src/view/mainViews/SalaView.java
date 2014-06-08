@@ -13,7 +13,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Sala;
+import model.Room;
 import view.International;
 import view.alteracoes.AlterarSala;
 import view.cadastros.CadastroPatrimonio;
@@ -37,7 +37,7 @@ public class SalaView extends PatrimonioView {
 	}
 
 	// This method fills a vector with the rooms on database.
-	protected Vector<String> fillDataVector(Sala room) {
+	protected Vector<String> fillDataVector(Room room) {
 
 		if (room == null) {
 			return null;
@@ -65,7 +65,7 @@ public class SalaView extends PatrimonioView {
 		try {
 			DefaultTableModel roomTable = new DefaultTableModel();
 
-			Iterator<Sala> i = SupportRoom.getInstance().getRoomsVec()
+			Iterator<Room> i = SupportRoom.getInstance().getRoomsVec()
 					.iterator();
 
 			roomTable.addColumn(International.getInstance().getLabels()
@@ -75,7 +75,7 @@ public class SalaView extends PatrimonioView {
 			roomTable.addColumn(International.getInstance().getLabels()
 					.getString("fullCapacity"));
 			while (i.hasNext()) {
-				Sala sala = i.next();
+				Room sala = i.next();
 				roomTable.addRow(fillDataVector(sala));
 			}
 

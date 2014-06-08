@@ -14,7 +14,7 @@ import java.util.Vector;
 
 import model.Student;
 import model.ReservaSalaAluno;
-import model.Sala;
+import model.Room;
 import persistence.ResSalaAlunoDAO;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -116,7 +116,7 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public int checkAvailableChairs(Sala room, String date, String time)
+	public int checkAvailableChairs(Room room, String date, String time)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
@@ -136,7 +136,7 @@ public class ManterResSalaAluno {
 	 * @throws ClienteException If some of the student info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public void insert(Sala room, Student student, String date, String time,
+	public void insert(Room room, Student student, String date, String time,
 			String purpose, String numberDesiredChairs) throws SQLException,
 			ReservaException, ClienteException, PatrimonioException {
 

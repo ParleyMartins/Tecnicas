@@ -17,7 +17,7 @@ import model.Student;
 import model.Professor;
 import model.ReservaSalaAluno;
 import model.ReservaSalaProfessor;
-import model.Sala;
+import model.Room;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -261,7 +261,7 @@ public class ResSalaProfessorDAO extends DAO {
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
 		String capacity = result.getString("capacidade");
-		Sala room = new Sala(code, description, capacity);
+		Room room = new Room(code, description, capacity);
 
 		String date = result.getString("data");
 		String time = result.getString("hora");
@@ -298,7 +298,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @return true if the Room is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean roomIsInDB (Sala room) throws SQLException {
+	private boolean roomIsInDB (Room room) throws SQLException {
 
 		String query = "SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
@@ -318,7 +318,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @return true if the Room is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean roomIsInReservationDB (Sala room, String date, String time)
+	private boolean roomIsInReservationDB (Room room, String date, String time)
 			throws SQLException {
 
 		String query = "SELECT * FROM reserva_sala_professor WHERE " +
@@ -343,7 +343,7 @@ public class ResSalaProfessorDAO extends DAO {
 	private boolean reservationIsInDB (ReservaSalaProfessor reservation) throws SQLException {
 
 		Professor teacher = reservation.getTeacher();
-		Sala room = reservation.getClassroom();
+		Room room = reservation.getClassroom();
 		
 		String query = "SELECT * FROM reserva_sala_professor WHERE " +
 				"id_professor = (SELECT id_professor FROM professor WHERE " +
@@ -548,7 +548,7 @@ public class ResSalaProfessorDAO extends DAO {
 	 * @param room The room that is going to be selected.
 	 * @return the query to select the given Room
 	 */
-	private String selectRoomIdQuery (Sala room) {
+	private String selectRoomIdQuery (Room room) {
 
 		String query = "SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +

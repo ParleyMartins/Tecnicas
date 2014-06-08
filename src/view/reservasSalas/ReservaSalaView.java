@@ -32,7 +32,7 @@ import javax.swing.WindowConstants;
 import view.International;
 import model.Student;
 import model.Professor;
-import model.Sala;
+import model.Room;
 import control.ManterAluno;
 import control.ManterProfessor;
 import control.ManterResSalaAluno;
@@ -49,7 +49,7 @@ public abstract class ReservaSalaView extends JDialog {
 	protected final int ERROR = -1;
 	protected ManterResSalaAluno studentInstance;
 	protected ManterResSalaProfessor teacherInstance;
-	protected Sala room;
+	protected Room room;
 	protected Student student;
 	protected Professor teacher;
 	protected JLabel studentLabel;

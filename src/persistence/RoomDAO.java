@@ -6,7 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/Sala
 
 package persistence;
 
-import model.Sala;
+import model.Room;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -59,7 +59,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */	
-	public void insert (Sala room) throws SQLException, PatrimonioException {
+	public void insert (Room room) throws SQLException, PatrimonioException {
 
 		checkInsertRoom(room);
 		this.update("INSERT INTO " +
@@ -76,7 +76,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void modify (Sala oldRoom, Sala newRoom) throws SQLException,
+	public void modify (Room oldRoom, Room newRoom) throws SQLException,
 			PatrimonioException {
 
 		checkModifyRoom(oldRoom, newRoom);
@@ -100,7 +100,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void delete (Sala room) throws SQLException, PatrimonioException {
+	public void delete (Room room) throws SQLException, PatrimonioException {
 
 		this.checkDeleteRoom(room);
 		
@@ -120,7 +120,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <Sala> searchAll ( ) throws SQLException,
+	public Vector <Room> searchAll ( ) throws SQLException,
 			PatrimonioException {
 
 		return this.search("SELECT * FROM sala;");
@@ -133,7 +133,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <Sala> searchByCode (String code) throws SQLException,
+	public Vector <Room> searchByCode (String code) throws SQLException,
 			PatrimonioException {
 
 		return this.search("SELECT * FROM sala WHERE codigo = " + "\"" + code
@@ -147,7 +147,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <Sala> searchByDescription (String description)
+	public Vector <Room> searchByDescription (String description)
 			throws SQLException,
 			PatrimonioException {
 
@@ -162,7 +162,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <Sala> searchByCapacity (String capacity)
+	public Vector <Room> searchByCapacity (String capacity)
 			throws SQLException, PatrimonioException {
 
 		return this.search("SELECT * FROM sala WHERE capacidade = " + capacity
@@ -180,10 +180,10 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private Vector <Sala> search (String query) throws SQLException,
+	private Vector <Room> search (String query) throws SQLException,
 			PatrimonioException {
 
-		Vector <Sala> roomVec = new Vector <Sala>();
+		Vector <Room> roomVec = new Vector <Room>();
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 
@@ -232,7 +232,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private boolean isInDB (Sala room) throws SQLException {
+	private boolean isInDB (Room room) throws SQLException {
 
 		return this.iInDBGeneric("SELECT * FROM sala WHERE " +
 				"sala.codigo = \"" + room.getIdCode() + "\" and " +
@@ -259,7 +259,7 @@ public class RoomDAO {
 	 * @return true if the Room was found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInOtherDB (Sala room) throws SQLException {
+	private boolean isInOtherDB (Room room) throws SQLException {
 
 		if (this.iInDBGeneric("SELECT * FROM reserva_sala_professor WHERE " +
 				"id_sala = (SELECT id_sala FROM sala WHERE " +
@@ -289,10 +289,10 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private Sala fetchSala (ResultSet result) throws PatrimonioException,
+	private Room fetchSala (ResultSet result) throws PatrimonioException,
 			SQLException {
 
-		return new Sala(result.getString("codigo"),
+		return new Room(result.getString("codigo"),
 				result.getString("descricao"),
 				result.getString("capacidade"));
 	}
@@ -322,7 +322,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkInsertRoom(Sala room) throws PatrimonioException, SQLException {
+	private void checkInsertRoom(Room room) throws PatrimonioException, SQLException {
 		if (room == null) {
 			throw new PatrimonioException(NULL_ROOM);
 		} else {
@@ -342,7 +342,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkModifyRoom(Sala oldRoom, Sala newRoom) throws SQLException, PatrimonioException{
+	private void checkModifyRoom(Room oldRoom, Room newRoom) throws SQLException, PatrimonioException{
 		this.checkDeleteRoom(oldRoom);
 		
 		if (newRoom == null) {
@@ -372,7 +372,7 @@ public class RoomDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private void checkDeleteRoom(Sala room) throws SQLException, PatrimonioException{
+	private void checkDeleteRoom(Room room) throws SQLException, PatrimonioException{
 		if (room == null) {
 			throw new PatrimonioException(NULL_ROOM);
 		} else {

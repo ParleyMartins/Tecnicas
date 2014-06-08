@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import model.Professor;
 import model.ReservaSalaProfessor;
-import model.Sala;
+import model.Room;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -26,14 +26,14 @@ import persistence.ProfessorDAO;
 import persistence.RoomDAO;
 
 public class ManterResSalaProfessorTest {
-	private static Sala sala1;
+	private static Room sala1;
 	private static Professor professor1;
 	private static Vector<ReservaSalaProfessor> vet;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		vet = ManterResSalaProfessor.getInstance().getAllTeacherRoomReservations();
-		sala1 = new Sala("123", "Sala de Aula", "120");
+		sala1 = new Room("123", "Sala de Aula", "120");
 		professor1 = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "nome@email");
 		
 		ProfessorDAO.getInstance().insert(professor1);
@@ -111,7 +111,7 @@ public class ManterResSalaProfessorTest {
 				"professor.email = \"" + prof.getEmail() + "\" and " +
 				"professor.matricula = \"" + prof.getEnrollmentNumber() + "\"";
 	}
-	private String select_id_sala(Sala sala){
+	private String select_id_sala(Room sala){
 		return "SELECT id_sala FROM sala WHERE " +
 				"sala.codigo = \"" + sala.getIdCode() + "\" and " +
 				"sala.descricao = \"" + sala.getDescription() +  "\" and " +

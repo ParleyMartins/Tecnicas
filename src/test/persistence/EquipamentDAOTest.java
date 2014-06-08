@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import model.Equipment;
-import model.Sala;
+import model.Room;
 
 import org.junit.After;
 import org.junit.AfterClass;

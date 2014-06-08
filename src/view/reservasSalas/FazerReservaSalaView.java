@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import view.International;
-import model.Sala;
+import model.Room;
 import control.ManterResSalaAluno;
 import control.ManterResSalaProfessor;
 import exception.ClienteException;
@@ -35,7 +35,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 	 * @throws ClienteException if some of the client info is invalid
 	 * @throws ReservaException if some of the reservation info is invalid
 	 */
-	public FazerReservaSalaView(Frame parent, boolean modal, Sala sala,
+	public FazerReservaSalaView(Frame parent, boolean modal, Room sala,
 			String data) throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 

@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.PatrimonioException;
 
-public class Sala extends Patrimonio {
+public class Room extends Patrimonio {
 
 	private String capacity;
 
@@ -26,7 +26,7 @@ public class Sala extends Patrimonio {
 	 * @param capacity amount of usable space.
 	 * @throws PatrimonioException It ensures that every parameter passed is not null.
 	 */
-	public Sala(String id_code, String desciption, String capacity)
+	public Room(String id_code, String desciption, String capacity)
 			throws PatrimonioException {
 
 		super(id_code, desciption);
@@ -69,7 +69,7 @@ public class Sala extends Patrimonio {
 	 * @param classroom place of study.
 	 * @return true if there is a reservation. false otherwise.
 	 */
-	public boolean equals(Sala classroom) {
+	public boolean equals(Room classroom) {
 
 		if (super.equals(classroom)
 				&& this.getCapacity().equals(classroom.getCapacity())) {
