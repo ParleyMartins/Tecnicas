@@ -27,7 +27,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import view.International;
-import model.Cliente;
+import model.Client;
 
 public abstract class ClienteView extends JDialog {
 
@@ -62,7 +62,7 @@ public abstract class ClienteView extends JDialog {
 	public abstract void excluirAction();
 
 	// This method fills a vector with the clients on database.
-	protected Vector<String> fillDataVector(Cliente client) {
+	protected Vector<String> fillDataVector(Client client) {
 
 		Vector<String> dataTable = new Vector<String>();
 
@@ -87,7 +87,7 @@ public abstract class ClienteView extends JDialog {
 
 		DefaultTableModel clientTable = new DefaultTableModel();
 
-		Iterator<Cliente> i = getIterator();
+		Iterator<Client> i = getIterator();
 
 		clientTable.addColumn(International.getInstance().getLabels()
 				.getString("enrollmentNumber"));
@@ -101,7 +101,7 @@ public abstract class ClienteView extends JDialog {
 				.getString("email"));
 
 		while (i.hasNext()) {
-			Cliente cliente = i.next();
+			Client cliente = i.next();
 			clientTable.addRow(fillDataVector(cliente));
 		}
 

@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ClienteException;
 
-public class Professor extends Cliente {
+public class Professor extends Client {
 
 	// Alerts and error messages.
 	private final String BLANK_ENROLLMENT_NUMBER = International.getInstance().getMessages()
