@@ -8,7 +8,7 @@ package model;
 
 import exception.PatrimonioException;
 
-public class Equipment extends Patrimonio {
+public class Equipment extends Property {
 
 	/**
 	 * Fields of a client. 

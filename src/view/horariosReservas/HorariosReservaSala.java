@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import model.Patrimonio;
+import model.Property;
 import model.StudentReserveRoom;
 import model.TeacherReserveRoom;
 import model.Room;
@@ -100,7 +100,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected DefaultTableModel fillTable (Patrimonio room) {
+	protected DefaultTableModel fillTable (Property room) {
 
 		this.room = (Room) room;
 		DefaultTableModel dataTable = new DefaultTableModel();

@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Equipment;
-import model.Patrimonio;
+import model.Property;
 import model.ReservaEquipamentoProfessor;
 import view.International;
 import view.reservasEquipamentos.AlterarReservaEquipamentoView;
@@ -81,7 +81,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	/*
 	 * This method fills the Table with the properties on the database
 	 */
-	protected DefaultTableModel fillTable (Patrimonio tempEquipment) {
+	protected DefaultTableModel fillTable (Property tempEquipment) {
 
 		this.equipment = (Equipment) tempEquipment;
 		DefaultTableModel dataTable = new DefaultTableModel();

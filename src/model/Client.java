@@ -130,10 +130,10 @@ public abstract class Client {
 	 */
 	public void setPhoneNumber(String phoneNumber) throws ClienteException {
 
-		validatePhoneNumber(phoneNumber);
 		if ("".equals(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
 		} else {
+			validatePhoneNumber(phoneNumber);
 			this.phoneNumber = phoneNumber.replaceAll(" ", "");
 		}
 

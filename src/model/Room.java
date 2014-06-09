@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.PatrimonioException;
 
-public class Room extends Patrimonio {
+public class Room extends Property {
 
 	private String capacity;
 

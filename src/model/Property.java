@@ -1,6 +1,6 @@
 /**
-Patrimonio. 
-Class sets exceptions of Patrimonio.
+Property. 
+Class sets exceptions of Property.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
 */
 
@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.PatrimonioException;
 
-public class Patrimonio {
+public class Property {
 
 	private String id_code;
 	private String description;
@@ -21,12 +21,12 @@ public class Patrimonio {
 					.getString("blankDescription");
 
 	/**
-	 * This method sets informations relared to a patrimony. 
+	 * This method sets informations related to a property. 
 	 * @param code An equipment id number .
 	 * @param description An equipment description. 
 	 * @throws PatrimonioException It ensures that every parameter passed is not null.
 	 */
-	public Patrimonio(String code, String description)
+	public Property(String code, String description)
 			throws PatrimonioException {
 
 		this.setIdCode(code);
@@ -94,7 +94,7 @@ public class Patrimonio {
 	 * @param property An equipment location. 
 	 * @return true if an equipment is registered. false otherwise. 
 	 */
-	public boolean equals(Patrimonio property) {
+	public boolean equals(Property property) {
 
 		if (this.getIdCode().equals(property.getIdCode())
 				&& this.getDescription().equals(property.getDescription())) {
