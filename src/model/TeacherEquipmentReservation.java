@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ReservaException;
 
-public class ReservaEquipamentoProfessor extends EquipmentReservation {
+public class TeacherEquipmentReservation extends EquipmentReservation {
 
 	private Teacher teacher;
 
@@ -25,7 +25,7 @@ public class ReservaEquipamentoProfessor extends EquipmentReservation {
 	 * @param teacher professional who teaches.
 	 * @throws ReservaException  It ensures that every parameter passed is valid.
 	 */
-	public ReservaEquipamentoProfessor(String date, String time,
+	public TeacherEquipmentReservation(String date, String time,
 			Equipment equipment, Teacher teacher) throws ReservaException {
 
 		super(date, time, equipment);
@@ -61,10 +61,18 @@ public class ReservaEquipamentoProfessor extends EquipmentReservation {
 	 * @param reservation A reservation.
 	 * @return if there dedicated equipment.
 	 */
-	public boolean equals(ReservaEquipamentoProfessor reservation) {
+	public boolean equals(TeacherEquipmentReservation reservation) {
 
-		return (super.equals(reservation) && this.getEquipment().equals(
-				reservation.getEquipment()));
+		boolean reservationIsEquals = super.equals(reservation);
+		
+		Teacher compareTeacher = reservation.getTeacher();
+		boolean teacherIsEquals = this.getTeacher().equals(compareTeacher); 
+		
+		if(reservationIsEquals && teacherIsEquals){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/** This method returns a String object representing the data.
@@ -72,9 +80,11 @@ public class ReservaEquipamentoProfessor extends EquipmentReservation {
 	 */
 	public String toString() {
 
-		return "ReservaEquipamentoProfessor " + 
+		String toString = "ReservaEquipamentoProfessor " + 
 				"\nProfessor = " + this.getTeacher().toString() + 
-				"\nEquipment = " + super.toString() + "]";
+				 super.toString() + "\n"; 
+		
+		return toString;
 	}
 
 }
