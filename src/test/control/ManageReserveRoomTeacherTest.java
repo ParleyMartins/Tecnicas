@@ -27,100 +27,101 @@ import persistence.RoomDAO;
 
 public class ManageReserveRoomTeacherTest {
 
-	private static Room sala1;
-	private static Teacher professor1;
-	private static Vector <TeacherReserveRoom> vet;
+	private static Room room1;
+	private static Teacher teacher1;
+	private static Vector <TeacherReserveRoom> TeachersReserve;
 
 	@BeforeClass
 	public static void setUpBeforeClass ( ) throws Exception {
 
-		vet = ManageReserveRoomTeacher.getInstance()
+		TeachersReserve = ManageReserveRoomTeacher.getInstance()
 				.getAllTeacherRoomReservations();
-		sala1 = new Room("123", "Sala de Aula", "120");
-		professor1 = new Teacher("testInstance", "040.757.021-70", "0058801",
+		room1 = new Room("123", "Sala de Aula", "120");
+		teacher1 = new Teacher("testInstance", "040.757.021-70", "0058801",
 				"3333-3333", "nome@email");
 
-		TeacherDAO.getInstance().insert(professor1);
-		RoomDAO.getInstance().insert(sala1);
+		TeacherDAO.getInstance().insert(teacher1);
+		RoomDAO.getInstance().insert(room1);
 
 	}
 
 	@AfterClass
 	public static void tearDownClass ( ) throws Exception {
-		TeacherDAO.getInstance().delete(professor1);
-		RoomDAO.getInstance().delete(sala1);
+		TeacherDAO.getInstance().delete(teacher1);
+		RoomDAO.getInstance().delete(room1);
 	}
 
 	@Test (expected = ClienteException.class)
 	public void testInstance ( ) {
 		assertTrue(
-				"Teste de Instancia.",
-				ManageReserveRoomTeacher.getInstance() instanceof ManageReserveRoomTeacher);
+				"Instance test.",
+				ManageReserveRoomTeacher.getInstance() instanceof
+					ManageReserveRoomTeacher);
 	}
 
 	@Test
 	public void testSingleton ( ) {
 
-		assertSame("Teste de Instancia.", ManageReserveRoomTeacher.getInstance(),
+		assertSame("Instance test.", ManageReserveRoomTeacher.getInstance(),
 				ManageReserveRoomTeacher.getInstance());
 	}
 
 	@Test
-	public void testInserir ( ) throws SQLException, ReservaException,
+	public void testInsert ( ) throws SQLException, ReservaException,
 			ClienteException, PatrimonioException {
 
-		String finalidade = "Sala de Estudos";
+		String finality = "Sala de Estudos";
 		String data = "20/12/33";
-		String hora = "9:11";
-		TeacherReserveRoom reserva = new TeacherReserveRoom(data, hora, sala1,
-				finalidade, professor1);
-		ManageReserveRoomTeacher.getInstance().insert(sala1, professor1, data,
-				hora, finalidade);
-		boolean resultado = this.inDB(reserva);
-		boolean resultado2 = reserva.equals(vet.lastElement());
-		if (resultado)
+		String time = "9:11";
+		TeacherReserveRoom reserva = new TeacherReserveRoom(data, time, room1,
+				finality, teacher1);
+		ManageReserveRoomTeacher.getInstance().insert(room1, teacher1, data,
+				time, finality);
+		boolean result = this.inDB(reserva);
+		boolean result2 = reserva.equals(TeachersReserve.lastElement());
+		if (result)
 			this.delete_from(reserva);
-		assertTrue("Teste de Insercao.", resultado && resultado2);
+		assertTrue("Teste de Insercao.", result && result2);
 	}
 
 	@Test
-	public void testAlterar ( ) throws ReservaException, SQLException,
+	public void testModify( ) throws ReservaException, SQLException,
 			ClienteException, PatrimonioException {
 
-		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/33", "9:11",
-				sala1, "Pesquisa", professor1);
-		this.insert_into(reserva);
-		vet.add(reserva);
-		TeacherReserveRoom reserva2 = new TeacherReserveRoom("20/12/33",
-				"9:11", sala1, "Reuniao", professor1);
+		TeacherReserveRoom reserve = new TeacherReserveRoom("20/12/33", "9:11",
+				room1, "Pesquisa", teacher1);
+		this.insert_into(reserve);
+		TeachersReserve.add(reserve);
+		TeacherReserveRoom reserve2 = new TeacherReserveRoom("20/12/33",
+				"9:11", room1, "Reuniao", teacher1);
 		ManageReserveRoomTeacher.getInstance().modify("Reuniao",
-				vet.lastElement());
-		boolean resultado = this.inDB(reserva2);
-		boolean resultado2 = reserva2.equals(vet.lastElement());
-		if (resultado)
-			this.delete_from(reserva2);
-		if (this.inDB(reserva))
-			this.delete_from(reserva);
-		assertTrue("Teste de Alteracao.", resultado && resultado2);
+				TeachersReserve.lastElement());
+		boolean result = this.inDB(reserve2);
+		boolean result2 = reserve2.equals(TeachersReserve.lastElement());
+		if (result)
+			this.delete_from(reserve2);
+		if (this.inDB(reserve))
+			this.delete_from(reserve);
+		assertTrue("Teste de Alteracao.", result && result2);
 	}
 
 	@Test
-	public void testExcluir ( ) throws ReservaException, SQLException {
+	public void testDelete ( ) throws ReservaException, SQLException {
 
-		String finalidade = "Pesquisa";
-		String data = "20/12/33";
-		String hora = "9:11";
-		TeacherReserveRoom reserva = new TeacherReserveRoom(data, hora, sala1,
-				finalidade, professor1);
-		this.insert_into(reserva);
-		vet.add(reserva);
-		ManageReserveRoomTeacher.getInstance().delete(reserva);
-		boolean resultado = this.inDB(reserva);
-		vet.remove(reserva);
+		String finality = "Pesquisa";
+		String date = "20/12/33";
+		String time = "9:11";
+		TeacherReserveRoom reserve = new TeacherReserveRoom(date, time, room1,
+				finality, teacher1);
+		this.insert_into(reserve);
+		TeachersReserve.add(reserve);
+		ManageReserveRoomTeacher.getInstance().delete(reserve);
+		boolean result = this.inDB(reserve);
+		TeachersReserve.remove(reserve);
 
-		if (resultado)
-			this.delete_from(reserva);
-		assertTrue("Teste de Exclusao.", !resultado);
+		if (result)
+			this.delete_from(reserve);
+		assertTrue("Teste de Exclusao.", !result);
 	}
 
 	private String select_id_professor (Teacher prof) {
