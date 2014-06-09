@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ReservaException;
 
-public class ReservaEquipamento extends Reservation {
+public class EquipmentReservation extends Reservation {
 
 	private Equipment equipment;
 
@@ -24,7 +24,7 @@ public class ReservaEquipamento extends Reservation {
 	 * @param equipment object to be reservation.
 	 * @throws ReservaException It ensures that every parameter passed is valid. 
 	 */
-	public ReservaEquipamento(String date, String time, Equipment equipment)
+	public EquipmentReservation(String date, String time, Equipment equipment)
 			throws ReservaException {
 
 		super(date, time);
@@ -45,7 +45,7 @@ public class ReservaEquipamento extends Reservation {
 	 * @param equipment object to be reservation.
 	 * @throws ReservaException It ensures that every parameter passed is valid.
 	 */
-	public void setEquipment(Equipment equipment) throws ReservaException {
+	private void setEquipment(Equipment equipment) throws ReservaException {
 
 		if (equipment == null) {
 			throw new ReservaException(BLANK_EQUIPMENT);
@@ -60,19 +60,27 @@ public class ReservaEquipamento extends Reservation {
 	 * @param reservation A reservation.
 	 * @return true if there is a reservation. false otherwise.
 	 */
-	public boolean equals(ReservaEquipamento reservation) {
-
-		return (super.equals(reservation) && this.getEquipment()
-				.equals(reservation.getEquipment()));
+	public boolean equals(EquipmentReservation reservation) {
+		
+		boolean reservationIsEquals = super.equals(reservation);
+		
+		Equipment compareEquip = reservation.getEquipment();
+		boolean equipmentIsEquals = this.getEquipment().equals(compareEquip); 
+		
+		if(reservationIsEquals && equipmentIsEquals){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**This method returns a String object representing the data.
 	 * @return A reservation.
 	 */
 	public String toString() {
-
-		return "ReservaEquipamento [equipamento=" + this.getEquipment()
-				+ ", toString()=" + super.toString() + "]";
+		String objString = "Equipamento =" + this.getEquipment()
+				+ super.toString() + "\n"; 
+		return objString;
 	}
 
 }
