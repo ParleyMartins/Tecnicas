@@ -1,5 +1,5 @@
 /**
-ManterAluno
+ManageStudent
 Student controller, include the procedures to access, modify, and delete student
 informations. In this class, we use Singleton to guarantee just one 
 instance at time, since this is a MVC controller. To execute the described 
@@ -16,9 +16,9 @@ import persistence.StudentDAO;
 import exception.ClienteException;
 import model.Student;
 
-public class ManterAluno {
+public class ManageStudent {
 
-	private static ManterAluno instance;
+	private static ManageStudent instance;
 	private static StudentDAO studentDAOInstance;
 
 	private Vector<Student> allStudents = new Vector<Student>();
@@ -26,20 +26,20 @@ public class ManterAluno {
 	/*
 	 * Private constructor to provide singleton implementation.
 	 */
-	private ManterAluno() {
+	private ManageStudent() {
 
 		// Empty constructor.
 	}
 
 	/**
 	 * Provides the singleton implementation
-	 * @return the active ManterAluno instance, since it will be just one at
+	 * @return the active ManageStudent instance, since it will be just one at
 	 * time.
 	 */
-	public static ManterAluno getInstance() {
+	public static ManageStudent getInstance() {
 
 		if (instance == null) {
-			instance = new ManterAluno();
+			instance = new ManageStudent();
 			studentDAOInstance = StudentDAO.getInstance();
 		} else {
 			// Nothing here.

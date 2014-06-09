@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import view.International;
-import control.ManterProfessor;
+import control.ManageTeacher;
 import exception.ClienteException;
 
 public class CadastroProfessor extends CadastroCliente {
@@ -40,7 +40,7 @@ public class CadastroProfessor extends CadastroCliente {
 					International.getInstance().getButtons()
 							.getString("register"))) {
 
-				ManterProfessor.getInstance().insert(
+				ManageTeacher.getInstance().insert(
 						this.nameTxtField.getText(),
 						this.cpfTxtField.getText(),
 						this.enrollmentNumberTxtField.getText(),

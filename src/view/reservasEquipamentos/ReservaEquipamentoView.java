@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import model.Professor;
-import control.ManterProfessor;
+import control.ManageTeacher;
 import control.ManterResEquipamentoProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -83,7 +83,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	protected void getTeacherFromDB ( ) {
 
 		try {
-			Vector <Professor> instanceTeacher = ManterProfessor.getInstance()
+			Vector <Professor> instanceTeacher = ManageTeacher.getInstance()
 					.searchCpf(this.cpfTextField.getText());
 			if (instanceTeacher.isEmpty()) {
 				JOptionPane

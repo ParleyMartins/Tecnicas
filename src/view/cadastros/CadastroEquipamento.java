@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import view.International;
-import control.ManterEquipamento;
+import control.ManageEquipment;
 import exception.PatrimonioException;
 
 public class CadastroEquipamento extends CadastroPatrimonio {
@@ -43,7 +43,7 @@ public class CadastroEquipamento extends CadastroPatrimonio {
 				.getString("successEquipment");
 
 		try {
-			ManterEquipamento.getInstance().insert(this.codeTxtField.getText(),
+			ManageEquipment.getInstance().insert(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText());
 
 			JOptionPane.showMessageDialog(this, createdMessage, successMessage,

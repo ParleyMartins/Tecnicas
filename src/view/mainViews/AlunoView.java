@@ -16,7 +16,7 @@ import view.International;
 import view.alteracoes.AlterarAluno;
 import view.cadastros.CadastroAluno;
 import view.cadastros.CadastroCliente;
-import control.ManterAluno;
+import control.ManageStudent;
 import exception.ClienteException;
 
 public class AlunoView extends ClienteView {
@@ -37,7 +37,7 @@ public class AlunoView extends ClienteView {
 				.getString("error");
 
 		try {
-			return ManterAluno.getInstance().getAllStudents().iterator();
+			return ManageStudent.getInstance().getAllStudents().iterator();
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
@@ -99,12 +99,12 @@ public class AlunoView extends ClienteView {
 			}
 
 			int confirm = JOptionPane.showConfirmDialog(this, deleteQuestion
-					+ ManterAluno.getInstance().getAllStudents().get(index)
+					+ ManageStudent.getInstance().getAllStudents().get(index)
 							.getName() + "?", deleteMessage,
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterAluno.getInstance().delete(
-						ManterAluno.getInstance().getAllStudents().get(index));
+				ManageStudent.getInstance().delete(
+						ManageStudent.getInstance().getAllStudents().get(index));
 				JOptionPane.showMessageDialog(this, deleteConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
 			} else {

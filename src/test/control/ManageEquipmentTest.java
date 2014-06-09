@@ -1,6 +1,6 @@
 package test.control;
 
-import control.ManterEquipamento;
+import control.ManageEquipment;
 import exception.PatrimonioException;
 
 import java.sql.SQLException;
@@ -16,20 +16,20 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ManterEquipamentoTest {
+public class ManageEquipmentTest {
 
-	static ManterEquipamento instance;
+	static ManageEquipment instance;
 	Vector<Equipment> allEquipments;
 	Equipment equipment;
 
-	public ManterEquipamentoTest() {
+	public ManageEquipmentTest() {
 
 	}
 
 	@BeforeClass
 	public static void setUpClass() throws PatrimonioException {
 
-		instance = ManterEquipamento.getInstance();
+		instance = ManageEquipment.getInstance();
 	}
 
 	@AfterClass
@@ -75,7 +75,7 @@ public class ManterEquipamentoTest {
 	@Test
 	public void testSingleton() {
 
-		ManterEquipamento otherInstance = ManterEquipamento.getInstance();
+		ManageEquipment otherInstance = ManageEquipment.getInstance();
 		assertSame("Instances should be the same.", otherInstance, instance);
 
 	}

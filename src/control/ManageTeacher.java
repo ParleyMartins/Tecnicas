@@ -1,5 +1,5 @@
 /**
-ManterProfessor
+ManageTeacher
 Teacher controller, include the procedures to access, modify, and delete teacher
 informations. In this class, we use Singleton to guarantee just one 
 instance at time, since this is a MVC controller. To execute the described 
@@ -15,9 +15,9 @@ import persistence.TeacherDAO;
 import exception.ClienteException;
 import model.Professor;
 
-public class ManterProfessor {
+public class ManageTeacher {
 
-	private static ManterProfessor instance;
+	private static ManageTeacher instance;
 	private static TeacherDAO teacherDAOInstance;
 
 	private Vector<Professor> allTeachers = new Vector<Professor>();
@@ -25,20 +25,20 @@ public class ManterProfessor {
 	/*
 	 * Private constructor to provide singleton implementation.
 	 */
-	private ManterProfessor() {
+	private ManageTeacher() {
 
 		// Empty constructor.
 	}
 
 	/**
 	 * Provides the singleton implementation
-	 * @return the active ManterProfessor instance, since it will be just one at
+	 * @return the active ManageTeacher instance, since it will be just one at
 	 * time.
 	 */
-	public static ManterProfessor getInstance() {
+	public static ManageTeacher getInstance() {
 
 		if (instance == null) {
-			instance = new ManterProfessor();
+			instance = new ManageTeacher();
 			teacherDAOInstance = TeacherDAO.getInstance();
 		} else {
 			// Nothing here.

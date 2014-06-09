@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import model.Equipment;
 import view.horariosReservas.HorariosReservaEquipamento;
 import view.horariosReservas.HorariosReservaPatrimonio;
-import control.ManterEquipamento;
+import control.ManageEquipment;
 import exception.PatrimonioException;
 
 public class DiaReservaEquipamento extends DiaReservaPatrimonio {
@@ -32,7 +32,7 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 			int equipmentPosition) throws SQLException, PatrimonioException {
 
 		super(parentWindow, modal);
-		this.equipmentToBeReserved = ManterEquipamento.getInstance().getAllEquipments()
+		this.equipmentToBeReserved = ManageEquipment.getInstance().getAllEquipments()
 				.get(equipmentPosition);
 	}
 

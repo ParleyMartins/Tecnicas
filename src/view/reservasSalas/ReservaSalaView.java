@@ -33,8 +33,8 @@ import view.International;
 import model.Student;
 import model.Professor;
 import model.Room;
-import control.ManterAluno;
-import control.ManterProfessor;
+import control.ManageStudent;
+import control.ManageTeacher;
 import control.ManterResSalaAluno;
 import control.ManterResSalaProfessor;
 import exception.ClienteException;
@@ -113,7 +113,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 
-			Vector <Student> alunos = ManterAluno.getInstance().searchByCpf(
+			Vector <Student> alunos = ManageStudent.getInstance().searchByCpf(
 					this.cpfTextField.getText());
 			if (alunos.isEmpty()) {
 				JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("studentNotExists")
@@ -140,7 +140,7 @@ public abstract class ReservaSalaView extends JDialog {
 	protected void getProfessor ( ) {
 
 		try {
-			Vector <Professor> professor = ManterProfessor.getInstance()
+			Vector <Professor> professor = ManageTeacher.getInstance()
 					.searchCpf(this.cpfTextField.getText());
 			if (professor.isEmpty()) {
 				JOptionPane

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 import view.International;
 import view.cadastros.CadastroPatrimonio;
-import control.ManterEquipamento;
+import control.ManageEquipment;
 import exception.PatrimonioException;
 
 public class AlterarEquipamento extends CadastroPatrimonio {
@@ -46,9 +46,9 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 		try {
 
-			this.codeTxtField.setText(ManterEquipamento.getInstance()
+			this.codeTxtField.setText(ManageEquipment.getInstance()
 					.getAllEquipments().get(index).getIdCode());
-			this.descriptionTxtArea.setText(ManterEquipamento.getInstance()
+			this.descriptionTxtArea.setText(ManageEquipment.getInstance()
 					.getAllEquipments().get(index).getDescription());
 			this.index2 = index;
 
@@ -83,10 +83,10 @@ public class AlterarEquipamento extends CadastroPatrimonio {
 
 		try {
 
-			ManterEquipamento.getInstance().modify(
+			ManageEquipment.getInstance().modify(
 					this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText(),
-					ManterEquipamento.getInstance().getAllEquipments()
+					ManageEquipment.getInstance().getAllEquipments()
 							.get(this.index2));
 
 			JOptionPane.showMessageDialog(this, modifiedMessage,

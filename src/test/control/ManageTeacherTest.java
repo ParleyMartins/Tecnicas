@@ -16,17 +16,17 @@ import org.junit.Test;
 
 import persistence.FactoryConnection;
 
-import control.ManterProfessor;
+import control.ManageTeacher;
 import exception.ClienteException;
 
-public class ManterProfessorTest {
+public class ManageTeacherTest {
 
 	private static Vector<Professor> allTeachers;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
-		allTeachers = ManterProfessor.getInstance().getAllTeachers();
+		allTeachers = ManageTeacher.getInstance().getAllTeachers();
 	}
 
 	@AfterClass
@@ -38,14 +38,14 @@ public class ManterProfessorTest {
 	public void testInstance() {
 
 		assertTrue("Should be a ManterProfessor instance.",
-				ManterProfessor.getInstance() instanceof ManterProfessor);
+				ManageTeacher.getInstance() instanceof ManageTeacher);
 	}
 
 	@Test
 	public void testSingleton() {
 
-		ManterProfessor instanceOne = ManterProfessor.getInstance();
-		ManterProfessor instanceTwo = ManterProfessor.getInstance();
+		ManageTeacher instanceOne = ManageTeacher.getInstance();
+		ManageTeacher instanceTwo = ManageTeacher.getInstance();
 		assertSame("Instances should be the same.", instanceOne, instanceTwo);
 	}
 
@@ -54,7 +54,7 @@ public class ManterProfessorTest {
 
 		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
-		ManterProfessor.getInstance().insert("Nome para Incluir",
+		ManageTeacher.getInstance().insert("Nome para Incluir",
 				"868.563.327-34", "123456", "1234-5678", "Nome@email");
 
 		boolean isOnDatabase;
@@ -82,7 +82,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		ManterProfessor.getInstance().modify("Nome para Alterar",
+		ManageTeacher.getInstance().modify("Nome para Alterar",
 				"868.563.327-34", "123456", "1234-5678", "Nome@email", teacher);
 
 		boolean isOnDatabase;
@@ -101,7 +101,7 @@ public class ManterProfessorTest {
 		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 
-		ManterProfessor.getInstance().modify("Nome para Alterar",
+		ManageTeacher.getInstance().modify("Nome para Alterar",
 				"868.563.327-34", "123456", "1234-5678", "Nome@email", teacher);
 	}
 
@@ -113,7 +113,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		ManterProfessor.getInstance().delete(teacher);
+		ManageTeacher.getInstance().delete(teacher);
 
 		boolean isOnDatabase;
 		isOnDatabase = select(teacher);
@@ -138,7 +138,7 @@ public class ManterProfessorTest {
 		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 
-		ManterProfessor.getInstance().delete(teacher);
+		ManageTeacher.getInstance().delete(teacher);
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		teachers = ManterProfessor.getInstance().searchName(teacher.getName());
+		teachers = ManageTeacher.getInstance().searchName(teacher.getName());
 		assertEquals(1, teachers.size());
 		
 		delete(teacher);
@@ -159,7 +159,7 @@ public class ManterProfessorTest {
 	public void searchByNameInexistent() throws ClienteException, SQLException {
 		Vector<Professor> teachers;
 		
-		teachers = ManterProfessor.getInstance().searchName("Nome do professor");
+		teachers = ManageTeacher.getInstance().searchName("Nome do professor");
 		assertEquals(0, teachers.size());
 	}
 	
@@ -171,7 +171,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		teachers = ManterProfessor.getInstance().searchCpf(teacher.getCpf());
+		teachers = ManageTeacher.getInstance().searchCpf(teacher.getCpf());
 		assertEquals(1, teachers.size());
 		
 		delete(teacher);
@@ -181,7 +181,7 @@ public class ManterProfessorTest {
 	public void searchByCPFInexistent() throws ClienteException, SQLException {
 		Vector<Professor> teachers;
 		
-		teachers = ManterProfessor.getInstance().searchCpf("040.757.021-70");
+		teachers = ManageTeacher.getInstance().searchCpf("040.757.021-70");
 		assertEquals(0, teachers.size());
 	}
 	
@@ -193,7 +193,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		teachers = ManterProfessor.getInstance().searchEnrollNumber(teacher.getEnrollmentNumber());
+		teachers = ManageTeacher.getInstance().searchEnrollNumber(teacher.getEnrollmentNumber());
 		assertEquals(1, teachers.size());
 		
 		delete(teacher);
@@ -203,7 +203,7 @@ public class ManterProfessorTest {
 	public void searchByEnrollmentNumberInexistent() throws ClienteException, SQLException {
 		Vector<Professor> teachers;
 		
-		teachers = ManterProfessor.getInstance().searchEnrollNumber("1111");
+		teachers = ManageTeacher.getInstance().searchEnrollNumber("1111");
 		assertEquals(0, teachers.size());
 	}
 
@@ -215,7 +215,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		teachers = ManterProfessor.getInstance().searchEmail(teacher.getEmail());
+		teachers = ManageTeacher.getInstance().searchEmail(teacher.getEmail());
 		assertEquals(1, teachers.size());
 		
 		delete(teacher);
@@ -225,7 +225,7 @@ public class ManterProfessorTest {
 	public void searchByEmailInexistent() throws ClienteException, SQLException {
 		Vector<Professor> teachers;
 		
-		teachers = ManterProfessor.getInstance().searchEmail("teacher@email");
+		teachers = ManageTeacher.getInstance().searchEmail("teacher@email");
 		assertEquals(0, teachers.size());
 	}
 	
@@ -237,7 +237,7 @@ public class ManterProfessorTest {
 
 		insert(teacher);
 
-		teachers = ManterProfessor.getInstance().searchPhoneNumber(teacher.getPhoneNumber());
+		teachers = ManageTeacher.getInstance().searchPhoneNumber(teacher.getPhoneNumber());
 		assertEquals(1, teachers.size());
 		
 		delete(teacher);
@@ -247,7 +247,7 @@ public class ManterProfessorTest {
 	public void searchByPhoneNumberInexistent() throws ClienteException, SQLException {
 		Vector<Professor> teachers;
 		
-		teachers = ManterProfessor.getInstance().searchEmail("9999-9999");
+		teachers = ManageTeacher.getInstance().searchEmail("9999-9999");
 		assertEquals(0, teachers.size());
 	}
 	

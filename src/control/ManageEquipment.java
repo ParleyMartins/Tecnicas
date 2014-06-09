@@ -1,5 +1,5 @@
 /**
-ManterEquipamento
+ManageEquipment
 Include the procedures to access, modify, and delete equipments. In this class, 
 we use Singleton to guarantee just one instance at time, since this is a MVC 
 controller. To execute the described actions, this class need to communicate 
@@ -17,32 +17,32 @@ import view.International;
 import exception.PatrimonioException;
 import model.Equipment;
 
-public class ManterEquipamento {
+public class ManageEquipment {
 
 	// This Vector will hold all equipments in memory.
 	private Vector<Equipment> allEquipments = new Vector<Equipment>();
 
-	private static ManterEquipamento instance;
+	private static ManageEquipment instance;
 	private static EquipamentDAO equipmentDAOInstance;
 	private static ResourceBundle messages;
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
 	 */
-	private ManterEquipamento() {
+	private ManageEquipment() {
 
 		// Blank constructor.
 	}
 
 	/**
 	 * Provides the singleton implementation
-	 * @return the active ManterEquipamento instance, since it will be just one
+	 * @return the active ManageEquipment instance, since it will be just one
 	 * at time.
 	 */
-	public static ManterEquipamento getInstance() {
+	public static ManageEquipment getInstance() {
 
 		if (instance == null) {
-			instance = new ManterEquipamento();
+			instance = new ManageEquipment();
 			equipmentDAOInstance = EquipamentDAO.getInstance();
 
 			International internationalInstance = International.getInstance();

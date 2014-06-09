@@ -18,7 +18,7 @@ import view.International;
 import view.alteracoes.AlterarEquipamento;
 import view.cadastros.CadastroEquipamento;
 import view.diasReservas.DiaReservaEquipamento;
-import control.ManterEquipamento;
+import control.ManageEquipment;
 import exception.PatrimonioException;
 
 public class EquipamentoView extends PatrimonioView {
@@ -65,7 +65,7 @@ public class EquipamentoView extends PatrimonioView {
 		try {
 			DefaultTableModel equipmentTable = new DefaultTableModel();
 
-			Iterator<Equipment> i = control.ManterEquipamento.getInstance()
+			Iterator<Equipment> i = control.ManageEquipment.getInstance()
 					.getAllEquipments().iterator();
 
 			equipmentTable.addColumn(International.getInstance().getLabels()
@@ -133,13 +133,13 @@ public class EquipamentoView extends PatrimonioView {
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this,
 					removeQuestion
-							+ ManterEquipamento.getInstance().getAllEquipments()
+							+ ManageEquipment.getInstance().getAllEquipments()
 									.get(index).getDescription() + "?",
 					removeMessage, JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterEquipamento.getInstance().delete(
-						ManterEquipamento.getInstance().getAllEquipments()
+				ManageEquipment.getInstance().delete(
+						ManageEquipment.getInstance().getAllEquipments()
 								.get(index));
 				JOptionPane.showMessageDialog(this, removeConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);

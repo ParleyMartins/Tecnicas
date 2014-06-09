@@ -15,7 +15,7 @@ import view.International;
 import view.alteracoes.AlterarProfessor;
 import view.cadastros.CadastroCliente;
 import view.cadastros.CadastroProfessor;
-import control.ManterProfessor;
+import control.ManageTeacher;
 import exception.ClienteException;
 
 public class ProfessorView extends ClienteView {
@@ -36,7 +36,7 @@ public class ProfessorView extends ClienteView {
 				.getString("error");
 
 		try {
-			return ManterProfessor.getInstance().getAllTeachers().iterator();
+			return ManageTeacher.getInstance().getAllTeachers().iterator();
 
 		} catch (ClienteException ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage(), errorMessage,
@@ -100,12 +100,12 @@ public class ProfessorView extends ClienteView {
 			}
 
 			int confirm = JOptionPane.showConfirmDialog(this, deleteQuestion
-					+ ManterProfessor.getInstance().getAllTeachers().get(index)
+					+ ManageTeacher.getInstance().getAllTeachers().get(index)
 							.getName() + "?", deleteMessage,
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterProfessor.getInstance().delete(
-						ManterProfessor.getInstance().getAllTeachers()
+				ManageTeacher.getInstance().delete(
+						ManageTeacher.getInstance().getAllTeachers()
 								.get(index));
 				JOptionPane.showMessageDialog(this, deleteConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
