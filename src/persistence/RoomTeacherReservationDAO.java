@@ -22,7 +22,7 @@ import exception.ReservaException;
 
 public class RoomTeacherReservationDAO extends DAO {
 
-	// Excrption messages and alerts.
+	// Exception messages and alerts.
 	private final String NULL = International.getInstance().getMessages()
 			.getString("null");
 	private final String ROOM_UNAVAILABLE = International.getInstance()
@@ -140,79 +140,6 @@ public class RoomTeacherReservationDAO extends DAO {
 		super.execute(this.deleteFromTeacherQuery(reservation));
 	}
 
-	private void checkReservationNull(TeacherReserveRoom reservation)
-			throws ReservaException {
-
-		if (reservation == null) {
-			throw new ReservaException(NULL);
-		} else {
-			// Nothing here.
-		}
-	}
-
-	private void checkReservationExists(TeacherReserveRoom reservation)
-			throws ReservaException, SQLException {
-
-		if (!this.reservationIsInDB(reservation)) {
-			throw new ReservaException(RESERVATION_INEXISTENT);
-		} else {
-			// Nothing here.
-		}
-	}
-
-	private void checkReservationDontExists(TeacherReserveRoom reservation)
-			throws ReservaException, SQLException {
-
-		if (this.reservationIsInDB(reservation)) {
-			throw new ReservaException(RESERVATION_EXISTENT);
-		} else {
-			// Nothing here.
-		}
-	}
-
-	private void checkRoom(TeacherReserveRoom reservation, boolean isNewRoom)
-			throws SQLException, ReservaException {
-
-		if (isNewRoom) {
-			if (!this.roomIsInDB(reservation.getClassroom())) {
-				throw new ReservaException(ROOM_INEXISTENT);
-			} else {
-				// Nothing here.
-			}
-
-			if (this.roomIsInReservationDB(reservation.getClassroom(),
-					reservation.getDate(), reservation.getTime())) {
-				throw new ReservaException(ROOM_UNAVAILABLE);
-			} else {
-				// Do nothing.
-			}
-		} else {
-			if (!this.roomIsInReservationDB(reservation.getClassroom(),
-					reservation.getDate(), reservation.getTime())) {
-				throw new ReservaException(ROOM_UNAVAILABLE);
-			} else {
-				// Do nothing.
-			}
-		}
-
-	}
-
-	private void checkDateTime(TeacherReserveRoom reservation)
-			throws ReservaException {
-
-		if (this.dateIsGone(reservation.getDate())) {
-			throw new ReservaException(DATE_IS_GONE);
-		} else {
-			// Nothing here.
-		}
-		if (this.dataIsNow(reservation.getDate())
-				&& this.timeIsGone(reservation.getTime())) {
-			throw new ReservaException(TIME_IS_GONE);
-		} else {
-			// Nothing here.
-		}
-	}
-
 	/**
 	 * This searches for all Room Reservations from the database.
 	 * @return a Vector with all the RoomReservation on the database
@@ -270,8 +197,7 @@ public class RoomTeacherReservationDAO extends DAO {
 		String matricula = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Teacher teacher = new Teacher(name, cpf, matricula, phoneNumber,
-				email);
+		Teacher teacher = new Teacher(name, cpf, matricula, phoneNumber, email);
 
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
@@ -712,5 +638,79 @@ public class RoomTeacherReservationDAO extends DAO {
 				+ where + " ;";
 
 		return query;
+	}
+
+	private void checkReservationNull(TeacherReserveRoom reservation)
+			throws ReservaException {
+
+		if (reservation == null) {
+			throw new ReservaException(NULL);
+		} else {
+			// Nothing here.
+		}
+	}
+
+	private void checkReservationExists(TeacherReserveRoom reservation)
+			throws ReservaException, SQLException {
+
+		if (!this.reservationIsInDB(reservation)) {
+			throw new ReservaException(RESERVATION_INEXISTENT);
+		} else {
+			// Nothing here.
+		}
+	}
+
+	private void checkReservationDontExists(TeacherReserveRoom reservation)
+			throws ReservaException, SQLException {
+
+		if (this.reservationIsInDB(reservation)) {
+			throw new ReservaException(RESERVATION_EXISTENT);
+		} else {
+			// Nothing here.
+		}
+	}
+
+	private void checkRoom(TeacherReserveRoom reservation, boolean isNewRoom)
+			throws SQLException, ReservaException {
+		
+		// Validation of newRoom and oldRoom are different.  
+		if (isNewRoom) {
+			if (!this.roomIsInDB(reservation.getClassroom())) {
+				throw new ReservaException(ROOM_INEXISTENT);
+			} else {
+				// Nothing here.
+			}
+
+			if (this.roomIsInReservationDB(reservation.getClassroom(),
+					reservation.getDate(), reservation.getTime())) {
+				throw new ReservaException(ROOM_UNAVAILABLE);
+			} else {
+				// Do nothing.
+			}
+		} else {
+			if (!this.roomIsInReservationDB(reservation.getClassroom(),
+					reservation.getDate(), reservation.getTime())) {
+				throw new ReservaException(ROOM_UNAVAILABLE);
+			} else {
+				// Do nothing.
+			}
+		}
+
+	}
+
+	private void checkDateTime(TeacherReserveRoom reservation)
+			throws ReservaException {
+
+		if (this.dateIsGone(reservation.getDate())) {
+			throw new ReservaException(DATE_IS_GONE);
+		} else {
+			// Nothing here.
+		}
+		if (this.dataIsNow(reservation.getDate())
+				&& this.timeIsGone(reservation.getTime())) {
+			throw new ReservaException(TIME_IS_GONE);
+		} else {
+			// Nothing here.
+		}
 	}
 }
