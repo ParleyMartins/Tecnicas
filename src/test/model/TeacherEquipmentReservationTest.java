@@ -15,10 +15,10 @@ import exception.ReservaException;
 
 public class TeacherEquipmentReservationTest {
 
-	static Equipment equipment;
-	static String date;
-	static String time;
-	static Teacher teacher;
+	Equipment equipment;
+	String date = "10/10/2010";
+	String time = "08:00";
+	Teacher teacher;
 	TeacherEquipmentReservation reservation;
 
 	String name = "Test Reservation";
@@ -27,18 +27,11 @@ public class TeacherEquipmentReservationTest {
 	String phone_number = "1111-1111";
 	String email = "test@test.com";
 
-	@BeforeClass
-	public static void setUpBeforeClass ( ) throws Exception {
-
-		equipment = new Equipment("0123", "Test Equipment Reservation Class");
-		date = "10/10/2010";
-		time = "08:00";
-
-	}
-
 	@Before
 	public void setUp ( ) throws Exception {
 
+		equipment = new Equipment("0123",
+				"Test Teacher Equipment Reservation Class");
 		teacher = new Teacher(name, cpf, enrollment_number, phone_number, email);
 		reservation = new TeacherEquipmentReservation(date, time, equipment,
 				teacher);
@@ -61,7 +54,6 @@ public class TeacherEquipmentReservationTest {
 				null);
 	}
 
-	
 	@Test
 	public void testGetTeacher ( ) {
 
@@ -70,7 +62,6 @@ public class TeacherEquipmentReservationTest {
 		assertSame("The two equipments should be the same", tempTeacher,
 				teacher);
 	}
-
 
 	@Test
 	public void testEqualsTrue ( ) {
@@ -83,14 +74,14 @@ public class TeacherEquipmentReservationTest {
 	@Test
 	public void testEqualsFalse ( ) throws ReservaException, ClienteException {
 
-		teacher.setEmail("t@test.com");
+		Teacher teacher2 = new Teacher(name, cpf, enrollment_number,
+				phone_number, "t@t.com");
 		TeacherEquipmentReservation reservation2 = new TeacherEquipmentReservation(
-				date, time, equipment, teacher);
+				date, time, equipment, teacher2);
 		assertFalse("The reservations should not be the same",
 				reservation.equals(reservation2));
 	}
 
-	
 	@Test
 	public void testToString ( ) {
 
@@ -108,29 +99,31 @@ public class TeacherEquipmentReservationTest {
 	@Test
 	public void testToStringExpected ( ) {
 
-		String expected = "ReservaEquipamentoProfessor " + 
-				"\nProfessor = " + teacher + 
+		String expected = "ReservaEquipamentoProfessor " +
+				"\nProfessor = " + teacher +
 				"\nEquipamento =" + equipment +
-				"\nHora=" + time + 
+				"\nHora=" + time +
 				"\nData=" + date + "\n\n";
-		
+
 		String toString = reservation.toString();
-		
+
 		assertEquals("The string should be equal to the returned.", expected,
 				toString);
 	}
 
-	
 	@Test
-	 public void testSetEquipment ( ) throws ReservaException, ClienteException { 
-		teacher = new Teacher(name, cpf, enrollment_number, phone_number, "test2@test.com");
+	public void testSetEquipment ( ) throws ReservaException, ClienteException {
+
+		teacher = new Teacher(name, cpf, enrollment_number, phone_number,
+				"test2@test.com");
 		reservation.setTeacher(teacher);
-		this.testGetTeacher(); 
+		this.testGetTeacher();
 	}
-	
-	@Test (expected = ReservaException.class) 
-	public void testSetEquipmentNull ( ) throws ReservaException { 
-		reservation.setTeacher(null); 
+
+	@Test (expected = ReservaException.class)
+	public void testSetEquipmentNull ( ) throws ReservaException {
+
+		reservation.setTeacher(null);
 	}
-	 
+
 }

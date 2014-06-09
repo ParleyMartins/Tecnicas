@@ -86,10 +86,8 @@ public class Property {
 				&& this.getDescription().equals(property.getDescription())) {
 			return true;
 		} else {
-			// do nothing.
+			return false;
 		}
-
-		return false;
 	}
 
 	/**
