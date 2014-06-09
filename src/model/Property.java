@@ -2,7 +2,7 @@
 Property. 
 Class sets exceptions of Property.
 https://github.com/ParleyMartins/Tecnicas/tree/master/src/model/Patrimonio.java.
-*/
+ */
 
 package model;
 
@@ -16,18 +16,18 @@ public class Property {
 
 	// Alerts and error messages.
 	private final String BLANK_CODE = International.getInstance().getMessages()
-					.getString("blankCode");
-	private final String BLANK_DESCRIPTION = International.getInstance().getMessages()
-					.getString("blankDescription");
+			.getString("blankCode");
+	private final String BLANK_DESCRIPTION = International.getInstance()
+			.getMessages().getString("blankDescription");
 
 	/**
-	 * This method sets informations related to a property. 
+	 * This method sets informations related to a property.
 	 * @param code An equipment id number .
-	 * @param description An equipment description. 
-	 * @throws PatrimonioException It ensures that every parameter passed is not null.
+	 * @param description An equipment description.
+	 * @throws PatrimonioException It ensures that every parameter passed is not
+	 * null.
 	 */
-	public Property(String code, String description)
-			throws PatrimonioException {
+	public Property(String code, String description) throws PatrimonioException {
 
 		this.setIdCode(code);
 		this.setDescription(description);
@@ -35,7 +35,7 @@ public class Property {
 
 	/**
 	 * This method gets an id_code.
-	 * @return The content in the id_code field. 
+	 * @return The content in the id_code field.
 	 */
 	public String getIdCode() {
 
@@ -43,8 +43,8 @@ public class Property {
 	}
 
 	/**
-	 * This method gets an description. 
-	 * @return The content in the field description. 
+	 * This method gets an description.
+	 * @return The content in the field description.
 	 */
 	public String getDescription() {
 
@@ -52,47 +52,33 @@ public class Property {
 	}
 
 	/**
-	 * This method modifies the id_code field. 
-	 * @param id_code An equipment code. 
-	 * @throws PatrimonioException It ensures that every parameter passed is not null.
+	 * This method modifies the id_code field.
+	 * @param idCode An equipment code.
+	 * @throws PatrimonioException It ensures that every parameter passed is not
+	 * null.
 	 */
-	public void setIdCode(String id_code) throws PatrimonioException {
+	public void setIdCode(String idCode) throws PatrimonioException {
 
-		if (id_code == null) {
-			throw new PatrimonioException(BLANK_CODE);
-		} else {
-			if ("".equals(id_code.trim())) {
-				throw new PatrimonioException(BLANK_CODE);
-			} else {
-				// Do nothing.
-			}
-		}
-		this.id_code = id_code;
+		validateIdCode(idCode);
+		this.id_code = idCode;
 	}
 
 	/**
-	 * This method modifies the description field. 
-	 * @param description An equipment description. 
-	 * @throws PatrimonioException It ensures that every parameter passed is not null. 
+	 * This method modifies the description field.
+	 * @param description An equipment description.
+	 * @throws PatrimonioException It ensures that every parameter passed is not
+	 * null.
 	 */
 	public void setDescription(String description) throws PatrimonioException {
 
-		if (description == null) {
-			throw new PatrimonioException(BLANK_DESCRIPTION);
-		} else {
-			if ("".equals(description.trim())) {
-				throw new PatrimonioException(BLANK_DESCRIPTION);
-			} else {
-				// Do nothing.
-			}
-		}
+		validateDescription(description);
 		this.description = description;
 	}
 
 	/**
 	 * This method checks if an equipment is registered.
-	 * @param property An equipment location. 
-	 * @return true if an equipment is registered. false otherwise. 
+	 * @param property An equipment location.
+	 * @return true if an equipment is registered. false otherwise.
 	 */
 	public boolean equals(Property property) {
 
@@ -105,12 +91,48 @@ public class Property {
 
 		return false;
 	}
-	
-	/** This method returns a String object representing the data.
-	 * @return A heritage code. 
+
+	/**
+	 * This method returns a String object representing the data.
+	 * @return A heritage code.
 	 */
 	public String toString() {
 
 		return "Codigo=" + id_code + "\nDescricao=" + description;
+	}
+
+	/*
+	 * Private methods
+	 */
+
+	private void validateIdCode(String idCode) throws PatrimonioException {
+
+		if (idCode == null) {
+			throw new PatrimonioException(BLANK_CODE);
+		} else {
+			// Do nothing.
+		}
+
+		if ("".equals(idCode.trim())) {
+			throw new PatrimonioException(BLANK_CODE);
+		} else {
+			// Do nothing.
+		}
+	}
+
+	private void validateDescription(String description)
+			throws PatrimonioException {
+
+		if (description == null) {
+			throw new PatrimonioException(BLANK_DESCRIPTION);
+		} else {
+			// Do nothing.
+		}
+
+		if ("".equals(description.trim())) {
+			throw new PatrimonioException(BLANK_DESCRIPTION);
+		} else {
+			// Do nothing.
+		}
 	}
 }
