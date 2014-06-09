@@ -31,7 +31,7 @@ import persistence.TeacherDAO;
 import persistence.FactoryConnection;
 
 import persistence.ResSalaAlunoDAO;
-import persistence.ResSalaProfessorDAO;
+import persistence.RoomTeacherReservationDAO;
 import persistence.RoomDAO;
 
 public class ResSalaProfessorDAOTest {
@@ -65,7 +65,7 @@ public class ResSalaProfessorDAOTest {
 
 	@Test
 	public void testInstance() {
-		assertTrue("Teste de Instancia", ResSalaProfessorDAO.getInstance() instanceof ResSalaProfessorDAO);
+		assertTrue("Teste de Instancia", RoomTeacherReservationDAO.getInstance() instanceof RoomTeacherReservationDAO);
 	}
 	
 	@Test
@@ -73,7 +73,7 @@ public class ResSalaProfessorDAOTest {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 				"Aula de reforco", professor1);
 		
-		ResSalaProfessorDAO.getInstance().insert(reserva);
+		RoomTeacherReservationDAO.getInstance().insert(reserva);
 		
 		boolean resultado = this.inDB(reserva);
 		
@@ -85,7 +85,7 @@ public class ResSalaProfessorDAOTest {
 	
 	@Test (expected= ReservaException.class)
 	public void testIncluirNulo() throws ReservaException, ClienteException, PatrimonioException, SQLException {
-		ResSalaProfessorDAO.getInstance().insert(null);
+		RoomTeacherReservationDAO.getInstance().insert(null);
 	}
 	@Test (expected= ReservaException.class)
 	public void testReservaPorProfessorInexistente() throws ReservaException, ClienteException, PatrimonioException, SQLException {
@@ -93,7 +93,7 @@ public class ResSalaProfessorDAOTest {
 				"Reuniao", new Professor("Inexistente", "501.341.852-69", "456678", "", ""));
 		
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -105,7 +105,7 @@ public class ResSalaProfessorDAOTest {
 				"Grupo de Estudos", professor1);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -117,13 +117,13 @@ public class ResSalaProfessorDAOTest {
 	{
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 				"Aula de MDS",  professor1);
-		ResSalaProfessorDAO.getInstance().insert(reserva);
+		RoomTeacherReservationDAO.getInstance().insert(reserva);
 		
 		TeacherReserveRoom reserva2 = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 				"Aula de PDS",  professor2);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva2);
+			RoomTeacherReservationDAO.getInstance().insert(reserva2);
 		} finally {
 				
 		this.executeQuery("DELETE FROM reserva_sala_professor;");
@@ -145,7 +145,7 @@ public class ResSalaProfessorDAOTest {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/13", "8:00", sala_a,
 				"Aula de EA",  professor1);
 		
-		ResSalaProfessorDAO.getInstance().insert(reserva);
+		RoomTeacherReservationDAO.getInstance().insert(reserva);
 		
 			
 		boolean resultadoProf = this.inDB(reserva);
@@ -166,7 +166,7 @@ public class ResSalaProfessorDAOTest {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/1990", "8:00", sala_a,
 				"Grupo de Estudos", professor1);
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			if(this.inDB(reserva))
 				this.delete_from_professor(reserva);
@@ -177,7 +177,7 @@ public class ResSalaProfessorDAOTest {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/01/2013", "8:00", sala_a,
 				"Grupo de Estudos", professor1);
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			if(this.inDB(reserva))
 				this.delete_from_professor(reserva);
@@ -188,7 +188,7 @@ public class ResSalaProfessorDAOTest {
 		TeacherReserveRoom reserva = new TeacherReserveRoom(this.dataAtualAMais(-100000000), this.horaAtual(), sala_a,
 				"Grupo de Estudos", professor1);
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			if(this.inDB(reserva))
 				this.delete_from_professor(reserva);
@@ -200,7 +200,7 @@ public class ResSalaProfessorDAOTest {
 				 this.horaAtualAMais(-10000000), sala_a,
 				"Grupo de Estudos",  professor1);
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			if(this.inDB(reserva))
 				this.delete_from_professor(reserva);
@@ -212,7 +212,7 @@ public class ResSalaProfessorDAOTest {
 				this.horaAtualAMais(-100000), sala_a,
 				"Grupo de Estudos", professor1);
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva);
+			RoomTeacherReservationDAO.getInstance().insert(reserva);
 		} finally {
 			if(this.inDB(reserva))
 				this.delete_from_professor(reserva);
@@ -226,9 +226,9 @@ public class ResSalaProfessorDAOTest {
 				"Aulao pre-prova", professor1);
 		TeacherReserveRoom reserva2 = new TeacherReserveRoom("20/12/13", "8:00", sala_a,
 				"Aulao pre-prova", professor1);
-		ResSalaProfessorDAO.getInstance().insert(reserva);
+		RoomTeacherReservationDAO.getInstance().insert(reserva);
 		try{
-			ResSalaProfessorDAO.getInstance().insert(reserva2);
+			RoomTeacherReservationDAO.getInstance().insert(reserva2);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -248,7 +248,7 @@ public class ResSalaProfessorDAOTest {
 				"VALUES ( " + values_reserva_sala_professor(reserva1) + " );");
 		
 		
-		ResSalaProfessorDAO.getInstance().modify(reserva1, reserva2);
+		RoomTeacherReservationDAO.getInstance().modify(reserva1, reserva2);
 		
 		boolean resultado = this.inDB(reserva2);
 		
@@ -260,13 +260,13 @@ public class ResSalaProfessorDAOTest {
 	public void testAlterar_AntigoNulo() throws ReservaException, ClienteException, PatrimonioException, SQLException {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 				"Grupo de pesquisa", professor1);
-		ResSalaProfessorDAO.getInstance().modify(null, reserva);
+		RoomTeacherReservationDAO.getInstance().modify(null, reserva);
 	}
 	@Test (expected= ReservaException.class)
 	public void testAlterar_NovoNulo() throws ReservaException, ClienteException, PatrimonioException, SQLException {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 			"Grupo de pesquisa", professor1);
-		ResSalaProfessorDAO.getInstance().modify(reserva, null);
+		RoomTeacherReservationDAO.getInstance().modify(reserva, null);
 	}
 	@Test (expected= ReservaException.class)
 	public void testAlterarInexistente() throws ReservaException, ClienteException, PatrimonioException, SQLException {
@@ -276,7 +276,7 @@ public class ResSalaProfessorDAOTest {
 		TeacherReserveRoom reserva2 = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 				"Grupo de pesquisa", professor1);
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -290,7 +290,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 		
 		if(this.inDB(reserva))
@@ -308,7 +308,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 		
 		if(this.inDB(reserva))
@@ -326,7 +326,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 		
 		if(this.inDB(reserva))
@@ -345,7 +345,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 		
 		if(this.inDB(reserva))
@@ -364,7 +364,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 		
 		if(this.inDB(reserva))
@@ -385,7 +385,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva2);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva2, reserva);
+			RoomTeacherReservationDAO.getInstance().modify(reserva2, reserva);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -405,7 +405,7 @@ public class ResSalaProfessorDAOTest {
 				"Grupo de Estudos", professor1);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva2, reserva3);
+			RoomTeacherReservationDAO.getInstance().modify(reserva2, reserva3);
 		} finally {
 		
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
@@ -430,7 +430,7 @@ public class ResSalaProfessorDAOTest {
 				"Grupo de Estudos", professor1);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 				
 		this.executeQuery("DELETE FROM professor WHERE cpf = \"257.312.954-33\"");
@@ -447,7 +447,7 @@ public class ResSalaProfessorDAOTest {
 				"Grupo de pesquisa", new Professor("Nao Existe", "501.341.852-69", "456678", "", ""));
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -462,7 +462,7 @@ public class ResSalaProfessorDAOTest {
 				"Grupo de Estudos", professor1);
 		
 		try{
-			ResSalaProfessorDAO.getInstance().modify(reserva, reserva2);
+			RoomTeacherReservationDAO.getInstance().modify(reserva, reserva2);
 		} finally {
 			this.executeQuery("DELETE FROM reserva_sala_professor;");
 		}
@@ -477,7 +477,7 @@ public class ResSalaProfessorDAOTest {
 						"(SELECT id_sala FROM sala WHERE codigo = \"" + sala_a.getIdCode() + "\")," +
 						"\"Grupo de Pesquisa\", \"08:00\", \"20/12/2034\");");
 		
-		ResSalaProfessorDAO.getInstance().delete(reserva);
+		RoomTeacherReservationDAO.getInstance().delete(reserva);
 		
 		boolean resultado = this.inDB(reserva);
 		
@@ -487,14 +487,14 @@ public class ResSalaProfessorDAOTest {
 	}
 	@Test (expected= ReservaException.class)
 	public void testExcluirNulo() throws ReservaException, ClienteException, PatrimonioException, SQLException {
-		ResSalaProfessorDAO.getInstance().delete(null);
+		RoomTeacherReservationDAO.getInstance().delete(null);
 	}
 	@Test (expected= ReservaException.class)
 	public void testExcluirInexistente() throws ReservaException, ClienteException, PatrimonioException, SQLException {
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/34", "8:00", sala_a,
 				"Reuniao", professor1);
 
-		ResSalaProfessorDAO.getInstance().delete(reserva);
+		RoomTeacherReservationDAO.getInstance().delete(reserva);
 		
 		this.executeQuery("DELETE FROM reserva_sala_professor;");
 	}
@@ -520,7 +520,7 @@ public class ResSalaProfessorDAOTest {
 						"\"" + reserva2.getPurpose() + "\", \"" +
 						reserva2.getTime() + "\", \"" + reserva2.getDate() +"\");");
 		
-		Vector<TeacherReserveRoom> vet = ResSalaProfessorDAO.getInstance().searchByDate("20/12/2034");
+		Vector<TeacherReserveRoom> vet = RoomTeacherReservationDAO.getInstance().searchByDate("20/12/2034");
 		
 		
 		boolean resultado = false;

@@ -12,7 +12,7 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import persistence.ResSalaProfessorDAO;
+import persistence.RoomTeacherReservationDAO;
 
 import model.Professor;
 import model.TeacherReserveRoom;
@@ -27,7 +27,7 @@ public class ManterResSalaProfessor {
 	private Vector<TeacherReserveRoom> resevations = new Vector<TeacherReserveRoom>();
 
 	private static ManterResSalaProfessor instance;
-	private static ResSalaProfessorDAO resDAOInstance;
+	private static RoomTeacherReservationDAO resDAOInstance;
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
@@ -46,7 +46,7 @@ public class ManterResSalaProfessor {
 
 		if (instance == null) {
 			instance = new ManterResSalaProfessor();
-			resDAOInstance = ResSalaProfessorDAO.getInstance();
+			resDAOInstance = RoomTeacherReservationDAO.getInstance();
 		} else {
 			// Nothing here.
 		}

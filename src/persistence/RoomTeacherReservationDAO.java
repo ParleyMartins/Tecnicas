@@ -1,6 +1,6 @@
 /**
-ResSalaProfessorDAO.java
-This class manages DAO relations between ReservaSala and Professor
+RoomTeacherReservationDAO.java
+This class manages DAO relations between RoomReservation and Teacher
 https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/
 */
 
@@ -13,18 +13,16 @@ import java.util.Date;
 import java.util.Vector;
 
 import view.International;
-import model.Student;
 import model.Professor;
-import model.StudentReserveRoom;
 import model.TeacherReserveRoom;
 import model.Room;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
 
-public class ResSalaProfessorDAO extends DAO {
+public class RoomTeacherReservationDAO extends DAO {
 
-	// Excpetion messages and alerts.
+	// Excrption messages and alerts.
 	private final String NULL = International.getInstance().getMessages()
 			.getString("null");
 	private final String ROOM_UNAVAILABLE = International.getInstance()
@@ -43,9 +41,9 @@ public class ResSalaProfessorDAO extends DAO {
 			.getMessages().getString("timeIsGone");
 
 	// Instance to the singleton.
-	private static ResSalaProfessorDAO instance;
+	private static RoomTeacherReservationDAO instance;
 
-	private ResSalaProfessorDAO ( ) {
+	private RoomTeacherReservationDAO ( ) {
 
 		// Blank constructor.
 	}
@@ -54,12 +52,12 @@ public class ResSalaProfessorDAO extends DAO {
 	 * Singleton implementation.
 	 * @return the initialized instance of the class.
 	 */
-	public static ResSalaProfessorDAO getInstance ( ) {
+	public static RoomTeacherReservationDAO getInstance ( ) {
 
 		if (instance != null) {
 			// Nothing here.
 		} else {
-			instance = new ResSalaProfessorDAO();
+			instance = new RoomTeacherReservationDAO();
 		}
 		return instance;
 	}
