@@ -31,7 +31,7 @@ import persistence.FactoryConnection;
 import persistence.RoomTeacherReservationDAO;
 import persistence.RoomDAO;
 
-public class ResSalaProfessorDAOTest {
+public class RoomTeacherReservationDAOTest {
 
 	private static Room sala_a;
 	private static Room sala_b;
