@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Student;
 import model.StudentReserveRoom;
 import model.Room;
+import model.Student;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
