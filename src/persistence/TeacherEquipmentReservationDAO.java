@@ -14,7 +14,7 @@ import java.util.Vector;
 import view.International;
 import model.Equipment;
 import model.Teacher;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -63,7 +63,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	public void insert (ReservaEquipamentoProfessor reservation)
+	public void insert (TeacherEquipmentReservation reservation)
 			throws ReservaException,
 			SQLException {
 
@@ -77,7 +77,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	public void delete (ReservaEquipamentoProfessor reservation)
+	public void delete (TeacherEquipmentReservation reservation)
 			throws ReservaException,
 			SQLException {
 		
@@ -118,18 +118,18 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
 	@SuppressWarnings ("unchecked")
-	public Vector <ReservaEquipamentoProfessor> searchByMonth (int month)
+	public Vector <TeacherEquipmentReservation> searchByMonth (int month)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 		String selectQuery = "SELECT * FROM reserva_equipamento_professor "
 				+ "INNER JOIN equipamento ON equipamento.id_equipamento = reserva_equipamento_professor.id_equipamento "
 				+ "INNER JOIN professor ON professor.id_professor = reserva_equipamento_professor.id_professor;";
 		
-		Vector <ReservaEquipamentoProfessor> monthTeacherReservations = super.search(selectQuery);
-		Iterator <ReservaEquipamentoProfessor> i = monthTeacherReservations.iterator();
+		Vector <TeacherEquipmentReservation> monthTeacherReservations = super.search(selectQuery);
+		Iterator <TeacherEquipmentReservation> i = monthTeacherReservations.iterator();
 
 		while (i.hasNext()) {
-			ReservaEquipamentoProfessor reservation = i.next();
+			TeacherEquipmentReservation reservation = i.next();
 			if (Integer.parseInt(reservation.getDate().split("[./-]")[1]) != month) {
 				i.remove();
 			} else {
@@ -149,7 +149,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
 	@SuppressWarnings ("unchecked")
-	public Vector <ReservaEquipamentoProfessor> searchByTime (String time)
+	public Vector <TeacherEquipmentReservation> searchByTime (String time)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -199,7 +199,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 
 		String date = result.getString("data");
 		String time = result.getString("hora");
-		ReservaEquipamentoProfessor reservation = new ReservaEquipamentoProfessor(
+		TeacherEquipmentReservation reservation = new TeacherEquipmentReservation(
 				date, time, equipment, teacher);
 
 		return reservation;
@@ -300,7 +300,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return true if the Reservation is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean reservationIsInDB (ReservaEquipamentoProfessor reservation)
+	private boolean reservationIsInDB (TeacherEquipmentReservation reservation)
 			throws SQLException {
 
 		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
@@ -369,7 +369,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return the WHERE query
 	 */
 	private String whereQuery (
-			ReservaEquipamentoProfessor reservation) {
+			TeacherEquipmentReservation reservation) {
 
 		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
 		String selectEquipment = selectEquipmentIDQuery(reservation.getEquipment());
@@ -390,7 +390,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return the VALUE query
 	 */
 	private String valueReservationQuery (
-			ReservaEquipamentoProfessor reservation) {
+			TeacherEquipmentReservation reservation) {
 
 		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
 		String selectEquipment = selectEquipmentIDQuery(reservation.getEquipment());
@@ -408,7 +408,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return the ATTRIBUTES query
 	 */
 	private String attributesQuery (
-			ReservaEquipamentoProfessor reservation) {
+			TeacherEquipmentReservation reservation) {
 
 		
 		String selectTeacher = selectTeacherIDQuery(reservation.getTeacher());
@@ -428,7 +428,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @param reservation The EquipmentReservation to generate the query 
 	 * @return the INSERT query
 	 */
-	private String insertIntoDBQuery (ReservaEquipamentoProfessor reservation) {
+	private String insertIntoDBQuery (TeacherEquipmentReservation reservation) {
 
 		String valueQuery = valueReservationQuery(reservation);
 		
@@ -445,7 +445,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @param reservation The EquipmentReservation to generate the query 
 	 * @return the DELETE query
 	 */
-	private String deleteQuery (ReservaEquipamentoProfessor reservation) {
+	private String deleteQuery (TeacherEquipmentReservation reservation) {
 
 		String where = this.whereQuery(reservation);
 		
@@ -461,7 +461,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	private void checkInsertReservation(ReservaEquipamentoProfessor reservation)
+	private void checkInsertReservation(TeacherEquipmentReservation reservation)
 			throws SQLException, ReservaException{
 		if (reservation == null) {
 			throw new ReservaException(NULL);
@@ -501,7 +501,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	private void checkDeleteReservation(ReservaEquipamentoProfessor reservation) 
+	private void checkDeleteReservation(TeacherEquipmentReservation reservation) 
 			throws ReservaException, SQLException{
 		if (reservation == null) {
 			throw new ReservaException(NULL);

@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Equipment;
 import model.Property;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 import view.International;
 import view.reservasEquipamentos.AlterarReservaEquipamentoView;
 import view.reservasEquipamentos.FazerReservaEquipamentoView;
@@ -57,8 +57,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	protected Vector <String> fillDataVector (Object object, final int index) {
 
 		Vector <String> dataVector = new Vector <String>();
-		if (object instanceof ReservaEquipamentoProfessor) {
-			ReservaEquipamentoProfessor reservation = (ReservaEquipamentoProfessor) object;
+		if (object instanceof TeacherEquipmentReservation) {
+			TeacherEquipmentReservation reservation = (TeacherEquipmentReservation) object;
 			if (this.equipment != null && (reservation.getEquipment().equals(this.equipment))) {
 
 				dataVector.add(String.valueOf(index));
@@ -107,7 +107,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 			}
 			this.month = Integer.parseInt(this.date.substring(3, 5));
 
-			Vector <ReservaEquipamentoProfessor> monthReservations = this.instance
+			Vector <TeacherEquipmentReservation> monthReservations = this.instance
 					.getReservationsPerMonth(month);
 			if (monthReservations != null) {
 				for (int i = 0 ; i < monthReservations.size() ; i++) {

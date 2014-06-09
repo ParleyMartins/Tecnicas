@@ -78,7 +78,7 @@ public class EquipmentReservation extends Reservation {
 	 * @return A reservation.
 	 */
 	public String toString() {
-		String objString = "Equipamento =" + this.getEquipment()
+		String objString = "\nEquipamento =" + this.getEquipment()
 				+ super.toString() + "\n"; 
 		return objString;
 	}

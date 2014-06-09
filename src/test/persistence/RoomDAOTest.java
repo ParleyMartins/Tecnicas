@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import model.Equipment;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 import model.Room;
 
 import org.junit.After;

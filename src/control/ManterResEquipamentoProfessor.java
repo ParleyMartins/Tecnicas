@@ -14,7 +14,7 @@ import java.util.Vector;
 
 import model.Equipment;
 import model.Teacher;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 import persistence.TeacherEquipmentReservationDAO;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -60,11 +60,11 @@ public class ManterResEquipamentoProfessor {
 	 * @throws ClienteException If some of the teacher info is invalid
 	 * @throws ReservaException If some of the equipment info is invalid
 	 */
-	public Vector<ReservaEquipamentoProfessor> getReservationsPerTime(
+	public Vector<TeacherEquipmentReservation> getReservationsPerTime(
 			String time) throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
-		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance
+		Vector<TeacherEquipmentReservation> reservations = resDAOInstance
 				.searchByTime(time);
 		return reservations;
 	}
@@ -78,11 +78,11 @@ public class ManterResEquipamentoProfessor {
 	 * @throws ClienteException If some of the teacher info is invalid
 	 * @throws ReservaException If some of the equipment info is invalid
 	 */
-	public Vector<ReservaEquipamentoProfessor> getReservationsPerMonth(int month)
+	public Vector<TeacherEquipmentReservation> getReservationsPerMonth(int month)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
-		Vector<ReservaEquipamentoProfessor> reservations = resDAOInstance
+		Vector<TeacherEquipmentReservation> reservations = resDAOInstance
 				.searchByMonth(month);
 		return reservations;
 	}
@@ -115,7 +115,7 @@ public class ManterResEquipamentoProfessor {
 	public void insert(Equipment equipment, Teacher teacher, String date,
 			String time) throws SQLException, ReservaException {
 
-		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(
+		TeacherEquipmentReservation reserva = new TeacherEquipmentReservation(
 				date, time, equipment, teacher);
 		resDAOInstance.insert(reserva);
 		this.teacherEquipReservationVector.add(reserva);
@@ -127,7 +127,7 @@ public class ManterResEquipamentoProfessor {
 	 * @throws SQLException If has some problem with the database deletion
 	 * @throws ReservaException If some of the equipment info is invalid
 	 */
-	public void delete(ReservaEquipamentoProfessor reservation)
+	public void delete(TeacherEquipmentReservation reservation)
 			throws SQLException, ReservaException {
 
 		resDAOInstance.delete(reservation);

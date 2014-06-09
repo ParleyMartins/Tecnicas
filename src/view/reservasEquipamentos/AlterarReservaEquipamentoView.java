@@ -11,7 +11,7 @@ import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Equipment;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -20,7 +20,7 @@ import view.International;
 public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	// int index;
-	ReservaEquipamentoProfessor instanceOfReserve;
+	TeacherEquipmentReservation instanceOfReserve;
 	Equipment instanceOfEquipment;
 	
 	/**

@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 import model.Equipment;
 import model.EquipmentReservation;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -72,7 +70,7 @@ public class EquipmentReservationTest {
 	
 	@Test (expected = ReservaException.class)
 	public void testConstructorNullEquipment( ) throws ReservaException {
-		 reservation = new EquipmentReservation (date, "101010", null);
+		 reservation = new EquipmentReservation (date, time, null);
 	}
 	
 	
@@ -91,8 +89,9 @@ public class EquipmentReservationTest {
 	}
 	
 	@Test
-	public void testEqualsFalse ( ) throws ReservaException {
-		EquipmentReservation reservation2 =  new EquipmentReservation ("05/05/05", time, equipment);;
+	public void testEqualsFalse ( ) throws ReservaException, PatrimonioException {
+		equipment.setIdCode("034587");
+		EquipmentReservation reservation2 =  new EquipmentReservation (date, time, equipment);;
 		assertFalse("The reservations should not be the same", reservation.equals(reservation2));
 	}
 	
@@ -111,13 +110,13 @@ public class EquipmentReservationTest {
 	
 	@Test
 	public void testToStringExpected ( ) {
-		String expected = "Equipamento =" + equipment
+		String expected = "\nEquipamento =" + equipment
 				+ "\nHora=" + time + "\nData=" + date + "\n"; 
 		String toString = reservation.toString();
 		assertEquals("The string should be equal to the returned.", expected, toString);
 	}
 	
-	
+	/*
 	//@Test
 	public void testSetEquipment ( ) throws ReservaException, PatrimonioException {
 		equipment = new Equipment("01234", "Test Equipment Reservation Class modified");
@@ -129,7 +128,8 @@ public class EquipmentReservationTest {
 	public void testSetEquipmentNull ( ) throws ReservaException {
 		reservation.setEquipment(null);
 	}
-
+	
+	*/
 	
 	
 
