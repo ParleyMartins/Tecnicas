@@ -23,7 +23,7 @@ import view.International;
 import view.reservasEquipamentos.AlterarReservaEquipamentoView;
 import view.reservasEquipamentos.FazerReservaEquipamentoView;
 import view.reservasEquipamentos.ReservaEquipamentoView;
-import control.ManterResEquipamentoProfessor;
+import control.ManageReserveEquipmentTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -31,7 +31,7 @@ import exception.ReservaException;
 public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 	private Equipment equipment;
-	private ManterResEquipamentoProfessor instance;
+	private ManageReserveEquipmentTeacher instance;
 
 	/**
 	 * Constructor to generate the form
@@ -85,7 +85,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
 		this.equipment = (Equipment) tempEquipment;
 		DefaultTableModel dataTable = new DefaultTableModel();
-		this.instance = ManterResEquipamentoProfessor.getInstance();
+		this.instance = ManageReserveEquipmentTeacher.getInstance();
 		try {
 			dataTable.addColumn("");
 			dataTable.addColumn(International.getInstance().getLabels()

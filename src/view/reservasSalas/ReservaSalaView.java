@@ -35,8 +35,8 @@ import model.Teacher;
 import model.Room;
 import control.ManageStudent;
 import control.ManageTeacher;
-import control.ManterResSalaAluno;
-import control.ManterResSalaProfessor;
+import control.ManageReserveRoomStudent;
+import control.ManageReserveRoomTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -47,8 +47,8 @@ public abstract class ReservaSalaView extends JDialog {
 	protected final int STUDENT = 1;
 	protected final int TEACHER = 2;
 	protected final int ERROR = -1;
-	protected ManterResSalaAluno studentInstance;
-	protected ManterResSalaProfessor teacherInstance;
+	protected ManageReserveRoomStudent studentInstance;
+	protected ManageReserveRoomTeacher teacherInstance;
 	protected Room room;
 	protected Student student;
 	protected Teacher teacher;
@@ -92,8 +92,8 @@ public abstract class ReservaSalaView extends JDialog {
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.teacherInstance = ManterResSalaProfessor.getInstance();
-		this.studentInstance = ManterResSalaAluno.getInstance();
+		this.teacherInstance = ManageReserveRoomTeacher.getInstance();
+		this.studentInstance = ManageReserveRoomStudent.getInstance();
 		initComponents();
 		this.searchCpfButton.setName(International.getInstance().getButtons().getString("searchCpf"));
 

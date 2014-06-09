@@ -25,7 +25,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import model.Teacher;
 import control.ManageTeacher;
-import control.ManterResEquipamentoProfessor;
+import control.ManageReserveEquipmentTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -33,7 +33,7 @@ import view.International;
 
 public abstract class ReservaEquipamentoView extends JDialog {
 
-	protected ManterResEquipamentoProfessor instanceManageResEquipmentTeacher;
+	protected ManageReserveEquipmentTeacher instanceManageResEquipmentTeacher;
 	protected Teacher instanceTeacher;
 	protected JButton cancelButton;
 	protected JLabel cpfLabel;
@@ -66,7 +66,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.instanceManageResEquipmentTeacher = ManterResEquipamentoProfessor
+		this.instanceManageResEquipmentTeacher = ManageReserveEquipmentTeacher
 				.getInstance();
 
 		initComponents();

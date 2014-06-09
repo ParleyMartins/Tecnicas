@@ -23,8 +23,8 @@ import view.reservasSalas.AlterarReservaAlunoSalaView;
 import view.reservasSalas.AlterarReservaProfSalaView;
 import view.reservasSalas.FazerReservaSalaView;
 import view.reservasSalas.ReservaSalaView;
-import control.ManterResSalaAluno;
-import control.ManterResSalaProfessor;
+import control.ManageReserveRoomStudent;
+import control.ManageReserveRoomTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -33,8 +33,8 @@ import java.awt.Frame;
 
 public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
-	private ManterResSalaAluno studentInstance;
-	private ManterResSalaProfessor teacherInstance;
+	private ManageReserveRoomStudent studentInstance;
+	private ManageReserveRoomTeacher teacherInstance;
 	private Room room;
 
 	/**
@@ -104,8 +104,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
 		this.room = (Room) room;
 		DefaultTableModel dataTable = new DefaultTableModel();
-		this.studentInstance = ManterResSalaAluno.getInstance();
-		this.teacherInstance = ManterResSalaProfessor.getInstance();
+		this.studentInstance = ManageReserveRoomStudent.getInstance();
+		this.teacherInstance = ManageReserveRoomTeacher.getInstance();
 		dataTable.addColumn("");
 		dataTable.addColumn(International.getInstance().getLabels().getString("reservedBy"));
 		dataTable.addColumn(International.getInstance().getLabels().getString("time"));
