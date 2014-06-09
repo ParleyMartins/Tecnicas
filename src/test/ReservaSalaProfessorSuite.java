@@ -9,7 +9,9 @@ import test.model.TeacherReserveRoomTest;
 import test.persistence.ResSalaProfessorDAOTest;
 
 @RunWith(Suite.class)
+
 @SuiteClasses({TeacherReserveRoomTest.class, ResSalaProfessorDAOTest.class, ManageReserveRoomTeacherTest.class})
+
 public class ReservaSalaProfessorSuite {
 
 }

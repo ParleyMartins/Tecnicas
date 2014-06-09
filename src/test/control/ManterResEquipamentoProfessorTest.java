@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import model.Equipment;
 import model.Teacher;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -70,7 +70,7 @@ public class ManterResEquipamentoProfessorTest {
 		String data = "08/06/2014";
 		String hora = "22:30";
 		
-		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(data, hora,
+		TeacherEquipmentReservation reserva = new TeacherEquipmentReservation(data, hora,
 				equipment, teacher);
 		
 		ManterResEquipamentoProfessor.getInstance().insert(equipment, teacher,
@@ -90,7 +90,7 @@ public class ManterResEquipamentoProfessorTest {
 		String data = "08/06/2014";
 		String hora = "22:30";
 		
-		ReservaEquipamentoProfessor reserva = new ReservaEquipamentoProfessor(data, hora,
+		TeacherEquipmentReservation reserva = new TeacherEquipmentReservation(data, hora,
 				equipment, teacher);
 		this.insert_into(reserva);
 		teacherEquipReservationVector.add(reserva);
@@ -106,7 +106,7 @@ public class ManterResEquipamentoProfessorTest {
 	}
 	
 	
-	private String where_reserva_equipamento_professor(ReservaEquipamentoProfessor reserva){
+	private String where_reserva_equipamento_professor(TeacherEquipmentReservation reserva){
 		return " WHERE " +
 		"id_professor = ( " + select_id_professor(reserva.getTeacher()) + " ) and " +
 		"id_equipamento = ( " + select_id_equipamento(reserva.getEquipment()) + " ) and " +
@@ -129,14 +129,14 @@ public class ManterResEquipamentoProfessorTest {
 				"equipamento.descricao = \"" + equipment.getDescription() + "\"";
 	}
 	
-	private String values_reserva_equipamento_professor(ReservaEquipamentoProfessor reserva){
+	private String values_reserva_equipamento_professor(TeacherEquipmentReservation reserva){
 		return "( " + select_id_professor(reserva.getTeacher()) + " ), " +
 		"( " + select_id_equipamento(reserva.getEquipment()) + " ), " +
 		"\"" + reserva.getTime() + "\", " +
 		"\"" + reserva.getDate() ;
 	}
 	
-	private void insert_into(ReservaEquipamentoProfessor reserva){
+	private void insert_into(TeacherEquipmentReservation reserva){
 		try {
 			this.executeQuery("INSERT INTO " +
 					"reserva_equipamento_professor (id_professor, id_equipamento, hora, data) " +
@@ -146,7 +146,7 @@ public class ManterResEquipamentoProfessorTest {
 		}
 	}
 	
-	private void delete_from(ReservaEquipamentoProfessor reserva){
+	private void delete_from(TeacherEquipmentReservation reserva){
 		try {
 			this.executeQuery("DELETE FROM reserva_equipamento_professor " + 
 								this.where_reserva_equipamento_professor(reserva) + " ;");
@@ -156,7 +156,7 @@ public class ManterResEquipamentoProfessorTest {
 		
 	}
 	
-	private boolean inDB(ReservaEquipamentoProfessor reserva) throws SQLException{
+	private boolean inDB(TeacherEquipmentReservation reserva) throws SQLException{
 		return this.inDBGeneric("SELECT * FROM reserva_equipamento_professor " + 
 								this.where_reserva_equipamento_professor(reserva) + " ;");
 	}

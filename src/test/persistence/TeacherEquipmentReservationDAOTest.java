@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import model.Equipment;
 import model.Teacher;
-import model.ReservaEquipamentoProfessor;
+import model.TeacherEquipmentReservation;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,7 +27,7 @@ public class TeacherEquipmentReservationDAOTest{
 
 	static TeacherDAO teacherDAO = TeacherDAO.getInstance();
 	static EquipamentDAO equipmentDAO = EquipamentDAO.getInstance();
-	ReservaEquipamentoProfessor reservation;
+	TeacherEquipmentReservation reservation;
 	static Equipment equipment1;
 	static Teacher teacher1;
 	static Equipment equipment2;
@@ -76,7 +76,7 @@ public class TeacherEquipmentReservationDAOTest{
 	@Before
 	public void setUp() throws ReservaException, SQLException{
 		instance = TeacherEquipmentReservationDAO.getInstance();
-		reservation = new ReservaEquipamentoProfessor(date, time, equipment1, teacher1);
+		reservation = new TeacherEquipmentReservation(date, time, equipment1, teacher1);
 		instance.insert(reservation);
 		
 	}
@@ -131,28 +131,28 @@ public class TeacherEquipmentReservationDAOTest{
 	@Test (expected = ReservaException.class)
 	public void testInsertNonExistingTeacher() throws ReservaException, SQLException, ClienteException, PatrimonioException {
 		instance.delete(reservation);
-		reservation = new ReservaEquipamentoProfessor(date, time, equipment1, teacher2);
+		reservation = new TeacherEquipmentReservation(date, time, equipment1, teacher2);
 		instance.insert(reservation);
 	}
 
 	@Test (expected = ReservaException.class)
 	public void testInsertNonExistingEquipment() throws ReservaException, SQLException, ClienteException, PatrimonioException {
 		instance.delete(reservation);
-		reservation = new ReservaEquipamentoProfessor(date, time, equipment2, teacher1);
+		reservation = new TeacherEquipmentReservation(date, time, equipment2, teacher1);
 		instance.insert(reservation);
 	}
 
 	@Test (expected = ReservaException.class)
 	public void testInsertEquipmentWithOtherReservation() throws ReservaException, SQLException, ClienteException, PatrimonioException {
 		teacherDAO.insert(teacher2);
-		ReservaEquipamentoProfessor reservation2 = new ReservaEquipamentoProfessor(date, time, equipment1, teacher2);
+		TeacherEquipmentReservation reservation2 = new TeacherEquipmentReservation(date, time, equipment1, teacher2);
 		instance.insert(reservation2);
 		fail("It should have thrown an ReservaException");
 	}
 	
 	@Test (expected = ReservaException.class)
 	public void testInsertSameReservation() throws ReservaException, SQLException, ClienteException, PatrimonioException {
-		ReservaEquipamentoProfessor reservation2 = new ReservaEquipamentoProfessor(date, time, equipment2, teacher1);
+		TeacherEquipmentReservation reservation2 = new TeacherEquipmentReservation(date, time, equipment2, teacher1);
 		equipmentDAO.insert(equipment2);
 		instance.insert(reservation2);
 		if(reserveIsOnDb(reservation2, time)){
@@ -192,7 +192,7 @@ public class TeacherEquipmentReservationDAOTest{
 	public void testSearchAll() throws ReservaException, SQLException, PatrimonioException, ClienteException {
 		teacherDAO.insert(teacher2);
 		equipmentDAO.insert(equipment2);
-		ReservaEquipamentoProfessor reservation2 = new ReservaEquipamentoProfessor(date, time, equipment2, teacher2);
+		TeacherEquipmentReservation reservation2 = new TeacherEquipmentReservation(date, time, equipment2, teacher2);
 		
 		Vector <Object> allTest = new Vector <Object>();
 		allTest.add(reservation);
@@ -209,13 +209,13 @@ public class TeacherEquipmentReservationDAOTest{
 	public void testSearchByMonth() throws ReservaException, SQLException, ClienteException, PatrimonioException {
 		teacherDAO.insert(teacher2);
 		equipmentDAO.insert(equipment2);
-		ReservaEquipamentoProfessor reservation2 = new ReservaEquipamentoProfessor(date, time, equipment2, teacher2);
+		TeacherEquipmentReservation reservation2 = new TeacherEquipmentReservation(date, time, equipment2, teacher2);
 		instance.insert(reservation2);
 		
-		ReservaEquipamentoProfessor reservation3 = new ReservaEquipamentoProfessor("10/04/2015", time, equipment2, teacher2);
+		TeacherEquipmentReservation reservation3 = new TeacherEquipmentReservation("10/04/2015", time, equipment2, teacher2);
 		instance.insert(reservation3);
 		
-		Vector <ReservaEquipamentoProfessor> allTime = instance.searchByMonth(4);
+		Vector <TeacherEquipmentReservation> allTime = instance.searchByMonth(4);
 		System.out.println(allTime);
 		assertEquals("It should return all reservations with the same month", 1, allTime.size());
 		instance.delete(reservation2);
@@ -226,27 +226,27 @@ public class TeacherEquipmentReservationDAOTest{
 	public void testSearchByTime() throws SQLException, ClienteException, PatrimonioException, ReservaException {
 		teacherDAO.insert(teacher2);
 		equipmentDAO.insert(equipment2);
-		ReservaEquipamentoProfessor reservation2 = new ReservaEquipamentoProfessor(date, time, equipment2, teacher2);
+		TeacherEquipmentReservation reservation2 = new TeacherEquipmentReservation(date, time, equipment2, teacher2);
 		instance.insert(reservation2);
 		
-		ReservaEquipamentoProfessor reservation3 = new ReservaEquipamentoProfessor(date, "10:00", equipment2, teacher2);
+		TeacherEquipmentReservation reservation3 = new TeacherEquipmentReservation(date, "10:00", equipment2, teacher2);
 		instance.insert(reservation3);
 		
-		Vector <ReservaEquipamentoProfessor> allTime = instance.searchByTime(time);
+		Vector <TeacherEquipmentReservation> allTime = instance.searchByTime(time);
 		instance.delete(reservation2);
 		instance.delete(reservation3);
 		assertEquals("It should return all reservations with the same time", 2, allTime.size());
 	}
 	
 	
-	private boolean reserveIsOnDb(ReservaEquipamentoProfessor reservation, 
+	private boolean reserveIsOnDb(TeacherEquipmentReservation reservation, 
 			String time) throws SQLException, ClienteException, 
 			PatrimonioException, ReservaException{
 		
-		Vector <ReservaEquipamentoProfessor> all = instance.searchByTime(time);
-		Iterator <ReservaEquipamentoProfessor> i = all.iterator();
+		Vector <TeacherEquipmentReservation> all = instance.searchByTime(time);
+		Iterator <TeacherEquipmentReservation> i = all.iterator();
 		while(i.hasNext()){
-			ReservaEquipamentoProfessor r = i.next();
+			TeacherEquipmentReservation r = i.next();
 			if(r.equals(reservation)){
 				return true;
 			}
