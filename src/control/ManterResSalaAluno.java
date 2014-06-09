@@ -15,7 +15,7 @@ import java.util.Vector;
 import model.Student;
 import model.StudentReserveRoom;
 import model.Room;
-import persistence.ResSalaAlunoDAO;
+import persistence.RoomStudentReservationDAO;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -23,7 +23,7 @@ import exception.ReservaException;
 public class ManterResSalaAluno {
 
 	private static ManterResSalaAluno instance;
-	private static ResSalaAlunoDAO resDAOInstance;
+	private static RoomStudentReservationDAO resDAOInstance;
 
 	private Vector<StudentReserveRoom> studentRoomReservationVector = new Vector<StudentReserveRoom>();
 
@@ -44,7 +44,7 @@ public class ManterResSalaAluno {
 
 		if (instance == null) {
 			instance = new ManterResSalaAluno();
-			resDAOInstance = ResSalaAlunoDAO.getInstance();
+			resDAOInstance = RoomStudentReservationDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -185,7 +185,7 @@ public class ManterResSalaAluno {
 	public void delete(StudentReserveRoom reservation) throws SQLException,
 			ReservaException {
 
-		ResSalaAlunoDAO.getInstance().delete(reservation);
+		RoomStudentReservationDAO.getInstance().delete(reservation);
 		this.studentRoomReservationVector.remove(reservation);
 	}
 }
