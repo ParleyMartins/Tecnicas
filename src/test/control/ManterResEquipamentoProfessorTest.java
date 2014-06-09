@@ -9,25 +9,18 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import model.Equipment;
-import model.Professor;
+import model.Teacher;
 import model.ReservaEquipamentoProfessor;
-import model.Student;
-import model.StudentReserveRoom;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.EquipamentDAO;
 import persistence.FactoryConnection;
 import persistence.TeacherDAO;
-import control.ManterEquipamento;
-import control.ManterProfessor;
 import control.ManterResEquipamentoProfessor;
-import control.ManterResSalaAluno;
-import exception.ClienteException;
+
 import exception.PatrimonioException;
 import exception.ReservaException;
 
@@ -35,14 +28,14 @@ import exception.ReservaException;
 public class ManterResEquipamentoProfessorTest {
 
 	private static Vector<Object> teacherEquipReservationVector;
-	private static Professor teacher;
+	private static Teacher teacher;
 	private static Equipment equipment;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
 		teacherEquipReservationVector = ManterResEquipamentoProfessor.getInstance().getTeacherEquipReservationVector() ;
-		teacher = new Professor("Prf", "246.329.130-30", "0055888", "5555-5556", "nome@email");
+		teacher = new Teacher("Prf", "246.329.130-30", "0055888", "5555-5556", "nome@email");
 		equipment = new Equipment("code", "description");
 		
 		TeacherDAO.getInstance().insert(teacher);
@@ -121,7 +114,7 @@ public class ManterResEquipamentoProfessorTest {
 		"data = \"" + reserva.getDate();
 	}
 	
-	private String select_id_professor(Professor teacher){
+	private String select_id_professor(Teacher teacher){
 		return "SELECT id_professor FROM professor WHERE " +
 				"professor.nome = \"" + teacher.getName() + "\" and " +
 				"professor.cpf = \"" + teacher.getCpf() + "\" and " +

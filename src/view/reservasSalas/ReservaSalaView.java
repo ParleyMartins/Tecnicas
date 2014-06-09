@@ -31,7 +31,7 @@ import javax.swing.WindowConstants;
 
 import view.International;
 import model.Student;
-import model.Professor;
+import model.Teacher;
 import model.Room;
 import control.ManageStudent;
 import control.ManageTeacher;
@@ -51,7 +51,7 @@ public abstract class ReservaSalaView extends JDialog {
 	protected ManterResSalaProfessor teacherInstance;
 	protected Room room;
 	protected Student student;
-	protected Professor teacher;
+	protected Teacher teacher;
 	protected JLabel studentLabel;
 	protected JRadioButton teacherRadioButton;
 	protected JLabel qntChairsLabel;
@@ -140,7 +140,7 @@ public abstract class ReservaSalaView extends JDialog {
 	protected void getProfessor ( ) {
 
 		try {
-			Vector <Professor> professor = ManageTeacher.getInstance()
+			Vector <Teacher> professor = ManageTeacher.getInstance()
 					.searchCpf(this.cpfTextField.getText());
 			if (professor.isEmpty()) {
 				JOptionPane

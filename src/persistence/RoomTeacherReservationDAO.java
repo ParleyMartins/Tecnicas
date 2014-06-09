@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Vector;
 
 import view.International;
-import model.Professor;
+import model.Teacher;
 import model.TeacherReserveRoom;
 import model.Room;
 import exception.ClienteException;
@@ -270,7 +270,7 @@ public class RoomTeacherReservationDAO extends DAO {
 		String matricula = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Professor teacher = new Professor(name, cpf, matricula, phoneNumber,
+		Teacher teacher = new Teacher(name, cpf, matricula, phoneNumber,
 				email);
 
 		String code = result.getString("codigo");
@@ -293,7 +293,7 @@ public class RoomTeacherReservationDAO extends DAO {
 	 * @return true if the Teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean teacherIsInDB(Professor teacher) throws SQLException {
+	private boolean teacherIsInDB(Teacher teacher) throws SQLException {
 
 		String query = "SELECT * FROM professor WHERE " + "professor.nome = \""
 				+ teacher.getName() + "\" and " + "professor.cpf = \""
@@ -358,7 +358,7 @@ public class RoomTeacherReservationDAO extends DAO {
 	private boolean reservationIsInDB(TeacherReserveRoom reservation)
 			throws SQLException {
 
-		Professor teacher = reservation.getTeacher();
+		Teacher teacher = reservation.getTeacher();
 		Room room = reservation.getClassroom();
 
 		String query = "SELECT * FROM reserva_sala_professor WHERE "
@@ -567,7 +567,7 @@ public class RoomTeacherReservationDAO extends DAO {
 	 * @param teacher The teacher that is going to be selected.
 	 * @return the query to select the given Teacher.
 	 */
-	private String selectTeacherIDQuery(Professor teacher) {
+	private String selectTeacherIDQuery(Teacher teacher) {
 
 		String query = "SELECT id_professor FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "

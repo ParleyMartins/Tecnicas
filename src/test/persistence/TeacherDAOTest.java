@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Professor;
+import model.Teacher;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -47,7 +47,7 @@ public class TeacherDAOTest {
 	@Test
 	public void testInsert() throws ClienteException, SQLException {
 		boolean resultOfSelect = false;
-		Professor teacher = new Professor("Adding", "557.242.971-67", "098767", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "557.242.971-67", "098767", "9999-9999", "teacher@email");
 		TeacherDAO.getInstance().insert(teacher);
 		
 		resultOfSelect = select(teacher);
@@ -66,8 +66,8 @@ public class TeacherDAOTest {
 	@Test (expected= ClienteException.class)
 	public void testInsertEqualsCpf() throws ClienteException, SQLException {
 		boolean resultOfSelect = true;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "098765", "1111-1111", "teacher@email");
-		Professor teacher2 = new Professor("Adding equal CPF", "040.747.021-70", "987654", "2222-2222", "professor2@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "098765", "1111-1111", "teacher@email");
+		Teacher teacher2 = new Teacher("Adding equal CPF", "040.747.021-70", "987654", "2222-2222", "professor2@email");
 		TeacherDAO.getInstance().insert(teacher);
 		
 		try{
@@ -83,8 +83,8 @@ public class TeacherDAOTest {
 	@Test (expected= ClienteException.class)
 	public void testInsertEqualEnrollmentNumber() throws ClienteException, SQLException {
 		boolean resultOfSelect = true;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "111111", "1111-1111", "teacher@email");
-		Professor teacher2 = new Professor("Adding equal enrollment number", "490.491.781-20", "111111", "2222-2222", "professor2@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "111111", "1111-1111", "teacher@email");
+		Teacher teacher2 = new Teacher("Adding equal enrollment number", "490.491.781-20", "111111", "2222-2222", "professor2@email");
 		TeacherDAO.getInstance().insert(teacher);
 		try{
 			TeacherDAO.getInstance().insert(teacher2);
@@ -99,8 +99,8 @@ public class TeacherDAOTest {
 	@Test (expected= ClienteException.class)
 	public void testeInsertAlreadyExistent() throws ClienteException, SQLException {
 		boolean resultOfSelect = true;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "58801", "3333-3333", "teacher@email");
-		Professor teacher2 = new Professor("Adding", "040.757.021-70", "58801", "3333-3333", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "58801", "3333-3333", "teacher@email");
+		Teacher teacher2 = new Teacher("Adding", "040.757.021-70", "58801", "3333-3333", "teacher@email");
 		TeacherDAO.getInstance().insert(teacher);
 		try{
 			TeacherDAO.getInstance().insert(teacher2);
@@ -119,8 +119,8 @@ public class TeacherDAOTest {
 	@Test
 	public void testModify() throws ClienteException, SQLException {
 		boolean resultOfSelect = false;
-		Professor teacher = new Professor("Adding", "288.270.232-91", "123456", "1234-5678", "Nome@email");
-		Professor teacher2 = new Professor("Modifying", "825.373.447-66", "098765", "(123)4567-8899", "email@Nome");
+		Teacher teacher = new Teacher("Adding", "288.270.232-91", "123456", "1234-5678", "Nome@email");
+		Teacher teacher2 = new Teacher("Modifying", "825.373.447-66", "098765", "(123)4567-8899", "email@Nome");
 		insert(teacher);
 		
 		TeacherDAO.getInstance().update(teacher, teacher2);
@@ -137,20 +137,20 @@ public class TeacherDAOTest {
 	
 	@Test (expected= ClienteException.class)
 	public void testModifyNullProfessor() throws ClienteException, SQLException {
-		Professor teacher2 = new Professor("Modifying", "00.757.021-70", "123456", "(999)9999-9999", "teacher@email");
+		Teacher teacher2 = new Teacher("Modifying", "00.757.021-70", "123456", "(999)9999-9999", "teacher@email");
 		TeacherDAO.getInstance().update(null, teacher2);
 	}
 	
 	@Test (expected= ClienteException.class)
 	public void testModifySecondProfessorNull() throws ClienteException, SQLException {
-		Professor teacher2 = new Professor("Modifying", "00.757.021-70", "123456", "(999)9999-9999", "teacher@email");
+		Teacher teacher2 = new Teacher("Modifying", "00.757.021-70", "123456", "(999)9999-9999", "teacher@email");
 		TeacherDAO.getInstance().update(teacher2, null);
 	}
 	@Test (expected= ClienteException.class)
 	public void testAlterarNaoExistente() throws ClienteException, SQLException {
 		boolean resultOfSelection = true;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "1111-1111", "teacher@email");
-		Professor teacher2 = new Professor("Modifying", "490.491.781-20", "098765", "(999)9999-9999", "email@professor");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "1111-1111", "teacher@email");
+		Teacher teacher2 = new Teacher("Modifying", "490.491.781-20", "098765", "(999)9999-9999", "email@professor");
 		
 		try{
 			TeacherDAO.getInstance().update(teacher, teacher2);
@@ -165,8 +165,8 @@ public class TeacherDAOTest {
 	public void testModifyforAlreadyExisting() throws ClienteException, SQLException {
 		boolean resultOfSelection = true;
 		boolean resultOfSelection2 = false;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "058801", "9999-9999", "teacher@email");
-		Professor teacher2 = new Professor("Adding", "040.757.021-70", "058801", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "058801", "9999-9999", "teacher@email");
+		Teacher teacher2 = new Teacher("Adding", "040.757.021-70", "058801", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
@@ -187,9 +187,9 @@ public class TeacherDAOTest {
 		boolean resultOfSelection = true;
 		boolean resultOfSelection2 = false;
 		boolean resultOfSelection3 = false;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
-		Professor teacher2 = new Professor("Adding Segundo", "490.491.781-20", "1234", "4444-4444", "novoAluno@email");
-		Professor teacher3 = new Professor("Adding Segundo", "040.757.021-70", "1234", "4444-4444", "novoAluno@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher2 = new Teacher("Adding Segundo", "490.491.781-20", "1234", "4444-4444", "novoAluno@email");
+		Teacher teacher3 = new Teacher("Adding Segundo", "040.757.021-70", "1234", "4444-4444", "novoAluno@email");
 		
 		insert(teacher);
 		insert(teacher2);
@@ -217,9 +217,9 @@ public class TeacherDAOTest {
 		boolean resultOfSelection = true;
 		boolean resultOfSelection2 = false;
 		boolean resultOfSelection3 = false;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-99999", "teacher@email");
-		Professor teacher2 = new Professor("Adding second", "490.491.781-20", "0987", "5555-5555", "professorNovo@email");
-		Professor teacher3 = new Professor("Adding third", "490.491.781-20", "123456", "5555-5555", "professorNovo@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-99999", "teacher@email");
+		Teacher teacher2 = new Teacher("Adding second", "490.491.781-20", "0987", "5555-5555", "professorNovo@email");
+		Teacher teacher3 = new Teacher("Adding third", "490.491.781-20", "123456", "5555-5555", "professorNovo@email");
 		
 		insert(teacher);
 		insert(teacher2);
@@ -252,7 +252,7 @@ public class TeacherDAOTest {
 	@Test
 	public void testDelete() throws ClienteException, SQLException {
 		boolean resultOfSelection = true;
-		Professor teacher = new Professor("Adding", "040.757.021-70", "058801", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "058801", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
@@ -276,7 +276,7 @@ public class TeacherDAOTest {
 	}
 	@Test (expected= ClienteException.class)
 	public void testeDeleteNotExisting() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
 		TeacherDAO.getInstance().delete(teacher);
 	}
 	
@@ -284,11 +284,11 @@ public class TeacherDAOTest {
 	
 	@Test
 	public void testSearchName() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
-		Vector<Professor> vet = TeacherDAO.getInstance().searchByName("Adding");
+		Vector<Teacher> vet = TeacherDAO.getInstance().searchByName("Adding");
 
 		delete(teacher);
 		
@@ -296,11 +296,11 @@ public class TeacherDAOTest {
 	}
 	@Test
 	public void testSearchCpf() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
-		Vector<Professor> vet = TeacherDAO.getInstance().searchByCpf("040.757.021-70");
+		Vector<Teacher> vet = TeacherDAO.getInstance().searchByCpf("040.757.021-70");
 
 		delete(teacher);
 		
@@ -308,11 +308,11 @@ public class TeacherDAOTest {
 	}
 	@Test
 	public void testSearchEnrollmentNumber() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
-		Vector<Professor> vet = TeacherDAO.getInstance().searchByEnrollmentNumber("123456");
+		Vector<Teacher> vet = TeacherDAO.getInstance().searchByEnrollmentNumber("123456");
 
 		delete(teacher);
 		
@@ -320,11 +320,11 @@ public class TeacherDAOTest {
 	}
 	@Test
 	public void testSearchPhoneNumber() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
-		Vector<Professor> vet = TeacherDAO.getInstance().searchByPhoneNumber("9999-9999");
+		Vector<Teacher> vet = TeacherDAO.getInstance().searchByPhoneNumber("9999-9999");
 
 		delete(teacher);
 		
@@ -332,11 +332,11 @@ public class TeacherDAOTest {
 	}
 	@Test
 	public void testSearchEmail() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
+		Teacher teacher = new Teacher("Adding", "040.757.021-70", "123456", "9999-9999", "teacher@email");
 		
 		insert(teacher);
 		
-		Vector<Professor> vet = TeacherDAO.getInstance().searchByEmail("teacher@email");
+		Vector<Teacher> vet = TeacherDAO.getInstance().searchByEmail("teacher@email");
 
 		delete(teacher);
 		
@@ -346,7 +346,7 @@ public class TeacherDAOTest {
 	
 	
 
-	private void insert(Professor teacher) throws SQLException {
+	private void insert(Teacher teacher) throws SQLException {
 
 		this.runInDatabase("INSERT INTO "
 				+ "professor (nome, cpf, telefone, email, matricula) VALUES ("
@@ -356,7 +356,7 @@ public class TeacherDAOTest {
 				+ teacher.getEnrollmentNumber() + "\");");
 	}
 
-	private void delete(Professor teacher) throws SQLException {
+	private void delete(Teacher teacher) throws SQLException {
 
 		this.runInDatabase("DELETE FROM professor WHERE " + "professor.nome = \""
 				+ teacher.getName() + "\" and " + "professor.cpf = \""
@@ -366,7 +366,7 @@ public class TeacherDAOTest {
 				+ teacher.getEnrollmentNumber() + "\";");
 	}
 
-	private boolean select(Professor teacher) throws SQLException {
+	private boolean select(Teacher teacher) throws SQLException {
 
 		boolean isOnDatabase;
 

@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import model.Equipment;
-import model.Professor;
+import model.Teacher;
 import model.ReservaEquipamentoProfessor;
 
 import org.junit.After;
@@ -29,9 +29,9 @@ public class TeacherEquipmentReservationDAOTest{
 	static EquipamentDAO equipmentDAO = EquipamentDAO.getInstance();
 	ReservaEquipamentoProfessor reservation;
 	static Equipment equipment1;
-	static Professor teacher1;
+	static Teacher teacher1;
 	static Equipment equipment2;
-	static Professor teacher2;
+	static Teacher teacher2;
 	static String cpf1 = "888.822.318-52";
 	static String cpf2 = "567.614.150-63";
 	TeacherEquipmentReservationDAO instance;
@@ -44,13 +44,13 @@ public class TeacherEquipmentReservationDAOTest{
 		String enrollmentNumber = "12345";
 		String phoneNumber = "1111-1111";
 		String email = "test@test.com";
-		teacher1 = new Professor(name, cpf1, enrollmentNumber, phoneNumber, email);
+		teacher1 = new Teacher(name, cpf1, enrollmentNumber, phoneNumber, email);
 		
 		name = "Test Two";
 		enrollmentNumber = "1234";
 		phoneNumber = "1111-2222";
 		email = "test2@test.com";
-		teacher2 = new Professor(name, cpf2, enrollmentNumber, phoneNumber, email);
+		teacher2 = new Teacher(name, cpf2, enrollmentNumber, phoneNumber, email);
 		
 		
 		String code = "12345";
@@ -88,7 +88,7 @@ public class TeacherEquipmentReservationDAOTest{
 		} else {
 			// Nothing here.
 		}
-		Vector <Professor> allTeachers = teacherDAO.searchByName(teacher2.getName());
+		Vector <Teacher> allTeachers = teacherDAO.searchByName(teacher2.getName());
 		if(!allTeachers.isEmpty()){
 			teacherDAO.delete(teacher2);
 		}else {

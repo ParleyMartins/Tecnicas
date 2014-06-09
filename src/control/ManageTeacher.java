@@ -13,14 +13,14 @@ import java.util.Vector;
 
 import persistence.TeacherDAO;
 import exception.ClienteException;
-import model.Professor;
+import model.Teacher;
 
 public class ManageTeacher {
 
 	private static ManageTeacher instance;
 	private static TeacherDAO teacherDAOInstance;
 
-	private Vector<Professor> allTeachers = new Vector<Professor>();
+	private Vector<Teacher> allTeachers = new Vector<Teacher>();
 
 	/*
 	 * Private constructor to provide singleton implementation.
@@ -53,10 +53,10 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
-	public Vector<Professor> searchName(String name) throws SQLException,
+	public Vector<Teacher> searchName(String name) throws SQLException,
 			ClienteException {
 
-		Vector<Professor> teachers = teacherDAOInstance.searchByName(name);
+		Vector<Teacher> teachers = teacherDAOInstance.searchByName(name);
 		return teachers;
 	}
 
@@ -67,10 +67,10 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
-	public Vector<Professor> searchCpf(String cpf) throws SQLException,
+	public Vector<Teacher> searchCpf(String cpf) throws SQLException,
 			ClienteException {
 
-		Vector<Professor> teachers = teacherDAOInstance.searchByCpf(cpf);
+		Vector<Teacher> teachers = teacherDAOInstance.searchByCpf(cpf);
 		return teachers;
 	}
 
@@ -81,10 +81,10 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
-	public Vector<Professor> searchEnrollNumber(String enrollmentNumber)
+	public Vector<Teacher> searchEnrollNumber(String enrollmentNumber)
 			throws SQLException, ClienteException {
 
-		Vector<Professor> teachers = teacherDAOInstance
+		Vector<Teacher> teachers = teacherDAOInstance
 				.searchByEnrollmentNumber(enrollmentNumber);
 		return teachers;
 	}
@@ -96,10 +96,10 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
-	public Vector<Professor> searchEmail(String email) throws SQLException,
+	public Vector<Teacher> searchEmail(String email) throws SQLException,
 			ClienteException {
 
-		Vector<Professor> teachers = teacherDAOInstance.searchByEmail(email);
+		Vector<Teacher> teachers = teacherDAOInstance.searchByEmail(email);
 		return teachers;
 	}
 
@@ -110,10 +110,10 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
-	public Vector<Professor> searchPhoneNumber(String phoneNumber)
+	public Vector<Teacher> searchPhoneNumber(String phoneNumber)
 			throws SQLException, ClienteException {
 
-		Vector<Professor> teachers = teacherDAOInstance
+		Vector<Teacher> teachers = teacherDAOInstance
 				.searchByPhoneNumber(phoneNumber);
 		return teachers;
 	}
@@ -124,7 +124,7 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database search
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
-	public Vector<Professor> getAllTeachers() throws SQLException,
+	public Vector<Teacher> getAllTeachers() throws SQLException,
 			ClienteException {
 
 		this.allTeachers = teacherDAOInstance.searchAll();
@@ -145,7 +145,7 @@ public class ManageTeacher {
 			String phoneNumber, String email) throws ClienteException,
 			SQLException {
 
-		Professor teacher = new Professor(name, cpf, enrollmentNumber,
+		Teacher teacher = new Teacher(name, cpf, enrollmentNumber,
 				phoneNumber, email);
 
 		teacherDAOInstance.insert(teacher);
@@ -164,10 +164,10 @@ public class ManageTeacher {
 	 * @throws SQLException If has some problem with the database update
 	 */
 	public void modify(String name, String cpf, String enrollmentNumber,
-			String phoneNumber, String email, Professor oldTeacher)
+			String phoneNumber, String email, Teacher oldTeacher)
 			throws ClienteException, SQLException {
 
-		Professor newTeacher = new Professor(name, cpf, enrollmentNumber,
+		Teacher newTeacher = new Teacher(name, cpf, enrollmentNumber,
 				phoneNumber, email);
 		teacherDAOInstance.update(oldTeacher, newTeacher);
 	}
@@ -179,7 +179,7 @@ public class ManageTeacher {
 	 * @throws ClienteException If some of the teacher info is invalid
 	 */
 	// This method deletes the selected teacher.
-	public void delete(Professor teacher) throws SQLException, ClienteException {
+	public void delete(Teacher teacher) throws SQLException, ClienteException {
 
 		teacherDAOInstance.delete(teacher);
 		this.allTeachers.remove(teacher);

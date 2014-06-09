@@ -6,7 +6,7 @@ https://github.com/ParleyMartins/Tecnicas/blob/estiloDesign/src/persistence/Prof
 
 package persistence;
 
-import model.Professor;
+import model.Teacher;
 
 import java.sql.*;
 import java.util.Vector;
@@ -58,7 +58,7 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public void insert (Professor teacher) throws SQLException,
+	public void insert (Teacher teacher) throws SQLException,
 			ClienteException {
 
 		if (teacher == null) {
@@ -95,7 +95,7 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public void update (Professor oldTeacher, Professor newTeacher)
+	public void update (Teacher oldTeacher, Teacher newTeacher)
 			throws SQLException, ClienteException {
 
 		if (oldTeacher == null) {
@@ -177,7 +177,7 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public void delete (Professor teacher) throws SQLException,
+	public void delete (Teacher teacher) throws SQLException,
 			ClienteException {
 
 		if (teacher == null) {
@@ -215,11 +215,11 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Professor> searchAll ( ) throws SQLException,
+	public Vector <Teacher> searchAll ( ) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM professor;";
-		Vector<Professor> allTeachers = this.search(selectQuery); 
+		Vector<Teacher> allTeachers = this.search(selectQuery); 
 		return allTeachers;
 	}
 
@@ -230,12 +230,12 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Professor> searchByName (String name) throws SQLException,
+	public Vector <Teacher> searchByName (String name) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM professor WHERE nome = " + "\""
 				+ name + "\";";
-		Vector<Professor> selectedTeachers = this.search(selectQuery); 
+		Vector<Teacher> selectedTeachers = this.search(selectQuery); 
 		return selectedTeachers;
 	}
 
@@ -246,12 +246,12 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Professor> searchByCpf (String cpf) throws SQLException,
+	public Vector <Teacher> searchByCpf (String cpf) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM professor WHERE cpf = " + "\""
 				+ cpf + "\";";
-		Vector<Professor> selectedTeachers = this.search(selectQuery); 
+		Vector<Teacher> selectedTeachers = this.search(selectQuery); 
 		return selectedTeachers;
 	}
 
@@ -262,13 +262,13 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Professor> searchByEnrollmentNumber (String enrollmentNumber)
+	public Vector <Teacher> searchByEnrollmentNumber (String enrollmentNumber)
 			throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM professor WHERE matricula = " + "\""
 				+ enrollmentNumber + "\";";
-		Vector<Professor> selectedTeachers = this.search(selectQuery); 
+		Vector<Teacher> selectedTeachers = this.search(selectQuery); 
 		return selectedTeachers;
 	}
 
@@ -279,12 +279,12 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Professor> searchByEmail (String email) throws SQLException,
+	public Vector <Teacher> searchByEmail (String email) throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM professor WHERE email = " + "\""
 				+ email + "\";";
-		Vector<Professor> selectedTeachers = this.search(selectQuery); 
+		Vector<Teacher> selectedTeachers = this.search(selectQuery); 
 		return selectedTeachers;
 	}
 
@@ -295,13 +295,13 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	public Vector <Professor> searchByPhoneNumber (String phoneNumber)
+	public Vector <Teacher> searchByPhoneNumber (String phoneNumber)
 			throws SQLException,
 			ClienteException {
 
 		String selectQuery = "SELECT * FROM professor WHERE telefone = " + "\""
 				+ phoneNumber + "\";";
-		Vector<Professor> selectedTeachers = this.search(selectQuery); 
+		Vector<Teacher> selectedTeachers = this.search(selectQuery); 
 		return selectedTeachers;
 	}
 
@@ -316,10 +316,10 @@ public class TeacherDAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
-	private Vector <Professor> search (String query) throws SQLException,
+	private Vector <Teacher> search (String query) throws SQLException,
 			ClienteException {
 
-		Vector <Professor> teacherVec = new Vector <Professor>();
+		Vector <Teacher> teacherVec = new Vector <Teacher>();
 
 		Connection connection = FactoryConnection.getInstance().getConnection();
 
@@ -367,7 +367,7 @@ public class TeacherDAO {
 	 * @return true if the teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInDB (Professor teacher) throws SQLException {
+	private boolean isInDB (Teacher teacher) throws SQLException {
 
 		String selectQuery = "SELECT * FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
@@ -416,7 +416,7 @@ public class TeacherDAO {
 	 * @return true if the teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean isInOtherDB (Professor teacher) throws SQLException {
+	private boolean isInOtherDB (Teacher teacher) throws SQLException {
 
 		String selectQuery = "SELECT * FROM reserva_sala_professor WHERE "
 				+ "id_professor = (SELECT id_professor FROM professor WHERE "
@@ -455,7 +455,7 @@ public class TeacherDAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 */
 
-	private Professor fetchProfessor (ResultSet result)
+	private Teacher fetchProfessor (ResultSet result)
 			throws ClienteException,
 			SQLException {
 		
@@ -464,7 +464,7 @@ public class TeacherDAO {
 		String enrollmentNb = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Professor newTeacher = new Professor(name, cpf, enrollmentNb, phoneNumber, email);
+		Teacher newTeacher = new Teacher(name, cpf, enrollmentNb, phoneNumber, email);
 		return newTeacher;
 	}
 

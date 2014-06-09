@@ -23,7 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
-import model.Professor;
+import model.Teacher;
 import control.ManageTeacher;
 import control.ManterResEquipamentoProfessor;
 import exception.ClienteException;
@@ -34,7 +34,7 @@ import view.International;
 public abstract class ReservaEquipamentoView extends JDialog {
 
 	protected ManterResEquipamentoProfessor instanceManageResEquipmentTeacher;
-	protected Professor instanceTeacher;
+	protected Teacher instanceTeacher;
 	protected JButton cancelButton;
 	protected JLabel cpfLabel;
 	protected JTextField cpfTextField;
@@ -83,7 +83,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	protected void getTeacherFromDB ( ) {
 
 		try {
-			Vector <Professor> instanceTeacher = ManageTeacher.getInstance()
+			Vector <Teacher> instanceTeacher = ManageTeacher.getInstance()
 					.searchCpf(this.cpfTextField.getText());
 			if (instanceTeacher.isEmpty()) {
 				JOptionPane

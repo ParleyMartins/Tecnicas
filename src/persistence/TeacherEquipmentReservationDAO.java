@@ -13,7 +13,7 @@ import java.util.Vector;
 
 import view.International;
 import model.Equipment;
-import model.Professor;
+import model.Teacher;
 import model.ReservaEquipamentoProfessor;
 import exception.ClienteException;
 import exception.PatrimonioException;
@@ -191,7 +191,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 		String matricula = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Professor teacher = new Professor(name, cpf, matricula, phoneNumber, email);
+		Teacher teacher = new Teacher(name, cpf, matricula, phoneNumber, email);
 
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
@@ -211,7 +211,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return true if the Teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean teacherIsInDB (Professor teacher) throws SQLException {
+	private boolean teacherIsInDB (Teacher teacher) throws SQLException {
 
 		String selectQuery = "SELECT * FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
@@ -249,7 +249,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @return true if the Teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean teacherIsInReservationDB (Professor teacher, String date,
+	private boolean teacherIsInReservationDB (Teacher teacher, String date,
 			String time) throws SQLException {
 		
 		String selectQuery = "SELECT * FROM reserva_equipamento_professor WHERE "
@@ -337,7 +337,7 @@ public class TeacherEquipmentReservationDAO extends DAO {
 	 * @param teacher The teacher that is going to be selected.
 	 * @return the query to select the given Teacher.
 	 */
-	private String selectTeacherIDQuery (Professor teacher) {
+	private String selectTeacherIDQuery (Teacher teacher) {
 		String query = "SELECT id_professor FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
 				+ "professor.cpf = \"" + teacher.getCpf() + "\" and "

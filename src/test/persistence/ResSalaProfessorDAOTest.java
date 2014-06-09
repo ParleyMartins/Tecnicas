@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
-import model.Professor;
+import model.Teacher;
 import model.TeacherReserveRoom;
 
 import model.Room;
@@ -35,17 +35,17 @@ public class ResSalaProfessorDAOTest {
 
 	private static Room sala_a;
 	private static Room sala_b;
-	private static Professor professor1;
-	private static Professor professor2;
+	private static Teacher professor1;
+	private static Teacher professor2;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
 		sala_a = new Room("S2", "Sala de aula", "130");
 		sala_b = new Room("I6", "Laboratorio", "40");
-		professor1 = new Professor("ProfessorUm", "490.491.781-20", "58801",
+		professor1 = new Teacher("ProfessorUm", "490.491.781-20", "58801",
 				"3333-3333", "prof@email");
-		professor2 = new Professor("ProfessorDois", "040.757.021-70", "36106",
+		professor2 = new Teacher("ProfessorDois", "040.757.021-70", "36106",
 				"3628-3079", "prof@email");
 
 		RoomDAO.getInstance().insert(sala_a);
@@ -100,7 +100,7 @@ public class ResSalaProfessorDAOTest {
 			ClienteException, PatrimonioException, SQLException {
 
 		TeacherReserveRoom reserva = new TeacherReserveRoom("20/12/34", "8:00",
-				sala_a, "Reuniao", new Professor("Inexistente",
+				sala_a, "Reuniao", new Teacher("Inexistente",
 						"501.341.852-69", "456678", "", ""));
 
 		try {
@@ -478,7 +478,7 @@ public class ResSalaProfessorDAOTest {
 		this.insert_into(reserva);
 
 		TeacherReserveRoom reserva2 = new TeacherReserveRoom("20/12/34",
-				"8:00", sala_a, "Grupo de pesquisa", new Professor(
+				"8:00", sala_a, "Grupo de pesquisa", new Teacher(
 						"Nao Existe", "501.341.852-69", "456678", "", ""));
 
 		try {
@@ -612,7 +612,7 @@ public class ResSalaProfessorDAOTest {
 		assertTrue("Teste de busca por data", resultado && resultado2);
 	}
 
-	private String select_id_professor(Professor p) {
+	private String select_id_professor(Teacher p) {
 
 		return "SELECT id_professor FROM professor WHERE "
 				+ "professor.nome = \"" + p.getName() + "\" and "

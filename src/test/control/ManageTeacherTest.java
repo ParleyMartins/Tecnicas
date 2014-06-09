@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Professor;
+import model.Teacher;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -21,7 +21,7 @@ import exception.ClienteException;
 
 public class ManageTeacherTest {
 
-	private static Vector<Professor> allTeachers;
+	private static Vector<Teacher> allTeachers;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -52,7 +52,7 @@ public class ManageTeacherTest {
 	@Test
 	public void testInsert() throws ClienteException, SQLException {
 
-		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+		Teacher teacher = new Teacher("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 		ManageTeacher.getInstance().insert("Nome para Incluir",
 				"868.563.327-34", "123456", "1234-5678", "Nome@email");
@@ -64,7 +64,7 @@ public class ManageTeacherTest {
 			delete(teacher);
 		}
 
-		Professor otherTeacher = allTeachers.lastElement();
+		Teacher otherTeacher = allTeachers.lastElement();
 		boolean areEquals = teacher.equals(otherTeacher);
 		allTeachers.remove(allTeachers.lastElement());
 		
@@ -75,9 +75,9 @@ public class ManageTeacherTest {
 	@Test
 	public void testModify() throws ClienteException, SQLException {
 
-		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+		Teacher teacher = new Teacher("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
-		Professor otherTeacher = new Professor("Nome para Alterar", "868.563.327-34",
+		Teacher otherTeacher = new Teacher("Nome para Alterar", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 
 		insert(teacher);
@@ -98,7 +98,7 @@ public class ManageTeacherTest {
 	@Test(expected = ClienteException.class)
 	public void testModifyInexistent() throws ClienteException, SQLException {
 
-		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+		Teacher teacher = new Teacher("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 
 		ManageTeacher.getInstance().modify("Nome para Alterar",
@@ -108,7 +108,7 @@ public class ManageTeacherTest {
 	@Test
 	public void testDelete() throws ClienteException, SQLException {
 
-		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+		Teacher teacher = new Teacher("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 
 		insert(teacher);
@@ -135,7 +135,7 @@ public class ManageTeacherTest {
 	@Test(expected = ClienteException.class)
 	public void testDeleteInexstent() throws ClienteException, SQLException {
 
-		Professor teacher = new Professor("Nome para Incluir", "868.563.327-34",
+		Teacher teacher = new Teacher("Nome para Incluir", "868.563.327-34",
 				"123456", "1234-5678", "Nome@email");
 
 		ManageTeacher.getInstance().delete(teacher);
@@ -143,9 +143,9 @@ public class ManageTeacherTest {
 
 	@Test
 	public void searchByName() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Incluindo", "040.757.021-70", "123456",
+		Teacher teacher = new Teacher("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 
 		insert(teacher);
 
@@ -157,7 +157,7 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByNameInexistent() throws ClienteException, SQLException {
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 		
 		teachers = ManageTeacher.getInstance().searchName("Nome do professor");
 		assertEquals(0, teachers.size());
@@ -165,9 +165,9 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByCPF() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Incluindo", "040.757.021-70", "123456",
+		Teacher teacher = new Teacher("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 
 		insert(teacher);
 
@@ -179,7 +179,7 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByCPFInexistent() throws ClienteException, SQLException {
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 		
 		teachers = ManageTeacher.getInstance().searchCpf("040.757.021-70");
 		assertEquals(0, teachers.size());
@@ -187,9 +187,9 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByEnrollmentNumber() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Incluindo", "040.757.021-70", "123456",
+		Teacher teacher = new Teacher("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 
 		insert(teacher);
 
@@ -201,7 +201,7 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByEnrollmentNumberInexistent() throws ClienteException, SQLException {
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 		
 		teachers = ManageTeacher.getInstance().searchEnrollNumber("1111");
 		assertEquals(0, teachers.size());
@@ -209,9 +209,9 @@ public class ManageTeacherTest {
 
 	@Test
 	public void searchByEmail() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Incluindo", "040.757.021-70", "123456",
+		Teacher teacher = new Teacher("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 
 		insert(teacher);
 
@@ -223,7 +223,7 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByEmailInexistent() throws ClienteException, SQLException {
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 		
 		teachers = ManageTeacher.getInstance().searchEmail("teacher@email");
 		assertEquals(0, teachers.size());
@@ -231,9 +231,9 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByPhoneNumber() throws ClienteException, SQLException {
-		Professor teacher = new Professor("Incluindo", "040.757.021-70", "123456",
+		Teacher teacher = new Teacher("Incluindo", "040.757.021-70", "123456",
 				"9999-9999", "aluno@email");
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 
 		insert(teacher);
 
@@ -245,13 +245,13 @@ public class ManageTeacherTest {
 	
 	@Test
 	public void searchByPhoneNumberInexistent() throws ClienteException, SQLException {
-		Vector<Professor> teachers;
+		Vector<Teacher> teachers;
 		
 		teachers = ManageTeacher.getInstance().searchEmail("9999-9999");
 		assertEquals(0, teachers.size());
 	}
 	
-	private void insert(Professor teacher) throws SQLException {
+	private void insert(Teacher teacher) throws SQLException {
 
 		this.executaNoBanco("INSERT INTO "
 				+ "professor (nome, cpf, telefone, email, matricula) VALUES ("
@@ -261,7 +261,7 @@ public class ManageTeacherTest {
 				+ teacher.getEnrollmentNumber() + "\");");
 	}
 
-	private void delete(Professor teacher) throws SQLException {
+	private void delete(Teacher teacher) throws SQLException {
 
 		this.executaNoBanco("DELETE FROM professor WHERE "
 				+ "professor.nome = \"" + teacher.getName() + "\" and "
@@ -272,7 +272,7 @@ public class ManageTeacherTest {
 				+ teacher.getEnrollmentNumber() + "\";");
 	}
 
-	private boolean select(Professor teacher) throws SQLException {
+	private boolean select(Teacher teacher) throws SQLException {
 
 		boolean isOnDatabase;
 

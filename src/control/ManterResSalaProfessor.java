@@ -14,7 +14,7 @@ import java.util.Vector;
 
 import persistence.RoomTeacherReservationDAO;
 
-import model.Professor;
+import model.Teacher;
 import model.TeacherReserveRoom;
 import model.Room;
 import exception.ClienteException;
@@ -98,7 +98,7 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database insert
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void insert(Room room, Professor teacher, String date, String time,
+	public void insert(Room room, Teacher teacher, String date, String time,
 			String purpose) throws SQLException, ReservaException {
 
 		TeacherReserveRoom reservation = new TeacherReserveRoom(date, time,

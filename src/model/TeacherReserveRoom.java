@@ -11,7 +11,7 @@ import exception.ReservaException;
 
 public class TeacherReserveRoom extends ReservaSala {
 
-	private Professor teacher;
+	private Teacher teacher;
 
 	// Error messages.
 	private final String BLANK_PROFESSOR = International.getInstance().getMessages()
@@ -27,7 +27,7 @@ public class TeacherReserveRoom extends ReservaSala {
 	 * @throws ReservaException
 	 */
 	public TeacherReserveRoom(String date, String time, Room classroom,
-			String purpose, Professor teacher) throws ReservaException {
+			String purpose, Teacher teacher) throws ReservaException {
 
 		super(date, time, classroom, purpose);
 		this.setTeacher(teacher);
@@ -37,7 +37,7 @@ public class TeacherReserveRoom extends ReservaSala {
 	 * This method gets a teacher.
 	 * @return The content in the teacher field.
 	 */
-	public Professor getTeacher() {
+	public Teacher getTeacher() {
 
 		return this.teacher;
 	}
@@ -47,7 +47,7 @@ public class TeacherReserveRoom extends ReservaSala {
 	 * @param teacher professional who teaches.
 	 * @throws ReservaException It ensures that every parameter passed is valid.
 	 */
-	public void setTeacher(Professor teacher) throws ReservaException {
+	public void setTeacher(Teacher teacher) throws ReservaException {
 
 		if (teacher == null) {
 			throw new ReservaException(BLANK_PROFESSOR);

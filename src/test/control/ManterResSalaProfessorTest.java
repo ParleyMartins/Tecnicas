@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Professor;
+import model.Teacher;
 import model.TeacherReserveRoom;
 import model.Room;
 
@@ -27,14 +27,14 @@ import persistence.RoomDAO;
 
 public class ManterResSalaProfessorTest {
 	private static Room sala1;
-	private static Professor professor1;
+	private static Teacher professor1;
 	private static Vector<TeacherReserveRoom> vet;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		vet = ManterResSalaProfessor.getInstance().getAllTeacherRoomReservations();
 		sala1 = new Room("123", "Sala de Aula", "120");
-		professor1 = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "nome@email");
+		professor1 = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "nome@email");
 		
 		TeacherDAO.getInstance().insert(professor1);
 		RoomDAO.getInstance().insert(sala1);
@@ -103,7 +103,7 @@ public class ManterResSalaProfessorTest {
 		assertTrue("Teste de Exclusao.", !resultado );
 	}
 
-	private String select_id_professor(Professor prof){
+	private String select_id_professor(Teacher prof){
 		return "SELECT id_professor FROM professor WHERE " +
 				"professor.nome = \"" + prof.getName() + "\" and " +
 				"professor.cpf = \"" + prof.getCpf() + "\" and " +

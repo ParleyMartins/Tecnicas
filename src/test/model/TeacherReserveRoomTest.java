@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import model.Professor;
+import model.Teacher;
 import model.TeacherReserveRoom;
 import model.Room;
 
@@ -21,7 +21,7 @@ public class TeacherReserveRoomTest {
 	@Test
 	public void testInstance() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
 				"Reunion", teacher);
 		assertTrue(reserve instanceof TeacherReserveRoom);
@@ -33,20 +33,20 @@ public class TeacherReserveRoomTest {
 	@Test (expected= ReservaException.class)
 	public void testNullTeacher() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = null;
+		Teacher teacher = null;
 		new TeacherReserveRoom(this.nowDate(), this.nowHour(), room, "Search", teacher);
 	}
 	
 	@Test (expected= ReservaException.class)
 	public void testNullFinality() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(this.nowDate(), this.nowHour(), room, null, teacher);
 	}
 	@Test (expected= ReservaException.class)
 	public void testBlankFinality() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(this.nowDate(), this.nowHour(), room, "     ", teacher);
 	}
 	
@@ -55,7 +55,7 @@ public class TeacherReserveRoomTest {
 	@Test (expected= ReservaException.class)
 	public void testNullRoom() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = null;
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(this.nowDate(), this.nowHour(), room, "Search", teacher);
 	}
 	
@@ -65,7 +65,7 @@ public class TeacherReserveRoomTest {
 	public void testHour() throws PatrimonioException, ClienteException, ReservaException {
 		String hora = this.nowHourPlus(100000000);
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(),
 				hora, room, "Reunion", teacher);
 		assertTrue("", reserve.getTime() == hora);
@@ -73,19 +73,19 @@ public class TeacherReserveRoomTest {
 	@Test (expected= ReservaException.class)
 	public void testNullHour() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(this.nowDate(), null, room, "Reunion", teacher);
 	}
 	@Test (expected= ReservaException.class)
 	public void testBlankHour() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(this.nowDate(), "    ", room, "Search", teacher);
 	}
 	@Test (expected= ReservaException.class)
 	public void testNoStandarlizedHour() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(this.nowDate(), "1000", room, "Reunion", teacher);
 	}
 	
@@ -93,7 +93,7 @@ public class TeacherReserveRoomTest {
 	public void testDate() throws PatrimonioException, ClienteException, ReservaException {
 		String data = "12/2/33";
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(data,
 				this.nowHour(), room, "DS lesson", teacher);
 
@@ -102,27 +102,27 @@ public class TeacherReserveRoomTest {
 	@Test (expected= ReservaException.class)
 	public void testNullDate() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom(null, this.nowHour(), room, "C1 lesson", teacher);
 	}
 	@Test (expected= ReservaException.class)
 	public void testBlankDate() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		new TeacherReserveRoom("    ", this.nowHour(), room, "Physics lesson", teacher);
 	}
 	
 	@Test (expected= ReservaException.class)
 	public void testLetterDate() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "501.341.852-69", "456678", "", "");
+		Teacher teacher = new Teacher("testInstance", "501.341.852-69", "456678", "", "");
 		new TeacherReserveRoom("12/q2/2030", this.nowHour(), room, "Study group", teacher);
 	}
 	
 	@Test
 	public void testEqualsTrue() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
 				"Reinforcement", teacher);
 		TeacherReserveRoom reserve2 = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
@@ -133,7 +133,7 @@ public class TeacherReserveRoomTest {
 	public void testEqualsFalseRoom() throws PatrimonioException, ClienteException, ReservaException {//mesma reserve mas em rooms dif
 		Room room = new Room("123", "Classroom", "120");
 		Room room2 = new Room("1233", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
 				"Reunion", teacher);
 		TeacherReserveRoom reserve2 = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room2,
@@ -144,8 +144,8 @@ public class TeacherReserveRoomTest {
 	@Test
 	public void testEqualsFalseTeacher() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
-		Professor teacher2 = new Professor("testInstanceD", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher2 = new Teacher("testInstanceD", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
 				"Reunion", teacher);
 		TeacherReserveRoom reserve2 = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
@@ -155,7 +155,7 @@ public class TeacherReserveRoomTest {
 	@Test
 	public void testEqualsFalseDate() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDatePlus(100000000), this.nowHour(), room,
 				"Study group", teacher);
 		TeacherReserveRoom reserve2 = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
@@ -165,7 +165,7 @@ public class TeacherReserveRoomTest {
 	@Test
 	public void testEqualsFalseHour() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(), this.nowHourPlus(10000000), room,
 				"Reunion", teacher);
 		TeacherReserveRoom reserve2 = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
@@ -175,7 +175,7 @@ public class TeacherReserveRoomTest {
 	@Test
 	public void testEqualsFalseFinality() throws PatrimonioException, ClienteException, ReservaException {
 		Room room = new Room("123", "Classroom", "120");
-		Professor teacher = new Professor("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
+		Teacher teacher = new Teacher("testInstance", "040.757.021-70", "0058801", "3333-3333", "Node@email");
 		TeacherReserveRoom reserve = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
 				"Reunion", teacher);
 		TeacherReserveRoom reserve2 = new TeacherReserveRoom(this.nowDate(), this.nowHour(), room,
