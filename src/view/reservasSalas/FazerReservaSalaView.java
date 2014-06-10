@@ -13,9 +13,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import view.International;
-import model.Sala;
-import control.ManterResSalaAluno;
-import control.ManterResSalaProfessor;
+import model.Room;
+import control.ManageReserveRoomStudent;
+import control.ManageReserveRoomTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -35,7 +35,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 	 * @throws ClienteException if some of the client info is invalid
 	 * @throws ReservaException if some of the reservation info is invalid
 	 */
-	public FazerReservaSalaView(Frame parent, boolean modal, Sala sala,
+	public FazerReservaSalaView(Frame parent, boolean modal, Room sala,
 			String data) throws SQLException, PatrimonioException,
 			ClienteException, ReservaException {
 
@@ -133,7 +133,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 		this.qntChairsReservedTextField.setBackground(new Color(200, 208, 254));
 		this.qntChairsReservedTextField.setText(this.qntChairsTxtField
 				.getText());
-		this.teacherInstance = ManterResSalaProfessor.getInstance();
+		this.teacherInstance = ManageReserveRoomTeacher.getInstance();
 		this.studentInstance = null;
 		this.checkChairsButton.setEnabled(false);
 
@@ -142,7 +142,7 @@ public class FazerReservaSalaView extends ReservaSalaView {
 	@Override
 	protected void alunoRadioButtonAction() {
 
-		this.studentInstance = ManterResSalaAluno.getInstance();
+		this.studentInstance = ManageReserveRoomStudent.getInstance();
 		this.studentLabel.setText(this.studentRadioButton.getText() + ": ");
 		this.studentTextArea.setText("");
 		this.cpfTextField.setText("");

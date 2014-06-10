@@ -23,9 +23,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
-import model.Professor;
-import control.ManterProfessor;
-import control.ManterResEquipamentoProfessor;
+import model.Teacher;
+import control.ManageTeacher;
+import control.ManageReserveEquipmentTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -33,8 +33,8 @@ import view.International;
 
 public abstract class ReservaEquipamentoView extends JDialog {
 
-	protected ManterResEquipamentoProfessor instanceManageResEquipmentTeacher;
-	protected Professor instanceTeacher;
+	protected ManageReserveEquipmentTeacher instanceManageResEquipmentTeacher;
+	protected Teacher instanceTeacher;
 	protected JButton cancelButton;
 	protected JLabel cpfLabel;
 	protected JTextField cpfTextField;
@@ -66,7 +66,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.instanceManageResEquipmentTeacher = ManterResEquipamentoProfessor
+		this.instanceManageResEquipmentTeacher = ManageReserveEquipmentTeacher
 				.getInstance();
 
 		initComponents();
@@ -83,7 +83,7 @@ public abstract class ReservaEquipamentoView extends JDialog {
 	protected void getTeacherFromDB ( ) {
 
 		try {
-			Vector <Professor> instanceTeacher = ManterProfessor.getInstance()
+			Vector <Teacher> instanceTeacher = ManageTeacher.getInstance()
 					.searchCpf(this.cpfTextField.getText());
 			if (instanceTeacher.isEmpty()) {
 				JOptionPane

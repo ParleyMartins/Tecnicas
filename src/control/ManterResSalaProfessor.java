@@ -12,11 +12,11 @@ package control;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import persistence.ResSalaProfessorDAO;
+import persistence.RoomTeacherReservationDAO;
 
-import model.Professor;
-import model.ReservaSalaProfessor;
-import model.Sala;
+import model.Teacher;
+import model.TeacherReserveRoom;
+import model.Room;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -24,10 +24,10 @@ import exception.ReservaException;
 public class ManterResSalaProfessor {
 
 	// This Vector will hold all reservations in memory.
-	private Vector<ReservaSalaProfessor> resevations = new Vector<ReservaSalaProfessor>();
+	private Vector<TeacherReserveRoom> resevations = new Vector<TeacherReserveRoom>();
 
 	private static ManterResSalaProfessor instance;
-	private static ResSalaProfessorDAO resDAOInstance;
+	private static RoomTeacherReservationDAO resDAOInstance;
 
 	/*
 	 * Private constructor, to guarantee the use via singleton.
@@ -46,7 +46,7 @@ public class ManterResSalaProfessor {
 
 		if (instance == null) {
 			instance = new ManterResSalaProfessor();
-			resDAOInstance = ResSalaProfessorDAO.getInstance();
+			resDAOInstance = RoomTeacherReservationDAO.getInstance();
 		} else {
 			// Nothing here.
 		}
@@ -62,12 +62,12 @@ public class ManterResSalaProfessor {
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public Vector<ReservaSalaProfessor> searchPerDate(String date)
+	public Vector<TeacherReserveRoom> searchPerDate(String date)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
 		// Makes a call to DAO layer to retrieve the data.
-		Vector<ReservaSalaProfessor> reservations = resDAOInstance
+		Vector<TeacherReserveRoom> reservations = resDAOInstance
 				.searchByDate(date);
 		return reservations;
 	}
@@ -80,7 +80,7 @@ public class ManterResSalaProfessor {
 	 * @throws PatrimonioException If some of the classroom info is invalid
 	 * @throws ReservaException If some of the reservation info is invalid
 	 */
-	public Vector<ReservaSalaProfessor> getAllTeacherRoomReservations()
+	public Vector<TeacherReserveRoom> getAllTeacherRoomReservations()
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -98,10 +98,10 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database insert
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void insert(Sala room, Professor teacher, String date, String time,
+	public void insert(Room room, Teacher teacher, String date, String time,
 			String purpose) throws SQLException, ReservaException {
 
-		ReservaSalaProfessor reservation = new ReservaSalaProfessor(date, time,
+		TeacherReserveRoom reservation = new TeacherReserveRoom(date, time,
 				room, purpose, teacher);
 
 		// Add the new reservation both to the database and the Vector.
@@ -116,14 +116,14 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database update
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void modify(String purpose, ReservaSalaProfessor reservation)
+	public void modify(String purpose, TeacherReserveRoom reservation)
 			throws SQLException, ReservaException {
 
 		/*
 		 * If we don't create a new object here, this code does'nt work. Need to
 		 * investigate.
 		 */
-		ReservaSalaProfessor oldReservation = new ReservaSalaProfessor(
+		TeacherReserveRoom oldReservation = new TeacherReserveRoom(
 				reservation.getDate(), reservation.getTime(),
 				reservation.getClassroom(), reservation.getPurpose(),
 				reservation.getTeacher());
@@ -138,7 +138,7 @@ public class ManterResSalaProfessor {
 	 * @throws SQLException If has some problem with the database remotion
 	 * @throws ReservaException If some of the classroom info is invalid
 	 */
-	public void delete(ReservaSalaProfessor reservation) throws SQLException,
+	public void delete(TeacherReserveRoom reservation) throws SQLException,
 			ReservaException {
 
 		// We need to remove both from the Vector and the database.

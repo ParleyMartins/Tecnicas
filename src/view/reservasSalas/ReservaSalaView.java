@@ -30,13 +30,13 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
 import view.International;
-import model.Aluno;
-import model.Professor;
-import model.Sala;
-import control.ManterAluno;
-import control.ManterProfessor;
-import control.ManterResSalaAluno;
-import control.ManterResSalaProfessor;
+import model.Student;
+import model.Teacher;
+import model.Room;
+import control.ManageStudent;
+import control.ManageTeacher;
+import control.ManageReserveRoomStudent;
+import control.ManageReserveRoomTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -47,11 +47,11 @@ public abstract class ReservaSalaView extends JDialog {
 	protected final int STUDENT = 1;
 	protected final int TEACHER = 2;
 	protected final int ERROR = -1;
-	protected ManterResSalaAluno studentInstance;
-	protected ManterResSalaProfessor teacherInstance;
-	protected Sala room;
-	protected Aluno student;
-	protected Professor teacher;
+	protected ManageReserveRoomStudent studentInstance;
+	protected ManageReserveRoomTeacher teacherInstance;
+	protected Room room;
+	protected Student student;
+	protected Teacher teacher;
 	protected JLabel studentLabel;
 	protected JRadioButton teacherRadioButton;
 	protected JLabel qntChairsLabel;
@@ -92,8 +92,8 @@ public abstract class ReservaSalaView extends JDialog {
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
-		this.teacherInstance = ManterResSalaProfessor.getInstance();
-		this.studentInstance = ManterResSalaAluno.getInstance();
+		this.teacherInstance = ManageReserveRoomTeacher.getInstance();
+		this.studentInstance = ManageReserveRoomStudent.getInstance();
 		initComponents();
 		this.searchCpfButton.setName(International.getInstance().getButtons().getString("searchCpf"));
 
@@ -113,7 +113,7 @@ public abstract class ReservaSalaView extends JDialog {
 
 		try {
 
-			Vector <Aluno> alunos = ManterAluno.getInstance().searchByCpf(
+			Vector <Student> alunos = ManageStudent.getInstance().searchByCpf(
 					this.cpfTextField.getText());
 			if (alunos.isEmpty()) {
 				JOptionPane.showMessageDialog(this, International.getInstance().getMessages().getString("studentNotExists")
@@ -140,7 +140,7 @@ public abstract class ReservaSalaView extends JDialog {
 	protected void getProfessor ( ) {
 
 		try {
-			Vector <Professor> professor = ManterProfessor.getInstance()
+			Vector <Teacher> professor = ManageTeacher.getInstance()
 					.searchCpf(this.cpfTextField.getText());
 			if (professor.isEmpty()) {
 				JOptionPane

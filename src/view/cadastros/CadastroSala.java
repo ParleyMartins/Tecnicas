@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import view.International;
-import control.ManterSala;
+import control.SupportRoom;
 import exception.PatrimonioException;
 
 public class CadastroSala extends CadastroPatrimonio {
@@ -43,7 +43,7 @@ public class CadastroSala extends CadastroPatrimonio {
 				.getString("successClassroom");
 
 		try {
-			ManterSala.getInstance().insert(this.codeTxtField.getText(),
+			SupportRoom.getInstance().insert(this.codeTxtField.getText(),
 					this.descriptionTxtArea.getText(),
 					this.capacityTxtField.getText());
 

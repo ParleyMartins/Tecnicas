@@ -10,8 +10,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.Equipamento;
-import model.ReservaEquipamentoProfessor;
+import model.Equipment;
+import model.TeacherEquipmentReservation;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -20,8 +20,8 @@ import view.International;
 public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 
 	// int index;
-	ReservaEquipamentoProfessor instanceOfReserve;
-	Equipamento instanceOfEquipment;
+	TeacherEquipmentReservation instanceOfReserve;
+	Equipment instanceOfEquipment;
 	
 	/**
 	 * Constructor to generate the form
@@ -36,7 +36,7 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	 * @throws ReservaException if some of the reservation info is invalid.
 	 */
 	public AlterarReservaEquipamentoView (Frame parent, boolean modal,
-			int index, int month, Equipamento equipmentToReserve) throws SQLException,
+			int index, int month, Equipment equipmentToReserve) throws SQLException,
 			PatrimonioException, ClienteException, ReservaException {
 
 		super(parent, modal);
@@ -49,30 +49,6 @@ public class AlterarReservaEquipamentoView extends ReservaEquipamentoView {
 	@Override
 	protected void reserveEquipmentToTeacher ( ) {
 
-		try {
-			this.instanceManageResEquipmentTeacher.modify(
-					this.instanceOfReserve,
-					this.dateTextField.getText(), this.hourTextField.getText(),
-					this.instanceOfEquipment,
-					this.instanceOfReserve.getTeacher());
-			JOptionPane
-					.showMessageDialog(
-							this,
-							International.getInstance().getMessages()
-									.getString("reserveModifySucess"),
-							International.getInstance().getLabels()
-									.getString("sucess"),
-							JOptionPane.INFORMATION_MESSAGE, null);
-			this.setVisible(false);
-		} catch (ReservaException ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage(), International
-					.getInstance().getLabels().getString("error"),
-					JOptionPane.ERROR_MESSAGE, null);
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
-					International.getInstance().getLabels().getString("error"),
-					JOptionPane.ERROR_MESSAGE, null);
-		}
 	}
 
 	private void resetComponents ( ) {

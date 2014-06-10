@@ -13,13 +13,13 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Sala;
+import model.Room;
 import view.International;
 import view.alteracoes.AlterarSala;
 import view.cadastros.CadastroPatrimonio;
 import view.cadastros.CadastroSala;
 import view.diasReservas.DiaReservaSala;
-import control.ManterSala;
+import control.SupportRoom;
 import exception.PatrimonioException;
 
 public class SalaView extends PatrimonioView {
@@ -37,7 +37,7 @@ public class SalaView extends PatrimonioView {
 	}
 
 	// This method fills a vector with the rooms on database.
-	protected Vector<String> fillDataVector(Sala room) {
+	protected Vector<String> fillDataVector(Room room) {
 
 		if (room == null) {
 			return null;
@@ -65,7 +65,7 @@ public class SalaView extends PatrimonioView {
 		try {
 			DefaultTableModel roomTable = new DefaultTableModel();
 
-			Iterator<Sala> i = ManterSala.getInstance().getRoomsVec()
+			Iterator<Room> i = SupportRoom.getInstance().getRoomsVec()
 					.iterator();
 
 			roomTable.addColumn(International.getInstance().getLabels()
@@ -75,7 +75,7 @@ public class SalaView extends PatrimonioView {
 			roomTable.addColumn(International.getInstance().getLabels()
 					.getString("fullCapacity"));
 			while (i.hasNext()) {
-				Sala sala = i.next();
+				Room sala = i.next();
 				roomTable.addRow(fillDataVector(sala));
 			}
 
@@ -129,13 +129,13 @@ public class SalaView extends PatrimonioView {
 
 		try {
 			int confirm = JOptionPane.showConfirmDialog(this, removeQuestion
-					+ ManterSala.getInstance().getRoomsVec().get(index)
+					+ SupportRoom.getInstance().getRoomsVec().get(index)
 							.getDescription() + "?", removeMessage,
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				ManterSala.getInstance().delete(
-						ManterSala.getInstance().getRoomsVec().get(index));
+				SupportRoom.getInstance().delete(
+						SupportRoom.getInstance().getRoomsVec().get(index));
 				JOptionPane.showMessageDialog(this, removeConfirmation,
 						successMessage, JOptionPane.INFORMATION_MESSAGE, null);
 			} else {

@@ -14,17 +14,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import model.Patrimonio;
-import model.ReservaSalaAluno;
-import model.ReservaSalaProfessor;
-import model.Sala;
+import model.Property;
+import model.StudentReserveRoom;
+import model.TeacherReserveRoom;
+import model.Room;
 import view.International;
 import view.reservasSalas.AlterarReservaAlunoSalaView;
 import view.reservasSalas.AlterarReservaProfSalaView;
 import view.reservasSalas.FazerReservaSalaView;
 import view.reservasSalas.ReservaSalaView;
-import control.ManterResSalaAluno;
-import control.ManterResSalaProfessor;
+import control.ManageReserveRoomStudent;
+import control.ManageReserveRoomTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -33,9 +33,9 @@ import java.awt.Frame;
 
 public class HorariosReservaSala extends HorariosReservaPatrimonio {
 
-	private ManterResSalaAluno studentInstance;
-	private ManterResSalaProfessor teacherInstance;
-	private Sala room;
+	private ManageReserveRoomStudent studentInstance;
+	private ManageReserveRoomTeacher teacherInstance;
+	private Room room;
 
 	/**
 	 * Constructor to generate the form
@@ -45,7 +45,7 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	 * @param room room of reservation.
 	 */
 	public HorariosReservaSala (Frame parent, boolean modal, String date,
-			Sala room) {
+			Room room) {
 
 		super(parent, modal, date, room);
 		this.room = room;
@@ -55,8 +55,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	protected Vector <String> fillDataVector (Object object, final int index) {
 
 		Vector <String> clientData = new Vector <String>();
-		if (object instanceof ReservaSalaAluno) {
-			ReservaSalaAluno reservation = (ReservaSalaAluno) object;
+		if (object instanceof StudentReserveRoom) {
+			StudentReserveRoom reservation = (StudentReserveRoom) object;
 			if (this.room != null && (reservation.getClassroom().equals(this.room))) {
 				clientData.add(String.valueOf(index));
 				clientData.add(International.getInstance().getLabels().getString("student"));
@@ -72,8 +72,8 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 				// Nothing here.
 			}
 		} else {
-			if (object instanceof ReservaSalaProfessor) {
-				ReservaSalaProfessor reservation = (ReservaSalaProfessor) object;
+			if (object instanceof TeacherReserveRoom) {
+				TeacherReserveRoom reservation = (TeacherReserveRoom) object;
 				if (this.room != null
 						&& (reservation.getClassroom().equals(this.room))) {
 
@@ -100,12 +100,12 @@ public class HorariosReservaSala extends HorariosReservaPatrimonio {
 	}
 
 	@Override
-	protected DefaultTableModel fillTable (Patrimonio room) {
+	protected DefaultTableModel fillTable (Property room) {
 
-		this.room = (Sala) room;
+		this.room = (Room) room;
 		DefaultTableModel dataTable = new DefaultTableModel();
-		this.studentInstance = ManterResSalaAluno.getInstance();
-		this.teacherInstance = ManterResSalaProfessor.getInstance();
+		this.studentInstance = ManageReserveRoomStudent.getInstance();
+		this.teacherInstance = ManageReserveRoomTeacher.getInstance();
 		dataTable.addColumn("");
 		dataTable.addColumn(International.getInstance().getLabels().getString("reservedBy"));
 		dataTable.addColumn(International.getInstance().getLabels().getString("time"));

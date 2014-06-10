@@ -9,16 +9,16 @@ package view.diasReservas;
 import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JFrame;
-import model.Equipamento;
+import model.Equipment;
 import view.horariosReservas.HorariosReservaEquipamento;
 import view.horariosReservas.HorariosReservaPatrimonio;
-import control.ManterEquipamento;
+import control.ManageEquipment;
 import exception.PatrimonioException;
 
 public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 
 	private static final long serialVersionUID = 1L;
-	private Equipamento equipmentToBeReserved;
+	private Equipment equipmentToBeReserved;
 
 	/**
 	 * Constructor creates a form to reservation.
@@ -32,7 +32,7 @@ public class DiaReservaEquipamento extends DiaReservaPatrimonio {
 			int equipmentPosition) throws SQLException, PatrimonioException {
 
 		super(parentWindow, modal);
-		this.equipmentToBeReserved = ManterEquipamento.getInstance().getAllEquipments()
+		this.equipmentToBeReserved = ManageEquipment.getInstance().getAllEquipments()
 				.get(equipmentPosition);
 	}
 

@@ -61,15 +61,13 @@ public abstract class DAO {
 		PreparedStatement statement = factoryCon.prepareStatement(query);
 		ResultSet result = statement.executeQuery();
 
+		boolean found = result.next();
+		
 		result.close();
 		statement.close();
 		factoryCon.close();
 
-		if (result.next()) {
-			return true;
-		} else {
-			return false;
-		}
+		return found;
 	}
 
 	/**

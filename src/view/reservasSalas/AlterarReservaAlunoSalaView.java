@@ -12,8 +12,8 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import model.ReservaSalaAluno;
-import model.ReservaSalaProfessor;
+import model.StudentReserveRoom;
+import model.TeacherReserveRoom;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -24,8 +24,8 @@ public class AlterarReservaAlunoSalaView extends ReservaSalaView {
 
 	private static final long serialVersionUID = 1L;
 	int index;
-	ReservaSalaAluno studentReservation;
-	ReservaSalaProfessor teacherReservation;
+	StudentReserveRoom studentReservation;
+	TeacherReserveRoom teacherReservation;
 
 	/**
 	 * Constructor to generate the form

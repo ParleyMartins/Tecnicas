@@ -16,22 +16,22 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import model.Equipamento;
-import model.Patrimonio;
-import model.ReservaEquipamentoProfessor;
+import model.Equipment;
+import model.Property;
+import model.TeacherEquipmentReservation;
 import view.International;
 import view.reservasEquipamentos.AlterarReservaEquipamentoView;
 import view.reservasEquipamentos.FazerReservaEquipamentoView;
 import view.reservasEquipamentos.ReservaEquipamentoView;
-import control.ManterResEquipamentoProfessor;
+import control.ManageReserveEquipmentTeacher;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
 
 public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 
-	private Equipamento equipment;
-	private ManterResEquipamentoProfessor instance;
+	private Equipment equipment;
+	private ManageReserveEquipmentTeacher instance;
 
 	/**
 	 * Constructor to generate the form
@@ -41,7 +41,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	 * @param tempEquipment
 	 */
 	public HorariosReservaEquipamento (Frame parent, boolean modal,
-			String date, Equipamento tempEquipment) {
+			String date, Equipment tempEquipment) {
 
 		super(parent, modal, date, tempEquipment);
 		this.equipment = tempEquipment;
@@ -57,8 +57,8 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	protected Vector <String> fillDataVector (Object object, final int index) {
 
 		Vector <String> dataVector = new Vector <String>();
-		if (object instanceof ReservaEquipamentoProfessor) {
-			ReservaEquipamentoProfessor reservation = (ReservaEquipamentoProfessor) object;
+		if (object instanceof TeacherEquipmentReservation) {
+			TeacherEquipmentReservation reservation = (TeacherEquipmentReservation) object;
 			if (this.equipment != null && (reservation.getEquipment().equals(this.equipment))) {
 
 				dataVector.add(String.valueOf(index));
@@ -81,11 +81,11 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 	/*
 	 * This method fills the Table with the properties on the database
 	 */
-	protected DefaultTableModel fillTable (Patrimonio tempEquipment) {
+	protected DefaultTableModel fillTable (Property tempEquipment) {
 
-		this.equipment = (Equipamento) tempEquipment;
+		this.equipment = (Equipment) tempEquipment;
 		DefaultTableModel dataTable = new DefaultTableModel();
-		this.instance = ManterResEquipamentoProfessor.getInstance();
+		this.instance = ManageReserveEquipmentTeacher.getInstance();
 		try {
 			dataTable.addColumn("");
 			dataTable.addColumn(International.getInstance().getLabels()
@@ -107,7 +107,7 @@ public class HorariosReservaEquipamento extends HorariosReservaPatrimonio {
 			}
 			this.month = Integer.parseInt(this.date.substring(3, 5));
 
-			Vector <ReservaEquipamentoProfessor> monthReservations = this.instance
+			Vector <TeacherEquipmentReservation> monthReservations = this.instance
 					.getReservationsPerMonth(month);
 			if (monthReservations != null) {
 				for (int i = 0 ; i < monthReservations.size() ; i++) {

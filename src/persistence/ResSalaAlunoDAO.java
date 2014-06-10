@@ -17,9 +17,9 @@ import view.International;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
-import model.Aluno;
-import model.ReservaSalaAluno;
-import model.Sala;
+import model.Student;
+import model.StudentReserveRoom;
+import model.Room;
 
 @SuppressWarnings ("unchecked")
 public class ResSalaAlunoDAO extends DAO {
@@ -76,7 +76,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void insert (ReservaSalaAluno reservation) throws ReservaException,
+	public void insert (StudentReserveRoom reservation) throws ReservaException,
 			SQLException, ClienteException, PatrimonioException {
 
 		if (reservation == null) {
@@ -143,7 +143,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public void modify (ReservaSalaAluno oldReservation, ReservaSalaAluno newReservation)
+	public void modify (StudentReserveRoom oldReservation, StudentReserveRoom newReservation)
 			throws ReservaException, SQLException, ClienteException,
 			PatrimonioException {
 
@@ -222,7 +222,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws SQLException if an exception related to the database is activated
 	 * @throws ReservaException if an exception related to the reservation is activated
 	 */
-	public void delete (ReservaSalaAluno reservation) throws ReservaException,
+	public void delete (StudentReserveRoom reservation) throws ReservaException,
 			SQLException {
 
 		if (reservation == null) {
@@ -248,7 +248,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <ReservaSalaAluno> searchAll ( ) throws SQLException,
+	public Vector <StudentReserveRoom> searchAll ( ) throws SQLException,
 			ClienteException, PatrimonioException, ReservaException {
 
 		String query = "SELECT * FROM reserva_sala_aluno "
@@ -267,7 +267,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <ReservaSalaAluno> searchByDay (String date)
+	public Vector <StudentReserveRoom> searchByDay (String date)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -289,7 +289,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public Vector <ReservaSalaAluno> searchByTime (String time)
+	public Vector <StudentReserveRoom> searchByTime (String time)
 			throws SQLException, ClienteException, PatrimonioException,
 			ReservaException {
 
@@ -313,18 +313,18 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	public int setAvailableChairs (Sala room, String time, String date)
+	public int setAvailableChairs (Room room, String time, String date)
 			throws SQLException, PatrimonioException, ClienteException,
 			ReservaException {
 
 		date = this.standardizeDate(date);
 		time = this.standardizeTime(time);
-		Vector <ReservaSalaAluno> reservationvec = this.searchAll();
-		Iterator <ReservaSalaAluno> i = reservationvec.iterator();
+		Vector <StudentReserveRoom> reservationvec = this.searchAll();
+		Iterator <StudentReserveRoom> i = reservationvec.iterator();
 		int total = Integer.parseInt(room.getCapacity());
 
 		while (i.hasNext()) {
-			ReservaSalaAluno resrevation = i.next();
+			StudentReserveRoom resrevation = i.next();
 			if (resrevation.getClassroom().equals(room) && resrevation.getDate().equals(date)
 					&& resrevation.getTime().equals(time)) {
 				total -= Integer.parseInt(resrevation.getReservedChairs());
@@ -347,7 +347,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @throws ClienteException if an exception related to the client is activated
 	 * @throws PatrimonioException if an exception related to the property is activated
 	 */
-	private boolean thereIsChairs (String reservedChairs, Sala room,
+	private boolean thereIsChairs (String reservedChairs, Room room,
 			String date, String time) throws SQLException, ClienteException,
 			PatrimonioException, ReservaException {
 
@@ -371,19 +371,19 @@ public class ResSalaAlunoDAO extends DAO {
 		String matricula = result.getString("matricula");
 		String phoneNumber = result.getString("telefone");
 		String email = result.getString("email");
-		Aluno student = new Aluno(name, cpf, matricula, phoneNumber, email);
+		Student student = new Student(name, cpf, matricula, phoneNumber, email);
 
 		String code = result.getString("codigo");
 		String description = result.getString("descricao");
 		String capacity = result.getString("capacidade");
-		Sala room = new Sala(code, description, capacity);
+		Room room = new Room(code, description, capacity);
 
 		String date = result.getString("data");
 		String time = result.getString("hora");
 		String purpose = result.getString("finalidade");
 		String reservedChairs = result.getString("cadeiras_reservadas");
 		
-		ReservaSalaAluno reservation = new ReservaSalaAluno(date, time, room, purpose,  
+		StudentReserveRoom reservation = new StudentReserveRoom(date, time, room, purpose,  
 				reservedChairs, student);
 
 		return reservation;
@@ -395,7 +395,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return true if the Student is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean studentIsInDB (Aluno student) throws SQLException {
+	private boolean studentIsInDB (Student student) throws SQLException {
 
 		String query = "SELECT * FROM aluno WHERE "
 				+ "aluno.nome = \"" + student.getName() + "\" and "
@@ -415,7 +415,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return true if the Room is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean roomIsInDB (Sala room) throws SQLException {
+	private boolean roomIsInDB (Room room) throws SQLException {
 
 		String query = "SELECT * FROM sala WHERE "
 				+ "sala.codigo = \"" + room.getIdCode() + "\" and "
@@ -435,7 +435,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	private boolean studentIsInReservationDB (Aluno student, String date, String time)
+	private boolean studentIsInReservationDB (Student student, String date, String time)
 			throws SQLException {
 
 		
@@ -461,7 +461,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return true if the Room is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean roomIsInTeacherReservationDB (Sala room, String date,
+	private boolean roomIsInTeacherReservationDB (Room room, String date,
 			String time)
 			throws SQLException {
 		
@@ -484,10 +484,10 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @return true if the Teacher is found, false otherwise.
 	 * @throws SQLException if an exception related to the database is activated
 	 */
-	private boolean reservationIsInDB (ReservaSalaAluno reservation) throws SQLException {
+	private boolean reservationIsInDB (StudentReserveRoom reservation) throws SQLException {
 
-		Aluno student = reservation.getStudent();
-		Sala room = reservation.getClassroom();
+		Student student = reservation.getStudent();
+		Room room = reservation.getClassroom();
 		String query = "SELECT * FROM reserva_sala_aluno WHERE "
 				+ "id_aluno = (SELECT id_aluno FROM aluno WHERE "
 				+ "aluno.nome = \"" + student.getName() + "\" and "
@@ -668,7 +668,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param student The student that is going to be selected.
 	 * @return the query to select the given Student
 	 */
-	private String selectStudentIDQuery (Aluno student) {
+	private String selectStudentIDQuery (Student student) {
 
 		String query = "SELECT id_aluno FROM aluno WHERE " + "aluno.nome = \""
 				+ student.getName() + "\" and " + "aluno.cpf = \"" + student.getCpf()
@@ -684,7 +684,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param room The room that is going to be selected.
 	 * @return the query to select the given Room
 	 */
-	private String selectRoomIDQuery (Sala room) {
+	private String selectRoomIDQuery (Room room) {
 
 		String query = "SELECT id_sala FROM sala WHERE " + "sala.codigo = \""
 				+ room.getIdCode() + "\" and " + "sala.descricao = \""
@@ -699,7 +699,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the WHERE query
 	 */
-	private String whereQuery (ReservaSalaAluno reservation) {
+	private String whereQuery (StudentReserveRoom reservation) {
 
 
 		String selectStudent = selectStudentIDQuery(reservation.getStudent());
@@ -720,7 +720,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the VALUE query
 	 */
-	private String valuesReservationQuery (ReservaSalaAluno reservation) {
+	private String valuesReservationQuery (StudentReserveRoom reservation) {
 
 		
 		String selectStudent = selectStudentIDQuery(reservation.getStudent());
@@ -738,7 +738,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the ATTRIBUTES query
 	 */
-	private String attributesQuery (ReservaSalaAluno reservation) {
+	private String attributesQuery (StudentReserveRoom reservation) {
 
 		String selectStudent = selectStudentIDQuery(reservation.getStudent());
 		String selectRoom = selectRoomIDQuery(reservation.getClassroom());
@@ -757,7 +757,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the INSERT query
 	 */
-	private String insertIntoQuery (ReservaSalaAluno reservation) {
+	private String insertIntoQuery (StudentReserveRoom reservation) {
 
 		String valueQuery = valuesReservationQuery(reservation);
 		
@@ -774,7 +774,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param newReservation The reservation with the new info
 	 * @return the UPDATE query
 	 */
-	private String updateQuery (ReservaSalaAluno oldReservation, ReservaSalaAluno newReservation) {
+	private String updateQuery (StudentReserveRoom oldReservation, StudentReserveRoom newReservation) {
 
 		String attributes = this.attributesQuery(newReservation);
 		String where = this.whereQuery(oldReservation);
@@ -790,7 +790,7 @@ public class ResSalaAlunoDAO extends DAO {
 	 * @param reservation The RoomReservation to generate the query 
 	 * @return the DELETE query
 	 */
-	private String deleteQuery (ReservaSalaAluno reservation) {
+	private String deleteQuery (StudentReserveRoom reservation) {
 
 	String where = this.whereQuery(reservation);
 		

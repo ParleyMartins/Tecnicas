@@ -8,7 +8,7 @@ package view.reservasEquipamentos;
 import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.Equipamento;
+import model.Equipment;
 import exception.ClienteException;
 import exception.PatrimonioException;
 import exception.ReservaException;
@@ -16,7 +16,7 @@ import view.International;
 
 public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 
-	Equipamento instanceOfEquipment;
+	Equipment instanceOfEquipment;
 	
 	/**
 	 *  Constructor to generate the form
@@ -30,7 +30,7 @@ public class FazerReservaEquipamentoView extends ReservaEquipamentoView {
 	 * @throws ReservaException if some of the reservation info is invalid.
 	 */
 	public FazerReservaEquipamentoView (Frame parent, boolean modal,
-			Equipamento equipmentToReserve, String dateOfBooking) throws SQLException,
+			Equipment equipmentToReserve, String dateOfBooking) throws SQLException,
 			PatrimonioException,  ClienteException,
 			ReservaException {
 

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
-import model.Patrimonio;
+import model.Property;
 
 import javax.swing.JTable;
 import javax.swing.JPanel;
@@ -36,7 +36,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	protected JTable reservationTable;
 	protected String date;
 	protected int month;
-	protected Patrimonio property;
+	protected Property property;
 	private JPanel buttonsPanel;
 	private JPanel tablePanel;
 	private JScrollPane scrollPane;
@@ -49,7 +49,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	 * @param property property of reservation
 	 */
 	public HorariosReservaPatrimonio (Frame parent, boolean modal, String date,
-			Patrimonio property) {
+			Property property) {
 
 		super(parent, modal);
 		this.date = date;
@@ -62,7 +62,7 @@ public abstract class HorariosReservaPatrimonio extends JDialog {
 	/*
 	 * This method fills the Table with the properties on the database
 	 */
-	protected abstract DefaultTableModel fillTable (Patrimonio patrimonio);
+	protected abstract DefaultTableModel fillTable (Property patrimonio);
 
 	/*
 	 * This method cancels a reservation.

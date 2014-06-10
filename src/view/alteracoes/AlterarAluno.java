@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 import view.International;
 import view.cadastros.CadastroCliente;
-import control.ManterAluno;
+import control.ManageStudent;
 import exception.ClienteException;
 
 public class AlterarAluno extends CadastroCliente {
@@ -42,15 +42,15 @@ public class AlterarAluno extends CadastroCliente {
 				.getString("error");
 
 		try {
-			this.nameTxtField.setText(ManterAluno.getInstance()
+			this.nameTxtField.setText(ManageStudent.getInstance()
 					.getAllStudents().get(index).getName());
-			this.emailTxtField.setText(ManterAluno.getInstance()
+			this.emailTxtField.setText(ManageStudent.getInstance()
 					.getAllStudents().get(index).getEmail());
-			this.phoneNumberTxtField.setText(ManterAluno.getInstance()
+			this.phoneNumberTxtField.setText(ManageStudent.getInstance()
 					.getAllStudents().get(index).getPhoneNumber());
-			this.enrollmentNumberTxtField.setText(ManterAluno.getInstance()
+			this.enrollmentNumberTxtField.setText(ManageStudent.getInstance()
 					.getAllStudents().get(index).getEnrollmentNumber());
-			this.cpfTxtField.setText(ManterAluno.getInstance().getAllStudents()
+			this.cpfTxtField.setText(ManageStudent.getInstance().getAllStudents()
 					.get(index).getCpf());
 
 		} catch (ClienteException ex) {
@@ -78,10 +78,10 @@ public class AlterarAluno extends CadastroCliente {
 				.getString("successModifiedRegister");
 
 		try {
-			ManterAluno.getInstance().modify(nameTxtField.getText(),
+			ManageStudent.getInstance().modify(nameTxtField.getText(),
 					cpfTxtField.getText(), enrollmentNumberTxtField.getText(),
 					phoneNumberTxtField.getText(), emailTxtField.getText(),
-					ManterAluno.getInstance().getAllStudents().get(index2));
+					ManageStudent.getInstance().getAllStudents().get(index2));
 
 			JOptionPane.showMessageDialog(this, modifiedMessage,
 					successMessage, JOptionPane.INFORMATION_MESSAGE, null);
