@@ -82,7 +82,7 @@ public class EquipmentReservationTest {
 				equipment);
 	}
 
-	// @Test
+	@Test
 	public void testEqualsTrue ( ) {
 
 		EquipmentReservation reservation2 = reservation;
