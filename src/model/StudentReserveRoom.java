@@ -9,7 +9,7 @@ package model;
 import view.International;
 import exception.ReservaException;
 
-public class StudentReserveRoom extends ReservaSala {
+public class StudentReserveRoom extends RoomReservation {
 
 	private Student student;
 	private String reservedChairs;
